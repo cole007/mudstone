@@ -1,2 +1,2 @@
-sass --watch XXX/css/scss:XXX/np/css
-sass --watch XXX/css/scss:XXX/np/css --style compressed
+sass --watch XXX/css/scss:XXX/css
+sass --watch XXX/css/scss:XXX/css --style compressed
