@@ -1,6 +1,4 @@
-Cornerstone
-
-======
+# Cornerstone
 
 Basic front-end framework for projects
 
