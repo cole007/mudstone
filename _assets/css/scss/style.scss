@@ -1,3 +1,59 @@
+/*
+    File: _assets/css/scss/style.scss
+    
+    See 
+        http://css-tricks.com/css-style-guides/
+        http://css-tricks.com/sass-style-guide/    
+    
+    # Selectors
+    
+    One selector per line, One rule per line
+    Dont use IDs as selectors
+    Avoid attribute selectors for styling
+    Use class names that are as short as possible but as long as necessary
+    Use semantic naming conventions, avoid referring to layout or colour choice
+    Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container    
+    
+    # Properties
+    
+    List related properties together
+    If the value of the width or height is 0, do not specify units
+    Avoid magic numbers, eg numbers used as quick fixes on a one-off basis
+    Closing curly brace on own line
+    Close final property with a semi-colon
+    Avoid units on a  zero value, eg 0 not 0px
+    Err towards shorthand where avaliable, eg border, background, etc
+    
+    # SASS/SCSS
+    
+    List @extend(s) First
+        Then "Regular" Styles
+        Then @include(s)
+        Then Nested Selectors
+        
+    All Vendor Prefixes Use @mixins
+    Maximum Nesting: Three Levels Deep
+    Maximum Nesting: 50 Lines
+    
+    Global and Section-Specific Sass Files Are just Table of Contents
+    Break Into As Many Small Files As Makes Sense
+    Partials are named _partial.scss eg _dropdown-menu.scss
+
+    Locally compile Expanded
+    For Deployment compile Compressed
+    
+    Be Generous With Comments
+    
+    Variablize All Common Numbers, and Numbers with Meaning
+    Variablize All Colors
+    
+    Nest and Name Your Media Queries
+    
+    Shame Last
+
+*/    
+
+
 @import "reset";
 @import "vars";
 @import "mixins";
