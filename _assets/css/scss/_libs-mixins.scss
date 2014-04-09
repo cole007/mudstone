@@ -1,0 +1,48 @@
+/*
+    File: _assets/css/scss/_libs-mixins.scss
+        Preference for third-party mixin libraries is to use Bourbon
+        See https://github.com/thoughtbot/bourbon
+*/
+
+// Typography
+
+    @mixin font-size($size) {
+      font-size: $size + px;
+      font-size: ($size / $base-font-size) + em;
+      font-size: ($size / $base-font-size) + rem;
+    }
+
+    @mixin font-type($font: 'base') {
+        @if $font == bold {
+        // web font/font stack here
+        // font-family:'Avenir Next W04 Demi';
+        // font-weight: bold;
+        } @else if $font == italic {
+        // web font/font stack here
+        // font-family:'AvenirNextW02-LightItal';
+        // font-style: italic;
+        } @else  {
+        // web font/font stack here
+        // font-family:'Avenir Next W02 Light';
+        // font-weight: normal;
+        }
+        font-weight: normal;
+        font-style: none;
+    }
+
+// Colours
+
+// Layout
+
+    @mixin clearfix{
+    	*zoom: 1;
+    	&:before,
+    	&:after {
+    	  display: table;
+    	  content: "";
+    	  line-height: 0;
+    	}
+    	&:after {
+    	  clear: both;
+    	}
+    }

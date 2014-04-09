@@ -1,0 +1,15 @@
+/*
+    File: _assets/css/scss/_libs-functions.scss
+*/
+
+// Typography
+
+// Colours
+
+    // http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+    // use eg palette(accent,light)
+    @function palette($palette, $tone: 'base') {
+        @return map-get(map-get($palettes, $palette), $tone);
+    }
+
+// Layout
