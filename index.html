@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="_assets/css/style.css">
 	<script type="text/javascript">
 		document.getElementsByTagName('html')[0].className += ' js';
+		function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTimeout(d),d=setTimeout(function(){d=null,c||a.apply(e,f)},b),c&&!d&&a.apply(e,f)}};
 	</script>
 </head>
 <body>
