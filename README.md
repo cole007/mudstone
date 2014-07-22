@@ -5,18 +5,16 @@
     
     Project Information
     
-    ☠☠ DO NOT PUSH TO LIVE ☠☠
+    ☠☠ DO NOT DEPLOY TO LIVE ☠☠
 	
 */
 
-    # Cornerstone
+    # Mudstone
 
     Basic front-end framework for projects
     
-    ref: http://en.wikipedia.org/wiki/Cornerstone
     
     # Project details
-    
     
     
     # Sass set-up
