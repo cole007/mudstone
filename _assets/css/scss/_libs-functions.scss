@@ -2,6 +2,16 @@
     File: _assets/css/scss/_libs-functions.scss
 */
 
+// Map helper functions
+
+  // usage
+  // set a key/value in a map
+  @function map-set($map, $key, $value) {
+    $new: ($key: $value);
+    @return map-merge($map, $new);
+  }
+
+
 // Typography
 
 // Colours
