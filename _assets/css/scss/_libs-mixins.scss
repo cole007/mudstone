@@ -6,12 +6,39 @@
 
 // Typography
 
-    @mixin font-size($size) {
-      font-size: $size + px;
-      font-size: ($size / $base-font-size) + em;
-      font-size: ($size / $base-font-size) + rem;
+    @mixin font-face($font-family,  $font-url, $font-name) {
+        @font-face {
+          font: {
+              family: $font-family;
+              style: normal;
+              weight: normal;
+          }
+          src: url($font-url + '.eot');
+          src: url($font-url + '.eot?#iefix') format('embedded-opentype'), 
+               url($font-url + '.woff') format('woff'), 
+               url($font-url + '.ttf')  format('truetype'),
+               url($font-url + '.svg#' + $font-name) format('svg');
+        }
     }
+    
 
+    @mixin font-size($font-size, $line-height: true) {
+        
+        font-size: $font-size;
+        font-size: ($font-size / $typecsset-base-font-size) * 1rem;
+        
+        @if $line-height == true {
+          line-height: ceil($font-size / $typecsset-base-line-height) * ($typecsset-base-line-height / $font-size);
+        } 
+        @elseif $line-height != false {
+          @if type-of($line-height) == number {
+            @if unitless($line-height) {
+              line-height: computeLineHeight($font-size, $line-height);
+            }
+          }
+        }
+    }
+    
     @mixin font-type($font: 'base') {
         @if $font == bold {
         // web font/font stack here
