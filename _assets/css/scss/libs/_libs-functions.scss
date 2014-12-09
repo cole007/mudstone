@@ -1,0 +1,109 @@
+/*
+    File: _assets/css/scss/_libs-functions.scss
+*/
+// Typography
+
+	@function fs($size) {
+		@return map-get($font-sizes, $size);
+	}
+
+  @function computeLineHeight($font-size, $computed) {
+    $fs: strip-units($font-size);
+    @return $computed / $fs;
+  }
+   
+
+// Map helpers 
+
+ // thanks to @ericmsuzanne for this function 
+  @function map-set($map, $key, $value) {
+    $new: ($key: $value);
+    @return map-merge($map, $new);
+  }
+
+  // http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+  // use eg palette(accent,light)
+  @function palette($palette, $tone: 'base') {
+      @return map-get(map-get($palettes, $palette), $tone);
+  }
+
+  @function forms($property, $value) {
+      @return map-get(map-get($forms, $property), $value);
+  }
+
+  @function borders($border) {
+  	@return map-get($borders, $border);
+  }
+
+  @function btn($button, $property: 'height') {
+      @return map-get(map-get($buttons, $button), $property);
+
+  }
+
+// Layout
+
+	@function r($lines) {
+	    @return $lines * $ratio + rem;
+	}
+
+	@function gutter($lines: 1, $gutter: $base-padding) {
+		@return $gutter * $lines;
+	}
+
+	@function gridCalc($columns,$total_coloumns: $base-max-columns) {
+		@return percentage($columns / $total_coloumns);
+	}
+
+	@function context($width, $max-width: $base-max-width) {
+		@return percentage($width / $max-width);
+	}
+
+
+
+// help funtions
+
+  @function strip-units($value) {
+  	@return $value / ($value * 0 + 1);
+  }
+
+	@function rem($font-size) {
+		@return ($font-size / $base-font-size) * 1rem;
+	}
+
+
+
+
+
+// Sprite 
+	@function sprite-spacing($sprite, $property: width, $excess: 0) {
+
+		$ext: if($property == width, 5, 6);
+		// 5 == width
+		// 6 == height
+		$spacing:  nth($sprite, 5);
+
+
+		@return $spacing + $excess;
+	}
+
+
+	@function opposite($arg) {
+
+		$output: null;
+
+		@if $arg == left {
+			$output: right;
+		}
+		@if $arg == right {
+			$output: left;
+		}
+		@if $arg == top {
+			$output: bottom;
+		}
+		@if $arg == bottom {
+			$output: top;
+		}
+
+		@return $output;
+
+	}

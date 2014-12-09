@@ -7,4 +7,10 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# OS generated files #
+######################
 .sass-cache
+_assets/css/scss/libs/bourbon
+node_modules
+*.*.map

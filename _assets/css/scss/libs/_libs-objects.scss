@@ -1,0 +1,412 @@
+
+
+
+// ************************************************************************* //
+// ************************************************************************* //
+// ******************************** Buttons  ******************************** //
+// ************************************************************************* //
+// ************************************************************************* //
+
+@if $_use-btns == true {
+	
+	%btn {
+	    display:inline-block;       
+	    vertical-align:middle;      
+	    white-space:nowrap;             
+	    cursor:pointer;             
+	    border:none;                
+	    margin:0;          
+	    padding: 0 r(1);
+	    line-height:3;
+	    height: r(3);  
+	    text-decoration: none;   
+	}
+	.btn {     
+		@extend %btn;
+	}
+	
+	
+	
+}
+
+
+// ************************************************************************* //
+// ************************************************************************* //
+// ******************************** Definitions  ******************************** //
+// ************************************************************************* //
+// ************************************************************************* //
+
+
+@if $_use-definitions == true {
+
+	dt,dd {
+		margin: 0;
+	}
+
+	.details {
+		margin: 0;
+		dt {
+			float: left;
+			clear: left;
+			margin-right: 1em;
+		}
+	}
+	
+	.details--row {
+		dd,dt {
+			display: inline-block;
+			float: none;
+		}
+	}
+
+	.details--row {
+		dt {
+			margin-right: 0;
+		}
+		aa {
+			margin-right: 1rem;
+		}
+	}
+
+	.details--fill {
+		dd {
+			text-align: right;
+		}
+	}
+	
+	.details--stack {
+		dt {
+			display: block;
+			float: none;
+		}
+	}
+	
+	.details__title {
+		font-weight: bold;
+	}
+	
+}
+
+
+
+// ************************************************************************* //
+// ************************************************************************* //
+// ******************************** Forms  ******************************** //
+// ************************************************************************* //
+// ************************************************************************* //
+
+@if $_use-forms == true {
+
+	input[type="submit"],
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+	    -moz-appearance: none;
+	    -webkit-appearance: none;
+	    appearance: none;
+	}
+	fieldset {
+		margin: 0;	
+		border: 0;
+	}
+	/* Block */
+	.form {
+    	.input {
+  			position: relative;
+  			text-align: left;
+  			margin-bottom: gutter(1);
+			}
+		  ///
+		  ///	Form Label
+		  ///
+	  	&__label {
+  			@include font-size(forms(label,font-size),false);
+  			color: forms(label,color);
+		  	display: inline-block;  
+		  	cursor: pointer;  
+		  	position: relative;  
+
+		  
+			  ///
+			  ///	Label used as input (checkboxs, radio buttons)
+			  ///
+	  	}
+		  ///
+		  ///	Form Input
+		  ///
+		
+		
+	  	&__input {
+  			@include font-size(forms(input,font-size));
+  			@include transition(all 0.5s);
+		  	padding: 0 forms(input,padding);
+				height: forms(input,height);
+				line-height: 1;
+		  	//color: $_input-text-color;
+		  	display: inline-block; 
+	 		 	color: forms(textarea,color-off);
+	 		 	&:focus {
+	 		 		color: forms(textarea,color-on);
+	 		 	}
+		  	&:focus {
+		  		//@include box-shadow(0 0 5px 0 $_form_input_focus inset);
+		  		//outline: none;
+		  	}
+		  	&--textarea {
+  				@include font-size(forms(input,font-size),true);
+		 		 	overflow:auto;
+		 		 //	height: forms(textarea,height);
+		 		 	padding-top: gutter(0.5);
+		 		 	padding-bottom: gutter(0.5);
+		  	}
+
+/*
+		  	&--select {
+		  		position: relative;
+		  		padding: 0;
+		  		&:before,
+		  		&:after {
+		  			content: " ";
+		  			display: block;
+		  			pointer-events: none;
+		  		}
+		  		&:before {
+		  			@include position(absolute, 1px 1px 1px null);
+		  			width: forms(select,btn-width);
+		  			background-color: forms(select,background-color);
+		  		}
+		  		&:after {
+		  			@include position(absolute, 19px 15px null null);
+		  			@include triangle(10px 6px, white, down);
+		  		}
+		  	}
+*/
+		  }
+	  
+	} // end of form class
+
+}
+
+
+
+// ************************************************************************* //
+// ************************************************************************* //
+// ******************************** Media Object  ******************************** //
+// ************************************************************************* //
+// ************************************************************************* //
+
+
+// see examples/media-object.html
+
+
+@if $_use-media-object == true {
+
+
+	
+		.media {
+		    display:block;
+		    overflow: hidden;
+		}
+		
+	  .media__img {
+	      float:left;
+	      margin-right: gutter(1);
+	  }
+	  
+	  .media__img--rev {
+	      float:right;
+	      margin-left: gutter(1);
+	  }
+	  
+	  [class*="media__img"] {
+	  	margin-bottom: 0;
+	    img {
+		    display:block;
+	    }
+	  }
+	  
+	  .media__bd {
+	    overflow: hidden;
+	  }
+}
+
+
+
+
+
+// ************************************************************************* //
+// ************************************************************************* //
+// ******************************** Nav  ******************************** //
+// ************************************************************************* //
+// ************************************************************************* //
+
+
+// see examples/nav.html
+
+@if $_use-nav == true {
+
+
+	.nav {
+	    list-style:none;
+	    margin: 0;
+	    padding: 0;
+	}
+
+	.nav__item {
+  	display:inline-block;
+	}
+	
+	//.nav--stacked` modified from `.nav` and throws the list into vertical mode, e.g.:
+	.nav--stacked {
+	    > li {
+	        display:block;
+	    }
+	}
+	
+/*
+	//.nav--banner` modified from `.nav` and centres the list, e.g.
+	.nav--banner {
+		text-align: center;
+	}
+	
+	//Force a nav to occupy 100% of the available width of its parent. Extends .nav
+	
+	.nav--fit{
+    display:table;
+    width:100%;
+	    > li {
+	        display:table-cell;
+	        > a {
+	            display:block;
+	        }
+	    }
+	}
+
+	.nav--justify {
+		text-align: justify;
+		&:after {
+			content: " ";
+			display: inline-block;
+			width: 100%;
+		}
+	}
+
+	.nav__dropdown__parent {
+		position: relative;
+	}
+
+	.nav__dropdown__wrapper {
+		position: absolute;
+		visibility: hidden;
+		.nav__dropdown__parent:hover & {
+			visibility: visible;
+		}
+	}
+*/
+	
+	//	.nav-wrapper-dropdown {
+	//		@include translateY(10px);
+	//		@include transition(all 0.5s);
+	//		position: absolute;
+	//		visibility: hidden;
+	//		left: 0;
+	//		z-index: 1000;
+	//		opacity: 0;
+	//		li:hover & {
+	//			@include translateY(0);
+	//			visibility: visible;
+	//			opacity: 1;
+	//		}
+	//	}
+
+
+	//	.nav__mask {
+	//		position: absolute;
+	//		top: 0;
+	//		left: 0;
+	//		width: 100%;
+	//		visibility: visible;
+	//		overflow: hidden;
+	//		z-index: -1;
+	//	}
+
+	
+	// example of a basic dropdown menu.
+	// <ul class="nav">
+	//     <li class=""><a href="#">Work</a>
+	//         <div class="nav-dropdown-wrapper">
+	//             <ul class="nav">
+	//                 <li><a href="#">About</a></li>
+	//             </ul>
+	//         </div>
+	//     </li>
+	//     <li><a href="#">About</a></li>
+	//     <li><a href="#">Contact</a></li>
+	// </ul>
+	
+
+
+	
+}
+
+
+// ************************************************************************* //
+// ************************************************************************* //
+// ******************************** Panels  ******************************** //
+// ************************************************************************* //
+// ************************************************************************* //
+
+
+@if $_use-panels == true {
+
+	%panel,
+	.panel {
+		> *:last-child,
+		> *:last-child > *:last-child,
+		> *:last-child > *:last-child > *:last-child {
+			margin-bottom: 0;
+		}
+	}
+	
+	
+	.panel--small {
+		//padding: $_half-spacing-unit;
+	}
+	
+}
+
+// ************************************************************************* //
+// ************************************************************************* //
+// ******************************** Wrapper  ******************************** //
+// ************************************************************************* //
+// ************************************************************************* //
+
+
+@if $_use-wrapper == true {
+
+	.wrapper {
+	//	width: 100%;
+	//	max-width: $base-max-width;
+		margin: 0 auto;
+    &:after{
+        content:"";
+        display:table;
+        clear:both;
+    }
+	}
+
+
+}
+
+@if $debug == true {
+
+	* {
+		outline: 1px dotted red !important;
+	}
+
+	//[class*="wrapper"] {
+	//	background-color: transparent !important;
+	//}
+
+
+
+}

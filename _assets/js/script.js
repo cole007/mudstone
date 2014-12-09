@@ -22,10 +22,12 @@ function namespace(namespaceString) {
 	return parent;
 }
 
+console.log('hello');
+
 var mud = namespace('mud.Application.Site');
 
 // declare our JS framework, HT @jackfranklin
-mud.oJqueryAction = {
+mud.doJqueryAction = {
     // variables you want available on page load
     getVars: function () {
         'use strict';

@@ -1,0 +1,2 @@
+function namespace(t){"use strict";for(var n=t.split("."),i=window,e="",o=0,u=n.length;u>o;o++)e=n[o],i[e]=i[e]||{},i=i[e];return i}console.log("hello");var mud=namespace("mud.Application.Site");mud.doJqueryAction={getVars:function(){"use strict"},init:function(){"use strict";this.getVars()},doShowcase:function(){}},jQuery(function(){mud.doJqueryAction.init()});
+//# sourceMappingURL=app.js.map

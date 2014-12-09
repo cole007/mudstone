@@ -10,15 +10,15 @@
     Don't use IDs as selectors
     Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container
     Use BEM syntax:
-        Block
+        Block 
         Block__element
-        Block--modifier
+        Block--modifier 
 
     # Properties
 
     List related properties together
     If the value of the width or height is 0, do not specify units
-    Avoid magic numbers, eg numbers used as quick fixes on a one-off basis
+    Avoid magic numbers, eg numbers used as  quick fixes on a one-off basis
     Close final property with a semi-colon
     Err towards shorthand where avaliable, eg border, background, etc
 
@@ -44,10 +44,12 @@
 
 
 // Libraries and dependencies
-@import 'libs-reset';
-@import 'libs-vars';
-@import 'libs-mixins';
-@import 'libs-functions';
+@import 'libs/_libs-reset';
+@import 'libs/_libs-vars';
+
+@import 'libs/_typecsset';
+@import 'libs/_libs-mixins';
+@import 'libs/_libs-functions';
 
 // external libraries go here
 // @import 'libs-gridset';
@@ -56,12 +58,16 @@
 // @import 'bourbon/bourbon';
 
 // comment out following for launch!
-@import 'views-beta';
+@import 'views/_views-beta';
 
-@import 'views-core';
+@import 'views/_views-core';
 @media screen and (min-width: $break-small) {
-    @import 'views-tablet';
+    @import 'views/_views-tablet';
 }
 @media screen and (min-width: $break-large) {
-    @import 'views-desktop';
+    @import 'views/_views-desktop';
 }
+
+
+
+

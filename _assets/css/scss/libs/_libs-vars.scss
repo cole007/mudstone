@@ -1,0 +1,169 @@
+/*
+    File: _assets/css/scss/_libs-vars.scss
+*/
+
+// debugging
+
+    $debug: false;
+
+// extends
+ $test: this;
+$extend : ();
+
+// Typography
+
+    $base-font-size:                18px;
+    $base-line-height:              22px;
+    $rhythm-base-font-size:         18;
+    $rhythm-unit:                   rem;
+    $browser-default-font-size:     16px;
+    $relative-font-sizing:          true;
+    $ratio:                         $base-line-height / $base-font-size;
+
+    $typecsset-show-baseline:       false;
+// Grid
+
+    $base-max-width:        1098px;
+    $base-max-columns:      12;
+    $base-column-width:     floor($base-max-width / $base-max-columns);
+    $base-side-padding:     20px;
+    $current_breakpoint:   base;
+
+    $base-padding: $base-line-height;
+    $base-padding-half: $base-line-height / 2;
+    
+    $base-grid-gutter: 20px;
+
+// Objects on/off
+
+    $_use-nav:                  true;
+    $_use-btns:                 true;
+    $_use-definitions:          false;
+    $_use-forms:                true;
+    $_use-media-object:         false;
+    $_use-panels:               false;
+    $_use-wrapper:              true;
+
+
+// borders-widths
+    $borders: (
+        hero:       8px,
+        quote:      5px,
+        footer:     5px,
+        list:       1px
+    );
+
+// Counter
+
+    $counter: counter;
+
+// Button 
+
+    $buttons: (
+        large: (
+            height: 48px,
+            line-height: 3,
+            font-size: 24px
+        ),
+        small: (
+            height: 50px,
+            line-height: 2.9,
+            font-size: 18px
+        )
+    );
+    
+    $home-link-border: #1e1e1e;
+    $comment-border: #E4E2E0;
+    
+
+
+// Colours
+
+    $white                  :#fff;
+    $black                  :#000;
+    // http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+    // use eg palette(accent,light)
+    $palettes: (
+        action: (
+          pagination: #efefef,
+          posted: #6c6c6c,
+          tags: #ededed
+        ),
+        bg: (
+          dark: #333333,
+          base: #4b4b4b,
+          light: #f3f2f0
+        ),
+        copy: (
+          base: #333333,
+          link: #d90066,
+          light: #f3f2f0,
+          title: #2b2b2b,
+          tags: #585858,
+          date: #999999
+        ),
+        themes: (
+          lightBlue: #066cb6,
+          darkBlue: #091d5f,
+          teal: #009e92,
+          green: #679f1a,
+          pink: #9a5aa6
+        )
+
+    );
+
+// Forms
+
+    $forms: (
+
+        input: (
+            height: 40px,
+            border: 1px solid #cdd1d6,
+            color: #666666,
+            font-size: 16px,
+            padding: $base-padding-half
+        ),
+
+        label: (
+            color: #41464b,
+            font-size:  20px
+
+        ),
+        select: (
+            background-color: $white,
+            btn-width: 40px
+        ),
+
+        textarea: (
+            height:   171px,
+            padding: 1,
+            color-off: #666666,
+            color-on:  #666666 
+        )
+
+    );
+
+    $font-sizes: (
+        h1:             50px,
+        h2:             40px,
+        h3:             35px,
+        h4:             21px,
+        h5:             19px,
+        h6:             14px,
+        base:           $base-font-size,
+        menu_item:      $base-font-size,
+        search:         40px,
+        meta:           14px,
+        panel:          38px,
+        caption:        15px,
+        intro:          24px,
+        signup:         16px
+    );     
+
+// Layout
+
+    $break-small            :768px;
+    $break-large            :954px;
+    $break-lap-up           :1024px;
+    $break-massive          :1200px;
+
