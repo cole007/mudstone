@@ -1,44 +1,39 @@
-/*
-    File: _assets/css/scss/_views-core.scss
-        This is the base, mobile-first view CSS.
-        Mobile-specific styles should be added here under Exceptions
 
-        1.  Baseline
-            Core/generic rules for this context
+//    File: _assets/css/scss/_views-core.scss
+//        This is the base, mobile-first view CSS.
+//        Mobile-specific styles should be added here under Exceptions
+//
+//        1.  Baseline
+//            Core/generic rules for this context
+//
+//        2.  Layout
+//            Page layout rules, eg for columns
+//            As a general rule width, padding and margin stuff here
+//
+//        3.  Typography
+//            Typographic rules: headings, lists, etc
+//
+//        4.  Elements
+//            HTML elements base rules
+//
+//        5.  Components
+//            Components within the site, eg navigation, carousels, etc
+//            Ideally context and element agnostic
+//
+//        6.  Exceptions
+//            Media queries targetting specific/edge-case CSS
+//
+//        7.  Hacks
+//            Idiosyncratic styles for browser support, etc
+//
+//
 
-        2.  Layout
-            Page layout rules, eg for columns
-            As a general rule width, padding and margin stuff here
-
-        3.  Typography
-            Typographic rules: headings, lists, etc
-
-        4.  Elements
-            HTML elements base rules
-
-        5.  Components
-            Components within the site, eg navigation, carousels, etc
-            Ideally context and element agnostic
-
-        6.  Exceptions
-            Media queries targetting specific/edge-case CSS
-
-        7.  Hacks
-            Idiosyncratic styles for browser support, etc
-
-*/
 html {
     font-size: $base-font-size / 16px + em; /* [1] */
     line-height: $base-line-height / $base-font-size; /* [2] */
 
-    // If you have chosen to display a baseline grid, we turn it on here.
-
 }
 
-
-h2 {
-    border: 2px solid red;
-}
 
 // === 1.  Baseline
 

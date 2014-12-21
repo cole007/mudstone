@@ -1,11 +1,11 @@
 
 
 
-// ************************************************************************* //
-// ************************************************************************* //
-// ******************************** Buttons  ******************************** //
-// ************************************************************************* //
-// ************************************************************************* //
+// 
+// 
+// Buttons
+// 
+// 
 
 @if $_use-btns == true {
 	
@@ -21,20 +21,33 @@
 	    height: r(3);  
 	    text-decoration: none;   
 	}
+
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <button class="btn">Primary</button>
+*/
 	.btn {     
 		@extend %btn;
+	}
+
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <button class="btn btn--cta">Primary</button>
+*/
+
+	.btn--cta {
+		background-color: $black;
 	}
 	
 	
 	
 }
 
-
-// ************************************************************************* //
-// ************************************************************************* //
-// ******************************** Definitions  ******************************** //
-// ************************************************************************* //
-// ************************************************************************* //
+// 
+// 
+// Definitions
+// 
+// 
 
 
 @if $_use-definitions == true {
@@ -42,6 +55,16 @@
 	dt,dd {
 		margin: 0;
 	}
+
+	/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details">
+			<dt>term</dt>
+			<dd>desc</dd>
+			<dt>term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
 
 	.details {
 		margin: 0;
@@ -51,15 +74,22 @@
 			margin-right: 1em;
 		}
 	}
+
+	/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details--row">
+			<dt>term</dt>
+			<dd>desc</dd>
+			<dt>term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
 	
 	.details--row {
 		dd,dt {
 			display: inline-block;
 			float: none;
 		}
-	}
-
-	.details--row {
 		dt {
 			margin-right: 0;
 		}
@@ -68,18 +98,48 @@
 		}
 	}
 
+	/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details--fill">
+			<dt>term</dt>
+			<dd>desc</dd>
+			<dt>term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
+
 	.details--fill {
 		dd {
 			text-align: right;
 		}
 	}
-	
+
+	/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details--stack">
+			<dt>term</dt>
+			<dd>desc</dd>
+			<dt>term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
+
 	.details--stack {
 		dt {
 			display: block;
 			float: none;
 		}
 	}
+
+	/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details--stack">
+			<dt class="details__title">term</dt>
+			<dd>desc</dd>
+			<dt class="details__title">term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
 	
 	.details__title {
 		font-weight: bold;
@@ -89,11 +149,12 @@
 
 
 
-// ************************************************************************* //
-// ************************************************************************* //
-// ******************************** Forms  ******************************** //
-// ************************************************************************* //
-// ************************************************************************* //
+// 
+// 
+// Forms
+// 
+// 
+
 
 @if $_use-forms == true {
 
@@ -159,27 +220,27 @@
 		 		 	padding-bottom: gutter(0.5);
 		  	}
 
-/*
-		  	&--select {
-		  		position: relative;
-		  		padding: 0;
-		  		&:before,
-		  		&:after {
-		  			content: " ";
-		  			display: block;
-		  			pointer-events: none;
-		  		}
-		  		&:before {
-		  			@include position(absolute, 1px 1px 1px null);
-		  			width: forms(select,btn-width);
-		  			background-color: forms(select,background-color);
-		  		}
-		  		&:after {
-		  			@include position(absolute, 19px 15px null null);
-		  			@include triangle(10px 6px, white, down);
-		  		}
-		  	}
-*/
+//
+//	  	&--select {
+//	  		position: relative;
+//	  		padding: 0;
+//	  		&:before,
+//	  		&:after {
+//	  			content: " ";
+//	  			display: block;
+//	  			pointer-events: none;
+//	  		}
+//	  		&:before {
+//	  			@include position(absolute, 1px 1px 1px null);
+//	  			width: forms(select,btn-width);
+//	  			background-color: forms(select,background-color);
+//	  		}
+//	  		&:after {
+//	  			@include position(absolute, 19px 15px null null);
+//	  			@include triangle(10px 6px, white, down);
+//	  		}
+//	  	}
+//
 		  }
 	  
 	} // end of form class
@@ -188,14 +249,11 @@
 
 
 
-// ************************************************************************* //
-// ************************************************************************* //
-// ******************************** Media Object  ******************************** //
-// ************************************************************************* //
-// ************************************************************************* //
-
-
-// see examples/media-object.html
+// 
+// 
+// Media query
+// 
+// 
 
 
 @if $_use-media-object == true {
@@ -233,11 +291,11 @@
 
 
 
-// ************************************************************************* //
-// ************************************************************************* //
-// ******************************** Nav  ******************************** //
-// ************************************************************************* //
-// ************************************************************************* //
+// 
+// 
+// Nav
+// 
+// 
 
 
 // see examples/nav.html
@@ -262,46 +320,46 @@
 	    }
 	}
 	
-/*
-	//.nav--banner` modified from `.nav` and centres the list, e.g.
-	.nav--banner {
-		text-align: center;
-	}
-	
-	//Force a nav to occupy 100% of the available width of its parent. Extends .nav
-	
-	.nav--fit{
-    display:table;
-    width:100%;
-	    > li {
-	        display:table-cell;
-	        > a {
-	            display:block;
-	        }
-	    }
-	}
 
-	.nav--justify {
-		text-align: justify;
-		&:after {
-			content: " ";
-			display: inline-block;
-			width: 100%;
-		}
-	}
+	//	//.nav--banner` modified from `.nav` and centres the list, e.g.
+	//	.nav--banner {
+	//		text-align: center;
+	//	}
+	//	
+	//	//Force a nav to occupy 100% of the available width of its parent. Extends .nav
+	//	
+	//	.nav--fit{
+	//    display:table;
+	//    width:100%;
+	//	    > li {
+	//	        display:table-cell;
+	//	        > a {
+	//	            display:block;
+	//	        }
+	//	    }
+	//	}
+	//
+	//	.nav--justify {
+	//		text-align: justify;
+	//		&:after {
+	//			content: " ";
+	//			display: inline-block;
+	//			width: 100%;
+	//		}
+	//	}
+	//
+	//	.nav__dropdown__parent {
+	//		position: relative;
+	//	}
+	//
+	//	.nav__dropdown__wrapper {
+	//		position: absolute;
+	//		visibility: hidden;
+	//		.nav__dropdown__parent:hover & {
+	//			visibility: visible;
+	//		}
+	//	}
 
-	.nav__dropdown__parent {
-		position: relative;
-	}
-
-	.nav__dropdown__wrapper {
-		position: absolute;
-		visibility: hidden;
-		.nav__dropdown__parent:hover & {
-			visibility: visible;
-		}
-	}
-*/
 	
 	//	.nav-wrapper-dropdown {
 	//		@include translateY(10px);
@@ -343,17 +401,14 @@
 	//     <li><a href="#">Contact</a></li>
 	// </ul>
 	
-
-
-	
 }
 
 
-// ************************************************************************* //
-// ************************************************************************* //
-// ******************************** Panels  ******************************** //
-// ************************************************************************* //
-// ************************************************************************* //
+// 
+// 
+// Panels
+// 
+// 
 
 
 @if $_use-panels == true {
@@ -374,11 +429,11 @@
 	
 }
 
-// ************************************************************************* //
-// ************************************************************************* //
-// ******************************** Wrapper  ******************************** //
-// ************************************************************************* //
-// ************************************************************************* //
+// 
+// 
+// Wrapper
+// 
+// 
 
 
 @if $_use-wrapper == true {

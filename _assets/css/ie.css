@@ -1,3 +1,46 @@
+/*
+
+    File: _assets/css/scss/style.scss
+
+    Use spaces not tabs
+
+    # Selectors
+
+    One selector per line, One rule per line
+    Don't use IDs as selectors
+    Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container
+    Use BEM syntax:  
+        Block 
+        Block__element
+        Block--modifier 
+
+    # Properties
+ 
+    List related properties together
+    If the value of the width or height is 0, do not specify units
+    Avoid magic numbers, eg numbers used as  quick fixes on a one-off basis
+    Close final property with a semi-colon
+    Err towards shorthand where avaliable, eg border, background, etc
+
+    # SASS/SCSS
+
+    All Vendor Prefixes Use @mixins
+    Maximum Nesting: Three Levels Deep
+    Maximum Nesting: 50 Lines
+
+    Locally compile Expanded
+    For Deployment compile Compressed
+
+    Be Generous With Comments
+
+    Variablize All Common Numbers, and Numbers with Meaning
+    Variablize All Colors
+
+    Nest and Name Your Media Queries
+
+    Shame Last
+
+*/
 /* line 13, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-reset */
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
@@ -594,5 +637,4 @@ html {
   /* [2] */ }
 
 
-
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=ie.css.map */

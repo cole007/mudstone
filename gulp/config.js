@@ -85,7 +85,8 @@ module.exports = {
   browserSync: {
     server: {
         baseDir: root
-    }
+    },
+    notify: false
   },
   sass: {
     src: paths.scss.src + '/style.scss',

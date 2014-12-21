@@ -14,3 +14,4 @@ Thumbs.db
 _assets/css/scss/libs/bourbon
 node_modules
 *.*.map
+docs
