@@ -1,7 +1,7 @@
 #Mudstone
 ![Mou icon](http://ournameismud.co.uk/css/images/maps-icon.png)
 
-**Mudstone**, gulp build framework *web developers*.
+**Mudstone**, gulp based web framework
 
 ##Gulp 
 
