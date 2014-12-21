@@ -1,49 +1,49 @@
-/*
-	
-    MUD Project
-    http://ournameismud.co.uk
-    
-    Project Information
-    
-    ☠☠ DO NOT DEPLOY TO LIVE ☠☠
-	
-*/
+#Mudstone
+![Mou icon](http://ournameismud.co.uk/css/images/maps-icon.png)
 
-    # Mudstone
+**Mudstone**, gulp build framework *web developers*.
 
-    Basic front-end framework for projects
-    
-    
-    # Project details
-    
-    
-    # Gulp set-up
-    
-    For a Getting started guide, API docs, recipes, making a plugin, etc. see the documentation page!
-    
-    ```js
-    npm install
+##Gulp 
 
-    cd _assets/css/libs
-    gem install bourbon
+* Compile sass (using libsass)
+* Uglify and concatenate javascript assets
+* JS Hint
+* Sourcemaps
+* Optimise Images
+* Sprite generator
+* Minify HTML
+* Compile haml templates
+* Optimise css with Combine Media queries, uncss and csso
+* Critcal path css generator
+* Build directory for deployments
+* Watch with Browsersync for live reload and server
+* Google page insights 
 
-    cd ../../
-    gulp
+##Scss 
 
-    
-    # Localhost set-up
-    
-    ## Local dev
-    
-    Host
-    Folder
-    
-    ## Staging
-    
-    Host
-    Folder
-    
-    ## Live 
-    
-    Host 
-    Folder
+Boilerplate setup to use Bourbon
+
+######From the terminal run
+```
+ cd _assets/css/libs
+ gem install bourbon
+```
+
+##Setup
+
+Make sure you have Node.js and gulp installed 
+
+######From the terminal run
+```
+ npm install
+ gulp
+ 
+```
+
+See gulp/configs.js for paths and files
+
+##Folder Structure
+
+All of the core html/haml, css, js is stored in the _assets directoy.  Changing the env value in config.js will change the output directory for all of the files to the _build folder. Change the var and run gulp build before deploying to live. 
+
+
