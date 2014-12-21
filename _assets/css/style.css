@@ -391,7 +391,10 @@ table {
   border-spacing: 0; }
 
 /*
-    File: _assets/css/scss/_libs-vars.scss
+    File: _assets/css/scss/libs/_libs-vars.scss
+*/
+/*
+    File: _assets/css/scss/_libs-functions.scss
 */
 /*
     File: _assets/css/scss/_libs-mixins.scss
@@ -402,9 +405,6 @@ table {
 
 
 
-*/
-/*
-    File: _assets/css/scss/_libs-functions.scss
 */
 /*
 SCSS variables are information about icon's compiled state, stored under its original file name
@@ -427,6 +427,153 @@ The provided mixins are intended to be used with the array-like variables
   @include sprite($icon-email);
 }
 */
+/* line 12, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+.btn {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0 1.22222rem;
+  line-height: 3;
+  height: 3.66667rem;
+  text-decoration: none; }
+
+/* line 102, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+input[type="submit"], input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none; }
+
+/* line 107, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+fieldset {
+  margin: 0;
+  border: 0; }
+
+/* Block */
+/* line 113, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+.form .input {
+  position: relative;
+  text-align: left;
+  margin-bottom: 22px; }
+/* line 121, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+.form__label {
+  font-size: 20px;
+  font-size: 1.11111rem;
+  color: #41464b;
+  display: inline-block;
+  cursor: pointer;
+  position: relative; }
+/* line 138, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+.form__input {
+  font-size: 16px;
+  font-size: 0.88889rem;
+  line-height: 1.375;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  padding: 0 11px;
+  height: 40px;
+  line-height: 1;
+  display: inline-block;
+  color: #666666;
+  /*
+		  	&--select {
+		  		position: relative;
+		  		padding: 0;
+		  		&:before,
+		  		&:after {
+		  			content: " ";
+		  			display: block;
+		  			pointer-events: none;
+		  		}
+		  		&:before {
+		  			@include position(absolute, 1px 1px 1px null);
+		  			width: forms(select,btn-width);
+		  			background-color: forms(select,background-color);
+		  		}
+		  		&:after {
+		  			@include position(absolute, 19px 15px null null);
+		  			@include triangle(10px 6px, white, down);
+		  		}
+		  	}
+*/ }
+  /* line 147, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+  .form__input:focus {
+    color: #666666; }
+  /* line 154, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+  .form__input--textarea {
+    font-size: 16px;
+    font-size: 0.88889rem;
+    line-height: 1.375;
+    overflow: auto;
+    padding-top: 11px;
+    padding-bottom: 11px; }
+
+/* line 248, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+/* line 254, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+.nav__item {
+  display: inline-block; }
+
+/* line 260, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+.nav--stacked > li {
+  display: block; }
+
+/*
+	//.nav--banner` modified from `.nav` and centres the list, e.g.
+	.nav--banner {
+		text-align: center;
+	}
+	
+	//Force a nav to occupy 100% of the available width of its parent. Extends .nav
+	
+	.nav--fit{
+    display:table;
+    width:100%;
+	    > li {
+	        display:table-cell;
+	        > a {
+	            display:block;
+	        }
+	    }
+	}
+
+	.nav--justify {
+		text-align: justify;
+		&:after {
+			content: " ";
+			display: inline-block;
+			width: 100%;
+		}
+	}
+
+	.nav__dropdown__parent {
+		position: relative;
+	}
+
+	.nav__dropdown__wrapper {
+		position: absolute;
+		visibility: hidden;
+		.nav__dropdown__parent:hover & {
+			visibility: visible;
+		}
+	}
+*/
+/* line 386, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+.wrapper {
+  margin: 0 auto; }
+  /* line 390, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/_libs-objects */
+  .wrapper:after {
+    content: "";
+    display: table;
+    clear: both; }
+
 /*
     File: _assets/css/scss/_views-beta.scss
         This is a miscellaneous file for pre-launch testing and static comps.
@@ -496,36 +643,6 @@ html {
 h2 {
   border: 2px solid red; }
 
-/* line 71, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/style.scss */
-html {
-  -webkit-transition: opacity 0.5s;
-  -moz-transition: opacity 0.5s;
-  transition: opacity 0.5s; }
-
-/* line 75, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/style.scss */
-.no-js {
-  opacity: 0; }
-
-/* line 79, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/style.scss */
-.js {
-  opacity: 1; }
-
-/* line 84, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/style.scss */
-h1 {
-  color: blue; }
-
-/* line 88, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/style.scss */
-body {
-  background-color: black; }
-
-/* line 93, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/style.scss */
-h1 {
-  font-size: 20px;
-  font-size: 1rem; }
-
-/* line 98, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/style.scss */
-h3 {
-  color: orange; }
 
 
 /*# sourceMappingURL=style.css.map */

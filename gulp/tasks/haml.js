@@ -1,3 +1,10 @@
+/*
+ * Haml
+ * Converts haml templates to html
+ * Ruby version of gulp haml used to allow partials
+ * Partials also rendered
+ */
+
 var gulp 				 = require('gulp');
 var haml 				 = require('gulp-ruby-haml'); // using the ruby version so we can use parials
 var changed  		 = require('gulp-changed');
@@ -10,8 +17,6 @@ var del = require('del');
 var runSequence = require('run-sequence');
 
 
-
-// Get all .haml files in one folder and render
 gulp.task('haml', function () {
 	return gulp.src(config.src)
 				.pipe(changed(config.src))
@@ -20,7 +25,6 @@ gulp.task('haml', function () {
 		    .pipe(gulp.dest(config.dest));
     		//.pipe(browserSync.reload({stream:true}));
 });
-
 
 // remove all the includes output files
 gulp.task('hamlClean', del.bind(null, [config.partials], {dot: true}));

@@ -1,3 +1,9 @@
+/*
+ * pageinsights 
+ * run pageinsights on urls (see config)
+ */
+
+
 var gulp 					= require('gulp');
 var psi 					= require('psi');
 var config        = require('../config').psi;

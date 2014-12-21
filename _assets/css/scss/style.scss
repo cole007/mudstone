@@ -47,8 +47,12 @@
 @import 'libs/_libs-reset';
 @import 'libs/_libs-vars';
 
-@import 'libs/_libs-mixins';
 @import 'libs/_libs-functions';
+// help mixins
+@import 'tools/tools-helpers';
+// project specific mixins
+@import 'libs/_libs-mixins';
+
 @import 'libs/_sprites';
 
 // external libraries go here
@@ -56,11 +60,13 @@
 
 // to install bourbon go to scss folder and 'bourbon install'
 @import 'libs/bourbon/bourbon';
+@import 'libs/_libs-objects';
 
 // comment out following for launch!
 @import 'views/_views-beta';
 
 @import 'views/_views-core';
+
 @media screen and (min-width: $break-small) {
     @import 'views/_views-tablet';
 }
@@ -68,33 +74,3 @@
     @import 'views/_views-desktop';
 }
 
-html {
-    @include transition(opacity 0.5s);
-}
-
-.no-js {
-    opacity: 0;
-}
-
-.js {
-    opacity: 1;
-}
-
-
-h1 {
-    color: blue;
-}
-
-body {
-    background-color: black;
-}
-
-
-h1 {
-    font-size: 20px;
-    font-size: 1rem;
-}
-
-h3 {
-    color: orange;
-}

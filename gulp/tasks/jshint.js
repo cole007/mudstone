@@ -1,3 +1,8 @@
+/*
+ * jshint
+ * run jshint of javascript
+ */
+
 var gulp         = require('gulp');
 var browserSync  = require('browser-sync');
 var reload			 = browserSync.reload;
@@ -11,9 +16,6 @@ var env 				 = require('../config').env
 
 
 gulp.task('jshint', function() {
-
-
-
   return gulp.src(config.hint)
     .pipe(reload({stream: true, once: true}))
     .pipe(jshint())

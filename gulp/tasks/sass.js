@@ -28,7 +28,7 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 gulp.task('sass', function () {
-  return gulp.src(config.src)
+  return gulp.src(config.watch)
     .pipe(gulpif(env == 'dev', sourcemaps.init()))
     .pipe(sass(config.options))
     .on('error', handleErrors)

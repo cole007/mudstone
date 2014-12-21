@@ -1,14 +1,13 @@
 /*
-    File: _assets/css/scss/_libs-vars.scss
+    File: _assets/css/scss/libs/_libs-vars.scss
 */
 
 // debugging
-
     $debug: false;
 
 // extends
- $test: this;
-$extend : ();
+
+    $sprite: '../images/sprite.png';
 
 // Typography
 
@@ -18,16 +17,15 @@ $extend : ();
     $rhythm-unit:                   rem;
     $browser-default-font-size:     16px;
     $relative-font-sizing:          true;
-    $ratio:                         $base-line-height / $base-font-size;
 
-    $typecsset-show-baseline:       false;
+    $ratio:                         $base-line-height / $base-font-size;
 // Grid
 
     $base-max-width:        1098px;
     $base-max-columns:      12;
     $base-column-width:     floor($base-max-width / $base-max-columns);
     $base-side-padding:     20px;
-    $current_breakpoint:   base;
+    $current_breakpoint:    base;
 
     $base-padding: $base-line-height;
     $base-padding-half: $base-line-height / 2;
@@ -45,16 +43,8 @@ $extend : ();
     $_use-wrapper:              true;
 
 
-// borders-widths
-    $borders: (
-        hero:       8px,
-        quote:      5px,
-        footer:     5px,
-        list:       1px
-    );
 
 // Counter
-
     $counter: counter;
 
 // Button 
