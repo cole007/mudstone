@@ -1,0 +1,67 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+*/
+$arms-x: 0px;
+$arms-y: 0px;
+$arms-offset-x: 0px;
+$arms-offset-y: 0px;
+$arms-width: 123px;
+$arms-height: 72px;
+$arms-total-width: 246px;
+$arms-total-height: 72px;
+$arms-image: '../images/sprite.png';
+$arms: 0px 0px 0px 0px 123px 72px 246px 72px '../images/sprite.png';
+$blog-x: 123px;
+$blog-y: 0px;
+$blog-offset-x: -123px;
+$blog-offset-y: 0px;
+$blog-width: 123px;
+$blog-height: 72px;
+$blog-total-width: 246px;
+$blog-total-height: 72px;
+$blog-image: '../images/sprite.png';
+$blog: 123px 0px -123px 0px 123px 72px 246px 72px '../images/sprite.png';
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}

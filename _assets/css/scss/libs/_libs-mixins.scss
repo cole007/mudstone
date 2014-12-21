@@ -35,7 +35,7 @@
   font-size: ($font-size / $typecsset-base-font-size) * 1rem;
   
   @if $line-height == true {
-    line-height: ceil($font-size / $typecsset-base-line-height) * ($typecsset-base-line-height / $font-size);
+    line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
   } 
   @elseif $line-height != false {
     @if type-of($line-height) == number {

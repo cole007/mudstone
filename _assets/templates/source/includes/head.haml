@@ -1,0 +1,29 @@
+!!! 5
+<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+%head
+	%meta{:charset => "utf-8"}
+	
+	%title Title
+	%meta{:name => "description", :content => ""}
+	
+	%meta{:name => "viewport", :content => "user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"}
+	%link{:href => "/favicon.ico", :rel => "shortcut icon"}
+	%link{:type => "text/plain", :rel => "author", :href => "humans.txt"}
+	-#
+		%noscript
+			%link{:rel => "stylesheet", :href => "/_assets/css/style.css", :media => "screen AND (min-width:180px)"}
+		:javascript
+			function loadCSS(e,t,n){"use strict";function o(){var t;for(var i=0;i<s.length;i++){if(s[i].href&&s[i].href.indexOf(e)>-1){t=true}}if(t){r.media=n||"screen AND (min-width:180px)"}else{setTimeout(o)}}var r=window.document.createElement("link");var i=t||window.document.getElementsByTagName("script")[0];var s=window.document.styleSheets;r.rel="stylesheet";r.href=e;r.media="only x";i.parentNode.insertBefore(r,i);o();return r} 
+			loadCSS( "/_assets/css/style.css" );
+	:javascript
+		var html = document.getElementsByTagName("html")[0];
+		if(html.className == "no-js") html.className = html.className.replace("no-js", "js"); // user has JS enabled 
+		function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTimeout(d),d=setTimeout(function(){d=null,c||a.apply(e,f)},b),c&&!d&&a.apply(e,f)}};
+
+	/[if (lt IE 9) & (!IEMobile)]
+		%link{:rel => "stylesheet", :href => "/_assets/css/ie.css"} 
+	
+
+	%link{:rel => "stylesheet", :href => "/_assets/css/style.css", :media => "screen AND (min-width:180px)"}

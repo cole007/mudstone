@@ -1,0 +1,13 @@
+= Haml::Engine.new(File.read('./_assets/templates/source/includes/head.haml')).render
+%body
+
+	.site
+	= Haml::Engine.new(File.read('./_assets/templates/source/includes/header.haml')).render
+	%p this is some text
+	.sidebar
+		= Haml::Engine.new(File.read('./_assets/templates/source/includes/box.haml')).render
+		%p piss 31 
+
+
+
+= Haml::Engine.new(File.read('./_assets/templates/source/includes/foot.haml')).render

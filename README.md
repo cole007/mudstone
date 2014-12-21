@@ -17,13 +17,19 @@
     # Project details
     
     
-    # Sass set-up
+    # Gulp set-up
     
-    Style guide for Sass/CSS: _assets/css/scss/style.scss
+    For a Getting started guide, API docs, recipes, making a plugin, etc. see the documentation page!
     
-    sass --watch XXX/css/scss:XXX/css
-    sass --watch XXX/css/scss:XXX/css --style expanded
-    sass --watch XXX/css/scss:XXX/css --style compressed
+    ```js
+    npm install
+
+    cd _assets/css/libs
+    gem install bourbon
+
+    cd ../../
+    gulp
+
     
     # Localhost set-up
     
