@@ -5,11 +5,6 @@
 */
 
 //  Heleprs
-/*
-
-
-
-*/
 
 
 // Typography
@@ -73,7 +68,6 @@
     }
   }
 }
-// Colours
 
 // Layout
 
@@ -85,319 +79,297 @@
     }
 }
 
-    //  @mixin grid-columns-classes($name: grid, $style: fluid, $columns: $base-max-columns, $breakpoint: $current_breakpoint) {
   
-    //      @for $i from 1 through $columns {
-  
-    //          %#{$name}-#{$i}-#{$breakpoint} {
-  
-    //              @if $style == 'fluid' {
-    //                  width: gridCalc($i, $columns);
-    //              } 
-    //              @if $style == 'fixed' {
-    //                  max-width: $base-column-width * $i;
-    //              }
-    //          }
-    //      }
-  
-    //  }
-  
-    //  @mixin extend($name, $breakpoint: $current_breakpoint) {
-    //      @extend %#{$name}-#{$breakpoint};
-    //  }
-
- 
-
-    // menu icon animation
-    // exameple markup
-    //
-    //  <a href="#" class="menu__btn"><span>Menu</span></a>
-    //
-    // effect takes place once the button has been clicked
-    // slighty movement on hover
+// menu icon animation
+// exameple markup
+//
+//  <a href="#" class="menu__btn"><span>Menu</span></a>
+//
+// effect takes place once the button has been clicked
+// slighty movement on hover
 
 // menu button
 
-    @mixin menu-icon-rotate($width: 30px, $height: 6px, $color: $_white, $curve: true, $active_class: '.active', $gap: 2) {
+@mixin menu-icon-rotate($width: 30px, $height: 6px, $color: $_white, $curve: true, $active_class: '.active', $gap: 2) {
+    
+
+    $exit_lenght: $height * 2;
+    $bar_gaps: ($height * $gap) + 1;
+
+
+    & > span {
+        @include transition(all 0.5s);
+        @include transform(translateY(0px));
+        margin: auto;
+        pointer-events: none;
         
-
-        $exit_lenght: $height * 2;
-        $bar_gaps: ($height * $gap) + 1;
-
-
-        & > span {
-            @include transition(all 0.5s);
-            @include transform(translateY(0px));
-            margin: auto;
-            pointer-events: none;
-            
-            &,
-            &:before,
-            &:after {
-                width: $width;
-                height: $height;
-                background-color: $color;
-                display: block;
-                position: relative; // firefox fix
-                z-index: 100001;
-                @if $curve == true {
-                    border-radius: $height;
-                }
+        &,
+        &:before,
+        &:after {
+            width: $width;
+            height: $height;
+            background-color: $color;
+            display: block;
+            position: relative; // firefox fix
+            z-index: 100001;
+            @if $curve == true {
+                border-radius: $height;
             }
-            
-            &:before,
-            &:after {
-                @include position(absolute, null null null 0);
-                @include transition(all 0.5s);
-                content: " ";
-                display: block;
-                width: $width;
-                height: $height;
-                background-color: $color;
-            }
-            
-            &:before {
-                @include transform(translateY(-$bar_gaps));
-            }
-            
-            &:after {
-                @include transform(translateY($bar_gaps));
-            }       
         }
         
-
-
-        &:focus {
-            > span {
-                @include transform(translateY($exit_lenght));
-                background-color: transparent!important; //urgh.. that'll do for now, that'll do pig, that'll do
-                &:before {
-                    @include transform(translateY(-$exit_lenght) rotate(45deg));
+        &:before,
+        &:after {
+            @include position(absolute, null null null 0);
+            @include transition(all 0.5s);
+            content: " ";
+            display: block;
+            width: $width;
+            height: $height;
+            background-color: $color;
+        }
         
-                }
-                &:after {
-                    @include transform(translateY(-$exit_lenght) rotate(-45deg));
-                }
+        &:before {
+            @include transform(translateY(-$bar_gaps));
+        }
+        
+        &:after {
+            @include transform(translateY($bar_gaps));
+        }       
+    }
+    
+
+
+    &:focus {
+        > span {
+            @include transform(translateY($exit_lenght));
+            background-color: transparent!important; //urgh.. that'll do for now, that'll do pig, that'll do
+            &:before {
+                @include transform(translateY(-$exit_lenght) rotate(45deg));
+    
+            }
+            &:after {
+                @include transform(translateY(-$exit_lenght) rotate(-45deg));
             }
         }
     }
+}
 
 
-    /// off canvas menu funk
+/// off canvas menu funk
 
 
-    @mixin offcanvas($behaviour: fade, $position: top, $size: 200px, $target: '.menu__wrapper', $wrapper: '.site') {
+@mixin offcanvas($behaviour: fade, $position: top, $size: 200px, $target: '.menu__wrapper', $wrapper: '.site') {
 
+    
+    @if $behaviour != 'shift' and $behaviour != 'overlay'  and $behaviour != 'reveal' and $behaviour != 'fade' {
+        @warn "The behaviour should be either shift, overlay, fade or reveal";
+    } @else {
         
-        @if $behaviour != 'shift' and $behaviour != 'overlay'  and $behaviour != 'reveal' and $behaviour != 'fade' {
-            @warn "The behaviour should be either shift, overlay, fade or reveal";
-        } @else {
-            
-            
-            $out_trans: null;
-            $in_trans: null;
-            $shift_trans: null;
-            $pos: null;
+        
+        $out_trans: null;
+        $in_trans: null;
+        $shift_trans: null;
+        $pos: null;
+        $pos_type: absolute;
+        $outposition: -($size);
+        $transition: translateX;
+        
+        
+        @if $behaviour == 'shift' and $position  == 'top' and $position == 'fade' {
             $pos_type: absolute;
-            $outposition: -($size);
-            $transition: translateX;
+        }
+        
+        $shift_amount: if($position == 'top', 100%, $size);
+        
+        $width: if($position == 'top', 100%, $size);
+        $height: null;
             
-            
-            @if $behaviour == 'shift' and $position  == 'top' and $position == 'fade' {
-                $pos_type: absolute;
-            }
-            
-            $shift_amount: if($position == 'top', 100%, $size);
-            
-            $width: if($position == 'top', 100%, $size);
-            $height: null;
-                
-            // check the $position value, here we are going to build up the position value, which will be passed into the positon mixin.
-            @if $position == 'top' {
-                $pos: 0 null null null;
-                $out_trans: translateY(-100%);
-                $in_trans: translateY(0);
-                $shift_trans: translateY(100%);
-                $transition: translateY;
-            } @else if $position == 'left' {
-                $pos: 0 null 0 0;
-                $out_trans: translateX(-100%);
-                $in_trans: translateX(0);
-                $shift_trans: translate($size);
-            } @else if $position == 'right' {
-                $pos: 0 0 0 null;
-                $out_trans: translateX(100%);
-                $in_trans: translateX(0);
-                $shift_trans: translate(-($size));
-            } @else {
-                @warn "The postion value should be either top, left or right, bottom is not support"
-            }
-            
-            #{$target} {
-                width: $width;
-                z-index: 300;
-                @if $behaviour == fade {    
-                    @include transform-origin(0 0);
-                    @include perspective(1000px);
-                    @include transform(rotateX(-10deg) translateY(-25px));
+        // check the $position value, here we are going to build up the position value, which will be passed into the positon mixin.
+        @if $position == 'top' {
+            $pos: 0 null null null;
+            $out_trans: translateY(-100%);
+            $in_trans: translateY(0);
+            $shift_trans: translateY(100%);
+            $transition: translateY;
+        } @else if $position == 'left' {
+            $pos: 0 null 0 0;
+            $out_trans: translateX(-100%);
+            $in_trans: translateX(0);
+            $shift_trans: translate($size);
+        } @else if $position == 'right' {
+            $pos: 0 0 0 null;
+            $out_trans: translateX(100%);
+            $in_trans: translateX(0);
+            $shift_trans: translate(-($size));
+        } @else {
+            @warn "The postion value should be either top, left or right, bottom is not support"
+        }
+        
+        #{$target} {
+            width: $width;
+            z-index: 300;
+            @if $behaviour == fade {    
+                @include transform-origin(0 0);
+                @include perspective(1000px);
+                @include transform(rotateX(-10deg) translateY(-25px));
+                @include transition(all 0.5s);
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                &.active {
+                    @include transform(rotateX(0deg) translateY(0px));
                     @include transition(all 0.5s);
+                    visibility: visible;
+                    opacity: 1;
+                }
+                &.closing {
+                    @include transform(rotateX(10deg));
+                    @include transition(all .25s);
                     opacity: 0;
                     visibility: hidden;
-                    position: absolute;
+                }
+            } @else {
+
+                @include transition(all 0.5s);
+                @include position($pos_type, $pos);
+                @include transform($out_trans);
+
+
+                @if $behaviour == overlay {
                     &.active {
-                        @include transform(rotateX(0deg) translateY(0px));
-                        @include transition(all 0.5s);
-                        visibility: visible;
-                        opacity: 1;
-                    }
-                    &.closing {
-                        @include transform(rotateX(10deg));
-                        @include transition(all .25s);
-                        opacity: 0;
-                        visibility: hidden;
+                        @include transform($in_trans);
                     }
                 } @else {
-
-                    @include transition(all 0.5s);
-                    @include position($pos_type, $pos);
-                    @include transform($out_trans);
-
-
-                    @if $behaviour == overlay {
-                        &.active {
-                            @include transform($in_trans);
-                        }
-                    } @else {
-                        @if $position == 'top' {
-                            &.active {
-                                @include transform($in_trans);
-                            }
-                        }
-                    }
-
-                    @if $behaviour == shift {
+                    @if $position == 'top' {
                         &.active {
                             @include transform($in_trans);
                         }
                     }
                 }
-            } 
-            
-            @if $behaviour == shift {
-            
-                #{$wrapper} {
-                    @include transition(all .5s);
-                    
-                    @if $position != 'top' {
-                        .menu-open & {
-                            @include transform($shift_trans);
-                        //  @include translateX(-($size));
-                            overflow: hidden;
-                        }   
-                    } 
-                    
-                    @else if $position == 'top' {
-                        .menu-open & {
-                            margin-top: $size;
-                        }
+
+                @if $behaviour == shift {
+                    &.active {
+                        @include transform($in_trans);
+                    }
+                }
+            }
+        } 
+        
+        @if $behaviour == shift {
+        
+            #{$wrapper} {
+                @include transition(all .5s);
+                
+                @if $position != 'top' {
+                    .menu-open & {
+                        @include transform($shift_trans);
+                    //  @include translateX(-($size));
+                        overflow: hidden;
+                    }   
+                } 
+                
+                @else if $position == 'top' {
+                    .menu-open & {
+                        margin-top: $size;
                     }
                 }
             }
         }
     }
-    
+}
+
+
+
+
 
  
- 
- 
-     
-    @mixin image-wrapper($aspect-ratio: 16 9, $max-height: 300px, $max-width: false, $image-settings: true) {
-      max-height: $max-height;
-      
-      @if $image-settings == true {
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-      
-      $x: nth($aspect-ratio,1);
-      $y: nth($aspect-ratio,2);
-   
-      @if type-of($max-width) == number {
-          max-width: $max-width;
-      }
-   
-      &:before {
-          padding-bottom: gridCalc($y,$x);
-          content: " ";
-          display: block;
-      }
-    }
-    
-    
-    @mixin placeholder(){
-      ::-webkit-input-placeholder {
-         @content;
-      }
-      
-      :-moz-placeholder { /* Firefox 18- */
-         @content;
-      }
-      
-      ::-moz-placeholder {  /* Firefox 19+ */
-         @content;
-      }
-      
-      :-ms-input-placeholder {  
-         @content;
-      }
-    }
-    
-    @mixin justify() {
-      text-align: justify;
-      &:after {
-        display: inline-block;
-        width: 100%;
-        content: " ";
-      }
-    }
-    
-    
-    //    markup
-    //    
-    //    .site
-    //      .site__wrap
-    //    .footer
-    //    
-    //    $els args need to be passed in the correct order, from top to bottom, so '.site' '.site__wrap' '.foot'
-    
-    @mixin sticky-footer($els: '.site' '.site__wrap' '.footer', $height: 115px ) {
+@mixin image-wrapper($aspect-ratio: 16 9, $max-height: 300px, $max-width: false, $image-settings: true) {
+  max-height: $max-height;
   
-      $site: nth($els, 1);
-      $wrap: nth($els, 2);
-      $foot: nth($els, 3);
-      
-      html,body {
-        height: 100%;
-      }
-      
-      #{$site} {
-        min-height: 100%;
-      }
-      
-      #{$wrap} {
-        overflow: auto;
-        padding-bottom: $height;
-      }
-      
-      #{$foot} {
-        position: relative;
-        margin-top: -$height;
-        height: $height;
-      }
-      
-      
-    }
-    
+  @if $image-settings == true {
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  $x: nth($aspect-ratio,1);
+  $y: nth($aspect-ratio,2);
+
+  @if type-of($max-width) == number {
+      max-width: $max-width;
+  }
+
+  &:before {
+      padding-bottom: gridCalc($y,$x);
+      content: " ";
+      display: block;
+  }
+}
+
+
+@mixin placeholder(){
+  ::-webkit-input-placeholder {
+     @content;
+  }
+  
+  :-moz-placeholder { /* Firefox 18- */
+     @content;
+  }
+  
+  ::-moz-placeholder {  /* Firefox 19+ */
+     @content;
+  }
+  
+  :-ms-input-placeholder {  
+     @content;
+  }
+}
+
+@mixin justify() {
+  text-align: justify;
+  &:after {
+    display: inline-block;
+    width: 100%;
+    content: " ";
+  }
+}
+
+
+//    markup
+//    
+//    .site
+//      .site__wrap
+//    .footer
+//    
+//    $els args need to be passed in the correct order, from top to bottom, so '.site' '.site__wrap' '.foot'
+
+@mixin sticky-footer($els: '.site' '.site__wrap' '.footer', $height: 115px ) {
+
+  $site: nth($els, 1);
+  $wrap: nth($els, 2);
+  $foot: nth($els, 3);
+  
+  html,body {
+    height: 100%;
+  }
+  
+  #{$site} {
+    min-height: 100%;
+  }
+  
+  #{$wrap} {
+    overflow: auto;
+    padding-bottom: $height;
+  }
+  
+  #{$foot} {
+    position: relative;
+    margin-top: -$height;
+    height: $height;
+  }
+  
+  
+}
+
     
     
 @mixin adjust-header($height: 80px) {

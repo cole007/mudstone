@@ -25,7 +25,10 @@
 
         7.  Hacks
             Idiosyncratic styles for browser support, etc
-
+$break-tiny    
+$break-small   
+$break-large   
+$break-massive 
 */
 
 // === 1.  Baseline
@@ -41,3 +44,37 @@
 // === 6.  Exceptions
 
 // === 7.  Hacks
+
+body {
+    &:after {
+        @include position(fixed, null null 0 0);
+        color: $white;
+        padding: 5px;
+        font-size: 12px;
+        content: " ";
+        display: block;
+        z-index: 100;
+        background-color: rgba(0,0,0,0.8);
+        content: "core";
+    }
+    @include mq('min', $break-tiny) {
+        &:after {
+            content: "min-width: #{$break-tiny}";
+        }
+    }
+    @include mq('min', $break-small) {
+        &:after {
+            content: "min-width: #{$break-small}";
+        }
+    }
+    @include mq('min', $break-large) {
+        &:after {
+            content: "min-width: #{$break-large}";
+        }
+    }
+    @include mq('min', $break-massive) {
+        &:after {
+            content: "min-width: #{$break-massive}";
+        }
+    }
+}

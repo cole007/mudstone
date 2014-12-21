@@ -402,11 +402,6 @@ table {
         See https://github.com/thoughtbot/bourbon
 */
 /*
-
-
-
-*/
-/*
 SCSS variables are information about icon's compiled state, stored under its original file name
 
 .icon-home {
@@ -601,8 +596,45 @@ fieldset {
 
         7.  Hacks
             Idiosyncratic styles for browser support, etc
-
+$break-tiny    
+$break-small   
+$break-large   
+$break-massive 
 */
+/* line 49, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+body:after {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  content: " ";
+  display: block;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.8);
+  content: "core"; }
+@media only screen and (min-width:480px) {
+  /* line 61, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+  body:after {
+    content: "min-width: 480px"; }
+ }
+@media only screen and (min-width:768px) {
+  /* line 66, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+  body:after {
+    content: "min-width: 768px"; }
+ }
+@media only screen and (min-width:954px) {
+  /* line 71, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+  body:after {
+    content: "min-width: 954px"; }
+ }
+@media only screen and (min-width:1200px) {
+  /* line 76, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+  body:after {
+    content: "min-width: 1200px"; }
+ }
+
 /*
     File: _assets/css/scss/_views-core.scss
         This is the base, mobile-first view CSS.

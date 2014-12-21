@@ -63,16 +63,11 @@
 @import 'libs/_libs-objects';
 
 // comment out following for launch!
-@import 'views/_views-beta';
 
 @import 'views/_views-core';
 
-@media screen and (min-width: $break-small) {
-    @import 'views/_views-tablet';
-}
-@media screen and (min-width: $break-large) {
-    @import 'views/_views-desktop';
-}
+@import 'views/_views-tablet';
+@import 'views/_views-desktop';
 
-@import 'views/_views-exceptions';
+
 
