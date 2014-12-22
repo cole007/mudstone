@@ -7,8 +7,6 @@ var assets = './_assets/',
     root = './',
     env = 'dev',
     outputStyle = 'expanded';
-
-
 /*
  * Update values based on environment
  */
@@ -17,12 +15,10 @@ if(env === 'live') {
     outputStyle = 'compressed';
     buildAssets = build + '_assets/';
 }
-
 /*
  * Site url used for page insights
  */
 var url = 'http://www.google.com';
-
 /*
  * Resource paths
  */
@@ -60,7 +56,6 @@ var paths = {
         partials: assets + 'templates/dest/includes',
       }
     };
-
 /*
  * Autoprefix browser suppport
  */
@@ -75,19 +70,19 @@ var AUTOPREFIXER_BROWSERS = [
       'android >= 4.4',
       'bb >= 10' 
     ];
-
 /*
  * module exports
  * variables used by gulp tasks, see the tasks folder
  */
-
 module.exports = {
+
   browserSync: {
     server: {
         baseDir: root
     },
     notify: false
   },
+
   sass: {
     src: paths.scss.src + '/style.scss',
     dest: paths.scss.dest,
@@ -98,10 +93,12 @@ module.exports = {
     },
     output: 'style.min.css'
   },
+
   images: {
     src: paths.images.src,
     dest: paths.images.dest
   },
+
   scripts: {
     src: [
       paths.js.src + '/libs/jquery-1.10.2.min.js',
@@ -112,6 +109,7 @@ module.exports = {
     output: 'app.js',
     hint: paths.js.hint
   },
+
   sprites: {
     data: paths.sprites.data,
     imgName: paths.sprites.spriteName,
@@ -120,11 +118,13 @@ module.exports = {
     spriteDataImg: paths.sprites.spriteDataImg,
     spriteDataCss: paths.sprites.spriteDataCss
   },
+  
   html: {
     src: paths.html.src,
     build: paths.html.build,
     dest: paths.html.dest
   },
+
   haml : {
     src: paths.haml.src,
     dest: paths.haml.dest,

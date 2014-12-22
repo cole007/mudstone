@@ -1,7 +1,23 @@
 = Haml::Engine.new(File.read('./_assets/templates/source/includes/head.haml')).render
-%body
 
+%body
 	.site
-	= Haml::Engine.new(File.read('./_assets/templates/source/includes/header.haml')).render
-	
+		
+		= Haml::Engine.new(File.read('./_assets/templates/source/includes/header.haml')).render
+		
+
+		.wrapper
+			%h1 heading 1
+			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.
+			%h2 heading 2
+			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.
+			%h3 heading 3
+			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.
+			%h4 heading 4
+			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.
+			%h5 heading 5
+			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.
+			%h6 heading 6
+			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.
+
 = Haml::Engine.new(File.read('./_assets/templates/source/includes/foot.haml')).render

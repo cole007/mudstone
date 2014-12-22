@@ -31,24 +31,67 @@
 html {
     font-size: $base-font-size / 16px + em; /* [1] */
     line-height: $base-line-height / $base-font-size; /* [2] */
-
 }
 
-
 // === 1.  Baseline
+body {}
 
+.wrapper {}
 
 // === 2.  Layout
 
+.grid {@include cf();}
+.grid-box {display: inline-block;}
+.grid-col {float: left;}
+
 // === 3.  Typography
 
+h1,.heading-1 {
+	@include font-size(fs(h1));
+	margin: 0 0 gutter(1);
+}
+h2,.heading-2 {
+	@include font-size(fs(h2));
+	margin: 0 0 gutter(1);
+}
+h3,.heading-3 {
+	@include font-size(fs(h3));
+	margin: 0 0 gutter(1);
+}
+h4,.heading-4 {
+	@include font-size(fs(h4));
+	margin: 0 0 gutter(1);
+}
+h5,.heading-5 {
+	@include font-size(fs(h5));
+	margin: 0 0 gutter(1);
+}
+h6,.heading-6 {
+	@include font-size(fs(h6));
+	margin: 0 0 gutter(1);
+}
 
+p,li {}
+a {}
+ul {}
+ol {}
 
 // === 4.  Elements
 
+.header {}
+.nav {}
+.content {}
+.sidebar {}
+.footer {}
 
 
 // === 5.  Components
+
+.slide {}
+.social {}
+.tabs {}
+.expand {}
+.modules {}
 
 // === 6.  Exceptions
 

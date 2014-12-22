@@ -30,18 +30,6 @@
 
 // === 1.  Baseline
 
-// === 2.  Layout
-
-// === 3.  Typography
-
-// === 4.  Elements
-
-// === 5.  Components
-
-// === 6.  Exceptions
-
-// === 7.  Hacks
-
 body {
     &:after {
         @include position(fixed, null null 0 0);
@@ -75,3 +63,15 @@ body {
         }
     }
 }
+
+// === 2.  Layout
+
+// === 3.  Typography
+
+// === 4.  Elements
+
+// === 5.  Components
+
+// === 6.  Exceptions
+
+// === 7.  Hacks

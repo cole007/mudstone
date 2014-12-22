@@ -1,0 +1,66 @@
+// font-size	- 
+// see http://codepen.io/chriscoyier/pen/gsodI for usage example
+// - does not require a height, although a height can be used			
+
+@mixin font-size($font-size, $line-height: true) {  
+  font-size: $font-size;
+  font-size: ($font-size / $base-font-size) * 1rem;
+  
+  @if $line-height == true {
+    line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
+  } 
+  @elseif $line-height != false {
+    @if type-of($line-height) == number {
+      @if unitless($line-height) {
+        line-height: computeLineHeight($font-size, $line-height);
+      }
+    }
+  }
+}
+
+// Font face mixin
+@mixin font-face($font-family, $font-url, $font-name) {
+  
+    @font-face {
+        font: {
+            family: $font-family;
+            style: normal;
+            weight: normal;
+        }
+        src: url($font-url + '/' + $font-name + '.eot');
+        src: url($font-url + '/' + $font-name + '.eot?#iefix') format('embedded-opentype'), 
+             url($font-url + '/' + $font-name + '.woff') format('woff'), 
+             url($font-url + '/' + $font-name + '.ttf')  format('truetype'),
+             url($font-url + '/' + $font-name + '.svg#' + $font-name) format('svg');
+    }
+}
+
+
+//  mixin for styling the number in number lists (eg ol)
+//  example usage:
+//   ol {
+//    display: block;
+//    @include fancy-ol($counter: ol-counter) {
+//       background-color: $_brand;
+//       display: inline-block;
+//       color: $_white;
+//       width: 22px;
+//       height: 22px;
+//       vertical-align: middle;
+//       text-align: center;
+//       padding-top: 3px;
+//       margin-right: 9px;
+//    }
+//   }
+   
+@mixin fancy-ol( $selector: li, $counter: ol-counter) {
+  list-style: none;
+  counter-reset: $counter;
+  #{$selector} {
+    &:before {
+       content: counter($counter);
+       counter-increment: $counter;
+       @content;
+    }
+  } 
+}

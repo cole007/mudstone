@@ -43,35 +43,41 @@
 
 
 // Libraries and dependencies
-@import 'libs/_libs-reset';
-@import 'libs/_libs-vars';
-
-@import 'libs/_libs-functions';
+@import 'libs/libs-reset';
+@import 'libs/libs-vars';
+@import 'libs/libs-functions';
 // help mixins
-@import 'tools/tools-helpers';
-// project specific mixins
-@import 'libs/_libs-mixins';
+@import 'libs/gridset';
 
-@import 'libs/_sprites';
+
+@import 'tools/tools-grid';
+@import 'tools/tools-helpers';
+@import 'tools/tools-images';
+@import 'tools/tools-layout';
+@import 'tools/tools-type';
+
+// project specific mixins
+@import 'libs/libs-mixins';
+@import 'libs/sprites';
 
 // external libraries go here
 // @import 'libs-gridset';
 
 // to install bourbon go to scss folder and 'bourbon install'
 @import 'libs/bourbon/bourbon';
-@import 'libs/_libs-objects';
+@import 'libs/libs-objects';
 
 // comment out following for launch!
 //@import 'views/_views-beta';
 
-@import 'views/_views-core';
+@import 'views/views-core';
 
 @media screen and (min-width: $break-small) {
-    @import 'views/_views-tablet';
+    @import 'views/views-tablet';
 }
 @media screen and (min-width: $break-large) {
-    @import 'views/_views-desktop';
+    @import 'views/views-desktop';
 }
 
-@import 'views/_views-exceptions';
+@import 'views/views-exceptions';
 

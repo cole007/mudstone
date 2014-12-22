@@ -32,7 +32,7 @@ gulp.task('sass', function () {
     .pipe(gulpif(env == 'dev', sourcemaps.init()))
     .pipe(sass(config.options))
     .on('error', handleErrors)
-    //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1')) // doesn't play nice with sourcemaps
+    .pipe(autoprefixer(config.prefix)) // doesn't play nice with sourcemaps
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .pipe(gulp.dest(config.dest))
     .on('error', handleErrors)

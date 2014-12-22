@@ -8,8 +8,12 @@
 // 
 
 @if $_use-btns == true {
-	
-	%btn {
+
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <button class="btn">Primary</button>
+*/
+	.btn {     
 	    display:inline-block;       
 	    vertical-align:middle;      
 	    white-space:nowrap;             
@@ -20,14 +24,6 @@
 	    line-height:3;
 	    height: r(3);  
 	    text-decoration: none;   
-	}
-
-/* 
-    Provides extra visual weight and identifies the primary action in a set of buttons.
-    <button class="btn">Primary</button>
-*/
-	.btn {     
-		@extend %btn;
 	}
 
 /* 
@@ -439,8 +435,8 @@
 @if $_use-wrapper == true {
 
 	.wrapper {
-	//	width: 100%;
-	//	max-width: $base-max-width;
+		width: 100%;
+		max-width: $base-max-width;
 		margin: 0 auto;
     &:after{
         content:"";
