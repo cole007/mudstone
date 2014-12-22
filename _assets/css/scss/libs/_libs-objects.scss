@@ -20,10 +20,20 @@
 	    cursor:pointer;             
 	    border:none;                
 	    margin:0;          
-	    padding: 0 r(1);
-	    line-height:3;
-	    height: r(3);  
+	    padding: 0 gutter(1);
 	    text-decoration: none;   
+	    @include font-size(18,40);
+	    height: 40px;
+	    background-color: $black;
+	    color: $white;
+	}
+
+	.btn--multi { 
+		&:after {
+			display: inline-block;
+			vertical-align: middle;
+			content: " ";
+		}
 	}
 
 /* 
@@ -31,9 +41,7 @@
     <button class="btn btn--cta">Primary</button>
 */
 
-	.btn--cta {
-		background-color: $black;
-	}
+
 	
 	
 	
@@ -176,7 +184,7 @@
 		  ///	Form Label
 		  ///
 	  	&__label {
-  			@include font-size(forms(label,font-size),false);
+  			//@include font-size(forms(label,font-size),false);
   			color: forms(label,color);
 		  	display: inline-block;  
 		  	cursor: pointer;  
@@ -193,7 +201,7 @@
 		
 		
 	  	&__input {
-  			@include font-size(forms(input,font-size));
+  			//@include font-size(forms(input,font-size));
   			@include transition(all 0.5s);
 		  	padding: 0 forms(input,padding);
 				height: forms(input,height);
@@ -209,7 +217,7 @@
 		  		//outline: none;
 		  	}
 		  	&--textarea {
-  				@include font-size(forms(input,font-size),true);
+  				//@include font-size(forms(input,font-size),true);
 		 		 	overflow:auto;
 		 		 //	height: forms(textarea,height);
 		 		 	padding-top: gutter(0.5);
@@ -317,32 +325,32 @@
 	}
 	
 
-	//	//.nav--banner` modified from `.nav` and centres the list, e.g.
-	//	.nav--banner {
-	//		text-align: center;
-	//	}
-	//	
-	//	//Force a nav to occupy 100% of the available width of its parent. Extends .nav
-	//	
-	//	.nav--fit{
-	//    display:table;
-	//    width:100%;
-	//	    > li {
-	//	        display:table-cell;
-	//	        > a {
-	//	            display:block;
-	//	        }
-	//	    }
-	//	}
-	//
-	//	.nav--justify {
-	//		text-align: justify;
-	//		&:after {
-	//			content: " ";
-	//			display: inline-block;
-	//			width: 100%;
-	//		}
-	//	}
+		//.nav--banner` modified from `.nav` and centres the list, e.g.
+		.nav--banner {
+			text-align: center;
+		}
+		
+		//Force a nav to occupy 100% of the available width of its parent. Extends .nav
+		
+		.nav--fit{
+	    display:table;
+	    width:100%;
+		    > li {
+		        display:table-cell;
+		        > a {
+		            display:block;
+		        }
+		    }
+		}
+	
+		.nav--justify {
+			text-align: justify;
+			&:after {
+				content: " ";
+				display: inline-block;
+				width: 100%;
+			}
+		}
 	//
 	//	.nav__dropdown__parent {
 	//		position: relative;
@@ -419,8 +427,9 @@
 	}
 	
 	
-	.panel--small {
-		//padding: $_half-spacing-unit;
+	.panel {
+		padding: gutter(1);
+		outline: 1px dotted red;
 	}
 	
 }

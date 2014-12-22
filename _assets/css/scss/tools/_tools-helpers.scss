@@ -47,3 +47,15 @@
   }
  // test: $type;
 }
+// example
+// - @include mq(340px 679px) {stuff:here}
+@mixin between($bps) {
+  $min: nth($bps,1);
+  $max: nth($bps,2);
+  $string: 'only screen and ';
+  $output: $string + '(min-width:#{$min})' + ' and '+ '(max-width:#{$max})';
+  @media #{$output} {
+    @content;
+  }
+}
+    

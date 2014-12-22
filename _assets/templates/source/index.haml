@@ -4,8 +4,6 @@
 	.site
 		
 		= Haml::Engine.new(File.read('./_assets/templates/source/includes/header.haml')).render
-		
-
 		.wrapper
 			%h1 heading 1
 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.
@@ -20,4 +18,31 @@
 			%h6 heading 6
 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.
 
+		.wrapper
+			%h3 The .nav item
+			%ul.nav
+				- (1..3).each do |i|
+					%li.nav__item item #{i} 
+			%h4 The .nav--stacked modifier
+			%ul.nav.nav--stacked
+				- (1..3).each do |i|
+					%li.nav__item item #{i} 
+			%h4 The .nav--banner modifier
+			%ul.nav.nav--banner
+				- (1..3).each do |i|
+					%li.nav__item item #{i} 
+			%h4 The .nav--fit modifier
+			%ul.nav.nav--fit
+				- (1..3).each do |i|
+					%li.nav__item item #{i} 
+
+		.wrapper
+			%h3 The .panel item
+			.panel
+				%h3 A title
+				%p Some copy, equal padding top and bottom, margings remove from last children
+
+		.wrapper
+			%h3 The .btn item
+			%a.btn.btn--cta{:href => "#"} A button
 = Haml::Engine.new(File.read('./_assets/templates/source/includes/foot.haml')).render

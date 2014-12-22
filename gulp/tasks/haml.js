@@ -22,8 +22,8 @@ gulp.task('haml', function () {
 				.pipe(changed(config.src))
 		    .pipe(haml())
 		    .on('error', handleErrors)
-		    .pipe(gulp.dest(config.dest));
-    		//.pipe(browserSync.reload({stream:true}));
+		    .pipe(gulp.dest(config.dest))
+    		.pipe(browserSync.reload({stream:true}));
 });
 
 // remove all the includes output files

@@ -47,7 +47,7 @@
 }
 
 @function gutter($lines: 1, $gutter: $base-padding) {
-	@return $gutter * $lines;
+	@return ($gutter * $lines) * 1px;
 }
 
 @function gridCalc($columns,$total_coloumns: $base-max-columns) {

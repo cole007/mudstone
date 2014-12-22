@@ -3,7 +3,7 @@
 // - does not require a height, although a height can be used			
 
 @mixin font-size($font-size, $line-height: true) {  
-  font-size: $font-size;
+  font-size: $font-size * 1px;
   font-size: ($font-size / $base-font-size) * 1rem;
   
   @if $line-height == true {
@@ -17,6 +17,20 @@
     }
   }
 }
+
+@mixin font-baseline($font-size: $base-font-size, $line-height:  $base-line-height, $default:$browser-default-font-size) {
+
+
+  font-size: $base-font-size / $browser-default-font-size + em;
+  line-height: $base-line-height / $base-font-size; /* [2] */
+
+}
+
+// html {
+//     font-size: $base-font-size / $browser-default-font-size + em; [1]
+//     line-height: $base-line-height / $base-font-size; /* [2] */
+// }
+
 
 // Font face mixin
 @mixin font-face($font-family, $font-url, $font-name) {

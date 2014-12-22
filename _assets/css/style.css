@@ -347,10 +347,6 @@ table {
 /*
     File: _assets/css/scss/_libs-functions.scss
 */
-/* line 31, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/tools/tools-grid */
-.test {
-  width: 50%; }
-
 /*
   Grid Mixins
 
@@ -393,20 +389,26 @@ The provided mixins are intended to be used with the array-like variables
   cursor: pointer;
   border: none;
   margin: 0;
-  padding: 0 1.22222rem;
-  line-height: 3;
-  height: 3.66667rem;
-  text-decoration: none; }
+  padding: 0 22px;
+  text-decoration: none;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 2.22222;
+  height: 40px;
+  background-color: #000;
+  color: #fff; }
+
+/* line 32, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+.btn--multi:after {
+  display: inline-block;
+  vertical-align: middle;
+  content: " "; }
 
 /* 
     Provides extra visual weight and identifies the primary action in a set of buttons.
     <button class="btn btn--cta">Primary</button>
 */
-/* line 34, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
-.btn--cta {
-  background-color: #000; }
-
-/* line 51, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 59, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 dt, dd {
   margin: 0; }
 
@@ -419,10 +421,10 @@ dt, dd {
 			<dd>desc</dd>
     </dl>
 	*/
-/* line 65, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 73, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .details {
   margin: 0; }
-  /* line 67, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+  /* line 75, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
   .details dt {
     float: left;
     clear: left;
@@ -437,14 +439,14 @@ dt, dd {
 			<dd>desc</dd>
     </dl>
 	*/
-/* line 85, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 93, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .details--row dd, .details--row dt {
   display: inline-block;
   float: none; }
-/* line 89, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 97, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .details--row dt {
   margin-right: 0; }
-/* line 92, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 100, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .details--row aa {
   margin-right: 1rem; }
 
@@ -457,7 +459,7 @@ dt, dd {
 			<dd>desc</dd>
     </dl>
 	*/
-/* line 108, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 116, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .details--fill dd {
   text-align: right; }
 
@@ -470,7 +472,7 @@ dt, dd {
 			<dd>desc</dd>
     </dl>
 	*/
-/* line 124, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 132, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .details--stack dt {
   display: block;
   float: none; }
@@ -484,109 +486,130 @@ dt, dd {
 			<dd>desc</dd>
     </dl>
 	*/
-/* line 140, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 148, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .details__title {
   font-weight: bold; }
 
-/* line 159, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 167, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 input[type="submit"], input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none; }
 
-/* line 164, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 172, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 fieldset {
   margin: 0;
   border: 0; }
 
 /* Block */
-/* line 170, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 178, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .form .input {
   position: relative;
   text-align: left;
   margin-bottom: 22px; }
-/* line 178, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 186, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .form__label {
-  font-size: 20px;
-  font-size: 1.11111rem;
   color: #41464b;
   display: inline-block;
   cursor: pointer;
   position: relative; }
-/* line 195, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 203, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .form__input {
-  font-size: 16px;
-  font-size: 0.88889rem;
-  line-height: 1.375;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  padding: 0 11px;
+  padding: 0 11;
   height: 40px;
   line-height: 1;
   display: inline-block;
   color: #666666; }
-  /* line 204, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+  /* line 212, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
   .form__input:focus {
     color: #666666; }
-  /* line 211, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+  /* line 219, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
   .form__input--textarea {
-    font-size: 16px;
-    font-size: 0.88889rem;
-    line-height: 1.375;
     overflow: auto;
     padding-top: 11px;
     padding-bottom: 11px; }
 
-/* line 259, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 267, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .media {
   display: block;
   overflow: hidden; }
 
-/* line 264, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 272, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .media__img {
   float: left;
   margin-right: 22px; }
 
-/* line 269, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 277, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .media__img--rev {
   float: right;
   margin-left: 22px; }
 
-/* line 274, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 282, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 [class*="media__img"] {
   margin-bottom: 0; }
-  /* line 276, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+  /* line 284, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
   [class*="media__img"] img {
     display: block; }
 
-/* line 281, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 289, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .media__bd {
   overflow: hidden; }
 
-/* line 302, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 310, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .nav {
   list-style: none;
   margin: 0;
   padding: 0; }
 
-/* line 308, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 316, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .nav__item {
   display: inline-block; }
 
-/* line 314, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 322, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .nav--stacked > li {
   display: block; }
 
-/* line 416, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 329, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+.nav--banner {
+  text-align: center; }
+
+/* line 335, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+.nav--fit {
+  display: table;
+  width: 100%; }
+  /* line 338, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+  .nav--fit > li {
+    display: table-cell; }
+    /* line 340, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+    .nav--fit > li > a {
+      display: block; }
+
+/* line 346, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+.nav--justify {
+  text-align: justify; }
+  /* line 348, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+  .nav--justify:after {
+    content: " ";
+    display: inline-block;
+    width: 100%; }
+
+/* line 424, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .panel > *:last-child, .panel > *:last-child > *:last-child, .panel > *:last-child > *:last-child > *:last-child {
   margin-bottom: 0; }
 
-/* line 437, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+/* line 430, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+.panel {
+  padding: 22px;
+  outline: 1px dotted red; }
+
+/* line 446, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
 .wrapper {
   width: 100%;
   max-width: 1098px;
   margin: 0 auto; }
-  /* line 441, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
+  /* line 450, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/libs/libs-objects */
   .wrapper:after {
     content: "";
     display: table;
@@ -594,65 +617,31 @@ fieldset {
 
 /* line 31, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
 html {
-  font-size: 1.125em;
-  /* [1] */
-  line-height: 1.22222;
-  /* [2] */ }
-
-/* line 34, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/tools/tools-layout */
-.grid:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-/* line 44, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
-.grid-box {
-  display: inline-block; }
-
-/* line 45, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
-.grid-col {
-  float: left; }
+  font-size: 1em;
+  line-height: 1.375; }
 
 /* line 49, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
 h1, .heading-1 {
-  font-size: 50px;
-  font-size: 2.77778rem;
-  line-height: 1.32;
   margin: 0 0 22px; }
 
 /* line 53, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
 h2, .heading-2 {
-  font-size: 40px;
-  font-size: 2.22222rem;
-  line-height: 1.1;
   margin: 0 0 22px; }
 
 /* line 57, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
 h3, .heading-3 {
-  font-size: 35px;
-  font-size: 1.94444rem;
-  line-height: 1.25714;
   margin: 0 0 22px; }
 
 /* line 61, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
 h4, .heading-4 {
-  font-size: 21px;
-  font-size: 1.16667rem;
-  line-height: 1.04762;
   margin: 0 0 22px; }
 
 /* line 65, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
 h5, .heading-5 {
-  font-size: 19px;
-  font-size: 1.05556rem;
-  line-height: 1.15789;
   margin: 0 0 22px; }
 
 /* line 69, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
 h6, .heading-6 {
-  font-size: 14px;
-  font-size: 0.77778rem;
-  line-height: 1.57143;
   margin: 0 0 22px; }
 
 

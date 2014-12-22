@@ -11,11 +11,11 @@
 
 // Typography
 
-    $base-font-size:                18px;
-    $base-line-height:              22px;
-    $rhythm-base-font-size:         18;
+    $base-font-size:                16;
+    $base-line-height:              22;
+    $rhythm-base-font-size:         18px;
     $rhythm-unit:                   rem;
-    $browser-default-font-size:     16px;
+    $browser-default-font-size:     16;
     $relative-font-sizing:          true;
 
     $ratio:                         $base-line-height / $base-font-size;
@@ -51,14 +51,14 @@
 
     $buttons: (
         large: (
-            height: 48px,
+            height: 48,
             line-height: 3,
-            font-size: 24px
+            font-size: 24
         ),
         small: (
-            height: 50px,
+            height: 50,
             line-height: 2.9,
-            font-size: 18px
+            font-size: 18
         )
     );
     
@@ -110,13 +110,13 @@
             height: 40px,
             border: 1px solid #cdd1d6,
             color: #666666,
-            font-size: 16px,
+            font-size: 16,
             padding: $base-padding-half
         ),
 
         label: (
             color: #41464b,
-            font-size:  20px
+            font-size:  20
 
         ),
         select: (
@@ -134,20 +134,20 @@
     );
 
     $font-sizes: (
-        h1:             50px,
-        h2:             40px,
-        h3:             35px,
-        h4:             21px,
-        h5:             19px,
-        h6:             14px,
+        h1:             50,
+        h2:             40,
+        h3:             35,
+        h4:             21,
+        h5:             19,
+        h6:             14,
         base:           $base-font-size,
         menu_item:      $base-font-size,
-        search:         40px,
-        meta:           14px,
-        panel:          38px,
-        caption:        15px,
-        intro:          24px,
-        signup:         16px
+        search:         40,
+        meta:           14,
+        panel:          38,
+        caption:        15,
+        intro:          24,
+        signup:         16
     );     
 
 // Layout
