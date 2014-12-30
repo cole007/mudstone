@@ -53,7 +53,7 @@ var paths = {
       haml: {
         src: assets + 'templates/source/**/*.haml',
         dest: assets + 'templates/dest/',
-        partials: assets + 'templates/dest/includes',
+        partials: assets + 'templates/dest/patterns'
       }
     };
 /*
@@ -77,9 +77,8 @@ var AUTOPREFIXER_BROWSERS = [
 module.exports = {
 
   browserSync: {
-    server: {
-        baseDir: root
-    },
+    
+    proxy: 'dev.mudstone',
     notify: false
   },
 

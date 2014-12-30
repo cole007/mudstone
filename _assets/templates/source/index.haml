@@ -4,6 +4,8 @@
 	.site
 		
 		= Haml::Engine.new(File.read('./_assets/templates/source/includes/header.haml')).render
+		
+		= Haml::Engine.new(File.read('./_assets/templates/source/patterns/box.haml')).render
 		.wrapper
 			%h1 heading 1
 			%p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.

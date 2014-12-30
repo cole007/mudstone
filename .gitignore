@@ -15,3 +15,5 @@ _assets/css/scss/libs/bourbon
 node_modules
 *.*.map
 docs
+patterns.php
+_assets/css/patterns.css
