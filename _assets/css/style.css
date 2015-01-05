@@ -615,6 +615,40 @@ fieldset {
     display: table;
     clear: both; }
 
+/* line 34, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+body:after {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  content: " ";
+  display: block;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.8);
+  content: "core"; }
+@media only screen and (min-width:480px) {
+  /* line 46, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+  body:after {
+    content: "min-width: 480px"; }
+ }
+@media only screen and (min-width:768px) {
+  /* line 51, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+  body:after {
+    content: "min-width: 768px"; }
+ }
+@media only screen and (min-width:954px) {
+  /* line 56, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+  body:after {
+    content: "min-width: 954px"; }
+ }
+@media only screen and (min-width:1200px) {
+  /* line 61, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/_views-beta */
+  body:after {
+    content: "min-width: 1200px"; }
+ }
+
 /* line 31, /Users/magicspon/websites/mudstone/fork/mudstone/_assets/css/scss/views/views-core */
 html {
   font-size: 1em;

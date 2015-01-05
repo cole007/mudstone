@@ -63,13 +63,13 @@
 // external libraries go here
 // @import 'libs-gridset';
 
-// to install bourbon go to scss folder and 'bourbon install'
-@import 'libs/bourbon/bourbon';
+// using node-bourbon, see ./gulp/config.js
+// @import 'libs/bourbon/bourbon';
+@import "bourbon";
 @import 'libs/libs-objects';
 
 // comment out following for launch!
-//@import 'views/_views-beta';
-
+@import 'views/_views-beta';
 @import 'views/views-core';
 
 @media screen and (min-width: $break-small) {

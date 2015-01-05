@@ -88,7 +88,7 @@ module.exports = {
     prefix: AUTOPREFIXER_BROWSERS,
     watch: paths.scss.src + '/**/*.scss',
     options: {
-       outputStyle: paths.scss.outputStyle
+      outputStyle: paths.scss.outputStyle
     },
     output: 'style.min.css'
   },
