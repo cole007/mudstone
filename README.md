@@ -21,12 +21,8 @@
 
 ##Scss 
 
-Boilerplate setup to use Bourbon
+Boilerplate setup to use Bourbon (via node)
 
-######From the terminal run
-```
- cd _assets/css/libs
- gem install bourbon
 ```
 
 ##Setup
@@ -35,7 +31,7 @@ Make sure you have Node.js and gulp installed
 
 ######From the terminal run
 ```
- npm install
+ (sudo) npm install
  gulp
  
 ```
