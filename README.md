@@ -23,7 +23,6 @@
 
 Boilerplate setup to use Bourbon (via node)
 
-```
 
 ##Setup
 
@@ -31,8 +30,8 @@ Make sure you have Node.js and gulp installed
 
 ######From the terminal run
 ```
-(sudo) npm install
-gulp
+ npm install
+ gulp
  
 ```
 
