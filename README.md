@@ -31,8 +31,8 @@ Make sure you have Node.js and gulp installed
 
 ######From the terminal run
 ```
- (sudo) npm install
- gulp
+(sudo) npm install
+gulp
  
 ```
 
