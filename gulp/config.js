@@ -41,6 +41,14 @@ var paths = {
         spriteDataImg: buildAssets + 'images',
         spriteDataCss: assets + 'css/scss/libs/'
       },
+      svg: {
+        src: assets + 'images/svg/*.svg',
+        dest: assets + 'images/',
+        output: 'svg-sprite.svg',
+        css: assets + 'css/scss/libs/_svg-sprites.scss',
+        sprite: assets + 'images/svg-sprite.svg',
+        template: assets + 'css/scss/libs/sprite-template.scss'
+      },
       images: {
         src: assets + 'images/site/*',
         dest: buildAssets + 'images'
@@ -116,6 +124,13 @@ module.exports = {
     imgPath: paths.sprites.imgPath,
     spriteDataImg: paths.sprites.spriteDataImg,
     spriteDataCss: paths.sprites.spriteDataCss
+  },
+  svg: {
+    src: paths.svg.src,
+    dest: paths.svg.dest,
+    css: paths.svg.css,
+    sprite: paths.svg.sprite,
+    template: paths.svg.template
   },
   
   html: {
