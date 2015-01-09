@@ -39,12 +39,12 @@ var paths = {
         cssName: '_sprites.scss',
         imgPath: '../images/sprite.png',
         spriteDataImg: buildAssets + 'images',
-        spriteDataCss: assets + 'css/scss/libs/'
+        spriteDataCss: assets + 'css/scss/gulp/'
       },
       svg: {
         src: assets + 'images/svg/*.svg',
         dest: assets,
-        css: 'css/scss/libs/_svg-sprites.scss',
+        css: 'css/scss/gulp/_svg-sprites.scss',
         sprite: 'images/svg-sprite.svg',
         template: assets + 'css/scss/_tpl/_sprite-template.scss'
       },
@@ -66,9 +66,9 @@ var paths = {
         src: assets + 'images/icons/*.svg',
         dest: assets + 'fonts/',
         name: 'icon-font',
-        path: assets + 'css/scss/libs/_icon-font.scss',
-        targetPath: '../../css/scss/libs/_icon-font.scss',
-        fontPath: '../../../fonts/'
+        path: assets + 'css/scss/_tpl/_icon-font-template.scss',
+        targetPath: '../css/scss/gulp/_icon-font.scss',
+        fontPath: '../fonts/'
       }
     };
 /*
@@ -145,7 +145,7 @@ module.exports = {
     dest: paths.icons.dest,
     name: paths.icons.name,
     path: paths.icons.path,
-    targetPath: paths.icon.targetPath,
+    targetPath: paths.icons.targetPath,
     fontPath: paths.icons.fontPath
   },
   

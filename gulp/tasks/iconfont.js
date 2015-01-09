@@ -4,11 +4,10 @@ var config        = require('../config').icons;
 var handleErrors  = require('../util/handleErrors');
 var iconfontCss   = require('gulp-iconfont-css');
 
-
 gulp.task('iconfont', function(){
-  gulp.src([config.src], {base: './_assets'})
+  gulp.src(config.src)
     .pipe(iconfontCss({
-      fontName: config,name,
+      fontName: config.name,
       path: config.path,
       targetPath: config.targetPath,
       fontPath: config.fontPath

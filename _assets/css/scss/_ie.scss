@@ -43,16 +43,19 @@
 */ 
 $ie: true;
 
+// gulp generator scss
+@import 'gulp/sprites';
+@import 'gulp/svg-sprites';
+@import 'gulp/icon-font';
+
 // Libraries and dependencies
 @import 'libs/libs-reset';
 @import 'libs/libs-vars';
-@import 'libs/sprites';
-@import 'libs/svg-sprites';
 @import 'libs/libs-functions';
 // help mixins
 @import 'libs/gridset';
 
-
+// tools
 @import 'tools/tools-grid';
 @import 'tools/tools-helpers';
 @import 'tools/tools-images';
@@ -65,13 +68,13 @@ $ie: true;
 // external libraries go here
 // @import 'libs-gridset';
 
-// to install bourbon go to scss folder and 'bourbon install'
-@import 'bourbon';
-@import 'libs/_libs-objects';
+// using node-bourbon, see ./gulp/config.js
+@import "bourbon";
+@import 'libs/libs-objects';
 
 // comment out following for launch!
-
-@import 'views/_views-core';
+@import 'views/views-beta';
+@import 'views/views-core';
 
 @import 'views/_views-tablet';
 @import 'views/_views-desktop';

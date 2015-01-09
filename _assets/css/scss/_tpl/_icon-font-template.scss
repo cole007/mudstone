@@ -29,14 +29,30 @@
 	@return $char;
 }
 
-@mixin icon($filename, $insert: before) {
+@mixin icon-font() {
+	font-family: "<%= fontName %>";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	// font-style: normal;
+	// font-variant: normal;
+	// font-weight: normal;
+	// speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+	// text-decoration: none;
+	// text-transform: none;	
+}
+
+@mixin icon($filename, $insert: before, $extend: true) {
 	&:#{$insert} {
-		@extend %icon;
+		@if $extend == true {
+			@extend %icon;
+		} @else {
+			@include icon-font();
+		}
 		content: icon-char($filename);
+		@content;
 	}
 }
 
-<% _.each(glyphs, function(glyph) { %>.icon-<%= glyph.fileName %> {
-	@include icon(<%= glyph.fileName %>);
+@mixin icon-char($filename) {
+	content: icon-char($filename);
 }
-<% }); %>

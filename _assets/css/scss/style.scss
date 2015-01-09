@@ -41,17 +41,19 @@
 //    Shame Last
 $ie: false;
 
+// gulp generator scss
+@import 'gulp/sprites';
+@import 'gulp/svg-sprites';
+@import 'gulp/icon-font';
 
 // Libraries and dependencies
 @import 'libs/libs-reset';
 @import 'libs/libs-vars';
-@import 'libs/sprites';
-@import 'libs/svg-sprites';
 @import 'libs/libs-functions';
 // help mixins
 @import 'libs/gridset';
 
-
+// tools
 @import 'tools/tools-grid';
 @import 'tools/tools-helpers';
 @import 'tools/tools-images';
@@ -69,7 +71,7 @@ $ie: false;
 @import 'libs/libs-objects';
 
 // comment out following for launch!
-@import 'views/_views-beta';
+@import 'views/views-beta';
 @import 'views/views-core';
 
 @media screen and (min-width: $break-small) {
