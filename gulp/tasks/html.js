@@ -21,8 +21,8 @@ gulp.task('html', function() {
 
 
 	return gulp.src(config.build)
-			.pipe(changed(config.build))
-	    .pipe(minifyHtml(opts))
+		.pipe(changed(config.build))
+	    //.pipe(minifyHtml(opts)) // don't minify html as the justify grid method doesn't work
 	    .pipe(gulp.dest(config.dest))
     	.pipe(browserSync.reload({stream:true}));
 });

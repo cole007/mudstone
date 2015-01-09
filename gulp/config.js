@@ -61,6 +61,14 @@ var paths = {
         src: assets + 'templates/source/**/*.haml',
         dest: assets + 'templates/dest/',
         partials: assets + 'templates/dest/patterns'
+      },
+      icons: {
+        src: assets + 'images/icons/*.svg',
+        dest: assets + 'fonts/',
+        name: 'icon-font',
+        path: assets + 'css/scss/libs/_icon-font.scss',
+        targetPath: '../../css/scss/libs/_icon-font.scss',
+        fontPath: '../../../fonts/'
       }
     };
 /*
@@ -130,6 +138,15 @@ module.exports = {
     css: paths.svg.css,
     sprite: paths.svg.sprite,
     template: paths.svg.template
+  },
+
+  icons: {
+    src: paths.icons.src,
+    dest: paths.icons.dest,
+    name: paths.icons.name,
+    path: paths.icons.path,
+    targetPath: paths.icon.targetPath,
+    fontPath: paths.icons.fontPath
   },
   
   html: {
