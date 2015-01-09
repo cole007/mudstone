@@ -28,8 +28,8 @@
 
 
 
-@mixin sprite-file($img: $sprite) {
-    background: url($img) no-repeat;
+@mixin sprite-file() {
+    background: url($png-sprite) no-repeat;
 } 
 
 @mixin sprite-modifier($sprite) {
@@ -38,3 +38,56 @@
   @include sprite-height($sprite);
 }
 
+
+// svg sprite functions
+
+// Gets an attribute from the sass mapp
+@function sprite-attr($icon, $attr) {
+	$icon: map-get($icons, $icon);
+	@return map-get($icon, $attr);
+}
+
+// using the above function, this function will return a map with the width and height
+@function svg-attr($icon) {
+	$attr: (
+		ie: sprite-attr($icon, ie),
+		width: sprite-attr($icon, width),
+		height: sprite-attr($icon, height),
+		x: sprite-attr($icon, backgroundX),
+		y: sprite-attr($icon, backgroundY)
+	);
+	@return $attr;
+}
+
+// svg sprite mixin, with fallback for ie
+// $ie is set to true in ie.scss
+@mixin svg($sprite) {
+	$svg-props: svg-attr($sprite);
+	@if $ie == true {
+		@include sprite(map-get($svg-props, ie));
+	} @else {
+		background: url($svg-sprite) map-get($svg-props, x) map-get($svg-props, y) no-repeat; 
+		width: map-get($svg-props, width);
+		height: map-get($svg-props, height);  
+	}
+}
+
+@mixin svg-position($sprite) {
+	$svg-props: svg-attr($sprite);
+	@if $ie == true {
+		@include sprite-width(map-get($svg-props, ie));
+  	@include sprite-height(map-get($svg-props, ie));
+	} @else {
+		width: map-get($svg-props, width);
+		height: map-get($svg-props, height);  
+	}
+}
+
+@mixin svg-size($sprite) {
+	$svg-props: svg-attr($sprite);
+	@if $ie == true {
+		@include sprite-position(map-get($svg-props, ie));
+	} @else {
+		background-position: map-get($svg-props, x) map-get($svg-props, y); 
+	}
+}

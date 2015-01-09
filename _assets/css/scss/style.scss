@@ -39,12 +39,14 @@
 //    Nest and Name Your Media Queries
 //
 //    Shame Last
-
+$ie: false;
 
 
 // Libraries and dependencies
 @import 'libs/libs-reset';
 @import 'libs/libs-vars';
+@import 'libs/sprites';
+@import 'libs/svg-sprites';
 @import 'libs/libs-functions';
 // help mixins
 @import 'libs/gridset';
@@ -58,13 +60,11 @@
 
 // project specific mixins
 @import 'libs/libs-mixins';
-@import 'libs/sprites';
 
 // external libraries go here
 // @import 'libs-gridset';
 
 // using node-bourbon, see ./gulp/config.js
-// @import 'libs/bourbon/bourbon';
 @import "bourbon";
 @import 'libs/libs-objects';
 

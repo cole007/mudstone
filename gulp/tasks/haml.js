@@ -5,16 +5,16 @@
  * Partials also rendered
  */
 
-var gulp 				 = require('gulp');
-var haml 				 = require('gulp-ruby-haml'); // using the ruby version so we can use parials
-var changed  		 = require('gulp-changed');
-var handleErrors = require('../util/handleErrors');
-var config       = require('../config').haml;
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
-var clean = require('gulp-clean');
-var del = require('del');
-var runSequence = require('run-sequence');
+var gulp 				 	= require('gulp');
+var haml 				 	= require('gulp-ruby-haml'); // using the ruby version so we can use parials
+var changed  		 	= require('gulp-changed');
+var handleErrors 	= require('../util/handleErrors');
+var config       	= require('../config').haml;
+var browserSync 	= require('browser-sync');
+var reload 				= browserSync.reload;
+var clean 				= require('gulp-clean');
+var del 					= require('del');
+var runSequence 	= require('run-sequence');
 
 
 gulp.task('haml', function () {

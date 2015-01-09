@@ -5,10 +5,10 @@
  */
 
 
-var gulp = require('gulp');
-var critical = require('critical');
-var rename = require('gulp-rename');
-var config       = require('../config');
+var gulp            = require('gulp');
+var critical        = require('critical');
+var rename          = require('gulp-rename');
+var config          = require('../config');
 
 
 // Copy our site styles to a site.css file

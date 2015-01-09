@@ -4,12 +4,12 @@
  */
 
 
-var changed    = require('gulp-changed');
-var gulp       = require('gulp');
-var imagemin   = require('gulp-imagemin');
-var config     = require('../config').images;
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
+var changed    		= require('gulp-changed');
+var gulp       		= require('gulp');
+var imagemin   		= require('gulp-imagemin');
+var config     		= require('../config').images;
+var browserSync 	= require('browser-sync');
+var reload 				= browserSync.reload;
 
 gulp.task('images', function() {
   return gulp.src(config.src)

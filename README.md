@@ -1,5 +1,5 @@
 #Mudstone
-![Mou icon](http://ournameismud.co.uk/css/images/maps-icon.png)
+![Mud](http://ournameismud.co.uk/css/images/maps-icon.png)
 
 **Mudstone**, gulp based web framework
 
@@ -30,7 +30,7 @@ Make sure you have Node.js and gulp installed
 
 ######From the terminal run
 ```
- npm install
+ (sudo) npm install
  gulp
  
 ```

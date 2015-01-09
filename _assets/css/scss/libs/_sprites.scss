@@ -7,27 +7,48 @@ SCSS variables are information about icon's compiled state, stored under its ori
 
 The large array-like variables contain all information about a single icon
 $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
 */
-$arms-x: 0px;
-$arms-y: 0px;
-$arms-offset-x: 0px;
-$arms-offset-y: 0px;
-$arms-width: 123px;
-$arms-height: 72px;
-$arms-total-width: 246px;
-$arms-total-height: 72px;
-$arms-image: '../images/sprite.png';
-$arms: 0px 0px 0px 0px 123px 72px 246px 72px '../images/sprite.png';
-$blog-x: 123px;
-$blog-y: 0px;
-$blog-offset-x: -123px;
-$blog-offset-y: 0px;
-$blog-width: 123px;
-$blog-height: 72px;
-$blog-total-width: 246px;
-$blog-total-height: 72px;
-$blog-image: '../images/sprite.png';
-$blog: 123px 0px -123px 0px 123px 72px 246px 72px '../images/sprite.png';
+$facebook-name: 'facebook';
+$facebook-x: 0px;
+$facebook-y: 0px;
+$facebook-offset-x: 0px;
+$facebook-offset-y: 0px;
+$facebook-width: 10px;
+$facebook-height: 22px;
+$facebook-total-width: 74px;
+$facebook-total-height: 22px;
+$facebook-image: '../images/sprite.png';
+$facebook: 0px 0px 0px 0px 10px 22px 74px 22px '../images/sprite.png' 'facebook';
+$twitter-name: 'twitter';
+$twitter-x: 10px;
+$twitter-y: 0px;
+$twitter-offset-x: -10px;
+$twitter-offset-y: 0px;
+$twitter-width: 32px;
+$twitter-height: 22px;
+$twitter-total-width: 74px;
+$twitter-total-height: 22px;
+$twitter-image: '../images/sprite.png';
+$twitter: 10px 0px -10px 0px 32px 22px 74px 22px '../images/sprite.png' 'twitter';
+$twitterHover-name: 'twitterHover';
+$twitterHover-x: 42px;
+$twitterHover-y: 0px;
+$twitterHover-offset-x: -42px;
+$twitterHover-offset-y: 0px;
+$twitterHover-width: 32px;
+$twitterHover-height: 22px;
+$twitterHover-total-width: 74px;
+$twitterHover-total-height: 22px;
+$twitterHover-image: '../images/sprite.png';
+$twitterHover: 42px 0px -42px 0px 32px 22px 74px 22px '../images/sprite.png' 'twitterHover';
+$spritesheet-width: 74px;
+$spritesheet-height: 22px;
+$spritesheet-image: '../images/sprite.png';
+$spritesheet-sprites: $facebook $twitter $twitterHover;
+$spritesheet: 74px 22px '../images/sprite.png' $spritesheet-sprites;
 
 /*
 The provided mixins are intended to be used with the array-like variables
@@ -64,4 +85,19 @@ The provided mixins are intended to be used with the array-like variables
   @include sprite-position($sprite);
   @include sprite-width($sprite);
   @include sprite-height($sprite);
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
 }

@@ -4,13 +4,13 @@
  */
 
 
-var gulp         = require('gulp');
-var spritesmith  = require('gulp.spritesmith');
-var imagemin   = require('gulp-imagemin');
-var config       = require('../config').sprites;
-var handleErrors = require('../util/handleErrors');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
+var gulp            = require('gulp');
+var spritesmith     = require('gulp.spritesmith');
+var imagemin        = require('gulp-imagemin');
+var config          = require('../config').sprites;
+var handleErrors    = require('../util/handleErrors');
+var browserSync     = require('browser-sync');
+var reload          = browserSync.reload;
 
 
 
