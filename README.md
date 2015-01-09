@@ -11,6 +11,7 @@
 * Sourcemaps
 * Optimise Images
 * Sprite generator
+* SVG sprites, with png sprite fallback
 * Minify HTML
 * Compile haml templates
 * Optimise css with Combine Media queries, uncss and csso
@@ -30,7 +31,7 @@ Make sure you have Node.js and gulp installed
 
 ######From the terminal run
 ```
- (sudo) npm install
+ npm install
  gulp
  
 ```
