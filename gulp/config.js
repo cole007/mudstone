@@ -3,7 +3,6 @@
  */
 var assets = './_assets/', 
     build = './_build/',
-    buildAssets = assets,
     root = './',
     env = 'dev',
     outputStyle = 'expanded';
@@ -13,7 +12,7 @@ var assets = './_assets/',
 if(env === 'live') {
     root = build;
     outputStyle = 'compressed';
-    buildAssets = build + '_assets/';
+    assets = build + '_assets/';
 }
 /*
  * Site url used for page insights
@@ -25,12 +24,12 @@ var url = 'http://www.google.com';
 var paths = {
       scss: {
         src: assets + 'css/scss',
-        dest: buildAssets + 'css',
+        dest: assets + 'css',
         outputStyle: outputStyle
       },
       js: {
         src: assets + 'js',
-        dest: buildAssets + 'js/dist',
+        dest: assets + 'js/dist',
         hint:  assets + 'js/script.js'
       },
       sprites: {  
@@ -38,7 +37,7 @@ var paths = {
         spriteName: 'sprite.png',
         cssName: '_sprites.scss',
         imgPath: '../images/sprite.png',
-        spriteDataImg: buildAssets + 'images',
+        spriteDataImg: assets + 'images',
         spriteDataCss: assets + 'css/scss/gulp/'
       },
       svg: {
@@ -50,7 +49,7 @@ var paths = {
       },
       images: {
         src: assets + 'images/site/*',
-        dest: buildAssets + 'images'
+        dest: assets + 'images'
       },
       html: {
         src: root + '**/*.html',
@@ -132,6 +131,7 @@ module.exports = {
     spriteDataImg: paths.sprites.spriteDataImg,
     spriteDataCss: paths.sprites.spriteDataCss
   },
+
   svg: {
     src: paths.svg.src,
     dest: paths.svg.dest,
@@ -169,13 +169,14 @@ module.exports = {
   },
 
   uncss: {
-    css: buildAssets + 'css/style.css',
+    css: assets + 'css/style.css', 
     html: root + '**/*.html',
-    dest: buildAssets + 'css/dist'
+    dest: assets + 'css/dist'
   },
 
   cmq: {
-    css: buildAssets + 'css/style.css',
-    dest: buildAssets + 'css/dist'
+    css: assets + 'css/style.css',
+    dest: assets + 'css/dist'
   }
+
 };

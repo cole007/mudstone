@@ -12,6 +12,7 @@
 * Optimise Images
 * Sprite generator
 * SVG sprites, with png sprite fallback
+* SVG to icon font
 * Minify HTML
 * Compile haml templates
 * Optimise css with Combine Media queries, uncss and csso
@@ -23,7 +24,6 @@
 ##Scss 
 
 Boilerplate setup to use Bourbon (via node)
-
 
 ##Setup
 
@@ -41,5 +41,3 @@ See gulp/configs.js for paths and files
 ##Folder Structure
 
 All of the core html/haml, css, js is stored in the _assets directoy.  Changing the env value in config.js will change the output directory for all of the files to the _build folder. Change the var and run gulp build before deploying to live. 
-
-

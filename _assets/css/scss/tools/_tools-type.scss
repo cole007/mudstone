@@ -1,6 +1,6 @@
-// font-size	- 
+// font-size  - 
 // see http://codepen.io/chriscoyier/pen/gsodI for usage example
-// - does not require a height, although a height can be used			
+// - does not require a height, although a height can be used     
 
 @mixin font-size($font-size, $line-height: true) {  
   font-size: $font-size * 1px;
@@ -18,8 +18,16 @@
   }
 }
 
-@mixin font-baseline($font-size: $base-font-size, $line-height:  $base-line-height, $default:$browser-default-font-size) {
+@mixin line-height($font-size, $line-height: true) {
+  @if $line-height == true {
+    line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
+  } 
+  @if unitless($line-height) {
+    line-height: computeLineHeight($font-size, $line-height);
+  }
+}
 
+@mixin font-baseline($font-size: $base-font-size, $line-height:  $base-line-height, $default:$browser-default-font-size) {
 
   font-size: $base-font-size / $browser-default-font-size + em;
   line-height: $base-line-height / $base-font-size; /* [2] */
@@ -33,7 +41,7 @@
 
 
 // Font face mixin
-@mixin font-face($font-family, $font-url, $font-name) {
+@mixin ff($font-family, $font-url, $font-name) {
   
     @font-face {
         font: {
@@ -67,7 +75,7 @@
 //    }
 //   }
    
-@mixin fancy-ol( $selector: li, $counter: ol-counter) {
+@mixin fancy-ol($selector: li, $counter: ol-counter) {
   list-style: none;
   counter-reset: $counter;
   #{$selector} {
