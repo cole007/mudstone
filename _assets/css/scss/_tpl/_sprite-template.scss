@@ -1,4 +1,3 @@
-{#common}$icons: (
-    sprite: (width: {swidth}px, height: {sheight}px, svgPath: '{svgPath}'),{/common}
-{#svg}    {name}: (ie: ${name}, width: {width}px, height: {height}px, backgroundX: {positionX}px, backgroundY: {positionY}px),
-{/svg}{#common});{/common}
+{#common}{#svg}${name}: null;{/svg}{/common}
+{#common}$icons: (sprite: (width: {swidth}px, height: {sheight}px, svgPath: '{svgPath}'),{/common}
+{#svg}{name}: (ie: ${name},width: {width}px, height: {height}px, backgroundX: {positionX}px, backgroundY: {positionY}px),{/svg}{#common});{/common}
