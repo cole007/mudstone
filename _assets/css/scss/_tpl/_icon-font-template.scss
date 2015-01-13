@@ -19,6 +19,8 @@
 	text-transform: none;
 }
 
+$icon_map: (<% _.each(glyphs, function(glyph) { %><%= glyph.fileName %>: "\<%= glyph.codePoint %>",<% }) %>);
+
 @function icon-char($filename) {
 	$char: "";
 <% _.each(glyphs, function(glyph) { %>
@@ -55,4 +57,13 @@
 
 @mixin icon-char($filename) {
 	content: icon-char($filename);
+}
+
+
+@each $icon, $char in $icon_map {
+	.icon--#{$icon} {
+		&:after {
+			content: icon-char($icon);
+		}
+	}
 }
