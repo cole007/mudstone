@@ -43,8 +43,9 @@
 // Layout
 
 @function r($lines) {
-    @return $lines * $ratio + rem;
+    @return $lines * $magic-ratio + rem;
 }
+
 
 @function gutter($lines: 1, $gutter: $base-padding) {
 	@return ($gutter * $lines) * 1px;

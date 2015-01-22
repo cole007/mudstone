@@ -47,27 +47,31 @@ body {}
 // === 3.  Typography
 
 h1,.heading-1 {
-	//@include font-size(fs(h1));
+	@include font-size(fs(h1));
 	margin: 0 0 gutter(1);
 }
 h2,.heading-2 {
-	//@include font-size(fs(h2));
+	@include font-size(fs(h2));
 	margin: 0 0 gutter(1);
 }
 h3,.heading-3 {
-	//@include font-size(fs(h3));
+	@include font-size(fs(h3));
 	margin: 0 0 gutter(1);
 }
 h4,.heading-4 {
-	//@include font-size(fs(h4));
+	@include font-size(fs(h4));
 	margin: 0 0 gutter(1);
 }
 h5,.heading-5 {
-	//@include font-size(fs(h5));
+	@include font-size(fs(h5));
 	margin: 0 0 gutter(1);
 }
 h6,.heading-6 {
-	//@include font-size(fs(h6));
+	@include font-size(fs(h6));
+	margin: 0 0 gutter(1);
+}
+
+p {
 	margin: 0 0 gutter(1);
 }
 
@@ -79,7 +83,7 @@ ol {}
 // === 4.  Elements
 
 .header {}
-.nav {}
+.menu {}
 .content {}
 .sidebar {}
 .footer {}

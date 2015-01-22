@@ -86,3 +86,14 @@
     }
   } 
 }
+
+
+@mixin baseline($baseline: $base-line-height) {
+  html {
+    $size: strip-units($baseline);
+
+    background-image: url(http://basehold.it/i/#{$size}); 
+  }
+}
+
+@include baseline();

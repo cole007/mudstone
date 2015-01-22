@@ -19,7 +19,10 @@
     $browser-default-font-size:     16;
     $relative-font-sizing:          true;
 
-    $ratio:                         $base-line-height / $base-font-size;
+
+
+    $magic-number:                  $base-line-height;
+    $magic-ratio:                   $base-line-height / $base-font-size;
 // Grid
 
     $base-max-width:        1098px;
