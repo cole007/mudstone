@@ -16,6 +16,7 @@
   }
 }
 
+// call on the input (radio/checkbox)
 @mixin fancy-input($position: before) {
 
 	// hide the default radio input
@@ -27,6 +28,7 @@
 	}
 }
 
+// call on the input (radio/checkbox) for the checked state
 @mixin fancy-input-checked($target: before) {
 	
 	&:checked + label:before {
