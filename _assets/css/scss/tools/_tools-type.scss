@@ -75,12 +75,16 @@
 //    }
 //   }
    
-@mixin fancy-ol($selector: li, $counter: ol-counter) {
+@mixin counter($selector: li, $counter: ol-counter, $type: false) {
   list-style: none;
   counter-reset: $counter;
   #{$selector} {
     &:before {
-       content: counter($counter);
+      @if $type == false {
+        content: counter($counter);
+      } @else {
+        content: counter($counter, $type);
+      }
        counter-increment: $counter;
        @content;
     }
