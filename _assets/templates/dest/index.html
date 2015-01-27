@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset='utf-8'>
+  <title>Title</title>
+  <meta content='' name='description'>
+  <meta content='user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+  <link href='/favicon.ico' rel='shortcut icon'>
+  <link href='humans.txt' rel='author' type='text/plain'>
+  <script>
+    var html = document.getElementsByTagName("html")[0];
+    if(html.className == "no-js") html.className = html.className.replace("no-js", "js"); // user has JS enabled 
+    function debounce(a,b,c){var d;return function(){var e=this,f=arguments;clearTimeout(d),d=setTimeout(function(){d=null,c||a.apply(e,f)},b),c&&!d&&a.apply(e,f)}};
+  </script>
+  <!--[if (lt IE 9) & (!IEMobile)]>
+    <link href='/_assets/css/ie.css' rel='stylesheet'>
+  <![endif]-->
+  <link href='/_assets/css/style.css' media='screen AND (min-width:180px)' rel='stylesheet'>
+</head>
+<body>
+  <div class='site'>
+    <div class='header'>
+      <div class='wrapper'>
+        <h1>Mudstone</h1>
+      </div>
+    </div>
+    <ul class='nav'>
+      <li class='nav__item'>item 1</li>
+      <li class='nav__item'>item 2</li>
+      <li class='nav__item'>item 3</li>
+    </ul>
+    <div class='wrapper'>
+      <div class='test'></div>
+      <h1>heading 1</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.</p>
+      <h2>heading 2</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.</p>
+      <h3>heading 3</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.</p>
+      <h4>heading 4</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.</p>
+      <h5>heading 5</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.</p>
+      <h6>heading 6</h6>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ex, pariatur vero cum laboriosam? Quis quo, ratione quod perspiciatis blanditiis ex! Accusantium sed iusto magni maiores id ratione sequi non.</p>
+    </div>
+    <div class='wrapper'>
+      <h3>The .nav item</h3>
+      <ul class='nav'>
+        <li class='nav__item'>item 1</li>
+        <li class='nav__item'>item 2</li>
+        <li class='nav__item'>item 3</li>
+      </ul>
+      <h4>The .nav--stacked modifier</h4>
+      <ul class='nav nav--stacked'>
+        <li class='nav__item'>item 1</li>
+        <li class='nav__item'>item 2</li>
+        <li class='nav__item'>item 3</li>
+      </ul>
+      <h4>The .nav--banner modifier</h4>
+      <ul class='nav nav--banner'>
+        <li class='nav__item'>item 1</li>
+        <li class='nav__item'>item 2</li>
+        <li class='nav__item'>item 3</li>
+      </ul>
+      <h4>The .nav--fit modifier</h4>
+      <ul class='nav nav--fit'>
+        <li class='nav__item'>item 1</li>
+        <li class='nav__item'>item 2</li>
+        <li class='nav__item'>item 3</li>
+      </ul>
+    </div>
+    <div class='wrapper'>
+      <h3>The .panel item</h3>
+      <div class='panel'>
+        <h3>A title</h3>
+        <p>Some copy, equal padding top and bottom, margings remove from last children</p>
+      </div>
+    </div>
+    <div class='wrapper'>
+      <h3>The .btn item</h3>
+      <a class='btn btn--cta' href='#'>A button</a>
+    </div>
+  </div>
+</body>
+<script src='/_assets/js/dist/app.js'></script>

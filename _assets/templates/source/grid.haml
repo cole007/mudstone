@@ -1,0 +1,16 @@
+= Haml::Engine.new(File.read('./_assets/templates/source/includes/head.haml')).render
+
+%body
+	.site
+		
+		= Haml::Engine.new(File.read('./_assets/templates/source/includes/header.haml')).render
+		.wrapper
+			%h2 Float grid
+			.grid-wrapper
+				- (1..24).each do |i|
+					.grid-col.grid-col--1
+						%h3 Box #{i}
+						.grid-box
+							%p Box contents
+
+= Haml::Engine.new(File.read('./_assets/templates/source/includes/foot.haml')).render

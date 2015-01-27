@@ -1,10 +1,19 @@
-var gulp         = require('gulp');
-var browserSync  = require('browser-sync');
-var sass         = require('gulp-sass');
-var sourcemaps   = require('gulp-sourcemaps');
-var handleErrors = require('../util/handleErrors');
-var config       = require('../config').sass;
-var autoprefixer = require('gulp-autoprefixer');
+/*
+ * sass 
+ * compile scss with libsass
+ */
+
+
+var gulp          = require('gulp');
+var browserSync   = require('browser-sync');
+var sass          = require('gulp-sass');
+var sourcemaps    = require('gulp-sourcemaps');
+var handleErrors  = require('../util/handleErrors');
+var config        = require('../config').sass;
+var autoprefixer  = require('gulp-autoprefixer');
+var gulpif        = require('gulp-if');
+var size          = require('gulp-size');
+var env           = require('../config').env;
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -19,12 +28,18 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 gulp.task('sass', function () {
-  return gulp.src(config.src)
-    .pipe(sourcemaps.init())
-    .pipe(sass())
+  return gulp.src(config.watch)
+    .pipe(gulpif(env == 'dev', sourcemaps.init()))
+    .pipe(sass({
+        outputStyle: config.options.outputStyle,
+        includePaths: require('node-bourbon').includePaths
+      }
+    ))
     .on('error', handleErrors)
-    //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1')) // doesn't play nice with sourcemaps
-    .pipe(sourcemaps.write('./'))
+    .pipe(autoprefixer(config.prefix)) // doesn't play nice with sourcemaps
+    .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .pipe(gulp.dest(config.dest))
+    .on('error', handleErrors)
+    .pipe(size())
     .pipe(browserSync.reload({stream:true}));
 });

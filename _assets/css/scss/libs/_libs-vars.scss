@@ -1,33 +1,35 @@
-/*
-    File: _assets/css/scss/_libs-vars.scss
-*/
+
+//   File: _assets/css/scss/libs/_libs-vars.scss
+
 
 // debugging
-
     $debug: false;
 
 // extends
- $test: this;
-$extend : ();
+
+    $png-sprite: '../images/sprite.png';
+    $svg-sprite: '../images/svg-sprite.svg';
 
 // Typography
 
-    $base-font-size:                18px;
-    $base-line-height:              22px;
-    $rhythm-base-font-size:         18;
+    $base-font-size:                16;
+    $base-line-height:              22;
+    $rhythm-base-font-size:         18px;
     $rhythm-unit:                   rem;
-    $browser-default-font-size:     16px;
+    $browser-default-font-size:     16;
     $relative-font-sizing:          true;
-    $ratio:                         $base-line-height / $base-font-size;
 
-    $typecsset-show-baseline:       false;
+
+
+    $magic-number:                  $base-line-height;
+    $magic-ratio:                   $base-line-height / $base-font-size;
 // Grid
 
     $base-max-width:        1098px;
     $base-max-columns:      12;
     $base-column-width:     floor($base-max-width / $base-max-columns);
     $base-side-padding:     20px;
-    $current_breakpoint:   base;
+    $current_breakpoint:    base;
 
     $base-padding: $base-line-height;
     $base-padding-half: $base-line-height / 2;
@@ -38,37 +40,29 @@ $extend : ();
 
     $_use-nav:                  true;
     $_use-btns:                 true;
-    $_use-definitions:          false;
+    $_use-definitions:          true;
     $_use-forms:                true;
-    $_use-media-object:         false;
-    $_use-panels:               false;
+    $_use-media-object:         true;
+    $_use-panels:               true;
     $_use-wrapper:              true;
 
 
-// borders-widths
-    $borders: (
-        hero:       8px,
-        quote:      5px,
-        footer:     5px,
-        list:       1px
-    );
 
 // Counter
-
     $counter: counter;
 
 // Button 
 
     $buttons: (
         large: (
-            height: 48px,
+            height: 48,
             line-height: 3,
-            font-size: 24px
+            font-size: 24
         ),
         small: (
-            height: 50px,
+            height: 50,
             line-height: 2.9,
-            font-size: 18px
+            font-size: 18
         )
     );
     
@@ -120,13 +114,13 @@ $extend : ();
             height: 40px,
             border: 1px solid #cdd1d6,
             color: #666666,
-            font-size: 16px,
+            font-size: 16,
             padding: $base-padding-half
         ),
 
         label: (
             color: #41464b,
-            font-size:  20px
+            font-size:  20
 
         ),
         select: (
@@ -144,26 +138,26 @@ $extend : ();
     );
 
     $font-sizes: (
-        h1:             50px,
-        h2:             40px,
-        h3:             35px,
-        h4:             21px,
-        h5:             19px,
-        h6:             14px,
+        h1:             50,
+        h2:             40,
+        h3:             35,
+        h4:             21,
+        h5:             19,
+        h6:             14,
         base:           $base-font-size,
         menu_item:      $base-font-size,
-        search:         40px,
-        meta:           14px,
-        panel:          38px,
-        caption:        15px,
-        intro:          24px,
-        signup:         16px
+        search:         40,
+        meta:           14,
+        panel:          38,
+        caption:        15,
+        intro:          24,
+        signup:         16
     );     
 
 // Layout
 
+    $break-tiny             :480px;
     $break-small            :768px;
     $break-large            :954px;
-    $break-lap-up           :1024px;
     $break-massive          :1200px;
 

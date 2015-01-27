@@ -22,8 +22,7 @@ function namespace(namespaceString) {
 	return parent;
 }
 
-console.log('hello');
-
+ 
 var mud = namespace('mud.Application.Site');
 
 // declare our JS framework, HT @jackfranklin

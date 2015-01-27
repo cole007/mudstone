@@ -1,51 +1,101 @@
-/*
-    File: _assets/css/scss/_views-core.scss
-        This is the base, mobile-first view CSS.
-        Mobile-specific styles should be added here under Exceptions
 
-        1.  Baseline
-            Core/generic rules for this context
+//    File: _assets/css/scss/_views-core.scss
+//        This is the base, mobile-first view CSS.
+//        Mobile-specific styles should be added here under Exceptions
+//
+//        1.  Baseline
+//            Core/generic rules for this context
+//
+//        2.  Layout
+//            Page layout rules, eg for columns
+//            As a general rule width, padding and margin stuff here
+//
+//        3.  Typography
+//            Typographic rules: headings, lists, etc
+//
+//        4.  Elements
+//            HTML elements base rules
+//
+//        5.  Components
+//            Components within the site, eg navigation, carousels, etc
+//            Ideally context and element agnostic
+//
+//        6.  Exceptions
+//            Media queries targetting specific/edge-case CSS
+//
+//        7.  Hacks
+//            Idiosyncratic styles for browser support, etc
+//
+//
 
-        2.  Layout
-            Page layout rules, eg for columns
-            As a general rule width, padding and margin stuff here
-
-        3.  Typography
-            Typographic rules: headings, lists, etc
-
-        4.  Elements
-            HTML elements base rules
-
-        5.  Components
-            Components within the site, eg navigation, carousels, etc
-            Ideally context and element agnostic
-
-        6.  Exceptions
-            Media queries targetting specific/edge-case CSS
-
-        7.  Hacks
-            Idiosyncratic styles for browser support, etc
-
-*/
-body {
-    background-color: purple;
+html {
+    font-size: $base-font-size / $browser-default-font-size + em; 
+    line-height: $base-line-height / $base-font-size; 
 }
 
-
 // === 1.  Baseline
+body {}
 
+.wrapper {}
 
 // === 2.  Layout
 
+// .grid {@include cf();}
+// .grid-box {display: inline-block;}
+// .grid-col {float: left;}
+
 // === 3.  Typography
 
+h1,.heading-1 {
+	@include font-size(fs(h1));
+	margin: 0 0 gutter(1);
+}
+h2,.heading-2 {
+	@include font-size(fs(h2));
+	margin: 0 0 gutter(1);
+}
+h3,.heading-3 {
+	@include font-size(fs(h3));
+	margin: 0 0 gutter(1);
+}
+h4,.heading-4 {
+	@include font-size(fs(h4));
+	margin: 0 0 gutter(1);
+}
+h5,.heading-5 {
+	@include font-size(fs(h5));
+	margin: 0 0 gutter(1);
+}
+h6,.heading-6 {
+	@include font-size(fs(h6));
+	margin: 0 0 gutter(1);
+}
 
+p {
+	margin: 0 0 gutter(1);
+}
+
+p,li {}
+a {}
+ul {}
+ol {}
 
 // === 4.  Elements
 
+.header {}
+.menu {}
+.content {}
+.sidebar {}
+.footer {}
 
 
 // === 5.  Components
+
+.slide {}
+.social {}
+.tabs {}
+.expand {}
+.modules {}
 
 // === 6.  Exceptions
 

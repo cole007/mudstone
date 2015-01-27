@@ -1,0 +1,103 @@
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+$facebook-name: 'facebook';
+$facebook-x: 0px;
+$facebook-y: 0px;
+$facebook-offset-x: 0px;
+$facebook-offset-y: 0px;
+$facebook-width: 10px;
+$facebook-height: 22px;
+$facebook-total-width: 74px;
+$facebook-total-height: 22px;
+$facebook-image: '../images/sprite.png';
+$facebook: 0px 0px 0px 0px 10px 22px 74px 22px '../images/sprite.png' 'facebook';
+$twitter-name: 'twitter';
+$twitter-x: 10px;
+$twitter-y: 0px;
+$twitter-offset-x: -10px;
+$twitter-offset-y: 0px;
+$twitter-width: 32px;
+$twitter-height: 22px;
+$twitter-total-width: 74px;
+$twitter-total-height: 22px;
+$twitter-image: '../images/sprite.png';
+$twitter: 10px 0px -10px 0px 32px 22px 74px 22px '../images/sprite.png' 'twitter';
+$twitterHover-name: 'twitterHover';
+$twitterHover-x: 42px;
+$twitterHover-y: 0px;
+$twitterHover-offset-x: -42px;
+$twitterHover-offset-y: 0px;
+$twitterHover-width: 32px;
+$twitterHover-height: 22px;
+$twitterHover-total-width: 74px;
+$twitterHover-total-height: 22px;
+$twitterHover-image: '../images/sprite.png';
+$twitterHover: 42px 0px -42px 0px 32px 22px 74px 22px '../images/sprite.png' 'twitterHover';
+$spritesheet-width: 74px;
+$spritesheet-height: 22px;
+$spritesheet-image: '../images/sprite.png';
+$spritesheet-sprites: $facebook $twitter $twitterHover;
+$spritesheet: 74px 22px '../images/sprite.png' $spritesheet-sprites;
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
+*/
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

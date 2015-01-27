@@ -1,76 +1,55 @@
 /*
+SCSS variables are information about icon's compiled state, stored under its original file name
 
-    File: _assets/css/scss/style.scss
+.icon-home {
+  width: $icon-home-width;
+}
 
-    Use spaces not tabs
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
 
-    # Selectors
-
-    One selector per line, One rule per line
-    Don't use IDs as selectors
-    Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container
-    Use BEM syntax:
-        Block 
-        Block__element
-        Block--modifier 
-
-    # Properties
-
-    List related properties together
-    If the value of the width or height is 0, do not specify units
-    Avoid magic numbers, eg numbers used as  quick fixes on a one-off basis
-    Close final property with a semi-colon
-    Err towards shorthand where avaliable, eg border, background, etc
-
-    # SASS/SCSS
-
-    All Vendor Prefixes Use @mixins
-    Maximum Nesting: Three Levels Deep
-    Maximum Nesting: 50 Lines
-
-    Locally compile Expanded
-    For Deployment compile Compressed
-
-    Be Generous With Comments
-
-    Variablize All Common Numbers, and Numbers with Meaning
-    Variablize All Colors
-
-    Nest and Name Your Media Queries
-
-    Shame Last
-
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
 */
 /*
-    File: _assets/css/scss/_libs-reset.scss
-        Based on http://necolas.github.io/normalize.css/
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
+}
+
+.icon-email {
+  @include sprite($icon-email);
+}
 */
-/*! normalize.css v2.1.2 | MIT License | git.io/normalize */
-/* ==========================================================================
-   HTML5 display definitions
-   ========================================================================== */
-/**
- * Correct `block` display not defined in IE 8/9.
- */
-/* line 17, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+@font-face {
+  font-family: "icon-font";
+  src: url('../fonts/icon-font.eot');
+  src: url('../fonts/icon-font.eot?#iefix') format('eot'), url('../fonts/icon-font.woff') format('woff'), url('../fonts/icon-font.ttf') format('truetype'), url('../fonts/icon-font.svg#icon-font') format('svg'); }
+
+/* line 13, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 *, *:before, *:after {
-  -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;
   /* Firefox, other Gecko */
   box-sizing: border-box;
   /* Opera/IE 8+ */
   /* 1 */
   -webkit-font-smoothing: antialiased; }
 
-/* line 36, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 32, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
   display: block; }
 
 /**
  * Correct `inline-block` display not defined in IE 8/9.
  */
-/* line 46, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 42, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 audio, canvas, video {
   display: inline-block; }
 
@@ -78,7 +57,7 @@ audio, canvas, video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-/* line 55, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 51, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 audio:not([controls]) {
   display: none;
   height: 0; }
@@ -87,7 +66,7 @@ audio:not([controls]) {
  * Address `[hidden]` styling not present in IE 8/9.
  * Hide the `template` element in IE, Safari, and Firefox < 22.
  */
-/* line 66, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 62, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 template {
   display: none; }
 
@@ -99,7 +78,7 @@ template {
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
-/* line 80, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 76, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 html {
   font-family: sans-serif;
   /* 1 */
@@ -111,7 +90,7 @@ html {
 /**
  * Remove default margin.
  */
-/* line 90, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 86, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 body {
   margin: 0; }
 
@@ -121,21 +100,21 @@ body {
 /**
  * Remove the gray background color from active links in IE 10.
  */
-/* line 102, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 98, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 a {
   background: transparent; }
 
 /**
  * Address `outline` inconsistency between Chrome and other browsers.
  */
-/* line 110, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 106, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 a:focus {
   outline: thin dotted; }
 
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-/* line 119, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 115, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 a:active, a:hover {
   outline: 0; }
 
@@ -155,37 +134,36 @@ h1 {
 /**
  * Address styling not present in IE 8/9, Safari 5, and Chrome.
  */
-/* line 141, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 137, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 abbr[title] {
   border-bottom: 1px dotted; }
 
 /**
  * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
  */
-/* line 150, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 146, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 b, strong {
   font-weight: bold; }
 
 /**
  * Address styling not present in Safari 5 and Chrome.
  */
-/* line 158, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 154, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 dfn {
   font-style: italic; }
 
 /**
  * Address differences between Firefox and other browsers.
  */
-/* line 166, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 162, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 hr {
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0; }
 
 /**
  * Address styling not present in IE 8/9.
  */
-/* line 176, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 172, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 mark {
   background: #ff0;
   color: #000; }
@@ -193,7 +171,7 @@ mark {
 /**
  * Correct font family set oddly in Safari 5 and Chrome.
  */
-/* line 188, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 184, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 code, kbd, pre, samp {
   font-family: monospace, serif;
   font-size: 1em; }
@@ -201,39 +179,39 @@ code, kbd, pre, samp {
 /**
  * Improve readability of pre-formatted text in all browsers.
  */
-/* line 197, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 193, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 pre {
   white-space: pre-wrap; }
 
 /**
  * Set consistent quote types.
  */
-/* line 205, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 201, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 q {
   quotes: "\201C" "\201D" "\2018" "\2019"; }
 
 /**
  * Address inconsistent and variable font size in all browsers.
  */
-/* line 213, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 209, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 small {
   font-size: 80%; }
 
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-/* line 222, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 218, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 sub, sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
   vertical-align: baseline; }
 
-/* line 229, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 225, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 sup {
   top: -0.5em; }
 
-/* line 233, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 229, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 sub {
   bottom: -0.25em; }
 
@@ -243,7 +221,7 @@ sub {
 /**
  * Remove border when inside `a` element in IE 8/9.
  */
-/* line 245, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 241, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 img {
   border: 0;
   max-width: 100%;
@@ -252,7 +230,7 @@ img {
 /**
  * Correct overflow displayed oddly in IE 9.
  */
-/* line 255, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 251, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 svg:not(:root) {
   overflow: hidden; }
 
@@ -262,7 +240,7 @@ svg:not(:root) {
 /**
  * Address margin not present in IE 8/9 and Safari 5.
  */
-/* line 267, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 263, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 figure {
   margin: 0; }
 
@@ -272,7 +250,7 @@ figure {
 /**
  * Define consistent border, margin, and padding.
  */
-/* line 279, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 275, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 fieldset {
   border: 0;
   margin: 0;
@@ -282,7 +260,7 @@ fieldset {
  * 1. Correct `color` not being inherited in IE 8/9.
  * 2. Remove padding so people aren't caught out if they zero out fieldsets.
  */
-/* line 290, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 286, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 legend {
   border: 0;
   /* 1 */
@@ -294,7 +272,7 @@ legend {
  * 2. Correct font size not being inherited in all browsers.
  * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
  */
-/* line 304, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 300, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 button, input, select, textarea {
   font-family: inherit;
   /* 1 */
@@ -307,7 +285,7 @@ button, input, select, textarea {
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
-/* line 316, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 312, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 button, input {
   line-height: normal; }
 
@@ -317,7 +295,7 @@ button, input {
  * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
  * Correct `select` style inheritance in Firefox 4+ and Opera.
  */
-/* line 328, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 324, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 button, select {
   text-transform: none; }
 
@@ -328,7 +306,7 @@ button, select {
  * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others.
  */
-/* line 343, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 339, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 button, html input[type="button"], input[type="reset"], input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
@@ -338,7 +316,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-/* line 353, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 349, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 button[disabled], html input[disabled] {
   cursor: default; }
 
@@ -346,7 +324,7 @@ button[disabled], html input[disabled] {
  * 1. Address box sizing set to `content-box` in IE 8/9.
  * 2. Remove excess padding in IE 8/9.
  */
-/* line 363, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 359, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 input[type="checkbox"], input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
@@ -358,7 +336,7 @@ input[type="checkbox"], input[type="radio"] {
  * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
  *    (include `-moz` to future-proof).
  */
-/* line 374, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 370, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */ }
@@ -367,14 +345,14 @@ input[type="search"] {
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-/* line 387, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 383, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; }
 
 /**
  * Remove inner padding and border in Firefox 4+.
  */
-/* line 396, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 392, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 button::-moz-focus-inner, input::-moz-focus-inner {
   border: 0;
   padding: 0; }
@@ -383,7 +361,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
  * 1. Remove default vertical scrollbar in IE 8/9.
  * 2. Improve readability and alignment in all browsers.
  */
-/* line 406, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 402, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 textarea {
   overflow: auto;
   /* 1 */
@@ -396,95 +374,348 @@ textarea {
 /**
  * Remove most spacing between table cells.
  */
-/* line 419, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/libs/_libs-reset */
+/* line 415, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-reset */
 table {
   border-collapse: collapse;
   border-spacing: 0; }
 
 /*
-    File: _assets/css/scss/_libs-vars.scss
+    File: _assets/css/scss/_libs-functions.scss
 */
-/**
- * Typecsset
- *
- * Typecsset is a small, unopinionated library for creating beautifully set type
- * on the web. Typecsset gives perfect vertical rhythm at any configurable font
- * size, as well as many other typographical niceties.
- */
+/*
+  Grid Mixins
+
+*/
+/* line 92, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/tools/tools-type */
+html {
+  background-image: url(http://basehold.it/i/22); }
+
 /*
     File: _assets/css/scss/_libs-mixins.scss
         Preference for third-party mixin libraries is to use Bourbon
         See https://github.com/thoughtbot/bourbon
 */
-/*
-
-
-
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <button class="btn">Primary</button>
 */
-/*
-    File: _assets/css/scss/_libs-functions.scss
+/* line 16, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.btn {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0 22px;
+  text-decoration: none;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 2.22222;
+  height: 40px;
+  background-color: #000;
+  color: #fff; }
+
+/* line 32, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.btn--multi:after {
+  display: inline-block;
+  vertical-align: middle;
+  content: " "; }
+
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <button class="btn btn--cta">Primary</button>
 */
-/*
-    File: _assets/css/scss/_views-beta.scss
-        This is a miscellaneous file for pre-launch testing and static comps.
-        To be removed for launch!!
+/* line 59, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+dt, dd {
+  margin: 0; }
 
-        1.  Baseline
-            Core/generic rules for this context
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details">
+			<dt>term</dt>
+			<dd>desc</dd>
+			<dt>term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
+/* line 73, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.details {
+  margin: 0; }
+  /* line 75, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+  .details dt {
+    float: left;
+    clear: left;
+    margin-right: 1em; }
 
-        2.  Layout
-            Page layout rules, eg for columns
-            As a general rule width, padding and margin stuff here
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details--row">
+			<dt>term</dt>
+			<dd>desc</dd>
+			<dt>term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
+/* line 93, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.details--row dd, .details--row dt {
+  display: inline-block;
+  float: none; }
+/* line 97, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.details--row dt {
+  margin-right: 0; }
+/* line 100, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.details--row aa {
+  margin-right: 1rem; }
 
-        3.  Typography
-            Typographic rules: headings, lists, etc
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details--fill">
+			<dt>term</dt>
+			<dd>desc</dd>
+			<dt>term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
+/* line 116, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.details--fill dd {
+  text-align: right; }
 
-        4.  Elements
-            HTML elements base rules
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details--stack">
+			<dt>term</dt>
+			<dd>desc</dd>
+			<dt>term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
+/* line 132, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.details--stack dt {
+  display: block;
+  float: none; }
 
-        5.  Components
-            Components within the site, eg navigation, carousels, etc
-            Ideally context and element agnostic
+/* 
+    Provides extra visual weight and identifies the primary action in a set of buttons.
+    <dl class="details--stack">
+			<dt class="details__title">term</dt>
+			<dd>desc</dd>
+			<dt class="details__title">term</dt>
+			<dd>desc</dd>
+    </dl>
+	*/
+/* line 148, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.details__title {
+  font-weight: bold; }
 
-        6.  Exceptions
-            Media queries targetting specific/edge-case CSS
+/* line 167, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+input[type="submit"], input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none; }
 
-        7.  Hacks
-            Idiosyncratic styles for browser support, etc
+/* line 172, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+fieldset {
+  margin: 0;
+  border: 0; }
 
-*/
-/*
-    File: _assets/css/scss/_views-core.scss
-        This is the base, mobile-first view CSS.
-        Mobile-specific styles should be added here under Exceptions
+/* Block */
+/* line 178, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.form .input {
+  position: relative;
+  text-align: left;
+  margin-bottom: 22px; }
+/* line 186, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.form__label {
+  color: #41464b;
+  display: inline-block;
+  cursor: pointer;
+  position: relative; }
+/* line 203, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.form__input {
+  transition: all 0.5s;
+  padding: 0 11;
+  height: 40px;
+  line-height: 1;
+  display: inline-block;
+  color: #666666; }
+  /* line 212, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+  .form__input:focus {
+    color: #666666; }
+  /* line 219, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+  .form__input--textarea {
+    overflow: auto;
+    padding-top: 11px;
+    padding-bottom: 11px; }
 
-        1.  Baseline
-            Core/generic rules for this context
+/* line 267, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.media {
+  display: block;
+  overflow: hidden; }
 
-        2.  Layout
-            Page layout rules, eg for columns
-            As a general rule width, padding and margin stuff here
+/* line 272, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.media__img {
+  float: left;
+  margin-right: 22px; }
 
-        3.  Typography
-            Typographic rules: headings, lists, etc
+/* line 277, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.media__img--rev {
+  float: right;
+  margin-left: 22px; }
 
-        4.  Elements
-            HTML elements base rules
+/* line 282, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+[class*="media__img"] {
+  margin-bottom: 0; }
+  /* line 284, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+  [class*="media__img"] img {
+    display: block; }
 
-        5.  Components
-            Components within the site, eg navigation, carousels, etc
-            Ideally context and element agnostic
+/* line 289, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.media__bd {
+  overflow: hidden; }
 
-        6.  Exceptions
-            Media queries targetting specific/edge-case CSS
+/* line 310, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
 
-        7.  Hacks
-            Idiosyncratic styles for browser support, etc
+/* line 316, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.nav__item {
+  display: inline-block; }
 
-*/
-/* line 30, /Users/magicspon/websites/mudstone/mudstone/_assets/css/scss/views/_views-core */
-body {
-  background-color: purple; }
+/* line 322, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.nav--stacked > li {
+  display: block; }
+
+/* line 329, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.nav--banner {
+  text-align: center; }
+
+/* line 335, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.nav--fit {
+  display: table;
+  width: 100%; }
+  /* line 338, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+  .nav--fit > li {
+    display: table-cell; }
+    /* line 340, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+    .nav--fit > li > a {
+      display: block; }
+
+/* line 346, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.nav--justify {
+  text-align: justify; }
+  /* line 348, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+  .nav--justify:after {
+    content: " ";
+    display: inline-block;
+    width: 100%; }
+
+/* line 424, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.panel > *:last-child, .panel > *:last-child > *:last-child, .panel > *:last-child > *:last-child > *:last-child {
+  margin-bottom: 0; }
+
+/* line 430, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.panel {
+  padding: 22px;
+  outline: 1px dotted red; }
+
+/* line 446, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+.wrapper {
+  width: 100%;
+  max-width: 1098px;
+  margin: 0 auto; }
+  /* line 450, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/libs/libs-objects */
+  .wrapper:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+/* line 34, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-beta */
+body:after {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  content: " ";
+  display: block;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.8);
+  content: "core"; }
+@media only screen and (min-width:480px) {
+  /* line 46, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-beta */
+  body:after {
+    content: "min-width: 480px"; }
+ }
+@media only screen and (min-width:768px) {
+  /* line 51, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-beta */
+  body:after {
+    content: "min-width: 768px"; }
+ }
+@media only screen and (min-width:954px) {
+  /* line 56, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-beta */
+  body:after {
+    content: "min-width: 954px"; }
+ }
+@media only screen and (min-width:1200px) {
+  /* line 61, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-beta */
+  body:after {
+    content: "min-width: 1200px"; }
+ }
+
+/* line 31, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-core */
+html {
+  font-size: 1em;
+  line-height: 1.375; }
+
+/* line 49, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-core */
+h1, .heading-1 {
+  font-size: 50px;
+  font-size: 3.125rem;
+  line-height: 1.32;
+  margin: 0 0 22px; }
+
+/* line 53, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-core */
+h2, .heading-2 {
+  font-size: 40px;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin: 0 0 22px; }
+
+/* line 57, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-core */
+h3, .heading-3 {
+  font-size: 35px;
+  font-size: 2.1875rem;
+  line-height: 1.25714;
+  margin: 0 0 22px; }
+
+/* line 61, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-core */
+h4, .heading-4 {
+  font-size: 21px;
+  font-size: 1.3125rem;
+  line-height: 1.04762;
+  margin: 0 0 22px; }
+
+/* line 65, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-core */
+h5, .heading-5 {
+  font-size: 19px;
+  font-size: 1.1875rem;
+  line-height: 1.15789;
+  margin: 0 0 22px; }
+
+/* line 69, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-core */
+h6, .heading-6 {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.57143;
+  margin: 0 0 22px; }
+
+/* line 74, /Users/magicspon/websites/_mudstone/mudstone/_assets/css/scss/views/views-core */
+p {
+  margin: 0 0 22px; }
 
 
 

@@ -1,34 +1,68 @@
-/*
-    File: _assets/css/scss/_views-beta.scss
-        This is a miscellaneous file for pre-launch testing and static comps.
-        To be removed for launch!!
 
-        1.  Baseline
-            Core/generic rules for this context
-
-        2.  Layout
-            Page layout rules, eg for columns
-            As a general rule width, padding and margin stuff here
-
-        3.  Typography
-            Typographic rules: headings, lists, etc
-
-        4.  Elements
-            HTML elements base rules
-
-        5.  Components
-            Components within the site, eg navigation, carousels, etc
-            Ideally context and element agnostic
-
-        6.  Exceptions
-            Media queries targetting specific/edge-case CSS
-
-        7.  Hacks
-            Idiosyncratic styles for browser support, etc
-
-*/
+//    File: _assets/css/scss/_views-core.scss
+//        This is the base, mobile-first view CSS.
+//        Mobile-specific styles should be added here under Exceptions
+//
+//        1.  Baseline
+//            Core/generic rules for this context
+//
+//        2.  Layout
+//            Page layout rules, eg for columns
+//            As a general rule width, padding and margin stuff here
+//
+//        3.  Typography
+//            Typographic rules: headings, lists, etc
+//
+//        4.  Elements
+//            HTML elements base rules
+//
+//        5.  Components
+//            Components within the site, eg navigation, carousels, etc
+//            Ideally context and element agnostic
+//
+//        6.  Exceptions
+//            Media queries targetting specific/edge-case CSS
+//
+//        7.  Hacks
+//            Idiosyncratic styles for browser support, etc
+//
+//
 
 // === 1.  Baseline
+
+body {
+    &:after {
+        @include position(fixed, null null 0 0);
+        color: $white;
+        padding: 5px;
+        font-size: 12px;
+        content: " ";
+        display: block;
+        z-index: 100;
+        background-color: rgba(0,0,0,0.8);
+        content: "core";
+    }
+    @include mq('min', $break-tiny) {
+        &:after {
+            content: "min-width: #{$break-tiny}";
+        }
+    }
+    @include mq('min', $break-small) {
+        &:after {
+            content: "min-width: #{$break-small}";
+        }
+    }
+    @include mq('min', $break-large) {
+        &:after {
+            content: "min-width: #{$break-large}";
+        }
+    }
+    @include mq('min', $break-massive) {
+        &:after {
+            content: "min-width: #{$break-massive}";
+        }
+    }
+}
 
 // === 2.  Layout
 
