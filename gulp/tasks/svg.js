@@ -1,41 +1,66 @@
-var gulp              = require('gulp');
+var gulp             	= require('gulp');
 var svgo           		= require('gulp-svgo');
 var gutil 						= require('gulp-util');
 var svg2png						= require('gulp-svg2png');
 var svgSprites        = require('gulp-svg-sprites');
-var config						= require('../config').svg;
+var config						= require('../config');
 var handleErrors 			= require('../util/handleErrors');
 var browserSync 			= require('browser-sync');
+var svgstore 					= require('gulp-svgstore');
+var inject 						= require('gulp-inject');
+var runSequence 			= require('run-sequence').use(gulp);
+
+
 
 gulp.task('svgSprite', function () {
 
-	return gulp.src(config.src)
+	return gulp.src(config.svg.src)
 		.pipe(svgo())
 		.pipe(svgSprites({
-			cssFile: config.css,
+			cssFile: config.svg.css,
 			preview: false,
 			layout: 'diagonal',
 			padding: 0,
 			svg: {
-				sprite: config.sprite
+				sprite: config.svg.sprite
 			},
 			templates: {
-				css: require("fs").readFileSync(config.template, "utf-8")
+				css: require("fs").readFileSync(config.svg.template, "utf-8")
 			}
 		}))
 		.on('error', handleErrors)
-		.pipe(gulp.dest(config.dest));
+		.pipe(gulp.dest(config.svg.dest));
 
 });
 
 gulp.task('pngSprite', ['svgSprite'], function() {
-	return gulp.src(config.src)
+	return gulp.src(config.svg.src)
 		.pipe(svg2png())
 		.on('error', handleErrors)
-		.pipe(gulp.dest(config.dest + 'images/sprites'));
+		.pipe(gulp.dest(config.svg.dest + '/sprites'));
 });
 
 // svg2png, svg sprite, png sprite
-gulp.task('sprites', ['pngSprite', 'svgSprite', 'sprite']);
+//gulp.task('sprites', ['pngSprite', 'svgSprite', 'sprite']);
+
+gulp.task('sprites', function(cb) {
+	runSequence('svgSprite',['pngSprite'], 'sprite', cb)
+});
 
 
+
+gulp.task('svgstore', function() {
+    var svgs = gulp
+        .src(config.svgStore.src)
+        .pipe(svgstore({ inlineSvg: true }));
+
+    function fileContents (filePath, file) {
+        return file.contents.toString();
+    }
+
+    return gulp
+        .src(config.svgStore.file)
+        .pipe(inject(svgs, { transform: fileContents }))
+		.on('error', handleErrors)
+        .pipe(gulp.dest(config.svgStore.dest));
+});

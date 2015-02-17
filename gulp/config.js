@@ -1,9 +1,9 @@
 /*
  * Enviroment variables, and output directories
  */
-var assets = './_assets/', 
-    build = './_build/',
-    root = './',
+var assets = '/_assets/', 
+    build = '/_build/',
+    root = '/',
     env = 'dev',
     outputStyle = 'expanded';
 /*
@@ -63,8 +63,10 @@ module.exports = {
 
   scripts: {
     src: [
-      assets + 'js/libs/jquery-1.10.2.min.js',
-      assets + 'js/plugins.js',
+      assets + 'js/libs/jquery-1.11.2.min.js',
+      assets + 'js/libs/plugins.js',
+      assets + 'js/application.js',
+      assets + 'js/behaviours/*.js',
       assets + 'js/script.js'
     ],
     dest: assets + 'js/dist',
@@ -82,11 +84,20 @@ module.exports = {
   },
 
   svg: {
-    src: assets + 'images/svg/*.svg',
-    dest: assets,
-    css: 'css/scss/gulp/_svg-sprites.scss',
-    sprite: 'images/svg-sprite.svg',
-    template: assets + 'css/scss/_tpl/_sprite-template.scss'
+    src: assets + 'images/svg-sprites/*.svg',
+    dest: assets + 'images',
+    css: '../css/scss/gulp/_svg-sprites.scss',
+    sprite: 'svg-sprite.svg',
+    template: assets + 'css/scss/_tpl/_sprite-template.scss',
+    pngs: 'sprites'
+  },
+
+
+  svgStore: {
+    src: assets + 'images/svg-inline/*.svg',
+    dest: assets + 'images/svg-inline/output/',
+    file: assets + 'images/svg-inline/inline-svg.html',
+
   },
 
   icons: {
@@ -104,13 +115,6 @@ module.exports = {
     dest: root
   },
 
-  haml : {
-    src: assets + 'templates/source/**/*.haml',
-    dest: assets + 'templates/dest/',
-    partials: assets + 'templates/dest/patterns'
-  },
-  
-  env: env,
 
   psi : {
     nokey: 'true',
@@ -132,7 +136,11 @@ module.exports = {
   jade: {
     src: assets + 'jade/source/*.jade',
     watch: assets + 'jade/source/**/*.jade',
-    dest: root
-  }
+    dest: root,
+    basedir: assets + 'jade/source'
+  },
+
+
+  env: env
 
 };
