@@ -91,3 +91,30 @@
 		background-position: map-get($svg-props, x) map-get($svg-props, y); 
 	}
 }
+
+
+
+@mixin resize-svg($svg, $size: null, $dimension: width) {
+	
+	$width:  map-get(map-get($svgs, $svg), width);
+	$height: map-get(map-get($svgs, $svg), height);
+	$d: null;
+
+	@if $dimension == width {
+		$d: $width;
+	} @else {
+		$d: $height;
+	}
+
+	$ratio: $size / $d;
+
+
+	@if $dimension == width {
+		width: $size * 1px;
+		height: ($height * $ratio) * 1px;
+	} @else {
+		width: ($width * $ratio) * 1px;
+		height: $size * 1px;
+	}
+
+} 

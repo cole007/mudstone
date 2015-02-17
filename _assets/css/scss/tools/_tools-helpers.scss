@@ -16,50 +16,118 @@
   }
 }
 
+// reset radio/checkbox
+@mixin reset-input() {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
 // call on the input (radio/checkbox)
 @mixin fancy-input($position: before) {
 
-	// hide the default radio input
-	display: none;
-	// create a radio button style using the 
-	& + label:#{$position} {
-		content: " ";
-		@content;		
-	}
+  // hide the default radio input
+  // opacity: 0;
+  // create a radio button style using the 
+  & + label:#{$position} {
+    content: " ";
+    @content;   
+  }
 }
 
 // call on the input (radio/checkbox) for the checked state
 @mixin fancy-input-checked($target: before) {
-	
-	&:checked + label:before {
-		@content;
-	}
+  
+  &:checked + label:before {
+    @content;
+  }
 }
+
 
 // example
 // - @include mq('min', '40px') {stuff:here}
-@mixin mq($str,$bp) {
-  $string: 'only screen and ';
-  $output: null;
-  
-  $output: $string + '(#{$str}-width:#{$bp})';
+// debug option - this can only be used when mixin is declared at the root
+// until libsass supports @at-root{}
+@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $debug: false) {
+  $min: null;
+  $max: null;
+  $break: null;
 
-  @media #{$output} {
-    @content;
-  }
- // test: $type;
+
+    @if type-of($bp) == list {
+        $min: nth($bp,1) * 1px;
+        $max: nth($bp,2) * 1px;
+        @if $orientation == null {
+          @media only screen and (min-#{$property}: $min) and (max-#{$property}: $max) {
+            @content;
+
+
+            // debugger
+            @if $debug == true {
+              @include mq-debug($bp,$type,$orientation,$property);
+            }
+
+
+          }
+        } @else {
+          @media only screen and (min-#{$property}: $min) and (max-#{$property}: $max) and (orientation : $orientation) {
+            @content;
+
+
+            // debugger
+            @if $debug == true {
+              @include mq-debug($bp,$type,$orientation,$property);
+            }
+
+
+          }
+        }
+    } @else {
+      $break: $bp * 1px;
+      @if $orientation == null {
+        @media only screen and (#{$type}-#{$property}: $break) {
+          @content;
+
+
+            // debugger
+            @if $debug == true {
+              @include mq-debug($bp,$type,$orientation,$property);
+            }
+
+
+        }
+
+      } @else {
+        @media only screen and (#{$type}-#{$property}: $break) and (orientation : $orientation) {
+          @content;
+            // debugger
+            @if $debug == true {
+              @include mq-debug($bp,$type,$orientation,$property);
+            }
+        }
+      }
+    }
+
 }
-// example
-// - @include mq(340px 679px) {stuff:here}
-@mixin between($bps) {
-  $min: nth($bps,1);
-  $max: nth($bps,2);
-  $string: 'only screen and ';
-  $output: $string + '(min-width:#{$min})' + ' and '+ '(max-width:#{$max})';
-  @media #{$output} {
-    @content;
-  }
+
+@mixin mq-debug($bp: null, $type: null, $orientation: null, $property: null) {
+    body {
+      &:after {
+          @include position(fixed, null null 0 0);
+          color: $white;
+          padding: 5px;
+          font-size: 12px;
+          content: " ";
+          display: block;
+          z-index: 100;
+          background-color: rgba(0,0,0,0.8);
+          content: '#{$bp} #{$type} #{$orientation} #{$property}';
+      }
+    }
+
 }
+
+
 
 // taken from 
 // https://github.com/at-import/toolkit/blob/2.x.x/stylesheets/toolkit/_triangle.scss
@@ -140,5 +208,31 @@
   @if $angle > 225 and $angle <= 315 {
     border-right-color: $color;
     border-width: ($height * abs($deg - 1)) $width ($height * $deg) 0;
+  }
+}
+
+// gradient underlines
+
+// <div>
+//   <span class="underline" style="display: inline;">bla bla</span>
+// </div>
+
+@mixin underline($color, $line-height: 1rem, $bg: transparent, $weight: 1px) {
+    @include background-image(linear-gradient(to bottom,($bg 50%, palette(themes,us) 50%)));
+    background-repeat: repeat-x;
+    background-position: 0 $line-height;
+    background-size: $weight $weight;
+}
+        
+
+
+
+@mixin debugger($psuedo: false, $color: red) {
+  outline: 1px dotted $color;
+  @if $psuedo == true {
+    &:before,
+    &:after {
+      outline: 1px dotted darken($color,10%);
+    }
   }
 }
