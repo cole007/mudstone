@@ -16,7 +16,7 @@ var runSequence 	= require('run-sequence');
 
 
 
-// runSequence, ensure that 'clean' runs after the haml, to remove the includes folder
+// runSequence
 gulp.task('build', function(callback) {
-  runSequence('sass', 'scripts', 'images', 'clean', 'html', 'cmq', 'uncss', callback);
+  runSequence('sass', 'scripts', 'images', 'html', 'cmq', 'uncss', callback);
 });
