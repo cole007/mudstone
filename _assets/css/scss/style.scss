@@ -40,6 +40,7 @@
 //
 //    Shame Last
 $ie: false;
+@import "bourbon";
 
 // gulp generator scss
 @import 'gulp/sprites';
@@ -60,6 +61,7 @@ $ie: false;
 @import 'tools/tools-images';
 @import 'tools/tools-layout';
 @import 'tools/tools-type';
+@import 'tools/tools-easing';
 
 // project specific mixins
 @import 'libs/libs-mixins';
@@ -68,7 +70,6 @@ $ie: false;
 // @import 'libs-gridset';
 
 // using node-bourbon, see ./gulp/config.js
-@import "bourbon";
 @import 'libs/libs-objects';
 
 // comment out following for launch!
