@@ -42,29 +42,155 @@ body {
         background-color: rgba(0,0,0,0.8);
         content: "core";
     }
-    @include mq('min', $break-tiny) {
+    @include mq($break-tiny, min) {
         &:after {
-            content: "min-width: #{$break-tiny}";
+            content: "min-width: break-tiny";
         }
     }
-    @include mq('min', $break-small) {
+    @include mq($break-small, min) {
         &:after {
-            content: "min-width: #{$break-small}";
+            content: "min-width: break-small";
         }
     }
-    @include mq('min', $break-large) {
+    @include mq($break-large, min) {
         &:after {
-            content: "min-width: #{$break-large}";
+            content: "min-width: break-large";
         }
     }
-    @include mq('min', $break-massive) {
+    @include mq($break-massive, min) {
         &:after {
-            content: "min-width: #{$break-massive}";
+            content: "min-width: break-massive";
         }
     }
 }
 
+
+.patterns {
+    .is-fixed {
+        .menu { position: static; }
+        & + * {
+            margin-top: 0;
+        }
+    }
+}
 // === 2.  Layout
+
+
+.panel--pattern {
+    padding: gutter(1) 0;
+    @include std-border(top); 
+    .link {
+        vertical-align: Baseline;
+    }
+    
+    .input__group {
+        margin-right: gutter(1);
+        display: inline-block;
+        vertical-align: baseline;
+    }
+    .tablesaw-bar {
+        .btn {
+            margin: 0;
+        }
+    }
+}
+
+.panel--pattern.buttons {
+    a.link,
+    .btn {
+        margin: 0 gutter(1) gutter(1) 0;
+        //vertical-align: top;
+    }  
+}
+
+
+.panel--pattern {
+    @include mq(1024px, min) {
+        
+        .pattern__column {
+            text-align: justify;
+            font-size: 0;
+            margin: gutter(1) 0;
+            &:after {
+                display: inline-block;
+                content: " ";
+                width: 100%;
+            }
+        }
+
+
+        .pattern__column {
+            width: gridCalc(1,3);
+            display: inline-block;
+        }
+    }
+
+    .input {
+        margin-bottom: gutter(1);
+    }
+}
+
+.panel--grid {
+    border: 1px solid palette(themes,magenta);
+    text-align: center;
+    padding: gutter(.25) 0;
+}
+// .grid-wrapper {
+//     margin-bottom: gutter(.25);
+// }
+
+.prompt--static {
+    padding: 100px 0;
+    .btn,.link {
+        margin: 0;
+    }
+}
+
+.panel--pattern {
+    .nav--justify {
+        li {
+            vertical-align: top;
+        }
+    }
+}
+
+.panel--banner__item {
+    .btn {
+        margin: 0;
+    }
+}
+.proto-mob {
+    max-width: $break-small * 1px !important;
+}
+.proto-tab {
+    max-width: $break-large * 1px !important;
+}
+
+.template-list {
+    .link {
+        margin-right: 0;
+    }
+}
+
+.dev-spacing {
+    box-shadow: 1px 1px 0 32px gamma(palette(themes,red)) inset;
+    position: relative;
+    @include debugger();
+    &:before,
+    &:after  {
+        @include position(absolute, 0 null null 0);
+        display: block;
+        content: '32px padding';
+        margin: 4px;
+        font-size: 12px;
+    }
+    &:after {
+        top: auto;
+        left: auto;
+        right: 0;
+        bottom: 0;
+    }
+}
 
 // === 3.  Typography
 

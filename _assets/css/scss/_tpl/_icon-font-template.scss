@@ -60,10 +60,10 @@ $icon_map: (<% _.each(glyphs, function(glyph) { %><%= glyph.fileName %>: "\<%= g
 }
 
 
-@each $icon, $char in $icon_map {
-	.icon--#{$icon} {
-		&:after {
-			content: icon-char($icon);
-		}
-	}
-}
+// @each $icon, $char in $icon_map {
+// 	.icon--#{$icon} {
+// 		&:after {
+// 			content: icon-char($icon);
+// 		}
+// 	}
+// }

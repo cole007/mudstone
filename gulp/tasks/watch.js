@@ -5,17 +5,16 @@
 
 var gulp  				= require('gulp');
 var config 				= require('../config');
-var runSequence 	= require('run-sequence');
-var browserSync 	= require('browser-sync');
+var runSequence 		= require('run-sequence');
+var browserSync 		= require('browser-sync');
 var reload 				= browserSync.reload;
 var gulpif 				= require('gulp-if');
 
 
-gulp.task('watch', function() {
-	gulp.watch(config.sass.watch,   ['sass']);
-	gulp.watch(config.scripts.src, ['scripts']);
-	gulp.watch(config.haml.src, ['haml']);
-	gulp.watch(config.html.build, ['html']);
+gulp.task('watch', ['browserSync'], function() {
+	gulp.watch(config.sass.watch,   ['sass', reload]);
+	gulp.watch(config.scripts.src, ['scripts', reload]);
+	gulp.watch(config.jade.watch,   ['jade', reload]);
 	gulp.watch(config.sprites.data, ['sprite']);
 	gulp.watch(config.images.src, ['images']);
 });

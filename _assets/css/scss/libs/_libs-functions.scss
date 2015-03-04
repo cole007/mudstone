@@ -21,11 +21,6 @@
   @return map-merge($map, $new);
 }
 
-// http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
-// use eg palette(accent,light)
-@function palette($palette, $tone: 'base') {
-    @return map-get(map-get($palettes, $palette), $tone);
-}
 
 @function forms($property, $value) {
     @return map-get(map-get($forms, $property), $value);
@@ -47,7 +42,7 @@
 }
 
 
-@function gutter($lines: 1, $gutter: $base-padding) {
+@function gutter($lines: 1, $gutter: $base-vr) {
 	@return ($gutter * $lines) * 1px;
 }
 
@@ -56,6 +51,7 @@
 }
 
 @function context($width, $max-width: $base-max-width) {
+
 	@return percentage($width / $max-width);
 }
 
@@ -72,7 +68,38 @@
 }
 
 
+// colour functions
+// Add percentage of white to a color
+@function tint($color, $percent){
+ 	@return mix(white, $color, $percent);
+}
+ 
+// Add percentage of black to a color
+@function shade($color, $percent){
+ 	@return mix(black, $color, $percent);
+}
 
+@function beta($color) {
+	@return tint($color,$beta);
+}
+
+@function gamma($color) {
+	@return tint($color,$gamma);
+}
+
+@function delta($color) {
+	@return tint($color,$delta);
+}
+
+// http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+// use eg palette(accent,light)
+@function palette($palette, $tone: 'base') {
+    @return map-get(map-get($palettes, $palette), $tone);
+}
+
+@function theme($tone) {
+	@return map-get(map-get($palettes, 'themes'), $tone);
+}
 
 
 // Sprite 

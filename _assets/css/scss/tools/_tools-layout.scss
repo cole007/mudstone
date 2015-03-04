@@ -49,6 +49,46 @@
     content: " ";
   }
 }
+
+
+@mixin quantity-child($selector:'.box-item', $num: 4, $offset: null) {
+    &:nth-last-child(#{$num}):first-child,
+    &:nth-last-child(#{$num}):first-child ~ #{$selector} {
+        @content;
+    }
+}
+
+@mixin quantity-type($selector:'.box-item', $num: 4, $offset: null) {
+    &:nth-last-of-type(#{$num}):first-of-type,
+    &:nth-last-of-type(#{$num}):first-of-type ~ #{$selector} {
+        @content;
+    }
+}
+
+@mixin none() {
+    &:only-of-type {
+        @content;
+    }
+}
+
+
+@mixin many() {
+    &:not(:only-of-type) {
+        @content;
+    }
+}
+
+
+@mixin child-of($n, $m) {
+    $child: $n;
+    $children: $m - 1;
+    &:nth-child(#{$n}):nth-last-child(#{$children}) {
+        @content;
+    }
+
+}
+
+
     
 
 //    markup
@@ -110,14 +150,14 @@
         @include transform(translateY(0px));
         margin: auto;
         pointer-events: none;
-        
+        vertical-align: middle;
+        display: inline-block;
         &,
         &:before,
         &:after {
             width: $width;
             height: $height;
             background-color: $color;
-            display: block;
             position: relative; // firefox fix
             z-index: 100001;
             @if $curve == true {
@@ -134,6 +174,7 @@
             width: $width;
             height: $height;
             background-color: $color;
+            display: block;
         }
         
         &:before {
@@ -147,7 +188,7 @@
     
 
 
-    &:focus {
+    &.is-active {
         > span {
             @include transform(translateY($exit_lenght));
             background-color: transparent!important; //urgh.. that'll do for now, that'll do pig, that'll do

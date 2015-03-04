@@ -32,7 +32,8 @@ gulp.task('sass', function () {
     .pipe(gulpif(env == 'dev', sourcemaps.init()))
     .pipe(sass({
         outputStyle: config.options.outputStyle,
-        includePaths: require('node-bourbon').includePaths
+        includePaths: require('node-bourbon').includePaths,
+        sourceMap: true
       }
     ))
     .on('error', handleErrors)
@@ -41,5 +42,5 @@ gulp.task('sass', function () {
     .pipe(gulp.dest(config.dest))
     .on('error', handleErrors)
     .pipe(size())
-    .pipe(browserSync.reload({stream:true}));
+    // .pipe(browserSync.reload({stream:true}));
 });

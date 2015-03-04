@@ -42,6 +42,8 @@
 
 */ 
 $ie: true;
+// using node-bourbon, see ./gulp/config.js
+@import "bourbon";
 
 // gulp generator scss
 @import 'gulp/sprites';
@@ -68,9 +70,18 @@ $ie: true;
 // external libraries go here
 // @import 'libs-gridset';
 
-// using node-bourbon, see ./gulp/config.js
-@import "bourbon";
-@import 'libs/libs-objects';
+@import 'libs/libs-utils';
+
+
+// atoms
+@import 'components/atoms/manifest';
+
+// molecules
+@import 'components/molecules/manifest';
+
+// manifest
+@import 'components/organisms/manifest';
+
 
 // comment out following for launch!
 @import 'views/views-beta';

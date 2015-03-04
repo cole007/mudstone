@@ -1,9 +1,9 @@
 /*
  * Enviroment variables, and output directories
  */
-var assets = '/_assets/', 
-    build = '/_build/',
-    root = '/',
+var assets = './_assets/', 
+    build = './_build/',
+    root = './',
     env = 'dev',
     outputStyle = 'expanded';
 /*
@@ -65,6 +65,7 @@ module.exports = {
     src: [
       assets + 'js/libs/jquery-1.11.2.min.js',
       assets + 'js/libs/plugins.js',
+      assets + 'js/libs/overflow-polyfill/*.js',
       assets + 'js/application.js',
       assets + 'js/behaviours/*.js',
       assets + 'js/script.js'
@@ -114,7 +115,8 @@ module.exports = {
     build: assets + 'templates/dest/*.html',
     dest: root
   },
-
+  
+  env: env,
 
   psi : {
     nokey: 'true',
@@ -125,12 +127,12 @@ module.exports = {
   uncss: {
     css: assets + 'css/style.css', 
     html: root + '**/*.html',
-    dest: assets + 'css/dist'
+    dest: assets + 'css'
   },
 
   cmq: {
     css: assets + 'css/style.css',
-    dest: assets + 'css/dist'
+    dest: assets + 'css'
   },
 
   jade: {
@@ -138,9 +140,6 @@ module.exports = {
     watch: assets + 'jade/source/**/*.jade',
     dest: root,
     basedir: assets + 'jade/source'
-  },
-
-
-  env: env
+  }
 
 };

@@ -1,10 +1,18 @@
+include ../mixins/mixins
 doctype
 html.no-js
-  include ../includes/head.jade
-  body
-    //- Add your site or application content here
-    .site   
-      block content
-      
-      include ../includes/footer.jade   
-    include ../includes/script.jade
+	head
+		meta(charset='utf-8')
+		title Mudstone - Boilerplate
+		meta(name='description', content='')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		link(rel='stylesheet', href='/_assets/css/style.css')
+		link(rel="shortcut icon", href="/favicon.ico" type="image/x-icon")
+		//- custom modernizr script, only tests for touch events
+		script(src='/_assets/js/libs/modernizr.touch-events.min.js')
+	body
+		.site
+			include ../includes/header
+			block content
+			include ../includes/footer
+		script(src='/_assets/js/dist/app.js')

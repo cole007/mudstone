@@ -73,11 +73,11 @@ template {
  *    user zoom.
  */
 
-html {
-    font-family: sans-serif; /* 1 */
-    -ms-text-size-adjust: 100%; /* 2 */
-    -webkit-text-size-adjust: 100%; /* 2 */
-}
+// html {
+//     font-family: sans-serif; /* 1 */
+//     -ms-text-size-adjust: 100%; /* 2 */
+//     -webkit-text-size-adjust: 100%; /* 2 */
+// }
 
 /**
  * Remove default margin.
@@ -178,13 +178,13 @@ mark {
  * Correct font family set oddly in Safari 5 and Chrome.
  */
 
-code,
-kbd,
-pre,
-samp {
-    font-family: monospace, serif;
-    font-size: 1em;
-}
+// code,
+// kbd,
+// pre,
+// samp {
+//     font-family: monospace, serif;
+//     font-size: 1em;
+// }
 
 /**
  * Improve readability of pre-formatted text in all browsers.

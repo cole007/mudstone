@@ -10,6 +10,50 @@
     $png-sprite: '../images/sprite.png';
     $svg-sprite: '../images/svg-sprite.svg';
 
+
+    $svgs: (
+        logo: (
+            width: 300,
+            height: 52
+        ),
+        step1: (
+            width: 595.29,
+            height: 456.2
+        ),
+        step2: (
+            width: 595.28,
+            height: 568.56
+        ),
+        step3: (
+            width: 595.28,
+            height: 492.979
+        ),
+        step4: (
+            width: 595.28,
+            height: 595.98
+        ),
+        step5: (
+            width: 595.28,
+            height: 531.179
+        ),
+        step6: (
+            width: 511.987,
+            height: 841.89
+        ),
+        step7: (
+            width: 595.28,
+            height: 555.961
+        ),
+        step8: (
+            width: 595.28,
+            height: 581.18
+        ),
+        step9: (
+            width: 595.28,
+            height: 373.789
+        )
+    );
+
 // Typography
 
     $base-font-size:                16;
@@ -19,13 +63,15 @@
     $browser-default-font-size:     16;
     $relative-font-sizing:          true;
 
+    $base-vr:  32;
 
 
     $magic-number:                  $base-line-height;
     $magic-ratio:                   $base-line-height / $base-font-size;
 // Grid
 
-    $base-max-width:        1098px;
+    $base-max-width:        1245px; // width + padding - hmmm
+    $base-wrapper-width:    1205;
     $base-max-columns:      12;
     $base-column-width:     floor($base-max-width / $base-max-columns);
     $base-side-padding:     20px;
@@ -75,18 +121,22 @@
 
     $white                  :#fff;
     $black                  :#000;
+    $base-grey: #666666;
+    $white-ish: #f1f1f1;
+
     // http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
     // use eg palette(accent,light)
     $palettes: (
         action: (
-          pagination: #efefef,
+          pagination: #a6adb2,
           posted: #6c6c6c,
-          tags: #ededed
+          tags: #ededed,
+          fb: #39579a
         ),
         bg: (
           dark: #333333,
           base: #4b4b4b,
-          light: #f3f2f0
+          light: #f3fcfc
         ),
         copy: (
           base: #333333,
@@ -97,25 +147,67 @@
           date: #999999
         ),
         themes: (
-          lightBlue: #066cb6,
-          darkBlue: #091d5f,
-          teal: #009e92,
-          green: #679f1a,
-          pink: #9a5aa6
+          teal:             #00bebe,
+          magenta:          #ff007d,
+          grey:             #505f69,
+          purple:           #500096,
+          blue:             #006ebe,
+          yellow:           #ffb900,
+          green:            #69c364,
+          red:              #d2003c,
+          orange:           #eb6e00
+        ),
+        menu: (
+            parent: $white,
+            single: #f3fcfc,
+            child: #f3fcfc,
+            granchild: #d9f5f5,
+            subnav: #505f69
+        ),
+        panel: (
+            success: #e7f5e7,
+            warning: #fff5d9
+        ),
+        form: (
+            error: #ef5052,
+            success: #00bebe,
+            track: #f3fcfc,
+            warning: #ffc72c
+        ),
+        social: (
+            facebook: #39579a,
+            twitter: #00abf0,
+            email: #00bebe,
+            youtube: #ef5052
         )
+    );
+    
+    $beta: 52.5%;
+    $gamma: 85%;
+    $delta: 90%;
 
+    $themes: (
+      teal:             #00bebe,
+      magenta:          #ff007d,
+      purple:           #500096,
+      blue:             #006ebe,
+      yellow:           #ffb900,
+      green:            #69c364,
+      red:              #d2003c,
+      orange:           #eb6e00
     );
 
+    
 // Forms
 
     $forms: (
 
         input: (
-            height: 40px,
+            height: 60px,
             border: 1px solid #cdd1d6,
             color: #666666,
-            font-size: 16,
-            padding: $base-padding-half
+            font-size: 18,
+            padding: 20px
         ),
 
         label: (
@@ -138,12 +230,12 @@
     );
 
     $font-sizes: (
-        h1:             50,
-        h2:             40,
-        h3:             35,
-        h4:             21,
-        h5:             19,
-        h6:             14,
+        h1:             78,
+        h2:             50,
+        h3:             42,
+        h4:             30,
+        h5:             24,
+        h6:             20,
         base:           $base-font-size,
         menu_item:      $base-font-size,
         search:         40,
@@ -156,8 +248,9 @@
 
 // Layout
 
-    $break-tiny             :480px;
-    $break-small            :768px;
-    $break-large            :954px;
-    $break-massive          :1200px;
+    $break-tiny             :480;
+    $break-small            :768;
+    $break-nexus            :962;
+    $break-large            :1024;
+    $break-massive          :1200;
 

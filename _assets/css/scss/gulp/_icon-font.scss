@@ -19,14 +19,151 @@
 	text-transform: none;
 }
 
+$icon_map: (amazon-a: "\E001",arrow__next: "\E002",arrow__prev: "\E003",arrow__start: "\E004",avatar: "\E005",back: "\E006",basket-smile: "\E007",bell-smile: "\E008",bell: "\E009",business: "\E00A",calendar: "\E00B",charity: "\E00C",coin-smile: "\E00D",cross: "\E00E",deals: "\E00F",e: "\E010",email: "\E011",entertainment: "\E012",facebook-f: "\E013",facebook: "\E014",fashion: "\E015",finance: "\E016",fundraising: "\E017",garden: "\E018",home: "\E019",insurance: "\E01A",login: "\E01B",mobiles: "\E01C",pen-smile: "\E01D",phone-smile: "\E01E",rating-off: "\E01F",rating-on: "\E020",sack-smile: "\E021",search: "\E022",share: "\E023",speech-smile: "\E024",star-smile: "\E025",star: "\E026",thumb: "\E027",tick: "\E028",travel: "\E029",triangle-after: "\E02A",triangle-before: "\E02B",trophy: "\E02C",twitter: "\E02D",utils: "\E02E",youtube: "\E02F",);
+
 @function icon-char($filename) {
 	$char: "";
 
-	@if $filename == facebook {
+	@if $filename == amazon-a {
 		$char: "\E001";
 	}
-	@if $filename == twitter {
+	@if $filename == arrow__next {
 		$char: "\E002";
+	}
+	@if $filename == arrow__prev {
+		$char: "\E003";
+	}
+	@if $filename == arrow__start {
+		$char: "\E004";
+	}
+	@if $filename == avatar {
+		$char: "\E005";
+	}
+	@if $filename == back {
+		$char: "\E006";
+	}
+	@if $filename == basket-smile {
+		$char: "\E007";
+	}
+	@if $filename == bell-smile {
+		$char: "\E008";
+	}
+	@if $filename == bell {
+		$char: "\E009";
+	}
+	@if $filename == business {
+		$char: "\E00A";
+	}
+	@if $filename == calendar {
+		$char: "\E00B";
+	}
+	@if $filename == charity {
+		$char: "\E00C";
+	}
+	@if $filename == coin-smile {
+		$char: "\E00D";
+	}
+	@if $filename == cross {
+		$char: "\E00E";
+	}
+	@if $filename == deals {
+		$char: "\E00F";
+	}
+	@if $filename == e {
+		$char: "\E010";
+	}
+	@if $filename == email {
+		$char: "\E011";
+	}
+	@if $filename == entertainment {
+		$char: "\E012";
+	}
+	@if $filename == facebook-f {
+		$char: "\E013";
+	}
+	@if $filename == facebook {
+		$char: "\E014";
+	}
+	@if $filename == fashion {
+		$char: "\E015";
+	}
+	@if $filename == finance {
+		$char: "\E016";
+	}
+	@if $filename == fundraising {
+		$char: "\E017";
+	}
+	@if $filename == garden {
+		$char: "\E018";
+	}
+	@if $filename == home {
+		$char: "\E019";
+	}
+	@if $filename == insurance {
+		$char: "\E01A";
+	}
+	@if $filename == login {
+		$char: "\E01B";
+	}
+	@if $filename == mobiles {
+		$char: "\E01C";
+	}
+	@if $filename == pen-smile {
+		$char: "\E01D";
+	}
+	@if $filename == phone-smile {
+		$char: "\E01E";
+	}
+	@if $filename == rating-off {
+		$char: "\E01F";
+	}
+	@if $filename == rating-on {
+		$char: "\E020";
+	}
+	@if $filename == sack-smile {
+		$char: "\E021";
+	}
+	@if $filename == search {
+		$char: "\E022";
+	}
+	@if $filename == share {
+		$char: "\E023";
+	}
+	@if $filename == speech-smile {
+		$char: "\E024";
+	}
+	@if $filename == star-smile {
+		$char: "\E025";
+	}
+	@if $filename == star {
+		$char: "\E026";
+	}
+	@if $filename == thumb {
+		$char: "\E027";
+	}
+	@if $filename == tick {
+		$char: "\E028";
+	}
+	@if $filename == travel {
+		$char: "\E029";
+	}
+	@if $filename == triangle-after {
+		$char: "\E02A";
+	}
+	@if $filename == triangle-before {
+		$char: "\E02B";
+	}
+	@if $filename == trophy {
+		$char: "\E02C";
+	}
+	@if $filename == twitter {
+		$char: "\E02D";
+	}
+	@if $filename == utils {
+		$char: "\E02E";
+	}
+	@if $filename == youtube {
+		$char: "\E02F";
 	}
 
 	@return $char;
@@ -59,3 +196,12 @@
 @mixin icon-char($filename) {
 	content: icon-char($filename);
 }
+
+
+// @each $icon, $char in $icon_map {
+// 	.icon--#{$icon} {
+// 		&:after {
+// 			content: icon-char($icon);
+// 		}
+// 	}
+// }

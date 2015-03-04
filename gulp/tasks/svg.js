@@ -1,14 +1,14 @@
-var gulp             	= require('gulp');
-var svgo           		= require('gulp-svgo');
+var gulp             			= require('gulp');
+var svgo           				= require('gulp-svgo');
 var gutil 						= require('gulp-util');
 var svg2png						= require('gulp-svg2png');
-var svgSprites        = require('gulp-svg-sprites');
+var svgSprites        			= require('gulp-svg-sprites');
 var config						= require('../config');
-var handleErrors 			= require('../util/handleErrors');
-var browserSync 			= require('browser-sync');
+var handleErrors 				= require('../util/handleErrors');
+var browserSync 				= require('browser-sync');
 var svgstore 					= require('gulp-svgstore');
 var inject 						= require('gulp-inject');
-var runSequence 			= require('run-sequence').use(gulp);
+var runSequence 				= require('run-sequence').use(gulp);
 
 
 
@@ -52,6 +52,7 @@ gulp.task('sprites', function(cb) {
 gulp.task('svgstore', function() {
     var svgs = gulp
         .src(config.svgStore.src)
+        .pipe(svgo())
         .pipe(svgstore({ inlineSvg: true }));
 
     function fileContents (filePath, file) {

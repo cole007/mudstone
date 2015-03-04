@@ -83,7 +83,7 @@
       @if $type == false {
         content: counter($counter);
       } @else {
-        content: counter($counter, $type);
+        content: counter($counter) $type;
       }
        counter-increment: $counter;
        @content;
@@ -100,4 +100,3 @@
   }
 }
 
-@include baseline();

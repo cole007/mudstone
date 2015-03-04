@@ -28,75 +28,277 @@
 //
 //
 
-html {
-    font-size: $base-font-size / $browser-default-font-size + em; 
-    line-height: $base-line-height / $base-font-size; 
+@include ff('GothamRounded-Bold', '../fonts/GothamRounded-Bold', 'GothamRounded-Bold');
+//@include ff('GothamRounded-BoldItalic', '../fonts/GothamRounded-BoldItalic', 'GothamRounded-BoldItalic');
+@include ff('GothamRounded-Book', '../fonts/GothamRounded-Book', 'GothamRounded-Book');
+//@include ff('GothamRounded-BookItalic', '../fonts/GothamRounded-BookItalic', 'GothamRounded-BookItalic');
+//@include ff('GothamRounded-Light', '../fonts/GothamRounded-Light', 'GothamRounded-Light');
+//@include ff('GothamRounded-LightItalic', '../fonts/GothamRounded-LightItalic', 'GothamRounded-LightItalic');
+@include ff('GothamRounded-Medium', '../fonts/GothamRounded-Medium', 'GothamRounded-Medium');
+//@include ff('GothamRounded-MediumItalic', '../fonts/GothamRounded-MediumItalic', 'GothamRounded-MediumItalic');
+@include ff('Verveine-Regular', '../fonts/Verveine-Regular', 'Verveine-Regular');
+
+
+
+svg {
+	max-height: 100%;
+} 
+
+
+// .sym--logo {
+// 	width:  map-get(map-get($svgs, logo), width) * 1px;
+// 	height: map-get(map-get($svgs, logo), height) * 1px;
+// }
+
+// hide the text part of the logo
+.logged-in {
+	#logo g#type {
+		display: none;
+	}
+
+	.sym--logo {
+		@include resize-svg(logo, 30, height);
+	}
 }
+
+.logged-out {
+	.sym--logo {
+		@include resize-svg(logo, 300, width);
+		margin: gutter(.5) auto;
+		display: block;
+	}
+}
+
+// theme styles
+// loop through each of the theme colours
+// base class sets the background color
+// inheritance used for sub elements
+// em/em-bg is the base class without any tinting
+// subtle/em-bg--subtle class is the beta version
+@each $theme, $color in $themes {
+
+	.theme--#{$theme} {
+		// background-color: gamma($color);
+
+
+		&--light {
+			background-color: delta($color);
+		}
+
+
+		// //[class*="heading-"], this heading class thing is causing to many issues
+		// .list--checklist li:before,
+		// .list__counter:before,
+		// .em,
+		// .link {
+		// 	color: $color;
+		// }
+
+		// .hero__heading {
+		// 	color: $white;
+		// }
+		
+
+
+		// &.quote {
+		// 	border-color:$color;
+		// 	color:$color;
+		// }
+
+		.slide__pager__button:hover,
+		.cycle-pager-active button {
+			background-color: $color;
+		}
+
+		// .form--register__header:after,
+		// .accordion__target,
+		// .accordion {
+		// 	border-top-color: $color;
+		// }
+
+
+		// .accordion__btn a:after {
+		// 	border-top-color: beta($color);
+		// }
+
+		// .accordion:last-child {
+		// 	border: 1px solid $color;
+		// }
+
+		// .accordion__btn {
+		// 	color: $color;
+		// }
+	
+		// .em-bg--subtle,
+		// .list__item {
+		// 	@if $theme == teal {
+		// 		background-color: gamma($color);
+		// 	} @else {
+		// 		background-color: beta($color);
+		// 	}
+		// }
+
+		&.quote--std {
+			border-left-color: $color;
+		}
+
+		.list__item:nth-child(odd) {
+			@if $theme == teal {
+				background-color: delta($color);
+			} @else {
+				background-color: gamma($color);
+			}
+		}
+
+		.list__item:nth-child(even) {
+			@if $theme == teal {
+				background-color: gamma($color);
+			} @else {
+				background-color: beta($color);
+			}
+		}
+
+
+		.slide__pagination:before {
+			color: $color;
+		}
+
+
+		
+
+		.list--animated__track {
+			background-color: beta($color);
+		}
+
+
+		.subtle {
+			color:  beta($color);
+		}
+
+		.list--checklist li:before {
+			color: $color;
+		}
+
+
+		.list--animated__marker {
+			border: 2px solid $color;
+		}
+		
+		.theme {
+			//color:$color;
+
+			&--color {
+				color:$color;
+
+				&.beta{
+					color:beta($color)
+				}
+				&.gamma {
+					color:gamma($color)
+				}
+				&.delta {
+					color:delta($color)
+				}
+			}
+
+			&--bg {
+				background-color:$color;
+
+				&.beta{
+					background-color:beta($color)
+				}
+				&.gamma {
+					background-color:gamma($color)
+				}
+				&.delta {
+					background-color:delta($color)
+				}
+			}
+		}
+	}
+} 
+
+
+
+
+
+.color--reset {
+	color:palette(themes,grey);
+}
+
+.no-bg {
+	background-color: $white;
+}
+
+.light-bg {
+	background-color: palette(bg,light);
+}
+
+
+
 
 // === 1.  Baseline
-body {}
+body {
+	& > svg {
+		display: none; // hide the big ole inline sprite 
+	}
+}
 
-.wrapper {}
+.home-link {
+	display: none !important;
+}
 
 // === 2.  Layout
-
-// .grid {@include cf();}
-// .grid-box {display: inline-block;}
-// .grid-col {float: left;}
-
-// === 3.  Typography
-
-h1,.heading-1 {
-	@include font-size(fs(h1));
-	margin: 0 0 gutter(1);
-}
-h2,.heading-2 {
-	@include font-size(fs(h2));
-	margin: 0 0 gutter(1);
-}
-h3,.heading-3 {
-	@include font-size(fs(h3));
-	margin: 0 0 gutter(1);
-}
-h4,.heading-4 {
-	@include font-size(fs(h4));
-	margin: 0 0 gutter(1);
-}
-h5,.heading-5 {
-	@include font-size(fs(h5));
-	margin: 0 0 gutter(1);
-}
-h6,.heading-6 {
-	@include font-size(fs(h6));
-	margin: 0 0 gutter(1);
+.wrapper {
+	@include wrapper();
+	padding-left: 20px;
+	padding-right: 20px;
+	position: relative;
 }
 
-p {
-	margin: 0 0 gutter(1);
+.grid-wrapper {
+	@include cf();
 }
 
-p,li {}
-a {}
-ul {}
-ol {}
+.slice {
+	padding-top: gutter(1);
+	padding-bottom: gutter(1.125);
+}
 
-// === 4.  Elements
+.slice--top {
+	padding-top: gutter(2);
+}
 
-.header {}
-.menu {}
-.content {}
-.sidebar {}
-.footer {}
+.slice--bottom {
+	padding-bottom: gutter(2);
+}
+
+.page {
+	padding-top: gutter(1);
+	padding-bottom: gutter(1);
+}
+
+.justified {
+	text-align: justify;
+	line-height: 0; // remove white space caused by the pseudo element
+	&:after {
+		display: inline-block;
+		width: 100%;
+        content: " ";
+	}
+	> *{
+		display:inline-block;
+	}
+}
 
 
-// === 5.  Components
 
-.slide {}
-.social {}
-.tabs {}
-.expand {}
-.modules {}
+// === 3.  Components
+// slide stuff 
 
-// === 6.  Exceptions
 
-// === 7.  Hacks
+
+
+
+
+

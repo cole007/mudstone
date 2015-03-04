@@ -1,0 +1,128 @@
+// base class for all modules
+// ensures even spacing around the module
+// by removing any last childrens bottom margin
+.panel {
+	> *:last-child,
+	> *:last-child > *:last-child,
+	> *:last-child > *:last-child > *:last-child {
+		margin-bottom: 0
+	}
+}
+
+
+// media object
+// <div class="media--m">
+//   <div class="media__img--m"></div>
+//   <div class="media__bd--m"></div>
+// </div>
+@mixin media-container($suffix: 'm') {
+	.media--#{$suffix} {
+		display:block;
+		&,
+		&__bd {
+			overflow: hidden;
+		}
+	}
+}
+
+@mixin media-image($sufix: 'm') {
+	.media__img--#{$suffix} {
+		float:left;
+		margin-right: gutter(1);
+	}
+}
+
+
+@mixin media-image--rev($sufix: 'm') {
+	.media__img--rev--#{$suffix} {
+		float:left;
+		margin-right: gutter(1);
+	}
+}
+
+.media {
+	display:block;
+    &,
+    &__bd {
+    	overflow: hidden;
+    }
+}
+		
+.media__img {
+	float:left;
+	margin-right: gutter(1);
+}
+	  
+.media__img--rev {
+  	float:right;
+  	margin-left: gutter(1);
+}
+	  
+[class*="media__img"] {
+	margin-bottom: 0;
+	img {
+    	display:block;
+	}
+}
+	  
+
+
+
+.flag {
+	display: table;
+	width: 100%;
+}
+
+
+.flag__item {
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+
+	.flag--top & {
+		vertical-align: top;
+	}
+
+	.flag--bottom & {
+		vertical-align: bottom;
+	}
+}
+
+[class*="flag__item"] {
+	& > {
+		display: block;
+		max-width: none;
+	}
+}
+
+.flag__item--img {
+	padding-right: 10px;
+
+	.flag--rev & {
+		padding-right: 0;
+		padding-left: 10px;
+	}
+}
+
+
+// flag container mixin
+// for use in media queries
+// use to introduce flag pattern at a later breakpoint
+// <div class="flag--tablet">flag kicks in at tablet bp</div>
+// you can pass more styles in if required
+@mixin flag-container($suffex: 'm') {
+	.flag--#{$suffex} {
+		display: table;
+		width: 100%;
+		@content;
+	}
+}
+
+// flag item mixin (as above)
+@mixin flag-item($suffex: 'm') {
+	.flag__item--#{$suffex} {
+		display: table;
+		width: 100%;
+		@content;
+	}
+}

@@ -99,21 +99,22 @@
 */
 
 $grid-settings : (
-  container: 1098px,
+  container: 1200px,
   columns: 12,
-  gutter: 30px,
-  gutter-side: right,
+  gutter: 20px,
+  gutter-side: left,
   gutter-type: padding,
   direction: left,
   padding-style: fixed,
-  output: float
+  output: float,
+  math: 'fraction'
 );
 
 $grid-justify-settings : (
   container: 1098px,
   columns: 12,
   gutter: 15px,
-  gutter-side: both,
+  gutter-side: left,
   gutter-type: padding,
   direction: left,
   padding-style: fixed,
@@ -126,6 +127,13 @@ $grid-default-columns: map-get($grid-settings,columns);
 $grid-default-gutter: map-get($grid-settings,gutter);
 $grid-default-gutter-side: map-get($grid-settings,gutter-side);
 $grid-default-gutter-type: map-get($grid-settings,gutter-type);
+
+@mixin wrapper($map: $grid-settings) {
+  max-width: map-get($map,container);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 
 // grid wapper mixin
@@ -143,6 +151,28 @@ $grid-default-gutter-type: map-get($grid-settings,gutter-type);
   @if $output == float {
     @include clearfix();
   }
+
+  $gutter-type: map-get($map,gutter-type);
+  $gutter: map-get($map,gutter);
+  $gutter-side: map-get($map,gutter-side);
+
+  // if the gutter type is margin we need to convert the px value into a percentage
+
+  @if $gutter-type == margin {
+    $g: gridCalc($gutter, map-get($map,container));
+  } @else {
+    // otherwise just use the px value
+    $g: $gutter;
+  }
+
+
+  @if $output != justify {
+    // clear both sides gutter
+    margin-left: -$g;
+  }
+
+
+
 
   // inline-block, reset font-size to 0
   @if $output == inline or $output == justify {
@@ -162,36 +192,7 @@ $grid-default-gutter-type: map-get($grid-settings,gutter-type);
     }
   }
 
-  $gutter-type: map-get($map,gutter-type);
-  $gutter: map-get($map,gutter);
-  $gutter-side: map-get($map,gutter-side);
 
-  // if the gutter type is margin we need to convert the px value into a percentage
-
-  @if $gutter-type == margin {
-    $g: gridCalc($gutter, map-get($map,container));
-  } @else {
-    // otherwise just use the px value
-    $g: $gutter;
-  }
-
-  @if $output != justify {
-
-    // clear left side gutter
-    @if $gutter-side == left {
-      margin-left: -$g;
-    }
-    // clear right side gutter
-    @if $gutter-side == right {
-      margin-right: -$g;
-    }
-    // clear both sides gutter
-    @if $gutter-side == both {
-      margin-left: -$g;
-      margin-right: -$g;
-    }
-
-  }
 
 }
 
@@ -212,6 +213,7 @@ $grid-default-gutter-type: map-get($grid-settings,gutter-type);
   $gutter: map-get($map,gutter);
   $gutter-type: map-get($map,gutter-type);
   $gutter-side: map-get($map,gutter-side);
+  $math: map-get($map,math);
 
   // 1 value argument, 
   // uses the default total columns, i.e. 12
@@ -300,7 +302,6 @@ $grid-default-gutter-type: map-get($grid-settings,gutter-type);
 
       @if $output == float {
         float: map-get($map, direction);
-        @debug $output;
       }
 
       @if $output == inline or $output == justify {
@@ -315,6 +316,14 @@ $grid-default-gutter-type: map-get($grid-settings,gutter-type);
   }
   // set the width 
   width: $width;
+}
+
+$list: 1 2 3 4 5 6 7 8 9 10 11 12;
+
+@each $i in $list {
+  .box--#{$i} {
+    @include grid-column(1 of $i, $render: false);
+  }
 }
 
 

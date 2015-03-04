@@ -1,0 +1,22 @@
+@for $i from 1 through 8 {
+	.t#{$i} {
+		width: gridCalc(1,$i);
+	}
+}
+
+@for $i from 1 through 8 {
+	.c#{$i} {
+		width: gridCalc($i,8);
+	}
+}
+
+
+.grid-wrapper--nest {
+	margin-left: gutter(-0.5);
+}
+
+.grid-wrapper--nest {
+	.col {
+		padding-left: gutter(.5);
+	}
+}

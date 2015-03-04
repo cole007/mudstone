@@ -14,7 +14,8 @@ gulp.task('iconfont', function(){
     }))
     .pipe(iconfont({
       fontName: config.name, // required
-      appendCodepoints: true // recommended option
+      appendCodepoints: true, // recommended option
+      normalize: true
     }))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.dest));

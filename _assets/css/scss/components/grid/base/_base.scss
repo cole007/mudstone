@@ -1,0 +1,66 @@
+.col {
+	float: left;
+	width: 100%;
+	margin-height: 1px;
+}
+
+@for $i from 1 through 4 {
+	.m#{$i} {
+		width: gridCalc(1,$i);
+	}
+}
+
+.grid-wrapper--nest {
+	margin-left: gutter(-0.25);
+}
+
+.grid-wrapper--nest {
+	& > .col {
+		padding-left: gutter(.25);
+	}
+}
+
+
+
+
+
+.box-container {
+    //@include justify();
+    display: flex;
+   	flex-wrap: nowrap; //  wrap  wrap-reverse;
+   	flex-direction: row; // row-reverse  column  column-reverse;
+   	justify-content: space-around; // flex-end  center  space-between  space-around;
+   	align-items: stretch; // | flex-end | center | baseline | stretch;
+   	height: 50px;
+}
+
+
+.box {
+    @include many() {
+        padding: 5px;
+    }
+}
+
+.box {
+    @include none() {
+        background-color: red;
+    }
+}
+
+// .box {
+//     @include child-of(8,2) {
+//         background-color: black;
+//     }
+// }
+
+
+.box {
+		//display: inline-block;
+    
+    @for $i from 1 through 12 {
+        @include quantity-child('.box', $num: $i) {
+            @include debugger();
+            width: (gridCalc(1,$i) - 2%);
+        }
+    }
+}

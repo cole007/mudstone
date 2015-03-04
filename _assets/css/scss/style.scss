@@ -3,7 +3,7 @@
 //    File: _assets/css/scss/style.scss
 //
 //    Use spaces not tabs
-//
+// 
 //    # Selectors
 //
 //    One selector per line, One rule per line
@@ -40,6 +40,8 @@
 //
 //    Shame Last
 $ie: false;
+
+// using node-bourbon, see ./gulp/config.js
 @import "bourbon";
 
 // gulp generator scss
@@ -51,7 +53,6 @@ $ie: false;
 @import 'libs/libs-reset';
 @import 'libs/libs-vars';
 @import 'libs/libs-functions';
-@import 'libs/libs-utils';
 // help mixins
 @import 'libs/gridset';
 
@@ -61,27 +62,56 @@ $ie: false;
 @import 'tools/tools-images';
 @import 'tools/tools-layout';
 @import 'tools/tools-type';
-@import 'tools/tools-easing';
 
 // project specific mixins
 @import 'libs/libs-mixins';
 
 // external libraries go here
 // @import 'libs-gridset';
-
-// using node-bourbon, see ./gulp/config.js
-@import 'libs/libs-objects';
+@import 'libs/libs-utils';
 
 // comment out following for launch!
 @import 'views/views-beta';
+
+// very core level stuff
+// theme colours loop
+// wrappers, layout classes et al
 @import 'views/views-core';
 
-@media screen and (min-width: $break-small) {
+// totally mobile first
+// build the *things* here
+// atoms
+// tiny little things, and lists
+@import 'components/atoms/manifest';
+
+// molecules
+// media, quotes, pagination, smaller bits
+@import 'components/molecules/manifest';
+
+// organisms
+// big ole blocks, headers, footers, posts et al
+@import 'components/organisms/manifest';
+
+// grid
+@import 'components/grid/manifest';
+
+// master view / layout
+// place the *things* here 
+// nothing component based
+
+// 480 up, big mobiles
+@media screen and (min-width: $break-tiny * 1px) {
+    @import 'views/views-mobile';
+}
+// portrait ipad
+@media screen and (min-width: $break-small * 1px) {
     @import 'views/views-tablet';
 }
-@media screen and (min-width: $break-large) {
+
+@media screen and (min-width: $break-large * 1px) {
     @import 'views/views-desktop';
 }
 
+// more custom media queries... for massive screens, inbetween sizes, et al... 
 @import 'views/views-exceptions';
 

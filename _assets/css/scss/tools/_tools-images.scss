@@ -1,13 +1,13 @@
 
 
 // image wrapper or aspect ratio
-@mixin image-wrapper($aspect-ratio: 16 9, $max-height: false, $max-width: false, $image-settings: true) {
+@mixin image-wrapper($aspect-ratio: 16 9, $max-height: false, $imageSettings: true) {
 
 	@if $max-height != false {
 		max-height: $max-height;
 	}
 
-	@if $image-setting == true {
+	@if $imageSettings == true {
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
@@ -15,14 +15,11 @@
 	$x: nth($aspect-ratio,1);
 	$y: nth($aspect-ratio,2);
 
-	@if type-of($max-width) == number {
-		max-width: $max-width;
-	}
 
 	&:before {
-		padding-bottom: fn-gridCalc($y,$x);
+		padding-bottom: gridCalc($y,$x);
 		content: " ";
-		display: block;
+		display: inline-block;
 	}
 }
 
@@ -118,3 +115,5 @@
 	}
 
 } 
+
+

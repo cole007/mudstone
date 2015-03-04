@@ -1,0 +1,62 @@
+
+// boilerplate navigation styles
+// not much styling, just resetting
+
+// reset the list style
+.list,
+.nav {
+    list-style:none;
+    margin: 0;
+    padding: 0;
+}
+
+// <li> class
+.nav__item {
+	display:inline-block;
+}
+
+// forces nav in to a vertical list	
+.nav--stacked {
+    > li {
+        display:block;
+    }
+}
+
+// place the nav in the centre of the area
+// horizon nav
+.nav--banner {
+	text-align: center;
+}
+
+// force the nav to take up all of the available space
+// evenly distributing the nav items 
+.nav--fit {
+	display:table;
+	width:100%;
+    > li {
+        display:table-cell;
+        > a {
+            display:block;
+        }
+    }
+}
+
+// spit the nav items evenly
+// useful for when two items need to be on either side of the page
+// no need for floats
+.nav--justify {
+	text-align: justify;
+	line-height: 0; // remove white space caused by the pseudo element
+	&:after {
+		display: inline-block;
+		width: 100%;
+        content: " ";
+	}
+    .nav__item {
+        display: inline-block;
+    }
+}
+
+
+// end of nav base classes //
+// add modifiers below here // 

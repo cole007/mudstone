@@ -1,0 +1,46 @@
+// organisms manifest
+
+// articles and things
+@import 'articles/articles';
+// views
+@include mq($break-tiny, min) {
+	@import 'articles/views/articles-m';
+}
+@include mq($break-small, min) {
+	@import 'articles/views/articles-t';
+}
+@include mq($break-large, min) {
+	@import 'articles/views/articles-d';
+}
+@import 'articles/views/articles-ex';
+
+
+// // articles and things
+@import 'header/header';
+// // views
+@include mq($break-tiny, min) {
+	@import 'header/views/header-m';
+}
+@include mq($break-small, min) {
+	@import 'header/views/header-t';
+}
+@include mq($break-large, min) {
+	@import 'header/views/header-d';
+}
+@import 'header/views/header-ex';
+
+
+// // articles and things
+@import 'footer/footer';
+// // views
+@include mq($break-tiny, min) {
+	@import 'footer/views/footer-m';
+}
+@include mq($break-small, min) {
+	@import 'footer/views/footer-t';
+}
+@include mq($break-large, min) {
+	@import 'footer/views/footer-d';
+}
+@import 'footer/views/footer-ex';
+

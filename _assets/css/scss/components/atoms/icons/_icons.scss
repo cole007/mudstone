@@ -1,0 +1,34 @@
+// icons 
+
+.social-icon {
+	@include icon-font();
+	&:before {
+		@include font-size(18,false);
+		width: 30px;
+		color: gamma(palette(themes,grey));
+	}
+	
+	&--facebook {
+		&:before {
+			content: icon-char(facebook);
+		}
+	}
+	&--twitter {
+		&:before {
+			content: icon-char(twitter);
+		}
+	}
+	&--email {
+		&:before {
+			content: icon-char(email);
+		}
+	}
+	&--youtube {
+		&:before {
+			content: icon-char(youtube);
+		}
+	}
+}
+
+
+

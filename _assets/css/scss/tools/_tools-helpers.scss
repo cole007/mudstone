@@ -26,21 +26,21 @@
 // call on the input (radio/checkbox)
 @mixin fancy-input($position: before) {
 
-  // hide the default radio input
-  // opacity: 0;
-  // create a radio button style using the 
-  & + label:#{$position} {
-    content: " ";
-    @content;   
-  }
+	// hide the default radio input
+	// opacity: 0;
+	// create a radio button style using the 
+	& + label:#{$position} {
+		content: " ";
+		@content;		
+	}
 }
 
 // call on the input (radio/checkbox) for the checked state
 @mixin fancy-input-checked($target: before) {
-  
-  &:checked + label:before {
-    @content;
-  }
+	
+	&:checked + label:before {
+		@content;
+	}
 }
 
 
@@ -48,11 +48,14 @@
 // - @include mq('min', '40px') {stuff:here}
 // debug option - this can only be used when mixin is declared at the root
 // until libsass supports @at-root{}
-@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $debug: false) {
+@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $debug: false, $inc-ie: true) {
   $min: null;
   $max: null;
   $break: null;
-
+  
+  
+  // ouput in media query for non ie css
+  @if $ie = false {
 
     @if type-of($bp) == list {
         $min: nth($bp,1) * 1px;
@@ -108,6 +111,14 @@
       }
     }
 
+  }
+
+  @if $inc-ie = true {
+    @if $ie = true {
+      @content;
+    }
+  }
+
 }
 
 @mixin mq-debug($bp: null, $type: null, $orientation: null, $property: null) {
@@ -128,6 +139,18 @@
 }
 
 
+
+// example
+// - @include mq(340px 679px) {stuff:here}
+@mixin between($bps) {
+  $min: nth($bps,1);
+  $max: nth($bps,2);
+  $string: 'only screen and ';
+  $output: $string + '(min-width:#{$min})' + ' and '+ '(max-width:#{$max})';
+  @media #{$output} {
+    @content;
+  }
+}
 
 // taken from 
 // https://github.com/at-import/toolkit/blob/2.x.x/stylesheets/toolkit/_triangle.scss
@@ -233,6 +256,27 @@
     &:before,
     &:after {
       outline: 1px dotted darken($color,10%);
+    }
+  }
+}
+
+
+@mixin selection($current-selector: false) {
+  @if $current-selector {
+    &::-moz-selection {
+      @content;
+    }
+
+    &::selection {
+      @content;
+    }
+  } @else {
+    ::-moz-selection {
+      @content;
+    }
+
+    ::selection {
+      @content;
     }
   }
 }

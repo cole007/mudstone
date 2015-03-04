@@ -24,5 +24,5 @@ gulp.task('scripts', function() {
     .pipe(concat(config.output))
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .pipe(gulp.dest(config.dest))
-    .pipe(browserSync.reload({stream:true}))
+    // .pipe(browserSync.reload({stream:true}))
 });

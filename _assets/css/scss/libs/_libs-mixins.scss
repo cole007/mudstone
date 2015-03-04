@@ -12,31 +12,40 @@
 
 @mixin font-type($font: 'base') {
   @if $font == bold {
-    font-family:"FS Albert Web Bold", sans-serif; font-weight:bold; 
-  } @else if $font == italic {
-    font-family:"FS Albert Web Light Italic", sans-serif; font-weight:200; font-style:italic; 
-  } @else if $font == thin {
-    font-family:"FS Albert Web Thin", sans-serif; font-weight:100;
+    font-family:"GothamRounded-Bold", sans-serif; 
+    letter-spacing: -0.05em;
+  } @else if $font == boldItalic {
+    font-family:"GothamRounded-BoldItalic", sans-serif; 
   } @else if $font == light {
-    font-family:"FS Albert Web Light", sans-serif; font-weight:200; 
-  } @else  {
-    font-family:"FS Albert Web Light", sans-serif; font-weight:200;
+    font-family:"GothamRounded-Light", sans-serif; 
+  } @else if $font == lightItalic {
+    font-family:"GothamRounded-LightItalic", sans-serif; 
+  } @else if $font == medium {
+    font-family:"GothamRounded-Medium", sans-serif; 
+    letter-spacing: -0.05em;
+  } @else if $font == mediumItalic {
+    font-family:"GothamRounded-MediumItalic", sans-serif; 
+  } @else if $font == fancy {
+    font-family:"Verveine-Regular", sans-serif;
+  } @else if $font == italic {
+    font-family:"GothamRounded-BookItalic";
+  } @else if $font == base {
+    font-family:"GothamRounded-Book";
+    
   }
 }
 
-@mixin heading-sizes($list: 1 2 3 4 5 6) {
-  $size: null;
-  @each $i in $list {
-    $heading: h#{$i};
-    $size: fs($heading);
 
-    h#{$i},
-    .heading-#{$i},
-    %heading-#{$i}{
-        @include font-size($size, false);
-    }
+@mixin std-border($position: all) {
+
+  @if $position == all {
+    border: 1px solid lighten(palette(themes,grey),50%);
+  } @else {
+    border-#{$position}: 1px solid lighten(palette(themes,grey),50%);
   }
+
 }
+
 
 // Layout
 
