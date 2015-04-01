@@ -73,14 +73,11 @@ $ie: true;
 @import 'libs/libs-utils';
 
 
-// atoms
-@import 'components/atoms/manifest';
+// BASE
+@import 'components/base/manifest';
 
-// molecules
-@import 'components/molecules/manifest';
-
-// manifest
-@import 'components/organisms/manifest';
+// BLOCKS
+@import 'components/blocks/manifest';
 
 
 // comment out following for launch!

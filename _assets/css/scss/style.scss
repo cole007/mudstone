@@ -81,19 +81,15 @@ $ie: false;
 
 // totally mobile first
 // build the *things* here
-// atoms
+// BASE
 // tiny little things, and lists
-@import 'components/atoms/manifest';
+@import 'components/base/manifest';
 
-// molecules
+// BLOCKS
 // media, quotes, pagination, smaller bits
-@import 'components/molecules/manifest';
+@import 'components/blocks/manifest';
 
-// organisms
-// big ole blocks, headers, footers, posts et al
-@import 'components/organisms/manifest';
-
-// grid
+// GRID
 @import 'components/grid/manifest';
 
 // master view / layout
