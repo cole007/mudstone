@@ -13,8 +13,8 @@
 * Sprite generator
 * SVG sprites, with png sprite fallback
 * SVG to icon font
-* Minify HTML
-* Compile haml templates
+* SVG symbol sprites (svgstore)
+* Compile jade templates
 * Optimise css with Combine Media queries, uncss and csso
 * Critcal path css generator
 * Build directory for deployments
