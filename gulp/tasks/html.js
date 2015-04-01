@@ -8,7 +8,6 @@ var gulp         = require('gulp');
 var browserSync  = require('browser-sync');
 var changed  		 = require('gulp-changed');
 var reload 			 = browserSync.reload;
-var minifyHtml   = require('gulp-minify-html');
 var handleErrors = require('../util/handleErrors');
 var config       = require('../config').html;
 var gulpif       = require('gulp-if');

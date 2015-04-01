@@ -76,7 +76,7 @@ module.exports = {
   },
 
   sprites: {
-    data: assets + 'images/sprites/*.png',
+    data: assets + 'images/png-sprites/*.png',
     imgName: 'sprite.png',
     cssName: '_sprites.scss',
     imgPath: '../images/sprite.png',

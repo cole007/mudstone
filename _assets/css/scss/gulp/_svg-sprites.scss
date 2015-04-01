@@ -1,2 +1,5 @@
-$icons: (sprite: (width: 493px, height: 168px, svgPath: '../svg-sprite.svg'),
-amazon-a: (ie: $amazon-a,width: 45.86px, height: 37.97px, backgroundX: 0px, backgroundY: 0px),amazon-a-off: (ie: $amazon-a-off,width: 45.86px, height: 37.97px, backgroundX: -46px, backgroundY: -38px),logo: (ie: $logo,width: 375.63px, height: 65px, backgroundX: -92px, backgroundY: -76px),logo-e: (ie: $logo-e,width: 24.7px, height: 27px, backgroundX: -468px, backgroundY: -141px),);
+$icons: (
+      sprite: (width: 42px, height: 44px),
+     facebook: (ie: $facebook, width: 10px, height: 22px, backgroundX: 0px, backgroundY: 0px),
+     twitter: (ie: $twitter, width: 32px, height: 22px, backgroundX: -10px, backgroundY: -22px),
+);

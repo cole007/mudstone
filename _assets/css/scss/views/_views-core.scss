@@ -1,188 +1,15 @@
-
-//    File: _assets/css/scss/_views-core.scss
-//        This is the base, mobile-first view CSS.
-//        Mobile-specific styles should be added here under Exceptions
-//
-//        1.  Baseline
-//            Core/generic rules for this context
-//
-//        2.  Layout
-//            Page layout rules, eg for columns
-//            As a general rule width, padding and margin stuff here
-//
-//        3.  Typography
-//            Typographic rules: headings, lists, etc
-//
-//        4.  Elements
-//            HTML elements base rules
-//
-//        5.  Components
-//            Components within the site, eg navigation, carousels, etc
-//            Ideally context and element agnostic
-//
-//        6.  Exceptions
-//            Media queries targetting specific/edge-case CSS
-//
-//        7.  Hacks
-//            Idiosyncratic styles for browser support, etc
-//
-//
-
+// ADD FONTS TO DOC – $font-family, $font-url, $font-name
 @include ff('GothamRounded-Bold', '../fonts/GothamRounded-Bold', 'GothamRounded-Bold');
-//@include ff('GothamRounded-BoldItalic', '../fonts/GothamRounded-BoldItalic', 'GothamRounded-BoldItalic');
-@include ff('GothamRounded-Book', '../fonts/GothamRounded-Book', 'GothamRounded-Book');
-//@include ff('GothamRounded-BookItalic', '../fonts/GothamRounded-BookItalic', 'GothamRounded-BookItalic');
-//@include ff('GothamRounded-Light', '../fonts/GothamRounded-Light', 'GothamRounded-Light');
-//@include ff('GothamRounded-LightItalic', '../fonts/GothamRounded-LightItalic', 'GothamRounded-LightItalic');
-@include ff('GothamRounded-Medium', '../fonts/GothamRounded-Medium', 'GothamRounded-Medium');
-//@include ff('GothamRounded-MediumItalic', '../fonts/GothamRounded-MediumItalic', 'GothamRounded-MediumItalic');
-@include ff('Verveine-Regular', '../fonts/Verveine-Regular', 'Verveine-Regular');
-
-
 
 svg {
 	max-height: 100%;
 } 
 
-
-// .sym--logo {
-// 	width:  map-get(map-get($svgs, logo), width) * 1px;
-// 	height: map-get(map-get($svgs, logo), height) * 1px;
-// }
-
-// hide the text part of the logo
-.logged-in {
-	#logo g#type {
-		display: none;
-	}
-
-	.sym--logo {
-		@include resize-svg(logo, 30, height);
-	}
-}
-
-.logged-out {
-	.sym--logo {
-		@include resize-svg(logo, 300, width);
-		margin: gutter(.5) auto;
-		display: block;
-	}
-}
-
-// theme styles
-// loop through each of the theme colours
-// base class sets the background color
-// inheritance used for sub elements
-// em/em-bg is the base class without any tinting
-// subtle/em-bg--subtle class is the beta version
+// SITE COLOUR THEMING – delete if not needed.
 @each $theme, $color in $themes {
 
 	.theme--#{$theme} {
 		// background-color: gamma($color);
-
-
-		&--light {
-			background-color: delta($color);
-		}
-
-
-		// //[class*="heading-"], this heading class thing is causing to many issues
-		// .list--checklist li:before,
-		// .list__counter:before,
-		// .em,
-		// .link {
-		// 	color: $color;
-		// }
-
-		// .hero__heading {
-		// 	color: $white;
-		// }
-		
-
-
-		// &.quote {
-		// 	border-color:$color;
-		// 	color:$color;
-		// }
-
-		.slide__pager__button:hover,
-		.cycle-pager-active button {
-			background-color: $color;
-		}
-
-		// .form--register__header:after,
-		// .accordion__target,
-		// .accordion {
-		// 	border-top-color: $color;
-		// }
-
-
-		// .accordion__btn a:after {
-		// 	border-top-color: beta($color);
-		// }
-
-		// .accordion:last-child {
-		// 	border: 1px solid $color;
-		// }
-
-		// .accordion__btn {
-		// 	color: $color;
-		// }
-	
-		// .em-bg--subtle,
-		// .list__item {
-		// 	@if $theme == teal {
-		// 		background-color: gamma($color);
-		// 	} @else {
-		// 		background-color: beta($color);
-		// 	}
-		// }
-
-		&.quote--std {
-			border-left-color: $color;
-		}
-
-		.list__item:nth-child(odd) {
-			@if $theme == teal {
-				background-color: delta($color);
-			} @else {
-				background-color: gamma($color);
-			}
-		}
-
-		.list__item:nth-child(even) {
-			@if $theme == teal {
-				background-color: gamma($color);
-			} @else {
-				background-color: beta($color);
-			}
-		}
-
-
-		.slide__pagination:before {
-			color: $color;
-		}
-
-
-		
-
-		.list--animated__track {
-			background-color: beta($color);
-		}
-
-
-		.subtle {
-			color:  beta($color);
-		}
-
-		.list--checklist li:before {
-			color: $color;
-		}
-
-
-		.list--animated__marker {
-			border: 2px solid $color;
-		}
 		
 		.theme {
 			//color:$color;
@@ -218,37 +45,6 @@ svg {
 	}
 } 
 
-
-
-
-
-.color--reset {
-	color:palette(themes,grey);
-}
-
-.no-bg {
-	background-color: $white;
-}
-
-.light-bg {
-	background-color: palette(bg,light);
-}
-
-
-
-
-// === 1.  Baseline
-body {
-	& > svg {
-		display: none; // hide the big ole inline sprite 
-	}
-}
-
-.home-link {
-	display: none !important;
-}
-
-// === 2.  Layout
 .wrapper {
 	@include wrapper();
 	padding-left: 20px;
@@ -262,43 +58,39 @@ body {
 
 .slice {
 	padding-top: gutter(1);
-	padding-bottom: gutter(1.125);
-}
-
-.slice--top {
-	padding-top: gutter(2);
-}
-
-.slice--bottom {
-	padding-bottom: gutter(2);
-}
-
-.page {
-	padding-top: gutter(1);
 	padding-bottom: gutter(1);
-}
 
-.justified {
-	text-align: justify;
-	line-height: 0; // remove white space caused by the pseudo element
-	&:after {
-		display: inline-block;
-		width: 100%;
-        content: " ";
+	&--top {
+		padding-top:gutter(1);
 	}
-	> *{
-		display:inline-block;
+
+	&--bottom {
+		padding-bottom:gutter(1);
+	}
+
+	&--double {
+		padding-top: gutter(2);
+		padding-bottom: gutter(2);
+
+		&--top {
+			padding-top:gutter(2);
+		}
+
+		&--bottom {
+			padding-bottom:gutter(2);
+		}
+	}
+
+	&--triple {
+		padding-top: gutter(3);
+		padding-bottom: gutter(3);
+
+		&--top {
+			padding-top:gutter(3);
+		}
+
+		&--bottom {
+			padding-bottom:gutter(3);
+		}
 	}
 }
-
-
-
-// === 3.  Components
-// slide stuff 
-
-
-
-
-
-
-

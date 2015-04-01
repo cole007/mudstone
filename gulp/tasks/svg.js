@@ -2,7 +2,7 @@ var gulp             			= require('gulp');
 var svgo           				= require('gulp-svgo');
 var gutil 						= require('gulp-util');
 var svg2png						= require('gulp-svg2png');
-var svgSprites        			= require('gulp-svg-sprites');
+var svgSprite        			= require('gulp-svg-sprite');
 var config						= require('../config');
 var handleErrors 				= require('../util/handleErrors');
 var browserSync 				= require('browser-sync');
@@ -10,26 +10,30 @@ var svgstore 					= require('gulp-svgstore');
 var inject 						= require('gulp-inject');
 var runSequence 				= require('run-sequence').use(gulp);
 
-
-
 gulp.task('svgSprite', function () {
 
-	return gulp.src(config.svg.src)
-		.pipe(svgo())
-		.pipe(svgSprites({
-			cssFile: config.svg.css,
-			preview: false,
-			layout: 'diagonal',
-			padding: 0,
-			svg: {
-				sprite: config.svg.sprite
-			},
-			templates: {
-				css: require("fs").readFileSync(config.svg.template, "utf-8")
-			}
-		}))
-		.on('error', handleErrors)
-		.pipe(gulp.dest(config.svg.dest));
+    return gulp.src(config.svg.src)
+        .pipe(svgo())
+        .pipe(svgSprite({
+            "mode": {
+                "css": {
+                    "spacing": {
+                        "padding": 5
+                    },
+                    "dest": "./",
+                    "layout": "diagonal",
+                    "sprite": config.svg.sprite,
+                    "bust": false,
+                    "render": {
+                        "scss": {
+                            "dest": config.svg.css,
+                            "template": config.svg.template
+                        }
+                    }
+                }
+            }
+        }))
+        .pipe(gulp.dest(config.svg.dest));
 
 });
 
