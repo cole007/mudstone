@@ -11,6 +11,12 @@
   $fs: strip-units($font-size);
   @return $computed / $fs;
 }
+
+// http://madebymike.com.au/writing/precise-control-responsive-typography/
+@function resp-font($min, $max, $start, $stop) {
+	@return calc( (#{$min} * 1px) + (#{$max} - #{$min}) * ( (100vw - (#{$start} * 1px)) / ( #{$stop} - #{$start}) ));
+}
+
    
 
 // Map helpers 
