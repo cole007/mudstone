@@ -7,7 +7,7 @@ module.exports = function() {
   // Send error to notification center with gulp-notify
   notify.onError({
     title: "Compile Error",
-    message: "<%= error.message %>"
+    message: "<%= error.message %> in <%= error.reason %>  on line number <%= error.line %>"
   }).apply(this, args);
 
   // Keep gulp from hanging on this task
