@@ -14,10 +14,14 @@ var csso        	= require('gulp-csso');
 gulp.task('uncss', function() {
     return gulp.src(config.css)
         .pipe(uncss({
-            html: glob.sync(config.html),
-            ignore: ['.is-*', '.tablesaw*']
+            html: 'index.html'
         }))
-        .pipe(gulp.dest(config.dest))
-        .pipe(gulpif('*.css', csso()))
+        .pipe(gulp.dest(config.dest));
+});
+
+
+gulp.task('csso', function() {
+    return gulp.src(config.css)
+        .pipe(csso())
         .pipe(gulp.dest(config.dest));
 });

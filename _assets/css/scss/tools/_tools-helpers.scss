@@ -271,3 +271,122 @@
     }
   }
 }
+
+// ----
+// Sass (v3.4.7)
+// Compass (v1.0.1)
+// ----
+ 
+ // thanks to @ericmsuzanne for this function 
+@function map-set($map, $key, $value) {
+  $new: ($key: $value);
+  @return map-merge($map, $new);
+}
+
+// Introducing Map-Extends
+// Cross media query extends using maps
+// 1. Create an map, with a name key.
+// 2. Add your css as per normal, just with commas instead of semi colons
+//  $menu-object: (
+//    name: menu-object,
+//    list-style: none,
+//    margin: 0
+//  );
+// 3. Nesting is not possible, well, it could be done but I'm not sure that it's worth it
+// 4. Call the mixin by passing in the name of the object you wish to use, and the current breakpoint name
+//    eg. core, mob, desktop, et al
+//
+//  The first time the obj mixin is called a %placeholder class is created and immediately extended
+//  The next time the obj mixin is called, the %placeholder class is used
+//
+//
+// USAGE
+//
+//  .menu {
+//    @include obj($menu-object, 'core');
+//  }
+//  .sub-menu {
+//    @include obj($menu-object, 'core');
+//  }
+// called from within the desktop breakpoint file 
+//  .side-menu {
+//    @include obj($menu-object, 'desktop');
+//  }
+//  .another-menu {
+//    @include obj($menu-object, 'desktop');
+//  }
+//
+// OUTPUT
+//
+//  .menu, .sub-menu {
+//    list-style: none;
+//    margin: 0;
+//  }
+//  @media screen and (min-width: 954px) {
+//    .side-menu, .another-menu {
+//      list-style: none;
+//      margin: 0;
+//    }
+//  }
+
+// init extend map, this map will keep a record of all of the extend objects created
+$extend : ();
+
+@mixin obj($map, $bp: $current_breakpoint) {
+
+
+  // if we're passing in a map
+  @if type-of($map) == map {
+    // init name variable
+    $name: null;
+    // loop through the map values
+    @each $j in $map {
+      // if the key is name
+      @if nth($j,1) == name {
+        // update the name value
+        $name: map-get($map, name);
+      }
+    }
+    // set the placeholder
+    $placeholder: #{$name}-#{$bp};
+    @if map-has-key($extend, $placeholder) {
+        // map exists so extend it
+        @extend %#{$placeholder};
+        // call placeholder class
+    } @else {
+      // add the name to the extends object
+      // the next time the mixin is called with the same object
+      // the placeholder class will not need to be generated
+      $extend: map-set($extend, $placeholder, true) !global;
+      // create placeholder class
+      // jump to the root context
+      @at-root {
+        // create the placeholer class
+        %#{$placeholder} {
+          // loop through the map values, 
+          @each $i in $map {
+            // nth(1) == property
+            $a: nth($i,1);
+            // nt(2) == value
+            $b: nth($i,2);
+            @if $a != name {
+              #{$a}: #{$b};
+            }
+          }
+        }
+      }
+      // now we can call out placeholder
+      @extend %#{$placeholder};
+    }
+  }
+
+  @else {
+    @warn "the first argument must be a map";
+  }
+}
+
+
+
+
+
+// yup

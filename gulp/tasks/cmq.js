@@ -9,7 +9,6 @@ var config 	= require('../config').cmq;
 
 gulp.task('cmq', function () {
   gulp.src(config.css)
-  	.pipe(csso())
     .pipe(cmq({
       log: true
     }))

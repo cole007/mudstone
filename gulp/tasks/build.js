@@ -22,7 +22,7 @@ var config        = require('../config').build;
 
 
 gulp.task('o-css', function(callback) {
-  runSequence('sass', 'cmq', 'uncss', callback);
+  runSequence('sass', 'cmq', 'csso', callback);
 });
 
 
@@ -48,5 +48,5 @@ gulp.task('build-images', function(callback) {
 
 //
 gulp.task('build', function(callback) {
-  runSequence(['build-scripts', 'build-fonts', 'build-images', 'sass', 'jade', 'scripts'], callback);
+  runSequence(['build-scripts', 'build-fonts', 'build-images', 'o-css', 'jade', 'scripts'], callback);
 });

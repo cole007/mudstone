@@ -32,15 +32,14 @@ gulp.task('sass', function () {
     .pipe(gulpif(env == 'dev', sourcemaps.init()))
     .pipe(sass({
         outputStyle: config.options.outputStyle,
-        includePaths: require('node-bourbon').includePaths,
-        sourceMap: true
+        includePaths: require('node-bourbon').includePaths
       }
     ))
-    .on('error', handleErrors)
     .pipe(autoprefixer(config.prefix)) // doesn't play nice with sourcemaps
-    .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
-    .pipe(gulp.dest(config.dest))
     .on('error', handleErrors)
+    .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
+    .on('error', handleErrors)
+    .pipe(gulp.dest(config.dest))
     .pipe(size())
     // .pipe(browserSync.reload({stream:true}));
 });

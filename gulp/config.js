@@ -14,7 +14,7 @@ if(env === 'live') {
     outputStyle = 'compressed';
     assetPath = "/_build/";
     build = './_dist/_build/';
-    root = '_dist'
+    root = '_dist';
 }
 /*
  * Site url used for page insights
