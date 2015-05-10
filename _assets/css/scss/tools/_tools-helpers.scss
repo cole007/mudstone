@@ -55,7 +55,6 @@
   
   
   // ouput in media query for non ie css
-  @if $ie = false {
 
     @if type-of($bp) == list {
         $min: nth($bp,1) * 1px;
@@ -110,14 +109,6 @@
         }
       }
     }
-
-  }
-
-  @if $inc-ie = true {
-    @if $ie = true {
-      @content;
-    }
-  }
 
 }
 

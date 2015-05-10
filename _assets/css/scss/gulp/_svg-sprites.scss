@@ -1,5 +1,5 @@
 $icons: (
-      sprite: (width: 42px, height: 44px),
-     facebook: (ie: $facebook, width: 10px, height: 22px, backgroundX: 0px, backgroundY: 0px),
-     twitter: (ie: $twitter, width: 32px, height: 22px, backgroundX: -10px, backgroundY: -22px),
+      sprite: (width: 42px, height: 44px, pngPath: '../img/sprite.png', svgPath: '../img/sprite.svg'),
+     facebook: (name: $facebook, width: 10px, height: 22px, backgroundX: 0px, backgroundY: 0px),
+     twitter: (name: $twitter, width: 32px, height: 22px, backgroundX: -10px, backgroundY: -22px),
 );

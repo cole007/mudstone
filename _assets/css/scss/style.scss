@@ -1,5 +1,3 @@
-
-
 //    File: _assets/css/scss/style.scss
 //
 //    Use spaces not tabs
@@ -41,24 +39,24 @@
 //    Shame Last
 $ie: false;
 
-// using node-bourbon, see ./gulp/config.js
+// using  node-bourbon, see ./gulp/config.js
 @import "bourbon";
 
+
+
 // gulp generator scss
-@import 'gulp/sprites';
+@import 'gulp/png-sprites';
 @import 'gulp/svg-sprites';
 @import 'gulp/icon-font';
 
 // Libraries and dependencies
 @import 'libs/libs-reset';
 @import 'libs/libs-vars';
-@import 'libs/libs-functions';
-
 // help mixins
-@import 'libs/gridset';
-
 // tools
-@import 'tools/tools-grid';
+@import 'tools/tools-functions';
+//@import 'tools/tools-grid';
+@import 'tools/tools-easing';
 @import 'tools/tools-helpers';
 @import 'tools/tools-images';
 @import 'tools/tools-layout';
@@ -70,45 +68,8 @@ $ie: false;
 // external libraries go here
 // @import 'libs-gridset';
 @import 'libs/libs-utils';
-
-// comment out following for launch!
-@import 'views/views-beta';
-
-// very core level stuff
-// theme colours loop
-// wrappers, layout classes et al
 @import 'views/views-core';
 
-// totally mobile first
-// build the *things* here
-// BASE
-// tiny little things, and lists
-@import 'components/base/manifest';
+@import 'components/manifest';
 
-// BLOCKS
-// media, quotes, pagination, smaller bits
-@import 'components/blocks/manifest';
-
-// GRID
-@import 'components/grid/manifest';
-
-// master view / layout
-// place the *things* here 
-// nothing component based
-
-// 480 up, big mobiles
-@media screen and (min-width: $break-tiny * 1px) {
-    @import 'views/views-mobile';
-}
-// portrait ipad
-@media screen and (min-width: $break-small * 1px) {
-    @import 'views/views-tablet';
-}
-
-@media screen and (min-width: $break-large * 1px) {
-    @import 'views/views-desktop';
-}
-
-// more custom media queries... for massive screens, inbetween sizes, et al... 
-@import 'views/views-exceptions';
-
+@import 'views/views-beta';

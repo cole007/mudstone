@@ -29,26 +29,63 @@
 // backgrond image class
 // forces image to take up all of the space
 // presuming the the background-image reference will come from the markup
-.bg-img {
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: 50%;
+// .u-bg {
+// 	background-size: cover;
+// 	background-repeat: no-repeat;
+// 	background-position: 50%;
+// 	display: block;
+// 	position: relative;
+// 	// min-height: 230px;
+// 	// &:before {
+// 	// 	content: " ";
+// 	// 	padding-top: gridCalc(1,2);
+// 	// 	display: block;
+// 	// }
+
+
+// 	color: $white;
+
+// 	&:before {
+// 		@include position(absolute, 0);
+// 		display: block;
+// 		background-color: rgba(129,129,129,.7);
+// 		content: " ";
+// 	}
+	
+
+
+// 	.panel {
+// 		background: none;
+// 		position: relative;
+// 		z-index: 1;
+// 	}
+// }
+
+
+
+.u-ir {
+	display: block;
+	text-indent: 150%;
+	overflow: hidden;
+	white-space: nowrap;
 }
+
 
 
 // helper classes
 
-.text-center {
+.u-text-center {
 	text-align: center;
 } 
 
-.text-left {
+.u-text-left {
 	text-align: left;
 }
 
-.text-right {
+.u-text-right {
 	text-align: right;
 }
+
 
 .center {
 	margin-left: auto;
@@ -67,10 +104,7 @@
 	display: none!important;
 }
 
-.video-wrap {
+.wrap {
 	position: relative;
 }
 
-.inline-wrap {
-	font-size: 0;
-}

@@ -17,7 +17,7 @@
 * Compile jade templates
 * Optimise css with Combine Media queries, uncss and csso
 * Critcal path css generator
-* Build directory for deployments
+* Build task for deployment directory
 * Watch with Browsersync for live reload and server
 * Google page insights 
 

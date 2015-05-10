@@ -18,7 +18,7 @@ gulp.task('svgSprite', function () {
             "mode": {
                 "css": {
                     "spacing": {
-                        "padding": 5
+                        "padding": 0
                     },
                     "dest": "./",
                     "layout": "diagonal",
@@ -41,7 +41,7 @@ gulp.task('pngSprite', ['svgSprite'], function() {
 	return gulp.src(config.svg.src)
 		.pipe(svg2png())
 		.on('error', handleErrors)
-		.pipe(gulp.dest(config.svg.dest + '/sprites'));
+		.pipe(gulp.dest(config.svg.pngDest));
 });
 
 // svg2png, svg sprite, png sprite

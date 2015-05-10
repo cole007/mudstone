@@ -8,7 +8,7 @@ var runSequence = require('run-sequence');
 
 gulp.task('jade', function() {
   var YOUR_LOCALS = {
-  	
+  	path: config.path
   };
 
   gulp.src(config.src)

@@ -1,58 +1,16 @@
 
 //   File: _assets/css/scss/libs/_libs-vars.scss
-
+    $website-url: '';
 
 // debugging
     $debug: false;
 
 // extends
 
-    $png-sprite: '../images/sprite.png';
+    $png-sprite: '../images/png-sprite.png';
     $svg-sprite: '../images/svg-sprite.svg';
 
 
-    $svgs: (
-        logo: (
-            width: 300,
-            height: 52
-        ),
-        step1: (
-            width: 595.29,
-            height: 456.2
-        ),
-        step2: (
-            width: 595.28,
-            height: 568.56
-        ),
-        step3: (
-            width: 595.28,
-            height: 492.979
-        ),
-        step4: (
-            width: 595.28,
-            height: 595.98
-        ),
-        step5: (
-            width: 595.28,
-            height: 531.179
-        ),
-        step6: (
-            width: 511.987,
-            height: 841.89
-        ),
-        step7: (
-            width: 595.28,
-            height: 555.961
-        ),
-        step8: (
-            width: 595.28,
-            height: 581.18
-        ),
-        step9: (
-            width: 595.28,
-            height: 373.789
-        )
-    );
 
 // Typography
 
@@ -63,34 +21,33 @@
     $browser-default-font-size:     16;
     $relative-font-sizing:          true;
 
-    $base-vr:  32;
+    $base-vr:  22;
 
 
     $magic-number:                  $base-line-height;
     $magic-ratio:                   $base-line-height / $base-font-size;
 // Grid
 
-    $base-max-width:        1245px; // width + padding - hmmm
+    $base-max-width:        1600px; // width + padding - hmmm
     $base-wrapper-width:    1205;
     $base-max-columns:      12;
     $base-column-width:     floor($base-max-width / $base-max-columns);
     $base-side-padding:     20px;
     $current_breakpoint:    base;
 
-    $base-padding: $base-line-height;
+    $base-padding: 20;
     $base-padding-half: $base-line-height / 2;
     
     $base-grid-gutter: 20px;
 
+
+    $column-width: 220;
+
+
+    $contain-padding: rem(70);
+
 // Objects on/off
 
-    $_use-nav:                  true;
-    $_use-btns:                 true;
-    $_use-definitions:          true;
-    $_use-forms:                true;
-    $_use-media-object:         true;
-    $_use-panels:               true;
-    $_use-wrapper:              true;
 
 
 
@@ -99,151 +56,86 @@
 
 // Button 
 
-    $buttons: (
-        large: (
-            height: 48,
-            line-height: 3,
-            font-size: 24
-        ),
-        small: (
-            height: 50,
-            line-height: 2.9,
-            font-size: 18
-        )
-    );
-    
-    $home-link-border: #1e1e1e;
-    $comment-border: #E4E2E0;
-    
+
 
 
 // Colours
 
     $white                  :#fff;
     $black                  :#000;
-    $base-grey: #666666;
-    $white-ish: #f1f1f1;
+    $base-grey: #706f6f;
 
     // http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
     // use eg palette(accent,light)
+
+    $orange: #F9B80C;
+    $green: #56950D;
+    $blue: #1AA6D5;
+    $tomato: #FC6A23;
+    $purple: #844CB6;
+    $navy: #2482AD;
+    $body: #F9F5F0;
+    $positive: #65AB14;
+    $payslip: #575B5F;
+
     $palettes: (
-        action: (
-          pagination: #a6adb2,
-          posted: #6c6c6c,
-          tags: #ededed,
-          fb: #39579a
-        ),
         bg: (
-          dark: #333333,
-          base: #4b4b4b,
-          light: #f3fcfc
-        ),
-        copy: (
-          base: #333333,
-          link: #d90066,
-          light: #f3f2f0,
-          title: #2b2b2b,
-          tags: #585858,
-          date: #999999
+          body: #e5e5e5,
+          dark: $base-grey,
+          light: #f2f2f2
         ),
         themes: (
-          teal:             #00bebe,
-          magenta:          #ff007d,
-          grey:             #505f69,
-          purple:           #500096,
-          blue:             #006ebe,
-          yellow:           #ffb900,
-          green:            #69c364,
-          red:              #d2003c,
-          orange:           #eb6e00
+          magenta:          #e5007e,
+          grey:             $base-grey
         ),
-        menu: (
-            parent: $white,
-            single: #f3fcfc,
-            child: #f3fcfc,
-            granchild: #d9f5f5,
-            subnav: #505f69
+        std: (
+            base: #4A90E2,
+            dark:  #267DE2
         ),
-        panel: (
-            success: #e7f5e7,
-            warning: #fff5d9
+        grey: (
+            grey1: #F0F0F0,
+            grey2: #C4C4C4,
+            grey3: #B6B6B6,
+            grey4: #757575,
+            grey5: #656565
         ),
-        form: (
-            error: #ef5052,
-            success: #00bebe,
-            track: #f3fcfc,
-            warning: #ffc72c
-        ),
-        social: (
-            facebook: #39579a,
-            twitter: #00abf0,
-            email: #00bebe,
-            youtube: #ef5052
+        custom: (
+            alpha: $orange,
+            beta: $green,
+            gamma: $blue,
+            delta: $tomato,
+            epsilon: $purple,
+            zeta: $navy 
         )
     );
-    
+
+
+    $themes: (
+        alpha: $orange,
+        beta: $green,
+        gamma: $blue,
+        delta: $navy,
+        epsilon: $tomato,
+        zeta: $purple 
+    );
+
+
     $beta: 52.5%;
     $gamma: 85%;
     $delta: 90%;
 
-    $themes: (
-      teal:             #00bebe,
-      magenta:          #ff007d,
-      purple:           #500096,
-      blue:             #006ebe,
-      yellow:           #ffb900,
-      green:            #69c364,
-      red:              #d2003c,
-      orange:           #eb6e00
-    );
 
     
 // Forms
 
-    $forms: (
-
-        input: (
-            height: 60px,
-            border: 1px solid #cdd1d6,
-            color: #666666,
-            font-size: 18,
-            padding: 20px
-        ),
-
-        label: (
-            color: #41464b,
-            font-size:  20
-
-        ),
-        select: (
-            background-color: $white,
-            btn-width: 40px
-        ),
-
-        textarea: (
-            height:   171px,
-            padding: 1,
-            color-off: #666666,
-            color-on:  #666666 
-        )
-
-    );
 
     $font-sizes: (
-        h1:             78,
-        h2:             50,
-        h3:             42,
-        h4:             30,
-        h5:             24,
-        h6:             20,
-        base:           $base-font-size,
-        menu_item:      $base-font-size,
-        search:         40,
-        meta:           14,
-        panel:          38,
-        caption:        15,
-        intro:          24,
-        signup:         16
+        h1:             44,
+        h2:             24,
+        h3:             20,
+        h4:             18,
+        h5:             16,
+        h6:             14
     );     
 
 // Layout

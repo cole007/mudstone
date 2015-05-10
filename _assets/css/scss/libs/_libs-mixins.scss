@@ -12,36 +12,23 @@
 
 @mixin font-type($font: 'base') {
   @if $font == bold {
-    font-family:"GothamRounded-Bold", sans-serif; 
-    letter-spacing: -0.05em;
-  } @else if $font == boldItalic {
-    font-family:"GothamRounded-BoldItalic", sans-serif; 
-  } @else if $font == light {
-    font-family:"GothamRounded-Light", sans-serif; 
-  } @else if $font == lightItalic {
-    font-family:"GothamRounded-LightItalic", sans-serif; 
-  } @else if $font == medium {
-    font-family:"GothamRounded-Medium", sans-serif; 
-    letter-spacing: -0.05em;
-  } @else if $font == mediumItalic {
-    font-family:"GothamRounded-MediumItalic", sans-serif; 
-  } @else if $font == fancy {
-    font-family:"Verveine-Regular", sans-serif;
+    font-family:"AvantGardeGothicITCW02Dm", sans-serif; 
+    font-weight: normal;
   } @else if $font == italic {
-    font-family:"GothamRounded-BookItalic";
+    font-family:"AvantGardeGothicITCW02BkObl", sans-serif; 
+    font-style: normal;
   } @else if $font == base {
-    font-family:"GothamRounded-Book";
-    
+    font-family:"AvantGardeGothicITCW01Bk", sans-serif; 
   }
 }
 
 
-@mixin std-border($position: all) {
+@mixin std-border($position: all, $color: palette(grey,grey2), $weight: rem(1), $style: solid) {
 
   @if $position == all {
-    border: 1px solid lighten(palette(themes,grey),50%);
+    border: $weight $style $color;
   } @else {
-    border-#{$position}: 1px solid lighten(palette(themes,grey),50%);
+    border-#{$position}: $weight $style $color;
   }
 
 }

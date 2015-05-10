@@ -3,7 +3,7 @@
 // - does not require a height, although a height can be used     
 
 @mixin font-size($font-size, $line-height: true) {  
-  font-size: $font-size * 1px;
+  //font-size: $font-size * 1px; - no ie8 support required
   font-size: ($font-size / $base-font-size) * 1rem;
   
   @if $line-height == true {
@@ -41,7 +41,7 @@
 
 
 // Font face mixin
-@mixin ff($font-family, $font-url, $font-name) {
+@mixin ff($font-family, $font-url, $font-name: null) {
   
     @font-face {
         font: {
@@ -52,8 +52,8 @@
         src: url($font-url + '/' + $font-name + '.eot');
         src: url($font-url + '/' + $font-name + '.eot?#iefix') format('embedded-opentype'), 
              url($font-url + '/' + $font-name + '.woff') format('woff'), 
-             url($font-url + '/' + $font-name + '.ttf')  format('truetype'),
-             url($font-url + '/' + $font-name + '.svg#' + $font-name) format('svg');
+             url($font-url + '/' + $font-name + '.ttf')  format('truetype');
+             //url($font-url + '/' + $font-name + '.svg#' + $font-name) format('svg');
     }
 }
 

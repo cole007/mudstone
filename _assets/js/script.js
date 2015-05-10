@@ -1,9 +1,0 @@
-$(function($){
-
-
-	mud.behaviour.init();
-
-	
-
-
-});

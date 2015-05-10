@@ -2,17 +2,19 @@
  * Enviroment variables, and output directories
  */
 var assets = './_assets/', 
-    build = './_build/',
+    build = './_assets/',
     root = './',
     env = 'dev',
-    outputStyle = 'expanded';
+    outputStyle = 'expanded',
+    assetPath = "/_assets/";
 /*
  * Update values based on environment
  */
 if(env === 'live') {
-    root = build;
     outputStyle = 'compressed';
-    assets = build + '_assets/';
+    assetPath = "/_build/";
+    build = './_dist/_build/';
+    root = '_dist'
 }
 /*
  * Site url used for page insights
@@ -40,14 +42,16 @@ var AUTOPREFIXER_BROWSERS = [
 module.exports = {
 
   browserSync: {
-        server: {
-            baseDir: "./"
-        }
+    server: {
+        baseDir: root,
+        directory: false
+    },
+    notify: false
   },
 
   sass: {
     src: assets + 'css/scss/style.scss',
-    dest: assets + 'css',
+    dest: build + 'css',
     prefix: AUTOPREFIXER_BROWSERS,
     watch: assets + 'css/scss/**/*.scss',
     options: {
@@ -58,39 +62,37 @@ module.exports = {
 
   images: {
     src: assets + 'images/site/*',
-    dest: assets + 'images'
+    dest: build + 'images'
   },
 
   scripts: {
     src: [
       assets + 'js/libs/jquery-1.11.2.min.js',
-      assets + 'js/libs/plugins.js',
-      assets + 'js/libs/overflow-polyfill/*.js',
+      assets + 'js/plugins/*.js',
       assets + 'js/application.js',
-      assets + 'js/behaviours/*.js',
-      assets + 'js/script.js'
+      assets + 'js/behaviours/*.js'
     ],
-    dest: assets + 'js/dist',
+    dest: build + 'js/dist',
     output: 'app.js',
-    hint:  assets + 'js/script.js'
+    hint:  assets + 'js/behaviours/*.js'
   },
 
   sprites: {
     data: assets + 'images/png-sprites/*.png',
-    imgName: 'sprite.png',
-    cssName: '_sprites.scss',
-    imgPath: '../images/sprite.png',
-    spriteDataImg: assets + 'images',
+    imgName: 'png-sprite.png',
+    cssName: '_png-sprites.scss',
+    imgPath: '../images/png-sprite.png',
+    spriteDataImg: build + 'images',
     spriteDataCss: assets + 'css/scss/gulp/'
   },
 
   svg: {
     src: assets + 'images/svg-sprites/*.svg',
-    dest: assets + 'images',
-    css: '../css/scss/gulp/_svg-sprites.scss',
+    dest: build + 'images',
+    css: '../../../_assets/css/scss/gulp/_svg-sprites.scss',
     sprite: 'svg-sprite.svg',
     template: assets + 'css/scss/_tpl/_sprite-template.scss',
-    pngs: 'sprites'
+    pngs: 'png-sprites'
   },
 
 
@@ -98,7 +100,6 @@ module.exports = {
     src: assets + 'images/svg-inline/*.svg',
     dest: assets + 'images/svg-inline/output/',
     file: assets + 'images/svg-inline/inline-svg.html',
-
   },
 
   icons: {
@@ -127,19 +128,32 @@ module.exports = {
   uncss: {
     css: assets + 'css/style.css', 
     html: root + '**/*.html',
-    dest: assets + 'css'
+    dest: build + 'css'
   },
 
   cmq: {
     css: assets + 'css/style.css',
-    dest: assets + 'css'
+    dest: build + 'css'
   },
 
   jade: {
     src: assets + 'jade/source/*.jade',
     watch: assets + 'jade/source/**/*.jade',
     dest: root,
+    path: assetPath,
     basedir: assets + 'jade/source'
+  },
+
+
+  build: {
+    js_src: [assets + 'js/libs/modernizr.touch.min.js'],
+    js_dest: build + 'js/libs/',
+    fonts_src: assets + 'fonts/*.*',
+    fonts_dest: build + 'fonts/',
+    images_src: assets + 'images/*.*',
+    images_dest: build + 'images/',
+    css_src: assets + 'css/*.css',
+    css_dest: build + 'css/'
   }
 
 };

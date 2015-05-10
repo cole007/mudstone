@@ -81,15 +81,12 @@
 
 @mixin child-of($n, $m) {
     $child: $n;
-    $children: $m - 1;
+    $children: $m;
     &:nth-child(#{$n}):nth-last-child(#{$children}) {
         @content;
     }
-
 }
-
-
-    
+   
 
 //    markup
 //    

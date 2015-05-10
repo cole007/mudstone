@@ -24,6 +24,15 @@
 }
 
 
+// Sprite 
+@function sprite-spacing($sprite, $property: width, $excess: 0) {
+	$ext: if($property == width, 5, 6);
+	// 5 == width
+	// 6 == height
+	$spacing:  nth($sprite, 5);
+	@return $spacing + $excess;
+}
+
 
 @mixin sprite-file() {
     background: url($png-sprite) no-repeat;
@@ -67,6 +76,16 @@
 		width: map-get($svg-props, width);
 		height: map-get($svg-props, height);  
 	}
+}
+
+@mixin svg-height($sprite) {
+	$svg-props: svg-attr($sprite);
+	height: map-get($svg-props, height);  
+}
+
+@mixin svg-width($sprite) {
+	$svg-props: svg-attr($sprite);
+	width: map-get($svg-props, width);  
 }
 
 @mixin svg-position($sprite) {
