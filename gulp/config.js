@@ -1,7 +1,7 @@
 /*
  * Enviroment variables, and output directories
  */
-var assets = './_assets/', 
+var assets = './_assets/',
     build = './_assets/',
     root = './',
     env = 'dev',
@@ -12,8 +12,8 @@ var assets = './_assets/',
  */
 if(env === 'live') {
     outputStyle = 'compressed';
-    assetPath = "/_build/";
-    build = './_dist/_build/';
+    assetPath = "/_assets/";
+    build = '/_dist/_assets/';
     root = '_dist';
 }
 /*
@@ -25,7 +25,7 @@ var url = '';
  * Autoprefix browser suppport
  */
 var AUTOPREFIXER_BROWSERS = [
-      'ie >= 10',
+      'ie >= 9',
       'ie_mob >= 10',
       'ff >= 30',
       'chrome >= 34',
@@ -33,7 +33,7 @@ var AUTOPREFIXER_BROWSERS = [
       'opera >= 23',
       'ios >= 7',
       'android >= 4.4',
-      'bb >= 10' 
+      'bb >= 10'
     ];
 /*
  * module exports
@@ -110,13 +110,13 @@ module.exports = {
     targetPath: '../css/scss/gulp/_icon-font.scss',
     fontPath: '../fonts/'
   },
-  
+
   html: {
     src: root + '**/*.html',
     build: assets + 'templates/dest/*.html',
     dest: root
   },
-  
+
   env: env,
 
   psi : {
@@ -126,7 +126,7 @@ module.exports = {
   },
 
   uncss: {
-    css: assets + 'css/style.css', 
+    css: assets + 'css/style.css',
     html: root + '**/*.html',
     dest: build + 'css'
   },
