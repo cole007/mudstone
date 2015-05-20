@@ -1,8 +1,8 @@
-//
+// utils
 @import 'utils/utils';
 
 // base
-@import 'base/type', 
+@import 'base/type',
 				'base/forms',
 				'base/tables',
 				'base/buttons',
@@ -11,14 +11,14 @@
 
 // layout
 
-@import 'layout/header', 
+@import 'layout/header',
 				'layout/footer',
 				'layout/structure';
 
 // modules
 
-@import 'modules/panels',	
-				'modules/accordions', 
+@import 'modules/panels',
+				'modules/accordions',
 				'modules/slides',
 				'modules/hero',
 				'modules/tabs';

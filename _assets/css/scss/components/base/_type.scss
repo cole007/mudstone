@@ -1,18 +1,18 @@
 // /*
 //  ==============================================================
-//  Typography 
+//  Typography
 //  ==============================================================
 //  */
 
+//@include baseline();
 
 html {
-    font-size: $base-font-size / $browser-default-font-size + em; 
-    line-height: $base-line-height / $base-font-size; 
+    @include font-baseline();
 }
 
 body {
 	@include font-type('base');
-	@include font-size(16,23);
+	@include font-size($base-font-size);
 	font-style: normal;
 	font-weight: normal;
 	-webkit-font-smoothing: subpixel-antialiased;
@@ -20,68 +20,59 @@ body {
 }
 
 
-
-
 h1,.heading-1 {
-	@include font-size(32,37);
 	@include font-type(bold);
-	margin: 0 0 r(2);
+	@include font-size(size(h1));
+	margin: 0 0 gutter(1);
 }
 
 
-// h2,.heading-2 {
-	
-// 	@include font-size(28,34);
-// 	@include font-type(bold);
-// 	margin: 0 0 r(1);
-// }
+h2,.heading-2 {
+	@include font-type(bold);
+	@include font-size(size(h2));
+	margin: 0 0 gutter(1);
+}
 
-// h3,.heading-3 {
-// 	@include font-size(24,29);
-// 	@include font-type(bold);
-// 	margin: 0 0 r(1);
-// }
+h3,.heading-3 {
+	@include font-type(bold);
+	@include font-size(size(h3));
+	margin: 0 0 gutter(1);
+}
 
+h4,.heading-4 {
+	@include font-type(bold);
+	@include font-size(size(h4));
+	margin: 0 0 gutter(1);
+}
 
-// h4,.heading-4 {
-// 	@include font-size(16,23);
-// 	margin: 0;
-// }
+h5,.heading-5 {
+	@include font-type(bold);
+	@include font-size(size(h5));
+	margin: 0 0 gutter(1);
+}
 
+h6,.heading-6 {
+	@include font-type(bold);
+	@include font-size(size(h6));
+	margin: 0 0 gutter(1);
+}
 
-// h5,.heading-5 {
-// 	@include font-size(fs(h5),25);
-// 	margin: 0 0 r(0.5);
-// }
+p {
+	margin: 0 0 gutter(1);
+}
 
+strong,b {
+	font-weight: normal;
+	@include font-type(bold);
+}
 
-// h6,.heading-6 {
-// 	@include font-size(fs(h6),20);
-// 	@include font-type('medium');
-// 	margin: 0 0 r(0.5);
-// 	font-weight: normal;
-// }
-
-// p {
-// 	margin: 0 0 r(1);
-// }
-
-// strong,b {
-// 	//font-weight: normal;
-// 	//@include font-type(bold);
-// }
-
-// em {
-// 	//@include font-type(italic);
-// }
+em {
+	font-style: normal;
+	@include font-type(italic);
+}
 
 
-// p,li {
-// 	//@include font-size(16,22);
-// }
-
-
-// a {
-// 	text-decoration: none;
-// 	color: inherit;
-// }
+a {
+	text-decoration: none;
+	color: inherit;
+}

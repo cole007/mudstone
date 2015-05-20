@@ -1,15 +1,100 @@
-// .u-bg {
-// 	background-size: cover;
-// 	background-repeat: no-repeat;
-// 	background-position: 50%;
+
+// vertical align helper class
+// <div class="u-va">
+//   <div class="u-va__item"></div>
+// </div>
+
+// .u-va {
+// 	height: 100%; // make sure the element takes up all of the available heights... or not
+// 	position: relative;
+// 	font-size: 0; // remove white space
+// 	&:before {
+// 		width: 0;
+// 		height: 100%;
+// 		content: " ";
+// 	}
+// 	&:before,
+// 	&__item {
+// 		display: inline-block;
+// 		vertical-align: middle;
+// 	}
+// 	&__item {
+// 		//max-width: 95%; // stops the element from dropping out of view in smaller areas
+// 		margin: auto;
+// 	}
 // }
 
-// .u-overlay {
-// 	position: relative;
+// backgrond image class
+// forces image to take up all of the space
+// presuming the the background-image reference will come from the markup
+// 	.u-bg {
+// 		background-size: cover;
+// 		background-repeat: no-repeat;
+// 		background-position: 50%;
+// 		display: block;
+// 		position: relative;
+//	}
+//
+
 // 	&:before {
 // 		@include position(absolute, 0);
 // 		display: block;
 // 		background-color: rgba(129,129,129,.7);
 // 		content: " ";
 // 	}
+
+
+
+// 	.panel {
+// 		background: none;
+// 		position: relative;
+// 		z-index: 1;
+// 	}
 // }
+
+// image replacement
+
+// .u-ir {
+// 	display: block;
+// 	text-indent: 150%;
+// 	overflow: hidden;
+// 	white-space: nowrap;
+// }
+
+
+// helper classes
+
+// .u-text-center {
+// 	text-align: center;
+// }
+
+// .u-text-left {
+// 	text-align: left;
+// }
+
+// .u-text-right {
+// 	text-align: right;
+// }
+
+
+// .center {
+// 	margin-left: auto;
+// 	margin-right: auto;
+// }
+
+// .left {
+// 	float: left;
+// }
+
+// .right {
+// 	float: right;
+// }
+
+// .hidden {
+// 	display: none!important;
+// }
+
+// .wrap {
+// 	position: relative;
+// }
+

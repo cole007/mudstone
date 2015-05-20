@@ -1,19 +1,19 @@
 //    File: _assets/css/scss/style.scss
 //
 //    Use spaces not tabs
-// 
+//
 //    # Selectors
 //
 //    One selector per line, One rule per line
 //    Don't use IDs as selectors
 //    Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container
-//    Use BEM syntax:  
-//        Block 
+//    Use BEM syntax:
+//        Block
 //        Block__element
-//        Block--modifier 
+//        Block--modifier
 //
 //    # Properties
-// 
+//
 //    List related properties together
 //    If the value of the width or height is 0, do not specify units
 //    Avoid magic numbers, eg numbers used as  quick fixes on a one-off basis
@@ -42,33 +42,31 @@ $ie: false;
 // using  node-bourbon, see ./gulp/config.js
 @import "bourbon";
 
-
 // gulp generated scss
-@import 'gulp/png-sprites';
-@import 'gulp/svg-sprites';
-@import 'gulp/icon-font';
+@import 'gulp/png-sprites',
+				'gulp/svg-sprites',
+				'gulp/icon-font';
+
 
 // Libraries and dependencies
-@import 'libs/libs-reset';
-@import 'libs/libs-vars';
-// help mixins
-// tools
-@import 'tools/tools-functions';
-//@import 'tools/tools-grid';
-@import 'tools/tools-easing';
-@import 'tools/tools-helpers';
-@import 'tools/tools-images';
-@import 'tools/tools-layout';
-@import 'tools/tools-type';
+@import 'libs/libs-reset',
+				'libs/libs-vars';
+
+// tools - mixins and functions
+// these shouldn't need to be changed
+@import 'tools/tools-functions',
+				'tools/tools-easing',
+				'tools/tools-helpers',
+				'tools/tools-images',
+				'tools/tools-layout',
+				'tools/tools-type';
 
 // project specific mixins
 @import 'libs/libs-mixins';
 
-// external libraries go here
-// @import 'libs-gridset';
-@import 'libs/libs-utils';
-@import 'views/views-core';
+// views and components
+@import 'views/views-core',
+				'components/manifest';
 
-@import 'components/manifest';
-
+// beta, remove before deploying to production
 @import 'views/views-beta';

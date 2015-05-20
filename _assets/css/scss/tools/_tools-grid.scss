@@ -1,4 +1,7 @@
-
+/*
+ Helper functions to be used with gridset
+ Makes gridset a little DRYer
+*/
 
 // return the column width minus gutter
 @function gs-width-no-marin($grid, $start, $end: false, $container: false, $unit: false) {
@@ -7,7 +10,7 @@
   @if $unit = true {
     $output: $output * 1%;
   }
-  @return $output; 
+  @return $output;
 }
 
 
@@ -28,7 +31,7 @@
 
 // use mixin as a modifier, does not include the margin-right value;
 @mixin gs-col($grid, $start, $end: false, $container: false, $ie: false) {
-    margin-left: gs-marginleft($grid, $start, $container, true);  
+    margin-left: gs-marginleft($grid, $start, $container, true);
     width: gs-width($grid, $start, $end, $container, true);
 }
 
@@ -41,13 +44,13 @@
   @else {
     $marginright: -100%;
     @if ($ie == ie) or ($ie == true) { $marginright: -99.9%; }
-    margin-left: gs-marginleft($grid, $start, $container, true);  
+    margin-left: gs-marginleft($grid, $start, $container, true);
     margin-right: $marginright;
     width: gs-width($grid, $start, $end, $container, true);
   }
 }
 
-// 
+//
 @mixin gs-no-gutters($grid, $start, $end: false, $container: false, $ie: false) {
   width: gs-width-no-marin($grid, $start, $end: false, $container: false, $unit: false);
 }
@@ -58,7 +61,6 @@
   width: gs-width-no-marin($grid, $start, $end: false, $container: $container, $unit: false);
   margin-right: gs-gutter($grid, $container, true);
 }
-
 
 
 @mixin gs-padding($grid, $container, $units) {
@@ -73,275 +75,9 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
-  Grid Mixins
-
+  Custom grid functions
 */
 
-$grid-settings : (
-  container: 1200px,
-  columns: 12,
-  gutter: 20px,
-  gutter-side: left,
-  gutter-type: padding,
-  direction: left,
-  padding-style: fixed,
-  output: float,
-  math: 'fraction'
-);
 
-$grid-justify-settings : (
-  container: 1098px,
-  columns: 12,
-  gutter: 15px,
-  gutter-side: left,
-  gutter-type: padding,
-  direction: left,
-  padding-style: fixed,
-  output: justify,
-  align: left
-);
-
-
-$grid-default-columns: map-get($grid-settings,columns);
-$grid-default-gutter: map-get($grid-settings,gutter);
-$grid-default-gutter-side: map-get($grid-settings,gutter-side);
-$grid-default-gutter-type: map-get($grid-settings,gutter-type);
-
-@mixin wrapper($map: $grid-settings) {
-  max-width: map-get($map,container);
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-// grid wapper mixin
-// used for clearing column margins/padding or ustify grid layout
-
-@mixin grid-wrapper($map: $grid-settings) {
-
-  // initalize gutter value
-  $g:  map-get($map, gutter);
-
-  // get the output style, float, inline, jusify
-  $output: map-get($map, output);
-
-  // include clearfix if it's a float
-  @if $output == float {
-    @include clearfix();
-  }
-
-  $gutter-type: map-get($map,gutter-type);
-  $gutter: map-get($map,gutter);
-  $gutter-side: map-get($map,gutter-side);
-
-  // if the gutter type is margin we need to convert the px value into a percentage
-
-  @if $gutter-type == margin {
-    $g: gridCalc($gutter, map-get($map,container));
-  } @else {
-    // otherwise just use the px value
-    $g: $gutter;
-  }
-
-
-  @if $output != justify {
-    // clear both sides gutter
-    margin-left: -$g;
-  }
-
-
-
-
-  // inline-block, reset font-size to 0
-  @if $output == inline or $output == justify {
-    font-size: 0;
-  }
-  // justify, add the justify properties
-  @if $output == justify {
-    text-align: justify;
-    &:after {
-      display: inline-block;
-      width: 100%;
-      content: " ";
-    }
-    // reset child element text-align
-    & > div {
-      text-align: map-get($map,align);
-    }
-  }
-
-
-
-}
-
-@function column-width($x,$y,$excess: 0,$map:$grid-settings) {
-  $excess-width: if($excess == 0, 0, gridCalc($excess,map-get($map,container)));
-  $width: gridCalc($x,$y) - $excess-width;
-  @return $width;
-}
-
-
-@mixin grid-column($columns: 1 of $grid-default-columns, $with: 30px padding right, $map: $grid-settings, $render: true) {
-
-  $x: nth($columns,1);
-  $y: map-get($map,columns);
-  $center: null;
-  $output: map-get($map, output);
-  $width: null;
-  $gutter: map-get($map,gutter);
-  $gutter-type: map-get($map,gutter-type);
-  $gutter-side: map-get($map,gutter-side);
-  $math: map-get($map,math);
-
-  // 1 value argument, 
-  // uses the default total columns, i.e. 12
-  @if length($columns) >= 1 {
-    // set the width value
-    $width: gridCalc($x,$y);
-  }
-
-  @if length($columns) == 4 {
-    $center: nth($columns,4); 
-  }
-
-  // if more than 1 arugment
-  @if length($columns) > 1 {
-    // if three arguments have been passed we want to use the 3 value as the total columns
-    // 1 of 12
-    @if length($columns) == 3 {
-      // get the third value from the columns list
-      $y: nth($columns,3);
-      // reset the width value
-      $width: gridCalc($x,$y);
-    }
-  }
-
-  // if render is true
-  // if we just want the width outputted we can set render to false
-  @if $render == true {
-
-    @if length($with) >= 1 {
-      $gutter: nth($with, 1);
-    }
-    @if length($with) > 1 {
-      $gutter-type: nth($with, 2);
-    }
-    @if length($with) == 3 {
-      $gutter-side: nth($with, 3);
-    }
-
-    // if zero is passed in we wont' add any gutters, not even 0 zalues
-    @if $gutter != 0 {
-
-      // if the gutter type is margin we need to adjust the width value
-      @if $gutter-type == margin {
-        // get the wrapper width, used for calculating a px margin value into a percetange
-        // margins must be outputted as percentages
-        $wrapper: map-get($map,container);
-        // set the gutter value
-        $gutter: gridCalc($gutter, $wrapper);
-        //  remove the gutter value from the overal width
-        $width: gridCalc($x,$y) - $gutter;
-
-        @if $gutter-side == left {
-          margin-left: $gutter;
-        }
-
-        @if $gutter-side == right {
-          margin-right: $gutter;
-        }
-
-        @if $gutter-side == both {
-          margin-left: $gutter / 2;
-          margin-right: $gutter / 2;
-        }
-
-      } @else {
-
-        @if $gutter-side == left {
-          padding-left: $gutter;
-        }
-
-        @if $gutter-side == right {
-          padding-right: $gutter;
-        }
-
-        @if $gutter-side == both {
-          padding-left: $gutter / 2;
-          padding-right: $gutter / 2;
-        }
-
-      } // end of gutter type conditional
-    }
-
-    // if we are not centering the content
-    // add the float/display style
-    @if $center == null {
-
-      @if $output == float {
-        float: map-get($map, direction);
-      }
-
-      @if $output == inline or $output == justify {
-        display: inline-block;
-        vertical-align: top;
-      }
-
-    } @else {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-  // set the width 
-  width: $width;
-}
-
-$list: 1 2 3 4 5 6 7 8 9 10 11 12;
-
-@each $i in $list {
-  .box--#{$i} {
-    @include grid-column(1 of $i, $render: false);
-  }
-}
-
-
-//@mixin sort-order($columns: 1 of 3 from 4) {
-//  $x: nth($columns,1);
-//  $y: nth($columns,3);
-//  $pos: nth($columns,5);
-//
-//  width: column-width($x,$y);
-//  float: left;
-//
-//  $margin: ($pos - 1) * column-width($x,$y);
-//
-//  $direction: map-get($grid-settings,direction);
-//  $reverse: opposite($direction);
-//
-//  margin-#{$direction}: $margin;
-//  margin-#{$reverse}: -100%;
-//
-//}
 

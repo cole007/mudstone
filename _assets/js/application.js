@@ -1,11 +1,11 @@
  /*
  * JavaScript Debug - v0.4 - 6/22/2010
  * http://benalman.com/projects/javascript-debug-console-log/
- * 
+ *
  * Copyright (c) 2010 "Cowboy" Ben Alman
  * Dual licensed under the MIT and GPL licenses.
  * http://benalman.com/about/license/
- * 
+ *
  * With lots of help from Paul Irish!
  * http://paulirish.com/
  */
@@ -22,14 +22,14 @@ window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g
 //   html.className = html.className.replace(' wf-loading', ' wf-fail');
 // }, 1500);
 
- 
+
 // var WebFontConfig = {
 //     typekit: {
 //       id: 'wit0jva'
 //     }
 // };
 
-// /** 
+// /**
 //  * Load external fonts
 //  */
 // (function() {
@@ -40,7 +40,7 @@ window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g
 //     wf.type = 'text/javascript';
 //     wf.async = 'true';
 //     var s = document.getElementsByTagName('script')[0];
-//     s.parentNode.insertBefore(wf, s); 
+//     s.parentNode.insertBefore(wf, s);
 // })();
 
 (function($,sr){
@@ -72,28 +72,25 @@ window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g
 
 // https://github.com/cowboy/jquery-tiny-pubsub
 (function($) {
- 
+
   var o = $({});
- 
+
   $.subscribe = function() {
     o.on.apply(o, arguments);
   };
- 
+
   $.unsubscribe = function() {
     o.off.apply(o, arguments);
   };
- 
+
   $.publish = function() {
     o.trigger.apply(o, arguments);
   };
- 
+
 }(jQuery));
 
 
-
-
-
-/** 
+/**
  * Method used to create an object based on input string
  * @method namespace
  * @param  {String} namespaceString dot notation of object representation
@@ -105,28 +102,27 @@ function namespace(namespaceString) {
   "use strict";
   var parts = namespaceString.split('.'),
     parent = window,
-    currentPart = '';    
-    
+    currentPart = '';
+
   for(var i = 0, length = parts.length; i < length; i++) {
     currentPart = parts[i];
     parent[currentPart] = parent[currentPart] || {};
     parent = parent[currentPart];
   }
-  
+
   return parent;
 }
 
- 
 var mud = namespace('mud.Application.Site');
 
 /**
  * Module to hold behaviours
- * @module mrb
+ * @module mud
  * @submodule Behaviours
  */
 mud.Behaviours = {};
 
-/** 
+/**
  * Method used to create an object based on input string
  * @method  mud.loadBehaviour
  * @param  {String} context Context within dom that behaviour will look at
@@ -135,11 +131,11 @@ mud.Behaviours = {};
  * this could be call specifically on a DOM element e.g. mud.loadBehaviour($('#myElement'))
  */
 mud.loadBehaviour = function(context){
- 
+
     if(context === undefined){
         context = $(document);
     }
-     
+
     // iterate through each element with $('[data-behaviour]') in DOM
     context.find("*[data-behaviour]").each(function(){
         // assign to variable
@@ -167,11 +163,11 @@ mud.loadBehaviour = function(context){
     });
 };
 
-/** 
- * Method used to call mrb.loadBehaviour
- * @method mrb.onReady
+/**
+ * Method used to call mud.loadBehaviour
+ * @method mud.onReady
  * @example
- * mrb.onReady()
+ * mud.onReady()
  */
 mud.onReady = function(){
     // onready call LoadBehaviour

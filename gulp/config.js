@@ -67,7 +67,7 @@ module.exports = {
 
   scripts: {
     src: [
-      assets + 'js/libs/jquery-1.11.2.min.js',
+      assets + 'js/vendor/jquery-1.11.3.min.js',
       assets + 'js/plugins/*.js',
       assets + 'js/application.js',
       assets + 'js/behaviours/*.js'

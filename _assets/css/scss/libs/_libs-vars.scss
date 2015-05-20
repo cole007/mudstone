@@ -1,148 +1,84 @@
-
-//   File: _assets/css/scss/libs/_libs-vars.scss
-    $website-url: '';
-
 // debugging
-    $debug: false;
+$debug: false;
 
-// extends
-
-    $png-sprite: '../images/png-sprite.png';
-    $svg-sprite: '../images/svg-sprite.svg';
-
-
+// images
+$png-sprite:                    '../images/png-sprite.png';
+$svg-sprite:                    '../images/svg-sprite.svg';
 
 // Typography
+$base-font-size:                16;
+$base-line-height:              24;
+$browser-default-font-size:     16;
+$magic-number:                  $base-line-height;
+$magic-ratio:                   $base-line-height / $base-font-size;
 
-    $base-font-size:                16;
-    $base-line-height:              22;
-    $rhythm-base-font-size:         18px;
-    $rhythm-unit:                   rem;
-    $browser-default-font-size:     16;
-    $relative-font-sizing:          true;
+// Scaling Variables
+$golden:                        1.618;
+$minor-second:                  1.067;
+$major-second:                  1.125;
+$minor-third:                   1.2;
+$major-third:                   1.25;
+$perfect-fourth:                1.333;
+$augmented-fourth:              1.414;
+$perfect-fifth:                 1.5;
+$minor-sixth:                   1.6;
+$major-sixth:                   1.667;
+$minor-seventh:                 1.778;
+$major-seventh:                 1.875;
+$octave:                        2;
+$major-tenth:                   2.5;
+$major-eleventh:                2.667;
+$major-twelfth:                 3;
+$double-octave:                 4;
 
-    $base-vr:  22;
+// units added later
+$modular-scale-ratio:           $major-third;
+$modular-scale-base:            $base-font-size;
 
+$font-size: (
+    h1:                         modular-scale(6),
+    h2:                         modular-scale(5),
+    h3:                         modular-scale(4),
+    h4:                         modular-scale(3),
+    h5:                         modular-scale(2),
+    h6:                         modular-scale(1)
+);
 
-    $magic-number:                  $base-line-height;
-    $magic-ratio:                   $base-line-height / $base-font-size;
 // Grid
-
-    $base-max-width:        1600px; // width + padding - hmmm
-    $base-wrapper-width:    1205;
-    $base-max-columns:      12;
-    $base-column-width:     floor($base-max-width / $base-max-columns);
-    $base-side-padding:     20px;
-    $current_breakpoint:    base;
-
-    $base-padding: 20;
-    $base-padding-half: $base-line-height / 2;
-    
-    $base-grid-gutter: 20px;
-
-
-    $column-width: 220;
-
-
-    $contain-padding: rem(70);
-
-// Objects on/off
-
-
-
+$base-max-width:                1600px;
+$base-max-columns:              12;
+$current_breakpoint:            base;
+$base-padding:                  modular-scale(1);
 
 // Counter
-    $counter: counter;
-
-// Button 
-
-
-
+$counter:                       counter;
 
 // Colours
+$white:                         #fff;
+$black:                         #000;
+$base-grey:                     #706f6f;
 
-    $white                  :#fff;
-    $black                  :#000;
-    $base-grey: #706f6f;
-
-    // http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
-    // use eg palette(accent,light)
-
-    $orange: #F9B80C;
-    $green: #56950D;
-    $blue: #1AA6D5;
-    $tomato: #FC6A23;
-    $purple: #844CB6;
-    $navy: #2482AD;
-    $body: #F9F5F0;
-    $positive: #65AB14;
-    $payslip: #575B5F;
-
-    $palettes: (
-        bg: (
-          body: #e5e5e5,
-          dark: $base-grey,
-          light: #f2f2f2
-        ),
-        themes: (
-          magenta:          #e5007e,
-          grey:             $base-grey
-        ),
-        std: (
-            base: #4A90E2,
-            dark:  #267DE2
-        ),
-        grey: (
-            grey1: #F0F0F0,
-            grey2: #C4C4C4,
-            grey3: #B6B6B6,
-            grey4: #757575,
-            grey5: #656565
-        ),
-        custom: (
-            alpha: $orange,
-            beta: $green,
-            gamma: $blue,
-            delta: $tomato,
-            epsilon: $purple,
-            zeta: $navy 
-        )
-    );
+$palettes: (
+    bg: (
+      body:                     #e5e5e5,
+      dark:                     $base-grey,
+      light:                    #f2f2f2
+    ),
+    themes: (
+      magenta:                  #e5007e,
+      grey:                     $base-grey
+    ),
+    std: (
+        base:                   #4A90E2,
+        dark:                   #267DE2
+    ),
+);
 
 
-    $themes: (
-        alpha: $orange,
-        beta: $green,
-        gamma: $blue,
-        delta: $navy,
-        epsilon: $tomato,
-        zeta: $purple 
-    );
-
-
-    $beta: 52.5%;
-    $gamma: 85%;
-    $delta: 90%;
-
-
-    
-// Forms
-
-
-    $font-sizes: (
-        h1:             44,
-        h2:             24,
-        h3:             20,
-        h4:             18,
-        h5:             16,
-        h6:             14
-    );     
-
-// Layout
-
-    $break-tiny             :480;
-    $break-small            :768;
-    $break-nexus            :962;
-    $break-large            :1024;
-    $break-massive          :1200;
+// Breakpoints
+$break-tiny:                    480;
+$break-small:                   768;
+$break-nexus:                   962;
+$break-large:                   1024;
+$break-massive:                 1200;
 

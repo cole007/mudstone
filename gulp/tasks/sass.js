@@ -1,5 +1,5 @@
 /*
- * sass 
+ * sass
  * compile scss with libsass
  */
 
@@ -35,8 +35,8 @@ gulp.task('sass', function () {
         includePaths: require('node-bourbon').includePaths
       }
     ))
-    .pipe(autoprefixer(config.prefix)) // doesn't play nice with sourcemaps
     .on('error', handleErrors)
+    .pipe(autoprefixer(config.prefix)) // doesn't play nice with sourcemaps
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.dest))

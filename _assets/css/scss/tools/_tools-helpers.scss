@@ -2,16 +2,16 @@
   ::-webkit-input-placeholder {
      @content;
   }
-  
+
   :-moz-placeholder { /* Firefox 18- */
      @content;
   }
-  
+
   ::-moz-placeholder {  /* Firefox 19+ */
      @content;
   }
-  
-  :-ms-input-placeholder {  
+
+  :-ms-input-placeholder {
      @content;
   }
 }
@@ -21,6 +21,7 @@
   opacity: 0;
   width: 0;
   height: 0;
+  float: left; // take out of the flow
 }
 
 // call on the input (radio/checkbox)
@@ -28,16 +29,16 @@
 
 	// hide the default radio input
 	// opacity: 0;
-	// create a radio button style using the 
+	// create a radio button style using the
 	& + label:#{$position} {
 		content: " ";
-		@content;		
+		@content;
 	}
 }
 
 // call on the input (radio/checkbox) for the checked state
 @mixin fancy-input-checked($target: before) {
-	
+
 	&:checked + label:before {
 		@content;
 	}
@@ -52,8 +53,8 @@
   $min: null;
   $max: null;
   $break: null;
-  
-  
+
+
   // ouput in media query for non ie css
 
     @if type-of($bp) == list {
@@ -143,7 +144,7 @@
   }
 }
 
-// taken from 
+// taken from
 // https://github.com/at-import/toolkit/blob/2.x.x/stylesheets/toolkit/_triangle.scss
 @mixin triangle($color: null, $height: null, $width: null, $angle: null) {
 
@@ -175,7 +176,7 @@
   @if $angle == "top left" {
     $angle: 45 * 5;
   }
-  // 
+  //
   // @if unit($height) == "" or unit($height) == "%" {
   //   @debug "in triangle #{$height} is not a compatible unit for height."
   // }
@@ -237,7 +238,7 @@
     background-position: 0 $line-height;
     background-size: $weight $weight;
 }
-        
+
 
 
 
@@ -276,8 +277,8 @@
 // Sass (v3.4.7)
 // Compass (v1.0.1)
 // ----
- 
- // thanks to @ericmsuzanne for this function 
+
+ // thanks to @ericmsuzanne for this function
 @function map-set($map, $key, $value) {
   $new: ($key: $value);
   @return map-merge($map, $new);
@@ -308,7 +309,7 @@
 //  .sub-menu {
 //    @include obj($menu-object, 'core');
 //  }
-// called from within the desktop breakpoint file 
+// called from within the desktop breakpoint file
 //  .side-menu {
 //    @include obj($menu-object, 'desktop');
 //  }
@@ -363,7 +364,7 @@ $extend : ();
       @at-root {
         // create the placeholer class
         %#{$placeholder} {
-          // loop through the map values, 
+          // loop through the map values,
           @each $i in $map {
             // nth(1) == property
             $a: nth($i,1);

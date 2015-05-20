@@ -4,37 +4,26 @@
         See https://github.com/thoughtbot/bourbon
 */
 
-//  Heleprs
-
-
-// Typography
-
-
 @mixin font-type($font: 'base') {
   @if $font == bold {
-    font-family:"AvantGardeGothicITCW02Dm", sans-serif; 
+    font-family:"AvantGardeGothicITCW02Dm", sans-serif;
     font-weight: normal;
   } @else if $font == italic {
-    font-family:"AvantGardeGothicITCW02BkObl", sans-serif; 
+    font-family:"AvantGardeGothicITCW02BkObl", sans-serif;
     font-style: normal;
   } @else if $font == base {
-    font-family:"AvantGardeGothicITCW01Bk", sans-serif; 
+    font-family:"AvantGardeGothicITCW01Bk", sans-serif;
   }
 }
 
 
-@mixin std-border($position: all, $color: palette(grey,grey2), $weight: rem(1), $style: solid) {
-
+@mixin std-border($position: all, $color: $base-grey, $weight: 1px, $style: solid) {
   @if $position == all {
     border: $weight $style $color;
   } @else {
     border-#{$position}: $weight $style $color;
   }
-
 }
 
 
-// Layout
 
-
-   

@@ -1,23 +1,23 @@
 
-// // boilerplate form styles
-// // core block styles
-// // input reset
-// input[type="submit"],
-// input[type="search"],
-// input[type=number]::-webkit-inner-spin-button,
-// input[type=number]::-webkit-outer-spin-button {
-//     -moz-appearance: none;
-//     -webkit-appearance: none;
-//     appearance: none;
-//     border-radius: 0;
-// }
+// boilerplate form styles
+// core block styles
+// input reset
+input[type="submit"],
+input[type="search"],
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
 
-// input,select {
-//   -moz-appearance: none;
-//   -webkit-appearance: none;
-//   appearance: none;
-// 	border-radius: 0;
-// }
+input,select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+	border-radius: 0;
+}
 
 
 // select:focus,
@@ -25,8 +25,85 @@
 // 	outline: 0;
 // }
 
-// // remove border and margin from fieldsets
-// fieldset {
-// 	margin: 0;	
-// 	border: 0;
-// }
+// remove border and margin from fieldsets
+fieldset {
+	margin: 0;
+	border: 0;
+}
+
+
+.form__input {
+
+}
+
+.form__label {
+
+}
+
+.form__textarea {
+
+}
+
+.form__select {
+	position: relative;
+
+	// use pseudo elements to cover native dropdown
+	&:before,
+	&:after {
+		content: " ";
+	}
+
+	// reset the select element
+	select {
+
+	}
+}
+
+
+.form__toggle {
+	@include reset-input();
+
+	& + label {
+		&:before {
+			content: " ";
+		}
+	}
+}
+
+.form__toggle--radio {
+	& + label {
+		&:before {
+			width: 30px;
+			height: 30px;
+			border-radius: 100%;
+			border: 1px solid $base-grey;
+			display: inline-block;
+		}
+	}
+	// checked sate
+	&:checked + label {
+		&:before {
+
+		}
+	}
+}
+
+.form__toggle--check {
+	& + label {
+		&:before {
+			width: 30px;
+			height: 30px;
+			border: 1px solid $base-grey;
+			display: inline-block;
+		}
+	}
+
+	// checked sate
+	&:checked + label {
+		&:before {
+
+		}
+	}
+}
+
+

@@ -3,8 +3,8 @@
 */
 // Typography
 
-@function fs($size) {
-	@return map-get($font-sizes, $size);
+@function size($size) {
+	@return map-get($font-size, $size);
 }
 
 @function computeLineHeight($font-size, $computed) {
@@ -12,9 +12,9 @@
   @return $computed / $fs;
 }
 
-// Map helpers 
+// Map helpers
 
-// thanks to @ericmsuzanne for this function 
+// thanks to @ericmsuzanne for this function
 @function map-set($map, $key, $value) {
   $new: ($key: $value);
   @return map-merge($map, $new);
@@ -31,7 +31,7 @@
 
 
 @function gutter($lines: 1, $gutter: $base-padding) {
-	@return rem(($gutter * $lines));
+	@return ($gutter * $lines) * 1px;
 }
 
 @function gridCalc($columns,$total_coloumns: $base-max-columns) {
@@ -41,8 +41,6 @@
 @function context($width, $max-width: $base-max-width) {
 	@return percentage($width / $max-width);
 }
-
-
 
 // help funtions
 
@@ -60,7 +58,7 @@
 @function tint($color, $percent){
  	@return mix(white, $color, $percent);
 }
- 
+
 // Add percentage of black to a color
 @function shade($color, $percent){
  	@return mix(black, $color, $percent);
@@ -78,9 +76,7 @@
 
 
 @function opposite($arg) {
-
 	$output: null;
-
 	@if $arg == left {
 		$output: right;
 	}
@@ -93,7 +89,5 @@
 	@if $arg == bottom {
 		$output: top;
 	}
-
 	@return $output;
-
 }

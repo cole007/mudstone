@@ -401,72 +401,211 @@ table {
         Preference for third-party mixin libraries is to use Bourbon
         See https://github.com/thoughtbot/bourbon
 */
-.va {
-  font-size: 0;
+html {
+  font-size: 1em;
+  line-height: 1.5;
+  /* [2] */
 }
 
-.va:before {
-  width: 0;
-  height: 100%;
-  content: " ";
-}
-
-.va:before,
-.va__item {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.va__item {
-  margin: auto;
-}
-
-.u-ir {
-  display: block;
-  text-indent: 150%;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.u-text-center {
-  text-align: center;
-}
-
-.u-text-left {
-  text-align: left;
-}
-
-.u-text-right {
-  text-align: right;
-}
-
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.wrap {
-  position: relative;
+body {
+  font-family: "AvantGardeGothicITCW01Bk", sans-serif;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-style: normal;
+  font-weight: normal;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, .heading-1 {
-  font-size: 2rem;
-  line-height: 1.15625;
   font-family: "AvantGardeGothicITCW02Dm", sans-serif;
   font-weight: normal;
-  margin: 0 0 2.5rem;
+  font-size: 61.03516px;
+  font-size: 3.8147rem;
+  line-height: 1.17965;
+  margin: 0 0 20px;
+}
+
+h2, .heading-2 {
+  font-family: "AvantGardeGothicITCW02Dm", sans-serif;
+  font-weight: normal;
+  font-size: 48.82812px;
+  font-size: 3.05176rem;
+  line-height: 1.47456;
+  margin: 0 0 20px;
+}
+
+h3, .heading-3 {
+  font-family: "AvantGardeGothicITCW02Dm", sans-serif;
+  font-weight: normal;
+  font-size: 39.0625px;
+  font-size: 2.44141rem;
+  line-height: 1.2288;
+  margin: 0 0 20px;
+}
+
+h4, .heading-4 {
+  font-family: "AvantGardeGothicITCW02Dm", sans-serif;
+  font-weight: normal;
+  font-size: 31.25px;
+  font-size: 1.95312rem;
+  line-height: 1.536;
+  margin: 0 0 20px;
+}
+
+h5, .heading-5 {
+  font-family: "AvantGardeGothicITCW02Dm", sans-serif;
+  font-weight: normal;
+  font-size: 25px;
+  font-size: 1.5625rem;
+  line-height: 1.92;
+  margin: 0 0 20px;
+}
+
+h6, .heading-6 {
+  font-family: "AvantGardeGothicITCW02Dm", sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  margin: 0 0 20px;
+}
+
+p {
+  margin: 0 0 20px;
+}
+
+strong, b {
+  font-weight: normal;
+  font-family: "AvantGardeGothicITCW02Dm", sans-serif;
+  font-weight: normal;
+}
+
+em {
+  font-style: normal;
+  font-family: "AvantGardeGothicITCW02BkObl", sans-serif;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input[type="submit"],
+input[type="search"],
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+input, select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+fieldset {
+  margin: 0;
+  border: 0;
+}
+
+.form__select {
+  position: relative;
+}
+
+.form__select:before,
+.form__select:after {
+  content: " ";
+}
+
+.form__toggle {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  float: left;
+}
+
+.form__toggle + label:before {
+  content: " ";
+}
+
+.form__toggle--radio + label:before {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 1px solid #706f6f;
+  display: inline-block;
+}
+
+.form__toggle--check + label:before {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #706f6f;
+  display: inline-block;
+}
+
+.table {
+  width: 100%;
+}
+
+.btn {
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 2.44444;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0 25px;
+  text-decoration: none;
+  height: 44px;
+}
+
+.button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.icon {
+  font-style: normal;
+  display: inline-block;
+}
+
+.icon:before {
+  font-family: "icon-font";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: inherit;
+}
+
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav > li {
+  display: inline-block;
+}
+
+.nav--stacked > li {
+  display: block;
+}
+
+.m-panel > *:last-child,
+.m-panel > *:last-child > *:last-child,
+.m-panel > *:last-child > *:last-child > *:last-child {
+  margin-bottom: 0;
 }
 
 body:after {
