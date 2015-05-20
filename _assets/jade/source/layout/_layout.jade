@@ -2,7 +2,7 @@ include ../mixins/mixins
 doctype
 <!--[if IE 8]><html class="ie-8"><![endif]-->
 <!--[if gt IE 8]><!-->
-html.no-js<!--<![endif]-->
+html<!--<![endif]-->
     head
         meta(charset='utf-8')
         title Mudstone Boilerplate
@@ -11,7 +11,7 @@ html.no-js<!--<![endif]-->
         link(rel='stylesheet', href='#{path}css/style.css', media='screen AND (min-width:180px)')
         link(rel="shortcut icon", href="/favicon.ico" type="image/x-icon")
         //- custom modernizr script, only tests for touch events
-        script(src='#{path}js/libs/modernizr.touch.min.js')
+        script(src='#{path}js/vendor/modernizr.min.js')
     body
         .site
             include ../includes/header

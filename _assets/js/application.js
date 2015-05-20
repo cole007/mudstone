@@ -1,3 +1,17 @@
+ /*
+ * JavaScript Debug - v0.4 - 6/22/2010
+ * http://benalman.com/projects/javascript-debug-console-log/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ * 
+ * With lots of help from Paul Irish!
+ * http://paulirish.com/
+ */
+window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g,m=9,c=["error","warn","info","debug","log"],l="assert clear count dir dirxml exception group groupCollapsed groupEnd profile profileEnd table time timeEnd trace".split(" "),j=l.length,a=[];while(--j>=0){(function(n){h[n]=function(){m!==0&&d&&d[n]&&d[n].apply(d,arguments)}})(l[j])}j=c.length;while(--j>=0){(function(n,o){h[o]=function(){var q=b.call(arguments),p=[o].concat(q);a.push(p);e(p);if(!d||!k(n)){return}d.firebug?d[o].apply(i,q):d[o]?d[o](q):d.log(q)}})(j,c[j])}function e(n){if(f&&(g||!d||!d.log)){f.apply(i,n)}}h.setLevel=function(n){m=typeof n==="number"?n:9};function k(n){return m>0?m>n:c.length+m<=n}h.setCallback=function(){var o=b.call(arguments),n=a.length,p=n;f=o.shift()||null;g=typeof o[0]==="boolean"?o.shift():false;p-=typeof o[0]==="number"?o.shift():n;while(p<n){e(a[p++])}};return h})();
+
+
  /**
  * Create module for configuring loading external fonts
  * @module WebFontConfig
@@ -29,41 +43,6 @@
 //     s.parentNode.insertBefore(wf, s); 
 // })();
 
-
-/** 
- * Method used to create an object based on input string
- * @method namespace
- * @param  {String} namespaceString dot notation of object representation
- * @return {Object} parent ret urns object relative indepth to notation
- * @example
- * var mrb = namespace('mrb.Application.Site');
- */
-function namespace(namespaceString) {
-	"use strict";
-	var parts = namespaceString.split('.'),
-		parent = window,
-		currentPart = '';    
-		
-	for(var i = 0, length = parts.length; i < length; i++) {
-		currentPart = parts[i];
-		parent[currentPart] = parent[currentPart] || {};
-		parent = parent[currentPart];
-	}
-	
-	return parent;
-}
-
- 
-var mud = namespace('mud.Application.Site');
-
-mud.device = ($('html').hasClass('touch')) ? 'mobile' : 'desktop';
-
-mud.breakpoint = {};
-mud.breakpoint.name = '';
-mud.breakpoint.width = '';
-mud.breakpoint.height = '';
-
-
 (function($,sr){
   // debouncing function from John Hann
   // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
@@ -91,23 +70,117 @@ mud.breakpoint.height = '';
 })(jQuery,'smartresize');
 
 
+// https://github.com/cowboy/jquery-tiny-pubsub
+(function($) {
+ 
+  var o = $({});
+ 
+  $.subscribe = function() {
+    o.on.apply(o, arguments);
+  };
+ 
+  $.unsubscribe = function() {
+    o.off.apply(o, arguments);
+  };
+ 
+  $.publish = function() {
+    o.trigger.apply(o, arguments);
+  };
+ 
+}(jQuery));
 
-// debug.log(mud.device);
 
-// declare our JS framework, HT @jackfranklin
-mud.behaviour = {
-    // variables you want available on page load
-    getVars: function () {
-        'use strict';
 
-    	// eg this.accordion = $('.accordion');
-    },    
-    // functions you want to kick in on page load
-    init: function () {
-      'use strict';
-      this.getVars();
-    	// eg  this.doShowcase();
+
+
+/** 
+ * Method used to create an object based on input string
+ * @method namespace
+ * @param  {String} namespaceString dot notation of object representation
+ * @return {Object} parent ret urns object relative indepth to notation
+ * @example
+ * var mud = namespace('mud.Application.Site');
+ */
+function namespace(namespaceString) {
+  "use strict";
+  var parts = namespaceString.split('.'),
+    parent = window,
+    currentPart = '';    
+    
+  for(var i = 0, length = parts.length; i < length; i++) {
+    currentPart = parts[i];
+    parent[currentPart] = parent[currentPart] || {};
+    parent = parent[currentPart];
+  }
+  
+  return parent;
+}
+
+ 
+var mud = namespace('mud.Application.Site');
+
+/**
+ * Module to hold behaviours
+ * @module mrb
+ * @submodule Behaviours
+ */
+mud.Behaviours = {};
+
+/** 
+ * Method used to create an object based on input string
+ * @method  mud.loadBehaviour
+ * @param  {String} context Context within dom that behaviour will look at
+ * @example
+ * by default set context to the $(document);
+ * this could be call specifically on a DOM element e.g. mud.loadBehaviour($('#myElement'))
+ */
+mud.loadBehaviour = function(context){
+ 
+    if(context === undefined){
+        context = $(document);
     }
+     
+    // iterate through each element with $('[data-behaviour]') in DOM
+    context.find("*[data-behaviour]").each(function(){
+        // assign to variable
+        var $el = $(this);
+        // grab contents of behaviours
+        var behaviours = $el.attr('data-behaviour');
+            // split out behaviours as multiple behaviours can be defined on each DOM element e.g. data-behaviour="showVid ShowHide ..etd"
+            $.each(behaviours.split(" "), function(index, behaviourName){
+                try{
+                    // assign instance of method object based on behaviour name e.g. mud.Behaviours.showVid to variable
+                    var BehaviourClass = mud.Behaviours[behaviourName];
+                    // instantiate method object
+                    if(typeof mud.Behaviours[behaviourName] !== 'undefined'){
+                        var initializedBehaviour = new BehaviourClass($el);
+                    }else{
+                        // log error if behaviour not found
+                        console.log(behaviourName+' Behaviour not found');
+                    }
+                }
+                catch(e){
+                    // log error if behaviour not found
+                    console.log(e);
+                }
+            });
+    });
 };
+
+/** 
+ * Method used to call mrb.loadBehaviour
+ * @method mrb.onReady
+ * @example
+ * mrb.onReady()
+ */
+mud.onReady = function(){
+    // onready call LoadBehaviour
+    mud.loadBehaviour();
+}
+
+$(document).ready(function(){
+    // use document on ready to insure that all js resources are loaded onto page
+    mud.onReady();
+});
 
 

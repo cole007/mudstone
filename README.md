@@ -24,6 +24,7 @@
 ##Scss 
 
 Boilerplate setup to use Bourbon (via node)
+Autoprefixer used for... wait for it... prefixing
 
 ##Setup
 
@@ -41,3 +42,11 @@ See gulp/configs.js for paths and files
 ##Folder Structure
 
 All of the source files (scss,javascript,js) are stored in the _assets directory.  Changing the env variable in gulp/config.js will change the root directory to '/_dist' rather than '/'.  Use the dist directory for deployments.  Only the compiled, minified and optimised files will be deployed from the dist directory.
+
+##Javascript
+
+Vendor folder contains jquery and modernizer (touch test only)
+Libs folder contains any plugins used
+Behaviour folder contains any custom javascript
+All of the files in libs/behaviours + jquery from the vendor folder get merged into one file (dist/app.js)
+application.js based on http://www.creativebloq.com/javascript/get-your-javascript-order-4135704 
