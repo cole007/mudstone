@@ -5,18 +5,19 @@
 //  */
 
 
-// html {
-//     font-size: $base-font-size / $browser-default-font-size + em; 
-//     line-height: $base-line-height / $base-font-size; 
-// }
+html {
+    font-size: $base-font-size / $browser-default-font-size + em; 
+    line-height: $base-line-height / $base-font-size; 
+}
 
-// body {
-// 	@include font-type('base');
-// 	@include font-size(16,23);
-// 	font-style: normal;
-// 	font-weight: normal;
-// 	-webkit-font-smoothing: subpixel-antialiased;
-// }
+body {
+	@include font-type('base');
+	@include font-size(16,23);
+	font-style: normal;
+	font-weight: normal;
+	-webkit-font-smoothing: subpixel-antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
 
 
 
