@@ -6,14 +6,16 @@ var assets = './_assets/',
     root = './',
     env = 'dev',
     outputStyle = 'expanded',
-    assetPath = "/_assets/";
+    assetPath = "/_assets/",
+    deployAssets = '_dist/_assets/',
+    deployRoot = '_dist';
 /*
  * Update values based on environment
  */
 if(env === 'live') {
     outputStyle = 'compressed';
     assetPath = "/_assets/";
-    build = '/_dist/_assets/';
+    build = '_dist/_assets/';
     root = '_dist';
 }
 /*
@@ -68,7 +70,7 @@ module.exports = {
   scripts: {
     src: [
       assets + 'js/vendor/jquery-1.11.3.min.js',
-      assets + 'js/plugins/*.js',
+      assets + 'js/libs/*.js',
       assets + 'js/application.js',
       assets + 'js/behaviours/*.js'
     ],
@@ -89,10 +91,10 @@ module.exports = {
   svg: {
     src: assets + 'images/svg-sprites/*.svg',
     dest: build + 'images',
-    css: '../../../_assets/css/scss/gulp/_svg-sprites.scss',
+    css: '../../_assets/css/scss/gulp/_svg-sprites.scss',
     sprite: 'svg-sprite.svg',
     template: assets + 'css/scss/_tpl/_sprite-template.scss',
-    pngs: 'png-sprites'
+    pngs: assets + 'images/png-sprites'
   },
 
 
@@ -146,14 +148,17 @@ module.exports = {
 
 
   build: {
-    js_src: [assets + 'js/libs/modernizr.touch.min.js'],
-    js_dest: build + 'js/libs/',
+    js_src: [assets + 'js/vendor/modernizr.min.js'],
+    js_dest: deployAssets + 'js/vendor/',
+    js_MergeDest: deployAssets + 'js/dist/',
     fonts_src: assets + 'fonts/*.*',
-    fonts_dest: build + 'fonts/',
+    fonts_dest: deployAssets + 'fonts/',
     images_src: assets + 'images/*.*',
-    images_dest: build + 'images/',
+    images_dest: deployAssets + 'images/',
     css_src: assets + 'css/*.css',
-    css_dest: build + 'css/'
+    css_dest: deployAssets + 'css/',
+    html_src: root + '*.html',
+    html_dest: deployRoot
   }
 
 };
