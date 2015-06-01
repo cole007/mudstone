@@ -6,7 +6,7 @@ var assets = './_assets/',
     root = './',
     env = 'dev',
     outputStyle = 'expanded',
-    assetPath = "/_assets/",
+    assetPath = "_assets/",
     deployAssets = '_dist/_assets/',
     deployRoot = '_dist';
 /*
@@ -15,7 +15,7 @@ var assets = './_assets/',
 if(env === 'live') {
     outputStyle = 'compressed';
     assetPath = "/_assets/";
-    build = '_dist/_assets/';
+    build = '/_dist/_assets/';
     root = '_dist';
 }
 /*
@@ -69,8 +69,8 @@ module.exports = {
 
   scripts: {
     src: [
-      assets + 'js/vendor/jquery-1.11.3.min.js',
-      assets + 'js/libs/*.js',
+      assets + 'js/libs/jquery-1.11.3.min.js',
+      assets + 'js/plugins/*.js',
       assets + 'js/application.js',
       assets + 'js/behaviours/*.js'
     ],
@@ -94,7 +94,8 @@ module.exports = {
     css: '../../_assets/css/scss/gulp/_svg-sprites.scss',
     sprite: 'svg-sprite.svg',
     template: assets + 'css/scss/_tpl/_sprite-template.scss',
-    pngs: assets + 'images/png-sprites'
+    pngs: assets + 'images/png-sprites',
+    assets: assets + 'images/svg-assets/*.svg'
   },
 
 
@@ -102,6 +103,8 @@ module.exports = {
     src: assets + 'images/svg-inline/*.svg',
     dest: assets + 'images/svg-inline/output/',
     file: assets + 'images/svg-inline/inline-svg.html',
+    fileName: 'inline-svg.html',
+    jadeDest: assets + 'jade/source/includes'
   },
 
   icons: {
@@ -148,7 +151,7 @@ module.exports = {
 
 
   build: {
-    js_src: [assets + 'js/vendor/modernizr.min.js'],
+    js_src: [assets + 'js/libs/modernizr.min.js'],
     js_dest: deployAssets + 'js/vendor/',
     js_MergeDest: deployAssets + 'js/dist/',
     fonts_src: assets + 'fonts/*.*',
@@ -159,6 +162,15 @@ module.exports = {
     css_dest: deployAssets + 'css/',
     html_src: root + '*.html',
     html_dest: deployRoot
+  },
+
+  styleguide: {
+    scssRoot: assets + 'css/scss/style.scss',
+    scssWatch: assets + 'css/scss/components/**/*.scss',
+    scssBuild: '/_assets/css',
+    readmore: assets + 'css/scss/README.md',
+    tmp: 'tmp',
+    buildRoot: 'docs/styleguide'
   }
 
 };

@@ -44,29 +44,29 @@ $ie: false;
 
 // gulp generated scss
 @import 'gulp/png-sprites',
-				'gulp/svg-sprites',
-				'gulp/icon-font';
+		'gulp/svg-sprites',
+		'gulp/icon-font';
 
 
 // Libraries and dependencies
 @import 'libs/libs-reset',
-				'libs/libs-vars';
+		'libs/libs-vars';
 
 // tools - mixins and functions
 // these shouldn't need to be changed
 @import 'tools/tools-functions',
-				'tools/tools-easing',
-				'tools/tools-helpers',
-				'tools/tools-images',
-				'tools/tools-layout',
-				'tools/tools-type';
+		'tools/tools-easing',
+		'tools/tools-helpers',
+		'tools/tools-images',
+		'tools/tools-layout',
+		'tools/tools-type';
 
 // project specific mixins
 @import 'libs/libs-mixins';
 
 // views and components
 @import 'views/views-core',
-				'components/manifest';
+		'components/manifest';
 
 // beta, remove before deploying to production
 @import 'views/views-beta';

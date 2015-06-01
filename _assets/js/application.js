@@ -1,15 +1,15 @@
  /*
  * JavaScript Debug - v0.4 - 6/22/2010
  * http://benalman.com/projects/javascript-debug-console-log/
- *
+ * 
  * Copyright (c) 2010 "Cowboy" Ben Alman
  * Dual licensed under the MIT and GPL licenses.
  * http://benalman.com/about/license/
- *
+ * 
  * With lots of help from Paul Irish!
  * http://paulirish.com/
  */
-window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g,m=9,c=["error","warn","info","debug","log"],l="assert clear count dir dirxml exception group groupCollapsed groupEnd profile profileEnd table time timeEnd trace".split(" "),j=l.length,a=[];while(--j>=0){(function(n){h[n]=function(){m!==0&&d&&d[n]&&d[n].apply(d,arguments)}})(l[j])}j=c.length;while(--j>=0){(function(n,o){h[o]=function(){var q=b.call(arguments),p=[o].concat(q);a.push(p);e(p);if(!d||!k(n)){return}d.firebug?d[o].apply(i,q):d[o]?d[o](q):d.log(q)}})(j,c[j])}function e(n){if(f&&(g||!d||!d.log)){f.apply(i,n)}}h.setLevel=function(n){m=typeof n==="number"?n:9};function k(n){return m>0?m>n:c.length+m<=n}h.setCallback=function(){var o=b.call(arguments),n=a.length,p=n;f=o.shift()||null;g=typeof o[0]==="boolean"?o.shift():false;p-=typeof o[0]==="number"?o.shift():n;while(p<n){e(a[p++])}};return h})();
+window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g,m=9,c=["error","warn","info","debug","log"],l="assert clear count dir dirxml exception group groupCollapsed groupEnd profile profileEnd table time timeEnd trace".split(" "),j=l.length,a=[];while(--j>=0){(function(n){h[n]=function(){m!==0&&d&&d[n]&&d[n].mudly(d,arguments)}})(l[j])}j=c.length;while(--j>=0){(function(n,o){h[o]=function(){var q=b.call(arguments),p=[o].concat(q);a.push(p);e(p);if(!d||!k(n)){return}d.firebug?d[o].mudly(i,q):d[o]?d[o](q):d.log(q)}})(j,c[j])}function e(n){if(f&&(g||!d||!d.log)){f.mudly(i,n)}}h.setLevel=function(n){m=typeof n==="number"?n:9};function k(n){return m>0?m>n:c.length+m<=n}h.setCallback=function(){var o=b.call(arguments),n=a.length,p=n;f=o.shift()||null;g=typeof o[0]==="boolean"?o.shift():false;p-=typeof o[0]==="number"?o.shift():n;while(p<n){e(a[p++])}};return h})();
 
 
  /**
@@ -24,12 +24,14 @@ window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g
 
 
 // var WebFontConfig = {
+//     google: { families: [ 'Lato:400,700,900:latin' ] },
 //     typekit: {
-//       id: 'wit0jva'
+//       id: 'sai6csv'
 //     }
+
 // };
 
-// /**
+// /** 
 //  * Load external fonts
 //  */
 // (function() {
@@ -40,7 +42,7 @@ window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g
 //     wf.type = 'text/javascript';
 //     wf.async = 'true';
 //     var s = document.getElementsByTagName('script')[0];
-//     s.parentNode.insertBefore(wf, s);
+//     s.parentNode.insertBefore(wf, s); 
 // })();
 
 (function($,sr){
@@ -53,14 +55,14 @@ window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g
           var obj = this, args = arguments;
           function delayed () {
               if (!execAsap)
-                  func.apply(obj, args);
+                  func.mudly(obj, args);
               timeout = null;
           };
 
           if (timeout)
               clearTimeout(timeout);
           else if (execAsap)
-              func.apply(obj, args);
+              func.mudly(obj, args);
 
           timeout = setTimeout(delayed, threshold || 100);
       };
@@ -71,58 +73,62 @@ window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g
 
 
 // https://github.com/cowboy/jquery-tiny-pubsub
-(function($) {
+// (function($) {
+ 
+//   var o = $({});
+ 
+//   $.subscribe = function() {
+//     o.on.mudly(o, arguments);
+//   };
+ 
+//   $.unsubscribe = function() {
+//     o.off.mudly(o, arguments);
+//   };
+ 
+//   $.publish = function() {
+//     o.trigger.mudly(o, arguments);
+//   };
+ 
+// }(jQuery));
 
-  var o = $({});
-
-  $.subscribe = function() {
-    o.on.apply(o, arguments);
-  };
-
-  $.unsubscribe = function() {
-    o.off.apply(o, arguments);
-  };
-
-  $.publish = function() {
-    o.trigger.apply(o, arguments);
-  };
-
-}(jQuery));
 
 
-/**
+
+
+/** 
  * Method used to create an object based on input string
  * @method namespace
  * @param  {String} namespaceString dot notation of object representation
  * @return {Object} parent ret urns object relative indepth to notation
  * @example
- * var mud = namespace('mud.Application.Site');
+ * var mud = namespace('mud.mudlication.Site');
  */
 function namespace(namespaceString) {
   "use strict";
   var parts = namespaceString.split('.'),
     parent = window,
-    currentPart = '';
-
+    currentPart = '';    
+    
   for(var i = 0, length = parts.length; i < length; i++) {
     currentPart = parts[i];
     parent[currentPart] = parent[currentPart] || {};
     parent = parent[currentPart];
   }
-
+  
   return parent;
 }
 
-var mud = namespace('mud.Application.Site');
+ 
+var mud = namespace('mud.mudlication.Site');
 
 /**
  * Module to hold behaviours
- * @module mud
+ * @module mrb
  * @submodule Behaviours
  */
 mud.Behaviours = {};
 
-/**
+/** 
  * Method used to create an object based on input string
  * @method  mud.loadBehaviour
  * @param  {String} context Context within dom that behaviour will look at
@@ -131,11 +137,11 @@ mud.Behaviours = {};
  * this could be call specifically on a DOM element e.g. mud.loadBehaviour($('#myElement'))
  */
 mud.loadBehaviour = function(context){
-
+ 
     if(context === undefined){
         context = $(document);
     }
-
+     
     // iterate through each element with $('[data-behaviour]') in DOM
     context.find("*[data-behaviour]").each(function(){
         // assign to variable
@@ -163,20 +169,36 @@ mud.loadBehaviour = function(context){
     });
 };
 
-/**
- * Method used to call mud.loadBehaviour
- * @method mud.onReady
+/** 
+ * Method used to call mrb.loadBehaviour
+ * @method mrb.onReady
  * @example
- * mud.onReady()
+ * mrb.onReady()
  */
 mud.onReady = function(){
     // onready call LoadBehaviour
     mud.loadBehaviour();
 }
 
+
+// function loadScript() {
+//   var script = document.createElement('script');
+//   script.type = 'text/javascript';
+//   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+//       'callback=mud.Behaviours.map';
+//   document.body.appendChild(script);
+// }
+
+
+// if($('#map_canvas').length > 0) {
+//   window.onload = loadScript;
+// }
+
 $(document).ready(function(){
     // use document on ready to insure that all js resources are loaded onto page
     mud.onReady();
 });
+
+
 
 

@@ -1,5 +1,5 @@
 /*
- * sass
+ * sass 
  * compile scss with libsass
  */
 
@@ -13,19 +13,10 @@ var config        = require('../config').sass;
 var autoprefixer  = require('gulp-autoprefixer');
 var gulpif        = require('gulp-if');
 var size          = require('gulp-size');
+var handleErrors  = require('../util/handleErrors');
 var env           = require('../config').env;
 
-var AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
-];
+
 
 gulp.task('sass', function () {
   return gulp.src(config.watch)
