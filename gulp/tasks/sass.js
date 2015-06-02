@@ -27,6 +27,8 @@ gulp.task('sass', function () {
       }
     ))
     .on('error', handleErrors)
+    .pipe(sourcemaps.write({includeContent: false}))
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(autoprefixer(config.prefix)) // doesn't play nice with sourcemaps
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .on('error', handleErrors)
