@@ -72,6 +72,7 @@ module.exports = {
       assets + 'js/libs/jquery-1.11.3.min.js',
       assets + 'js/plugins/*.js',
       assets + 'js/application.js',
+      assets + 'js/tools.js',
       assets + 'js/behaviours/*.js'
     ],
     dest: build + 'js/dist',
@@ -152,7 +153,7 @@ module.exports = {
 
   build: {
     js_src: [assets + 'js/libs/modernizr.min.js'],
-    js_dest: deployAssets + 'js/vendor/',
+    js_dest: deployAssets + 'js/libs/',
     js_MergeDest: deployAssets + 'js/dist/',
     fonts_src: assets + 'fonts/*.*',
     fonts_dest: deployAssets + 'fonts/',
