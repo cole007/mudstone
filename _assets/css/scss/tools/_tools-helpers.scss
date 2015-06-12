@@ -54,6 +54,7 @@
   $max: null;
   $break: null;
 
+  @if $ie == false {
 
   // ouput in media query for non ie css
 
@@ -110,7 +111,11 @@
         }
       }
     }
-
+  } @else {
+    @if $inc-ie == true {
+      @content;
+    }
+  }
 }
 
 @mixin mq-debug($bp: null, $type: null, $orientation: null, $property: null) {
@@ -271,6 +276,30 @@
       @content;
     }
   }
+}
+
+@mixin fallback($property) {
+  .no-#{$property} & {
+    @content;
+  }
+}
+
+@mixin bleeding-edge($property) {
+  .#{$property} & {
+    @content;
+  }
+}
+
+@mixin ie(){
+  @if $ie == true {
+    @content;
+  } 
+}
+
+@mixin not-ie() {
+  @if $ie == false {
+    @content;
+  } 
 }
 
 // ----

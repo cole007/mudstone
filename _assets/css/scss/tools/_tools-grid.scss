@@ -1,87 +1,22 @@
-/*
- Helper functions to be used with gridset
- Makes gridset a little DRYer
-*/
-
-// return the column width minus gutter
-@function gs-width-no-marin($grid, $start, $end: false, $container: false, $unit: false) {
-
-  $output: gs-width($grid,$start,$end, $unit: false) + (gs-gutter($grid, $container: false, $unit:false) /2);
-  @if $unit = true {
-    $output: $output * 1%;
-  }
-  @return $output;
-}
-
-
-//Grid set helper mixins and functions
-@mixin gs-wrapper(){
-
-}
-
-// init gs
-// Should be used in conjunction with gs-col
-@mixin gs-init($asymmetric: true) {
-  float : left;
-  display: block;
-  @if $asymmetric == true {
-    margin-right: -100%;
-  }
-}
-
-// use mixin as a modifier, does not include the margin-right value;
-@mixin gs-col($grid, $start, $end: false, $container: false, $ie: false) {
-    margin-left: gs-marginleft($grid, $start, $container, true);
-    width: gs-width($grid, $start, $end, $container, true);
-}
-
-// same as the gs-span mixin but just outputs the margin and width properties
-@mixin gs-cell($grid, $start, $end: false, $container: false, $ie: false){
-  @if $start == all {
-    margin-left: 0;
-    width: 100%;
-  }
-  @else {
-    $marginright: -100%;
-    @if ($ie == ie) or ($ie == true) { $marginright: -99.9%; }
-    margin-left: gs-marginleft($grid, $start, $container, true);
-    margin-right: $marginright;
-    width: gs-width($grid, $start, $end, $container, true);
-  }
-}
-
-//
-@mixin gs-no-gutters($grid, $start, $end: false, $container: false, $ie: false) {
-  width: gs-width-no-marin($grid, $start, $end: false, $container: false, $unit: false);
-}
-
-// gutterless widths, ie 1/2 = 50%;
-// width gutters on the outside, margin-right
-@mixin gs-outside-gutters($grid, $start, $end: false, $container: false, $ie: false) {
-  width: gs-width-no-marin($grid, $start, $end: false, $container: $container, $unit: false);
-  margin-right: gs-gutter($grid, $container, true);
-}
-
-
-@mixin gs-padding($grid, $container, $units) {
-
-  padding-right: gs-gutter(d,false,true);
-  padding-left: gs-gutter(d,false,true);
-}
-
-@mixin gs-clear-padding($grid, $container, $units) {
-  margin-left: -#{gs-gutter(d,false,true)};
-  margin-right: -#{gs-gutter(d,false,true)};
-}
-
-
-/*
-  Custom grid functions
-*/
-
 $grid-settings: (
   type: 'flex',
   columns: $base-max-columns,
+  max-width: $base-max-width,
+  gutter: $base-grid-gutter,
+  direction: 'ltr'
+);
+
+$grid-tablet-settings: (
+  type: 'flex',
+  columns: 6,
+  max-width: $base-max-width,
+  gutter: $base-grid-gutter,
+  direction: 'ltr'
+);
+
+$grid-mobile-settings: (
+  type: 'flex',
+  columns: 4,
   max-width: $base-max-width,
   gutter: $base-grid-gutter,
   direction: 'ltr'
@@ -166,4 +101,3 @@ $grid-settings: (
     }
   }
 }
-
