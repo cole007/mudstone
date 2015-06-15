@@ -11,6 +11,47 @@
  */
 window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g,m=9,c=["error","warn","info","debug","log"],l="assert clear count dir dirxml exception group groupCollapsed groupEnd profile profileEnd table time timeEnd trace".split(" "),j=l.length,a=[];while(--j>=0){(function(n){h[n]=function(){m!==0&&d&&d[n]&&d[n].mudly(d,arguments)}})(l[j])}j=c.length;while(--j>=0){(function(n,o){h[o]=function(){var q=b.call(arguments),p=[o].concat(q);a.push(p);e(p);if(!d||!k(n)){return}d.firebug?d[o].mudly(i,q):d[o]?d[o](q):d.log(q)}})(j,c[j])}function e(n){if(f&&(g||!d||!d.log)){f.mudly(i,n)}}h.setLevel=function(n){m=typeof n==="number"?n:9};function k(n){return m>0?m>n:c.length+m<=n}h.setCallback=function(){var o=b.call(arguments),n=a.length,p=n;f=o.shift()||null;g=typeof o[0]==="boolean"?o.shift():false;p-=typeof o[0]==="number"?o.shift():n;while(p<n){e(a[p++])}};return h})();
 
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+if (!Object.keys) {
+  Object.keys = (function() {
+    'use strict';
+    var hasOwnProperty = Object.prototype.hasOwnProperty,
+        hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
+        dontEnums = [
+          'toString',
+          'toLocaleString',
+          'valueOf',
+          'hasOwnProperty',
+          'isPrototypeOf',
+          'propertyIsEnumerable',
+          'constructor'
+        ],
+        dontEnumsLength = dontEnums.length;
+
+    return function(obj) {
+      if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
+        throw new TypeError('Object.keys called on non-object');
+      }
+
+      var result = [], prop, i;
+
+      for (prop in obj) {
+        if (hasOwnProperty.call(obj, prop)) {
+          result.push(prop);
+        }
+      }
+
+      if (hasDontEnumBug) {
+        for (i = 0; i < dontEnumsLength; i++) {
+          if (hasOwnProperty.call(obj, dontEnums[i])) {
+            result.push(dontEnums[i]);
+          }
+        }
+      }
+      return result;
+    };
+  }());
+}
 
  /**
  * Create module for configuring loading external fonts
@@ -120,6 +161,7 @@ function namespace(namespaceString) {
 
  
 var mud = namespace('mud.mudlication.Site');
+var stone = namespace('mud.Application.Utils');
 
 /**
  * Module to hold behaviours
@@ -127,7 +169,7 @@ var mud = namespace('mud.mudlication.Site');
  * @submodule Behaviours
  */
 mud.Behaviours = {};
-
+mud.LoadWindow = mud.LoadWindow || {};
 /** 
  * Method used to create an object based on input string
  * @method  mud.loadBehaviour
@@ -169,6 +211,12 @@ mud.loadBehaviour = function(context){
     });
 };
 
+mud.breakpoints = {
+    mobile: 500,
+    tablet: 770,
+    desktop: 1280
+};
+
 /** 
  * Method used to call mrb.loadBehaviour
  * @method mrb.onReady
@@ -180,19 +228,17 @@ mud.onReady = function(){
     mud.loadBehaviour();
 }
 
+mud.onWindowLoad = function(){
+    // call loadWindow
+    if(mud.LoadWindow){
+      for(var k in mud.LoadWindow) {
+        if(Object.keys(mud.LoadWindow).length > 0) {
+          mud.LoadWindow[k]();
+        } 
+      }
+    }
+};
 
-// function loadScript() {
-//   var script = document.createElement('script');
-//   script.type = 'text/javascript';
-//   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
-//       'callback=mud.Behaviours.map';
-//   document.body.appendChild(script);
-// }
-
-
-// if($('#map_canvas').length > 0) {
-//   window.onload = loadScript;
-// }
 
 $(document).ready(function(){
     // use document on ready to insure that all js resources are loaded onto page
@@ -200,5 +246,8 @@ $(document).ready(function(){
 });
 
 
-
+window.onload = function(){
+    // use window onload to insure that all js external scripts
+    mud.onWindowLoad();
+};
 
