@@ -12,7 +12,6 @@
  *    });
  *    expand.init();
  */
- 
 stone.expand = function () {
     this.el = '.expand-link';
     this.timeoutID = false;
@@ -87,7 +86,7 @@ stone.expand.prototype = {
         var $parent = e.parents(this.options.parentEl),
             target = $parent.find(this.options.targetEl),
             self = this;
- 
+
         $(target).stop().slideDown({
             duration: self.options.duration,
             easing: self.options.easing,
@@ -106,8 +105,7 @@ stone.expand.prototype = {
             timeoutID = self.timeoutID;
             $(el).each(function() {
                 var $btn = $(this),
-                    localParent = $btn.parent(self.options.parentEl);
- 
+                    localParent = $btn.parents(self.options.parentEl);
                     $btn.off().on('click', function(e) {
                         e.preventDefault();
                         var fn, delay = self.options.delay;
@@ -125,20 +123,25 @@ stone.expand.prototype = {
                                 }
                             });
                         }
-                        function slideDown() {
+
+                        var slideDown = function(){
                             $(localParent).addClass(self.options.activeClass);
                             self.slideDown($btn);
                         }
  
-                        function slideUp() {
+                        var slideUp = function() {
                             $(localParent).removeClass(self.options.activeClass);
                             self.slideUp($btn);
                         }
+
+                        if(!$(self.options.targetEl).is(':animated')) {
  
-                        if (!$(localParent).hasClass(self.options.activeClass)) {
-                            timeoutID = window.setTimeout(slideDown, delay);
-                        } else {
-                            timeoutID = window.setTimeout(slideUp, delay);
+                            if (!$(localParent).hasClass(self.options.activeClass)) {
+                                timeoutID = window.setTimeout(slideDown, delay);
+                            } else {
+                                timeoutID = window.setTimeout(slideUp, delay);
+                            }
+
                         }
                     });
                 });
@@ -358,6 +361,25 @@ stone.resp_content.prototype = {
     },
 };
  
+/**
+ * Method for moving elements to different dom locations at given breakpoints
+ * var searchView = new stone.resp_position();   
+ *     searchView.setElement('.form--search');
+ *     searchView.setOptions({
+ *         breakpoints: [
+ *             {
+ *                 bp: mud.breakpoints.tablet,
+ *                 targetEl: '.nav--mobile .js-search-open',
+ *                 type: 'insertAfter'
+ *             }
+ *         ],
+ *         last: {
+ *             targetEl: '.header__top .container',
+ *             type: 'appendTo'
+ *         }
+ *     });
+ *     searchView.init();
+*/
  
 stone.resp_position = function () {
     this.el = '.js-content';
@@ -365,10 +387,6 @@ stone.resp_position = function () {
     this.previousBreak = '';
     this.options = {
         type: 'appendTo',
-        before: function() {
-        },
-        after: function() {
-        },
         parents: '',
         wrapper: false,
         last: {
@@ -382,21 +400,9 @@ stone.resp_position = function () {
                 bp: mud.breakpoints.mobile,
                 targetEl: '.el-1',
                 type: 'appendTo'
-            },
-            {
-                bp: mud.breakpoints.tablet,
-                targetEl: '.el-3',
-                type: 'appendTo'
-            },
-            {
-                bp: mud.breakpoints.desktop,
-                targetEl: '.el-5',
-                type: 'appendTo'
             }
         ],
     };
-     
- 
     ( arguments.callee._singletonInstance )
         return arguments.callee._singletonInstance;
     arguments.callee._singletonInstance = this;
@@ -426,7 +432,6 @@ stone.resp_position.prototype = {
         if(obj.before) {
             obj.before();
         }
- 
         if(typeof this.el == 'object') {
             for(var i = 0; i < this.el.length; i++) {
                $(this.el[i])[obj.type](obj.targetEl);
@@ -434,7 +439,6 @@ stone.resp_position.prototype = {
         } else {
             $(this.el)[obj.type](obj.targetEl);
         }
- 
         if(obj.after){
             obj.after();
         }
@@ -450,7 +454,7 @@ stone.resp_position.prototype = {
                 obj = bpArray[i];
             }
         }
-        this.currentBreak = obj;
+       // this.currentBreak = obj;
         return obj;
     },
  
@@ -479,7 +483,8 @@ stone.resp_position.prototype = {
         // move function only gets executed when the current breakpoint changes (var oldNum)
         var self = this, 
             breaks = self.sortBreaks();
- 
+            self.newArray = [];
+
         var oldNum = self.newNum;
         for(var i = 0; i < breaks.length; i++) {
             if(w < breaks[i]) {
@@ -488,6 +493,7 @@ stone.resp_position.prototype = {
                 }
             }
         }
+       // debug.log(this.options.breakpoints);
         self.newNum = self.newArray[0];
         if(oldNum !== self.newNum) {
             var setup = self.getCurrentBreak(self.newNum);
@@ -496,6 +502,7 @@ stone.resp_position.prototype = {
             } else {
                 var obj = self.options.last;
             }
+            //debug.log(obj);
             self.move(obj);
         }    
     },
@@ -514,14 +521,291 @@ stone.resp_position.prototype = {
     init : function() {
         var self = this,
             viewPort = new stone.viewPort();
- 
             if(this.options.onLoad) {
-                if(typeof this.options.onLoad == 'function') {
+                if(typeof this.options.onLoad === 'function') {
                     this.options.onLoad();
                 }
                 self.load(viewPort.width)
             }
             self.resize();
     }
- 
 };
+
+
+/**
+ * Method for managing slides, based on default values
+ * @example
+ * var slide = new stone.slide();
+ *     slide.setElement('.slide--homepage #cycle-main');
+ *     slide.setOptions({
+ *         swipeFX: 'scrollHorz',
+ *         pager: '.slide-pager'
+ *     });
+ *     slide.init();
+ * var slideInstance = slide.thisSlide();
+*/
+
+stone.slide = function() {
+    this.el = '',
+    this.options =  {
+        fx: 'fade',
+        slides: '> div',
+        timeout: 5000,
+        next: '.slide__next',
+        prev: '.slide__prev',
+        log: false,
+        swipe: true
+    };
+
+    ( arguments.callee._singletonInstance )
+        return arguments.callee._singletonInstance;
+    arguments.callee._singletonInstance = this;
+}
+
+stone.slide.prototype = {
+    // argument passed in will be used as the selector
+    // if no argument is supplied the default class will be used
+    setElement : function (e) {
+        // update default el if one is passed in
+        this.el = (e.length > 0)?e:this.el;
+    },
+    // add aditional options
+    // targets et al
+    // gets merged with the default options
+    setOptions : function (o) {
+        var options = this.options;
+            options = $.extend({}, options, o);
+        this.options = options;
+    },
+    // init must be called before, otherwise there is no cycle context
+    thisSlide : function() {
+        return $(this.el);
+    },
+
+    init: function() {
+        $(this.el).cycle(this.options);
+    }
+}
+
+/**
+ * Method for managing popup groups
+ * @example
+* var popup = new stone.popup();
+*     popup.setElement('.js-popup-show');
+*     popup.setOptions({
+*         callback: {
+*             open: function() {
+*             },
+*             close: function() {
+*             }
+*         }
+*     })
+*     popup.init();
+*/
+stone.popup = function() {
+
+    this.el = '',
+    this.options = {
+        activeClass: 'active',
+        callback: {
+            close: function() {},
+            open: function() {}
+        }
+    };
+
+    ( arguments.callee._singletonInstance )
+        return arguments.callee._singletonInstance;
+    arguments.callee._singletonInstance = this;
+}
+
+stone.popup.prototype = {
+    // argument passed in will be used as the selector
+    // if no argument is supplied the default class will be used
+    setElement : function (e) {
+        // update default el if one is passed in
+        this.el = (e.length > 0)?e:this.el;
+    },
+    // add aditional options
+    // targets et al
+    // gets merged with the default options
+    setOptions : function (o) {
+        var options = this.options;
+            options = $.extend({}, options, o);
+        this.options = options;
+    },
+
+    open : function(e) {
+        var self = this,
+            target = e.data('popup-target'),
+            target = '[data-popup="' + target + '"]';
+            e.addClass(self.options.activeClass);
+            $(target).addClass(self.options.activeClass);
+
+            if(self.options.callback.open) {
+                self.options.callback.open();
+            }
+    },
+    // close the popup
+    close : function(e) {
+        var self = this,
+            target = e.data('popup-target'),
+            target = '[data-popup="' + target + '"]';
+            e.removeClass(self.options.activeClass);
+            $(target).removeClass(self.options.activeClass);
+
+            if(self.options.callback.open) {
+                self.options.callback.close();
+            }
+    },
+    // method to close siblings
+    closeSiblings : function(e) {
+        var self = this;
+        e.each(function() {
+            self.close(e);
+        });
+    },
+
+    init : function() {
+        var self = this;
+        // loop through all the links
+        $(this.el).each(function() {
+            var $self = $(this);
+            // on click
+            $self.off().on('click', function(e) {
+                e.preventDefault();
+                // get the target
+                var target = $self.data('popup-target'),
+                    target = '[data-popup="' + target + '"]';
+                if(!$self.hasClass('active')) {
+                    // if there are any active siblings, close them
+                    $(self.el + '.' + self.options.activeClass).each(function() {
+                        self.closeSiblings($(this));
+                    });
+                    self.open($self);
+                } else {
+                    self.close($self);
+                }
+            });
+        })
+    }
+}
+
+
+/**
+ * Method for add overlays 
+ * @example
+ * var overlay = new stone.overlay();   
+ *    overlay.setStyle({backgroundColor: 'rgba(0,0,0,0.5'});
+ *    overlay.setOptions({
+ *        target: '.target',
+ *        trigger: '.btn',
+ *    });
+ *    overlay.init();
+ *    // to remove
+ *    overlay.remove();
+ */
+
+stone.overlay = function() {
+    this.style = {
+        position: 'fixed', 
+        top: '0', 
+        left: '0',
+        width: '100%', 
+        height: '100vh', 
+        zIndex: '1000', 
+        backgroundColor: 'rgba(0,0,0,0.4)',
+        display: 'none'
+    },
+    this.options = {
+        target: '',
+        className: '--overlay--',
+        target: '',
+        trigger: '',
+        event: 'click',
+        duration: 150,
+        delay: 1000,
+        type: 'prepend'
+    };
+
+    ( arguments.callee._singletonInstance )
+        return arguments.callee._singletonInstance;
+    arguments.callee._singletonInstance = this;
+}
+
+
+stone.overlay.prototype = {
+    timeout: 0,
+    state: false,
+    markup : function() {
+        return  '<div class="' + this.options.className + '"></div>';
+    },
+    selector : function() {
+        return  '.' + this.options.className
+    },
+    // add aditional options
+    // targets et al
+    // gets merged with the default options
+    setStyle : function (o) {
+        var style = this.style;
+            style = $.extend({}, style, o);
+        this.style = style;
+    },
+    setOptions : function (o) {
+        var options = this.options;
+            options = $.extend({}, options, o);
+        this.options = options;
+    },
+
+    add: function() {
+        var self = this,
+            options = self.options,
+            style = self.style;
+            self.state = true;
+            $(options.target)[options.type](self.markup()).find(self.selector()).css(style).fadeIn({
+                duration: options.duration,
+                complete: function() {
+                    window.clearTimeout(self.timeOut);
+                }
+            }); 
+
+    },
+
+    remove: function() {
+        var self = this,
+            selector = self.selector();
+            self.state = false;
+            $(selector).fadeOut({
+                duration: self.options.duration,
+                complete: function() {
+                    $(selector).remove();
+                    window.clearTimeout(self.timeout);
+                }
+            });
+    },
+
+    on: function() {
+        var self = this;
+            self.timeout = window.setTimeout(self.add.bind(self), self.options.delay);
+    },
+
+    off: function() {
+        var self = this;
+            self.timeout = window.setTimeout(self.remove.bind(self), self.options.delay);
+    },
+
+    init: function() {
+        var self = this,
+            options = self.options,
+            selector = self.selector();
+            if(!self.state) {
+                self.add();
+            }
+ 
+            $(document).off().on('click', selector, function() {
+                if(options.trigger) {
+                    $(options.trigger).trigger(options.event);
+                }
+                self.off();
+            });
+    }
+}
