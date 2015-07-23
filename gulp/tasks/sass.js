@@ -10,13 +10,12 @@ var sass          = require('gulp-sass');
 var sourcemaps    = require('gulp-sourcemaps');
 var handleErrors  = require('../util/handleErrors');
 var config        = require('../config').sass;
-var autoprefixer  = require('gulp-autoprefixer');
 var gulpif        = require('gulp-if');
 var size          = require('gulp-size');
 var handleErrors  = require('../util/handleErrors');
 var env           = require('../config').env;
-
-
+var autoprefixer = require('autoprefixer-core');
+var postcss       = require('gulp-postcss');
 
 gulp.task('sass', function () {
   return gulp.src(config.watch)
@@ -27,9 +26,9 @@ gulp.task('sass', function () {
       }
     ))
     .on('error', handleErrors)
-    .pipe(sourcemaps.write({includeContent: false}))
-    .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(autoprefixer(config.prefix)) // doesn't play nice with sourcemaps
+    // .pipe(sourcemaps.write({includeContent: false}))
+    // .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(postcss([ autoprefixer({ browsers: config.prefix }) ]))
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.dest))

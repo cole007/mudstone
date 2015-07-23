@@ -27,21 +27,21 @@
 // call on the input (radio/checkbox)
 @mixin fancy-input($position: before) {
 
-	// hide the default radio input
-	// opacity: 0;
-	// create a radio button style using the
-	& + label:#{$position} {
-		content: " ";
-		@content;
-	}
+  // hide the default radio input
+  // opacity: 0;
+  // create a radio button style using the
+  & + label:#{$position} {
+    content: " ";
+    @content;
+  }
 }
 
 // call on the input (radio/checkbox) for the checked state
 @mixin fancy-input-checked($target: before) {
 
-	&:checked + label:before {
-		@content;
-	}
+  &:checked + label:before {
+    @content;
+  }
 }
 
 
@@ -49,7 +49,7 @@
 // - @include mq('min', '40px') {stuff:here}
 // debug option - this can only be used when mixin is declared at the root
 // until libsass supports @at-root{}
-@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $debug: false, $inc-ie: true) {
+@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $debug: false, $inc-ie: false) {
   $min: null;
   $max: null;
   $break: null;
@@ -300,6 +300,18 @@
   @if $ie == false {
     @content;
   } 
+}
+
+@mixin ie9-up() {
+  @media screen and (min-width:0\0) {
+    @content;
+  }
+}
+
+@mixin ie11() {
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
 }
 
 // ----

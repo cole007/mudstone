@@ -386,7 +386,6 @@ stone.resp_position = function () {
     this.currentBreak = '';
     this.previousBreak = '';
     this.options = {
-        type: 'appendTo',
         parents: '',
         wrapper: false,
         last: {
