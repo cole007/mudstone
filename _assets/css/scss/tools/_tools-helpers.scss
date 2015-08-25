@@ -238,7 +238,7 @@
 // </div>
 
 @mixin underline($color, $line-height: 1rem, $bg: transparent, $weight: 1px) {
-    @include background-image(linear-gradient(to bottom,($bg 50%, palette(themes,us) 50%)));
+    @include background-image(linear-gradient(to bottom,($bg 50%, $color 50%)));
     background-repeat: repeat-x;
     background-position: 0 $line-height;
     background-size: $weight $weight;
@@ -329,11 +329,11 @@
 // Cross media query extends using maps
 // 1. Create an map, with a name key.
 // 2. Add your css as per normal, just with commas instead of semi colons
-//  $menu-object: (
-//    name: menu-object,
-//    list-style: none,
-//    margin: 0
-//  );
+ // $menu-object: (
+ //   name: menu-object,
+ //   list-style: none,
+ //   margin: 0
+ // );
 // 3. Nesting is not possible, well, it could be done but I'm not sure that it's worth it
 // 4. Call the mixin by passing in the name of the object you wish to use, and the current breakpoint name
 //    eg. core, mob, desktop, et al
@@ -375,8 +375,6 @@
 $extend : ();
 
 @mixin obj($map, $bp: $current_breakpoint) {
-
-
   // if we're passing in a map
   @if type-of($map) == map {
     // init name variable

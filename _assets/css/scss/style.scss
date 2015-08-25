@@ -38,20 +38,15 @@
 //
 //    Shame Last
 $ie: false;
-
 // using  node-bourbon, see ./gulp/config.js
 @import "bourbon";
-
 // gulp generated scss
 @import 'gulp/png-sprites',
 		'gulp/svg-sprites',
 		'gulp/icon-font';
-
-
 // Libraries and dependencies
-@import 'libs/libs-reset',
-		'libs/libs-vars';
-
+@import 'libs/normalize',
+		'app/config/variables';
 // tools - mixins and functions
 // these shouldn't need to be changed
 @import 'tools/tools-functions',
@@ -60,13 +55,5 @@ $ie: false;
 		'tools/tools-images',
 		'tools/tools-layout',
 		'tools/tools-type';
-
-// project specific mixins
-@import 'libs/libs-mixins';
-
 // views and components
-@import 'views/views-core',
-		'components/manifest';
-
-// beta, remove before deploying to production
-@import 'views/views-beta';
+@import 'app/manifest';

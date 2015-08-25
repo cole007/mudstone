@@ -63,6 +63,12 @@ gulp.task('build-css', function(callback) {
         .pipe(gulp.dest(config.css_dest));
 });
  
+// optimise the css and move to the dist folder
+// gulp.task('build-js-temps', function(callback) {
+//     gulp.src(config.js_temp_source)
+//         .pipe(gulp.dest(config.js_temp_dest));
+// });
+ 
 // run all the build tasks
 gulp.task('build', function(callback) {
   runSequence(['build-html', 'build-fonts', 'build-images', 'build-scripts', 'move-scripts', 'build-css'], callback);

@@ -96,7 +96,6 @@
 //    
 //    $els args need to be passed in the correct order, from top to bottom, so '.site' '.site__wrap' '.foot'
 
-
 @mixin sticky-footer($els: '.site' '.site__wrap' '.footer', $height: 115px ) {
 
   $site: nth($els, 1);

@@ -1,33 +1,37 @@
+/*
+    File: _assets/css/scss/_libs-functions.scss
+*/
 // Typography
 
-/// @param {map key} $size
-/// @description retuns value from the font size map
 @function size($size) {
 	@return map-get($font-size, $size);
 }
 
-/// @param {integer} $font-size
-/// @param {integer} $computed
-/// @description converts pixel line height values to unitless
 @function computeLineHeight($font-size, $computed) {
   $fs: strip-units($font-size);
   @return $computed / $fs;
 }
 
-/// @author @ericmsuzanne
+// Map helpers
+
+// thanks to @ericmsuzanne for this function
 @function map-set($map, $key, $value) {
   $new: ($key: $value);
   @return map-merge($map, $new);
 }
 
 
+
+
 // Layout
+
 @function r($lines: 1, $gutter: $base-padding) {
 	@return rem(($gutter * $lines));
 }
 
+
 @function gutter($lines: 1, $gutter: $base-padding) {
-	@return ($gutter * $lines) * 1px;
+	@return floor(($gutter * $lines) * 1px);
 }
 
 @function gridCalc($columns,$total_coloumns: $base-max-columns) {
@@ -60,26 +64,18 @@
  	@return mix(black, $color, $percent);
 }
 
-/// @param {map} $map
-/// @param {map key} $value
-/// returns a color from the palettes map
+// http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+// use eg palette(accent,light)
 @function palette($palette, $tone: 'base') {
     @return map-get(map-get($palettes, $palette), $tone);
 }
 
-@function rgbaie($color,$opacity) {
-	@if $ie == true {
-		@return $color;
-	} @else {
-		@return rgba($color,$opacity);
-	}
-}
-
-/// @param {map} $map
-/// @param {map key} $value
-/// returns a color from the palettes map
 @function c($palette, $tone: 'base') {
     @return map-get(map-get($palettes, $palette), $tone);
+}
+
+@function theme($tone) {
+	@return map-get(map-get($palettes, 'theme'), $tone);
 }
 
 
@@ -98,4 +94,30 @@
 		$output: top;
 	}
 	@return $output;
+}
+
+@function mapReverse ($map) {
+    $result: null;
+
+    @if type-of($map) == "map" {
+        $keys: map-keys($map);
+        $map-reversed: ();
+        
+        @for $i from length($keys) through 1 {
+            $map-reversed: map-merge(
+                $map-reversed,
+                (nth($keys, $i): map-get($map, nth($keys, $i)))
+            );
+        }
+
+        @if type-of($map-reversed) == "map" {
+            $result: $map-reversed;
+        } @else {
+            @warn 'There was an error reversing the order of "#{$map}"';
+        }
+    } @else {
+        @warn '"#{$map}" is not a valid map';
+    }
+
+    @return $result;
 }

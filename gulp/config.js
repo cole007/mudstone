@@ -2,26 +2,43 @@
  * Enviroment variables, and output directories
  */
 var assets = './_assets/',
-    build = './_assets/',
-    root = './',
+    root = 'tmp',
     env = 'dev',
     outputStyle = 'expanded',
     assetPath = "_assets/",
-    deployAssets = '_dist/_assets/',
-    deployRoot = '_dist';
+    state = 'flat', 
+    jadeDest = root;
+    url = 'local.ournameismud.co.uk';
 /*
  * Update values based on environment
  */
 if(env === 'live') {
-    outputStyle = 'compressed';
-    assetPath = "/_assets/";
-    build = '/_dist/_assets/';
-    root = '_dist';
+  outputStyle = 'compressed';
 }
-/*
- * Site url used for page insights
- */
-var url = '';
+
+if(state = 'flat') {
+    root = root +'/public_html/';
+    build = root + '/public_html/_assets/';
+    jadeDest = root;
+    server = { 
+      server: {
+          baseDir: root,
+          directory: false
+      },
+      notify: false
+    }
+
+
+} else {
+    root = '/deploy/public_html/';
+    build = root + '/public_html/_assets/';
+    jadeDest = 'assets/jade/dist/'
+    server = {
+      proxy: url,
+      notify: false
+    }
+}
+
 
 /*
  * Autoprefix browser suppport
@@ -42,34 +59,28 @@ var AUTOPREFIXER_BROWSERS = [
  * variables used by gulp tasks, see the tasks folder
  */
 module.exports = {
-
-  browserSync: {
-    server: {
-        baseDir: root,
-        directory: false
-    },
-    notify: false
-  },
-
+ 
+  browserSync: server,
+ 
   sass: {
-    src: assets + 'css/scss/style.scss',
+    src: [assets + 'css/scss/style.scss', assets + 'css/scss/ie.scss'],
     dest: build + 'css',
     prefix: AUTOPREFIXER_BROWSERS,
-    watch: assets + 'css/scss/**/*.scss',
+    watch: assets + 'css/scss/**/**/*.scss',
     options: {
       outputStyle: outputStyle
-    },
-    output: 'style.min.css'
+    }
   },
-
+ 
   images: {
     src: assets + 'images/site/*',
     dest: build + 'images'
   },
-
+ 
   scripts: {
     src: [
       assets + 'js/libs/jquery-1.11.3.min.js',
+      assets + 'js/libs/underscore-min.js',
       assets + 'js/plugins/*.js',
       assets + 'js/application.js',
       assets + 'js/tools.js',
@@ -79,7 +90,7 @@ module.exports = {
     output: 'app.js',
     hint:  assets + 'js/behaviours/*.js'
   },
-
+ 
   sprites: {
     data: assets + 'images/png-sprites/*.png',
     imgName: 'png-sprite.png',
@@ -88,18 +99,18 @@ module.exports = {
     spriteDataImg: build + 'images',
     spriteDataCss: assets + 'css/scss/gulp/'
   },
-
+ 
   svg: {
     src: assets + 'images/svg-sprites/*.svg',
     dest: build + 'images',
-    css: '../../_assets/css/scss/gulp/_svg-sprites.scss',
+    css: '../../../../_assets/css/scss/gulp/_svg-sprites.scss',
     sprite: 'svg-sprite.svg',
     template: assets + 'css/scss/_tpl/_sprite-template.scss',
     pngs: assets + 'images/png-sprites',
     assets: assets + 'images/svg-assets/*.svg'
   },
-
-
+ 
+ 
   svgStore: {
     src: assets + 'images/svg-inline/*.svg',
     dest: assets + 'images/svg-inline/output/',
@@ -107,71 +118,72 @@ module.exports = {
     fileName: 'inline-svg.html',
     jadeDest: assets + 'jade/source/includes'
   },
-
+ 
   icons: {
     src: assets + 'images/icons/*.svg',
-    dest: assets + 'fonts/',
+    dest: build + 'fonts/',
     name: 'icon-font',
     path: assets + 'css/scss/_tpl/_icon-font-template.scss',
-    targetPath: '../css/scss/gulp/_icon-font.scss',
+    targetPath: '../../../../_assets/css/scss/gulp/_icon-font.scss',
     fontPath: '../fonts/'
   },
-
+ 
   html: {
     src: root + '**/*.html',
     build: assets + 'templates/dest/*.html',
     dest: root
   },
-
+ 
   env: env,
-
+ 
   psi : {
     nokey: 'true',
-    url: '',
+    url: 'http://local.search-star.co.uk',
     strategy: 'mobile',
   },
-
+ 
+  // THESE PATHS NEED UPDATING BEFORE USING THE UNCSS TASK
   uncss: {
     css: assets + 'css/style.css',
     html: root + '**/*.html',
     dest: build + 'css'
   },
-
+ 
+  // THESE PATHS NEED UPDATING BEFORE USING THE CMQ TASK
   cmq: {
     css: assets + 'css/style.css',
     dest: build + 'css'
   },
-
+ 
   jade: {
     src: assets + 'jade/source/*.jade',
     watch: assets + 'jade/source/**/*.jade',
-    dest: root,
+    dest: jadeDest,
     path: assetPath,
     basedir: assets + 'jade/source'
   },
-
-
+ 
   build: {
     js_src: [assets + 'js/libs/modernizr.min.js'],
-    js_dest: deployAssets + 'js/libs/',
-    js_MergeDest: deployAssets + 'js/dist/',
+    js_dest: build + 'js/libs/',
+    js_MergeDest: build + 'js/dist/',
     fonts_src: assets + 'fonts/*.*',
-    fonts_dest: deployAssets + 'fonts/',
+    fonts_dest: build + 'fonts/',
     images_src: assets + 'images/*.*',
-    images_dest: deployAssets + 'images/',
+    images_dest: build + 'images/',
     css_src: assets + 'css/*.css',
-    css_dest: deployAssets + 'css/',
+    css_dest: build + 'css/',
     html_src: root + '*.html',
-    html_dest: deployRoot
+    html_dest: build + 'static/'
   },
-
-  styleguide: {
-    scssRoot: assets + 'css/scss/style.scss',
-    scssWatch: assets + 'css/scss/components/**/*.scss',
-    scssBuild: '/_assets/css',
-    readmore: assets + 'css/scss/README.md',
-    tmp: 'tmp',
-    buildRoot: 'docs/styleguide'
-  }
-
+ 
+  // styleguide: {
+  //   scssRoot: assets + 'css/scss/style.scss',
+  //   scssWatch: assets + 'css/scss/components/**/*.scss',
+  //   scssBuild: '/_assets/css',
+  //   readmore: assets + 'css/scss/README.md',
+  //   tmp: 'tmp',
+  //   buildRoot: 'docs/styleguide'
+  // }
+ 
 };

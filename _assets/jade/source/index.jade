@@ -1,5 +1,8 @@
 //- load content into the layout
-extends layout/_layout
+extends _wrapper/_layout
 //- define the block of content to be placed in the extend
 block content
-	h1.heading-1 Mudstone
+	.site
+		include _includes/header
+		h1 MudStone
+		include _includes/footer

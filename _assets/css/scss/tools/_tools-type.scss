@@ -3,8 +3,11 @@
 // - does not require a height, although a height can be used
 
 @mixin font-size($font-size, $line-height: true) {
-  font-size: $font-size * 1px;
-  font-size: ($font-size / $base-font-size) * 1rem;
+  @if $ie == true {
+    font-size: $font-size * 1px;
+  } @else {
+    font-size: ($font-size / $base-font-size) * 1rem;
+  }
 
   @if $line-height == true {
     line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);

@@ -15,6 +15,6 @@ gulp.task('watch', ['browserSync'], function() {
 	gulp.watch(config.sass.watch,   ['sass', reload]);
 	gulp.watch(config.scripts.src, ['scripts', reload]);
 	gulp.watch(config.jade.watch,   ['jade', reload]);
-	gulp.watch(config.sprites.data, ['sprite']);
-	gulp.watch(config.images.src, ['images']);
+	// gulp.watch(config.sprites.data, ['sprite']);
+	// gulp.watch(config.images.src, ['images']);
 });
