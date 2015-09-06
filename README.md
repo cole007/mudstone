@@ -41,7 +41,7 @@ See gulp/configs.js for paths and files
 
 ##Folder Structure
 
-All of the source files (scss,javascript,js) are stored in the _assets directory.  Changing the env variable in gulp/config.js will change the root directory to '/_dist' rather than '/'.  Use the dist directory for deployments.  Only the compiled, minified and optimised files will be deployed from the dist directory.
+All of the source files (scss,javascript,js) are stored in the _assets directory.  
 
 ##Javascript
 
