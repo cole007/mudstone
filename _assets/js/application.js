@@ -18,34 +18,30 @@ Object.keys||(Object.keys=function(){"use strict";var t=Object.prototype.hasOwnP
  * Create module for configuring loading external fonts
  * @module WebFontConfig
  */
-// var html = document.getElementsByTagName('html')[0];
-// html.className += '  wf-loading';
-// setTimeout(function() {
-//   html.className = html.className.replace(' wf-loading', ' wf-fail');
-// }, 1500);
+var html = document.getElementsByTagName('html')[0];
+html.className += '  wf-loading';
+setTimeout(function() {
+  html.className = html.className.replace(' wf-loading', ' wf-fail');
+}, 1500);
 
 
-// var WebFontConfig = {
-//     google: { families: [ 'Lato:400,700,900:latin' ] },
-//     typekit: {
-//       id: 'sai6csv'
-//     }
+var WebFontConfig = {
+    google: { families: [ 'Raleway:400,800,600,300:latin' ] }
+};
 
-// };
-
-// /** 
-//  * Load external fonts
-//  */
-// (function() {
-//   "use strict";
-//     var wf = document.createElement('script');
-//     wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-//     '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-//     wf.type = 'text/javascript';
-//     wf.async = 'true';
-//     var s = document.getElementsByTagName('script')[0];
-//     s.parentNode.insertBefore(wf, s); 
-// })();
+/** 
+ * Load external fonts
+ */
+(function() {
+  "use strict";
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s); 
+})();
 
 (function($,sr){
   // debouncing function from John Hann

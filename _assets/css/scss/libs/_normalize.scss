@@ -5,7 +5,12 @@
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
- 
+
+*,*:before,&:after {
+  box-sizing: border-box;
+}
+
+
 html {
   font-family: sans-serif; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */
@@ -183,6 +188,7 @@ sub {
  
 img {
   border: 0;
+  max-width: 100%;
 }
  
 /**
@@ -379,7 +385,7 @@ input[type="search"]::-webkit-search-decoration {
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
+  padding: 0;
 }
  
 /**

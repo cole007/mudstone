@@ -1,3 +1,20 @@
+@mixin type-reveal($selector: ".site") {
+  #{unquote($selector)} {
+    transition: opacity .4s;
+    opacity: 0;
+    .wf-active &,
+    .wf-fail & {
+      opacity: 1;
+    }
+  }
+
+  .no-js {
+    #{unquote($selector)} {
+      opacity: 1;
+    }
+  }
+}
+
 // font-size  -
 // see http://codepen.io/chriscoyier/pen/gsodI for usage example
 // - does not require a height, although a height can be used

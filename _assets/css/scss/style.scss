@@ -46,12 +46,13 @@ $ie: false;
 		'gulp/icon-font';
 // Libraries and dependencies
 @import 'libs/normalize',
-		'app/config/variables';
+		'app/_config/variables';
 // tools - mixins and functions
 // these shouldn't need to be changed
 @import 'tools/tools-functions',
 		'tools/tools-easing',
 		'tools/tools-helpers',
+		'tools/tools-grid',
 		'tools/tools-images',
 		'tools/tools-layout',
 		'tools/tools-type';

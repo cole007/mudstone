@@ -6,13 +6,13 @@
 
 @mixin font-type($font: 'base') {
   @if $font == bold {
-    font-family:"AvantGardeGothicITCW02Dm", sans-serif;
-    font-weight: normal;
-  } @else if $font == italic {
-    font-family:"AvantGardeGothicITCW02BkObl", sans-serif;
-    font-style: normal;
+    font-weight: 800;
+  } @else if $font == semi {
+    font-weight: 600;
+  }  @else if $font == light {
+    font-weight: 300;
   } @else if $font == base {
-    font-family:"AvantGardeGothicITCW01Bk", sans-serif;
+    font-weight: 400;
   }
 }
 

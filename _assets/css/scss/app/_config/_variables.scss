@@ -12,6 +12,8 @@ $browser-default-font-size:     16;
 $magic-number:                  $base-line-height;
 $magic-ratio:                   $base-line-height / $base-font-size;
 
+
+
 // Scaling Variables
 $golden:                        1.618;
 $minor-second:                  1.067;
@@ -45,11 +47,12 @@ $font-size: (
 );
 
 // Grid
-$base-max-width:                1600px;
+$base-max-width:                1280px;
 $base-max-columns:              12;
 $current_breakpoint:            base;
 $base-padding:                  modular-scale(1);
 
+$base-grid-gutter:              $base-padding;
 // Counter
 $counter:                       counter;
 

@@ -1,0 +1,19 @@
+.logo {
+	display: block;
+}
+
+.site-header {
+	padding: gutter(1);
+}
+
+@mixin _480-site-header() {
+	.site-header {
+		padding: gutter(1);
+	}
+}
+
+@mixin _768-site-header() {
+	.site-header {
+		padding: gutter(2) gutter(1);
+	}
+}

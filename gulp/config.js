@@ -2,7 +2,7 @@
  * Enviroment variables, and output directories
  */
 var assets = './_assets/',
-    root = 'tmp',
+    base = 'tmp',
     env = 'dev',
     outputStyle = 'expanded',
     assetPath = "_assets/",
@@ -17,8 +17,8 @@ if(env === 'live') {
 }
 
 if(state = 'flat') {
-    root = root +'/public_html/';
-    build = root + '/public_html/_assets/';
+    root = 'tmp/public_html/';
+    build = 'tmp/public_html/_assets/';
     jadeDest = root;
     server = { 
       server: {
@@ -31,7 +31,7 @@ if(state = 'flat') {
 
 } else {
     root = '/deploy/public_html/';
-    build = root + '/public_html/_assets/';
+    build = '/deploy/public_html/_assets/';
     jadeDest = 'assets/jade/dist/'
     server = {
       proxy: url,

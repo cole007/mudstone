@@ -56,7 +56,7 @@
 // using the above function, this function will return a map with the width and height
 @function svg-attr($icon) {
 	$attr: (
-		ie: sprite-attr($icon, ie),
+		ie: sprite-attr($icon, name),
 		width: sprite-attr($icon, width),
 		height: sprite-attr($icon, height),
 		x: sprite-attr($icon, backgroundX),
@@ -92,7 +92,7 @@
 	$svg-props: svg-attr($sprite);
 	@if $ie == true {
 		@include sprite-width(map-get($svg-props, ie));
-  	@include sprite-height(map-get($svg-props, ie));
+  		@include sprite-height(map-get($svg-props, ie));
 	} @else {
 		width: map-get($svg-props, width);
 		height: map-get($svg-props, height);  

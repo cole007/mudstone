@@ -10,6 +10,10 @@ html {
     @include font-baseline();
 }
 
+html,body {
+	font-family: 'Raleway', sans-serif;
+}
+
 body {
 	@include font-type('base');
 	@include font-size($base-font-size);
