@@ -14,7 +14,7 @@ Thumbs.db
 node_modules
 *.map
 docs
-tmp
+#tmp
 
 
 # Craft #
