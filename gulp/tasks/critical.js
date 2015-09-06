@@ -5,10 +5,11 @@
  */
 
 
-var gulp            = require('gulp');
-var critical        = require('critical');
-var rename          = require('gulp-rename');
-var config          = require('../config');
+var gulp            = require('gulp'),
+    critical        = require('critical'),
+    rename          = require('gulp-rename'),
+    config          = require('../config');
+
 
 gulp.task('critical', function (cb) {
   critical.generate({

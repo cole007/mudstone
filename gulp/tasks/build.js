@@ -3,15 +3,17 @@
  * move all src files to dist directory
  */
  
-var gulp                    = require('gulp');
-var runSequence             = require('run-sequence');
-var uglify                  = require('gulp-uglify');
-var concat                  = require('gulp-concat');
-var handleErrors            = require('../util/handleErrors');
-var cmq                     = require('gulp-combine-media-queries');
-var csso                    = require('gulp-csso');
-var config                  = require('../config').build;
-var scripts                 = require('../config').scripts;
+var gulp                = require('gulp'),
+    runSequence         = require('run-sequence'),
+    uglify              = require('gulp-uglify'),
+    concat              = require('gulp-concat'),
+    handleErrors        = require('../util/handleErrors'),
+    cmq                 = require('gulp-combine-media-queries'),
+    csso                = require('gulp-csso'),
+    config              = require('../config').build,
+    scripts             = require('../config').scripts;
+ 
+
  
 gulp.task('o-css', function(callback) {
   runSequence('sass', 'cmq', 'csso', callback);
@@ -71,5 +73,5 @@ gulp.task('build-css', function(callback) {
  
 // run all the build tasks
 gulp.task('build', function(callback) {
-  runSequence(['build-html', 'build-fonts', 'build-images', 'build-scripts', 'move-scripts', 'build-css'], callback);
+  runSequence(['build-fonts', 'build-images', 'build-scripts', 'move-scripts', 'build-css'], callback);
 });

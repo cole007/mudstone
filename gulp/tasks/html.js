@@ -4,14 +4,14 @@
  */
 
 
-var gulp         = require('gulp');
-var browserSync  = require('browser-sync');
-var changed  		 = require('gulp-changed');
-var reload 			 = browserSync.reload;
-var handleErrors = require('../util/handleErrors');
-var config       = require('../config').html;
-var gulpif       = require('gulp-if');
-var env					 = require('../config').env;
+var gulp         		= require('gulp'),
+	browserSync  		= require('browser-sync'),
+	changed  		 	= require('gulp-changed'),
+	reload 			 	= browserSync.reload,
+	handleErrors 		= require('../util/handleErrors'),
+	config       		= require('../config').html,
+	gulpif       		= require('gulp-if'),
+	env					= require('../config').env;
 
 
 

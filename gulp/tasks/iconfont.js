@@ -1,14 +1,14 @@
-var gulp          = require('gulp');
-var svgo          = require('gulp-svgo');
-var iconfont      = require('gulp-iconfont');
-var config        = require('../config').icons;
-var handleErrors  = require('../util/handleErrors');
-var iconfontCss   = require('gulp-iconfont-css');
-var runSequence   = require('run-sequence');
+var gulp              = require('gulp'),
+    svgmin              = require('gulp-svgmin'),
+    iconfont          = require('gulp-iconfont'),
+    config            = require('../config').icons,
+    handleErrors      = require('../util/handleErrors'),
+    iconfontCss       = require('gulp-iconfont-css'),
+    runSequence       = require('run-sequence');
 
 gulp.task('iconfont', function(){
  gulp.src(config.src)
-   .pipe(svgo())
+   .pipe(svgmin())
    .pipe(iconfontCss({
      fontName: config.name,
      path: config.path,

@@ -5,15 +5,15 @@
  */
 
 
-var gulp         = require('gulp');
-var browserSync  = require('browser-sync');
-var uglify       = require('gulp-uglify');
-var concat       = require('gulp-concat');
-var sourcemaps   = require('gulp-sourcemaps');
-var handleErrors = require('../util/handleErrors');
-var config       = require('../config').scripts;
-var gulpif			 = require('gulp-if');
-var env 				 = require('../config').env;
+var gulp         	= require('gulp'),
+	browserSync  	= require('browser-sync'),
+	uglify       	= require('gulp-uglify'),
+	concat       	= require('gulp-concat'),
+	sourcemaps   	= require('gulp-sourcemaps'),
+	handleErrors 	= require('../util/handleErrors'),
+	config       	= require('../config').scripts,
+	gulpif		 	= require('gulp-if'),
+	env 		 	= require('../config').env;
 
 
 gulp.task('scripts', function() {

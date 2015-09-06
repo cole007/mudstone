@@ -3,12 +3,12 @@
  * default watch setup, sass, scripts, haml, html, sprites, images
  */
 
-var gulp  				= require('gulp');
-var config 				= require('../config');
-var runSequence 		= require('run-sequence');
-var browserSync 		= require('browser-sync');
-var reload 				= browserSync.reload;
-var gulpif 				= require('gulp-if');
+var gulp  				= require('gulp'),
+	config 				= require('../config'),
+	runSequence 		= require('run-sequence'),
+	browserSync 		= require('browser-sync'),
+	reload 				= browserSync.reload,
+	gulpif 				= require('gulp-if');
 
 
 gulp.task('watch', ['browserSync'], function() {

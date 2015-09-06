@@ -4,18 +4,18 @@
  */
 
 
-var gulp          = require('gulp');
-var browserSync   = require('browser-sync');
-var sass          = require('gulp-sass');
-var sourcemaps    = require('gulp-sourcemaps');
-var handleErrors  = require('../util/handleErrors');
-var config        = require('../config').sass;
-var gulpif        = require('gulp-if');
-var size          = require('gulp-size');
-var handleErrors  = require('../util/handleErrors');
-var env           = require('../config').env;
-var autoprefixer = require('autoprefixer-core');
-var postcss       = require('gulp-postcss');
+var gulp            = require('gulp'),
+    browserSync     = require('browser-sync'),
+    sass            = require('gulp-sass'),
+    sourcemaps      = require('gulp-sourcemaps'),
+    handleErrors    = require('../util/handleErrors'),
+    config          = require('../config').sass,
+    gulpif          = require('gulp-if'),
+    size            = require('gulp-size'),
+    handleErrors    = require('../util/handleErrors'),
+    env             = require('../config').env,
+    autoprefixer    = require('autoprefixer-core'),
+    postcss         = require('gulp-postcss');
 
 gulp.task('sass', function () {
   return gulp.src(config.watch)

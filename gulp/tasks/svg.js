@@ -1,20 +1,20 @@
-var gulp                        = require('gulp');
-var svgo                        = require('gulp-svgo');
-var gutil                       = require('gulp-util');
-var svg2png                     = require('gulp-svg2png');
-var svgSprite                   = require('gulp-svg-sprite');
-var config                      = require('../config');
-var handleErrors                = require('../util/handleErrors');
-var browserSync                 = require('browser-sync');
-var svgstore                    = require('gulp-svgstore');
-var inject                      = require('gulp-inject');
-var runSequence                 = require('run-sequence').use(gulp);
-var html2jade                   = require('gulp-html2jade')
+var gulp            = require('gulp'),
+    svgmin          = require('gulp-svgmin'),
+    gutil           = require('gulp-util'),
+    svg2png         = require('gulp-svg2png'),
+    svgSprite       = require('gulp-svg-sprite'),
+    config          = require('../config'),
+    handleErrors    = require('../util/handleErrors'),
+    browserSync     = require('browser-sync'),
+    svgstore        = require('gulp-svgstore'),
+    inject          = require('gulp-inject'),
+    runSequence     = require('run-sequence').use(gulp),
+    html2jade       = require('gulp-html2jade');
 
 gulp.task('svgSprite', function () {
 
     return gulp.src(config.svg.src)
-        .pipe(svgo())
+        .pipe(svgmin())
         .pipe(svgSprite({
             "mode": {
                 "css": {
@@ -49,7 +49,7 @@ gulp.task('pngSprite', ['svgSprite'], function() {
 
 gulp.task('svg-assets', function() {
     return gulp.src(config.svg.assets)
-        .pipe(svgo())
+        .pipe(svgmin())
         .on('error', handleErrors)
         .pipe(gulp.dest(config.svg.dest));
 });
@@ -77,7 +77,7 @@ gulp.task('html-jade', function() {
 gulp.task('build-svgstore', function () {
     var svgs = gulp
         .src(config.svgStore.src)
-        .pipe(svgo())
+        .pipe(svgmin())
         .pipe(svgstore({ inlineSvg: true }));
 
     function fileContents (filePath, file) {

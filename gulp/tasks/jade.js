@@ -1,10 +1,10 @@
-var gulp = require('gulp');
-var jade = require('gulp-jade');
-var config = require('../config').jade;
-var browserSync   = require('browser-sync');
-var handleErrors  = require('../util/handleErrors');
-var rename = require("gulp-rename");
-var runSequence = require('run-sequence');
+var gulp            = require('gulp'),
+    jade            = require('gulp-jade'),
+    config          = require('../config').jade,
+    browserSync     = require('browser-sync'),
+    handleErrors    = require('../util/handleErrors'),
+    rename          = require("gulp-rename"),
+    runSequence     = require('run-sequence');
 
 gulp.task('jade', function() {
   var YOUR_LOCALS = {
