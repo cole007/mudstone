@@ -41,10 +41,12 @@ $ie: false;
 // using  node-bourbon, see ./gulp/config.js
 @import "bourbon";
 // gulp generated scss
+// stores variables used by svg/icon mixins
 @import 'gulp/png-sprites',
 		'gulp/svg-sprites',
 		'gulp/icon-font';
 // Libraries and dependencies
+// latest version of normalize - with img/fieldset
 @import 'libs/normalize',
 		'app/_config/variables';
 // tools - mixins and functions
