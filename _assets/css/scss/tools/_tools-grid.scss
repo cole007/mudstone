@@ -35,9 +35,9 @@ $grid-mobile-settings: (
 /// @param {boolean} $inc_gutter
 /// @param {boolean/integer} $space-below
 
-@mixin g-row($map: $grid-settings, $inc_gutter: true, $space-below: true) {
+@mixin g-row($map: $grid-settings, $inc_gutter: true, $space-below: true, $type: false) {
 
-  $type: map-get($map, type);
+  $type: if($type == false, map-get($map, type), $type);
   $direction: map-get($map, direction);
   $gutter: map-get($map, gutter);
   $max-width:  map-get($map, max-width);

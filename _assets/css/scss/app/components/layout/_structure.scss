@@ -4,36 +4,26 @@
 	padding-right: gutter(1);
 }
 
-.grid-box {
-	margin-bottom: gutter(2);
+.slice {
+	padding-top: gutter(1);
+	padding-bottom: gutter(1);
+	position: relative;
+	z-index: 10;
 }
 
-
-@mixin _768-grid-box() {
-	.grid-box {
-		width: 50%;
-		padding: gutter(1);
-		margin-bottom: gutter(0);
-	}
+.slice__heading {
+	@include font-size(ms(3));
+	padding-bottom: gutter(.25);
+	border-bottom: 3px solid c(themes,blog);
 }
 
-@mixin _960-grid-box() {
-	.grid-box {
-		width: 33.3333%;
-	}
+.slice__heading--minor {
+	@include font-size(ms(2));
+	display: inline-block;
+	padding-bottom: 0;
+	border-width: 2px;
 }
 
-@mixin _1024-grid-box() {
-	.grid-box {
-		width: 25%;
-	}
-}
-
-@mixin _768-grid-wrapper() {
-	.grid-wrapper {
-		display: flex;
-		flex-wrap: wrap;
-		margin-left: gutter(-1);
-		margin-right: gutter(-1);
-	}
+.g-wrap {
+	@include g-row($inc_gutter: false, $space-below: false);
 }

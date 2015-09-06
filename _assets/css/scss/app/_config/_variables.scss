@@ -1,5 +1,5 @@
 // debugging
-$debug: false;
+$debug: true;
 
 // images
 $png-sprite:                    '../images/png-sprite.png';
@@ -7,7 +7,7 @@ $svg-sprite:                    '../images/svg-sprite.svg';
 
 // Typography
 $base-font-size:                16;
-$base-line-height:              24;
+$base-line-height:              12;
 $browser-default-font-size:     16;
 $magic-number:                  $base-line-height;
 $magic-ratio:                   $base-line-height / $base-font-size;
@@ -38,13 +38,14 @@ $modular-scale-ratio:           $major-third;
 $modular-scale-base:            $base-font-size;
 
 $font-size: (
-    h1:                         modular-scale(6),
-    h2:                         modular-scale(5),
-    h3:                         modular-scale(4),
-    h4:                         modular-scale(3),
-    h5:                         modular-scale(2),
-    h6:                         modular-scale(1)
+    h1:                         ms(6),
+    h2:                         ms(5),
+    h3:                         ms(4),
+    h4:                         ms(3),
+    h5:                         ms(2),
+    h6:                         ms(1)
 );
+
 
 // Grid
 $base-max-width:                1280px;
@@ -68,8 +69,11 @@ $palettes: (
       light:                    #f2f2f2
     ),
     themes: (
-      magenta:                  #e5007e,
-      grey:                     $base-grey
+        contact:                #ff0031,
+        blog:                   #37cecd,
+        service:                #00afff,
+        about:                  #ffc627,
+        case:                   #6be361,
     ),
     std: (
         base:                   #4A90E2,
@@ -81,7 +85,17 @@ $palettes: (
 // Breakpoints
 $break-tiny:                    480;
 $break-small:                   768;
-$break-nexus:                   962;
+$break-nexus:                   960;
 $break-large:                   1024;
 $break-massive:                 1200;
+
+$breakpoints: (
+  mobile-portrait:               320,
+  mobile-landscape:              480,
+  tablet-portrait:               660,
+  tablet-landscape:              960,
+  desktop-small:                1024,
+  desktop-standard:             1200,
+  desktop-large:                1600
+);
 

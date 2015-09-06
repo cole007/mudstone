@@ -1,7 +1,6 @@
 
 .btn {
-		$btn-height: 44;
-
+	$btn-height: 44;
     @include font-size(18,$btn-height);
     display:inline-block;
     vertical-align:middle;
@@ -18,6 +17,6 @@
     background: none;
     border: 0;
     padding: 0;
-		cursor: pointer;
+	cursor: pointer;
 }
 

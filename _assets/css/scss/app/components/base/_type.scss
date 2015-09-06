@@ -26,32 +26,32 @@ body {
 
 h1,.heading-1 {
 	@include font-type(bold);
-	@include font-size(size(h1));
+	@include font-size(size(h3));
 	margin: 0 0 gutter(1);
 }
 
 
 h2,.heading-2 {
 	@include font-type(bold);
-	@include font-size(size(h2));
+	@include font-size(size(h4));
 	margin: 0 0 gutter(1);
 }
 
 h3,.heading-3 {
 	@include font-type(bold);
-	@include font-size(size(h3));
+	@include font-size(size(h5));
 	margin: 0 0 gutter(1);
 }
 
 h4,.heading-4 {
 	@include font-type(bold);
-	@include font-size(size(h4));
+	@include font-size(size(h6));
 	margin: 0 0 gutter(1);
 }
 
 h5,.heading-5 {
 	@include font-type(bold);
-	@include font-size(size(h5));
+	@include font-size(size(h6));
 	margin: 0 0 gutter(1);
 }
 
@@ -79,4 +79,34 @@ em {
 a {
 	text-decoration: none;
 	color: inherit;
+}
+
+.s-content {
+
+	ul,ol {
+		margin: 0 0 gutter(1);
+		padding-left: gutter(1);
+	}
+
+	li {
+		margin-bottom: gutter(.25);
+	}
+
+	p > a {
+		text-decoration: underline;
+		color: c(themes,blog);
+	}
+
+	blockquote {
+		margin: 0 0 gutter(1);
+		padding: 0 0 0 gutter(1);
+		border-left: 3px solid c(themes,blog);
+	}
+
+	cite {
+		@include font-type(bold);
+		@include font-size(ms(-1));
+		font-style: normal;
+	}
+
 }

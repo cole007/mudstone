@@ -135,12 +135,12 @@
 
 // menu button
 
-@mixin menu-icon-rotate($width: 30px, $height: 6px, $color: $_white, $curve: true, $active_class: '.active', $gap: 2) {
+@mixin menu-icon-rotate($width: 30px, $height: 6px, $color: $_white, $curve: true, $active_class: '.is-active', $gap: 2) {
     
 
     $exit_lenght: $height * 2;
     $bar_gaps: ($height * $gap) + 1;
-
+    position: relative;
 
     & > span {
         @include transition(all 0.5s);
@@ -155,7 +155,12 @@
             width: $width;
             height: $height;
             background-color: $color;
-            position: relative; // firefox fix
+            position: absolute; // firefox fix
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
             z-index: 100001;
             @if $curve == true {
                 border-radius: $height;

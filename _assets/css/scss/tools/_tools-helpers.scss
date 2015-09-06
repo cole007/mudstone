@@ -49,7 +49,7 @@
 // - @include mq('min', '40px') {stuff:here}
 // debug option - this can only be used when mixin is declared at the root
 // until libsass supports @at-root{}
-@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $debug: false, $inc-ie: false) {
+@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $inc-ie: false) {
   $min: null;
   $max: null;
   $break: null;
@@ -57,33 +57,16 @@
   @if $ie == false {
 
   // ouput in media query for non ie css
-
     @if type-of($bp) == list {
         $min: nth($bp,1) * 1px;
         $max: nth($bp,2) * 1px;
         @if $orientation == null {
           @media only screen and (min-#{$property}: $min) and (max-#{$property}: $max) {
             @content;
-
-
-            // debugger
-            @if $debug == true {
-              @include mq-debug($bp,$type,$orientation,$property);
-            }
-
-
           }
         } @else {
           @media only screen and (min-#{$property}: $min) and (max-#{$property}: $max) and (orientation : $orientation) {
             @content;
-
-
-            // debugger
-            @if $debug == true {
-              @include mq-debug($bp,$type,$orientation,$property);
-            }
-
-
           }
         }
     } @else {
@@ -91,23 +74,11 @@
       @if $orientation == null {
         @media only screen and (#{$type}-#{$property}: $break) {
           @content;
-
-
-            // debugger
-            @if $debug == true {
-              @include mq-debug($bp,$type,$orientation,$property);
-            }
-
-
         }
 
       } @else {
         @media only screen and (#{$type}-#{$property}: $break) and (orientation : $orientation) {
           @content;
-            // debugger
-            @if $debug == true {
-              @include mq-debug($bp,$type,$orientation,$property);
-            }
         }
       }
     }
@@ -117,6 +88,14 @@
     }
   }
 }
+
+
+@mixin breakpoint($name, $type: min) {
+  @include mq(map-get($breakpoints,$name), $type) {
+    @content;
+  }
+} 
+
 
 @mixin mq-debug($bp: null, $type: null, $orientation: null, $property: null) {
     body {

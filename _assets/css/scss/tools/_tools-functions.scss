@@ -12,6 +12,11 @@
   @return $computed / $fs;
 }
 
+
+@function ms($increment, $value: $modular-scale-base, $ratio: $modular-scale-ratio) {
+  @return modular-scale($increment, $value: $modular-scale-base, $ratio: $modular-scale-ratio);
+}
+
 // Map helpers
 
 // thanks to @ericmsuzanne for this function
@@ -20,15 +25,11 @@
   @return map-merge($map, $new);
 }
 
-
-
-
 // Layout
 
 @function r($lines: 1, $gutter: $base-padding) {
 	@return rem(($gutter * $lines));
 }
-
 
 @function gutter($lines: 1, $gutter: $base-padding) {
 	@return floor(($gutter * $lines) * 1px);

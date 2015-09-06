@@ -45,14 +45,15 @@ $ie: false;
 @import 'gulp/png-sprites',
 		'gulp/svg-sprites',
 		'gulp/icon-font';
+// functions
+@import 'tools/tools-functions';
 // Libraries and dependencies
 // latest version of normalize - with img/fieldset
 @import 'libs/normalize',
 		'app/_config/variables';
 // tools - mixins and functions
 // these shouldn't need to be changed
-@import 'tools/tools-functions',
-		'tools/tools-easing',
+@import 'tools/tools-easing',
 		'tools/tools-helpers',
 		'tools/tools-grid',
 		'tools/tools-images',

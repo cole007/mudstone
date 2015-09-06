@@ -1,6 +1,7 @@
 // config/fonts
 // @import '_config/variables'; -- imported at root level (function/tool dependencies)
-@import	'_config/fonts';
+@import	'_config/fonts',
+		'_config/debug';
 // utils
 @import 'components/utils/utils';
 // theme - first in the order, easy to over write
@@ -13,7 +14,7 @@
 		'components/base/tables',
 		'components/base/buttons',
 		'components/base/icons',
-		'components/base/nav';
+		'components/base/list';
 // layout
 @import 'components/layout/header',
 		'components/layout/footer',

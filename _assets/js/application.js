@@ -182,3 +182,10 @@ window.onload = function(){
     mud.onWindowLoad();
 };
 
+// jQuery selector function, for targetting rel attributes
+// <div rel="menu"></div>
+// $rel('menu').css({display: 'none'});
+function $rel(str) {
+    return $('[rel*="' + str + '"]');
+}
+
