@@ -16,7 +16,7 @@ if(env === 'live') {
   outputStyle = 'compressed';
 }
 
-if(state = 'flat') {
+if(state === 'flat') {
     root = 'tmp/public_html/';
     build = 'tmp/public_html/_assets/';
     jadeDest = root;
@@ -27,8 +27,6 @@ if(state = 'flat') {
       },
       notify: false
     }
-
-
 } else {
     root = '/deploy/public_html/';
     build = '/deploy/public_html/_assets/';
