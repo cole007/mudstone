@@ -8,8 +8,7 @@ var gulp                = require('gulp'),
     uglify              = require('gulp-uglify'),
     concat              = require('gulp-concat'),
     handleErrors        = require('../util/handleErrors'),
-    cmq                 = require('gulp-combine-media-queries'),
-    csso                = require('gulp-csso'),
+    cssmin              = require('gulp-minify-css'),
     config              = require('../config').build,
     scripts             = require('../config').scripts;
  
@@ -58,10 +57,8 @@ gulp.task('move-scripts', function(callback) {
 // optimise the css and move to the dist folder
 gulp.task('build-css', function(callback) {
     gulp.src(config.css_src)
-        .pipe(cmq({
-          log: true
-        }))
-        .pipe(csso())
+        //https://github.com/jakubpawlowicz/clean-css
+        .pipe(cssmin())
         .pipe(gulp.dest(config.css_dest));
 });
  

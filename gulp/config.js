@@ -169,7 +169,7 @@ module.exports = {
     fonts_dest: build + 'fonts/',
     images_src: assets + 'images/*.*',
     images_dest: build + 'images/',
-    css_src: assets + 'css/*.css',
+    css_src: build + 'css/*.css',
     css_dest: build + 'css/',
     html_src: root + '*.html',
     html_dest: build + 'static/'

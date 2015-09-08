@@ -3,19 +3,18 @@
  * compile scss with libsass
  */
 
-
 var gulp            = require('gulp'),
     browserSync     = require('browser-sync'),
     sass            = require('gulp-sass'),
     sourcemaps      = require('gulp-sourcemaps'),
     handleErrors    = require('../util/handleErrors'),
-    config          = require('../config').sass,
     gulpif          = require('gulp-if'),
     size            = require('gulp-size'),
     handleErrors    = require('../util/handleErrors'),
-    env             = require('../config').env,
     autoprefixer    = require('autoprefixer-core'),
-    postcss         = require('gulp-postcss');
+    postcss         = require('gulp-postcss'),
+    config          = require('../config').sass,
+    env             = require('../config').env;
 
 gulp.task('sass', function () {
   return gulp.src(config.watch)
