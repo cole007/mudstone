@@ -70,8 +70,8 @@ Any extra branches should be feature-specific and named accordingly, e.g.
 Once completed a feature branch should be merged into master and removed. Ideally when logging time we should be adding comments related to the feature(s) we are working on.
 
 ###Tips
-`git branch` - list branches in a repository
-`git branch feature/nav` - create new git branch
-`git branch -D feature/nav` - create new git branch
-`git checkout feature/nav` - moves branch and updates working directory
-`git merge feature/nav` - merge development branch into master (must checkout into master first)
+`git branch` - list branches in a repository  
+`git branch feature/nav` - create new git branch  
+`git branch -D feature/nav` - create new git branch  
+`git checkout feature/nav` - moves branch and updates working directory  
+`git merge feature/nav` - merge development branch into master (must checkout into master first)  
