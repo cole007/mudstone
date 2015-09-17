@@ -14,9 +14,9 @@ var gulp                = require('gulp'),
  
 
  
-gulp.task('o-css', function(callback) {
-  runSequence('sass', 'cmq', 'csso', callback);
-});
+// gulp.task('o-css', function(callback) {
+//   runSequence('sass', 'cssmin', callback);
+// });
  
  
  

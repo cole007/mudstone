@@ -147,11 +147,6 @@ module.exports = {
     dest: build + 'css'
   },
  
-  // THESE PATHS NEED UPDATING BEFORE USING THE CMQ TASK
-  cmq: {
-    css: assets + 'css/style.css',
-    dest: build + 'css'
-  },
  
   jade: {
     src: assets + 'jade/source/*.jade',

@@ -9,7 +9,7 @@ var gulp 			= require('gulp'),
 	glob 			= require('glob'),
 	config 			= require('../config').uncss,
 	gulpif       	= require('gulp-if'),
-	csso        	= require('gulp-csso');
+	cssmin          = require('gulp-minify-css');
 
 gulp.task('uncss', function() {
     return gulp.src(config.css)
@@ -20,8 +20,8 @@ gulp.task('uncss', function() {
 });
 
 
-gulp.task('csso', function() {
+gulp.task('cssmin', function() {
     return gulp.src(config.css)
-        .pipe(csso())
+        .pipe(cssmin())
         .pipe(gulp.dest(config.dest));
 });
