@@ -52,3 +52,28 @@ behaviour folder contains any custom javascript
 application.js includes boilerplate code for the js framework (http://www.creativebloq.com/javascript/get-your-javascript-order-4135704)
 tools.js includes constructor functions for common ui patterns
 All of the files in libs/behaviours + jquery from the vendor folder get merged into one file (dist/app.js)
+
+##Git methodology
+
+At a core we should be working on four branches:
+
+- master
+- dev
+- deploy/staging
+- deploy/production
+
+Dev work should be merged into master before going into deployment.
+
+Any extra branches should be feature-specific and named accordingly, e.g. 
+
+- feature/nav
+- feature/add-on-x
+
+Once completed a feature branch should be merged into master and removed. Ideally when logging time we should be adding comments related to the feature(s) we are working on.
+
+###Tips
+`git branch` - list branches in a repository  
+`git branch feature/nav` - create new git branch  
+`git branch -D feature/nav` - create new git branch  
+`git checkout feature/nav` - moves branch and updates working directory  
+`git merge feature/nav` - merge development branch into master (must checkout into master first)  
