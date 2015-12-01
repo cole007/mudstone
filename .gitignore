@@ -14,27 +14,27 @@ Thumbs.db
 node_modules
 *.map
 docs
-#tmp
+tmp
 
 
 # Craft #
 ######################
 # http://buildwithcraft.com/help/craft-storage-gitignore#craft-storage-runtime
-craft/storage/backups/
-craft/storage/runtime/
-craft/storage/userphotos/
+deploy/craft/storage/backups/
+deploy/craft/storage/runtime/
+deploy/craft/storage/userphotos/
 
 
 # ExpressionEngine #
 ######################
 # https://github.com/github/gitignore/blob/master/ExpressionEngine.gitignore
 # Images
-images/avatars/
-images/captchas/
-images/smileys/
-images/member_photos/
-images/signature_attachments/
-images/pm_attachments/
+deploy/public_html/images/avatars/
+deploy/public_html/images/captchas/
+deploy/public_html/images/smileys/
+deploy/public_html/images/member_photos/
+deploy/public_html/images/signature_attachments/
+deploy/public_html/images/pm_attachments/
 
 # Caches
 sized/

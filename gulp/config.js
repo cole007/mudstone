@@ -61,10 +61,10 @@ module.exports = {
   browserSync: server,
  
   sass: {
-    src: [assets + 'css/scss/style.scss', assets + 'css/scss/ie.scss'],
+    src: [assets + 'scss/style.scss', assets + 'scss/ie.scss'],
     dest: build + 'css',
     prefix: AUTOPREFIXER_BROWSERS,
-    watch: assets + 'css/scss/**/**/*.scss',
+    watch: assets + 'scss/**/**/*.scss',
     options: {
       outputStyle: outputStyle
     }
@@ -95,15 +95,15 @@ module.exports = {
     cssName: '_png-sprites.scss',
     imgPath: '../images/png-sprite.png',
     spriteDataImg: build + 'images',
-    spriteDataCss: assets + 'css/scss/gulp/'
+    spriteDataCss: assets + 'scss/gulp/'
   },
  
   svg: {
     src: assets + 'images/svg-sprites/*.svg',
     dest: build + 'images',
-    css: '../../../../_assets/css/scss/gulp/_svg-sprites.scss',
+    css: '../../../../_assets/scss/gulp/_svg-sprites.scss',
     sprite: 'svg-sprite.svg',
-    template: assets + 'css/scss/_tpl/_sprite-template.scss',
+    template: assets + 'scss/_tpl/_sprite-template.scss',
     pngs: assets + 'images/png-sprites',
     assets: assets + 'images/svg-assets/*.svg'
   },
@@ -121,8 +121,8 @@ module.exports = {
     src: assets + 'images/icons/*.svg',
     dest: build + 'fonts/',
     name: 'icon-font',
-    path: assets + 'css/scss/_tpl/_icon-font-template.scss',
-    targetPath: '../../../../_assets/css/scss/gulp/_icon-font.scss',
+    path: assets + 'scss/_tpl/_icon-font-template.scss',
+    targetPath: '../../../../_assets/scss/gulp/_icon-font.scss',
     fontPath: '../fonts/'
   },
  
@@ -171,10 +171,10 @@ module.exports = {
   },
  
   // styleguide: {
-  //   scssRoot: assets + 'css/scss/style.scss',
-  //   scssWatch: assets + 'css/scss/components/**/*.scss',
+  //   scssRoot: assets + 'scss/style.scss',
+  //   scssWatch: assets + 'scss/components/**/*.scss',
   //   scssBuild: '/_assets/css',
-  //   readmore: assets + 'css/scss/README.md',
+  //   readmore: assets + 'scss/README.md',
   //   tmp: 'tmp',
   //   buildRoot: 'docs/styleguide'
   // }
