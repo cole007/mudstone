@@ -1,0 +1,63 @@
+//    File: _assets/css/scss/style.scss
+//
+//    Use spaces not tabs
+//
+//    # Selectors
+//
+//    One selector per line, One rule per line
+//    Don't use IDs as selectors
+//    Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container
+//    Use BEM syntax:
+//        Block
+//        Block__element
+//        Block--modifier
+//
+//    # Properties
+//
+//    List related properties together
+//    If the value of the width or height is 0, do not specify units
+//    Avoid magic numbers, eg numbers used as  quick fixes on a one-off basis
+//    Close final property with a semi-colon
+//    Err towards shorthand where avaliable, eg border, background, etc
+//
+//    # SASS/SCSS
+//
+//    All Vendor Prefixes Use @mixins
+//    Maximum Nesting: Three Levels Deep
+//    Maximum Nesting: 50 Lines
+//
+//    Locally compile Expanded
+//    For Deployment compile Compressed
+//
+//    Be Generous With Comments
+//
+//    Variablize All Common Numbers, and Numbers with Meaning
+//    Variablize All Colors
+//
+//    Nest and Name Your Media Queries
+//
+//    Shame Last
+$ie: false;
+// using  node-bourbon, see ./gulp/config.js
+@import "bourbon";
+// gulp generated scss
+// stores variables used by svg/icon mixins
+@import 'gulp/png-sprites',
+		'gulp/svg-sprites',
+		'gulp/icon-font';
+// functions
+@import 'tools/tools-functions';
+// Libraries and dependencies
+// latest version of normalize - with img/fieldset
+@import 'libs/normalize',
+		'app/_config/variables';
+// tools - mixins and functions
+// these shouldn't need to be changed
+@import 'tools/tools-easing',
+		'tools/tools-helpers',
+		'tools/tools-grid',
+		'tools/tools-images',
+		'tools/tools-layout',
+		'tools/tools-type';
+// views and components
+@import 'app/manifest';

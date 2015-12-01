@@ -3,7 +3,7 @@
  * @example
  * var expand = new stone.expand();   
  *    expand.setElement('.link');
- *    expand.setOptions({
+ *    expand.setOptions({tools.js.cx
  *        parentEl: '.parent',
  *        targetEl: '.target',
  *        easing: 'easeOutCubic',
@@ -12,6 +12,7 @@
  *    });
  *    expand.init();
  */
+ 
 stone.expand = function () {
     this.el = '.expand-link';
     this.timeoutID = false;
@@ -86,7 +87,7 @@ stone.expand.prototype = {
         var $parent = e.parents(this.options.parentEl),
             target = $parent.find(this.options.targetEl),
             self = this;
-
+ 
         $(target).stop().slideDown({
             duration: self.options.duration,
             easing: self.options.easing,
@@ -106,6 +107,7 @@ stone.expand.prototype = {
             $(el).each(function() {
                 var $btn = $(this),
                     localParent = $btn.parents(self.options.parentEl);
+ 
                     $btn.off().on('click', function(e) {
                         e.preventDefault();
                         var fn, delay = self.options.delay;
@@ -177,91 +179,91 @@ stone.viewPort = function() {
  *    swap.setElement('.js-image');
  *    swap.init();
  */
-stone.resp_media = function () {
-    this.el = '.js-image';
-    this.options = {
-        inline: true,
-        breakpoints: {
-            mobile: mud.breakpoints.mobile,
-            tablet: mud.breakpoints.tablet,
-            desktop: mud.breakpoints.desktop
-        },
-        path: '/_assets/images/',
-        css: {
-            display: 'inline'
-        }
-    };
+// stone.resp_media = function () {
+//     this.el = '.js-image';
+//     this.options = {
+//         inline: true,
+//         breakpoints: {
+//             mobile: mud.breakpoints.mobile,
+//             tablet: mud.breakpoints.tablet,
+//             desktop: mud.breakpoints.desktop
+//         },
+//         path: '/_assets/images/',
+//         css: {
+//             display: 'inline'
+//         }
+//     };
      
  
-    ( arguments.callee._singletonInstance )
-        return arguments.callee._singletonInstance;
-    arguments.callee._singletonInstance = this;
+//     ( arguments.callee._singletonInstance )
+//         return arguments.callee._singletonInstance;
+//     arguments.callee._singletonInstance = this;
  
-};
+// };
  
  
-stone.resp_media.prototype = {
+// stone.resp_media.prototype = {
  
-        // argument passed in will be used as the selector
-    // if no argument is supplied the default class will be used
-    setElement : function (e) {
-        // update default el if one is passed in
-        this.el = (e.length > 0)?e:this.el;
-    },
-    // add aditional options
-    // targets et al
-    // gets merged with the default options
-    setOptions : function (o) {
-        var options = this.options;
-            options = $.extend({}, options, o);
-        this.options = options;
-    },
+//         // argument passed in will be used as the selector
+//     // if no argument is supplied the default class will be used
+//     setElement : function (e) {
+//         // update default el if one is passed in
+//         this.el = (e.length > 0)?e:this.el;
+//     },
+//     // add aditional options
+//     // targets et al
+//     // gets merged with the default options
+//     setOptions : function (o) {
+//         var options = this.options;
+//             options = $.extend({}, options, o);
+//         this.options = options;
+//     },
  
-    content: function() {
-        var self = this,
-            viewPort = new stone.viewPort(),
-            img = this.el,
-            breakpoints = self.options.breakpoints,
-            count = Object.keys(breakpoints).length - 1;
+//     content: function() {
+//         var self = this,
+//             viewPort = new stone.viewPort(),
+//             img = this.el,
+//             breakpoints = self.options.breakpoints,
+//             count = Object.keys(breakpoints).length - 1;
  
-            $(img).each(function() {
-                var $img = $(this),
-                    output = [],
-                    k = 0;
+//             $(img).each(function() {
+//                 var $img = $(this),
+//                     output = [],
+//                     k = 0;
 
-                    for(var key in breakpoints){
-                        if(viewPort.width < breakpoints[key]) {
-                            output.push(key);
-                        }
-                    }
-                    var size = (output.length === 0) ? 'desktop' : output[0];
+//                     for(var key in breakpoints){
+//                         if(viewPort.width < breakpoints[key]) {
+//                             output.push(key);
+//                         }
+//                     }
+//                     var size = (output.length === 0) ? 'desktop' : output[0];
 
-                self.swap($img,size);
-            });
+//                 self.swap($img,size);
+//             });
             
-    },
+//     },
  
-    swap: function(e,size) {
-        var self = this,
-            src = e.data(size);
-            src = self.options.path + src;
+//     swap: function(e,size) {
+//         var self = this,
+//             src = e.data(size);
+//             src = self.options.path + src;
  
-        if(self.options.inline === true) {
-            e.attr('src', src).css(self.options.css);
-        } else {
-            e.css('background-image', 'url('+ src +')');
-        }
-    },
+//         if(self.options.inline === true) {
+//             e.attr('src', src).css(self.options.css);
+//         } else {
+//             e.css('background-image', 'url('+ src +')');
+//         }
+//     },
  
-    init: function(e) {
-        var self = this;
-        self.content();
+//     init: function(e) {
+//         var self = this;
+//         self.content();
  
-        $(window).smartresize(function(){
-            self.content();
-        });
-    },
-};
+//         $(window).smartresize(function(){
+//             self.content();
+//         });
+//     },
+// };
  
 /**
  * Method for swapping images at breakpoints 
@@ -276,92 +278,92 @@ stone.resp_media.prototype = {
  *     })
  *     swap.init();
  */
-stone.resp_content = function () {
-    this.el = '.js-content';
-    this.options = {
-        ajax: false,
-        url: null,
-        breakpoints: {
-            mobile: mud.breakpoints.mobile,
-            tablet: mud.breakpoints.tablet,
-            desktop: mud.breakpoints.desktop
-        },
-        path: '/_assets/pages/',
-        css: {
-            visibility: 'visible'
-        }
-    };
+// stone.resp_content = function () {
+//     this.el = '.js-content';
+//     this.options = {
+//         ajax: false,
+//         url: null,
+//         breakpoints: {
+//             mobile: mud.breakpoints.mobile,
+//             tablet: mud.breakpoints.tablet,
+//             desktop: mud.breakpoints.desktop
+//         },
+//         path: '/_assets/pages/',
+//         css: {
+//             visibility: 'visible'
+//         }
+//     };
      
  
-    ( arguments.callee._singletonInstance )
-        return arguments.callee._singletonInstance;
-    arguments.callee._singletonInstance = this;
+//     ( arguments.callee._singletonInstance )
+//         return arguments.callee._singletonInstance;
+//     arguments.callee._singletonInstance = this;
  
-};
+// };
  
  
-stone.resp_content.prototype = {
+// stone.resp_content.prototype = {
  
-    // argument passed in will be used as the selector
-    // if no argument is supplied the default class will be used
-    // type = string
-    setElement : function (e) {
-        // update default el if one is passed in
-        this.el = (e.length > 0)?e:this.el;
-    },
-    // add aditional options
-    // targets et al
-    // gets merged with the default options
-    // type = object
-    setOptions : function (o) {
-        var options = this.options;
-            options = $.extend({}, options, o);
-        this.options = options;
-    },
+//     // argument passed in will be used as the selector
+//     // if no argument is supplied the default class will be used
+//     // type = string
+//     setElement : function (e) {
+//         // update default el if one is passed in
+//         this.el = (e.length > 0)?e:this.el;
+//     },
+//     // add aditional options
+//     // targets et al
+//     // gets merged with the default options
+//     // type = object
+//     setOptions : function (o) {
+//         var options = this.options;
+//             options = $.extend({}, options, o);
+//         this.options = options;
+//     },
  
-    swap: function(e,size) {
-        var self = this,
-            content = e.data(size);
-            if(self.options.ajax === false) {
-                e.html(content).css(self.options.css);
-            }            
-    },
+//     swap: function(e,size) {
+//         var self = this,
+//             content = e.data(size);
+//             if(self.options.ajax === false) {
+//                 e.html(content).css(self.options.css);
+//             }            
+//     },
  
-    content: function() {
-        var self = this,
-            viewPort = new stone.viewPort(),
-            el = this.el,
-            breakpoints = self.options.breakpoints;
-            count = Object.keys(breakpoints).length - 1;
+//     content: function() {
+//         var self = this,
+//             viewPort = new stone.viewPort(),
+//             el = this.el,
+//             breakpoints = self.options.breakpoints;
+//             count = Object.keys(breakpoints).length - 1;
  
-            $(el).each(function() {
-                var $el = $(this),
-                    output = [],
-                    i;
-                    for(var key in breakpoints){
-                        if(viewPort.width < breakpoints[key]) {
-                            output.push(key);
-                            i = 0;
-                        } else {
-                            output.push(key);
-                            i = count;
-                        }
-                    }
+//             $(el).each(function() {
+//                 var $el = $(this),
+//                     output = [],
+//                     i;
+//                     for(var key in breakpoints){
+//                         if(viewPort.width < breakpoints[key]) {
+//                             output.push(key);
+//                             i = 0;
+//                         } else {
+//                             output.push(key);
+//                             i = count;
+//                         }
+//                     }
                  
-                self.swap($el,output[i]);
-            });
-    },
+//                 self.swap($el,output[i]);
+//             });
+//     },
  
-    init: function(e) {
-        var self = this;
-        self.content();
-        $(window).smartresize(function(){
-            self.content();
-        });
-    },
-};
+//     init: function(e) {
+//         var self = this;
+//         self.content();
+//         $(window).smartresize(function(){
+//             self.content();
+//         });
+//     },
+// };
  
-/**
+ /**
  * Method for moving elements to different dom locations at given breakpoints
  * var searchView = new stone.resp_position();   
  *     searchView.setElement('.form--search');
@@ -380,12 +382,12 @@ stone.resp_content.prototype = {
  *     });
  *     searchView.init();
 */
- 
 stone.resp_position = function () {
     this.el = '.js-content';
     this.currentBreak = '';
     this.previousBreak = '';
     this.options = {
+        type: 'appendTo',
         parents: '',
         wrapper: false,
         last: {
@@ -399,9 +401,21 @@ stone.resp_position = function () {
                 bp: mud.breakpoints.mobile,
                 targetEl: '.el-1',
                 type: 'appendTo'
+            },
+            {
+                bp: mud.breakpoints.tablet,
+                targetEl: '.el-3',
+                type: 'appendTo'
+            },
+            {
+                bp: mud.breakpoints.desktop,
+                targetEl: '.el-5',
+                type: 'appendTo'
             }
         ],
     };
+     
+ 
     ( arguments.callee._singletonInstance )
         return arguments.callee._singletonInstance;
     arguments.callee._singletonInstance = this;
@@ -431,6 +445,7 @@ stone.resp_position.prototype = {
         if(obj.before) {
             obj.before();
         }
+ 
         if(typeof this.el == 'object') {
             for(var i = 0; i < this.el.length; i++) {
                $(this.el[i])[obj.type](obj.targetEl);
@@ -438,6 +453,7 @@ stone.resp_position.prototype = {
         } else {
             $(this.el)[obj.type](obj.targetEl);
         }
+ 
         if(obj.after){
             obj.after();
         }
@@ -453,6 +469,7 @@ stone.resp_position.prototype = {
                 obj = bpArray[i];
             }
         }
+
        // this.currentBreak = obj;
         return obj;
     },
@@ -492,7 +509,9 @@ stone.resp_position.prototype = {
                 }
             }
         }
-       // debug.log(this.options.breakpoints);
+
+
+
         self.newNum = self.newArray[0];
         if(oldNum !== self.newNum) {
             var setup = self.getCurrentBreak(self.newNum);
@@ -501,7 +520,6 @@ stone.resp_position.prototype = {
             } else {
                 var obj = self.options.last;
             }
-            //debug.log(obj);
             self.move(obj);
         }    
     },
@@ -520,6 +538,7 @@ stone.resp_position.prototype = {
     init : function() {
         var self = this,
             viewPort = new stone.viewPort();
+ 
             if(this.options.onLoad) {
                 if(typeof this.options.onLoad === 'function') {
                     this.options.onLoad();
@@ -528,283 +547,144 @@ stone.resp_position.prototype = {
             }
             self.resize();
     }
+ 
 };
 
 
-/**
- * Method for managing slides, based on default values
- * @example
- * var slide = new stone.slide();
- *     slide.setElement('.slide--homepage #cycle-main');
- *     slide.setOptions({
- *         swipeFX: 'scrollHorz',
- *         pager: '.slide-pager'
- *     });
- *     slide.init();
- * var slideInstance = slide.thisSlide();
-*/
-
-stone.slide = function() {
+stone.tabs = function() {
     this.el = '',
-    this.options =  {
-        fx: 'fade',
-        slides: '> div',
-        timeout: 5000,
-        next: '.slide__next',
-        prev: '.slide__prev',
-        log: false,
-        swipe: true
+    this.options  = {
+        container: '',
+        parent: '',
+        activeClass: '',
     };
 
     ( arguments.callee._singletonInstance )
         return arguments.callee._singletonInstance;
     arguments.callee._singletonInstance = this;
-}
+};
 
-stone.slide.prototype = {
-    // argument passed in will be used as the selector
-    // if no argument is supplied the default class will be used
+stone.tabs.prototype = {
+    current: '',
+    next: '',
     setElement : function (e) {
         // update default el if one is passed in
         this.el = (e.length > 0)?e:this.el;
     },
-    // add aditional options
-    // targets et al
-    // gets merged with the default options
     setOptions : function (o) {
         var options = this.options;
             options = $.extend({}, options, o);
         this.options = options;
     },
-    // init must be called before, otherwise there is no cycle context
-    thisSlide : function() {
-        return $(this.el);
+
+    setCurrent: function() {
+         this.current = $(this.options.parent).find(this.options.activeClass);
+         return this.current;
     },
 
-    init: function() {
-        $(this.el).cycle(this.options);
-    }
-}
+    stripString: function(str) {
+        return str.slice(1);
+    },
 
-/**
- * Method for managing popup groups
- * @example
-* var popup = new stone.popup();
-*     popup.setElement('.js-popup-show');
-*     popup.setOptions({
-*         callback: {
-*             open: function() {
-*             },
-*             close: function() {
-*             }
-*         }
-*     })
-*     popup.init();
-*/
-stone.popup = function() {
+    getHeight: function() {
+        var target = [],
+            height = 0;
+        $(this.el).each(function(i) {
+            if($($(this).attr('href')).outerHeight() > height) {
+                height = $($(this).attr('href')).outerHeight();
+            }
+            
+        });
+        return height;
+    },
 
-    this.el = '',
-    this.options = {
-        activeClass: 'active',
-        callback: {
-            close: function() {},
-            open: function() {}
+    setHeight: function() {
+        $(this.options.container).css({height: this.getHeight() + 'px'});
+    },
+
+    onLoad: function() {
+        var hash = document.location.hash,
+            first = $(this.el).attr('href');
+        if(hash) {
+            this.close();
+            this.next = $("a[href^='"+hash+"']")
+            this.switchTab(hash);
+        } else {
+            this.next = $("a[href^='"+first+"']")
+            this.switchTab(first);
         }
-    };
-
-    ( arguments.callee._singletonInstance )
-        return arguments.callee._singletonInstance;
-    arguments.callee._singletonInstance = this;
-}
-
-stone.popup.prototype = {
-    // argument passed in will be used as the selector
-    // if no argument is supplied the default class will be used
-    setElement : function (e) {
-        // update default el if one is passed in
-        this.el = (e.length > 0)?e:this.el;
-    },
-    // add aditional options
-    // targets et al
-    // gets merged with the default options
-    setOptions : function (o) {
-        var options = this.options;
-            options = $.extend({}, options, o);
-        this.options = options;
     },
 
-    open : function(e) {
+    onScroll: function() {
         var self = this,
-            target = e.data('popup-target'),
-            target = '[data-popup="' + target + '"]';
-            e.addClass(self.options.activeClass);
-            $(target).addClass(self.options.activeClass);
+            $container = $(self.options.container);
 
-            if(self.options.callback.open) {
-                self.options.callback.open();
+        var throttled = _.throttle(function() {
+            if(!$container.hasClass('is-active')) {
+                if($.inViewport($container)) {
+                    $container.addClass('is-active');
+                    self.onLoad();
+                }
             }
+        }, 250);
+        $(window).on('scroll', throttled);
+
     },
-    // close the popup
-    close : function(e) {
+
+    close: function() {
         var self = this,
-            target = e.data('popup-target'),
-            target = '[data-popup="' + target + '"]';
-            e.removeClass(self.options.activeClass);
-            $(target).removeClass(self.options.activeClass);
-
-            if(self.options.callback.open) {
-                self.options.callback.close();
-            }
-    },
-    // method to close siblings
-    closeSiblings : function(e) {
-        var self = this;
-        e.each(function() {
-            self.close(e);
+            $el = this.current;
+        $el.each(function(i) {
+            $(this).removeClass(self.stripString(self.options.activeClass));
         });
     },
 
-    init : function() {
-        var self = this;
-        // loop through all the links
-        $(this.el).each(function() {
-            var $self = $(this);
-            // on click
-            $self.off().on('click', function(e) {
-                e.preventDefault();
-                // get the target
-                var target = $self.data('popup-target'),
-                    target = '[data-popup="' + target + '"]';
-                if(!$self.hasClass('active')) {
-                    // if there are any active siblings, close them
-                    $(self.el + '.' + self.options.activeClass).each(function() {
-                        self.closeSiblings($(this));
-                    });
-                    self.open($self);
-                } else {
-                    self.close($self);
-                }
-            });
-        })
-    }
-}
-
-
-/**
- * Method for add overlays 
- * @example
- * var overlay = new stone.overlay();   
- *    overlay.setStyle({backgroundColor: 'rgba(0,0,0,0.5'});
- *    overlay.setOptions({
- *        target: '.target',
- *        trigger: '.btn',
- *    });
- *    overlay.init();
- *    // to remove
- *    overlay.remove();
- */
-
-stone.overlay = function() {
-    this.style = {
-        position: 'fixed', 
-        top: '0', 
-        left: '0',
-        width: '100%', 
-        height: '100vh', 
-        zIndex: '1000', 
-        backgroundColor: 'rgba(0,0,0,0.4)',
-        display: 'none'
-    },
-    this.options = {
-        target: '',
-        className: '--overlay--',
-        target: '',
-        trigger: '',
-        event: 'click',
-        duration: 150,
-        delay: 1000,
-        type: 'prepend'
-    };
-
-    ( arguments.callee._singletonInstance )
-        return arguments.callee._singletonInstance;
-    arguments.callee._singletonInstance = this;
-}
-
-
-stone.overlay.prototype = {
-    timeout: 0,
-    state: false,
-    markup : function() {
-        return  '<div class="' + this.options.className + '"></div>';
-    },
-    selector : function() {
-        return  '.' + this.options.className
-    },
-    // add aditional options
-    // targets et al
-    // gets merged with the default options
-    setStyle : function (o) {
-        var style = this.style;
-            style = $.extend({}, style, o);
-        this.style = style;
-    },
-    setOptions : function (o) {
-        var options = this.options;
-            options = $.extend({}, options, o);
-        this.options = options;
-    },
-
-    add: function() {
+    switchTab: function(hash) {
         var self = this,
+            $tab = $(hash);
+        $(this.next).addClass('is-active');
+        $tab.addClass(self.stripString(self.options.activeClass));
+        this.setCurrent();
+        window.history.replaceState("", "", hash);
+    },
+
+    events: function() {
+        var self = this,
+            el = self.el,
             options = self.options,
-            style = self.style;
-            self.state = true;
-            $(options.target)[options.type](self.markup()).find(self.selector()).css(style).fadeIn({
-                duration: options.duration,
-                complete: function() {
-                    window.clearTimeout(self.timeOut);
-                }
-            }); 
+            parent = options.parent,
+            activeClass = options.activeClass;
 
-    },
-
-    remove: function() {
-        var self = this,
-            selector = self.selector();
-            self.state = false;
-            $(selector).fadeOut({
-                duration: self.options.duration,
-                complete: function() {
-                    $(selector).remove();
-                    window.clearTimeout(self.timeout);
+            $(parent).on('click', el, function(e){
+                e.preventDefault();
+                if(!$(this).hasClass(activeClass)) {
+                    self.close();
+                    self.next = $(this);
+                    self.switchTab(this.hash);
                 }
             });
-    },
+    }, 
 
-    on: function() {
-        var self = this;
-            self.timeout = window.setTimeout(self.add.bind(self), self.options.delay);
-    },
-
-    off: function() {
-        var self = this;
-            self.timeout = window.setTimeout(self.remove.bind(self), self.options.delay);
-    },
 
     init: function() {
-        var self = this,
-            options = self.options,
-            selector = self.selector();
-            if(!self.state) {
-                self.add();
+        var self = this;
+        this.setCurrent();
+        this.events();
+        this.setHeight();
+        this.onScroll();
+        if(!$(self.options.container).hasClass('is-active')) {
+            if($.inViewport($(this.el))) {
+                $(self.options.container).addClass('is-active');
+                self.onLoad();
             }
- 
-            $(document).off().on('click', selector, function() {
-                if(options.trigger) {
-                    $(options.trigger).trigger(options.event);
-                }
-                self.off();
-            });
+        }
+
+        var updateHeight = _.debounce(function() {
+            self.setHeight();
+        }, 300);
+        $(window).resize(updateHeight);
+
+
     }
-}
+};
+

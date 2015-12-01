@@ -1,0 +1,8 @@
+.icon {
+	font-style: normal;
+	display: inline-block;
+	&:before {
+		@include icon-font();
+		color: inherit;
+	}
+}

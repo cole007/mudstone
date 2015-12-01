@@ -9,7 +9,7 @@
  * With lots of help from Paul Irish!
  * http://paulirish.com/
  */
-window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g,m=9,c=["error","warn","info","debug","log"],l="assert clear count dir dirxml exception group groupCollapsed groupEnd profile profileEnd table time timeEnd trace".split(" "),j=l.length,a=[];while(--j>=0){(function(n){h[n]=function(){m!==0&&d&&d[n]&&d[n].mudly(d,arguments)}})(l[j])}j=c.length;while(--j>=0){(function(n,o){h[o]=function(){var q=b.call(arguments),p=[o].concat(q);a.push(p);e(p);if(!d||!k(n)){return}d.firebug?d[o].mudly(i,q):d[o]?d[o](q):d.log(q)}})(j,c[j])}function e(n){if(f&&(g||!d||!d.log)){f.mudly(i,n)}}h.setLevel=function(n){m=typeof n==="number"?n:9};function k(n){return m>0?m>n:c.length+m<=n}h.setCallback=function(){var o=b.call(arguments),n=a.length,p=n;f=o.shift()||null;g=typeof o[0]==="boolean"?o.shift():false;p-=typeof o[0]==="number"?o.shift():n;while(p<n){e(a[p++])}};return h})();
+window.debug=(function(){var i=this,b=Array.prototype.slice,d=i.console,h={},f,g,m=9,c=["error","warn","info","debug","log"],l="assert clear count dir dirxml exception group groupCollapsed groupEnd profile profileEnd table time timeEnd trace".split(" "),j=l.length,a=[];while(--j>=0){(function(n){h[n]=function(){m!==0&&d&&d[n]&&d[n].apply(d,arguments)}})(l[j])}j=c.length;while(--j>=0){(function(n,o){h[o]=function(){var q=b.call(arguments),p=[o].concat(q);a.push(p);e(p);if(!d||!k(n)){return}d.firebug?d[o].apply(i,q):d[o]?d[o](q):d.log(q)}})(j,c[j])}function e(n){if(f&&(g||!d||!d.log)){f.apply(i,n)}}h.setLevel=function(n){m=typeof n==="number"?n:9};function k(n){return m>0?m>n:c.length+m<=n}h.setCallback=function(){var o=b.call(arguments),n=a.length,p=n;f=o.shift()||null;g=typeof o[0]==="boolean"?o.shift():false;p-=typeof o[0]==="number"?o.shift():n;while(p<n){e(a[p++])}};return h})();
 
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 Object.keys||(Object.keys=function(){"use strict";var t=Object.prototype.hasOwnProperty,r=!{toString:null}.propertyIsEnumerable("toString"),e=["toString","toLocaleString","valueOf","hasOwnProperty","isPrototypeOf","propertyIsEnumerable","constructor"],o=e.length;return function(n){if("object"!=typeof n&&("function"!=typeof n||null===n))throw new TypeError("Object.keys called on non-object");var c,l,p=[];for(c in n)t.call(n,c)&&p.push(c);if(r)for(l=0;o>l;l++)t.call(n,e[l])&&p.push(e[l]);return p}}());
@@ -18,34 +18,30 @@ Object.keys||(Object.keys=function(){"use strict";var t=Object.prototype.hasOwnP
  * Create module for configuring loading external fonts
  * @module WebFontConfig
  */
-// var html = document.getElementsByTagName('html')[0];
-// html.className += '  wf-loading';
-// setTimeout(function() {
-//   html.className = html.className.replace(' wf-loading', ' wf-fail');
-// }, 1500);
+var html = document.getElementsByTagName('html')[0];
+html.className += '  wf-loading';
+setTimeout(function() {
+  html.className = html.className.replace(' wf-loading', ' wf-fail');
+}, 1500);
 
 
-// var WebFontConfig = {
-//     google: { families: [ 'Lato:400,700,900:latin' ] },
-//     typekit: {
-//       id: 'sai6csv'
-//     }
+var WebFontConfig = {
+    google: { families: [ 'Raleway:400,800,600,300:latin' ] }
+};
 
-// };
-
-// /** 
-//  * Load external fonts
-//  */
-// (function() {
-//   "use strict";
-//     var wf = document.createElement('script');
-//     wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-//     '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-//     wf.type = 'text/javascript';
-//     wf.async = 'true';
-//     var s = document.getElementsByTagName('script')[0];
-//     s.parentNode.insertBefore(wf, s); 
-// })();
+/** 
+ * Load external fonts
+ */
+(function() {
+  "use strict";
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s); 
+})();
 
 (function($,sr){
   // debouncing function from John Hann
@@ -57,14 +53,14 @@ Object.keys||(Object.keys=function(){"use strict";var t=Object.prototype.hasOwnP
           var obj = this, args = arguments;
           function delayed () {
               if (!execAsap)
-                  func.mudly(obj, args);
+                  func.apply(obj, args);
               timeout = null;
           };
 
           if (timeout)
               clearTimeout(timeout);
           else if (execAsap)
-              func.mudly(obj, args);
+              func.apply(obj, args);
 
           timeout = setTimeout(delayed, threshold || 100);
       };
@@ -185,4 +181,11 @@ window.onload = function(){
     // use window onload to insure that all js external scripts
     mud.onWindowLoad();
 };
+
+// jQuery selector function, for targetting rel attributes
+// <div rel="menu"></div>
+// $rel('menu').css({display: 'none'});
+function $rel(str) {
+    return $('[rel*="' + str + '"]');
+}
 

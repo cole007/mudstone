@@ -15,7 +15,7 @@
 * SVG to icon font
 * SVG symbol sprites (svgstore)
 * Compile jade templates
-* Optimise css with Combine Media queries, uncss and csso
+* Optimise css with uncss and clean css
 * Critcal path css generator
 * Build task for deployment directory
 * Watch with Browsersync for live reload and server
@@ -33,7 +33,8 @@ Make sure you have Node.js and gulp installed
 ######From the terminal run
 ```
  npm install
- gulp
+ gulp build - this will move any fonts/scripts into the working directory (tmp or deploy)
+ gulp - starts server, watches css,js,jade et al
  
 ```
 
@@ -45,11 +46,12 @@ All of the source files (scss,javascript,js) are stored in the _assets directory
 
 ##Javascript
 
-Vendor folder contains jquery and modernizer (touch test only)
-Libs folder contains any plugins used
-Behaviour folder contains any custom javascript
+Libs folder contains jquery and modernizer (touch test only)
+plugsins folder contains any plugins used
+behaviour folder contains any custom javascript
+application.js includes boilerplate code for the js framework (http://www.creativebloq.com/javascript/get-your-javascript-order-4135704)
+tools.js includes constructor functions for common ui patterns
 All of the files in libs/behaviours + jquery from the vendor folder get merged into one file (dist/app.js)
-application.js based on http://www.creativebloq.com/javascript/get-your-javascript-order-4135704 
 
 ##Git methodology
 

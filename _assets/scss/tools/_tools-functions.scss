@@ -1,0 +1,124 @@
+/*
+    File: _assets/css/scss/_libs-functions.scss
+*/
+// Typography
+
+@function size($size) {
+	@return map-get($font-size, $size);
+}
+
+@function computeLineHeight($font-size, $computed) {
+  $fs: strip-units($font-size);
+  @return $computed / $fs;
+}
+
+
+@function ms($increment, $value: $modular-scale-base, $ratio: $modular-scale-ratio) {
+  @return modular-scale($increment, $value: $modular-scale-base, $ratio: $modular-scale-ratio);
+}
+
+// Map helpers
+
+// thanks to @ericmsuzanne for this function
+@function map-set($map, $key, $value) {
+  $new: ($key: $value);
+  @return map-merge($map, $new);
+}
+
+// Layout
+
+@function r($lines: 1, $gutter: $base-padding) {
+	@return rem(($gutter * $lines));
+}
+
+@function gutter($lines: 1, $gutter: $base-padding) {
+	@return floor(($gutter * $lines) * 1px);
+}
+
+@function gridCalc($columns,$total_coloumns: $base-max-columns) {
+	@return percentage($columns / $total_coloumns);
+}
+
+@function context($width, $max-width: $base-max-width) {
+	@return percentage($width / $max-width);
+}
+
+// help funtions
+
+@function strip-units($value) {
+	@return $value / ($value * 0 + 1);
+}
+
+@function rem($font-size) {
+	@return ($font-size / $base-font-size) * 1rem;
+}
+
+
+// colour functions
+// Add percentage of white to a color
+@function tint($color, $percent){
+ 	@return mix(white, $color, $percent);
+}
+
+// Add percentage of black to a color
+@function shade($color, $percent){
+ 	@return mix(black, $color, $percent);
+}
+
+// http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+// use eg palette(accent,light)
+@function palette($palette, $tone: 'base') {
+    @return map-get(map-get($palettes, $palette), $tone);
+}
+
+@function c($palette, $tone: 'base') {
+    @return map-get(map-get($palettes, $palette), $tone);
+}
+
+@function theme($tone) {
+	@return map-get(map-get($palettes, 'theme'), $tone);
+}
+
+
+@function opposite($arg) {
+	$output: null;
+	@if $arg == left {
+		$output: right;
+	}
+	@if $arg == right {
+		$output: left;
+	}
+	@if $arg == top {
+		$output: bottom;
+	}
+	@if $arg == bottom {
+		$output: top;
+	}
+	@return $output;
+}
+
+@function mapReverse ($map) {
+    $result: null;
+
+    @if type-of($map) == "map" {
+        $keys: map-keys($map);
+        $map-reversed: ();
+        
+        @for $i from length($keys) through 1 {
+            $map-reversed: map-merge(
+                $map-reversed,
+                (nth($keys, $i): map-get($map, nth($keys, $i)))
+            );
+        }
+
+        @if type-of($map-reversed) == "map" {
+            $result: $map-reversed;
+        } @else {
+            @warn 'There was an error reversing the order of "#{$map}"';
+        }
+    } @else {
+        @warn '"#{$map}" is not a valid map';
+    }
+
+    @return $result;
+}
