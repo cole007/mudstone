@@ -4,6 +4,7 @@ var source = require('vinyl-source-stream'),
     browserify = require('browserify'),
     babelify = require('babelify'),
     watchify = require('watchify'),
+    sourcemaps = require('gulp-sourcemaps'),
     notify = require('gulp-notify'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
@@ -30,14 +31,15 @@ function buildScript(file, watch) {
     return stream
       .on('error', handleErrors)
       .pipe(source(file))
-      // .pipe(buffer())
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write('./'))
       // .pipe(uglify())
       .pipe(gulp.dest(config.dest))
-      .on('error', handleErrors)
       // If you also want to uglify it
       // .pipe(rename('app.min.js'))
       // .pipe(gulp.dest('./build'))
-      .pipe(reload({stream:true}))
+      //.pipe(reload({stream:true}))
   }
 
   // listen for an update and run rebundle

@@ -41,6 +41,7 @@
     "gulp-uncss": "^1.0.3",
     "gulp-util": "^3.0.6",
     "gulp.spritesmith": "^4.0.0",
+    "jquery": "^2.1.4",
     "jshint-stylish": "^2.0.1",
     "node-bourbon": "*",
     "require-dir": "^0.3.0",
