@@ -196,6 +196,26 @@ var beta = new App.view({
 	}
 });
 
+// example
+// App.offCanvas = function() {
+// inherit options from App.view();
+// 	stuff
+//
+//}
+// var menu = new App.view({
+// 	name: 'mobile:menu',
+// 	state: false,
+// 	container: '.header', // events are bound here
+// 	element: '.menuBtn', // events delegated from here
+// 	behaviour: 'offCanvas',
+// 	activeClass: 'is-active',
+// 	watch: {
+// 		name: 'a',
+// 		state: false,
+// 		action: 'openAll'
+// 	}
+// });
+
 (function () {
 	App.collection.forEach(function (element, index) {
 		element.render();
