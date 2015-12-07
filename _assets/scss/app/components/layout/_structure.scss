@@ -1,7 +1,6 @@
 
 .site {
 	display: flex;
-	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
 	height: 100vh;
@@ -18,6 +17,23 @@
 	}
 }
 
+.accordion {
+	width: 50%;
+}
+
 .is-active {
 	border-color: #b222bb;
 }
+
+.content {
+	display: none;
+	//transition: all .4s;
+}
+
+p {
+	margin : 0;
+}
+
+// .is-active + .content {
+// 	display: block;
+// }

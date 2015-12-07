@@ -1,13 +1,25 @@
 // import $ from 'jquery';
-// App({
-// 	name: 'v'
-// });
-// Test({
-// 	name: 's'
-// });
 
 var App = App || {};
+
 App.collection = [];
+App.tools = {
+	transitionEnd: function() {
+	    var el = document.createElement('div');
+	    var transEndEventNames = {
+	      WebkitTransition : 'webkitTransitionEnd',
+	      MozTransition    : 'transitionend',
+	      OTransition      : 'oTransitionEnd otransitionend',
+	      transition       : 'transitionend'
+	    }
+	    for (var name in transEndEventNames) {
+	      if (el.style[name] !== undefined) {
+	        return transEndEventNames[name];
+	      }
+	    }
+	    return false
+	}
+}
 
 App.view = function(options, func) {
 	var _this = this;
@@ -30,7 +42,6 @@ App.view = function(options, func) {
 		}
 	};
 	this.update = (e) => {
-		console.log(App.collection);
 		(e.length > 0) ? this.setState(true) : this.setState(false);
 		if(this.watch !== undefined) {
 			var func = App.collection.find((element) => element.name === this.watch.name);
@@ -42,12 +53,12 @@ App.view = function(options, func) {
 	this.setState = (state) => {
 		this.state = state;
 	};
-
+	this.event = (index, state) => {
+	};
 	if(typeof this.onLoad === 'object') {
 		var onLoad = options.onLoad;
 		var target = App.collection.find((element) => element.name === onLoad.name);
 		target[onLoad.func]();
-
 	} else if(typeof this.onLoad === 'function') {
 		this.onLoad.call(this, options);
 	}
@@ -56,58 +67,78 @@ App.view = function(options, func) {
 	}
 	// add to collection 
 	App.collection.push(this);
-}
+};
 
 App.expander = function(options) {
 	var _this = this,
 		container = options.container,
 		element = options.element,
-		currentEl = null;
+		currentEl = null,
+		timer;
+		var open = function(element) {
+			var $target = $(element.target);
+			$target.slideDown();
+		};
+
+		var close = function(element) {
+			var $target = $(element.target);
+			$target.slideUp();
+		}
+
 		_this.open = () => {
 			if(currentEl) {
-				currentEl.el.addClass('is-active');
+				open(currentEl);
+				//currentEl.el.addClass('is-active');
 			}
 		};
 		_this.openAll = () => {
 			_this.set.forEach((element) => {
-				element.el.addClass('is-active');
+				open(element);
+				//element.el.addClass('is-active');
 				element.state = true;
 			});
 		};
 		_this.close = () => {
 			if(currentEl) {
-				currentEl.el.removeClass('is-active');
+				close(currentEl);
+				//currentEl.el.removeClass('is-active');
 			}
 		};
 		_this.closeAll = () => {
 			_this.set.forEach((element) => {
-				element.el.removeClass('is-active');
+				close(element);
+				//element.el.removeClass('is-active');
 				element.state = false;
 			});
 		};
+
 		// add a method to
 		$(container).find(element).each(function(i) {
 			 _this.set.forEach((element) => {
 			 	element.open = _this.open,
-			 	element.close = _this.close
+			 	element.close = _this.close,
+			 	element.target = element.el.data('target')
 			 });
 		});
 		// the click event
 		$(container).off().on('click', element, function(e) {
-			var index = $(this).index();
-			// get any active elements
+			e.preventDefault();
+			var index = (options.wrapper !== undefined) ? $(this).parents(options.wrapper).index() : $(this).index();
+			var state = _this.set[index].state;
 			var activeElements = _this.set.filter((element) => element.state === true && element.index !== index);
+			currentEl = _this.set[index];
+			// get any active elements
 			// if found and option.single is true
 			if(activeElements.length > 0 && options.single === true) {
 				// each of the elements
 				activeElements.forEach((element, i) => {
-					element.el.removeClass('is-active');
+					//element.el.removeClass('is-active');
 					element.state = false;
+					close(element);
 				})
 			}
-			currentEl = _this.set[index];
 			// if the current state is false
-			if(_this.set[index].state === false) {
+			if(state === false) {
 				//$(this).addClass('is-active');
 				_this.set[index].state = true;
 				_this.set[index].open();
@@ -116,7 +147,6 @@ App.expander = function(options) {
 				_this.set[index].state = false;
 				_this.set[index].close();
 			}
-
 			// update the state of the containing object, if none are active, set the containing state to false
 			_this.update(_this.set.filter((element) => element.state === true));
 		});
@@ -125,8 +155,9 @@ App.expander = function(options) {
 var alpha = new App.view({
 	name: 'a',
 	state: false,
-	container: '.wrapper-a',
-	element: '.button',
+	container: '.wrapper-a', // events are bound here
+	element: '.button', // events delegated from here
+	wrapper: '.accordion', // options wrapper class, can be used for styling, indexes etc
 	behaviour: 'expander',
 	activeClass: 'is-active',
 	single: true,
@@ -140,15 +171,16 @@ var alpha = new App.view({
 var beta = new App.view({
 	name: 'b',
 	state: false,
-	container: '.wrapper-b',
-	element: '.button',
+	container: '.wrapper-b', // events are bound here
+	element: '.button', // events delegated from here
+	wrapper: '.accordion', // options wrapper class, can be used for styling, indexes etc
 	behaviour: 'expander',
 	activeClass: 'is-active',
 	single: false,
 	watch: {
 		name: 'a',
-		state: true,
-		action: 'close'
+		state: false,
+		action: 'openAll'
 	}
 });
 

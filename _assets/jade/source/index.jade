@@ -4,14 +4,44 @@ extends _wrapper/_layout
 block content
 	.site
 		.wrapper-a
-			button.button 1
-			button.button 2
-			button.button 3
-			button.button.is-active 4
-			button.button 5
+			.accordion
+				button.button(data-target="#c1") 1
+				.content#c1
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
+			.accordion
+				button.button(data-target="#c2") 2
+				.content#c2
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
+			.accordion
+				button.button(data-target="#c3") 3
+				.content#c3
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
+			.accordion
+				button.button.is-active(data-target="#c4") 4
+				.content#c4
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
+			.accordion
+				button.button(data-target="#c5") 5
+				.content#c5
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
 		.wrapper-b
-			button.button a
-			button.button.is-active b
-			button.button c
-			button.button d
-			button.button e
+			.accordion
+				button.button.is-active(data-target="#c1b") 1
+				.content#c1b
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
+			.accordion
+				button.button(data-target="#c2b") 2
+				.content#c2b
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
+			.accordion
+				button.button(data-target="#c3b") 3
+				.content#c3b
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
+			.accordion
+				button.button(data-target="#c4b") 4
+				.content#c4b
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
+			.accordion
+				button.button(data-target="#c5b") 5
+				.content#c5b
+					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
