@@ -77,16 +77,14 @@ module.exports = {
  
   scripts: {
     src: [
-      assets + 'js/libs/jquery-1.11.3.min.js',
-      assets + 'js/libs/underscore-min.js',
-      assets + 'js/plugins/*.js',
-      assets + 'js/application.js',
-      assets + 'js/tools.js',
-      assets + 'js/behaviours/*.js'
+      assets + 'js/app.js'
+    ],
+    path: [
+      assets + 'js/'
     ],
     dest: build + 'js/dist',
     output: 'app.js',
-    hint:  assets + 'js/behaviours/*.js'
+    hint:  assets + 'js/modules/*.js'
   },
  
   sprites: {
