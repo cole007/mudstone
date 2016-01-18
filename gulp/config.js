@@ -28,8 +28,8 @@ if(state === 'flat') {
       notify: false
     }
 } else {
-    root = '/deploy/public_html/';
-    build = '/deploy/public_html/_assets/';
+    root = 'deploy/public_html/';
+    build = 'deploy/public_html/_assets/';
     jadeDest = 'assets/jade/dist/'
     server = {
       proxy: url,
