@@ -19,7 +19,7 @@ body {
 	@include font-size($base-font-size);
 	font-style: normal;
 	font-weight: normal;
-	-webkit-font-smoothing: subpixel-antialiased;
+	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
