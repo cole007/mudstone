@@ -43,6 +43,8 @@
     "gulp.spritesmith": "^4.0.0",
     "jquery": "^2.1.4",
     "jshint-stylish": "^2.0.1",
+    "lodash": "^4.0.0",
+    "modernizr": "^3.3.1",
     "node-bourbon": "*",
     "require-dir": "^0.3.0",
     "run-sequence": "*",
@@ -50,7 +52,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-paths": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.6.1"
+    "watchify": "^3.6.1",
+    "webfontloader": "^1.6.20"
   },
   "engines": {
     "node": ">=0.12.2"
