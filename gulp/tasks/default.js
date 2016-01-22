@@ -3,10 +3,8 @@
  * Runs watch, for browsersync, sass, js, images, haml, sprites
  */
 
-var gulp 			= require('gulp'),
-	runSequence 	= require('run-sequence'),
-	config 			= require('../config');
+var gulp 			= require('gulp');
 
-gulp.task('default', ['watch' , 'sass', 'scripts', 'browserSync'], function () {
+gulp.task('default', ['watch'], function () {
    // gulp.watch(config.sass.src, ['sass']);
 });

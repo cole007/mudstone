@@ -3,15 +3,15 @@
  * default watch setup, sass, scripts, haml, html, sprites, images
  */
 
-var gulp  				= require('gulp'),
-	browserSync 		= require('browser-sync'),
-	reload 					= browserSync.reload,
-	config 					= require('../config'),
-	configBrowserSync = config.browserSync,
-	configJade    		= config.jade,
-	configSass			= config.sass;
+var gulp  						= require('gulp'),
+	browserSync 				= require('browser-sync'),
+	reload 							= browserSync.reload,
+	config 							= require('../config'),
+	configBrowserSync   = config.browserSync,
+	configJade    			= config.jade,
+	configSass					= config.sass;
 
-gulp.task('watch', ['scripts'], function() {
+gulp.task('watch', ['sass', 'scripts'], function() {
 
 
 	browserSync(configBrowserSync);

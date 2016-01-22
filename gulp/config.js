@@ -6,7 +6,7 @@ var assets = './_assets/',
     env = 'dev',
     outputStyle = 'expanded',
     assetPath = "/_assets/",
-    state = 'flat', 
+    state = 'static', 
     jadeDest = root,
     public_html = 'public_html',
     url = 'local.ournameismud.co.uk';
@@ -17,25 +17,36 @@ if(env === 'live') {
   outputStyle = 'compressed';
 }
 
-if(state === 'flat') {
+if(state === 'dev') {
     root = 'tmp/' + public_html + '/';
     build = 'tmp/' + public_html + '/_assets/';
-    jadeDest = root;
-    server = { 
-      server: {
-          baseDir: root,
-          directory: false
-      },
-      notify: false
-    }
 } else {
     root = 'deploy/' + public_html + '/';
     build = 'deploy/' + public_html + '/_assets/';
-    jadeDest = 'assets/jade/dist/'
-    server = {
-      proxy: url,
-      notify: false
-    }
+}
+// jade build location
+if(state === 'dev') {
+  jadeDest = root;
+} else if(state === 'static') {
+  jadeDest = 'deploy/' + public_html + '/';
+} else if(state === 'cms') {
+  jadeDest = '_assets/jade/dist/';
+}
+
+// server
+if(state === 'dev' || state === 'static') {
+  server = { 
+    server: {
+        baseDir: root,
+        directory: false
+    },
+    notify: false
+  }
+} else {
+  server = {
+    proxy: url,
+    notify: false
+  }
 }
 
 
@@ -134,12 +145,6 @@ module.exports = {
   },
  
   env: env,
- 
-  psi : {
-    nokey: 'true',
-    url: 'http://local.search-star.co.uk',
-    strategy: 'mobile',
-  },
  
   // THESE PATHS NEED UPDATING BEFORE USING THE UNCSS TASK
   uncss: {
