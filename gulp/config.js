@@ -7,7 +7,8 @@ var assets = './_assets/',
     outputStyle = 'expanded',
     assetPath = "/_assets/",
     state = 'flat', 
-    jadeDest = root;
+    jadeDest = root,
+    public_html = 'public_html',
     url = 'local.ournameismud.co.uk';
 /*
  * Update values based on environment
@@ -17,8 +18,8 @@ if(env === 'live') {
 }
 
 if(state === 'flat') {
-    root = 'tmp/public_html/';
-    build = 'tmp/public_html/_assets/';
+    root = 'tmp/' + public_html + '/';
+    build = 'tmp/' + public_html + '/_assets/';
     jadeDest = root;
     server = { 
       server: {
@@ -28,8 +29,8 @@ if(state === 'flat') {
       notify: false
     }
 } else {
-    root = 'deploy/public_html/';
-    build = 'deploy/public_html/_assets/';
+    root = 'deploy/' + public_html + '/';
+    build = 'deploy/' + public_html + '/_assets/';
     jadeDest = 'assets/jade/dist/'
     server = {
       proxy: url,
