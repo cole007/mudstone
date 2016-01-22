@@ -6,6 +6,7 @@
 ##Gulp 
 
 * Compile sass (using libsass)
+* Compile ES6 with babel/browserify
 * Uglify and concatenate javascript assets
 * JS Hint
 * Sourcemaps
