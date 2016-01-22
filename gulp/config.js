@@ -6,8 +6,9 @@ var assets = './_assets/',
     env = 'dev',
     outputStyle = 'expanded',
     assetPath = "/_assets/",
-    state = 'flat', 
-    jadeDest = root;
+    state = 'static', 
+    jadeDest = root,
+    public_html = 'public_html',
     url = 'local.ournameismud.co.uk';
 /*
  * Update values based on environment
@@ -16,25 +17,36 @@ if(env === 'live') {
   outputStyle = 'compressed';
 }
 
-if(state === 'flat') {
-    root = 'tmp/public_html/';
-    build = 'tmp/public_html/_assets/';
-    jadeDest = root;
-    server = { 
-      server: {
-          baseDir: root,
-          directory: false
-      },
-      notify: false
-    }
+if(state === 'dev') {
+    root = 'tmp/' + public_html + '/';
+    build = 'tmp/' + public_html + '/_assets/';
 } else {
-    root = '/deploy/public_html/';
-    build = '/deploy/public_html/_assets/';
-    jadeDest = 'assets/jade/dist/'
-    server = {
-      proxy: url,
-      notify: false
-    }
+    root = 'deploy/' + public_html + '/';
+    build = 'deploy/' + public_html + '/_assets/';
+}
+// jade build location
+if(state === 'dev') {
+  jadeDest = root;
+} else if(state === 'static') {
+  jadeDest = 'deploy/' + public_html + '/';
+} else if(state === 'cms') {
+  jadeDest = '_assets/jade/dist/';
+}
+
+// server
+if(state === 'dev' || state === 'static') {
+  server = { 
+    server: {
+        baseDir: root,
+        directory: false
+    },
+    notify: false
+  }
+} else {
+  server = {
+    proxy: url,
+    notify: false
+  }
 }
 
 
@@ -77,14 +89,16 @@ module.exports = {
  
   scripts: {
     src: [
-      assets + 'js/app.js'
-    ],
-    path: [
-      assets + 'js/'
+      assets + 'js/libs/jquery-1.11.3.min.js',
+      assets + 'js/libs/underscore-min.js',
+      assets + 'js/plugins/*.js',
+      assets + 'js/application.js',
+      assets + 'js/tools.js',
+      assets + 'js/behaviours/*.js'
     ],
     dest: build + 'js/dist',
     output: 'app.js',
-    hint:  assets + 'js/modules/*.js'
+    hint:  assets + 'js/behaviours/*.js'
   },
  
   sprites: {
@@ -131,12 +145,6 @@ module.exports = {
   },
  
   env: env,
- 
-  psi : {
-    nokey: 'true',
-    url: 'http://local.search-star.co.uk',
-    strategy: 'mobile',
-  },
  
   // THESE PATHS NEED UPDATING BEFORE USING THE UNCSS TASK
   uncss: {
