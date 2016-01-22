@@ -12,8 +12,7 @@ var source = require('vinyl-source-stream'),
     browserSync = require('browser-sync'),
     handleErrors = require('../util/handleErrors'),
     reload = browserSync.reload,
-    config = require('../config').scripts,
-    sass = require('../config').sass;
+    config = require('../config').scripts;
 
 
 function buildScript(file, watch) {
@@ -32,14 +31,14 @@ function buildScript(file, watch) {
       .on('error', handleErrors)
       .pipe(source(file))
       .pipe(buffer())
+      //.pipe(uglify())
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(sourcemaps.write('./'))
       // .pipe(uglify())
       .pipe(gulp.dest(config.dest))
       // If you also want to uglify it
       // .pipe(rename('app.min.js'))
-      // .pipe(gulp.dest('./build'))
-      //.pipe(reload({stream:true}))
+      .pipe(reload({stream:true}))
   }
 
   // listen for an update and run rebundle
