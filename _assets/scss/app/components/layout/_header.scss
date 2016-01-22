@@ -74,6 +74,13 @@
 	z-index: -1;
 	transition: transform .3s .1s, scale .3s .1s;
 	will-change: transform, opacity;
+
+	&.is-active {
+		transform: scale(1);
+		opacity: 1;
+		left: 0;
+		z-index: 1;
+	}
 }
 
 
