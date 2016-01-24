@@ -217,6 +217,7 @@ function expand(opts) {
 			});
 		}
 		if (!obj.isRunning) {
+			console.log('running');
 			new _tweezer2.default({
 				start: obj.currentHeight,
 				end: obj.state ? obj.height : 0
@@ -227,8 +228,10 @@ function expand(opts) {
 				obj.isRunning = false;
 				if (obj.state === true) {
 					obj.$target.css({ overflow: '', position: '', height: '' }).addClass('is-active');
+					obj.$el.addClass('is-active');
 				} else {
 					obj.$target.css({ display: 'none' }).removeClass('is-active');
+					obj.$el.removeClass('is-active');
 				}
 			}).begin();
 			obj.isRunning = true;
@@ -254,8 +257,9 @@ function expand(opts) {
 		if (closeOthers) closeOther(index);
 		el.currentHeight = el.state === true ? el.height : 0;
 		el.state = !el.state;
-		tween(el.$el);
-		$this.toggleClass('is-active');
+		if (!el.isRunning) {
+			tween(el.$el);
+		}
 	}
 
 	function init() {
