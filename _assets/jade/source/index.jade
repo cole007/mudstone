@@ -4,13 +4,13 @@ extends _wrapper/_layout
 block content
 	.site
 		include _includes/header
-		.wrapper-a
+		.wrapper(data-behaviour="accordion")
 			.accordion
 				button.button(data-target="#c1") 1
 				.content#c1
 					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
 			.accordion
-				button.button(data-target="#c2") 2
+				button.button.button-2(data-target="#c2") 2
 				.content#c2
 					p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum libero, adipisci fugiat sequi minima quas culpa laudantium, eius sit perspiciatis soluta cumque alias expedita. Harum repellendus dolorem sapiente odit eius.
 			.accordion

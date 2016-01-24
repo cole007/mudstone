@@ -22,7 +22,6 @@
 	width: 100%;
 	top: 0;
 	left: 0;
-	z-index: 20;
 	background-color: $white;
 	padding: gutter(1) 0;
 	border-bottom: 4px solid c(themes,blog);
@@ -62,25 +61,37 @@
 }
 
 .menu__wrapper {
-	@include position(fixed, 0 null 0 -100%);
+	@include position(fixed, 0);
 	width: 100%;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	background-color: c(themes,blog);
+	visibility: hidden;
 	opacity: 0;
-	transform: scale(1.2);
-	z-index: -1;
-	transition: transform .3s .1s, scale .3s .1s;
-	will-change: transform, opacity;
+	transform: scale(1.4);
+	transition: opacity .5s, transform .5s, visibility 0s;
+}
 
-	&.is-active {
-		transform: scale(1);
-		opacity: 1;
-		left: 0;
-		z-index: 1;
-	}
+.is-animating-in, .is-active {
+	transform: scale(1);
+	visibility: visible;
+	opacity: 1;
+}
+
+// .is-animating-in, .is-active {
+// 	transform: scale(1);
+// 	visibility: visible;
+// 	opacity: 1;
+// }
+
+.is-animating-out {
+	opacity: 0;
+	transform: scale(1.4);
+}
+
+.is-active {
 }
 
 

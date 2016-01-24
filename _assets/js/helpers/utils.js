@@ -12,6 +12,7 @@ var utils = {
 					},
 					release() {
 						$window.scrollTop(windowTop);
+						console.log('a');
 					}
 				}
 	}

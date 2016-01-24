@@ -1,43 +1,33 @@
 import $ from 'jquery';
 import prefix from '../helpers/prefix';
 
-var animate = {
+var transition = {
 
-	animateIn(el, func, activeClassName = 'is-active', animateClassName = 'is-animating-in') {
+	transitionEnd(el, func) {
 		function onEnd(e) {
-			el.removeClass(animateClassName);
 			if(typeof func == 'function') {
 				func();
 			}
 		}
-		el.addClass(`${animateClassName} ${activeClassName}`).one(this.transitionEnd, onEnd);
+		el.one(prefix.transitionEnd, onEnd);
 	},
 
-	animateOut(el, func, activeClassName = 'is-active', animateClassName = 'is-animating-out') {
-		function onEnd(e) {
-			el.removeClass(animateClassName);
-			if(typeof func == 'function') {
-				func();
-			}
-		}
-		el.addClass(animateClassName).removeClass(activeClassName).one(this.transitionEnd, onEnd);
-	},
 
 	animateInAnimdateOut(options) {
-
 		var _this = this, 
 			el = options.el;
 
 		function open() {
-			_this.animateIn($(el), () => {
+			_this.transitionEnd($(el), () => {
 				if(typeof options.openComplete === 'function') {
+					
 					options.openComplete();
 				}
 			});
 		}
 
 		function close() {
-			_this.animateOut($(el), () => {
+			_this.transitionEnd($(el), () => {
 				if(typeof options.closeComplete === 'function') {
 					options.closeComplete();
 				}
@@ -48,6 +38,7 @@ var animate = {
 			if(typeof options.openStart === 'function') {
 				options.openStart();
 			}
+			console.log('a');
 			open();	
 		}
 		else {
@@ -60,5 +51,5 @@ var animate = {
 }
 
 
-export default animate;
+export default transition;
 

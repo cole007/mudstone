@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import animate from '../helpers/animate';
+import transition from '../helpers/transition';
 import utils from '../helpers/utils';
 
 
@@ -7,24 +7,25 @@ import utils from '../helpers/utils';
 
 function menu(container) {
 	var lock = utils.lock();
-
 	function clickHandle(e) {
 		e.preventDefault();
-		animate.animateInAnimdateOut({
-			el: '.js-menu',
+		transition.animateInAnimdateOut({
+			el: '.js-menu',	
 			openStart: function() {
-				console.log('openStart');
-				//lock.capture();
+				$(this.el).addClass('is-animating-in');
+				lock.capture();
 			},
 			openComplete: function() {
-				console.log('openComplete');
+				$(this.el).addClass('is-active').removeClass('is-animating-in');
+				$('body').css({position: 'fixed', height: '100%', width: '100%'});
 			},
 			closeStart: function(){
-				//lock.release();
-				console.log('closeStart');
+				$(this.el).addClass('is-animating-out');
+				$('body').css({position: '', height: '', width: ''});
+				lock.release();
 			},
 			closeComplete: function(){
-				console.log('closeComplete');
+				$(this.el).removeClass('is-animating-out is-active');
 			}
 		});
 	}
