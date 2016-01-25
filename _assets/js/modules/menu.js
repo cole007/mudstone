@@ -2,14 +2,11 @@ import $ from 'jquery';
 import transition from '../helpers/transition';
 import utils from '../helpers/utils';
 
-
-
-
 function menu(container) {
 	var lock = utils.lock();
 	function clickHandle(e) {
 		e.preventDefault();
-		transition.animateInAnimdateOut({
+		transition.transitionInOut({
 			el: '.js-menu',	
 			openStart: function() {
 				$(this.el).addClass('is-animating-in');

@@ -21,11 +21,17 @@ var _accordion = require('./modules/accordion');
 
 var _accordion2 = _interopRequireDefault(_accordion);
 
+var _viewport = require('./helpers/viewport.js');
+
+var _viewport2 = _interopRequireDefault(_viewport);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _webfontloader2.default.load({
 	typekit: { id: 'vcl8lns' }
 });
+
+var test = new _viewport2.default();
 
 _loadBehaviour2.default.Behaviours.menu = _menu2.default;
 _loadBehaviour2.default.Behaviours.accordion = _accordion2.default;
@@ -34,7 +40,7 @@ _loadBehaviour2.default.Behaviours.accordion = _accordion2.default;
 	_loadBehaviour2.default.loadBehaviour();
 });
 
-},{"./dependencies/load-behaviour":2,"./modules/accordion":8,"./modules/menu":9,"jquery":10,"webfontloader":14}],2:[function(require,module,exports){
+},{"./dependencies/load-behaviour":2,"./helpers/viewport.js":8,"./modules/accordion":9,"./modules/menu":10,"jquery":11,"webfontloader":15}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -130,7 +136,7 @@ mud.onWindowLoad = function () {
 
 exports.default = mud;
 
-},{"../dependencies/namespace":3,"jquery":10}],3:[function(require,module,exports){
+},{"../dependencies/namespace":3,"jquery":11}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -185,43 +191,40 @@ function expand(opts) {
 	// options
 	var $wrapper = opts.wrapper;
 	var button = opts.button || '.button';
-	var closeOthers = opts.closeOthers || true;
-
+	var closeOthers = opts.closeOthers;
 	var $window = (0, _jquery2.default)(window);
 	var collection = [];
-
+	var initCss = { display: 'block', height: 0, overflow: 'hidden', position: 'relative' };
+	// set the height values for each item, called during window resize
 	function setHeight() {
 		collection.forEach(function (element) {
 			return element.height = element.state === true ? getHeight(element.$target) : element.$target.outerHeight(true);
 		});
 	};
-
+	// get the height of all of the children
 	function getHeight($target) {
 		var height = 0;
 		$target.children().each(function () {
 			height += (0, _jquery2.default)(this).outerHeight(true);
 		});
 		return height;
-	}
-
+	};
+	// do the tweening
 	function tween($el) {
 		var index = $el.data('expand-index');
 		var obj = collection[index];
 
 		if (obj.state === true) {
-			obj.$target.css({
-				display: 'block',
-				height: 0,
-				overflow: 'hidden',
-				position: 'relative'
-			});
+			obj.$target.css(initCss);
 		}
 		if (!obj.isRunning) {
-			console.log('running');
+			// init new Tweezer
 			new _tweezer2.default({
 				start: obj.currentHeight,
 				end: obj.state ? obj.height : 0
-			}).on('tick', function (v) {
+			})
+			// update height value on each 'tick'
+			.on('tick', function (v) {
 				return obj.$target.css({ height: v + 'px', overflow: 'hidden', position: 'relative' });
 			}).on('done', function () {
 				obj.shouldGrow = !opts.shouldGrow;
@@ -236,7 +239,7 @@ function expand(opts) {
 			}).begin();
 			obj.isRunning = true;
 		}
-	}
+	};
 
 	function closeOther(i) {
 		collection.find(function (el, index) {
@@ -247,7 +250,7 @@ function expand(opts) {
 				el.$el.removeClass('is-active');
 			}
 		});
-	}
+	};
 
 	function clickHandle(e) {
 		e.preventDefault();
@@ -256,11 +259,11 @@ function expand(opts) {
 		var el = collection[index];
 		if (closeOthers) closeOther(index);
 		el.currentHeight = el.state === true ? el.height : 0;
-		el.state = !el.state;
 		if (!el.isRunning) {
+			el.state = !el.state;
 			tween(el.$el);
 		}
-	}
+	};
 
 	function init() {
 		$wrapper.find(button).each(function (i) {
@@ -270,7 +273,6 @@ function expand(opts) {
 			if (state === true) {
 				$target.addClass('is-active');
 			}
-
 			var height = state === true ? getHeight($target) : $target.outerHeight(true);
 			(0, _jquery2.default)(this).attr('data-expand-index', i);
 			collection.push({
@@ -283,16 +285,17 @@ function expand(opts) {
 				shouldGrow: state
 			});
 		});
-	}
+	};
+
 	init();
 
 	$window.on('resize', (0, _lodash.debounce)(setHeight, 300));
 	$wrapper.on('click', button, clickHandle);
-}
+};
 
 exports.default = expand;
 
-},{"jquery":10,"lodash":11,"tweezer.js":13}],5:[function(require,module,exports){
+},{"jquery":11,"lodash":12,"tweezer.js":14}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -338,7 +341,7 @@ var tool = {
 
 exports.default = tool;
 
-},{"jquery":10}],6:[function(require,module,exports){
+},{"jquery":11}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -364,7 +367,7 @@ var transition = {
 		}
 		el.one(_prefix2.default.transitionEnd, onEnd);
 	},
-	animateInAnimdateOut: function animateInAnimdateOut(options) {
+	transitionInOut: function transitionInOut(options) {
 		var _this = this,
 		    el = options.el;
 
@@ -402,7 +405,7 @@ var transition = {
 
 exports.default = transition;
 
-},{"../helpers/prefix":5,"jquery":10}],7:[function(require,module,exports){
+},{"../helpers/prefix":5,"jquery":11}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -434,7 +437,63 @@ var utils = {
 
 exports.default = utils;
 
-},{"jquery":10}],8:[function(require,module,exports){
+},{"jquery":11}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _lodash = require('lodash');
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var viewport = function viewport(opts) {
+
+	function queryName() {
+		return window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '');
+	}
+
+	function getDimensions() {
+		return {
+			width: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
+			height: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
+		};
+	}
+
+	this.initialQuery = queryName();
+	this.breakpoint = this.initialQuery;
+	this.width = getDimensions().width;
+	this.height = getDimensions().height;
+	this.current = this.initialQuery;
+
+	var $window = (0, _jquery2.default)(window);
+	var query = function query() {
+		this.breakpoint = queryName();
+		this.width = getDimensions().width;
+		this.height = getDimensions().height;
+		if (this.current !== this.breakpoint) {
+			console.log('now');
+			this.current = this.breakpoint;
+			this.change();
+		}
+	};
+
+	this.resize = function () {
+		$window.on('resize', (0, _lodash.debounce)(query.bind(this), 300));
+		//return this;
+	};
+
+	this.change = function () {};
+};
+
+exports.default = viewport;
+
+},{"jquery":11,"lodash":12}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -461,14 +520,11 @@ function accordion(container) {
 		closeStart: function closeStart() {},
 		closeEnd: function closeEnd() {}
 	});
-
-	//accordion.closeOther();
-	// accordion.init();
 };
 
 exports.default = accordion;
 
-},{"../helpers/expand":4,"jquery":10}],9:[function(require,module,exports){
+},{"../helpers/expand":4,"jquery":11}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -493,7 +549,7 @@ function menu(container) {
 	var lock = _utils2.default.lock();
 	function clickHandle(e) {
 		e.preventDefault();
-		_transition2.default.animateInAnimdateOut({
+		_transition2.default.transitionInOut({
 			el: '.js-menu',
 			openStart: function openStart() {
 				(0, _jquery2.default)(this.el).addClass('is-animating-in');
@@ -518,7 +574,7 @@ function menu(container) {
 
 exports.default = menu;
 
-},{"../helpers/transition":6,"../helpers/utils":7,"jquery":10}],10:[function(require,module,exports){
+},{"../helpers/transition":6,"../helpers/utils":7,"jquery":11}],11:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -9730,9 +9786,9 @@ return jQuery;
 
 }));
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = require('./lodash.js');
-},{"./lodash.js":12}],12:[function(require,module,exports){
+},{"./lodash.js":13}],13:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -24136,7 +24192,7 @@ module.exports = require('./lodash.js');
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -24300,7 +24356,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /* Web Font Loader v1.6.20 - (c) Adobe Systems, Google. License: Apache 2.0 */
 (function(){function aa(a,b,c){return a.call.apply(a.bind,arguments)}function ba(a,b,c){if(!a)throw Error();if(2<arguments.length){var d=Array.prototype.slice.call(arguments,2);return function(){var c=Array.prototype.slice.call(arguments);Array.prototype.unshift.apply(c,d);return a.apply(b,c)}}return function(){return a.apply(b,arguments)}}function p(a,b,c){p=Function.prototype.bind&&-1!=Function.prototype.bind.toString().indexOf("native code")?aa:ba;return p.apply(null,arguments)}var q=Date.now||function(){return+new Date};function ca(a,b){this.a=a;this.m=b||a;this.c=this.m.document}var da=!!window.FontFace;function t(a,b,c,d){b=a.c.createElement(b);if(c)for(var e in c)c.hasOwnProperty(e)&&("style"==e?b.style.cssText=c[e]:b.setAttribute(e,c[e]));d&&b.appendChild(a.c.createTextNode(d));return b}function u(a,b,c){a=a.c.getElementsByTagName(b)[0];a||(a=document.documentElement);a.insertBefore(c,a.lastChild)}function v(a){a.parentNode&&a.parentNode.removeChild(a)}
 function w(a,b,c){b=b||[];c=c||[];for(var d=a.className.split(/\s+/),e=0;e<b.length;e+=1){for(var f=!1,g=0;g<d.length;g+=1)if(b[e]===d[g]){f=!0;break}f||d.push(b[e])}b=[];for(e=0;e<d.length;e+=1){f=!1;for(g=0;g<c.length;g+=1)if(d[e]===c[g]){f=!0;break}f||b.push(d[e])}a.className=b.join(" ").replace(/\s+/g," ").replace(/^\s+|\s+$/,"")}function y(a,b){for(var c=a.className.split(/\s+/),d=0,e=c.length;d<e;d++)if(c[d]==b)return!0;return!1}

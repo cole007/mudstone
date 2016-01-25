@@ -13,7 +13,7 @@ var transition = {
 	},
 
 
-	animateInAnimdateOut(options) {
+	transitionInOut(options) {
 		var _this = this, 
 			el = options.el;
 

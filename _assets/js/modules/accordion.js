@@ -11,11 +11,6 @@ function accordion(container) {
 		closeStart: function() {},
 		closeEnd: function() {},
 	});
-
-	//accordion.closeOther();
-	// accordion.init();
-
-
 };
 
 export default accordion;
