@@ -5,6 +5,4 @@
 
 var gulp 			= require('gulp');
 
-gulp.task('default', ['watch'], function () {
-   // gulp.watch(config.sass.src, ['sass']);
-});
+gulp.task('default', ['watch']);
