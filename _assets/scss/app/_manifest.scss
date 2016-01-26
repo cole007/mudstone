@@ -3,25 +3,25 @@
 @import	'_config/fonts',
 		'_config/debug';
 // utils
-@import 'components/utils/utils';
+@import 'utils/utils';
 // theme - first in the order, easy to over write
-@import 'components/theme/theme';
+@import 'theme/theme';
 // utils - early in the order, easy to over write
-@import 'components/utils/utils';
+@import 'utils/utils';
 // base elements
-@import 'components/base/type',
-		'components/base/forms',
-		'components/base/tables',
-		'components/base/buttons',
-		'components/base/icons',
-		'components/base/list';
+@import 'base/type',
+	'base/forms',
+	'base/tables',
+	'base/buttons',
+	'base/icons',
+	'base/list';
 // layout
-@import 'components/layout/header',
-		'components/layout/footer',
-		'components/layout/structure';
+@import 'layout/header',
+		'layout/footer',
+		'layout/structure';
 // modules
-@import 'components/modules/panels',
-		'components/modules/hero';
+@import 'modules/panels',
+		'modules/hero';
 
 @include mq(480, min) {
 	@import	'views/480-up';
