@@ -9,7 +9,7 @@ var gulp 			= require('gulp'),
 	glob 			= require('glob'),
 	config 			= require('../config').uncss,
 	gulpif       	= require('gulp-if'),
-	cssmin          = require('gulp-minify-css');
+	cssnano         = require('gulp-cssnano');
 
 gulp.task('uncss', function() {
     return gulp.src(config.css)
@@ -22,6 +22,6 @@ gulp.task('uncss', function() {
 
 gulp.task('cssmin', function() {
     return gulp.src(config.css)
-        .pipe(cssmin())
+        .pipe(cssnano())
         .pipe(gulp.dest(config.dest));
 });

@@ -11,7 +11,7 @@ var gulp                = require('gulp'),
     postcss             = require('gulp-postcss'),
     concat              = require('gulp-concat'),
     handleErrors        = require('../util/handleErrors'),
-    cssmin              = require('gulp-minify-css'),
+    cssnano             = require('gulp-cssnano'),
     util                = require('gulp-util'),
     setup               = require('../config'),
     config              = setup.build,
@@ -59,13 +59,7 @@ gulp.task('move-scripts', function(callback) {
 });
  
 // optimise the css and move to the dist folder
-gulp.task('build-css', function(callback) {
-    gulp.src(config.css_src)
-        //https://github.com/jakubpawlowicz/clean-css
-        .pipe(cssmin())
-        .pipe(gulp.dest(config.css_dest));
-});
- 
+
 
 gulp.task('build-css', function() {
   return gulp.src(setup.sass.watch)
@@ -76,7 +70,7 @@ gulp.task('build-css', function() {
     ))
     .on('error', handleErrors)
     .pipe(postcss([ autoprefixer({ browsers: setup.sass.prefix }) ]))
-    .pipe(cssmin())
+    .pipe(cssnano())
     .on('error', handleErrors)
     .pipe(gulp.dest(setup.sass.dest))
     // .pipe(browserSync.reload({stream:true}));
