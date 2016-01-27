@@ -17,18 +17,12 @@ var gulp                = require('gulp'),
     config              = setup.build,
     scripts             = setup.scripts;
  
-
 // move the html files to dist
 gulp.task('build-html', function(callback) {
     gulp.src(config.html_src)
       .pipe(gulp.dest(config.html_dest));
 });
 
-// move the favicons
-gulp.task('build-favicons', function(callback) {
-    gulp.src(setup.favicons.src)
-      .pipe(gulp.dest(setup.favicons.dest));
-});
  
 // move the fonts to dist
 gulp.task('build-fonts', function(callback) {
@@ -77,9 +71,9 @@ gulp.task('build-css', function() {
 }); 
 
 gulp.task('build', function(callback) {
-  runSequence(['jade', 'build-fonts', 'build-images', 'build-scripts', 'move-scripts', 'build-css'], callback);
+  runSequence('sprites', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css'], callback);
 });
 
-gulp.task('init', function(callback) {
-  runSequence('sprites', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css','build-favicons'], callback);
+gulp.task('build-cms', function(callback) {
+  runSequence('build-css', ['scripts'], callback);
 });
