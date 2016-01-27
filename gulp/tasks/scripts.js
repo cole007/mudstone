@@ -5,15 +5,16 @@
  */
 
 
-var gulp         	= require('gulp'),
+var gulp         = require('gulp'),
 	browserSync  	= require('browser-sync'),
 	uglify       	= require('gulp-uglify'),
 	concat       	= require('gulp-concat'),
+	babel 				= require('gulp-babel'),
 	sourcemaps   	= require('gulp-sourcemaps'),
 	handleErrors 	= require('../util/handleErrors'),
 	config       	= require('../config').scripts,
-	gulpif		 	= require('gulp-if'),
-	env 		 	= require('../config').env;
+	gulpif		 		= require('gulp-if'),
+	env 		 			= require('../config').env;
 
 
 gulp.task('scripts', function() {
@@ -21,6 +22,9 @@ gulp.task('scripts', function() {
     .pipe(gulpif(env == 'dev', sourcemaps.init()))
     .pipe(gulpif(env == 'live', uglify()))
     .on('error', handleErrors)
+		.pipe(babel({
+			presets: ['es2015']
+		}))
     .pipe(concat(config.output))
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .pipe(gulp.dest(config.dest))
