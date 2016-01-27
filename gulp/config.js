@@ -3,11 +3,25 @@
  */
 var assets = './_assets/',
     base = 'tmp',
-    env = 'dev',
-    outputStyle = 'expanded',
-    assetPath = "/_assets/",
-    state = 'static', 
-    jadeDest = root,
+    env = 'dev', //  env = dev will create sourcemaps, set as live will not
+    outputStyle = 'expanded', // scss output style
+    assetPath = "/_assets/"; 
+/*
+ * @param state
+ * During html development state must equal 'dev', 
+ * This will build files into the tmp directory 
+ * and set browsersync to use the tmp directory as root
+ * 
+ * Deployment builds, for static sites (no cms) state must equal 'static'
+ * This will build files into the deploy directory and 
+ * browsersync will use this directory as the root
+ * 
+ * CMS builds, state must equal 'cms'
+ * This is the same as static except the url variable is used 
+ * as a proxy for browsersync
+ */
+var state = 'static', 
+    jadeDest = root, // where should the jade templates be built, usually root, except when state === cms
     public_html = 'public_html',
     url = 'local.ournameismud.co.uk';
 /*
@@ -17,6 +31,9 @@ if(env === 'live') {
   outputStyle = 'compressed';
 }
 
+/*
+ * Build directory conditionals, based on state
+*/ 
 if(state === 'dev') {
     root = 'tmp/' + public_html + '/';
     build = 'tmp/' + public_html + '/_assets/';
@@ -24,7 +41,10 @@ if(state === 'dev') {
     root = 'deploy/' + public_html + '/';
     build = 'deploy/' + public_html + '/_assets/';
 }
-// jade build location
+
+/*
+ * Jade Build directory conditionals, based on state
+*/ 
 if(state === 'dev') {
   jadeDest = root;
 } else if(state === 'static') {
@@ -33,7 +53,9 @@ if(state === 'dev') {
   jadeDest = '_assets/jade/dist/';
 }
 
-// server
+/*
+ * Browsersync settings, based on state
+*/ 
 if(state === 'dev' || state === 'static') {
   server = { 
     server: {
