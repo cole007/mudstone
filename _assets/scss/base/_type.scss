@@ -10,9 +10,9 @@ html {
     @include font-baseline();
 }
 
-// html,body {
-// 	font-family: 'Raleway', sans-serif;
-// }
+html,body {
+	font-family: 'Raleway', sans-serif;
+}
 
 body {
 	@include font-type('base');

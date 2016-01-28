@@ -1,3 +1,48 @@
+// Micro cf, as per: css-101.org/articles/cf/latest-new-cf-so-far.php
+@mixin cf() {
+    &:after{
+        content:"";
+        display:table;
+        clear:both;
+    }
+}
+
+@mixin quantity-child($selector:'.box-item', $num: 4, $offset: null) {
+    &:nth-last-child(#{$num}):first-child,
+    &:nth-last-child(#{$num}):first-child ~ #{$selector} {
+        @content;
+    }
+}
+
+@mixin quantity-type($selector:'.box-item', $num: 4, $offset: null) {
+    &:nth-last-of-type(#{$num}):first-of-type,
+    &:nth-last-of-type(#{$num}):first-of-type ~ #{$selector} {
+        @content;
+    }
+}
+
+@mixin none() {
+    &:only-of-type {
+        @content;
+    }
+}
+
+
+@mixin many() {
+    &:not(:only-of-type) {
+        @content;
+    }
+}
+
+
+@mixin child-of($n, $m) {
+    $child: $n;
+    $children: $m;
+    &:nth-child(#{$n}):nth-last-child(#{$children}) {
+        @content;
+    }
+}
+
 @mixin placeholder(){
   ::-webkit-input-placeholder {
      @content;
@@ -26,7 +71,6 @@
 
 // call on the input (radio/checkbox)
 @mixin fancy-input($position: before) {
-
   // hide the default radio input
   // opacity: 0;
   // create a radio button style using the
@@ -38,7 +82,6 @@
 
 // call on the input (radio/checkbox) for the checked state
 @mixin fancy-input-checked($target: before) {
-
   &:checked + label:before {
     @content;
   }
@@ -292,6 +335,112 @@
     @content;
   }
 }
+
+//    markup
+//    
+//    .site
+//      .site__wrap
+//    .footer
+//    
+//    $els args need to be passed in the correct order, from top to bottom, so '.site' '.site__wrap' '.foot'
+@mixin sticky-footer($els: '.site' '.site__wrap' '.footer', $height: 115px ) {
+  $site: nth($els, 1);
+  $wrap: nth($els, 2);
+  $foot: nth($els, 3);
+  html,body {
+    height: 100%;
+  }
+  #{$site} {
+    min-height: 100%;
+  }
+  #{$wrap} {
+    overflow: auto;
+    padding-bottom: $height;
+  }
+  #{$foot} {
+    position: relative;
+    margin-top: -$height;
+    height: $height;
+  }
+}
+
+
+// menu icon animation
+// exameple markup
+//
+//  <a href="#" class="menu__btn"><span>Menu</span></a>
+//
+// effect takes place once the button has been clicked
+// slighty movement on hover
+
+// menu button
+
+@mixin menu-icon-rotate($width: 30px, $height: 6px, $color: $_white, $curve: true, $active_class: '.is-active', $gap: 2) {
+    $exit_lenght: $height * 2;
+    $bar_gaps: ($height * $gap) + 1;
+    position: relative;
+    & > span {
+        transition: all 0.5s;
+        transform: translateY(0px);
+        margin: auto;
+        pointer-events: none;
+        vertical-align: middle;
+        display: inline-block;
+        &,
+        &:before,
+        &:after {
+            width: $width;
+            height: $height;
+            background-color: $color;
+            position: absolute; // firefox fix
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 100001;
+            @if $curve == true {
+                border-radius: $height;
+            }
+        }
+        &:before,
+        &:after {
+            @include position(absolute, null null null 0);
+            transition: all 0.5s;
+            content: " ";
+            display: block;
+            width: $width;
+            height: $height;
+            background-color: $color;
+            display: block;
+        }
+        
+        &:before {
+            transform: translateY(-$bar_gaps);
+        }
+        
+        &:after {
+            transform: translateY($bar_gaps);
+        }       
+    }
+    &.is-active {
+        > span {
+            opacity: 0;
+            background-color: transparent!important; //urgh.. that'll do for now, that'll do pig, that'll do
+            &:before {
+                transform: translateY(-$exit_lenght) rotate(45deg);
+    
+            }
+            &:after {
+                transform: translateY(-$exit_lenght) rotate(-45deg);
+            }
+        }
+    }
+}
+
+
+/// off canvas menu funk
+
 
 // ----
 // Sass (v3.4.7)

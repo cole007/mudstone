@@ -11,24 +11,18 @@ var gulp                = require('gulp'),
     postcss             = require('gulp-postcss'),
     concat              = require('gulp-concat'),
     handleErrors        = require('../util/handleErrors'),
-    cssmin              = require('gulp-minify-css'),
+    cssnano             = require('gulp-cssnano'),
     util                = require('gulp-util'),
     setup               = require('../config'),
     config              = setup.build,
     scripts             = setup.scripts;
  
-
 // move the html files to dist
 gulp.task('build-html', function(callback) {
     gulp.src(config.html_src)
       .pipe(gulp.dest(config.html_dest));
 });
 
-// move the favicons
-gulp.task('build-favicons', function(callback) {
-    gulp.src(setup.favicons.src)
-      .pipe(gulp.dest(setup.favicons.dest));
-});
  
 // move the fonts to dist
 gulp.task('build-fonts', function(callback) {
@@ -59,13 +53,7 @@ gulp.task('move-scripts', function(callback) {
 });
  
 // optimise the css and move to the dist folder
-gulp.task('build-css', function(callback) {
-    gulp.src(config.css_src)
-        //https://github.com/jakubpawlowicz/clean-css
-        .pipe(cssmin())
-        .pipe(gulp.dest(config.css_dest));
-});
- 
+
 
 gulp.task('build-css', function() {
   return gulp.src(setup.sass.watch)
@@ -76,16 +64,16 @@ gulp.task('build-css', function() {
     ))
     .on('error', handleErrors)
     .pipe(postcss([ autoprefixer({ browsers: setup.sass.prefix }) ]))
-    .pipe(cssmin())
+    .pipe(cssnano())
     .on('error', handleErrors)
     .pipe(gulp.dest(setup.sass.dest))
     // .pipe(browserSync.reload({stream:true}));
 }); 
 
 gulp.task('build', function(callback) {
-  runSequence(['jade', 'build-fonts', 'build-images', 'build-scripts', 'move-scripts', 'build-css'], callback);
+  runSequence('sprites', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css'], callback);
 });
 
-gulp.task('init', function(callback) {
-  runSequence('sprites', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css','build-favicons'], callback);
+gulp.task('build-cms', function(callback) {
+  runSequence('build-css', ['scripts'], callback);
 });

@@ -20,7 +20,7 @@ var assets = './_assets/',
  * This is the same as static except the url variable is used 
  * as a proxy for browsersync
  */
-var state = 'static', 
+var state = 'dev', 
     jadeDest = root, // where should the jade templates be built, usually root, except when state === cms
     public_html = 'public_html',
     url = 'local.ournameismud.co.uk';
@@ -129,13 +129,13 @@ module.exports = {
     cssName: '_png-sprites.scss',
     imgPath: '../images/png-sprite.png',
     spriteDataImg: build + 'images',
-    spriteDataCss: assets + 'scss/gulp/'
+    spriteDataCss: assets + 'scss/_system/gulp/'
   },
  
   svg: {
     src: assets + 'images/svg-sprites/*.svg',
     dest: build + 'images',
-    css: '../../../../_assets/scss/gulp/_svg-sprites.scss',
+    css: '../../../../_assets/scss/_system/gulp/_svg-sprites.scss',
     sprite: 'svg-sprite.svg',
     template: assets + 'scss/_tpl/_sprite-template.scss',
     pngs: assets + 'images/png-sprites',
@@ -156,7 +156,7 @@ module.exports = {
     dest: build + 'fonts/',
     name: 'icon-font',
     path: assets + 'scss/_tpl/_icon-font-template.scss',
-    targetPath: '../../../../_assets/scss/gulp/_icon-font.scss',
+    targetPath: '../../../../_assets/scss/_system/gulp/_icon-font.scss',
     fontPath: '../fonts/'
   },
  

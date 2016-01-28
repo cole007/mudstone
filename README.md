@@ -42,16 +42,19 @@ See gulp/configs.js for paths and files
 
 ##Folder Structure
 
-All of the source files (scss,javascript,js) are stored in the _assets directory.  Changing the env variable in gulp/config.js will change the root directory to '/_dist' rather than '/'.  Use the dist directory for deployments.  Only the compiled, minified and optimised files will be deployed from the dist directory.
+All of the site files are stored in the _assets directory
+
+During development (see gulp/config.js) files are published to a tmp directory
+
+For production everything is built in the deploy directory
 
 ##Javascript
 
-Libs folder contains jquery and modernizer (touch test only)
-plugsins folder contains any plugins used
-behaviour folder contains any custom javascript
-application.js includes boilerplate code for the js framework (http://www.creativebloq.com/javascript/get-your-javascript-order-4135704)
-tools.js includes constructor functions for common ui patterns
-All of the files in libs/behaviours + jquery from the vendor folder get merged into one file (dist/app.js)
+-  /_assets/js/application.js contains boilerplate code (data-behaviour method, etc)
+-  /_assets/js/tools.js useful utils functions/objects
+-  /_assets/js/plugins/* third party plugins (please use unminified versions)
+-  /_assets/js/libs/* third party libraries (jquery, modernizr, lodash)
+-  /_assets/js/behaviours/* site specific functions
 
 ##Git methodology
 
