@@ -112,7 +112,6 @@
 @mixin baseline($baseline: $magic-number) {
   html {
     $size: strip-units($baseline);
-
     background-image: url(http://basehold.it/i/#{$size});
   }
 }
