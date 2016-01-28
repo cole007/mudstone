@@ -8,16 +8,13 @@
 }
 
 
-$icon_map: (facebook: "\E001",twitter: "\E002",);
+$icon_map: (icon_audio: "\E001",);
 
 @function icon-char($filename) {
 	$char: "";
 
-	@if $filename == facebook {
+	@if $filename == icon_audio {
 		$char: "\E001";
-	}
-	@if $filename == twitter {
-		$char: "\E002";
 	}
 
 	@return $char;

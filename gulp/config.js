@@ -107,20 +107,16 @@ module.exports = {
   images: {
     src: assets + 'images/site/*',
     dest: build + 'images'
-  },
+  }, 
+
+  //^\is-\S+
  
   scripts: {
-    src: [
-      assets + 'js/libs/jquery-1.11.3.min.js',
-      assets + 'js/libs/underscore-min.js',
-      assets + 'js/plugins/*.js',
-      assets + 'js/application.js',
-      assets + 'js/tools.js',
-      assets + 'js/behaviours/*.js'
-    ],
+    src: assets + 'js/app.js',
+    path: assets + 'js/',
     dest: build + 'js/dist',
     output: 'app.js',
-    hint:  assets + 'js/behaviours/*.js'
+    hint:  assets + 'js/modules/*.js'
   },
  
   sprites: {
@@ -129,13 +125,13 @@ module.exports = {
     cssName: '_png-sprites.scss',
     imgPath: '../images/png-sprite.png',
     spriteDataImg: build + 'images',
-    spriteDataCss: assets + 'scss/gulp/'
+    spriteDataCss: assets + 'scss/_system/gulp/'
   },
  
   svg: {
     src: assets + 'images/svg-sprites/*.svg',
     dest: build + 'images',
-    css: '../../../../_assets/scss/gulp/_svg-sprites.scss',
+    css: '../../../../_assets/scss/_system/gulp/_svg-sprites.scss',
     sprite: 'svg-sprite.svg',
     template: assets + 'scss/_tpl/_sprite-template.scss',
     pngs: assets + 'images/png-sprites',
@@ -156,7 +152,7 @@ module.exports = {
     dest: build + 'fonts/',
     name: 'icon-font',
     path: assets + 'scss/_tpl/_icon-font-template.scss',
-    targetPath: '../../../../_assets/scss/gulp/_icon-font.scss',
+    targetPath: '../../../../_assets/scss/_system/gulp/_icon-font.scss',
     fontPath: '../fonts/'
   },
  

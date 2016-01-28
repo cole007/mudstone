@@ -50,20 +50,21 @@ $grid-mobile-settings: (
   @if $type == 'float' {
     @include cf();
   }
-
-  @if $type == 'inline' {
-    font-size: 0;
-  }
-
-  @if $type == 'justify' {
-    font-size: 0;
-    text-align: justify;
-    &:after {
-      display: inline-block;
-      width: 100%;
-      content: " "
-    }
-  }
+  // nope, this was never a good idea
+  // @if $type == 'inline' {
+  //   font-size: 0;
+  // }
+  
+  // Nope
+  // @if $type == 'justify' {
+  //   font-size: 0;
+  //   text-align: justify;
+  //   &:after {
+  //     display: inline-block;
+  //     width: 100%;
+  //     content: " "
+  //   }
+  // }
 
   @if $inc_gutter == true {
     margin-left: -$gutter * 2;
