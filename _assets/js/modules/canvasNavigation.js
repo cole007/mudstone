@@ -4,23 +4,21 @@ import utils from '../helpers/utils';
 import Viewport from '../helpers/viewport';
 import config from '../dependencies/config';
 
-function menu(container) {
-	var lock = utils.lock();
-	var $btn = $('.menu__btn');
-	var viewport = new Viewport();
-	var { breakpoints } = config;
-	
-	var transition = new Transition({
+function canvasNavigation(container) {
+	let lock = utils.lock();
+	let $btn = $('.menu__btn');
+	let viewport = new Viewport();
+	let { breakpoints } = config;
+	let transition = new Transition({
 		el: '.js-menu',	
+		activeClass: 'is-active',
 		openStart: function() {
 			$(this.el).addClass('is-animating-in');
 			$btn.addClass('is-active');
 			lock.capture();
-			console.log('open start');
 		},
 		openComplete: function() {
 			$(this.el).addClass('is-active').removeClass('is-animating-in');
-			console.log('open complete');
 		},
 		closeStart: function(){
 			$(this.el).addClass('is-animating-out');
@@ -44,14 +42,12 @@ function menu(container) {
 	// the function only gets called when a breakpoint changes
 	viewport.change(function(prev, current) {
 		if(prev === 'tablet' && current === 'desktop') {
-			console.log('desktop');
 			container.off('click', '.menu__btn', clickHandle);
 		}
 		if(prev === 'desktop' && current === 'tablet') {
-			console.log('tablet');
 			container.on('click', '.menu__btn', clickHandle);
 		}
 	});
-}
+};
 
-export default menu;
+export default canvasNavigation;

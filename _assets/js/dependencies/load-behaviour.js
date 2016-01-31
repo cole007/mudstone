@@ -53,12 +53,6 @@ mud.loadBehaviour = function(context){
 };
 
 
-mud.breakpoints = {
-    mobile: 500,
-    tablet: 768,
-    desktop: 1280
-};
-
 /** 
  * Method used to call mrb.loadBehaviour
  * @method mrb.onReady

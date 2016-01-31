@@ -1,5 +1,4 @@
 var config = {
-
 	tween: {
 		easing: (t, b, c, d) => {
 			if ((t/=d/2) < 1) { 
@@ -11,7 +10,7 @@ var config = {
 	},
 
 	debounceDelay: 300,
-
+	
 	breakpoints: {
 		mobile: 0,
 		tablet: 778,

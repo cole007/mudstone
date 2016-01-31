@@ -1,10 +1,9 @@
 import $ from 'jquery';
 import prefix from '../helpers/prefix';
 
-
 function Transition(opts) {
 	this.el = opts.el;
-	this.activeClass = 'is-active';
+	this.activeClass = opts.activeClass;
 	// callbacks
 	this.openStart = opts.openStart;
 	this.openComplete = opts.openComplete;
@@ -12,15 +11,15 @@ function Transition(opts) {
 	this.closeComplete = opts.closeComplete;
 	var _this = this;
 
+	// transition end event
 	function transitionEnd(el, fn) {
-		function onEnd(e) {
+		el.one(prefix.transitionEnd, function(e) {
 			if(typeof fn == 'function') {
 				fn();
 			}
-		}
-		el.one(prefix.transitionEnd, onEnd);
+		});
 	};
-
+	// Complete callback wrapper
 	function action(fn) {
 		transitionEnd($(opts.el), () => {
 			if(typeof fn === 'function') {
@@ -28,7 +27,7 @@ function Transition(opts) {
 			}
 		});
 	};
-
+	// method to call on 'event'
 	this.trigger = function() {
 		if(!$(opts.el).hasClass(this.activeClass)) {
 			if(typeof this.openStart === 'function') {
@@ -43,51 +42,7 @@ function Transition(opts) {
 			action(this.closeComplete.bind(this));	
 		}
 	}
-
-
 };
-
-
-
-// var transition = {
-
-// 	transitionEnd(el, func) {
-// 		function onEnd(e) {
-// 			if(typeof func == 'function') {
-// 				func();
-// 			}
-// 		}
-// 		el.one(prefix.transitionEnd, onEnd);
-// 	},
-
-
-// 	transitionInOut(options) {
-// 		var _this = this, 
-// 			el = options.el;
-
-// 		function action(fn) {
-// 			_this.transitionEnd($(el), () => {
-// 				if(typeof fn === 'function') {
-// 					fn();
-// 				}
-// 			});
-// 		}
-
-// 		if(!$(el).hasClass('is-active')) {
-// 			if(typeof options.openStart === 'function') {
-// 				options.openStart();
-// 			}
-// 			action(options.openComplete);	
-// 		}
-// 		else {
-// 			if(typeof options.closeStart === 'function') {
-// 				options.closeStart();
-// 			}
-// 			close(options.openComplete);	
-// 		}
-// 	}
-// }
-
 
 export default Transition;
 

@@ -1,7 +1,7 @@
 import WebFont from 'webfontloader';
 import $ from 'jquery';
 import mud from './dependencies/load-behaviour';
-import menu from './modules/menu';
+import canvasNavigation from './modules/canvasNavigation';
 import accordion from './modules/accordion';
 
 WebFont.load({
@@ -10,7 +10,7 @@ WebFont.load({
 
 
 
-mud.Behaviours.menu = menu;
+mud.Behaviours.canvasNavigation = canvasNavigation;
 mud.Behaviours.accordion = accordion;
 
 $(function() {

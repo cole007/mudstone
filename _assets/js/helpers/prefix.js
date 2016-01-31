@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
 var tool = {
-
 	prefix: (function () {
 	  var styles = window.getComputedStyle(document.documentElement, ''),
 	    pre = (Array.prototype.slice
@@ -49,9 +48,7 @@ var tool = {
 	        }
 	    }
 		return false;
-	},
-
-
+	}
 };
 
 export default tool;
