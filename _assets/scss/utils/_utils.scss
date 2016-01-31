@@ -22,11 +22,11 @@
 }
 
 .g-fx--column {
-	display: flex;
+	flex-direction: column;
 }
 
 .g-fx--row {
-	display: flex;
+	flex-direction: row;
 }
 
 .g-fx--wrap {
@@ -37,6 +37,15 @@
 
 .u-trans {
 	transition: all .3s;
+}
+
+// image replacement
+
+.u-ir {
+	display: block;
+	text-indent: 150%;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 

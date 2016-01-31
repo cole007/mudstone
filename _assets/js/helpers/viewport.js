@@ -2,7 +2,7 @@ import { debounce } from 'lodash';
 import $ from 'jquery';
 
 
-var viewport = function(opts) {
+var Viewport = function(opts) {
 
 	function queryName() {
 		return window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '');

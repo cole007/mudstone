@@ -30,5 +30,8 @@ html.no-js<!--<![endif]-->
         //- custom modernizr script, only tests for touch events
         //-  script(src='#{path}js/libs/modernizr.min.js')
     body
-        block content
+        .site
+            include ../_includes/header
+            .site-page
+                block content
         script(src='#{path}js/dist/app.js')

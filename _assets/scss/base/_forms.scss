@@ -1,4 +1,3 @@
-
 // boilerplate form styles
 // core block styles
 // input reset
@@ -68,7 +67,6 @@ fieldset {
 	position: relative;
 	display: block;
 	border: 2px solid lighten($base-grey,40%);
-
 	// use pseudo elements to cover native dropdown
 	&:before,
 	&:after {

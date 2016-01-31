@@ -79,34 +79,7 @@ em {
 a {
 	text-decoration: none;
 	color: inherit;
-}
-
-.s-content {
-
-	ul,ol {
-		margin: 0 0 gutter(1);
-		padding-left: gutter(1);
+	&:hover {
+		color: c(link,hover);
 	}
-
-	li {
-		margin-bottom: gutter(.25);
-	}
-
-	p > a {
-		text-decoration: underline;
-		color: c(themes,blog);
-	}
-
-	blockquote {
-		margin: 0 0 gutter(1);
-		padding: 0 0 0 gutter(1);
-		border-left: 3px solid c(themes,blog);
-	}
-
-	cite {
-		@include font-type(bold);
-		@include font-size(ms(-1));
-		font-style: normal;
-	}
-
 }

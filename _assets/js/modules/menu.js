@@ -4,21 +4,22 @@ import utils from '../helpers/utils';
 
 function menu(container) {
 	var lock = utils.lock();
+	var $btn = $('.menu__btn');
 	function clickHandle(e) {
 		e.preventDefault();
 		transition.transitionInOut({
 			el: '.js-menu',	
 			openStart: function() {
 				$(this.el).addClass('is-animating-in');
+				$btn.addClass('is-active');
 				lock.capture();
 			},
 			openComplete: function() {
 				$(this.el).addClass('is-active').removeClass('is-animating-in');
-				$('body').css({position: 'fixed', height: '100%', width: '100%'});
 			},
 			closeStart: function(){
 				$(this.el).addClass('is-animating-out');
-				$('body').css({position: '', height: '', width: ''});
+				$btn.removeClass('is-active');
 				lock.release();
 			},
 			closeComplete: function(){
