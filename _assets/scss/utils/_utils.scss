@@ -22,11 +22,11 @@
 }
 
 .g-fx--column {
-	display: flex;
+	flex-direction: column;
 }
 
 .g-fx--row {
-	display: flex;
+	flex-direction: row;
 }
 
 .g-fx--wrap {
