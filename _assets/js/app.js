@@ -9,7 +9,6 @@ WebFont.load({
 	typekit: { id: 'vcl8lns' }
 });
 
-var test = new viewport();
 
 
 mud.Behaviours.menu = menu;
