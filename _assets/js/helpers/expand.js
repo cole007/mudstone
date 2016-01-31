@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import Tweezer from 'tweezer.js';
 import { debounce } from 'lodash';
+import config from '../dependencies/config';
 
 /* 
 Example Usage 
@@ -10,6 +11,7 @@ var accordion = new Expand({
 	button: '.button',
 	closeOthers: false,
 	activeClass: '.is-active',
+	duration: 1000,
 	openStart: function() {
 		console.log('openStart callback');
 	},
@@ -49,7 +51,8 @@ function Expand(opts) {
 		button: '.button',
 		closeOthers: false,
 		activeClass: 'is-active',
-		activeContentClass: 'is-active'
+		activeContentClass: 'is-active',
+		duration: 1000
 	};
 	// API
 	this.$wrapper = opts.wrapper || defaults.wrapper;
@@ -57,6 +60,8 @@ function Expand(opts) {
 	this.closeOthers = opts.closeOthers || defaults.closeOthers;
 	this.activeClass = opts.activeClass || defaults.activeClass;
 	this.activeContentClass = opts.activeContentClass || defaults.activeContentClass;
+	this.duration = opts.duration || defaults.duration;
+	this.easing = config.tween.easing;
 	// callbacks 
 	this.openStart = opts.openStart;
 	this.openComplete = opts.openComplete;
@@ -148,7 +153,9 @@ function Expand(opts) {
 			// init new Tweezer
 			new Tweezer({
 				start: obj.currentHeight,
-				end: obj.state ? obj.height : 0
+				end: obj.state ? obj.height : 0,
+				duration: _this.duration,
+				easing: _this.easing
 			})
 			// update height value on each 'tick'
 			.on('tick', (v) => obj.$target.css({height: v + 'px', overflow: 'hidden', position: 'relative'}))

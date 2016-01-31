@@ -125,3 +125,8 @@ body:before {
     content: "desktop";
   }
 }
+@media (min-width: 1400px) {
+  body:before {
+    content: "super-desktop";
+  }
+}
