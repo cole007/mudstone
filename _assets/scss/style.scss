@@ -106,22 +106,22 @@ $ie: false;
 @import 'views/exceptions';
  
  
-// body:before {
-//   content: "smartphone";
-//   display: none; /* Prevent from displaying. */
-// }
-// @media (min-width: 400px) {
-//   body:before {
-//     content: "smartphone-tablet";
-//   }
-// }
-// @media (min-width: 700px) {
-//   body:before {
-//     content: "tablet";
-//   }
-// }
-// @media (min-width: 1100px) {
-//   body:before {
-//     content: "desktop";
-//   }
-// }
+body:before {
+  content: "smartphone";
+  display: none; /* Prevent from displaying. */
+}
+@media (min-width: 480px) {
+  body:before {
+    content: "smartphone-tablet";
+  }
+}
+@media (min-width: 700px) {
+  body:before {
+    content: "tablet";
+  }
+}
+@media (min-width: 1100px) {
+  body:before {
+    content: "desktop";
+  }
+}

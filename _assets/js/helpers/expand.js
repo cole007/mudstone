@@ -4,47 +4,45 @@ import { debounce } from 'lodash';
 
 /* 
 Example Usage 
-
-Javascript: 
-
+Javascript:  
 var accordion = new Expand({
-	wrapper: container,
+	wrapper: '.js-accordion',
 	button: '.button',
 	closeOthers: false,
 	activeClass: '.is-active',
 	openStart: function() {
-		console.log('openStart');
+		console.log('openStart callback');
 	},
 	openComplete: function() {
-		console.log('openComplete');
+		console.log('openComplete callback');
 	},
 	closeStart: function() {
-		console.log('closeStart')
+		console.log('closeStart callback')
 	},
 	closeComplete: function() {
-		console.log('closeComplete')
+		console.log('closeComplete callback')
 	},
 });
-
-Html:
-<div data-behaviour="accordion" class="wrapper accordion">
-	<button data-target="#c1" class="button accordion__btn">1</button>
-	<div id="c1" class="accordion__content">
-	<button data-target="#c2" class="button accordion__btn">1</button>
-	<div id="c2" class="accordion__content">
+// change the state of an accordion
+accordion.tween($('.button')) // this will/open close the selected element
+accordion.close(); // will close all accordions
+accordion.open(); // will open all accordions
+Html: 
+<!-- data-target strong or href must match the target elements id -->
+<div class="js-accordion">
+	<button data-target="#c1" class="button">1</button>
+	<div id="c1" class="accordion__content"></div>
+	<button data-target="#c2" class="button">1</button>
+	<div id="c2" class="accordion__content"></div>
 </div>
-
 SCSS:
-
 .accordion__content {
 	display: none;
 	&.is-active {
 		display: block;
 	}
 }
-
 */
-
 function Expand(opts) {
 	var defaults = {
 		wrapper: $('.js-accordion'),
@@ -59,7 +57,6 @@ function Expand(opts) {
 	this.closeOthers = opts.closeOthers || defaults.closeOthers;
 	this.activeClass = opts.activeClass || defaults.activeClass;
 	this.activeContentClass = opts.activeContentClass || defaults.activeContentClass;
-
 	// callbacks 
 	this.openStart = opts.openStart;
 	this.openComplete = opts.openComplete;
@@ -88,13 +85,12 @@ function Expand(opts) {
 		})	
 		return height;
 	};
-
 	function clickHandle(e) {
 		e.preventDefault();
 		var $this = $(this);
 		var index = $this.data('expand-index');
 		var el = collection[index];
-		if(_this.closeOthers) _this.closeOther(index);
+		if(_this.closeOthers) _this.close(index);
 		el.currentHeight = el.state === true ? el.height : 0;
 		if(!el.isRunning) {
 			el.state = !el.state;
@@ -110,7 +106,6 @@ function Expand(opts) {
 			_this.tween(el.$el);
 		}
 	};
-
 	// immediately invoked function
 	(function init() {
 		// loop through all of the buttons
@@ -179,8 +174,7 @@ function Expand(opts) {
 			obj.isRunning = true;
 		}
 	};
-
-	this.closeOther = function(i) {
+	this.close = function(i) {
 		collection.find(function(el, index) {
 			if(el.state === true && i !== index) {
 				el.state = !el.state;
@@ -190,7 +184,15 @@ function Expand(opts) {
 			}
 		}.bind(this));
 	};
-
+	this.open = function() {
+		collection.find(function(el, index) {
+			if(el.state === false) {
+				el.state = !el.state;
+				this.tween(el.$el);
+				el.$el.addClass('is-active');
+			}
+		}.bind(this));
+	};
 	$window.on('resize', debounce(setHeight, 300));
 	this.$wrapper.on('click', this.button, clickHandle);
 };
