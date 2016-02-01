@@ -9,12 +9,12 @@ WebFont.load({
 	typekit: { id: 'vcl8lns' }
 });
 
-
-
+// assign the data-behaviour functions
 mud.Behaviours.canvasNavigation = canvasNavigation;
 mud.Behaviours.accordion = accordion;
 mud.Behaviours.validation = validation;
 
 $(function() {
+	$('html').removeClass('no-js');
 	mud.loadBehaviour();
 });

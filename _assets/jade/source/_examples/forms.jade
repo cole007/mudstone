@@ -1,0 +1,37 @@
+form.form
+	fieldset
+		legend.heading-3 Your details
+		.form__group
+			label.form__label(for="name") First Name
+			input.form__input.g-m10(type="text" name="name" id="name")
+		.form__group
+			label.form__label(for="surname") Surname
+			input.form__input.g-m10(type="text" name="surname" id="surname")
+		.form__group
+			label.form__label(for="email") Email address
+			input.form__input.g-m10(type="email" name="email" id="email")
+		.form__group
+			label.form__label(for="message") Message
+			textarea.form__input.form__input--textarea.g-m10(name="message" id="message" rows="6")
+		.form__group
+			span.form__label Radio Buttons
+			input.form__toggle.form__toggle.form__toggle--radio(type="radio" name="radio" id="r1")
+			label.form__label.form__label--toggle(for="r1") Yes
+			input.form__toggle.form__toggle.form__toggle--radio(type="radio" name="radio" id="r2")
+			label.form__label.form__label--toggle(for="r2") No
+		.form__group
+			span.form__label Check boxes
+			input.form__toggle.form__toggle.form__toggle--check(type="checkbox" name="checkbox" id="c1")
+			label.form__label.form__label--toggle(for="c1") Option 1
+			input.form__toggle.form__toggle.form__toggle--check(type="checkbox" name="checkbox" id="c2")
+			label.form__label.form__label--toggle(for="c2") Option 2
+		.form__group
+			label.form__label(for="select1") Please select an event
+			.form__select.g-m10
+				select(id="select1" name="select1")
+					option English
+					option French
+					option German
+					option Spanish
+		.form__group
+			button.btn(type="submit") Send

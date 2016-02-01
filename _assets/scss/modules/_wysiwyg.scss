@@ -5,11 +5,31 @@
 
 	ul,ol {
 		margin: 0 0 gutter(1);
-		padding-left: gutter(1);
+		list-style: none;
+		padding: 0;
 	}
 
 	li {
-		margin-bottom: gutter(.25);
+		// push container in
+		padding-left: gutter(1);
+		// push text in
+		&:before {
+			// pull marker back (equal to padding-left)
+			margin: 0 gutter(.5) 0 gutter(-1);
+			color: #ee4433;
+			// ol li overwrites this
+			content: "• ";
+		}
+	}
+
+	ol {
+		counter-reset: counter;
+		li {
+			&:before {
+				content: counter(counter);
+				counter-increment: counter;
+			}
+		}
 	}
 	
 	p {}

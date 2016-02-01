@@ -15,3 +15,47 @@
 .g-col {
 	margin-left: $grid-desktop-gutter;
 }
+
+// header
+
+.site {
+	padding-top: 0;
+}
+
+.site-header {
+	background-color: $black;
+	color: $white;
+	position: static;
+}
+
+.site-header__wrapper {
+	justify-content: space-between;
+	align-items: center;
+}
+
+// menu 
+
+.menu {
+	margin-right: 0;
+}
+
+.menu__btn {
+	display: none;
+}
+
+.menu__wrapper {
+	// position: static;
+	// display: block;
+	// transform: none;
+	// opacity: 1;
+	// visibility: visible;
+	// background: none;
+}
+
+.menu__item {
+	@include font-type(base);
+	margin: 0 gutter(.5);
+	display: inline-block;
+	color: $white;
+	letter-spacing: normal;
+}

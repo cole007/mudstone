@@ -36,3 +36,16 @@
 	border: 1px solid #1a1a1a;
 }
 
+// spacing classes 
+
+.gutter-row {
+	padding: gutter(1) 0;
+}
+
+.gutter-col {
+	padding: 0 gutter(1);
+}
+
+.gutter-box {
+	padding: gutter(1);
+}

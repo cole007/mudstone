@@ -1,3 +1,6 @@
+// Don't style forms here... just form elements
+// Create a module file for any form components 
+
 // boilerplate form styles
 // core block styles
 // input reset
@@ -12,9 +15,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input,select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
 	border-radius: 0;
 }
 
@@ -68,24 +71,24 @@ fieldset {
 	display: block;
 	border: 2px solid lighten($base-grey,40%);
 	// use pseudo elements to cover native dropdown
+	// position in the corner
 	&:before,
 	&:after {
 		@include position(absolute, 0 0 0 null);
 		content: " ";
 		pointer-events: none;
 	}
-		
+	// add a background colour 
 	&:before {
 		background-color: lighten($base-grey,40%);
 		width: 30px;
 	}
-
+	// place a triangle in the middle
 	&:after {
 		@include triangle(lighten($base-grey,20%), 8px, 12px, bottom);
 		margin: auto;
 		right: 8px;
 	}
-
 	// reset the select element
 	select {
 		border: 0;
@@ -96,6 +99,8 @@ fieldset {
 }
 
 .form__toggle {
+	// this doesn't work in jquery validation
+	// use absolute positioning instead of opacity/visibity/display/apperance
 	@include reset-input();
 	& + label {
 		&:before {
