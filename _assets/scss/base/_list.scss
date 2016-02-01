@@ -8,16 +8,17 @@
     padding: 0;
 }
 
-.nav--flat {
-    > li {
-    	display: inline-block;
-    }
-}
+// removed - to specific at this level
+// .nav--flat {
+//     > li {
+//     	display: inline-block;
+//     }
+// }
 
-// forces nav in to a vertical list
-.nav--stacked {
-    > li {
-        display:block;
-    }
-}
+// // forces nav in to a vertical list
+// .nav--stacked {
+//     > li {
+//         display:block;
+//     }
+// }
 

@@ -425,7 +425,6 @@
     }
     &.is-active {
         > span {
-            opacity: 0;
             background-color: transparent!important; //urgh.. that'll do for now, that'll do pig, that'll do
             &:before {
                 transform: translateY(-$exit_lenght) rotate(45deg);

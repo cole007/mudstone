@@ -1,17 +1,17 @@
 header.site-header
-	.wrapper
-		.g-wrap.site-header__wrapper
-			a.site-logo(href="/" rel="logo") MudStone
-			nav.menu.g-wrap#site-menu(data-behaviour="menu")
-				a.menu__btn(href="#site-menu" rel="nofollow menu-btn")
-					span
-				ul.nav.menu__wrapper(rel="menu-wrapper")
-					li.menu__item
-						a(href="#type") Typography
-					li.menu__item
-						a(href="#form") Form
-					li.menu__item
-						a(href="#intro") Layout
-					li.menu__item
-						a(href="#intro") Panels
+	a.site-logo(href="/") MudStone
+	nav.menu.site-menu(data-behaviour="canvasNavigation")
+		a.menu__btn(href="#site-menu" rel="nofollow")
+			span
+		ul.nav.menu__wrapper.js-menu
+			li.menu__item
+				a(href="#Type") Type
+			li.menu__item
+				a(href="#Form") Form
+			li.menu__item
+				a(href="#Grid") Grid
+			li.menu__item
+				a(href="#Panels") Panels
+			li.menu__item
+				a(href="#Widgets") Widgets
 

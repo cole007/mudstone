@@ -1,4 +1,5 @@
-
+// for link buttons
+// <a href="#" class="btn btn--downloads"></a>
 .btn {
 	$btn-height: 44;
     @include font-size(18,$btn-height);
@@ -13,6 +14,8 @@
     height: $btn-height * 1px;
 }
 
+// reset for actual buttons
+// <button type="submit" class="button btn--downloads"></a>
 .button {
     background: none;
     border: 0;
