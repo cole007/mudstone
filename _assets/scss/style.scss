@@ -84,19 +84,40 @@ $ie: false;
  
 // views, mediaquery stuff 
 // Maximum 3 levels of specificity  
+
+body:before {
+  content: "mobile";
+  display: none; /* Prevent from displaying. */
+}
+
 @include mq(480, min) {
-    @import 'views/480-up';
+  body:before {
+    content: "480 up";
+  }
+  @import 'views/480-up';
 }
 @include mq(660, min) {
+    body:before {
+      content: "660 up";
+    }
     @import 'views/660-up';
 }
 @include mq(768, min) {
+    body:before {
+      content: "tablet";
+    }
     @import 'views/768-up';
 }
 @include mq(960, min) {
+    body:before {
+      content: "960 up";
+    }
     @import 'views/960-up';
 }
 @include mq(1024, min) {
+    body:before {
+      content: "desktop";
+    }
     @import 'views/1024-up';
 }
 // utils - these should generally trump other selectors, 
@@ -105,28 +126,3 @@ $ie: false;
 // final exceptions/shame
 @import 'views/exceptions';
  
- 
-body:before {
-  content: "smartphone";
-  display: none; /* Prevent from displaying. */
-}
-@media (min-width: 480px) {
-  body:before {
-    content: "smartphone-tablet";
-  }
-}
-@media (min-width: 700px) {
-  body:before {
-    content: "tablet";
-  }
-}
-@media (min-width: 1100px) {
-  body:before {
-    content: "desktop";
-  }
-}
-@media (min-width: 1400px) {
-  body:before {
-    content: "super-desktop";
-  }
-}

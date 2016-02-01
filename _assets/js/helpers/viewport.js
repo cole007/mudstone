@@ -18,7 +18,6 @@ import $ from 'jquery';
 		}
 	});
 */
-
 var Viewport = function(opts) {
 	var defaults = {
 		debounceDelay: 300

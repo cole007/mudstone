@@ -29,22 +29,25 @@ function canvasNavigation(container) {
 			$(this.el).removeClass('is-animating-out is-active');
 		}
 	});
-
+	// the click handler
 	function clickHandle(e) {
 		e.preventDefault();
 		transition.trigger();
 	}
-	// if onLoad the viewport is smaller than tablet
-	if(viewport.width < breakpoints.tablet) {
+	// if onLoad the viewport is smaller than desktop
+	if(viewport.width < breakpoints.desktop) {
 		container.on('click', '.menu__btn', clickHandle);
 	}
 	// watch for breakpoint changes
 	// the function only gets called when a breakpoint changes
+	// Used to unbind the click event
 	viewport.change(function(current, prev) {
-		if(prev === 'tablet' && this.width >= breakpoints.desktop) {
+		if(current === 'desktop' || this.width >= breakpoints.desktop) {
+			console.log('unbind');
 			container.off('click', '.menu__btn', clickHandle);
 		}
-		if(prev === 'desktop' && this.width < breakpoints.desktop) {
+		if(current === 'tablet' || this.width < breakpoints.desktop) {
+			console.log('bind');
 			container.on('click', '.menu__btn', clickHandle);
 		}
 	});
