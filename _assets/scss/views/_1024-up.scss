@@ -1,25 +1,17 @@
-// base/type.scss
+// structure
 
-// h1,.heading-1 {
-// 	@include font-size(size(h1));
-// }
-
-// h2,.heading-2 {
-// 	@include font-size(size(h2));
-// }
-
-// h3,.heading-3 {
-// 	@include font-size(size(h3));
-// }
-
-// h4,.heading-4 {
-// 	@include font-size(size(h4));
-// }
-
-// h5,.heading-5 {
-// 	@include font-size(size(h5));
-// }
-
-// h6,.heading-6 {
-// 	@include font-size(size(h6));
-// }
+// grid classes
+// example output:
+// .g-t6 { width: calc(50% - 10px) }
+@include grid-classes($total-columns: 12, $gutter: $grid-desktop-gutter, $prefix: g-d);
+// add negative margin to grid wrapper
+// to allow for grid gutters
+// and avoid having to use :first-child/:last-child selectors
+.g-cf,
+.g-fx {
+	margin-left: -$grid-desktop-gutter;
+}
+// update add the gutter to the grid column class 
+.g-col {
+	margin-left: $grid-desktop-gutter;
+}

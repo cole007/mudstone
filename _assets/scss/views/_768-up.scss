@@ -1,48 +1,17 @@
-// layout/header.scss
+// structure
 
-// .menu__wrapper {
-// 	position: static;
-// 	will-change: none;
-// 	opacity: 1;
-// 	transform: none;
-// 	z-index: 1;
-// 	background: none;
-// 	display: block;
-// 	text-align: left;
-// 	&:before {
-// 		display: none;
-// 	}
-// }
-
-// .menu__btn {
-// 	display: none;
-// }
-
-// .menu__item {
-// 	@include font-size(modular-scale(0));
-// 	color: $black;
-// 	display: inline-block;
-// 	margin: 0 gutter(.25);
-// 	letter-spacing: 0;
-// 	&:hover {
-// 		color: c(themes,blog);
-// 	}
-// }
-
-
-
-
-
-
-
-
-// layout/footer.scss
-
-
-
-
-
-
-
-
-// layout/structure.scss
+// grid classes
+// example output:
+// .g-t6 { width: calc(50% - 10px) }
+@include grid-classes($total-columns: 12, $gutter: $grid-tablet-gutter, $prefix: g-t);
+// add negative margin to grid wrapper
+// to allow for grid gutters
+// and avoid having to use :first-child/:last-child selectors
+.g-cf,
+.g-fx {
+	margin-left: -$grid-tablet-gutter;
+}
+// update add the gutter to the grid column class 
+.g-col {
+	margin-left: $grid-tablet-gutter;
+}

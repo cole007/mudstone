@@ -48,7 +48,7 @@ var Viewport = function(opts) {
 			let current = this.breakpoint;
 			this.current = this.breakpoint;
 			if(typeof this.change === 'function') {
-				this.onChange(prev, current);
+				this.onChange(current, prev);
 			}
 		}
 		if(typeof this.onResize === 'function') {

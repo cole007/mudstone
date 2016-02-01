@@ -40,11 +40,11 @@ function canvasNavigation(container) {
 	}
 	// watch for breakpoint changes
 	// the function only gets called when a breakpoint changes
-	viewport.change(function(prev, current) {
-		if(prev === 'tablet' && current === 'desktop') {
+	viewport.change(function(current, prev) {
+		if(prev === 'tablet' && this.width >= breakpoints.desktop) {
 			container.off('click', '.menu__btn', clickHandle);
 		}
-		if(prev === 'desktop' && current === 'tablet') {
+		if(prev === 'desktop' && this.width < breakpoints.desktop) {
 			container.on('click', '.menu__btn', clickHandle);
 		}
 	});

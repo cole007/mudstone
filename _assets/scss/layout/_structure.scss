@@ -1,2 +1,38 @@
 // max nesting = 2
 .site-page {}
+
+.wrapper {
+	width: 100%;
+	max-width: $base-max-width;
+	margin: 0 auto;
+	padding: 0 $grid-mobile-gutter;
+}
+
+// grid classes
+// example output:
+// .g-m6 { width: calc(50% - 10px) }
+// Never add any additional styles to the grid utility classes, always add another class
+// Where possible avoid styling grid columns altogether
+// If you need to add additional styles to a column please add some comments
+// On project completion we can run the final css through gulp-uncss
+// There are no push/pull class names generated
+@include grid-classes($total-columns: 12, $gutter: $grid-mobile-gutter, $prefix: g-m);
+
+// add negative margin to grid wrapper
+// to allow for grid gutters
+// and avoid having to use :first-child/:last-child selectors
+.g-cf,
+.g-fx {
+	margin-left: -$grid-mobile-gutter;
+}
+// add the gutter to the grid column class 
+.g-col {
+	margin-left: $grid-mobile-gutter;
+	// demo only = maybe
+	padding: gutter(1);
+	margin-bottom: gutter(1);
+	// demo fo-sure yeah
+	text-align: center;
+	border: 1px solid #1a1a1a;
+}
+

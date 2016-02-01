@@ -15,10 +15,14 @@
 
 .g-cf {
 	@include cf();
+	& > .g-col {
+		float: left;
+	}
 }
 
 .g-fx {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .g-fx--column {

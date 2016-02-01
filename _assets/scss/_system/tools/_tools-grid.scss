@@ -22,6 +22,14 @@ $grid-mobile-settings: (
   direction: 'ltr'
 );
 
+@mixin grid-classes($total-columns: 12, $gutter: gutter(1), $prefix: g-d) {
+  @for $i from 1 through $total-columns {
+    .#{$prefix}#{$i}  {
+      width: colCalc($i,$total-columns,$gutter);
+    }
+  }
+} 
+
 /// @param {map} $map
 @mixin g-wrapper($map: $grid-settings) {
   $max-width:  map-get($map, max-width);
@@ -50,7 +58,10 @@ $grid-mobile-settings: (
   @if $type == 'float' {
     @include cf();
   }
+  // https://css-tricks.com/fighting-the-space-between-inline-block-elements/
+  // 
   // nope, this was never a good idea
+  // "Update: unless you care to support Android WebKit."
   // @if $type == 'inline' {
   //   font-size: 0;
   // }
