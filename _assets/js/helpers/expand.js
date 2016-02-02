@@ -79,15 +79,14 @@ function Expand(opts) {
 	// private function
 	// set the height values for each item, called during window resize
 	function setHeight() {
-		collection.forEach((element) => element.height = (element.state === true) ? getHeight(element.$target) : element.$target.outerHeight(true));
+		collection.forEach((element) => element.height = (element.state === true) ? element.$target.outerHeight(true) : getHeight(element.$target));
 	};
 	// private function
 	// get the height of all of the children 
 	function getHeight($target) {
-		var height = 0;
-		$target.children().each(function() {
-			height += $(this).outerHeight(true);
-		})	
+		$target.css({display: 'block'});
+		var height = $target.outerHeight(true);
+		$target.css({display: 'none'});
 		return height;
 	};
 	function clickHandle(e) {
@@ -124,7 +123,7 @@ function Expand(opts) {
 			if(state === true) {
 				$target.addClass(_this.activeContentClass);
 			}
-			var height = (state === true) ? getHeight($target) : $target.outerHeight(true);
+			var height = (state === true) ? $target.outerHeight(true) : getHeight($target);
 			$(this).attr('data-expand-index', i);
 			collection.push({
 				$el: $(this),
@@ -143,12 +142,15 @@ function Expand(opts) {
 	this.tween = function($el) {
 		var index = $el.data('expand-index');
 		var obj = collection[index];
+
 		// if the state is true
 		// add the initCss style
 		// hides $target before it expands
 		if(obj.state === true) {
 			obj.$target.css(initCss);
 		}
+
+		console.log(obj.$target);
 		if (!obj.isRunning) {
 			// init new Tweezer
 			new Tweezer({

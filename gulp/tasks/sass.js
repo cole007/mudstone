@@ -30,7 +30,7 @@ gulp.task('sass', function () {
     .pipe(postcss([ autoprefixer({ browsers: config.prefix }) ]))
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .on('error', handleErrors)
-    .pipe(gulp.dest(config.dest))
     .pipe(size())
+    .pipe(gulp.dest(config.dest))
     // .pipe(browserSync.reload({stream:true}));
 });
