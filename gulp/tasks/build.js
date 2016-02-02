@@ -70,10 +70,17 @@ gulp.task('build-css', function() {
     // .pipe(browserSync.reload({stream:true}));
 }); 
 
-gulp.task('build', function(callback) {
-  runSequence('sprites', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css'], callback);
+// kick things off
+gulp.task('init', function(callback) {
+  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'scripts', 'move-scripts', 'sass'], callback);
 });
 
+// build things, and compress css/js
+gulp.task('build', function(callback) {
+  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css'], callback);
+});
+
+// build cms assets things, and compress css/js
 gulp.task('build-cms', function(callback) {
   runSequence('build-css', ['scripts'], callback);
 });
