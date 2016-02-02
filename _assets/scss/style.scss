@@ -74,6 +74,7 @@ $ie: false;
 // Maximum 2 levels of specificity  
 @import 'layout/header',
         'layout/footer',
+        'layout/navigation',
         'layout/structure';
 // modules and components, should work independently from the layout
 // Maximum 3 levels of specificity  

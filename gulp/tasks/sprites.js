@@ -15,7 +15,7 @@ var gulp            = require('gulp'),
     reload          = browserSync.reload;
 
 
-gulp.task('sprite', function () {
+gulp.task('png-sprite', function () {
   // Generate our spritesheet
     var spriteData = gulp.src(config.data)
     .pipe(spritesmith({

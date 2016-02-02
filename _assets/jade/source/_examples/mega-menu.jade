@@ -1,0 +1,23 @@
+.menu__wrapper.js-menu
+	ul.nav.menu__root
+		-var n = 0
+		while n < 6
+			li.menu__item.menu__item__lvl1
+				a(href="#") Menu Item 
+				button.button +
+				.menu__subwrap
+					ul.nav
+						-var k = 0
+						while k < 6
+							li.menu__item.menu__item__lvl2
+								a(href="#") Sub Menu Item l2
+								button.button +
+								.menu__subwrap
+									ul.nav
+										-var j = 0
+										while j < 6
+											li.menu__item.menu__item__lvl2 
+												a(href="#") Sub Menu Item l3
+											-j++
+							-k++
+			-n++

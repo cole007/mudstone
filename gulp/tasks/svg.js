@@ -57,8 +57,8 @@ gulp.task('svg-assets', function() {
 // svg2png, svg sprite, png sprite
 //gulp.task('sprites', ['pngSprite', 'svgSprite', 'sprite']);
 
-gulp.task('sprites', function(cb) {
-    runSequence('svgSprite',['pngSprite'], 'sprite', cb)
+gulp.task('sprite', function(cb) {
+    runSequence('svgSprite',['pngSprite'], 'png-sprite', cb)
 });
 
 

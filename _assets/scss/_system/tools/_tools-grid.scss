@@ -22,10 +22,16 @@ $grid-mobile-settings: (
   direction: 'ltr'
 );
 
-@mixin grid-classes($total-columns: 12, $gutter: gutter(1), $prefix: g-d) {
+@mixin grid-classes($total-columns: 12, $gutter: gutter(1), $prefix: g-d, $output: class) {
   @for $i from 1 through $total-columns {
-    .#{$prefix}#{$i}  {
-      width: colCalc($i,$total-columns,$gutter);
+    @if $output == extend {
+      %#{$prefix}#{$i} {
+        width: colCalc($i,$total-columns,$gutter);
+      }
+    } @else {
+      .#{$prefix}#{$i}  {
+        width: colCalc($i,$total-columns,$gutter);
+      }
     }
   }
 } 

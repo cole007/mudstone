@@ -30,7 +30,7 @@ accordion.tween($('.button')) // this will/open close the selected element
 accordion.close(); // will close all accordions
 accordion.open(); // will open all accordions
 Html: 
-<!-- data-target strong or href must match the target elements id -->
+<!-- data-target string or href must match the target elements id -->
 <div class="js-accordion">
 	<button data-target="#c1" class="button">1</button>
 	<div id="c1" class="accordion__content"></div>

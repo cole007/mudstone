@@ -43,6 +43,10 @@
   @return calc(#{gridCalc($column,$total_columns)} - #{$gutter});
 }
 
+@function colPush($column,$total_columns,$gutter) {
+  @return calc(#{gridCalc($column,$total_columns)} + #{$gutter});
+}
+
 @function context($width, $max-width: $base-max-width) {
 	@return percentage($width / $max-width);
 }

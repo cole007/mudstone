@@ -4,6 +4,7 @@
 // example output:
 // .g-t6 { width: calc(50% - 10px) }
 @include grid-classes($total-columns: 12, $gutter: $grid-desktop-gutter, $prefix: g-d);
+@include grid-classes($total-columns: 12, $gutter: $grid-desktop-gutter, $prefix: g-d, $output: extend);
 // add negative margin to grid wrapper
 // to allow for grid gutters
 // and avoid having to use :first-child/:last-child selectors
@@ -14,6 +15,20 @@
 // update add the gutter to the grid column class 
 .g-col {
 	margin-left: $grid-desktop-gutter;
+}
+// example grid push
+.g-push2 {
+	margin-left: colPush(2,12,$grid-desktop-gutter);
+}
+
+.g--feature {
+	@extend %g-d12;
+}
+.g--sub {
+	@extend %g-d8;
+}
+.g--minor {
+	@extend %g-d5;
 }
 
 // header

@@ -5,9 +5,9 @@ import canvasNavigation from './modules/canvasNavigation';
 import accordion from './modules/accordion';
 import validation from './modules/validation';
 
-// WebFont.load({
-// 	typekit: { id: 'vcl8lns' }
-// });
+WebFont.load({
+	typekit: { id: 'vcl8lns' }
+});
 
 // assign the data-behaviour functions
 mud.Behaviours.canvasNavigation = canvasNavigation;
