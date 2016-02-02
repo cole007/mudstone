@@ -2,7 +2,6 @@
  * sass 
  * compile scss with libsass
  */
-
 var gulp            = require('gulp'),
     browserSync     = require('browser-sync'),
     sass            = require('gulp-sass'),
@@ -10,7 +9,6 @@ var gulp            = require('gulp'),
     handleErrors    = require('../util/handleErrors'),
     gulpif          = require('gulp-if'),
     size            = require('gulp-size'),
-    handleErrors    = require('../util/handleErrors'),
     autoprefixer    = require('autoprefixer'),
     postcss         = require('gulp-postcss'),
     config          = require('../config').sass,
@@ -30,7 +28,7 @@ gulp.task('sass', function () {
     .pipe(postcss([ autoprefixer({ browsers: config.prefix }) ]))
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .on('error', handleErrors)
-    .pipe(gulp.dest(config.dest))
     .pipe(size())
+    .pipe(gulp.dest(config.dest))
     // .pipe(browserSync.reload({stream:true}));
 });

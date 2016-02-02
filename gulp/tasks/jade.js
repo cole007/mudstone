@@ -3,7 +3,6 @@ var gulp            = require('gulp'),
     config          = require('../config').jade,
     browserSync     = require('browser-sync'),
     handleErrors    = require('../util/handleErrors'),
-    rename          = require("gulp-rename"),
     runSequence     = require('run-sequence');
 
 gulp.task('jade', function() {
@@ -21,20 +20,3 @@ gulp.task('jade', function() {
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({stream:true}));
 });
-
-
-// gulp.task('rename-jade', function() {
-
-//     return gulp.src("./*.html")
-//       .pipe(rename(function (path) {
-//           path.extname = ".php"
-//       }))
-//       .pipe(gulp.dest("./"));
-
-// })
-
-
-
-// gulp.task('jade', function(cb) {
-//   runSequence('templates', ['svgstore'], cb);
-// });

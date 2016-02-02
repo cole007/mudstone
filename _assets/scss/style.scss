@@ -1,4 +1,4 @@
-//    File: _assets/css/scss/style.scss
+//    File: _assets/scss/style.scss
 //
 //    Use spaces not tabs
 //
@@ -41,86 +41,88 @@ $ie: false;
 // gulp generated scss
 // stores variables used by svg/icon mixins
 @import '_system/gulp/png-sprites',
-		'_system/gulp/svg-sprites',
-		'_system/gulp/icon-font';
+        '_system/gulp/svg-sprites',
+        '_system/gulp/icon-font';
 // functions
 @import '_system/tools/tools-functions';
 // Libraries and dependencies
 // latest version of normalize - with img/fieldset
 @import '_system/libs/normalize',
-		'_config/variables';
+        '_config/variables';
 // tools - mixins and functions
 // these shouldn't need to be changed
 @import '_system/tools/tools-helpers',
-		'_system/tools/tools-grid',
-		'_system/tools/tools-images',
-		'_system/tools/tools-type';
+        '_system/tools/tools-grid',
+        '_system/tools/tools-images',
+        '_system/tools/tools-type';
 // views and components
 // config/fonts
 // @import '_config/variables'; -- imported at root level (function/tool dependencies)
-@import	'_config/fonts',
-		'_config/debug';
-
+@import '_config/fonts',
+        '_config/debug';
+ 
 // base elements
 // First elements to be styled
 // No nesting or important... low specificity
 @import 'base/type',
-		'base/forms',
-		'base/tables',
-		'base/buttons',
-		'base/icons',
-		'base/list';
+        'base/forms',
+        'base/tables',
+        'base/buttons',
+        'base/icons',
+        'base/list';
 // layout and structure
 // Maximum 2 levels of specificity  
 @import 'layout/header',
-		'layout/footer',
-		'layout/structure';
+        'layout/footer',
+        'layout/navigation',
+        'layout/structure';
 // modules and components, should work independently from the layout
 // Maximum 3 levels of specificity  
 @import 'modules/panels',
-		'modules/hero';
-
+        'modules/accordion',
+        'modules/wysiwyg',
+        'modules/hero';
+ 
 // views, mediaquery stuff 
 // Maximum 3 levels of specificity  
+
+body:before {
+  content: "mobile";
+  display: none; /* Prevent from displaying. */
+}
+
 @include mq(480, min) {
-	@import	'views/480-up';
+  body:before {
+    content: "480 up";
+  }
+  @import 'views/480-up';
 }
 @include mq(660, min) {
-	@import	'views/660-up';
+    body:before {
+      content: "660 up";
+    }
+    @import 'views/660-up';
 }
 @include mq(768, min) {
-	@import	'views/768-up';
+    body:before {
+      content: "tablet";
+    }
+    @import 'views/768-up';
 }
 @include mq(960, min) {
-	@import	'views/960-up';
+    body:before {
+      content: "960 up";
+    }
+    @import 'views/960-up';
 }
 @include mq(1024, min) {
-	@import	'views/1024-up';
+    body:before {
+      content: "desktop";
+    }
+    @import 'views/1024-up';
 }
 // utils - these should generally trump other selectors, 
 // important is fine here
 @import 'utils/utils';
 // final exceptions/shame
-@import	'views/exceptions';
-
-
-// body:before {
-//   content: "smartphone";
-//   display: none; /* Prevent from displaying. */
-// }
-// @media (min-width: 400px) {
-//   body:before {
-//     content: "smartphone-tablet";
-//   }
-// }
-// @media (min-width: 700px) {
-//   body:before {
-//     content: "tablet";
-//   }
-// }
-// @media (min-width: 1100px) {
-//   body:before {
-//     content: "desktop";
-//   }
-// }
-
+@import 'views/exceptions';

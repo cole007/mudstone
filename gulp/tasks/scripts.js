@@ -3,8 +3,6 @@
  * uglify if env = live
  * concat javascript files
  */
-
-
 var gulp         = require('gulp'),
 	browserSync  = require('browser-sync'),
 	uglify       = require('gulp-uglify'),
@@ -20,11 +18,11 @@ var gulp         = require('gulp'),
 gulp.task('scripts', function() {
   return gulp.src(config.src)
     .pipe(gulpif(env == 'dev', sourcemaps.init()))
-    .pipe(gulpif(env == 'live', uglify()))
 	.pipe(babel({
 		presets: ['es2015']
 	}))
     .on('error', handleErrors)
+    .pipe(gulpif(env == 'live', uglify()))
     .pipe(concat(config.output))
     .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
     .pipe(gulp.dest(config.dest))

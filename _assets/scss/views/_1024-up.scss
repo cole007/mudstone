@@ -1,25 +1,76 @@
-// base/type.scss
+// structure
 
-// h1,.heading-1 {
-// 	@include font-size(size(h1));
-// }
+// grid classes
+// example output:
+// .g-t6 { width: calc(50% - 10px) }
+@include grid-classes($total-columns: 12, $gutter: $grid-desktop-gutter, $prefix: g-d);
+@include grid-classes($total-columns: 12, $gutter: $grid-desktop-gutter, $prefix: g-d, $output: extend);
+// add negative margin to grid wrapper
+// to allow for grid gutters
+// and avoid having to use :first-child/:last-child selectors
+.g-cf,
+.g-fx {
+	margin-left: -$grid-desktop-gutter;
+}
+// update add the gutter to the grid column class 
+.g-col {
+	margin-left: $grid-desktop-gutter;
+}
+// example grid push
+.g-push2 {
+	margin-left: colPush(2,12,$grid-desktop-gutter);
+}
 
-// h2,.heading-2 {
-// 	@include font-size(size(h2));
-// }
+.g--feature {
+	@extend %g-d12;
+}
+.g--sub {
+	@extend %g-d8;
+}
+.g--minor {
+	@extend %g-d5;
+}
 
-// h3,.heading-3 {
-// 	@include font-size(size(h3));
-// }
+// header
 
-// h4,.heading-4 {
-// 	@include font-size(size(h4));
-// }
+.site {
+	padding-top: 0;
+}
 
-// h5,.heading-5 {
-// 	@include font-size(size(h5));
-// }
+.site-header {
+	background-color: $black;
+	color: $white;
+	position: static;
+}
 
-// h6,.heading-6 {
-// 	@include font-size(size(h6));
-// }
+.site-header__wrapper {
+	justify-content: space-between;
+	align-items: center;
+}
+
+// menu 
+
+.menu {
+	margin-right: 0;
+}
+
+.menu__btn {
+	display: none;
+}
+
+.menu__wrapper {
+	// position: static;
+	// display: block;
+	// transform: none;
+	// opacity: 1;
+	// visibility: visible;
+	// background: none;
+}
+
+.menu__item {
+	@include font-type(base);
+	margin: 0 gutter(.5);
+	display: inline-block;
+	color: $white;
+	letter-spacing: normal;
+}

@@ -51,9 +51,15 @@ $font-size: (
 $base-max-width:                1280px;
 $base-max-columns:              12;
 $current_breakpoint:            base;
-$base-padding:                  modular-scale(1);
+$base-padding:                  20;
 
 $base-grid-gutter:              $base-padding;
+
+$grid-mobile-gutter:            $base-padding / 2 * 1px;
+$grid-tablet-gutter:            $base-padding * 1px;
+$grid-desktop-gutter:           $base-padding * 1px;
+
+
 // Counter
 $counter:                       counter;
 
@@ -79,6 +85,9 @@ $palettes: (
         base:                   #4A90E2,
         dark:                   #267DE2
     ),
+    link: ( 
+      hover:                    #ff0031
+    )
 );
 
 

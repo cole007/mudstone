@@ -1,0 +1,29 @@
+// structure
+
+// grid classes
+// example output:
+// .g-t6 { width: calc(50% - 10px) }
+@include grid-classes($total-columns: 12, $gutter: $grid-tablet-gutter, $prefix: g-t);
+@include grid-classes($total-columns: 12, $gutter: $grid-mobile-gutter, $prefix: g-t, $output: extend);
+// add negative margin to grid wrapper
+// to allow for grid gutters
+// and avoid having to use :first-child/:last-child selectors
+.g-cf,
+.g-fx {
+	margin-left: -$grid-tablet-gutter;
+}
+// update add the gutter to the grid column class 
+.g-col {
+	margin-left: $grid-tablet-gutter;
+}
+
+
+.g--feature {
+	@extend %g-t10;
+}
+.g--sub {
+	@extend %g-t8;
+}
+.g--minor {
+	@extend %g-t5;
+}

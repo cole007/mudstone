@@ -375,10 +375,10 @@
 
 // menu button
 
-@mixin menu-icon-rotate($width: 30px, $height: 6px, $color: $_white, $curve: true, $active_class: '.is-active', $gap: 2) {
+@mixin menu-icon-rotate($width: 30px, $height: 6px, $color: $white, $curve: true, $active_class: '.is-active', $gap: 2) {
     $exit_lenght: $height * 2;
     $bar_gaps: ($height * $gap) + 1;
-    position: relative;
+    //position: relative;
     & > span {
         transition: all 0.5s;
         transform: translateY(0px);
@@ -424,9 +424,7 @@
         }       
     }
     &.is-active {
-        > span {
-            opacity: 0;
-            background-color: transparent!important; //urgh.. that'll do for now, that'll do pig, that'll do
+        & > span {
             &:before {
                 transform: translateY(-$exit_lenght) rotate(45deg);
     

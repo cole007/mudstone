@@ -15,10 +15,14 @@
 
 .g-cf {
 	@include cf();
+	& > .g-col {
+		float: left;
+	}
 }
 
 .g-fx {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .g-fx--column {
@@ -33,10 +37,37 @@
 	flex-wrap: wrap;
 }
 
+.g-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// panels
+
+// base class for all modules
+// ensures even spacing around the module
+// by removing any last childrens bottom margin
+.u-panel {
+	> *:last-child,
+	> *:last-child > *:last-child,
+	> *:last-child > *:last-child > *:last-child {
+		margin-bottom: 0
+	}
+}
+
 // effects
 
 .u-trans {
 	transition: all .3s;
+}
+
+// image replacement
+
+.u-ir {
+	display: block;
+	text-indent: 150%;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 

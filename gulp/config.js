@@ -137,7 +137,7 @@ module.exports = {
     dest: build + 'images',
     css: '../../../../_assets/scss/_system/gulp/_svg-sprites.scss',
     sprite: 'svg-sprite.svg',
-    template: assets + 'scss/_tpl/_sprite-template.scss',
+    template: assets + 'scss/_system/_tpl/_sprite-template.scss',
     pngs: assets + 'images/png-sprites',
     assets: assets + 'images/svg-assets/*.svg'
   },
@@ -155,7 +155,7 @@ module.exports = {
     src: assets + 'images/icons/*.svg',
     dest: build + 'fonts/',
     name: 'icon-font',
-    path: assets + 'scss/_tpl/_icon-font-template.scss',
+    path: assets + 'scss/_system/_tpl/_icon-font-template.scss',
     targetPath: '../../../../_assets/scss/_system/gulp/_icon-font.scss',
     fontPath: '../fonts/'
   },

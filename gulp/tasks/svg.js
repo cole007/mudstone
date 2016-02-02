@@ -1,6 +1,5 @@
 var gulp            = require('gulp'),
     svgmin          = require('gulp-svgmin'),
-    gutil           = require('gulp-util'),
     svg2png         = require('gulp-svg2png'),
     svgSprite       = require('gulp-svg-sprite'),
     config          = require('../config'),
@@ -45,8 +44,6 @@ gulp.task('pngSprite', ['svgSprite'], function() {
         .pipe(gulp.dest(config.svg.pngs));
 });
 
-
-
 gulp.task('svg-assets', function() {
     return gulp.src(config.svg.assets)
         .pipe(svgmin())
@@ -57,18 +54,16 @@ gulp.task('svg-assets', function() {
 // svg2png, svg sprite, png sprite
 //gulp.task('sprites', ['pngSprite', 'svgSprite', 'sprite']);
 
-gulp.task('sprites', function(cb) {
-    runSequence('svgSprite',['pngSprite'], 'sprite', cb)
+gulp.task('sprite', function(cb) {
+    runSequence('svgSprite',['pngSprite'], 'png-sprite', cb)
 });
 
 
 gulp.task('html-jade', function() {
-
     var options = {
         nspaces:2, 
         bodyless: true
     };
-
     return gulp.src(config.svgStore.dest + config.svgStore.fileName)
         .pipe(html2jade(options))
         .pipe(gulp.dest(config.svgStore.jadeDest));
@@ -79,18 +74,15 @@ gulp.task('build-svgstore', function () {
         .src(config.svgStore.src)
         .pipe(svgmin())
         .pipe(svgstore({ inlineSvg: true }));
-
     function fileContents (filePath, file) {
         return file.contents.toString();
     }
-
     return gulp
         .src(config.svgStore.file)
         .pipe(inject(svgs, { transform: fileContents }))
         .on('error', handleErrors)
         .pipe(gulp.dest(config.svgStore.dest));
 });
-
 
 gulp.task('svgstore', function(cb) {
     runSequence('build-svgstore',['html-jade'],  cb)

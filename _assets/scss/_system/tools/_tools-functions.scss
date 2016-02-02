@@ -35,8 +35,16 @@
 	@return floor(($gutter * $lines) * 1px);
 }
 
-@function gridCalc($columns,$total_coloumns: $base-max-columns) {
-	@return percentage($columns / $total_coloumns);
+@function gridCalc($columns,$total-columns: $base-max-columns) {
+	@return percentage($columns / $total-columns);
+}
+
+@function colCalc($column,$total_columns,$gutter) {
+  @return calc(#{gridCalc($column,$total_columns)} - #{$gutter});
+}
+
+@function colPush($column,$total_columns,$gutter) {
+  @return calc(#{gridCalc($column,$total_columns)} + #{$gutter});
 }
 
 @function context($width, $max-width: $base-max-width) {

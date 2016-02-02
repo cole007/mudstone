@@ -1,158 +1,39 @@
+// site logo
 .site-logo {
 	@include font-type(bold);
-	@include font-size(size(h4),false);
+	//@include font-family(display);
+	@include font-size(size(h6),false);
 	line-height: 1;
 	display: block;
-	align-self: baseline;
 	position: relative;
 	z-index: 101;
 	transition: all .4s;
+	margin-left: 20px;
 }
 
-@include mq(768, max) {
-	[rel*="logo"] {
-		&.is-active--menu {
-			color: $white;
-		}
+// vertical space for the fixed header
+.site {
+	@include mq(1024, max) {
+		padding-top: 41px;
 	}
 }
 
 .site-header {
-	position: fixed;
-	width: 100%;
-	top: 0;
-	left: 0;
-	background-color: $white;
-	padding: gutter(1) 0;
-	border-bottom: 4px solid c(themes,blog);
-	& + div {
-		margin-top: 95px;
-	}
-}
-
-.site-header__wrapper {
-	justify-content: space-between;
-	align-items: stretch;
-	padding: gutter(.25) 0 gutter(.25);
- 	// no-flexbox fallback
-	@include fallback(flexbox) {
-		@include g-row($inc_gutter: false, $space-below: false, $type: justify);
-		& > * {
-			display: inline-block;
-			vertical-align: baseline;
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-
-// menu
-
-.menu {
-	align-items: center;
-	align-self: baseline;
-}
-
-.menu__wrapper {
-	@include position(fixed, 0);
-	width: 100%;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background-color: c(themes,blog);
-	visibility: hidden;
-	opacity: 0;
-	transform: scale(1.4);
-	transition: opacity .5s, transform .5s, visibility 0s;
-}
-
-.is-animating-in, .is-active {
-	transform: scale(1);
-	visibility: visible;
-	opacity: 1;
-}
-
-// .is-animating-in, .is-active {
-// 	transform: scale(1);
-// 	visibility: visible;
-// 	opacity: 1;
-// }
-
-.is-animating-out {
-	opacity: 0;
-	transform: scale(1.4);
-}
-
-.is-active {
-}
-
-
-.menu__btn {
-	@include menu-icon-rotate($width: 30px, $height: 2px, $color: $black, $curve: true, $active_class: '.is-active', $gap: 3);
-	display: block;
-	width: 40px;
-	height: 40px;
-	position: relative;
-	top: 10px;
-	z-index: 101;
-
-	&.is-active {
-		span {
-			&,
-			&:before,
-			&:after {
-				background-color: $white;
-			}
-		}
-	}
-}
-
-.menu__item {
-	@include font-type(bold);
-	@include font-size(modular-scale(3));
-	letter-spacing: 0.25em;
-	margin: 2vh 0;
-	color: $white;
-	transition: color .3s;
-	&:hover {
+	padding: gutter(.5) 0;
+	// all of this needs to be replaced for desktop
+	// so lets wrap the fella in a little media query
+	@include mq(1024, max) {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		left: 0;
+		background-color: $white;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 		color: $black;
 	}
-
-	& > a {
-		padding: 0 gutter(.5);
-	}
 }
 
-// state - use rel selector to separate state from classes
 
-%is-active-menu {
-	opacity: 1;
-	transform: scale(1);
-	z-index: 100;
-	left: 0;
-}
 
-// class can change, rel shouldn't change
-// views/768_up
-[rel*="menu-wrapper"] {
-	&.is-active--menu {
-		@extend %is-active-menu;
-	}
-}
 
-// no-js version
-:target {
-	&#site-menu {
-		.menu__wrapper {
-			@extend %is-active-menu;
-		}
-	}
-}
+

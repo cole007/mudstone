@@ -1,0 +1,19 @@
+.accordion {
+	padding: gutter(1);
+}
+
+.accordion__content { 
+	display: none;
+	&.is-active {
+		display: block;
+	}
+}
+
+.accordion__inner {
+	padding: 0 gutter(1);
+}
+
+.accordion__btn {
+	display: block;
+	margin-bottom: gutter(.5);
+}

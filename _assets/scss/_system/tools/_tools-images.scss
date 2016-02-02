@@ -78,6 +78,10 @@
 	}
 }
 
+@mixin sprite($sprite) {
+	@include svg($sprite);
+}
+
 @mixin svg-height($sprite) {
 	$svg-props: svg-attr($sprite);
 	height: map-get($svg-props, height);  
@@ -107,8 +111,6 @@
 		background-position: map-get($svg-props, x) map-get($svg-props, y); 
 	}
 }
-
-
 
 @mixin resize-svg($svg, $size: null, $dimension: width) {
 	

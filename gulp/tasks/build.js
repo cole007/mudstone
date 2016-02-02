@@ -71,7 +71,7 @@ gulp.task('build-css', function() {
 }); 
 
 gulp.task('build', function(callback) {
-  runSequence('sprites', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css'], callback);
+  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css'], callback);
 });
 
 gulp.task('build-cms', function(callback) {
