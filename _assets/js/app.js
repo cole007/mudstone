@@ -15,6 +15,6 @@ mud.Behaviours.accordion = accordion;
 mud.Behaviours.validation = validation;
 
 $(function() {
-	$('html').removeClass('no-js');
 	mud.loadBehaviour();
 });
+

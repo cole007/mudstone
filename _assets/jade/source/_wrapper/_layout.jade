@@ -27,6 +27,8 @@ html.no-js<!--<![endif]-->
         //- meta(name="msapplication-TileImage", content="/favicon/mstile-144x144.png")
         //- meta(name="theme-color", content="#ffffff")
         link(rel='stylesheet', href='#{path}css/style.css', media='screen AND (min-width:180px)')
+        //- Remove script tag if modernizr is being used
+        script var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");
         //- custom modernizr script, only tests for touch events
         //-  script(src='#{path}js/libs/modernizr.min.js')
     body
