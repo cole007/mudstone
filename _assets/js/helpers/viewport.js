@@ -1,5 +1,5 @@
-import { debounce } from 'lodash';
 import $ from 'jquery';
+import debounce from 'lodash.debounce';
 /* 
 	var viewport = new Viewport({
 		debounceDelay: 300

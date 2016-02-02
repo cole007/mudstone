@@ -1,9 +1,9 @@
 import WebFont from 'webfontloader';
 import $ from 'jquery';
 import mud from './dependencies/load-behaviour';
-import canvasNavigation from './modules/canvasNavigation';
-import accordion from './modules/accordion';
-import validation from './modules/validation';
+import canvasNavigation from './behaviours/canvasNavigation';
+import accordion from './behaviours/accordion';
+import validation from './behaviours/validation';
 
 WebFont.load({
 	typekit: { id: 'vcl8lns' }

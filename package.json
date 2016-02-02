@@ -42,6 +42,8 @@
     "jquery": "^2.1.4",
     "local-links": "^1.4.0",
     "lodash": "^4.0.0",
+    "lodash.debounce": "^4.0.0",
+    "lodash.throttle": "^4.0.0",
     "merge-stream": "^1.0.0",
     "modernizr": "^3.3.1",
     "node-bourbon": "*",

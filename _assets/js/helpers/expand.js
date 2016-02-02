@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Tweezer from 'tweezer.js';
-import { debounce } from 'lodash';
+import debounce from 'lodash.debounce';
 import config from '../dependencies/config';
 
 /* 
@@ -74,28 +74,13 @@ function Expand(opts) {
 	let $window = $(window);
 	// init empty array for accordion items
 	let collection = [];
-	// base css for opening
-	let initCss = { display: 'block', height: 0, overflow: 'hidden', position: 'relative' };
-	// private function
-	// set the height values for each item, called during window resize
-	function setHeight() {
-		collection.forEach((element) => element.height = (element.state === true) ? element.$target.outerHeight(true) : getHeight(element.$target));
-	};
-	// private function
-	// get the height of all of the children 
-	function getHeight($target) {
-		$target.css({display: 'block'});
-		var height = $target.outerHeight(true);
-		$target.css({display: 'none'});
-		return height;
-	};
+
 	function clickHandle(e) {
 		e.preventDefault();
 		var $this = $(this);
 		var index = $this.data('expand-index');
 		var el = collection[index];
 		if(_this.closeOthers) _this.close(index);
-		el.currentHeight = el.state === true ? el.height : 0;
 		if(!el.isRunning) {
 			el.state = !el.state;
 			// the context of this in side the clickHandle is the DOM element 
@@ -123,14 +108,11 @@ function Expand(opts) {
 			if(state === true) {
 				$target.addClass(_this.activeContentClass);
 			}
-			var height = (state === true) ? $target.outerHeight(true) : getHeight($target);
 			$(this).attr('data-expand-index', i);
 			collection.push({
 				$el: $(this),
 				$target: $target,
 				state: state,
-				height: height,
-				currentHeight:  $(this).hasClass(_this.activeContentClass) === true ? height : 0,
 				isRunning: false,
 				shouldGrow: state
 			});
@@ -142,20 +124,21 @@ function Expand(opts) {
 	this.tween = function($el) {
 		var index = $el.data('expand-index');
 		var obj = collection[index];
-
+		var height = obj.$target.outerHeight(true);
 		// if the state is true
 		// add the initCss style
 		// hides $target before it expands
 		if(obj.state === true) {
-			obj.$target.css(initCss);
+			obj.$target.css({display: 'none'});
+			height = obj.$target.outerHeight(true);
+			obj.$target.css({display: 'block', height: 0, overflow: 'hidden', position: 'relative'});
 		}
 
-		console.log(obj.$target);
 		if (!obj.isRunning) {
 			// init new Tweezer
 			new Tweezer({
-				start: obj.currentHeight,
-				end: obj.state ? obj.height : 0,
+				start: obj.state ? 0 : height,
+				end: obj.state ? height : 0,
 				duration: _this.duration,
 				easing: _this.easing
 			})
@@ -172,7 +155,7 @@ function Expand(opts) {
 						_this.openComplete();
 					}
 				} else {
-					obj.$target.css({display: 'none'}).removeClass(_this.activeContentClass);
+					obj.$target.css({display: 'none', position: '', height: ''}).removeClass(_this.activeContentClass);
 	 				obj.$el.removeClass(_this.activeClass);
 					if(typeof _this.closeComplete === 'function') {
 						_this.closeComplete();
@@ -187,7 +170,6 @@ function Expand(opts) {
 		collection.find(function(el, index) {
 			if(el.state === true && i !== index) {
 				el.state = !el.state;
-				el.currentHeight = el.height;
 				this.tween(el.$el);
 				el.$el.removeClass('is-active');
 			}
@@ -202,7 +184,6 @@ function Expand(opts) {
 			}
 		}.bind(this));
 	};
-	$window.on('resize', debounce(setHeight, 300));
 	this.$wrapper.on('click', this.button, clickHandle);
 };
 
