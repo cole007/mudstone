@@ -22,7 +22,7 @@ var assets = './_assets/',
  */
 var state = 'dev', 
     jadeDest = root, // where should the jade templates be built, usually root, except when state === cms
-    public_html = 'public_html',
+    public_html = 'public',
     url = 'local.ournameismud.co.uk';
 /*
  * Update values based on environment
