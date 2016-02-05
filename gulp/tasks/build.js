@@ -70,17 +70,22 @@ gulp.task('build-css', function() {
     // .pipe(browserSync.reload({stream:true}));
 }); 
 
-// kick things off
-gulp.task('init', function(callback) {
-  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'scripts', 'move-scripts', 'sass'], callback);
-});
-
-// build things, and compress css/js
+// build all the things
 gulp.task('build', function(callback) {
-  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css'], callback);
+  runSequence('sprite', ['jade', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'move-scripts', 'sass'], callback);
 });
 
-// build cms assets things, and compress css/js
-gulp.task('build-cms', function(callback) {
-  runSequence('build-css', ['scripts'], callback);
+// build css and js for local (not minified)
+gulp.task('build-local', function(callback) {
+  runSequence('sass', ['bundle-scripts'], callback);
+});
+
+// build css and js for staging (not minified)
+gulp.task('build-stage', function(callback) {
+  runSequence('sass', ['bundle-scripts'], callback);
+});
+
+// build for production
+gulp.task('build-production', function(callback) {
+  runSequence('build-css', ['build-scripts'], callback);
 });

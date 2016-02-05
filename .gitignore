@@ -42,3 +42,7 @@ sized/
 thumbs/
 _thumbs/
 */expressionengine/cache/*
+
+# Don't push complied css/js
+deploy/public/_assets/css/*
+deploy/public/_assets/js/*
