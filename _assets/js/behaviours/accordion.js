@@ -5,7 +5,7 @@ function accordion(container) {
 	var accordion = new Expand({
 		wrapper: container,
 		button: '.button',
-		closeOthers: false,
+		closeOthers: true,
 		activeClass: 'is-active',
 		activeContentClass: 'is-active',
 		openStart: function() {
