@@ -67,6 +67,8 @@ function Expand(opts) {
 	this.openComplete = opts.openComplete;
 	this.closeStart = opts.closeStart;
 	this.closeComplete = opts.closeComplete;
+
+	this.activeLink = null;
 	// Private Variables
 	// get hold of this
 	let _this = this;
@@ -77,21 +79,18 @@ function Expand(opts) {
 
 	function clickHandle(e) {
 		e.preventDefault();
+	 	e.stopPropagation();
 		var $this = $(this);
 		var index = $this.data('expand-index');
 		var el = collection[index];
+		_this.activeLink = el;
 		if(_this.closeOthers) _this.close(index);
 		if(!el.isRunning) {
 			el.state = !el.state;
 			// the context of this in side the clickHandle is the DOM element 
 			// which was clicked,
 			// so use the _this hook, bind() won't work here
-			if(typeof _this.openStart === 'function' && el.state === true) {
-				_this.openStart();
-			}
-			if(typeof _this.closeStart === 'function' && el.state === false) {
-				_this.closeStart();
-			}
+
 			_this.tween(el.$el);
 		}
 	};
@@ -129,10 +128,18 @@ function Expand(opts) {
 		// add the initCss style
 		// hides $target before it expands
 		if(obj.state === true) {
+			if(typeof this.openStart === 'function') {
+				this.openStart(obj);
+			}
 			obj.$target.css({display: 'none'});
 			height = obj.$target.outerHeight(true);
 			obj.$target.css({display: 'block', height: 0, overflow: 'hidden', position: 'relative'});
+		} else {
+			if(typeof this.closeStart === 'function') {
+				this.closeStart(obj);
+			}
 		}
+
 
 		if (!obj.isRunning) {
 			// init new Tweezer
@@ -152,13 +159,13 @@ function Expand(opts) {
 	 				obj.$target.css({overflow: '', position: '', height: ''}).addClass(_this.activeContentClass);
 	 				obj.$el.addClass(_this.activeClass);
 					if(typeof _this.openComplete === 'function') {
-						_this.openComplete();
+						_this.openComplete(obj);
 					}
 				} else {
 					obj.$target.css({display: 'none', position: '', height: ''}).removeClass(_this.activeContentClass);
 	 				obj.$el.removeClass(_this.activeClass);
 					if(typeof _this.closeComplete === 'function') {
-						_this.closeComplete();
+						_this.closeComplete(obj);
 					}
 				}
 			})
