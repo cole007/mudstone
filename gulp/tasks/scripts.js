@@ -4,6 +4,7 @@ var source = require('vinyl-source-stream'),
     browserify = require('browserify'),
     babelify = require('babelify'),
     watchify = require('watchify'),
+    gulpif   = require('gulp-if'),
     sourcemaps = require('gulp-sourcemaps'),
     notify = require('gulp-notify'),
     uglify = require('gulp-uglify'),
@@ -15,7 +16,7 @@ var source = require('vinyl-source-stream'),
     config = require('../config').scripts;
 
 
-function buildScript(file, watch) {
+function buildScript(file, watch, minify) {
   var props = {
     entries: [config.path + file],
     debug : false,
@@ -31,10 +32,9 @@ function buildScript(file, watch) {
       .on('error', handleErrors)
       .pipe(source(file))
       .pipe(buffer())
-      //.pipe(uglify())
-      .pipe(sourcemaps.init({ loadMaps: true }))
-      .pipe(sourcemaps.write('./'))
-      // .pipe(uglify())
+      .pipe(gulpif(minify === true, uglify()))
+      .pipe(gulpif(minify === true, sourcemaps.init({ loadMaps: true })))
+      .pipe(gulpif(minify === true, sourcemaps.write('./')))
       .pipe(gulp.dest(config.dest))
       // If you also want to uglify it
       // .pipe(rename('app.min.js'))
@@ -56,5 +56,13 @@ function buildScript(file, watch) {
 // });
 
 gulp.task('scripts', function() {
-  return buildScript(config.output, true); // browserify watch for JS changes
+  return buildScript(config.output, true, false); // browserify watch for JS changes
+});
+
+gulp.task('bundle-scripts', function() {
+  return buildScript(config.output, false, false); // browserify watch for JS changes
+});
+
+gulp.task('build-scripts', function() {
+  return buildScript(config.output, false, true); // browserify watch for JS changes
 });
