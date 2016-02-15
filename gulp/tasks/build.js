@@ -71,11 +71,11 @@ gulp.task('build-css', function() {
 }); 
 
 gulp.task('init', function(callback) {
-  runSequence('sprite', ['jade', 'move-json', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass', 'move-template', 'move-video'], callback);
+  runSequence('sprite', ['jade', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass'], callback);
 });
 
 gulp.task('build', function(callback) {
-  runSequence('sprite', ['jade', 'move-json', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'move-scripts', 'sass'], callback);
+  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'move-scripts', 'sass'], callback);
 });
 
 gulp.task('build-local', function(callback) {
