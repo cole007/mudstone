@@ -8,10 +8,10 @@ var gulp  				= require('gulp'),
 	reload 				= browserSync.reload,
 	config 				= require('../config');
 
-gulp.task('watch', ['scripts'], function() {
+gulp.task('watch', function() {
 	browserSync(config.browserSync);
 	gulp.watch(config.sass.watch,   ['sass', reload]);
-	// gulp.watch(config.scripts.src, ['scripts', reload]);
+	gulp.watch(config.scripts.src, ['scripts', reload]);
 	gulp.watch(config.jade.watch,   ['jade', reload]);
 	// gulp.watch(config.sprites.data, ['sprite']);
 	// gulp.watch(config.images.src, ['images']);

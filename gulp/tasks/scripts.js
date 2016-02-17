@@ -7,7 +7,6 @@ var gulp         = require('gulp'),
 	browserSync  = require('browser-sync'),
 	uglify       = require('gulp-uglify'),
 	concat       = require('gulp-concat'),
-	babel 		 = require('gulp-babel'),
 	sourcemaps   = require('gulp-sourcemaps'),
 	handleErrors = require('../util/handleErrors'),
 	config       = require('../config').scripts,
@@ -18,9 +17,6 @@ var gulp         = require('gulp'),
 gulp.task('scripts', function() {
   return gulp.src(config.src)
     .pipe(gulpif(env == 'dev', sourcemaps.init()))
-	.pipe(babel({
-		presets: ['es2015']
-	}))
     .on('error', handleErrors)
     .pipe(gulpif(env == 'live', uglify()))
     .pipe(concat(config.output))
