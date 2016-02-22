@@ -1,13 +1,3 @@
-@font-face {
-	font-family: "icon-font";
-	src: url('../fonts/icon-font.eot');
-	src: url('../fonts/icon-font.eot?#iefix') format('eot'),
-		url('../fonts/icon-font.woff') format('woff'),
-		url('../fonts/icon-font.ttf') format('truetype'),
-		url('../fonts/icon-font.svg#icon-font') format('svg');
-}
-
-
 $icon_map: (icon_audio: "\E001",);
 
 @function icon-char($filename) {
