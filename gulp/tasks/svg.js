@@ -92,6 +92,8 @@ gulp.task('build-svgstore', function () {
 });
 
 
+
+
 gulp.task('svgstore', function(cb) {
     runSequence('build-svgstore',['html-jade'],  cb)
 });

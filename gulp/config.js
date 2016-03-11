@@ -142,9 +142,9 @@ module.exports = {
   svgStore: {
     src: assets + 'images/svg-inline/*.svg',
     dest: assets + 'images/svg-inline/output/',
-    file: assets + 'images/svg-inline/inline-svg.html',
-    fileName: 'inline-svg.html',
-    jadeDest: assets + 'jade/source/includes'
+    file: assets + 'images/svg-inline/source.html',
+    fileName: 'source.html',
+    jadeDest: assets + 'jade/source/_includes'
   },
  
   icons: {
