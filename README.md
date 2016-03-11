@@ -8,7 +8,6 @@
 * Compile sass (using libsass)
 * Compile ES6 with babel/browserify
 * Uglify and concatenate javascript assets
-* JS Hint
 * Sourcemaps
 * Optimise Images
 * Sprite generator
@@ -17,10 +16,10 @@
 * SVG symbol sprites (svgstore)
 * Compile jade templates
 * Optimise css with uncss and clean css
+* Html validator
 * Critcal path css generator
 * Build task for deployment directory
 * Watch with Browsersync for live reload and server
-* Google page insights 
 
 ##SCSS 
 
@@ -70,6 +69,9 @@ To use a NPM module use the es6 import syntax
 `import _ from 'lodash';`
 
 
+## Non es6/common js plugins
+
+If you need to use any old school plugins, you now can.  Any files in 'js/libs' will be merged together and concatenated to the start of the final output js file.
 
 ##Git methodology
 

@@ -50,7 +50,7 @@ $font-size: (
 // Grid
 $base-max-width:                1280px;
 $base-max-columns:              12;
-$current_breakpoint:            base;
+$current-breakpoint:            base;
 $base-padding:                  20;
 
 $base-grid-gutter:              $base-padding;
@@ -83,7 +83,7 @@ $palettes: (
     ),
     std: (
         base:                   #4A90E2,
-        dark:                   #267DE2
+        dark:                   #267de2
     ),
     link: ( 
       hover:                    #ff0031

@@ -1,5 +1,4 @@
 import WebFont from 'webfontloader';
-import $ from 'jquery';
 import mud from './dependencies/load-behaviour';
 import canvasNavigation from './behaviours/canvasNavigation';
 import accordion from './behaviours/accordion';
@@ -21,8 +20,3 @@ window.onload = function(){
 $(function() {
 	mud.loadBehaviour();
 });
-
-// or if you need to wait for the fonts to be loaded
-// document.fonts.onloadingdone = function (fontFaceSetEvent) {
-//  mud.loadBehaviour();
-// };

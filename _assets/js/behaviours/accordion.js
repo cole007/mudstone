@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import Expand from '../helpers/expand';
 
 function accordion(container) {

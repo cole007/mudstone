@@ -1,4 +1,3 @@
-import $ from 'jquery';
 
 var tool = {
 	prefix: (function () {

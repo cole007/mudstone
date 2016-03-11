@@ -16,6 +16,7 @@ node_modules
 *.map
 docs
 tmp
+reports
 
 
 # Craft #

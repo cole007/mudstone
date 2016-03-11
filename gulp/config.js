@@ -5,6 +5,8 @@ var assets = './_assets/',
     base = 'tmp',
     env = 'dev', //  env = dev will create sourcemaps, set as live will not
     outputStyle = 'expanded', // scss output style
+    build,
+    server,
     assetPath = "/_assets/"; 
 /*
  * @param state
@@ -114,9 +116,12 @@ module.exports = {
   scripts: {
     src: assets + 'js/app.js',
     path: assets + 'js/',
+    tmp: build + 'js/tmp',
     dest: build + 'js/dist',
+    bundle: 'bundle.js',
     output: 'app.js',
-    hint:  assets + 'js/modules/*.js'
+    libs: assets + 'js/libs/*.js',
+    libsOutput: 'libs.js',
   },
  
   sprites: {
@@ -204,3 +209,4 @@ module.exports = {
   // }
  
 };
+

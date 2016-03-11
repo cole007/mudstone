@@ -8,12 +8,37 @@ var source = require('vinyl-source-stream'),
     sourcemaps = require('gulp-sourcemaps'),
     notify = require('gulp-notify'),
     uglify = require('gulp-uglify'),
+    concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     buffer = require('vinyl-buffer'),
     browserSync = require('browser-sync'),
     handleErrors = require('../util/handleErrors'),
     reload = browserSync.reload,
+    runSequence = require('run-sequence'),
+    env = require('../config').env,
     config = require('../config').scripts;
+
+
+gulp.task('lib-scripts', () => {
+  return gulp.src(config.libs)
+    .pipe(concat(config.libsOutput))
+    .pipe(gulp.dest(config.tmp))
+});
+
+
+gulp.task('squish-lib-scripts', () => {
+  return gulp.src(config.libs)
+    .pipe(uglify())
+    .pipe(concat(config.libsOutput))
+    .pipe(gulp.dest(config.tmp))
+});
+
+
+gulp.task('concat-scripts', () => {
+  return gulp.src([config.tmp + '/' + config.libsOutput, config.tmp + '/' + config.bundle ])
+    .pipe(concat(config.output))
+    .pipe(gulp.dest(config.dest))
+});
 
 
 function buildScript(file, watch, minify) {
@@ -33,8 +58,8 @@ function buildScript(file, watch, minify) {
       .pipe(source(file))
       .pipe(buffer())
       .pipe(gulpif(minify === true, uglify()))
-      .pipe(gulpif(minify === true, sourcemaps.init({ loadMaps: true })))
-      .pipe(gulpif(minify === true, sourcemaps.write('./')))
+      .pipe(gulpif(minify === false, sourcemaps.init({ loadMaps: true })))
+      .pipe(gulpif(minify === false, sourcemaps.write('./')))
       .pipe(gulp.dest(config.dest))
       // If you also want to uglify it
       // .pipe(rename('app.min.js'))
@@ -55,7 +80,7 @@ function buildScript(file, watch, minify) {
 //   return buildScript(config.output, false); // this will run once because we set watch to false
 // });
 
-gulp.task('scripts', function() {
+gulp.task('watch-scripts', function() {
   return buildScript(config.output, true, false); // browserify watch for JS changes
 });
 
@@ -63,6 +88,18 @@ gulp.task('bundle-scripts', function() {
   return buildScript(config.output, false, false); // browserify watch for JS changes
 });
 
-gulp.task('build-scripts', function() {
+gulp.task('squish-scripts', function() {
   return buildScript(config.output, false, true); // browserify watch for JS changes
+});
+
+gulp.task('scripts', function(callback) {
+  runSequence('watch-scripts', ['lib-scripts'], 'concat-scripts', callback);
+});
+
+gulp.task('merge-scripts', function(callback) {
+  runSequence('bundle-scripts', ['lib-scripts'], 'concat-scripts', callback);
+});
+
+gulp.task('build-scripts', function(callback) {
+  runSequence('squish-scripts', ['squish-lib-scripts'], 'concat-scripts', callback);
 });

@@ -1,5 +1,4 @@
 import verge from 'verge';
-import $ from 'jquery';
 import Viewport from  '../helpers/viewport';
 import debounce from 'lodash.debounce';
 import prefix from '../helpers/prefix';

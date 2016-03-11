@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import Transition from '../helpers/transition';
 import utils from '../helpers/utils';
 import Viewport from '../helpers/viewport';

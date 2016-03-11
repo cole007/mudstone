@@ -14,6 +14,7 @@ var gulp                = require('gulp'),
     cssnano             = require('gulp-cssnano'),
     util                = require('gulp-util'),
     setup               = require('../config'),
+    htmlv               = require('gulp-html-validator'),
     config              = setup.build,
     scripts             = setup.scripts;
  
@@ -37,13 +38,13 @@ gulp.task('build-images', function(callback) {
 });
  
 // move and optimise the scripts
-gulp.task('build-scripts', function(callback) {
-    gulp.src(scripts.src)
-        .pipe(uglify())
-        .on('error', handleErrors)
-        .pipe(concat(scripts.output))
-        .pipe(gulp.dest(config.js_MergeDest));
-});
+// gulp.task('build-scripts', function(callback) {
+//     gulp.src(scripts.src)
+//         .pipe(uglify())
+//         .on('error', handleErrors)
+//         .pipe(concat(scripts.output))
+//         .pipe(gulp.dest(config.js_MergeDest));
+// });
  
 // move any scripts which are not merged in to app.js
 // for example modernizer 
@@ -70,20 +71,29 @@ gulp.task('build-css', function() {
     // .pipe(browserSync.reload({stream:true}));
 }); 
 
+gulp.task('html-validation', function () {
+  gulp.src('tmp/public/*.html')
+    .pipe(htmlv({format: 'html'}))
+    .pipe(gulp.dest('./reports'));
+});
+
+
+
+
 gulp.task('init', function(callback) {
-  runSequence('sprite', ['jade', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass'], callback);
+  runSequence('sprite', ['jade', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'merge-scripts', 'sass'], callback);
 });
 
 gulp.task('build', function(callback) {
-  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'move-scripts', 'sass'], callback);
+  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'merge-scripts', 'move-scripts', 'sass'], callback);
 });
 
 gulp.task('build-local', function(callback) {
-  runSequence('sass', ['bundle-scripts'], callback);
+  runSequence('sass', ['merge-scripts'], callback);
 });
 
 gulp.task('build-stage', function(callback) {
-  runSequence('sass', ['bundle-scripts'], callback);
+  runSequence('sass', ['merge-scripts'], callback);
 });
 
 gulp.task('build-production', function(callback) {
