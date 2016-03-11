@@ -1,0 +1,103 @@
+//    File: _assets/scss/style.scss
+//
+//    Use spaces not tabs
+//
+//    # Selectors
+//
+//    One selector per line, One rule per line
+//    Don't use IDs as selectors
+//    Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container
+//    Use BEM syntax:
+//        Block
+//        Block__element
+//        Block--modifier
+//
+//    # Properties
+//
+//    List related properties together
+//    If the value of the width or height is 0, do not specify units
+//    Avoid magic numbers, eg numbers used as  quick fixes on a one-off basis
+//    Close final property with a semi-colon
+//    Err towards shorthand where avaliable, eg border, background, etc
+//
+//    # SASS/SCSS
+//
+//    All Vendor Prefixes Use @mixins
+//    Maximum Nesting: Three Levels Deep
+//    Maximum Nesting: 50 Lines
+//
+//    Locally compile Expanded
+//    For Deployment compile Compressed
+//
+//    Be Generous With Comments
+//
+//    Variablize All Common Numbers, and Numbers with Meaning
+//    Variablize All Colors
+//
+//    Shame Last
+$ie: true;
+// using  node-bourbon, see ./gulp/config.js
+@import "bourbon";
+// gulp generated scss
+// stores variables used by svg/icon mixins
+@import '_system/gulp/png-sprites',
+        '_system/gulp/svg-sprites',
+        '_system/gulp/icon-font';
+// functions
+@import '_system/tools/tools-functions';
+// Libraries and dependencies
+// latest version of normalize - with img/fieldset
+@import '_system/libs/normalize',
+        '_config/variables';
+// tools - mixins and functions
+// these shouldn't need to be changed
+@import '_system/tools/tools-helpers',
+        '_system/tools/tools-grid',
+        '_system/tools/tools-images',
+        '_system/tools/tools-type';
+// views and components
+// config/fonts
+// @import '_config/variables'; -- imported at root level (function/tool dependencies)
+@import '_config/fonts',
+        '_config/debug';
+ 
+// base elements
+// First elements to be styled
+// No nesting or important... low specificity
+@import 'base/type',
+        'base/forms',
+        'base/tables',
+        'base/buttons',
+        'base/icons',
+        'base/list';
+// layout and structure
+// Maximum 2 levels of specificity  
+@import 'layout/header',
+        'layout/footer',
+        'layout/navigation',
+        'layout/structure';
+// modules and components, should work independently from the layout
+// Maximum 3 levels of specificity  
+@import 'modules/panels',
+        'modules/accordion',
+        'modules/wysiwyg',
+        'modules/hero';
+ 
+// views, mediaquery stuff 
+// Maximum 3 levels of specificity  
+
+body:before {
+  content: "mobile";
+  display: none; /* Prevent from displaying. */
+}
+
+@import 'views/480-up';
+@import 'views/660-up';
+@import 'views/768-up';
+@import 'views/960-up';
+@import 'views/1024-up';
+// utils - these should generally trump other selectors, 
+// important is fine here
+@import 'utils/utils';
+// final exceptions/shame
+@import 'views/exceptions';
