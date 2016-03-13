@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import WebFont from 'webfontloader';
 import mud from './dependencies/load-behaviour';
 import canvasNavigation from './behaviours/canvasNavigation';

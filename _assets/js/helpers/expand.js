@@ -1,6 +1,7 @@
 import Tweezer from 'tweezer.js';
 import debounce from 'lodash.debounce';
 import config from '../dependencies/config';
+import $ from 'jquery';
 
 /* 
 Example Usage 
@@ -66,31 +67,27 @@ function Expand(opts) {
 	this.openComplete = opts.openComplete;
 	this.closeStart = opts.closeStart;
 	this.closeComplete = opts.closeComplete;
-
+	// prev
 	this.activeLink = null;
+
 	// Private Variables
 	// get hold of this
 	let _this = this;
-	// save the window dom
-	let $window = $(window);
-	// init empty array for accordion items
-	let collection = [];
 
 	function clickHandle(e) {
 		e.preventDefault();
 	 	e.stopPropagation();
-		var $this = $(this);
-		var index = $this.data('expand-index');
-		var el = collection[index];
-		_this.activeLink = el;
-		if(_this.closeOthers) _this.close(index);
-		if(!el.isRunning) {
-			el.state = !el.state;
+		if(_this.closeOthers && _this.activeLink !== null) {
+			_this.activeLink._state = false;
+			_this.tween(_this.activeLink);
+		}
+		_this.activeLink = this;
+		if(!this._isRunning) {
+			this._state = !this._state;
 			// the context of this in side the clickHandle is the DOM element 
 			// which was clicked,
 			// so use the _this hook, bind() won't work here
-
-			_this.tween(el.$el);
+			_this.tween(this);
 		}
 	};
 	// immediately invoked function
@@ -103,93 +100,85 @@ function Expand(opts) {
 			var $target = $($(this).data('target'));
 			var state = $(this).hasClass(_this.activeClass) ? true : false;
 			// if active, add the active class to the target element
+			this._state = state;
+			this._isRunning = false;
+			this.$target = $target;
 			if(state === true) {
 				$target.addClass(_this.activeContentClass);
+				_this.activeLink = this;
 			}
-			$(this).attr('data-expand-index', i);
-			collection.push({
-				$el: $(this),
-				$target: $target,
-				state: state,
-				isRunning: false,
-				shouldGrow: state
-			});
 		});
 	}.bind(this))();
 	// public api, pass in the qQuery object to transition
 	// transition will be based on the current state
 	// do the tweening
-	this.tween = function($el) {
-		var index = $el.data('expand-index');
-		var obj = collection[index];
-		var height = obj.$target.outerHeight(true);
+	this.tween = function(el) {
+		var $el = $(el);
+		var $target = $(el.$target);
+		var height = $target.outerHeight(true);
 		// if the state is true
 		// add the initCss style
 		// hides $target before it expands
-		if(obj.state === true) {
+		if(el._state === true) {
 			if(typeof this.openStart === 'function') {
-				this.openStart(obj);
+				this.openStart(el);
 			}
-			obj.$target.css({display: 'none'});
-			height = obj.$target.outerHeight(true);
-			obj.$target.css({display: 'block', height: 0, overflow: 'hidden', position: 'relative'});
+			$target.css({display: 'block'});
+			height = $target.outerHeight(true);
+			$target.css({height: 0, overflow: 'hidden', position: 'relative'});
 		} else {
 			if(typeof this.closeStart === 'function') {
-				this.closeStart(obj);
+				this.closeStart(el);
 			}
 		}
 
-
-		if (!obj.isRunning) {
+		if (!el._isRunning) {
 			// init new Tweezer
-			new Tweezer({
-				start: obj.state ? 0 : height,
-				end: obj.state ? height : 0,
+			var t = t || new Tweezer({
+				start: el._state ? 0 : height,
+				end: el._state ? height : 0,
 				duration: _this.duration,
 				easing: _this.easing
 			})
 			// update height value on each 'tick'
-			.on('tick', (v) => obj.$target.css({height: v + 'px', overflow: 'hidden', position: 'relative'}))
+			.on('tick', (v) => $target.css({height: v + 'px', overflow: 'hidden', position: 'relative'}))
 			.on('done', ()=> {
-				obj.shouldGrow = !opts.shouldGrow;
-				obj.isRunning = false;
-				if(obj.state === true) {
+				el._isRunning = false;
+				if(el._state === true) {
 					// remove the transition initCss styles and add the active class
-	 				obj.$target.css({overflow: '', position: '', height: ''}).addClass(_this.activeContentClass);
-	 				obj.$el.addClass(_this.activeClass);
+	 				$target.css({overflow: '', position: '', height: ''}).addClass(_this.activeContentClass);
+	 				$el.addClass(_this.activeClass);
 					if(typeof _this.openComplete === 'function') {
-						_this.openComplete(obj);
+						_this.openComplete(el);
 					}
 				} else {
-					obj.$target.css({display: 'none', position: '', height: ''}).removeClass(_this.activeContentClass);
-	 				obj.$el.removeClass(_this.activeClass);
+					$target.css({display: 'none', position: '', height: ''}).removeClass(_this.activeContentClass);
+	 				$el.removeClass(_this.activeClass);
 					if(typeof _this.closeComplete === 'function') {
-						_this.closeComplete(obj);
+						_this.closeComplete(el);
 					}
 				}
 			})
 			.begin();
-			obj.isRunning = true;
+			el._isRunning = true;
 		}
 	};
-	this.close = function(i) {
-		collection.find(function(el, index) {
-			if(el.state === true && i !== index) {
-				el.state = !el.state;
-				this.tween(el.$el);
-				el.$el.removeClass('is-active');
-			}
-		}.bind(this));
-	};
-	this.open = function() {
-		collection.find(function(el, index) {
-			if(el.state === false) {
-				el.state = !el.state;
-				this.tween(el.$el);
-				el.$el.addClass('is-active');
-			}
-		}.bind(this));
-	};
+	// this.close = function() {
+	// 	this.$wrapper.find(this.button).each(function() {
+	// 		if(this._state === true) {
+	// 			this._state = false;
+	// 			_this.tween(this);
+	// 		}
+	// 	});
+	// };
+	// this.open = function() {
+	// 	this.$wrapper.find(this.button).each(function() {
+	// 		if(this._state === false) {
+	// 			this._state = true;
+	// 			_this.tween(this);
+	// 		}
+	// 	});
+	// };
 	this.$wrapper.on('click', this.button, clickHandle);
 };
 

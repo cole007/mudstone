@@ -1,3 +1,4 @@
+import $ from 'jquery';
 // store the json
 var content;
 

@@ -2,6 +2,7 @@ import Transition from '../helpers/transition';
 import utils from '../helpers/utils';
 import Viewport from '../helpers/viewport';
 import config from '../dependencies/config';
+import $ from 'jquery';
 
 function canvasNavigation(container) {
 	let lock = utils.lock();

@@ -115,13 +115,12 @@ module.exports = {
  
   scripts: {
     src: assets + 'js/app.js',
+    libs: assets + 'js/libs/*.js',
     path: assets + 'js/',
+    libsOutput: 'libs.js',
+    output: 'app.js',
     tmp: build + 'js/tmp',
     dest: build + 'js/dist',
-    bundle: 'bundle.js',
-    output: 'app.js',
-    libs: assets + 'js/libs/*.js',
-    libsOutput: 'libs.js',
   },
  
   sprites: {
