@@ -1,18 +1,25 @@
 import Expand from '../helpers/expand';
-import $ from 'jquery';
 
 function accordion(container) {
-	console.log('e');
+
 	var accordion = new Expand({
 		wrapper: container,
 		button: '.button',
 		closeOthers: true,
 		activeClass: 'is-active',
 		activeContentClass: 'is-active',
-		openStart: function() {},
-		openComplete: function() {},
-		closeStart: function() {},
-		closeComplete: function() {}
+		openStart: function() {
+			console.log('openStart');
+		},
+		openComplete: function() {
+			console.log('openComplete');
+		},
+		closeStart: function() {
+			console.log('closeStart')
+		},
+		closeComplete: function() {
+			console.log('closeComplete')
+		},
 	});
 };
 

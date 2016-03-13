@@ -1,6 +1,6 @@
 .menu__wrapper.js-menu(data-behaviour="megaNav")
-	button.js-menu-root Root
-	button.js-menu-back Back
+	button.js-menu-root.menu__ctrl-btn Root
+	button.js-menu-back.menu__ctrl-btn Back
 	ul.nav.menu__root
 		-var n = 0
 		while n < 6
@@ -20,22 +20,6 @@
 										while j < 6
 											li.menu__item.menu__item__lvl2 
 												a(href="#") Sub Menu Item l3
-												button.button.js-menu-btn +
-												.menu__subwrap
-													ul.nav
-														-var i = 0
-														while i < 6
-															li.menu__item.menu__item__lvl2 
-																a(href="#") Sub Menu Item l4
-																button.button.js-menu-btn +
-																.menu__subwrap
-																	ul.nav
-																		-var q = 0
-																		while q < 6
-																			li.menu__item.menu__item__lvl2 
-																				a(href="#") Sub Menu Item l5
-																			-q++
-															-i++
 											-j++
 							-k++
 			-n++
