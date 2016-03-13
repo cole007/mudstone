@@ -6,7 +6,21 @@
 	margin-right: gutter(.5);
 }
 
+.menu__root {
+	position: absolute;
+	top: 70px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
 .menu__wrapper {
+	button {
+		z-index: 1001;
+		display: inline-block;
+	}
 	// all of this needs to be replaced for desktop
 	// so lets wrap the fella in a little media query
 	@include mq(1024, max) {
@@ -17,11 +31,10 @@
 		visibility: hidden;
 		opacity: 0;
 		transform: translate3d(-100%, 0, 0);
-		padding: gutter(1);
 		transition: opacity .5s, transform .5s, visibility 0s;
 		// let there be scrollbars
-		overflow: auto;
-		padding-top: gutter(2);
+		// overflow: auto;
+		
 		&.is-animating-in, 
 		&.is-active {
 			transform: translate3d(0, 0, 0);
@@ -77,12 +90,22 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	min-height: 100%;
+	height: 100%;
 	overflow-y: auto;
+	overflow-x: hidden;
 	transform: translate3d(100%,0,0);
 	transition: transform .3s;
 	background-color: c(themes,blog);
 	&.is-active {
 		transform: translate3d(0,0,0);
 	}
+
+	ul {
+		height: 100%;
+		overflow-y: auto;
+	}
+}
+
+.site-logo {
+	display: none !important;
 }

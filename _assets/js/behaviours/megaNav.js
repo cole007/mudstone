@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import Viewport from '../helpers/viewport';
 import config from '../dependencies/config';
+import Tweezer from 'tweezer.js';
 
 var deepTarget = [];
 var { breakpoints } = config;
@@ -14,21 +15,24 @@ function resetMenu() {
 	var k = len - 1;
 	// loop through each target and call the backAction
 	while(n < len) {
-		let { $target } = deepTarget[k];
-		backAction($target);
+		backAction(deepTarget[k]);
 		n++;
 		k--;
 	}
 }
 // remove active state from current level(s)
-function backAction($target) {
+function backAction(o) {
 	currentLevel--;
-	container.attr('data-current-level', currentLevel);
+	updateUi();
 	// remove item from array
 	deepTarget.splice(deepTarget.length - 1, 1);
-	$target.removeClass('is-active');
-	console.log('h');
+	o.$target.removeClass('is-active');
+	o.$btn.removeClass('is-active');
 } 
+
+function updateUi(i = currentLevel) {
+	container.attr('data-current-level', i);
+}
 
 function megaNav(container) {
 	// the main click handle
@@ -36,6 +40,10 @@ function megaNav(container) {
 		e.preventDefault();
 		e.stopPropagation();
 		openLevel($(this));
+
+		container.animate({
+			scrollTop: 0
+		})
 	}
 	// the open event
 	function openLevel($el) {
@@ -46,14 +54,21 @@ function megaNav(container) {
 			$btn: $el
 		});
 		currentLevel++;
+		updateUi();
+		$el.addClass('is-active');
 		$target.addClass('is-active');
 	}
+
+	// container.on('scroll', function(e) {
+	// 	console.log('eee');
+	// });
+
 	// back button function
 	function backButtonHandle(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		var { $target } = deepTarget[deepTarget.length - 1];
-		backAction($target);
+		//var { $target } = deepTarget[deepTarget.length - 1];
+		backAction(deepTarget[deepTarget.length - 1]);
 	}
 	// root button function
 	function rootButtonHandle(e) {
@@ -66,7 +81,7 @@ function megaNav(container) {
 		var $currents = container.find('.is-current').each(function() {
 			openLevel($(this));
 		});
-		container.attr('data-current-level', $currents.length)
+		updateUi($currents.length);
 	}
 	// add the click events
 	function bindEvents() {
