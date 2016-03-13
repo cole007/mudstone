@@ -37,4 +37,7 @@ html.no-js<!--<![endif]-->
             .site-page
                 block content
             include ../_includes/footer
+        // build:js
+        script(src='#{path}js/tmp/libs.js')
         script(src='#{path}js/dist/app.js')
+        // endbuild

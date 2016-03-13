@@ -13,6 +13,7 @@ var gulp                = require('gulp'),
     handleErrors        = require('../util/handleErrors'),
     cssnano             = require('gulp-cssnano'),
     util                = require('gulp-util'),
+    htmlreplace         = require('gulp-html-replace'),
     setup               = require('../config'),
     htmlv               = require('gulp-html-validator'),
     config              = setup.build,
@@ -22,6 +23,15 @@ var gulp                = require('gulp'),
 gulp.task('build-html', function(callback) {
     gulp.src(config.html_src)
       .pipe(gulp.dest(config.html_dest));
+});
+
+
+gulp.task('update-html', function() {
+  gulp.src(config.htmlScript)
+    .pipe(htmlreplace({
+        'js': '/js/dist/app.js'
+    }))
+    .pipe(gulp.dest(config.htmlScriptDest));
 });
 
  
@@ -81,11 +91,11 @@ gulp.task('html-validation', function () {
 
 
 gulp.task('init', function(callback) {
-  runSequence('sprite', ['jade', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'merge-scripts', 'sass'], callback);
+  runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass'], callback);
 });
 
 gulp.task('build', function(callback) {
-  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'merge-scripts', 'move-scripts', 'sass'], callback);
+  runSequence('sprite', ['jade', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'merge-scripts', 'sass'], callback);
 });
 
 gulp.task('build-local', function(callback) {

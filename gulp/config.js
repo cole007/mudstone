@@ -195,7 +195,9 @@ module.exports = {
     css_src: build + 'css/*.css',
     css_dest: build + 'css/',
     html_src: root + '*.html',
-    html_dest: build + 'static/'
+    html_dest: build + 'static/',
+    htmlScript: root + '*.html',
+    htmlScriptDest: root
   },
  
   // styleguide: {
