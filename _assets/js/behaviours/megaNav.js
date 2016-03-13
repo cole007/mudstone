@@ -40,7 +40,7 @@ function megaNav(container) {
 		e.preventDefault();
 		e.stopPropagation();
 		openLevel($(this));
-
+		// maybe replace this with tweezer, for smoother animations
 		container.animate({
 			scrollTop: 0
 		})
@@ -58,16 +58,10 @@ function megaNav(container) {
 		$el.addClass('is-active');
 		$target.addClass('is-active');
 	}
-
-	// container.on('scroll', function(e) {
-	// 	console.log('eee');
-	// });
-
 	// back button function
 	function backButtonHandle(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		//var { $target } = deepTarget[deepTarget.length - 1];
 		backAction(deepTarget[deepTarget.length - 1]);
 	}
 	// root button function
