@@ -26,10 +26,20 @@ gulp.task('build-html', function(callback) {
 });
 
 
-gulp.task('update-html', function() {
+gulp.task('prod-html', function() {
   gulp.src(config.htmlScript)
     .pipe(htmlreplace({
         'js': '/js/dist/app.js'
+    }))
+    .pipe(gulp.dest(config.htmlScriptDest));
+});
+
+
+gulp.task('dev-html', function() {
+  gulp.src(config.htmlScript)
+    .pipe(htmlreplace({
+        'js': '/js/dist/app.js',
+        'js': '/js/tmp/libs.js'
     }))
     .pipe(gulp.dest(config.htmlScriptDest));
 });
