@@ -3,7 +3,7 @@ import utils from '../helpers/utils';
 import Viewport from '../helpers/viewport';
 import config from '../dependencies/config';
 import $ from 'jquery';
-import { resetMenu } from '../behaviours/megaNav';
+import { menu } from '../behaviours/megaNav';
 
 function canvasNavigation(container) {
 	let lock = utils.lock();
@@ -28,7 +28,7 @@ function canvasNavigation(container) {
 		},
 		closeComplete: function(){
 			$(this.el).removeClass('is-animating-out is-active');
-			resetMenu();
+			menu.resetMenu();
 		}
 	});
 	// the click handler

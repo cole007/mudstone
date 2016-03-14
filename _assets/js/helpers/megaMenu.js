@@ -60,7 +60,6 @@ function MegaMenu(options) {
 		this.updateUi($currents.length);
 	}
 
-
 	// add the click events
 	this.bindEvents = function() {
 		this.container.on('click', this.btn, clickHandle);
@@ -112,8 +111,8 @@ function MegaMenu(options) {
 		this.updateUi();
 		// remove item from array
 		deepTarget.splice(deepTarget.length - 1, 1);
-		o.$target.removeClass('is-active');
-		o.$btn.removeClass('is-active');
+		o.$target.removeClass(this.activeClass);
+		o.$btn.removeClass(this.activeClass);
 	};
 
 	this.openLevel = function($el) {
@@ -126,8 +125,8 @@ function MegaMenu(options) {
 		});
 		currentLevel++;
 		this.updateUi();
-		$el.addClass('is-active');
-		$target.addClass('is-active');
+		$el.addClass(this.activeClass);
+		$target.addClass(this.activeClass);
 	}
 
 

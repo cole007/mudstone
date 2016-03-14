@@ -4,7 +4,6 @@ import MegaMenu from '../helpers/megaMenu';
 var menu;
 
 function megaNav(container) {
-
 	menu = new MegaMenu({
 		container: container,
 		btn: '.js-menu-btn',
@@ -22,4 +21,4 @@ function megaNav(container) {
 
 
 
-export { megaNav };
+export { megaNav, menu };
