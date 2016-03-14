@@ -59,14 +59,6 @@ gulp.task('build-images', function(callback) {
       .pipe(gulp.dest(config.images_dest));
 });
  
-// move and optimise the scripts
-// gulp.task('build-scripts', function(callback) {
-//     gulp.src(scripts.src)
-//         .pipe(uglify())
-//         .on('error', handleErrors)
-//         .pipe(concat(scripts.output))
-//         .pipe(gulp.dest(config.js_MergeDest));
-// });
  
 // move any scripts which are not merged in to app.js
 // for example modernizer 
@@ -76,8 +68,6 @@ gulp.task('move-scripts', function(callback) {
 });
  
 // optimise the css and move to the dist folder
-
-
 gulp.task('build-css', function() {
   return gulp.src(setup.sass.watch)
     .pipe(sass({
@@ -104,8 +94,8 @@ gulp.task('init', function(callback) {
   runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass', 'dev-html'], callback);
 });
 
-gulp.task('build-local', function(callback) {
-  runSequence('sass', ['merge-scripts', 'dev-html'], callback);
+gulp.task('build-development', function(callback) {
+  runSequence('sass', ['lib-scripts', 'bundle-scripts', 'dev-html'], callback);
 });
 
 gulp.task('build-stage', function(callback) {
