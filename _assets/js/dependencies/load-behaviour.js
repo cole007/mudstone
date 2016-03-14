@@ -52,18 +52,6 @@ mud.loadBehaviour = function(context){
     });
 };
 
-
-/** 
- * Method used to call mrb.loadBehaviour
- * @method mrb.onReady
- * @example
- * mrb.onReady()
- */
-mud.onReady = function(){
-    // onready call LoadBehaviour
-    mud.loadBehaviour();
-}
-
 mud.onWindowLoad = function(){
     // call loadWindow
     if(mud.LoadWindow){

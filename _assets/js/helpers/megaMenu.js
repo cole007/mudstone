@@ -35,21 +35,23 @@ function MegaMenu(options) {
 	this.openCurrentLevel = options.openCurrentLevel; // boolean
 	this.useAtBreakpoint = options.useAtBreakpoint; // pixel width
 
+
+	this.updateUi = function(i = currentLevel) {
+		this.container.attr('data-current-level', i);
+	}
 	// add the click events
 	this.bindEvents = function() {
 		this.container.on('click', this.btn, clickHandle);
 		this.container.on('click', this.backBtn, backButtonHandle);
 		this.container.on('click', this.rootBtn, rootButtonHandle);
+		this.updateUi();
 	}
 	// remove the click events
 	this.unBindEvents = function() {
 		this.container.off('click', this.btn, clickHandle);
 		this.container.off('click', this.backBtn, backButtonHandle);
 		this.container.off('click', this.rootBtn, rootButtonHandle);
-	}
-
-	this.updateUi = function(i = currentLevel) {
-		this.container.attr('data-current-level', i);
+		this.container.removeAttr('data-current-level');
 	}
 	// watch for breakpoint changes
 	// the function only gets called when a breakpoint changes
@@ -67,7 +69,6 @@ function MegaMenu(options) {
 	if(viewport.width < this.useAtBreakpoint) {
 		this.bindEvents();
 		// update the UI on load
-		this.updateUi();
 	}
 
 	function clickHandle(e) {
@@ -117,7 +118,6 @@ function MegaMenu(options) {
 
 	this.openLevel = function($el) {
 		var $target = this.target($el);
-		console.log($el);
 		// add the target and current button to array
 		deepTarget.push({
 			$target: $target,
