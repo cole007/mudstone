@@ -1,10 +1,28 @@
 import $ from 'jquery';
 import Viewport from '../helpers/viewport';
 
+/*
+	Example usage:
+	See jade/source/examples/mega-menu.jade for example markup
+	var menu = new MegaMenu({
+		container: container,
+		btn: '.js-menu-btn',
+		target: function($el) {
+			return $el.next()
+		},
+		backBtn: '.js-menu-back',
+		rootBtn: '.js-menu-root',
+		activeClass: 'is-active',
+		currentClass: '.is-current',
+		openCurrentLevel: false,
+		useAtBreakpoint: 1024,
+	})
+*/
+
 function MegaMenu(options) {
 	this.container = options.container; // jquery object
 	this.btn = options.btn; // css selector
-	this.target = options.target;
+	this.target = options.target; // function return jquery object 
 	this.backBtn = options.backBtn; // css selector
 	this.rootBtn = options.rootBtn; // css selector
 	this.activeClass = options.activeClass; // css selector
@@ -12,14 +30,10 @@ function MegaMenu(options) {
 	this.openCurrentLevel = options.openCurrentLevel; // boolean
 	this.useAtBreakpoint = options.useAtBreakpoint; // pixel width
 
-
 	var deepTarget = [];
-	var { breakpoints } = config;
 	var viewport = new Viewport();
 	var currentLevel = 0;
-	var container = options.container;
 	var _this = this;
-
 
 	function clickHandle(e) {
 		e.preventDefault();
@@ -39,7 +53,7 @@ function MegaMenu(options) {
 		_this.resetMenu();
 	}
 
-	function init() {
+	this.setCurrent = function() {
 		var $currents = this.container.find(this.currentClass).each(function() {
 			_this.openLevel($(this));
 		});
@@ -48,16 +62,16 @@ function MegaMenu(options) {
 
 
 	// add the click events
-	this.bindEvents() {
-		container.on('click', this.btn, clickHandle);
-		container.on('click', this.backBtn, backButtonHandle);
-		container.on('click', this.rootBtn, rootButtonHandle);
+	this.bindEvents = function() {
+		this.container.on('click', this.btn, clickHandle);
+		this.container.on('click', this.backBtn, backButtonHandle);
+		this.container.on('click', this.rootBtn, rootButtonHandle);
 	}
 	// remove the click events
-	this.unBindEvents() {	
-		container.off('click', this.btn, clickHandle);
-		container.off('click', this.backBtn, backButtonHandle);
-		container.off('click', this.rootBtn, rootButtonHandle);
+	this.unBindEvents = function() {
+		this.container.off('click', this.btn, clickHandle);
+		this.container.off('click', this.backBtn, backButtonHandle);
+		this.container.off('click', this.rootBtn, rootButtonHandle);
 	}
 
 
@@ -77,11 +91,11 @@ function MegaMenu(options) {
 		}
 	});
 
-	this.updateUi() {
+	this.updateUi = function(i = currentLevel) {
 		this.container.attr('data-current-level', i);
 	}
 
-	this.resetMenu() {
+	this.resetMenu = function() {
 		var len = deepTarget.length;
 		var n = 0;
 		var k = len - 1;
@@ -93,33 +107,36 @@ function MegaMenu(options) {
 		}
 	};
 
-	this.backAction(o) {
+	this.backAction = function(o) {
 		currentLevel--;
-		updateUi();
+		this.updateUi();
 		// remove item from array
 		deepTarget.splice(deepTarget.length - 1, 1);
 		o.$target.removeClass('is-active');
 		o.$btn.removeClass('is-active');
 	};
 
-	this.openLevel() {
-		var $target = $el.next();
+	this.openLevel = function($el) {
+		var $target = this.target($el);
+		console.log($el);
 		// add the target and current button to array
 		deepTarget.push({
 			$target: $target,
 			$btn: $el
 		});
 		currentLevel++;
-		updateUi();
+		this.updateUi();
 		$el.addClass('is-active');
 		$target.addClass('is-active');
 	}
 
 
 	if(this.openCurrentLevel === true) {
-		init.call(this);
+		this.setCurrent()
 	}
 
+
+	this.updateUi();
 }
 
 export default MegaMenu;
