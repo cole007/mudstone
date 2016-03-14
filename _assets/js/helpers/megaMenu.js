@@ -73,29 +73,6 @@ function MegaMenu(options) {
 		// update the UI on load
 	}
 
-	// there is no close functionality attached to the expand buttons
-	// a simple class check would suffice if the functionality is required
-	function clickHandle(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		_this.openLevel($(this));
-		if(typeof _this.callback === 'function') {
-			_this.callback.call(_this, this);
-		}
-	}
-
-	function backButtonHandle(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		_this.backAction(set[set.length - 1]);
-	} 
-
-	function rootButtonHandle(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		_this.resetMenu();
-	}
-
 	// Opens the deepest current section
 	if(this.openCurrentLevel === true) {
 		var $currents = this.container.find(this.currentClass).each(function() {
@@ -140,6 +117,29 @@ function MegaMenu(options) {
 		$target.addClass(this.activeClass);
 	}
 
+
+	// there is no close functionality attached to the expand buttons
+	// a simple class check would suffice if the functionality is required
+	function clickHandle(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		_this.openLevel($(this));
+		if(typeof _this.callback === 'function') {
+			_this.callback.call(_this, this);
+		}
+	}
+
+	function backButtonHandle(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		_this.backAction(set[set.length - 1]);
+	} 
+
+	function rootButtonHandle(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		_this.resetMenu();
+	}
 }
 
 export default MegaMenu;
