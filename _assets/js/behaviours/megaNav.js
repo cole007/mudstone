@@ -6,7 +6,7 @@ function megaNav(container) {
 	menu = new MegaMenu({
 		container: container,
 		btn: '.js-menu-btn',
-		target: function($el) {
+		target: ($el) => {
 			return $el.next()
 		},
 		backBtn: '.js-menu-back',
@@ -15,6 +15,9 @@ function megaNav(container) {
 		currentClass: '.is-current',
 		openCurrentLevel: false,
 		useAtBreakpoint: 1024,
+		callback: function(e) {
+			console.log('this', this, 'e', e);
+		}
 	})
 };
 

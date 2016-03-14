@@ -19,24 +19,26 @@ import Viewport from '../helpers/viewport';
 */
 
 function MegaMenu(options) {
-
-	var deepTarget = [];
+	// shome private vars
+	var set = [];
 	var viewport = new Viewport();
-	var currentLevel = 0;
+	// assign this to _this
 	var _this = this;
 
+	this.currentLevel = 0;
 	this.container = options.container; // jquery object
 	this.btn = options.btn; // css selector
-	this.target = options.target; // function return jquery object 
 	this.backBtn = options.backBtn; // css selector
 	this.rootBtn = options.rootBtn; // css selector
-	this.activeClass = options.activeClass; // css selector
 	this.currentClass = options.currentClass; // css selector
+	this.target = options.target; // function return jquery object 
+	this.activeClass = options.activeClass; // string
 	this.openCurrentLevel = options.openCurrentLevel; // boolean
 	this.useAtBreakpoint = options.useAtBreakpoint; // pixel width
+	this.callback = options.callback;
 
 
-	this.updateUi = function(i = currentLevel) {
+	this.updateUi = function(i = this.currentLevel) {
 		this.container.attr('data-current-level', i);
 	}
 	// add the click events
@@ -71,16 +73,21 @@ function MegaMenu(options) {
 		// update the UI on load
 	}
 
+	// there is no close functionality attached to the expand buttons
+	// a simple class check would suffice if the functionality is required
 	function clickHandle(e) {
 		e.preventDefault();
 		e.stopPropagation();
 		_this.openLevel($(this));
+		if(typeof _this.callback === 'function') {
+			_this.callback.call(_this, this);
+		}
 	}
 
 	function backButtonHandle(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		_this.backAction(deepTarget[deepTarget.length - 1]);
+		_this.backAction(set[set.length - 1]);
 	} 
 
 	function rootButtonHandle(e) {
@@ -98,32 +105,36 @@ function MegaMenu(options) {
 	}
 
 	this.resetMenu = function() {
-		var k = deepTarget.length - 1;
+		var k = set.length - 1;
 		// loop through each target and call the backAction
 		// in reverse
 		while(k > -1) {
-			this.backAction(deepTarget[k]);
+			this.backAction(set[k]);
 			k--;
 		}
 	};
 
 	this.backAction = function(o) {
-		currentLevel--;
+		this.currentLevel--;
 		this.updateUi();
 		// remove item from array
-		deepTarget.splice(deepTarget.length - 1, 1);
+		set.splice(set.length - 1, 1);
 		o.$target.removeClass(this.activeClass);
 		o.$btn.removeClass(this.activeClass);
 	};
 
 	this.openLevel = function($el) {
+		if(typeof this.target !== 'function') {
+			console.warn('this.target must be a function. Use a function that returns a jquery object')
+			return;
+		}
 		var $target = this.target($el);
 		// add the target and current button to array
-		deepTarget.push({
+		set.push({
 			$target: $target,
 			$btn: $el
 		});
-		currentLevel++;
+		this.currentLevel++;
 		this.updateUi();
 		$el.addClass(this.activeClass);
 		$target.addClass(this.activeClass);
