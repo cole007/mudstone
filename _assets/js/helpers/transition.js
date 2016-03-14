@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import prefix from '../helpers/prefix';
 
 function Transition(opts) {

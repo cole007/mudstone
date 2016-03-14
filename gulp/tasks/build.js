@@ -25,11 +25,12 @@ gulp.task('build-html', function(callback) {
       .pipe(gulp.dest(config.html_dest));
 });
 
-
 gulp.task('prod-html', function() {
   gulp.src(config.htmlScript)
     .pipe(htmlreplace({
-        'js': '/js/dist/app.js'
+        'js': '/_assets/js/dist/app.js'
+    },{
+        keepBlockTags: true
     }))
     .pipe(gulp.dest(config.htmlScriptDest));
 });
@@ -38,8 +39,9 @@ gulp.task('prod-html', function() {
 gulp.task('dev-html', function() {
   gulp.src(config.htmlScript)
     .pipe(htmlreplace({
-        'js': '/js/dist/app.js',
-        'js': '/js/tmp/libs.js'
+        'js': ['/_assets/js/tmp/libs.js', '/_assets/js/dist/app.js']
+    },{
+       keepBlockTags: true
     }))
     .pipe(gulp.dest(config.htmlScriptDest));
 });
@@ -98,24 +100,18 @@ gulp.task('html-validation', function () {
 });
 
 
-
-
 gulp.task('init', function(callback) {
-  runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass'], callback);
-});
-
-gulp.task('build', function(callback) {
-  runSequence('sprite', ['jade', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'merge-scripts', 'sass'], callback);
+  runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass', 'dev-html'], callback);
 });
 
 gulp.task('build-local', function(callback) {
-  runSequence('sass', ['merge-scripts'], callback);
+  runSequence('sass', ['merge-scripts', 'dev-html'], callback);
 });
 
 gulp.task('build-stage', function(callback) {
-  runSequence('sass', ['merge-scripts'], callback);
+  runSequence('sass', ['merge-scripts', 'prod-html'], 'clean-tmp-scripts', callback);
 });
 
 gulp.task('build-production', function(callback) {
-  runSequence('build-css', ['build-scripts'], callback);
+  runSequence('build-css', ['build-scripts', 'prod-html'], 'clean-tmp-scripts', callback);
 });

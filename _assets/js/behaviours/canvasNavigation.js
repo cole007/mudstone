@@ -2,7 +2,6 @@ import Transition from '../helpers/transition';
 import utils from '../helpers/utils';
 import Viewport from '../helpers/viewport';
 import config from '../dependencies/config';
-import $ from 'jquery';
 import { menu } from '../behaviours/megaNav';
 
 function canvasNavigation(container) {

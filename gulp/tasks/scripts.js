@@ -35,14 +35,14 @@ gulp.task('squish-lib-scripts', function() {
     .pipe(gulp.dest(config.tmp))
 });
 
-// gulp.task('clean', function () {
-//   return del(config.tmp);
-// });
+gulp.task('clean-tmp-scripts', function () {
+  return del(config.tmp);
+});
 
 
 gulp.task('concat-scripts', function() {
-  console.log(config.tmp + '/' + config.libsOutput, config.dest + '/' + config.output);
   return gulp.src([config.tmp + '/' + config.libsOutput, config.dest + '/' + config.output ])
+    .pipe(uglify())
     .pipe(concat(config.output))
     .pipe(gulp.dest(config.dest))
 });

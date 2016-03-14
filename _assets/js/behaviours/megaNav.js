@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import MegaMenu from '../helpers/megaMenu';
 
 var menu;

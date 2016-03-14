@@ -1,7 +1,6 @@
 import Tweezer from 'tweezer.js';
 import debounce from 'lodash.debounce';
 import config from '../dependencies/config';
-import $ from 'jquery';
 
 /* 
 Example Usage 

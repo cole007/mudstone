@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import Viewport from '../helpers/viewport';
 
 /*
