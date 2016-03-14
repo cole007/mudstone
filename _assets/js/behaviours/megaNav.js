@@ -6,9 +6,7 @@ function megaNav(container) {
 	menu = new MegaMenu({
 		container: container,
 		btn: '.js-menu-btn',
-		target: ($el) => {
-			return $el.next()
-		},
+		target: ($btn) => $btn.next(),
 		backBtn: '.js-menu-back',
 		rootBtn: '.js-menu-root',
 		activeClass: 'is-active',
