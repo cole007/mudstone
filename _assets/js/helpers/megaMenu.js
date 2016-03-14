@@ -19,6 +19,12 @@ import Viewport from '../helpers/viewport';
 */
 
 function MegaMenu(options) {
+
+	var deepTarget = [];
+	var viewport = new Viewport();
+	var currentLevel = 0;
+	var _this = this;
+
 	this.container = options.container; // jquery object
 	this.btn = options.btn; // css selector
 	this.target = options.target; // function return jquery object 
@@ -29,10 +35,40 @@ function MegaMenu(options) {
 	this.openCurrentLevel = options.openCurrentLevel; // boolean
 	this.useAtBreakpoint = options.useAtBreakpoint; // pixel width
 
-	var deepTarget = [];
-	var viewport = new Viewport();
-	var currentLevel = 0;
-	var _this = this;
+	// add the click events
+	this.bindEvents = function() {
+		this.container.on('click', this.btn, clickHandle);
+		this.container.on('click', this.backBtn, backButtonHandle);
+		this.container.on('click', this.rootBtn, rootButtonHandle);
+	}
+	// remove the click events
+	this.unBindEvents = function() {
+		this.container.off('click', this.btn, clickHandle);
+		this.container.off('click', this.backBtn, backButtonHandle);
+		this.container.off('click', this.rootBtn, rootButtonHandle);
+	}
+
+	this.updateUi = function(i = currentLevel) {
+		this.container.attr('data-current-level', i);
+	}
+	// watch for breakpoint changes
+	// the function only gets called when a breakpoint changes
+	// Used to unbind/bind the click event
+	viewport.change(function(current, prev) {
+		if(this.width >= _this.useAtBreakpoint) {
+			_this.unBindEvents();
+		}
+		if(this.width < _this.useAtBreakpoint) {
+			_this.bindEvents();
+		}
+	});
+
+	// if onLoad the viewport is smaller than desktop
+	if(viewport.width < this.useAtBreakpoint) {
+		this.bindEvents();
+		// update the UI on load
+		this.updateUi();
+	}
 
 	function clickHandle(e) {
 		e.preventDefault();
@@ -52,55 +88,20 @@ function MegaMenu(options) {
 		_this.resetMenu();
 	}
 
-	this.setCurrent = function() {
+	// Opens the deepest current section
+	if(this.openCurrentLevel === true) {
 		var $currents = this.container.find(this.currentClass).each(function() {
 			_this.openLevel($(this));
 		});
 		this.updateUi($currents.length);
 	}
 
-	// add the click events
-	this.bindEvents = function() {
-		this.container.on('click', this.btn, clickHandle);
-		this.container.on('click', this.backBtn, backButtonHandle);
-		this.container.on('click', this.rootBtn, rootButtonHandle);
-	}
-	// remove the click events
-	this.unBindEvents = function() {
-		this.container.off('click', this.btn, clickHandle);
-		this.container.off('click', this.backBtn, backButtonHandle);
-		this.container.off('click', this.rootBtn, rootButtonHandle);
-	}
-
-
-	// if onLoad the viewport is smaller than desktop
-	if(viewport.width < this.useAtBreakpoint) {
-		this.bindEvents();
-	}
-	// watch for breakpoint changes
-	// the function only gets called when a breakpoint changes
-	// Used to unbind the click event
-	viewport.change(function(current, prev) {
-		if(this.width >= _this.useAtBreakpoint) {
-			_this.unBindEvents();
-		}
-		if(this.width < _this.useAtBreakpoint) {
-			_this.bindEvents();
-		}
-	});
-
-	this.updateUi = function(i = currentLevel) {
-		this.container.attr('data-current-level', i);
-	}
-
 	this.resetMenu = function() {
-		var len = deepTarget.length;
-		var n = 0;
-		var k = len - 1;
+		var k = deepTarget.length - 1;
 		// loop through each target and call the backAction
-		while(n < len) {
+		// in reverse
+		while(k > -1) {
 			this.backAction(deepTarget[k]);
-			n++;
 			k--;
 		}
 	};
@@ -128,13 +129,6 @@ function MegaMenu(options) {
 		$target.addClass(this.activeClass);
 	}
 
-
-	if(this.openCurrentLevel === true) {
-		this.setCurrent()
-	}
-
-
-	this.updateUi();
 }
 
 export default MegaMenu;
