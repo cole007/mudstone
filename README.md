@@ -57,10 +57,13 @@ For production every is built in the deploy directory
 
 ## NPM packages included:
 
-- jQuery (https://github.com/jquery/jquery), 
-- lodash (https://www.npmjs.com/package/lodash), 
-- tweezer (https://github.com/jaxgeller/tweezer.js), 
+- jQuery (https://github.com/jquery/jquery)
+- lodash (https://www.npmjs.com/package/lodash)
+- tweezer (https://github.com/jaxgeller/tweezer.js) 
 - local-links (https://www.npmjs.com/package/local-links)
+- lory-js (http://meandmax.github.io/lory/)
+- verge (https://www.npmjs.com/package/verge)
+- webfontloader (https://www.npmjs.com/package/webfontloader)
 
 To use a NPM module use the es6 import syntax
 
