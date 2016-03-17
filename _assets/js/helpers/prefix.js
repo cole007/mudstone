@@ -47,7 +47,9 @@ var tool = {
 	        }
 	    }
 		return false;
-	}
+	},
+
+
 };
 
 export default tool;

@@ -81,6 +81,8 @@ $ie: false;
 @import 'modules/panels',
         'modules/accordion',
         'modules/wysiwyg',
+        'modules/tabs',
+        'modules/slide',
         'modules/hero';
  
 // views, mediaquery stuff 
@@ -126,3 +128,5 @@ body:before {
 @import 'utils/utils';
 // final exceptions/shame
 @import 'views/exceptions';
+
+
