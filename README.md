@@ -64,6 +64,7 @@ For production every is built in the deploy directory
 - lory-js (http://meandmax.github.io/lory/)
 - verge (https://www.npmjs.com/package/verge)
 - webfontloader (https://www.npmjs.com/package/webfontloader)
+- layzr.js (https://github.com/callmecavs/layzr.js/tree/master)
 
 To use a NPM module use the es6 import syntax
 

@@ -20,9 +20,31 @@ block content
 	//- .wrapper
 	//- 	.g-t10.g-d7.g-center.gutter-row
 	//- 		include _examples/forms
-	.hero.u-panel#Forms
-		.wrapper.u-text-center
-			h1 Slide
-	.wrapper
-		.g-t10.g-d7.g-center.gutter-row
-			include _examples/carousel
+	//- .hero.u-panel#Forms
+	//- 	.wrapper.u-text-center
+	//- 		h1 Slide
+	//- .wrapper
+	//- 	.g-t10.g-d7.g-center.gutter-row
+	//- 		include _examples/carousel
+
+	.wrapper.lz(data-behaviour="lazyLoad")
+		-var n = 1
+		while n < 16
+			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+			-n++
+		-var n = 1
+		while n < 16
+			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+			-n++
+		-var n = 1
+		while n < 16
+			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+			-n++
+		-var n = 1
+		while n < 16
+			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+			-n++
+		-var n = 1
+		while n < 16
+			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+			-n++

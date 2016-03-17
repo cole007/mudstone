@@ -6,6 +6,7 @@ import validation from './behaviours/validation';
 import carousel from './behaviours/carousel';
 import { megaNav } from  './behaviours/megaNav';
 import prefix from './helpers/prefix';
+import lazyLoad from './behaviours/lazyLoad';
 
 WebFont.load({
 	typekit: { id: 'vcl8lns' }
@@ -18,6 +19,7 @@ mud.Behaviours.accordion = accordion;
 mud.Behaviours.validation = validation;
 mud.Behaviours.megaNav = megaNav;
 mud.Behaviours.carousel = carousel;
+mud.LoadWindow.lazyLoad = lazyLoad;
 
 window.onload = function(){
     mud.onWindowLoad();

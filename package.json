@@ -45,6 +45,7 @@
     "gulp-watch": "^4.3.5",
     "gulp.spritesmith": "^6.0.1",
     "jquery": "^2.1.4",
+    "layzr.js": "^2.0.4",
     "local-links": "^1.4.0",
     "lodash": "^4.0.0",
     "lodash.debounce": "^4.0.3",
