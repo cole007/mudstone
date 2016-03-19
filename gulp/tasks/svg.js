@@ -74,6 +74,7 @@ gulp.task('build-svgstore', function () {
         .src(config.svgStore.src)
         .pipe(svgmin())
         .pipe(svgstore({ inlineSvg: true }));
+        
     function fileContents (filePath, file) {
         return file.contents.toString();
     }
