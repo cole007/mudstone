@@ -12,6 +12,7 @@ var gulp                = require('gulp'),
     concat              = require('gulp-concat'),
     handleErrors        = require('../util/handleErrors'),
     cssnano             = require('gulp-cssnano'),
+    del                 = require('del'),
     util                = require('gulp-util'),
     htmlreplace         = require('gulp-html-replace'),
     setup               = require('../config'),
@@ -90,18 +91,24 @@ gulp.task('html-validation', function () {
 });
 
 
+
+gulp.task('clean-assets', function () {
+  return del(config.clean);
+});
+
+
 gulp.task('init', function(callback) {
   runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass', 'dev-html'], callback);
 });
 
 gulp.task('build-development', function(callback) {
-  runSequence('sass', ['lib-scripts', 'bundle-scripts', 'dev-html'], callback);
+  runSequence('sass', ['lib-scripts', 'bundle-scripts', 'dev-html', 'move-scripts'], callback);
 });
 
 gulp.task('build-stage', function(callback) {
-  runSequence('sass', ['merge-scripts', 'prod-html'], 'clean-tmp-scripts', callback);
+  runSequence('sass', ['merge-scripts', 'prod-html', 'move-scripts'], 'clean-tmp-scripts', callback);
 });
 
 gulp.task('build-production', function(callback) {
-  runSequence('build-css', ['build-scripts', 'prod-html'], 'clean-tmp-scripts', callback);
+  runSequence('build-css', ['build-scripts', 'prod-html', 'move-scripts'], 'clean-tmp-scripts', callback);
 });
