@@ -197,7 +197,11 @@ module.exports = {
     html_src: root + '*.html',
     html_dest: build + 'static/',
     htmlScript: root + '*.html',
-    htmlScriptDest: root
+    htmlScriptDest: root,
+    clean: [
+      build + 'js',
+      build + 'css'
+    ]
   },
  
   // styleguide: {
