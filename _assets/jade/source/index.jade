@@ -26,25 +26,5 @@ block content
 	//- .wrapper
 	//- 	.g-t10.g-d7.g-center.gutter-row
 	//- 		include _examples/carousel
-
-	.wrapper.lz(data-behaviour="lazyLoad")
-		-var n = 1
-		while n < 16
-			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
-			-n++
-		-var n = 1
-		while n < 16
-			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
-			-n++
-		-var n = 1
-		while n < 16
-			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
-			-n++
-		-var n = 1
-		while n < 16
-			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
-			-n++
-		-var n = 1
-		while n < 16
-			img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
-			-n++
+	video#vid1.video-js.vjs-default-skin(width="640" height="264")
+		source(src="https://vimeo.com/123478917" type="video/vimeo")
