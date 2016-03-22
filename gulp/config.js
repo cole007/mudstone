@@ -202,7 +202,9 @@ module.exports = {
     clean: [
       build + 'js',
       build + 'css'
-    ]
+    ],
+    favicon_src: assets + 'favicons/*',
+    favicon_dest: build + 'favicons/'
   },
  
   // styleguide: {
