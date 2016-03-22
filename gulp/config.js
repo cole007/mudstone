@@ -150,6 +150,7 @@ module.exports = {
     fileName: 'source.html',
     jadeDest: assets + 'jade/source/_includes'
   },
+
  
   icons: {
     src: assets + 'images/icons/*.svg',
