@@ -51,32 +51,40 @@ function Expand(opts) {
 		closeOthers: false,
 		activeClass: 'is-active',
 		activeContentClass: 'is-active',
-		duration: 1000
+		duration: 1000,
+		autoInitialize: true
 	};
-	// API
-	this.$wrapper = opts.wrapper || defaults.wrapper;
-	this.button = opts.button || defaults.button;
-	this.closeOthers = opts.closeOthers || defaults.closeOthers;
-	this.activeClass = opts.activeClass || defaults.activeClass;
-	this.activeContentClass = opts.activeContentClass || defaults.activeContentClass;
-	this.duration = opts.duration || defaults.duration;
-	this.easing = config.tween.easing;
-	// callbacks 
-	this.openStart = opts.openStart;
-	this.openComplete = opts.openComplete;
-	this.closeStart = opts.closeStart;
-	this.closeComplete = opts.closeComplete;
+
+	this.options = {
+		// API
+		$wrapper: opts.wrapper || defaults.wrapper,
+		button: opts.button || defaults.button,
+		closeOthers: opts.closeOthers || defaults.closeOthers,
+		activeClass: opts.activeClass || defaults.activeClass,
+		activeContentClass: opts.activeContentClass || defaults.activeContentClass,
+		duration: opts.duration || defaults.duration,
+		easing: config.tween.easing,
+		autoInitialize: opts.autoInitialize || defaults.autoInitialize,
+		// callbacks 
+		openStart: opts.openStart,
+		openComplete: opts.openComplete,
+		closeStart: opts.closeStart,
+		closeComplete: opts.closeComplete
+	}
 	// prev
 	this.activeLink = null;
 
 	// Private Variables
 	// get hold of this
 	let _this = this;
+	let _opts = this.options;
+
+	console.log(_opts);
 
 	function clickHandle(e) {
 		e.preventDefault();
 	 	e.stopPropagation();
-		if(_this.closeOthers && _this.activeLink !== null) {
+		if(_opts.closeOthers && _this.activeLink !== null && _this.activeLink !== this) {
 			_this.activeLink._state = false;
 			_this.tween(_this.activeLink);
 		}
@@ -90,24 +98,27 @@ function Expand(opts) {
 		}
 	};
 	// immediately invoked function
-	(function init() {
+	this.init = function() {
 		// loop through all of the buttons
 		// create an array of elements,
 		// set initial states
 		// give each button an index data attribute
-		this.$wrapper.find(this.button).each(function(i) {
+		_opts.$wrapper.find(_opts.button).each(function(i) {
+
 			var $target = $($(this).data('target'));
-			var state = $(this).hasClass(_this.activeClass) ? true : false;
+			var state = $(this).hasClass(_opts.activeClass) ? true : false;
 			// if active, add the active class to the target element
 			this._state = state;
 			this._isRunning = false;
 			this.$target = $target;
 			if(state === true) {
-				$target.addClass(_this.activeContentClass);
+				$target.addClass(_opts.activeContentClass);
 				_this.activeLink = this;
 			}
 		});
-	}.bind(this))();
+	}
+
+
 	// public api, pass in the qQuery object to transition
 	// transition will be based on the current state
 	// do the tweening
@@ -119,15 +130,15 @@ function Expand(opts) {
 		// add the initCss style
 		// hides $target before it expands
 		if(el._state === true) {
-			if(typeof this.openStart === 'function') {
-				this.openStart(el);
+			if(typeof _opts.openStart === 'function') {
+				_opts.openStart(el);
 			}
 			$target.css({display: 'block'});
 			height = $target.outerHeight(true);
 			$target.css({height: 0, overflow: 'hidden', position: 'relative'});
 		} else {
-			if(typeof this.closeStart === 'function') {
-				this.closeStart(el);
+			if(typeof _opts.closeStart === 'function') {
+				_opts.closeStart(el);
 			}
 		}
 
@@ -145,16 +156,16 @@ function Expand(opts) {
 				el._isRunning = false;
 				if(el._state === true) {
 					// remove the transition initCss styles and add the active class
-	 				$target.css({overflow: '', position: '', height: ''}).addClass(_this.activeContentClass);
-	 				$el.addClass(_this.activeClass);
-					if(typeof _this.openComplete === 'function') {
-						_this.openComplete(el);
+	 				$target.css({overflow: '', position: '', height: ''}).addClass(_opts.activeContentClass);
+	 				$el.addClass(_opts.activeClass);
+					if(typeof _opts.openComplete === 'function') {
+						_opts.openComplete(el);
 					}
 				} else {
-					$target.css({display: 'none', position: '', height: ''}).removeClass(_this.activeContentClass);
-	 				$el.removeClass(_this.activeClass);
-					if(typeof _this.closeComplete === 'function') {
-						_this.closeComplete(el);
+					$target.css({display: 'none', position: '', height: ''}).removeClass(_opts.activeContentClass);
+	 				$el.removeClass(_opts.activeClass);
+					if(typeof _opts.closeComplete === 'function') {
+						_opts.closeComplete(el);
 					}
 				}
 			})
@@ -162,23 +173,26 @@ function Expand(opts) {
 			el._isRunning = true;
 		}
 	};
-	// this.close = function() {
-	// 	this.$wrapper.find(this.button).each(function() {
-	// 		if(this._state === true) {
-	// 			this._state = false;
-	// 			_this.tween(this);
-	// 		}
-	// 	});
-	// };
-	// this.open = function() {
-	// 	this.$wrapper.find(this.button).each(function() {
-	// 		if(this._state === false) {
-	// 			this._state = true;
-	// 			_this.tween(this);
-	// 		}
-	// 	});
-	// };
-	this.$wrapper.on('click', this.button, clickHandle);
+	
+	this.destroy = function() {
+		_opts.$wrapper.off('click', _opts.button, clickHandle);
+		_opts.$wrapper.find(_opts.button).each(function(i) {
+			$(this).removeClass(_opts.activeClass).removeAttr('style');
+			this.$target.removeClass(_opts.activeContentClass).removeAttr('style')
+		});
+	};
+
+
+	this.setOptions = function() {
+        var options = $.extend({}, _opts, o);
+        this.options = options;
+	}
+
+	if(_opts.autoInitialize === true) {
+		this.init();
+	}
+
+	_opts.$wrapper.on('click', _opts.button, clickHandle);
 };
 
 
