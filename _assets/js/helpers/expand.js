@@ -118,6 +118,8 @@ function Expand(opts) {
 				_this.activeLink = this;
 			}
 		});
+		
+		_opts.$wrapper.on('click', _opts.button, clickHandle);
 	}
 
 
@@ -199,7 +201,7 @@ function Expand(opts) {
 		this.init();
 	}
 
-	_opts.$wrapper.on('click', _opts.button, clickHandle);
+	
 };
 
 
