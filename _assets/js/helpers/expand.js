@@ -73,6 +73,7 @@ function Expand(opts) {
 	}
 	// prev
 	this.activeLink = null;
+	this.componentState = false;
 
 	// Private Variables
 	// get hold of this
@@ -99,6 +100,7 @@ function Expand(opts) {
 	};
 	// immediately invoked function
 	this.init = function() {
+		this.componentState = true;
 		// loop through all of the buttons
 		// create an array of elements,
 		// set initial states
@@ -173,8 +175,9 @@ function Expand(opts) {
 			el._isRunning = true;
 		}
 	};
-	
+
 	this.destroy = function() {
+		this.componentState = false;
 		_opts.$wrapper.off('click', _opts.button, clickHandle);
 		_opts.$wrapper.find(_opts.button).each(function(i) {
 			$(this).removeClass(_opts.activeClass).removeAttr('style');
@@ -186,6 +189,10 @@ function Expand(opts) {
 	this.setOptions = function() {
         var options = $.extend({}, _opts, o);
         this.options = options;
+	}
+
+	this.getState = function() {
+		return this.componentState;
 	}
 
 	if(_opts.autoInitialize === true) {
