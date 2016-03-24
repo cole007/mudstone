@@ -45,6 +45,8 @@ SCSS:
 }
 */
 function Expand(opts) {
+	// setup some default, 
+	// these will be used for missing opts
 	var defaults = {
 		wrapper: $('.js-accordion'),
 		button: '.button',
@@ -55,42 +57,48 @@ function Expand(opts) {
 		autoInitialize: true
 	};
 
+	// the options
 	this.options = {
 		// API
-		$wrapper: opts.wrapper || defaults.wrapper,
-		button: opts.button || defaults.button,
-		closeOthers: opts.closeOthers || defaults.closeOthers,
-		activeClass: opts.activeClass || defaults.activeClass,
-		activeContentClass: opts.activeContentClass || defaults.activeContentClass,
-		duration: opts.duration || defaults.duration,
-		easing: config.tween.easing,
-		autoInitialize: opts.autoInitialize || defaults.autoInitialize,
+		$wrapper: opts.wrapper || defaults.wrapper, // jquery object
+		button: opts.button || defaults.button, // css selector
+		closeOthers: opts.closeOthers || defaults.closeOthers, // boolean
+		activeClass: opts.activeClass || defaults.activeClass, // string
+		activeContentClass: opts.activeContentClass || defaults.activeContentClass, // string
+		duration: opts.duration || defaults.duration, // number
+		easing: config.tween.easing, // easing function
+		autoInitialize: opts.autoInitialize || defaults.autoInitialize, // boolean
 		// callbacks 
-		openStart: opts.openStart,
-		openComplete: opts.openComplete,
-		closeStart: opts.closeStart,
-		closeComplete: opts.closeComplete
+		openStart: opts.openStart, // function
+		openComplete: opts.openComplete, // function
+		closeStart: opts.closeStart, // function
+		closeComplete: opts.closeComplete // function
 	}
-	// prev
+	
+	// some component hooks
 	this.activeLink = null;
 	this.componentState = false;
 
-	// Private Variables
-	// get hold of this
+	// get shome closure
 	let _this = this;
 	let _opts = this.options;
 
-	console.log(_opts);
-
+	// we go clicky click
 	function clickHandle(e) {
+		// kill the things
 		e.preventDefault();
 	 	e.stopPropagation();
+	 	// if we wanna close other links, and there is a link to close and that link isn't this
+	 	// close the other one
 		if(_opts.closeOthers && _this.activeLink !== null && _this.activeLink !== this) {
 			_this.activeLink._state = false;
 			_this.tween(_this.activeLink);
 		}
+		// update the activeLink state, used to closeOthers
 		_this.activeLink = this;
+		// if we're not already animating
 		if(!this._isRunning) {
+			// flip the state
 			this._state = !this._state;
 			// the context of this in side the clickHandle is the DOM element 
 			// which was clicked,
@@ -98,37 +106,40 @@ function Expand(opts) {
 			_this.tween(this);
 		}
 	};
-	// immediately invoked function
+	// the initalizer
 	this.init = function() {
+		// set the compontent state
 		this.componentState = true;
-		// loop through all of the buttons
-		// create an array of elements,
-		// set initial states
-		// give each button an index data attribute
-		_opts.$wrapper.find(_opts.button).each(function(i) {
-
+		// loop through the buttons,
+		_opts.$wrapper.find(_opts.button).each(function() {
+			// get each target
 			var $target = $($(this).data('target'));
+			// get the current state, based on active class
 			var state = $(this).hasClass(_opts.activeClass) ? true : false;
-			// if active, add the active class to the target element
+			// add the properties to this
 			this._state = state;
 			this._isRunning = false;
 			this.$target = $target;
+			// is the state is true, update the DOM and active link ref
 			if(state === true) {
 				$target.addClass(_opts.activeContentClass);
 				_this.activeLink = this;
 			}
 		});
 		
+		// bind the click event
 		_opts.$wrapper.on('click', _opts.button, clickHandle);
 	}
 
 
-	// public api, pass in the qQuery object to transition
-	// transition will be based on the current state
-	// do the tweening
+	// goes all tweeny like
+	// accepts a string
 	this.tween = function(el) {
+		// get the dom node
 		var $el = $(el);
+		// we need a target
 		var $target = $(el.$target);
+		// get the current height
 		var height = $target.outerHeight(true);
 		// if the state is true
 		// add the initCss style
@@ -145,7 +156,7 @@ function Expand(opts) {
 				_opts.closeStart(el);
 			}
 		}
-
+		// if we're not already animating
 		if (!el._isRunning) {
 			// init new Tweezer
 			var t = t || new Tweezer({
@@ -162,12 +173,15 @@ function Expand(opts) {
 					// remove the transition initCss styles and add the active class
 	 				$target.css({overflow: '', position: '', height: ''}).addClass(_opts.activeContentClass);
 	 				$el.addClass(_opts.activeClass);
+	 				// callback
 					if(typeof _opts.openComplete === 'function') {
 						_opts.openComplete(el);
 					}
 				} else {
+					// reset shit
 					$target.css({display: 'none', position: '', height: ''}).removeClass(_opts.activeContentClass);
 	 				$el.removeClass(_opts.activeClass);
+	 				// callback
 					if(typeof _opts.closeComplete === 'function') {
 						_opts.closeComplete(el);
 					}
@@ -177,31 +191,33 @@ function Expand(opts) {
 			el._isRunning = true;
 		}
 	};
-
+	// kill it.. kill it dead
 	this.destroy = function() {
+		// update the component state
 		this.componentState = false;
+		// remove click handler
 		_opts.$wrapper.off('click', _opts.button, clickHandle);
-		_opts.$wrapper.find(_opts.button).each(function(i) {
+		// remove component classes and styles
+		_opts.$wrapper.find(_opts.button).each(function() {
 			$(this).removeClass(_opts.activeClass).removeAttr('style');
 			this.$target.removeClass(_opts.activeContentClass).removeAttr('style')
 		});
 	};
 
-
-	this.setOptions = function() {
-        var options = $.extend({}, _opts, o);
-        this.options = options;
+	// update the options with new ones
+	this.setOptions = function(o) {
+        this.options = $.extend({}, _opts, o);
 	}
 
+	// what's the state yeah?
 	this.getState = function() {
 		return this.componentState;
 	}
 
+	// wanna auto boot?
 	if(_opts.autoInitialize === true) {
 		this.init();
 	}
-
-	
 };
 
 
