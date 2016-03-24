@@ -2,29 +2,29 @@
 extends _wrapper/_layout
 //- define the block of accordion__content to be placed in the extend
 block content
-	//- .hero.u-panel#Type
-	//- 	.wrapper.u-text-center
-	//- 		h1 Type!
-	//- 		p Styles for the client... wrapped in .s-content
-	//- .wrapper
-	//- 	.g-t10.g-d7.g-center.gutter-row
-	//- 		include _examples/type
-	//- .hero.u-panel#Grid
-	//- 	.wrapper.u-text-center
-	//- 		h1 Mega Simple Grid!
-	//- 		p Utilises calc()... see /layout/_structure.scss
-	//- include _examples/grid
-	//- .hero.u-panel#Forms
-	//- 	.wrapper.u-text-center
-	//- 		h1 Forms
-	//- .wrapper
-	//- 	.g-t10.g-d7.g-center.gutter-row
-	//- 		include _examples/forms
-	//- .hero.u-panel#Forms
-	//- 	.wrapper.u-text-center
-	//- 		h1 Slide
-	//- .wrapper
-	//- 	.g-t10.g-d7.g-center.gutter-row
-	//- 		include _examples/carousel
-	video#vid1.video-js.vjs-default-skin(width="640" height="264")
-		source(src="https://vimeo.com/123478917" type="video/vimeo")
+
+	.wrapper
+		.g-t10.g-d7.g-center.gutter-row
+			include _examples/accordion
+
+	//- .wrapper.lz(data-behaviour="lazyLoad")
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++

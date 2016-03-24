@@ -20,6 +20,12 @@ var gulp                = require('gulp'),
     config              = setup.build,
     scripts             = setup.scripts;
  
+gulp.task('build-favicons', function(callback) {
+    gulp.src(config.favicon_src)
+      .pipe(gulp.dest(config.favicon_dest));
+}); 
+
+
 // move the html files to dist
 gulp.task('build-html', function(callback) {
     gulp.src(config.html_src)
@@ -98,7 +104,7 @@ gulp.task('clean-assets', function () {
 
 
 gulp.task('init', function(callback) {
-  runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass', 'dev-html'], callback);
+  runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass', 'dev-html', 'build-favicons'], callback);
 });
 
 gulp.task('build-development', function(callback) {

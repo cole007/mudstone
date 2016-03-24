@@ -150,6 +150,7 @@ module.exports = {
     fileName: 'source.html',
     jadeDest: assets + 'jade/source/_includes'
   },
+
  
   icons: {
     src: assets + 'images/icons/*.svg',
@@ -201,7 +202,9 @@ module.exports = {
     clean: [
       build + 'js',
       build + 'css'
-    ]
+    ],
+    favicon_src: assets + 'favicons/*',
+    favicon_dest: build + 'favicons/'
   },
  
   // styleguide: {
