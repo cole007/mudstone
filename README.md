@@ -33,7 +33,7 @@ Make sure you have Node.js and gulp installed
 ######From the terminal run
 ```
  npm install
- gulp build - this will run all of the tasks (sass, jade, scripts, sprites, icons, fonts, images)
+ gulp init - this will run all of the tasks (sass, jade, scripts, sprites, icons, fonts, images)
  gulp - starts server, watches css,js,jade et al
  
 ```
@@ -53,7 +53,10 @@ For production every is built in the deploy directory
 -  /_assets/js/app.js is the main entry point
 -  /_assets/js/dependencies/* contains the namespace function the data-behaviour method
 -  /_assets/js/helpers/* small utility functions
--  /_assets/js/modules/* UI modules and page functionality
+-  /_assets/js/behaviours/* page behaviours, modules etc
+-  /_assets/plugins/* any scripts that need to be bundled before browserfy (jquery plugins)
+-  /_assets/libs/* any libraries that need to be included in the head (such as moderniz),
+
 
 ## NPM packages included:
 
@@ -65,7 +68,7 @@ For production every is built in the deploy directory
 - webfontloader (https://www.npmjs.com/package/webfontloader)
 - layzr.js (https://github.com/callmecavs/layzr.js/tree/master)
 - wallop (https://github.com/peduarte/wallop)
-- plyr (plyr.io)
+- plyr (https://plyr.io)
 
 To use a NPM module use the es6 import syntax
 

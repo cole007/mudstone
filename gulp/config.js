@@ -115,7 +115,7 @@ module.exports = {
  
   scripts: {
     src: assets + 'js/app.js',
-    libs: assets + 'js/libs/*.js',
+    libs: [assets + 'js/libs/*.js', assets + 'js/plugins/*.js'],
     path: assets + 'js/',
     libsOutput: 'libs.js',
     output: 'app.js',
