@@ -1,0 +1,52 @@
+
+/**
+ * (optional) define here the style definitions which should be applied on the slider container
+ * e.g. width including further controls like arrows etc.
+ */
+.slider {}
+
+.site-header {
+  display: none;
+}
+ 
+.frame {
+    /**
+     * (optional) wrapper width, specifies width of the slider frame.
+     */
+    width: 100%;
+ 
+    position: relative;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+ 
+.slides {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+li {
+    background: #091d46;
+    font-size: 20px;
+    color: $white;
+    position: relative;
+    flex: 1 0 25%;
+    height: 400px;
+    border: 2px solid $black;
+    
+    // opacity: 0;
+    // transition: opacity .3;
+    // &.is-active {
+    //     opacity: 1;
+    // }
+
+    // // & ~ * { 
+    // //     position: absolute;
+    // //     left: 0;
+    // //     width: 100%;
+    // // }
+}

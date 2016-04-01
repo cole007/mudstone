@@ -3,6 +3,7 @@ var gulp            = require('gulp'),
     config          = require('../config').jade,
     browserSync     = require('browser-sync'),
     handleErrors    = require('../util/handleErrors'),
+    rename          = require("gulp-rename"),
     runSequence     = require('run-sequence');
 
 gulp.task('jade', function() {

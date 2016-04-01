@@ -1,0 +1,38 @@
+{
+	"masterPicture": "./_assets/images/favicons/favicon.png",
+	"iconsPath": "/_assets/favicons/",
+	"design": {
+		"ios": {
+			"pictureAspect": "backgroundAndMargin",
+			"backgroundColor": "#ffffff",
+			"margin": "18%"
+		},
+		"desktopBrowser": {},
+		"windows": {
+			"pictureAspect": "whiteSilhouette",
+			"backgroundColor": "#00aba9",
+			"onConflict": "override"
+		},
+		"androidChrome": {
+			"pictureAspect": "backgroundAndMargin",
+			"margin": "17%",
+			"backgroundColor": "#ffffff",
+			"themeColor": "#ab6060",
+			"manifest": {
+				"name": "Garry",
+				"display": "browser",
+				"orientation": "notSet",
+				"onConflict": "override",
+				"declared": true
+			}
+		},
+		"safariPinnedTab": {
+			"pictureAspect": "silhouette",
+			"themeColor": "#5bbad5"
+		}
+	},
+	"settings": {
+		"scalingAlgorithm": "Mitchell",
+		"errorOnImageTooSmall": false
+	}
+}

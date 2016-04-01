@@ -1,0 +1,25 @@
+.menu__wrapper.js-menu(data-behaviour="megaNav")
+	button.js-menu-root.menu__ctrl-btn Root
+	button.js-menu-back.menu__ctrl-btn Back
+	ul.nav.menu__root
+		-var n = 0
+		while n < 6
+			li.menu__item.menu__item--l1
+				a.menu__link.menu__link--l1(href="#") Menu Item 
+				button.button.menu__expand.js-menu-btn +
+				.menu__subwrap.menu__subwrap--l1
+					ul.nav
+						-var k = 0
+						while k < 8
+							li.menu__item.menu__item--l2
+								a.menu__link.menu__link--l2(href="#") Sub Menu Item l2
+								button.button.menu__expand.js-menu-btn +
+								.menu__subwrap.menu__subwrap--l2
+									ul.nav
+										-var j = 0
+										while j < 6
+											li.menu__item.menu__item--l3
+												a.menu__link.menu__link--l3(href="#") Sub Menu Item l3
+											-j++
+							-k++
+			-n++

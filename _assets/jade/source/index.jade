@@ -1,75 +1,30 @@
-//- load content into the layout
+//- load accordion__content into the layout
 extends _wrapper/_layout
-//- define the block of content to be placed in the extend
+//- define the block of accordion__content to be placed in the extend
 block content
-	.site
-		include _includes/header
-		.wrapper.slice.s-content#type
-			h1.slice__heading Typography
-			h1.heading-1 Heading 1 - Long title, will break onto two lines at some point
-			p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt facere officiis repellat aperiam, nisi possimus ratione fugit, ad saepe veniam! Sunt laborum fugiat tenetur alias laboriosam itaque nemo, pariatur amet?
-			h2.heading-2 Heading 2 - Long title, will break onto two lines at some point
-			p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt facere officiis repellat aperiam, nisi possimus ratione fugit, ad saepe veniam! Sunt laborum fugiat tenetur alias laboriosam itaque nemo, pariatur amet?
-			h3.heading-3 Heading 3 - Long title, will break onto two lines at some point, will break onto two lines at some point, will break onto two lines at some point
-			p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt facere officiis repellat aperiam, nisi possimus ratione fugit, ad saepe veniam! Sunt laborum fugiat tenetur alias laboriosam itaque nemo, pariatur amet?
-			h4.heading-4 Heading 4 - Long title, will break onto two lines at some point, will break onto two lines at some point
-			p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt facere officiis repellat aperiam, nisi possimus ratione fugit, ad saepe veniam! Sunt laborum fugiat tenetur alias laboriosam itaque nemo, pariatur amet?
-			h5.heading-5 Heading 5 - Long title, will break onto two lines at some point, will break onto two lines at some point, will break onto two lines at some point
-			p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt facere officiis repellat aperiam, nisi possimus ratione fugit, ad saepe veniam! Sunt laborum fugiat tenetur alias laboriosam itaque nemo, pariatur amet?
-			h6.heading-6 Heading 6 - Long title, will break onto two lines at some point, will break onto two lines at some point, will break onto two lines at some point
-			p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt facere officiis repellat aperiam, nisi possimus ratione fugit, ad saepe veniam! Sunt laborum fugiat tenetur alias laboriosam itaque nemo, pariatur amet?
-			h2.slice__heading.slice__heading--minor Lists
-			ul
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-			p Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-				a(href="#") Deserunt facere officiis repellat
-				|  aperiam, nisi possimus ratione fugit, ad saepe veniam! Sunt laborum fugiat tenetur alias laboriosam itaque nemo, pariatur amet?
-			ol
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-				li Lorem ipsum dolor sit amet, consectetur adipisicing elit 
-			blockquote
-				p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt facere officiis repellat aperiam, nisi possimus ratione fugit, ad saepe veniam! Sunt laborum fugiat tenetur alias laboriosam itaque nemo, pariatur amet?
-				cite Time itself
-		.wrapper.slice#form
-			h1.slice__heading Form
-			form.form
-				fieldset
-					.form__group
-						label.form__label(for="name") Name
-						input.form__input(type="text" name="name" id="name")
-					.form__group
-						label.form__label(for="email") Email
-						input.form__input(type="email" name="email" id="email")
-					.form__group
-						input.form__toggle.form__toggle--radio(type="radio" name="radio" id="radio1")
-						label.form__label.form__label--toggle(for="radio1") Yup
-						input.form__toggle.form__toggle--radio(type="radio" name="radio" id="radio2")
-						label.form__label.form__label--toggle(for="radio2") Nope
-					.form__group
-						input.form__toggle.form__toggle--check(type="checkbox" name="check1" id="check1")
-						label.form__label.form__label--toggle(for="check1") Yup
-						input.form__toggle.form__toggle--check(type="checkbox" name="check2" id="check2")
-						label.form__label.form__label--toggle(for="check2") Yup
-					.form__group
-						label.form__label(for="select") Pick something
-						.form__select
-							select(id="select" name="select")
-								option English
-								option French
-								option German
-								option Spanish
-					.form__group
-						label.form__label(for="message") Message
-						textarea.form__input.form__input--textarea(rows="5" name="message" id="message")
-		.wrapper.slice
-			h1.slice__heading Layout
-		.wrapper.slice
-			h1.slice__heading Panels
-		include _includes/footer
+
+	.wrapper
+		.g-t10.g-d7.g-center.gutter-row
+			include _examples/carousel
+
+	//- .wrapper.lz(data-behaviour="lazyLoad")
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++
+	//- 	-var n = 1
+	//- 	while n < 16
+	//- 		img(data-normal='/_assets/images/#{n}.jpg' style="min-height: 500px")
+	//- 		-n++

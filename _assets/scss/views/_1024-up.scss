@@ -49,28 +49,3 @@
 }
 
 // menu 
-
-.menu {
-	margin-right: 0;
-}
-
-.menu__btn {
-	display: none;
-}
-
-.menu__wrapper {
-	// position: static;
-	// display: block;
-	// transform: none;
-	// opacity: 1;
-	// visibility: visible;
-	// background: none;
-}
-
-.menu__item {
-	@include font-type(base);
-	margin: 0 gutter(.5);
-	display: inline-block;
-	color: $white;
-	letter-spacing: normal;
-}

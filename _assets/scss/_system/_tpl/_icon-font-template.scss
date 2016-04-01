@@ -1,11 +1,11 @@
-// @font-face {
-// 	font-family: "<%= fontName %>";
-// 	src: url('<%= fontPath %><%= fontName %>.eot');
-// 	src: url('<%= fontPath %><%= fontName %>.eot?#iefix') format('eot'),
-// 		url('<%= fontPath %><%= fontName %>.woff') format('woff'),
-// 		url('<%= fontPath %><%= fontName %>.ttf') format('truetype'),
-// 		url('<%= fontPath %><%= fontName %>.svg#<%= fontName %>') format('svg');
-// }
+@font-face {
+	font-family: "<%= fontName %>";
+	src: url('<%= fontPath %><%= fontName %>.eot');
+	src: url('<%= fontPath %><%= fontName %>.eot?#iefix') format('eot'),
+		url('<%= fontPath %><%= fontName %>.woff') format('woff'),
+		url('<%= fontPath %><%= fontName %>.ttf') format('truetype'),
+		url('<%= fontPath %><%= fontName %>.svg#<%= fontName %>') format('svg');
+}
 
 
 $icon_map: (<% _.each(glyphs, function(glyph) { %><%= glyph.fileName %>: "\<%= glyph.codePoint %>",<% }) %>);

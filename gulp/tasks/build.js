@@ -12,15 +12,45 @@ var gulp                = require('gulp'),
     concat              = require('gulp-concat'),
     handleErrors        = require('../util/handleErrors'),
     cssnano             = require('gulp-cssnano'),
+    del                 = require('del'),
     util                = require('gulp-util'),
+    htmlreplace         = require('gulp-html-replace'),
     setup               = require('../config'),
+    htmlv               = require('gulp-html-validator'),
     config              = setup.build,
     scripts             = setup.scripts;
  
+gulp.task('build-favicons', function(callback) {
+    gulp.src(config.favicon_src)
+      .pipe(gulp.dest(config.favicon_dest));
+}); 
+
+
 // move the html files to dist
 gulp.task('build-html', function(callback) {
     gulp.src(config.html_src)
       .pipe(gulp.dest(config.html_dest));
+});
+
+gulp.task('prod-html', function() {
+  gulp.src(config.htmlScript)
+    .pipe(htmlreplace({
+        'js': '/_assets/js/dist/app.js'
+    },{
+        keepBlockTags: true
+    }))
+    .pipe(gulp.dest(config.htmlScriptDest));
+});
+
+
+gulp.task('dev-html', function() {
+  gulp.src(config.htmlScript)
+    .pipe(htmlreplace({
+        'js': ['/_assets/js/tmp/libs.js', '/_assets/js/dist/app.js']
+    },{
+       keepBlockTags: true
+    }))
+    .pipe(gulp.dest(config.htmlScriptDest));
 });
 
  
@@ -36,14 +66,6 @@ gulp.task('build-images', function(callback) {
       .pipe(gulp.dest(config.images_dest));
 });
  
-// move and optimise the scripts
-gulp.task('build-scripts', function(callback) {
-    gulp.src(scripts.src)
-        .pipe(uglify())
-        .on('error', handleErrors)
-        .pipe(concat(scripts.output))
-        .pipe(gulp.dest(config.js_MergeDest));
-});
  
 // move any scripts which are not merged in to app.js
 // for example modernizer 
@@ -53,8 +75,6 @@ gulp.task('move-scripts', function(callback) {
 });
  
 // optimise the css and move to the dist folder
-
-
 gulp.task('build-css', function() {
   return gulp.src(setup.sass.watch)
     .pipe(sass({
@@ -70,10 +90,31 @@ gulp.task('build-css', function() {
     // .pipe(browserSync.reload({stream:true}));
 }); 
 
-gulp.task('build', function(callback) {
-  runSequence('sprite', ['jade', 'build-fonts', 'iconfont', 'images', 'build-scripts', 'move-scripts', 'build-css'], callback);
+gulp.task('html-validation', function () {
+  gulp.src('tmp/public/*.html')
+    .pipe(htmlv({format: 'html'}))
+    .pipe(gulp.dest('./reports'));
 });
 
-gulp.task('build-cms', function(callback) {
-  runSequence('build-css', ['scripts'], callback);
+
+
+gulp.task('clean-assets', function () {
+  return del(config.clean);
+});
+
+
+gulp.task('init', function(callback) {
+  runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass', 'dev-html', 'build-favicons'], callback);
+});
+
+gulp.task('build-development', function(callback) {
+  runSequence('sass', ['lib-scripts', 'bundle-scripts', 'dev-html', 'move-scripts'], callback);
+});
+
+gulp.task('build-stage', function(callback) {
+  runSequence('sass', ['merge-scripts', 'prod-html', 'move-scripts'], 'clean-tmp-scripts', callback);
+});
+
+gulp.task('build-production', function(callback) {
+  runSequence('build-css', ['build-scripts', 'prod-html', 'move-scripts'], 'clean-tmp-scripts', callback);
 });

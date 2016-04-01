@@ -2,6 +2,7 @@
  * sass 
  * compile scss with libsass
  */
+
 var gulp            = require('gulp'),
     browserSync     = require('browser-sync'),
     sass            = require('gulp-sass'),
@@ -9,6 +10,7 @@ var gulp            = require('gulp'),
     handleErrors    = require('../util/handleErrors'),
     gulpif          = require('gulp-if'),
     size            = require('gulp-size'),
+    handleErrors    = require('../util/handleErrors'),
     autoprefixer    = require('autoprefixer'),
     postcss         = require('gulp-postcss'),
     config          = require('../config').sass,
