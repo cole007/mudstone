@@ -9,7 +9,11 @@ var gulp            = require('gulp'),
     svgstore        = require('gulp-svgstore'),
     inject          = require('gulp-inject'),
     runSequence     = require('run-sequence').use(gulp),
-    html2jade       = require('gulp-html2jade');
+    html2jade       = require('gulp-html2jade'),
+    path            = require('path'),
+    gulpif          = require('gulp-if'),
+    rename          = require('gulp-rename'),
+    svgSymbols      = require('gulp-svg-symbols');
 
 gulp.task('svgSprite', function () {
 
@@ -93,6 +97,40 @@ gulp.task('build-svgstore', function () {
 
 
 
+
+gulp.task('symbolsSCSS', function () {
+  return gulp.src(config.svgSymbols.src)
+  // .pipe(rename(renameFunction))
+  .pipe(svgSymbols({
+    svgId:      'icon--%f',
+    className:  '.icon--%f',
+    name: '%f',
+    title:      false,
+    fontSize:   0,
+    templates: ['default-svg', config.svgSymbols.iconTemplate, 'default-demo']
+  }))
+  .pipe(gulp.dest(config.svgSymbols.cssPath));
+});
+
+
+gulp.task('symbolsSVG', function () {
+  return gulp.src(config.svgSymbols.src)
+  // .pipe(rename(renameFunction))
+  .pipe(svgSymbols({
+    svgId:      'icon--%f',
+    className:  '.icon--%f',
+    title:      false,
+    fontSize:   0,
+    templates: ['default-svg', config.svgSymbols.iconTemplate, 'default-demo']
+  }))
+
+    .pipe(gulpif( /[.]svg$/, gulp.dest(config.svgSymbols.dest)))
+});
+
+
+gulp.task('symbols', function(cb) {
+    runSequence('symbolsSVG', ['symbolsSCSS'],  cb)
+});
 
 gulp.task('svgstore', function(cb) {
     runSequence('build-svgstore',['html-jade'],  cb)

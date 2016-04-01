@@ -42,7 +42,8 @@ $ie: false;
 // stores variables used by svg/icon mixins
 @import '_system/gulp/png-sprites',
         '_system/gulp/svg-sprites',
-        '_system/gulp/icon-font';
+        '_system/gulp/icon-font',
+        '_system/gulp/svg-symbols';
 // functions
 @import '_system/tools/tools-functions';
 // Libraries and dependencies
