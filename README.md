@@ -76,14 +76,14 @@ To use a NPM module use the es6 import syntax
 
 ## Non es6/common js plugins
 
-If you need to use any old school plugins, you now can.  Any files in 'js/libs' will be merged together and concatenated to the start of the final output js file.
+If you need to use any old school plugins, you now can.  Any files in 'js/plugins' will be merged together and concatenated to the start of the final output js file.
 
 ##Git methodology
 
 At a core we should be working on four branches:
 
 - master
-- dev
+- dev / backend
 - deploy/staging
 - deploy/production
 
