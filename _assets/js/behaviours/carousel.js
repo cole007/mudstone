@@ -8,7 +8,7 @@ function carousel(container) {
         options = {
             infinite: false,
             enableMouseEvents: true,
-            slidesToScroll: 4,
+            slidesToScroll: 1,
             slideSpeed: 500,
             ease: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
             classNameFrame: 'js_frame',

@@ -171,7 +171,7 @@ module.exports = {
  
   // THESE PATHS NEED UPDATING BEFORE USING THE UNCSS TASK
   uncss: {
-    css: assets + 'css/style.css',
+    css: build + 'css/style.css',
     html: root + '**/*.html',
     dest: build + 'css'
   },

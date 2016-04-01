@@ -16,10 +16,10 @@ var gulp            = require('gulp'),
     config          = require('../config').sass;
 
 gulp.task('uncss', function () {
-  return gulp.src(config.dest + '/style.css')
+  return gulp.src(config.css)
     .pipe(uncss({
-        html: ['tmp/public_html/*.html'],
-        ignore: ['/(.is-)(\w)*', '(.no-)(\w)*']
+        html: [config.html],
+        ignore: [/\.no-\w+/g, /\.\w+\s?\.is-\w+/g]
     }))
     .pipe(cssnano())
     .on('error', handleErrors)
