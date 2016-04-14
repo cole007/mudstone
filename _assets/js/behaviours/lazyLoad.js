@@ -1,11 +1,17 @@
-import Layzr from 'layzr.js';
+// import lazySizes from 'lazysizes';
 
-function lazyLoad() {
-	const instance = Layzr({
-		normal: 'data-normal',
-		threshold: 50
-	}).update().check().handlers(true);
-};
+// function lazyLoad() {
+// 	// https://github.com/aFarkas/lazysizes
+// 	// add background-image support
+// 	document.addEventListener('lazybeforeunveil', function(e){
+// 	    var bg = e.target.getAttribute('data-bg');
+// 	    if(bg){
+// 	        e.target.style.backgroundImage = 'url(' + bg + ')';
+// 	    }
+// 	});
+	
+// 	lazySizes.loadMode = 5;
+// 	lazySizes.init();
+// };
 
-
-export default lazyLoad;
+// export default lazyLoad;

@@ -44,11 +44,9 @@ function canvasNavigation(container) {
 	// Used to unbind the click event
 	viewport.change(function(current, prev) {
 		if(current === 'desktop' || this.width >= breakpoints.desktop) {
-			console.log('unbind');
 			container.off('click', '.menu__btn', clickHandle);
 		}
 		if(current === 'tablet' || this.width < breakpoints.desktop) {
-			console.log('bind');
 			container.on('click', '.menu__btn', clickHandle);
 		}
 	});

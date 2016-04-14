@@ -1,5 +1,4 @@
 import Tweezer from 'tweezer.js';
-import debounce from 'lodash.debounce';
 import config from '../dependencies/config';
 
 /* 
@@ -11,23 +10,42 @@ var accordion = new Expand({
 	closeOthers: false,
 	activeClass: '.is-active',
 	duration: 1000,
-	openStart: function() {
+	openStart: function(el, target) {
 		console.log('openStart callback');
+		console.log('this', this, 'el', el, 'target', target);
 	},
-	openComplete: function() {
+	openComplete: function(el, target) {
 		console.log('openComplete callback');
+		console.log('this', this, 'el', el, 'target', target);
 	},
-	closeStart: function() {
+	closeStart: function(el, target) {
 		console.log('closeStart callback')
+		console.log('this', this, 'el', el, 'target', target);
 	},
-	closeComplete: function() {
+	closeComplete: function(el, target) {
 		console.log('closeComplete callback')
+		console.log('this', this, 'el', el, 'target', target);
 	},
+	onTick: function(v, el, target) {
+		console.log('this', this, 'v', v, el', el, 'target', target);
+	
+	}
 });
+// remove the click events
+accordion.unbind();
+// remove styles applied by the accordion
+accordion.removeStyles();
+// remove classes applied by the accordion
+accordion.removeClasses();
+// unbind, removeStyles. removeClasses
+accordion.destroy();
+// set new accordion options
+accordion.setOptions($.extend({}, defaults, desktopOptions));
+// kick off
+accordion.init();
 // change the state of an accordion
 accordion.tween($('.button')) // this will/open close the selected element
 accordion.close(); // will close all accordions
-accordion.open(); // will open all accordions
 Html: 
 <!-- data-target string or href must match the target elements id -->
 <div class="js-accordion">
@@ -53,7 +71,7 @@ function Expand(opts) {
 		closeOthers: false,
 		activeClass: 'is-active',
 		activeContentClass: 'is-active',
-		duration: 1000,
+		duration: 800,
 		autoInitialize: true
 	};
 
@@ -72,7 +90,8 @@ function Expand(opts) {
 		openStart: opts.openStart, // function
 		openComplete: opts.openComplete, // function
 		closeStart: opts.closeStart, // function
-		closeComplete: opts.closeComplete // function
+		closeComplete: opts.closeComplete, // function
+		onTick: opts.onTick // function
 	}
 	
 	// some component hooks
@@ -108,6 +127,7 @@ function Expand(opts) {
 	};
 	// the initalizer
 	this.init = function() {
+		_opts = _this.getOptions();
 		// set the compontent state
 		this.componentState = true;
 		// loop through the buttons,
@@ -120,6 +140,7 @@ function Expand(opts) {
 			this._state = state;
 			this._isRunning = false;
 			this.$target = $target;
+
 			// is the state is true, update the DOM and active link ref
 			if(state === true) {
 				$target.addClass(_opts.activeContentClass);
@@ -130,7 +151,6 @@ function Expand(opts) {
 		// bind the click event
 		_opts.$wrapper.on('click', _opts.button, clickHandle);
 	}
-
 
 	// goes all tweeny like
 	// accepts a string
@@ -146,14 +166,17 @@ function Expand(opts) {
 		// hides $target before it expands
 		if(el._state === true) {
 			if(typeof _opts.openStart === 'function') {
-				_opts.openStart(el);
+				_opts.openStart(el, $target);
 			}
 			$target.css({display: 'block'});
 			height = $target.outerHeight(true);
-			$target.css({height: 0, overflow: 'hidden', position: 'relative'});
+			if($target.css('position') !== 'absolute' && $target.css('position') !== 'fixed') {
+				$target.css({position: 'relative'});
+			}
+			$target.css({height: 0, overflow: 'hidden'});
 		} else {
 			if(typeof _opts.closeStart === 'function') {
-				_opts.closeStart(el);
+				_opts.closeStart(el, $target);
 			}
 		}
 		// if we're not already animating
@@ -162,28 +185,34 @@ function Expand(opts) {
 			var t = t || new Tweezer({
 				start: el._state ? 0 : height,
 				end: el._state ? height : 0,
-				duration: _this.duration,
+				duration: _opts.duration,
 				easing: _this.easing
 			})
 			// update height value on each 'tick'
-			.on('tick', (v) => $target.css({height: v + 'px', overflow: 'hidden', position: 'relative'}))
+			.on('tick', (v) => {
+				$target.css({height: v + 'px', overflow: 'hidden'})
+				if(typeof _opts.onTick === 'function') {
+					_opts.onTick.call(el, v, $target);
+				}
+			})
 			.on('done', ()=> {
 				el._isRunning = false;
 				if(el._state === true) {
 					// remove the transition initCss styles and add the active class
-	 				$target.css({overflow: '', position: '', height: ''}).addClass(_opts.activeContentClass);
+	 				$target.css({overflow: '', height: ''}).addClass(_opts.activeContentClass);
 	 				$el.addClass(_opts.activeClass);
 	 				// callback
+	 				_this.activeTarget = $target;
 					if(typeof _opts.openComplete === 'function') {
-						_opts.openComplete(el);
+						_opts.openComplete(el, $target);
 					}
 				} else {
 					// reset shit
-					$target.css({display: 'none', position: '', height: ''}).removeClass(_opts.activeContentClass);
+					$target.css({display: 'none', height: ''}).removeClass(_opts.activeContentClass);
 	 				$el.removeClass(_opts.activeClass);
 	 				// callback
 					if(typeof _opts.closeComplete === 'function') {
-						_opts.closeComplete(el);
+						_opts.closeComplete(el, $target);
 					}
 				}
 			})
@@ -196,22 +225,60 @@ function Expand(opts) {
 		// update the component state
 		this.componentState = false;
 		// remove click handler
+		this.unbind();
+		this.removeClasses();
+		this.removeStyles();
+	};
+
+	this.unbind = function() {
+		this.activeLink = null;
+		_opts = _this.getOptions();
 		_opts.$wrapper.off('click', _opts.button, clickHandle);
+	}
+
+	this.removeClasses = function() {
+		_opts = _this.getOptions();
 		// remove component classes and styles
 		_opts.$wrapper.find(_opts.button).each(function() {
-			$(this).removeClass(_opts.activeClass).removeAttr('style');
-			this.$target.removeClass(_opts.activeContentClass).removeAttr('style')
+			$(this).removeClass(_opts.activeClass)
+			this.$target.removeClass(_opts.activeContentClass)
 		});
-	};
+	}
+
+	this.removeStyles = function() {
+		_opts = _this.getOptions();
+		// remove component classes and styles
+		_opts.$wrapper.find(_opts.button).each(function() {
+			$(this).removeAttr('style');
+			this.$target.removeAttr('style')
+		});
+	}
 
 	// update the options with new ones
 	this.setOptions = function(o) {
         this.options = $.extend({}, _opts, o);
 	}
 
+	this.getOptions = function() {
+		return this.options;
+	}
+
+	this.getActiveLink = function() {
+		return this.activeLink;
+	}
+
+	this.getActiveTarget = function() {
+		return this.activeTarget;
+	}
+
 	// what's the state yeah?
 	this.getState = function() {
 		return this.componentState;
+	}
+
+	this.close = function() {
+		this.activeLink._state = false
+		this.tween(this.activeLink);
 	}
 
 	// wanna auto boot?

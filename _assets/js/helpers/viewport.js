@@ -37,7 +37,7 @@ var Viewport = function(opts) {
 			height: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
 		}
 	}
-	function query(e) {
+	function query(fn, e) {
 		this.breakpoint = queryName();
 	    this.width = getDimensions().width;
 	    this.height = getDimensions().height;
@@ -46,20 +46,18 @@ var Viewport = function(opts) {
 			let current = this.breakpoint;
 			this.current = this.breakpoint;
 			if(typeof this.change === 'function') {
-				this.onChange(current, prev);
+				fn.call(this, current, prev);
 			}
 		}
-		if(typeof this.onResize === 'function') {
-			this.onResize();
+		if(typeof fn === 'function') {
+			fn.call(this);
 		}
 	};
 	this.resize = function(fn) {
-		this.onResize = fn;
-		$window.on('resize', debounce(query.bind(this), this.debounceDelay));
+		$window.on('resize', debounce(query.bind(this, fn), this.debounceDelay));
 	};
 	this.change = function(fn) {
-		this.onChange = fn;
-		$window.on('resize', debounce(query.bind(this), this.debounceDelay));
+		$window.on('resize', debounce(query.bind(this, fn), this.debounceDelay));
 	};
 	this.destroy = function() {
 		$window.off('resize', query);
