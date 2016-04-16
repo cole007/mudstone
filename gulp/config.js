@@ -25,6 +25,8 @@ const build = (state === 'dev') ? `tmp/${public_html}/_assets/` : `deploy/${publ
 const root = (state === 'dev') ? `tmp/${public_html}/` : `deploy/${public_html}/`;
 // where should the jade templates be built, usually root, except when state === cms
 const url = 'local.ournameismud.co.uk';
+const craftLayout = '_layout.twig';
+const craftLayoutPath = 'deploy/craft/templates/wrapper/';
 
 /*
  * Default browsersync settings, 
@@ -37,7 +39,9 @@ var server = {
       notify: false
     };
 
-var jadeDest = root; 
+var jadeDest = root;
+var tagSrc = ` ${root}*.html`;
+var tagDest = root;
 
 /*
  * Jade Build directory conditionals, based on state
@@ -52,6 +56,8 @@ switch (state) {
     break;
   case "cms":
     jadeDest = '_assets/jade/dist/';
+    tagSrc = `${craftLayout}${craftLayout}`;
+    tagDest = `${craftLayout}`;
     server = {
       proxy: url,
       notify: false
@@ -172,8 +178,8 @@ const config = {
   },
 
   tags: {
-    src: ` ${root}*.html`,
-    dest: root,
+    src: tagSrc,
+    dest: tagDest,
   },
 
   favicons: {
