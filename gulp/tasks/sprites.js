@@ -82,9 +82,9 @@ gulp.task('png-sprite', () => {
 // svg2png, svg sprite, png sprite
 //gulp.task('sprites', ['pngSprite', 'svgSprite', 'sprite']);
 
-gulp.task('sprite', (cb) => {
+gulp.task('sprite', () => {
     const run = runSequence.use(gulp);
-    run('svgSprite',['pngSprite'], 'png-sprite', cb)
+    run('svgSprite',['pngSprite'], 'png-sprite')
 });
 
 

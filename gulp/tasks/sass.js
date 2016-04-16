@@ -14,7 +14,7 @@ import uncss from 'gulp-uncss';
 import config from '../config';
 import { includePaths } from 'node-bourbon';
 
-const $sass = $sass;
+const $sass = config.sass;
 const $uncss = config.uncss;
 
 gulp.task('sass', () => {

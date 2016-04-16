@@ -44,7 +44,6 @@ gulp.task('init', () => {
       'sprite', 
       'symbols', 
       [
-        'jade', 
         'images', 
         'svg-assets', 
         'build-fonts-css',
@@ -53,7 +52,8 @@ gulp.task('init', () => {
         'init-scripts',
         'dev-html'
       ], 
-      'sass');
+      'sass',
+      'jade');
 });
 
 gulp.task('build-development', () => {

@@ -12,8 +12,7 @@
 * Optimise Images
 * Sprite generator
 * SVG sprites, with png sprite fallback
-* SVG to icon font
-* SVG symbol sprites (svgstore)
+* SVG symbol
 * Compile jade templates
 * Optimise css with uncss and clean css
 * Html validator
@@ -33,7 +32,7 @@ Make sure you have Node.js and gulp installed
 ######From the terminal run
 ```
  npm install
- gulp init - this will run all of the tasks (sass, jade, scripts, sprites, icons, fonts, images)
+ gulp init - this will run all of the tasks (sass, jade, scripts, sprites, fonts, images)
  gulp - starts server, watches css,js,jade et al
  
 ```

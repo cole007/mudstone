@@ -56,13 +56,13 @@ gulp.task('html-jade', () => {
 })
 
 
-gulp.task('clean-symbols', function () {
+gulp.task('clean-symbols', () => {
   return del($symbols.fileDest);
 });
 
-gulp.task('symbols', function(cb) {
+gulp.task('symbols', () => {
     const run = runSequence.use(gulp);
-    runSequence('symbolsSVG', ['html-jade'], 'clean-symbols', cb)
+    runSequence('symbolsSVG', ['html-jade'], 'clean-symbols')
 });
 
 

@@ -28,20 +28,17 @@ gulp.task('bundle-scripts', () => buildScript($js.output, false, false));
 
 gulp.task('squish-scripts', () => buildScript($js.output, false, true));
 
-gulp.task('init-scripts', (callback) => runSequence('bundle-scripts', ['lib-scripts', 'move-scripts'], 'concat-scripts', callback));
+gulp.task('init-scripts', () => runSequence('bundle-scripts', ['lib-scripts', 'move-scripts'], 'concat-scripts'));
 
-gulp.task('merge-scripts', (callback) => runSequence('bundle-scripts', ['lib-scripts'], 'concat-scripts', callback));
+gulp.task('merge-scripts', () => runSequence('bundle-scripts', ['lib-scripts'], 'concat-scripts'));
 
-gulp.task('build-scripts', (callback) => runSequence('squish-scripts', ['squish-lib-scripts'], 'concat-scripts', callback));
+gulp.task('build-scripts', () => runSequence('squish-scripts', ['squish-lib-scripts'], 'concat-scripts'));
 
 /*
  * gulp move-scripts
  * Move required lib files to desintation (things that need to go in the <head>)
  */
-gulp.task('move-scripts', function(callback) {
-    gulp.src($js.deps)
-      .pipe(gulp.dest($js.depsDest));
-});
+gulp.task('move-scripts', () => gulp.src($js.deps).pipe(gulp.dest($js.depsDest)));
 
 /*
  * gulp lib-scripts

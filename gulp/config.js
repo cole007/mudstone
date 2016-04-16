@@ -14,7 +14,7 @@
  */
 const state = 'dev'; 
 /*
- * Srsutput directories
+ * src directories
  */
 const assets = './_assets/';
 /*
@@ -89,6 +89,8 @@ const config = {
       outputStyle: 'expanded'
     }
   },
+
+
   js: {
     src: `${assets}js/app.js`,
     libs: [`${assets}js/libs/*.js`, `${assets}js/plugins/*.js`],
