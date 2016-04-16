@@ -3,48 +3,41 @@ import runSequence from 'run-sequence';
 import htmlreplace from'gulp-html-replace';
 import config from '../config';
 
+const $tags = config.tags;
+const $fonts = config.fonts;
+const $favicons = config.favicons;
+const $js = config.js;
+const $webfontcss = config.webfontcss;
 
 // replace two script tags with one
 gulp.task('prod-html', () => {
-  gulp.src(config.tags.src)
+  gulp.src($tags.src)
     .pipe(htmlreplace({
-        'js': config.js.prodTag
+        'js': $js.prodTag
     },{
         keepBlockTags: true
     }))
-    .pipe(gulp.dest(config.tags.dest));
+    .pipe(gulp.dest($tags.dest));
 });
 
 // replace one script tag with two
 gulp.task('dev-html', () => {
-  gulp.src(config.tags.src)
+  gulp.src($tags.src)
     .pipe(htmlreplace({
-        'js': config.js.devTag
+        'js': $js.devTag
     },{
        keepBlockTags: true
     }))
-    .pipe(gulp.dest(config.tags.dest));
+    .pipe(gulp.dest($tags.dest));
 });
 
-gulp.task('build-fonts', () => {
-    gulp.src(config.fonts.src)
-      .pipe(gulp.dest(config.fonts.dest));
-});
+gulp.task('build-fonts', () => gulp.src($fonts.src).pipe(gulp.dest($fonts.dest)));
 
-gulp.task('build-fonts-css', () => {
-    gulp.src(config.webfontcss.src)
-      .pipe(gulp.dest(config.webfontcss.dest));
-});
+gulp.task('build-fonts-css', () => gulp.src($webfontcss.src).pipe(gulp.dest($webfontcss.dest)));
 
-gulp.task('build-favicons', () => {
-    gulp.src(config.favicons.src)
-      .pipe(gulp.dest(config.favicons.dest));
-});
+gulp.task('build-favicons', () => gulp.src($favicons.src).pipe(gulp.dest($favicons.dest)));
 
-
-gulp.task('remove-dev-js', () => {
-  return del(config.js.tmp);
-});
+gulp.task('remove-dev-js', () => del($js.tmp));
 
 gulp.task('init', () => {
   runSequence(

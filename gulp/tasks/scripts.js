@@ -20,15 +20,38 @@ import handleErrors from '../util/handleErrors';
 import runSequence from 'run-sequence';
 import config from '../config';
 
+const $js = config.js;
+
+gulp.task('scripts', () =>  buildScript($js.output, true, false));
+
+gulp.task('bundle-scripts', () => buildScript($js.output, false, false));
+
+gulp.task('squish-scripts', () => buildScript($js.output, false, true));
+
+gulp.task('init-scripts', (callback) => runSequence('bundle-scripts', ['lib-scripts', 'move-scripts'], 'concat-scripts', callback));
+
+gulp.task('merge-scripts', (callback) => runSequence('bundle-scripts', ['lib-scripts'], 'concat-scripts', callback));
+
+gulp.task('build-scripts', (callback) => runSequence('squish-scripts', ['squish-lib-scripts'], 'concat-scripts', callback));
+
+/*
+ * gulp move-scripts
+ * Move required lib files to desintation (things that need to go in the <head>)
+ */
+gulp.task('move-scripts', function(callback) {
+    gulp.src($js.deps)
+      .pipe(gulp.dest($js.depsDest));
+});
+
 /*
  * gulp lib-scripts
  * Concatenate lib files
  */
 
 gulp.task('lib-scripts', function() {
-  return gulp.src(config.js.libs)
-    .pipe(concat(config.js.libsOutput))
-    .pipe(gulp.dest(config.js.tmp))
+  return gulp.src($js.libs)
+    .pipe(concat($js.libsOutput))
+    .pipe(gulp.dest($js.tmp))
 });
 
 /*
@@ -36,10 +59,10 @@ gulp.task('lib-scripts', function() {
  * Concatenate and minify lib files
  */
 gulp.task('squish-lib-scripts', function() {
-  return gulp.src(config.js.libs)
+  return gulp.src($js.libs)
     .pipe(uglify())
-    .pipe(concat(config.js.libsOutput))
-    .pipe(gulp.dest(config.js.tmp))
+    .pipe(concat($js.libsOutput))
+    .pipe(gulp.dest($js.tmp))
 });
 
 
@@ -50,10 +73,10 @@ gulp.task('squish-lib-scripts', function() {
  * Concatenate libs with app
  */
 gulp.task('concat-scripts', function() {
-  return gulp.src([config.js.tmp + '/' + config.js.libsOutput, config.js.dest + '/' + config.js.output ])
+  return gulp.src([$js.tmp + '/' + $js.libsOutput, $js.dest + '/' + $js.output ])
     .pipe(uglify())
-    .pipe(concat(config.js.output))
-    .pipe(gulp.dest(config.js.dest))
+    .pipe(concat($js.output))
+    .pipe(gulp.dest($js.dest))
 });
 
 
@@ -63,7 +86,7 @@ gulp.task('concat-scripts', function() {
  */
 function buildScript(file, watch, minify) {
   const props = {
-    entries: [config.js.path + file],
+    entries: [$js.path + file],
     debug : false,
     transform:  [babelify.configure( {presets: ["es2015"]})]
   };
@@ -80,7 +103,7 @@ function buildScript(file, watch, minify) {
       .pipe(gulpif(minify === true, uglify()))
       .pipe(gulpif(minify === false, sourcemaps.init({ loadMaps: true })))
       .pipe(gulpif(minify === false, sourcemaps.write('./')))
-      .pipe(gulp.dest(config.js.dest))
+      .pipe(gulp.dest($js.dest))
       // If you also want to uglify it
       .pipe(browserSync.reload({stream:true}))
   }
@@ -94,25 +117,3 @@ function buildScript(file, watch, minify) {
   // run it once the first time buildScript is called
   return rebundle();
 }
-
-
-gulp.task('scripts', () =>  buildScript(config.js.output, true, false));
-
-gulp.task('bundle-scripts', () => buildScript(config.js.output, false, false));
-
-gulp.task('squish-scripts', () => buildScript(config.js.output, false, true));
-
-gulp.task('init-scripts', (callback) => runSequence('bundle-scripts', ['lib-scripts', 'move-scripts'], 'concat-scripts', callback));
-
-gulp.task('merge-scripts', (callback) => runSequence('bundle-scripts', ['lib-scripts'], 'concat-scripts', callback));
-
-gulp.task('build-scripts', (callback) => runSequence('squish-scripts', ['squish-lib-scripts'], 'concat-scripts', callback));
-
-/*
- * gulp move-scripts
- * Move required lib files to desintation (things that need to go in the <head>)
- */
-gulp.task('move-scripts', function(callback) {
-    gulp.src(config.js.deps)
-      .pipe(gulp.dest(config.js.depsDest));
-});

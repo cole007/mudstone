@@ -10,18 +10,21 @@ import handleErrors from '../util/handleErrors';
 import browserSync from 'browser-sync';
 import config from '../config';
 
+const $images = config.images;
+const $svg = config.svg;
+
 gulp.task('images', () => {
-  return gulp.src(config.images.src)
-    .pipe(changed(config.images.dest)) // Ignore unchanged files
+  return gulp.src($images.src)
+    .pipe(changed($images.dest)) // Ignore unchanged files
     .pipe(imagemin()) // Optimize
-    .pipe(gulp.dest(config.images.dest))
+    .pipe(gulp.dest($images.dest))
     .pipe(browserSync.reload({stream:true}));
 });
 
 
 gulp.task('svg-assets', () => {
-    return gulp.src(config.svg.assets)
+    return gulp.src($svg.assets)
         .pipe(svgmin())
         .on('error', handleErrors)
-        .pipe(gulp.dest(config.svg.dest));
+        .pipe(gulp.dest($svg.dest));
 });

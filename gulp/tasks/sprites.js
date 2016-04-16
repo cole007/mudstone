@@ -14,9 +14,12 @@ import imagemin from 'gulp-imagemin';
 import buffer from 'vinyl-buffer';
 import merge from 'merge-stream';
 
+const $svg = config.svg;
+const $sprites = config.sprites;
+
 
 gulp.task('svgSprite', () => {
-    return gulp.src(config.svg.src)
+    return gulp.src($svg.src)
         .pipe(svgmin())
         .pipe(svgSprite({
             "mode": {
@@ -26,35 +29,35 @@ gulp.task('svgSprite', () => {
                     },
                     "dest": "./",
                     "layout": "diagonal",
-                    "sprite": config.svg.sprite,
+                    "sprite": $svg.sprite,
                     "bust": false,
                     "render": {
                         "scss": {
-                            "dest": config.svg.css,
-                            "template": config.svg.template
+                            "dest": $svg.css,
+                            "template": $svg.template
                         }
                     }
                 }
             }
         }))
-        .pipe(gulp.dest(config.svg.dest));
+        .pipe(gulp.dest($svg.dest));
 });
 
 gulp.task('pngSprite', ['svgSprite'], () => {
-    return gulp.src(config.svg.src)
+    return gulp.src($svg.src)
         .pipe(svg2png())
         .on('error', handleErrors)
-        .pipe(gulp.dest(config.svg.pngs));
+        .pipe(gulp.dest($svg.pngs));
 });
 
 
 gulp.task('png-sprite', () => {
   // Generate our spritesheet
-    const spriteData = gulp.src(config.sprites.data)
+    const spriteData = gulp.src($sprites.data)
     .pipe(spritesmith({
-        imgName: config.sprites.imgName,
-        cssName: config.sprites.cssName,
-        imgPath: config.sprites.imgPath,
+        imgName: $sprites.imgName,
+        cssName: $sprites.cssName,
+        imgPath: $sprites.imgPath,
         cssVarMap: (sprite) => {
             sprite.name = sprite.name;
         }
@@ -66,11 +69,11 @@ gulp.task('png-sprite', () => {
     // DEV: We must buffer our stream into a Buffer for `imagemin`
     .pipe(buffer())
     .pipe(imagemin())
-    .pipe(gulp.dest(config.sprites.spriteDataImg));
+    .pipe(gulp.dest($sprites.spriteDataImg));
 
   // Pipe CSS stream through CSS optimizer and onto disk
   const cssStream = spriteData.css
-    .pipe(gulp.dest(config.sprites.spriteDataCss));
+    .pipe(gulp.dest($sprites.spriteDataCss));
 
   // Return a merged stream to handle both `end` events
   return merge(imgStream, cssStream);

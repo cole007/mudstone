@@ -14,9 +14,10 @@ import runSequence from 'run-sequence';
 import del from 'del';
 import config from '../config';
 
+const $symbols = config.svgSymbols;
 
 gulp.task('symbolsSVG',  () => {
-    const svgs = gulp.src(config.svgSymbols.src)
+    const svgs = gulp.src($symbols.src)
           // .pipe(rename(renameFunction))
             .pipe(svgmin())
             .pipe(svgSymbols({
@@ -25,31 +26,31 @@ gulp.task('symbolsSVG',  () => {
                 title:      false,
                 warn:       true,
                 fontSize:   0,
-                templates: ['default-svg', config.svgSymbols.iconTemplate]
+                templates: ['default-svg', $symbols.iconTemplate]
             }))
-            .pipe(gulp.dest(config.svgSymbols.fileDest));
+            .pipe(gulp.dest($symbols.fileDest));
 
     function fileContents (filePath, file) {
         return file.contents.toString();
     }
 
     return gulp
-        .src(config.svgSymbols.file)
+        .src($symbols.file)
         .pipe(inject(svgs, { transform: fileContents }))
         .on('error', handleErrors)
-        .pipe(gulp.dest(config.svgSymbols.fileDest));
+        .pipe(gulp.dest($symbols.fileDest));
 });
 
 
 gulp.task('symbolsAsset', () => {
-  return gulp.src(config.svgSymbols.fileDest + 'svg-symbols.svg')
-    .pipe(gulp.dest(config.svgSymbols.dest));
+  return gulp.src($symbols.fileDest + 'svg-symbols.svg')
+    .pipe(gulp.dest($symbols.dest));
 });
 
 
 gulp.task('symbolsSCSS', () => {
-  return gulp.src(config.svgSymbols.fileDest +  config.svgSymbols.cssOutput)
-    .pipe(gulp.dest(config.svgSymbols.cssPath));
+  return gulp.src($symbols.fileDest +  $symbols.cssOutput)
+    .pipe(gulp.dest($symbols.cssPath));
 });
 
 gulp.task('html-jade', () => {
@@ -57,14 +58,14 @@ gulp.task('html-jade', () => {
         nspaces:2, 
         bodyless: true
     };
-    return gulp.src(config.svgSymbols.fileDest + config.svgSymbols.fileName)
+    return gulp.src($symbols.fileDest + $symbols.fileName)
         .pipe(html2jade(options))
-        .pipe(gulp.dest(config.svgSymbols.jadeDest));
+        .pipe(gulp.dest($symbols.jadeDest));
 })
 
 
 gulp.task('clean-symbols', function () {
-  return del(config.svgSymbols.fileDest);
+  return del($symbols.fileDest);
 });
 
 gulp.task('symbols', function(cb) {
