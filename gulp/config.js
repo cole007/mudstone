@@ -51,7 +51,7 @@ switch (state) {
   case "dev":
     jadeDest = root;
     break;
-  case "state":
+  case "static":
     jadeDest = `deploy/${public_html}/`;
     break;
   case "cms":
