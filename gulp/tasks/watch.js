@@ -1,40 +1,41 @@
 /*
- * watch 
- * default watch setup, sass, scripts, haml, html, sprites, images
+ * Main Task: gulp
+ * run gulp watch (scss, js, images, jade, etc)
  */
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
+import watch from 'gulp-watch';
+import config from '../config';
 
-var gulp                  = require('gulp'),
-    browserSync         = require('browser-sync'),
-    watch                = require('gulp-watch'),
-    reload                 = browserSync.reload,
-    config                 = require('../config');
+gulp.task('default', ['watch']);
+
+gulp.task('server', () => browserSync(config.browserSync));
 
 gulp.task('watch', ['scripts'], function() {
     browserSync(config.browserSync);
     
     // watch scss
     watch(config.sass.watch, function(){
-        gulp.start('sass', reload);
+        gulp.start('sass', browserSync.reload);
     });
-
-    // watch scripts
-    // remove comments for non browserify build
-    // watch(config.scripts.src, function(){
-    //     gulp.start('scripts', reload);
-    // });
 
     // watch jade
     watch(config.jade.watch, function(){
-        gulp.start('jade', reload);
+        gulp.start('jade', browserSync.reload);
     });
 
     // watch images
     watch(config.images.src, function(){
-        gulp.start('images', reload);
+        gulp.start('images', browserSync.reload);
     });
 
     // watch svgs
-    watch(config.svgStore.src, function(){
-        gulp.start('build-svgstore', reload);
+    watch(config.svgSymbols.src, function(){
+        gulp.start('symbols', browserSync.reload);
+    });
+
+    // watch sprites
+    watch(config.svg.src, function(){
+        gulp.start('sprite', browserSync.reload);
     });
 });

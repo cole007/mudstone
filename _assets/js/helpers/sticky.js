@@ -1,6 +1,6 @@
 import verge from 'verge';
 import Viewport from  '../helpers/viewport';
-import debounce from 'lodash.debounce';
+import { debounce } from 'lodash.debounce';
 import prefix from '../helpers/prefix';
 
 function sticky(container) {

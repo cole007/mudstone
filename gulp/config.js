@@ -1,13 +1,5 @@
-/*
- * Enviroment variables, and output directories
- */
-var assets = './_assets/',
-    base = 'tmp',
-    env = 'dev', //  env = dev will create sourcemaps, set as live will not
-    outputStyle = 'expanded', // scss output style
-    build,
-    server,
-    assetPath = "/_assets/"; 
+"use strict";
+
 /*
  * @param state
  * During html development state must equal 'dev', 
@@ -22,68 +14,67 @@ var assets = './_assets/',
  * This is the same as static except the url variable is used 
  * as a proxy for browsersync
  */
-var state = 'dev', 
-    jadeDest = root, // where should the jade templates be built, usually root, except when state === cms
-    public_html = 'public',
-    url = 'local.ournameismud.co.uk';
+const state = 'dev'; 
 /*
- * Update values based on environment
+ * Srsutput directories
  */
-if(env === 'live') {
-  outputStyle = 'compressed';
-}
-
+const assets = './_assets/';
 /*
  * Build directory conditionals, based on state
 */ 
-if(state === 'dev') {
-    root = 'tmp/' + public_html + '/';
-    build = 'tmp/' + public_html + '/_assets/';
-} else {
-    root = 'deploy/' + public_html + '/';
-    build = 'deploy/' + public_html + '/_assets/';
-}
+const public_html = 'public';
+const build = (state === 'dev') ? 'tmp/' + public_html + '/_assets/' : 'deploy/' + public_html + '/_assets/';
+const root = (state === 'dev') ? 'tmp/' + public_html + '/' : 'deploy/' + public_html + '/';
+// where should the jade templates be built, usually root, except when state === cms
+const url = 'local.ournameismud.co.uk';
+
+/*
+ * Default browsersync settings, 
+*/ 
+var server = { 
+      server: {
+          baseDir: root,
+          directory: false
+      },
+      notify: false
+    };
+
+var jadeDest = root; 
 
 /*
  * Jade Build directory conditionals, based on state
+ * CMS state Browsersync settings
 */ 
-if(state === 'dev') {
-  jadeDest = root;
-} else if(state === 'static') {
-  jadeDest = 'deploy/' + public_html + '/';
-} else if(state === 'cms') {
-  jadeDest = '_assets/jade/dist/';
+switch (state) {
+  case "dev":
+    jadeDest = root;
+    break;
+  case "state":
+    jadeDest = 'deploy/' + public_html + '/';
+    break;
+  case "cms":
+    jadeDest = '_assets/jade/dist/';
+    server = {
+      proxy: url,
+      notify: false
+    };
+    break;
 }
 
 /*
- * Browsersync settings, based on state
 */ 
-if(state === 'dev' || state === 'static') {
-  server = { 
-    server: {
-        baseDir: root,
-        directory: false
-    },
-    notify: false
-  }
-} else {
-  server = {
-    proxy: url,
-    notify: false
-  }
-}
 
 
 /*
  * Autoprefix browser suppport
  */
-var AUTOPREFIXER_BROWSERS = [
+const AUTOPREFIXER_BROWSERS = [
       'ie >= 9',
       'ie_mob >= 10',
-      'ff >= 30',
-      'chrome >= 34',
+      'ff >= 40',
+      'chrome >= 47',
       'safari >= 7',
-      'opera >= 23',
+      'opera >= 33',
       'ios >= 7',
       'android >= 4.4',
       'bb >= 10'
@@ -92,7 +83,7 @@ var AUTOPREFIXER_BROWSERS = [
  * module exports
  * variables used by gulp tasks, see the tasks folder
  */
-module.exports = {
+const config = {
  
   browserSync: server,
  
@@ -102,36 +93,50 @@ module.exports = {
     prefix: AUTOPREFIXER_BROWSERS,
     watch: assets + 'scss/**/**/*.scss',
     options: {
-      outputStyle: outputStyle
+      outputStyle: 'expanded'
     }
   },
- 
-  images: {
-    src: assets + 'images/site/*',
-    dest: build + 'images'
-  }, 
-
-  //^\is-\S+
- 
-  scripts: {
+  js: {
     src: assets + 'js/app.js',
     libs: [assets + 'js/libs/*.js', assets + 'js/plugins/*.js'],
     path: assets + 'js/',
     libsOutput: 'libs.js',
     output: 'app.js',
-    tmp: build + 'js/tmp',
+    // temp files for devleoping
+    tmp: build + 'js/deps',
+    // build dest for final output
     dest: build + 'js/dist',
+
+    // scripts for the <head> section
+    deps: [assets + 'js/libs/modernizr.min.js'],
+    depsDest: build + 'js/libs/',
+
+    // html tags
+    prodTag: '/_assets/js/dist/app.js',
+    devTag: ['/_assets/js/deps/libs.js', '/_assets/js/dist/app.js']
   },
+  
+
+  // jpegs/pngs/etc
+  images: {
+    src: assets + 'images/site/*',
+    dest: build + 'images'
+  }, 
  
-  sprites: {
-    data: assets + 'images/png-sprites/*.png',
-    imgName: 'png-sprite.png',
-    cssName: '_png-sprites.scss',
-    imgPath: '../images/png-sprite.png',
-    spriteDataImg: build + 'images',
-    spriteDataCss: assets + 'scss/_system/gulp/'
+  //svg symbols
+  svgSymbols: {
+    src: assets + 'images/svg-symbols/*.svg',
+    dest: build + 'images/',
+    iconTemplate: assets +'scss/_system/_tpl/_svg-symbols.scss',
+    cssPath: assets +'scss/_system/gulp/',
+    cssOutput: '_svg-symbols.scss',
+    fileDest: assets + 'images/svg-symbols/output/',
+    file: assets + 'images/svg-symbols/source.html',
+    fileName: 'source.html',
+    jadeDest: assets + 'jade/source/_includes'
   },
- 
+  
+  //svg sprites/assets
   svg: {
     src: assets + 'images/svg-sprites/*.svg',
     dest: build + 'images',
@@ -141,80 +146,50 @@ module.exports = {
     pngs: assets + 'images/png-sprites',
     assets: assets + 'images/svg-assets/*.svg'
   },
- 
- 
-  svgStore: {
-    src: assets + 'images/svg-inline/*.svg',
-    dest: assets + 'images/svg-inline/output/',
-    file: assets + 'images/svg-inline/source.html',
-    fileName: 'source.html',
-    jadeDest: assets + 'jade/source/_includes'
-  },
-
- 
-  icons: {
-    src: assets + 'images/icons/*.svg',
-    dest: build + 'fonts/',
-    name: 'icon-font',
-    path: assets + 'scss/_system/_tpl/_icon-font-template.scss',
-    targetPath: '../../../../_assets/scss/_system/gulp/_icon-font.scss',
-    fontPath: '../fonts/'
+  // png sprite assets 
+  sprites: {
+    data: assets + 'images/png-sprites/*.png',
+    imgName: 'png-sprite.png',
+    cssName: '_png-sprites.scss',
+    imgPath: '../images/png-sprite.png',
+    spriteDataImg: build + 'images',
+    spriteDataCss: assets + 'scss/_system/gulp/'
   },
  
-  html: {
-    src: root + '**/*.html',
-    build: assets + 'templates/dest/*.html',
-    dest: root
-  },
- 
-  env: env,
- 
-  // THESE PATHS NEED UPDATING BEFORE USING THE UNCSS TASK
   uncss: {
     css: build + 'css/style.css',
     html: root + '**/*.html',
     dest: build + 'css'
   },
  
- 
   jade: {
     src: assets + 'jade/source/*.jade',
     watch: assets + 'jade/source/**/*.jade',
     dest: jadeDest,
-    path: assetPath,
     basedir: assets + 'jade/source'
   },
- 
-  build: {
-    js_src: [assets + 'js/libs/modernizr.min.js'],
-    js_dest: build + 'js/libs/',
-    js_MergeDest: build + 'js/dist/',
-    fonts_src: assets + 'fonts/*.*',
-    fonts_dest: build + 'fonts/',
-    images_src: assets + 'images/*.*',
-    images_dest: build + 'images/',
-    css_src: build + 'css/*.css',
-    css_dest: build + 'css/',
-    html_src: root + '*.html',
-    html_dest: build + 'static/',
-    htmlScript: root + '*.html',
-    htmlScriptDest: root,
-    clean: [
-      build + 'js',
-      build + 'css'
-    ],
-    favicon_src: assets + 'favicons/*',
-    favicon_dest: build + 'favicons/'
+
+  fonts: {
+    src: assets + 'fonts/*.*',
+    dest: build + 'fonts/',
   },
- 
-  // styleguide: {
-  //   scssRoot: assets + 'scss/style.scss',
-  //   scssWatch: assets + 'scss/components/**/*.scss',
-  //   scssBuild: '/_assets/css',
-  //   readmore: assets + 'scss/README.md',
-  //   tmp: 'tmp',
-  //   buildRoot: 'docs/styleguide'
-  // }
+
+  webfontcss: {
+    src: assets + 'scss/fonts.css',
+    dest: build + 'css/',
+  },
+
+  tags: {
+    src: root + '*.html',
+    dest: root,
+  },
+
+  favicons: {
+    src: assets + 'favicons/*',
+    dest: build + 'favicons/',
+  }
  
 };
 
+
+export default config;
