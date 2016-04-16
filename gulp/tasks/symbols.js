@@ -28,7 +28,10 @@ gulp.task('symbolsSVG',  () => {
                 fontSize:   0,
                 templates: ['default-svg', $symbols.iconTemplate]
             }))
-            .pipe(gulp.dest($symbols.fileDest));
+            .pipe(gulpif( /[.]svg$/, gulp.dest($symbols.dest)))
+            .pipe(gulpif( /[.]scss$/, gulp.dest($symbols.cssPath)))
+
+
 
     function fileContents (filePath, file) {
         return file.contents.toString();
@@ -41,17 +44,6 @@ gulp.task('symbolsSVG',  () => {
         .pipe(gulp.dest($symbols.fileDest));
 });
 
-
-gulp.task('symbolsAsset', () => {
-  return gulp.src($symbols.fileDest + 'svg-symbols.svg')
-    .pipe(gulp.dest($symbols.dest));
-});
-
-
-gulp.task('symbolsSCSS', () => {
-  return gulp.src($symbols.fileDest +  $symbols.cssOutput)
-    .pipe(gulp.dest($symbols.cssPath));
-});
 
 gulp.task('html-jade', () => {
     const options = {
@@ -70,7 +62,7 @@ gulp.task('clean-symbols', function () {
 
 gulp.task('symbols', function(cb) {
     const run = runSequence.use(gulp);
-    runSequence('symbolsSVG', ['symbolsSCSS', 'symbolsAsset', 'html-jade'], 'clean-symbols', cb)
+    runSequence('symbolsSVG', ['html-jade'], 'clean-symbols', cb)
 });
 
 
