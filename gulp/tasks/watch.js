@@ -7,35 +7,38 @@ import browserSync from 'browser-sync';
 import watch from 'gulp-watch';
 import config from '../config';
 
+const $browserSync = config.browserSync;
+const reload = browserSync.reload;
+
 gulp.task('default', ['watch']);
 
-gulp.task('server', () => browserSync(config.browserSync));
+gulp.task('server', () => browserSync($browserSync));
 
 gulp.task('watch', ['scripts'], function() {
-    browserSync(config.browserSync);
+    browserSync($browserSync);
     
     // watch scss
     watch(config.sass.watch, function(){
-        gulp.start('sass', browserSync.reload);
+        gulp.start('sass', reload);
     });
 
     // watch jade
     watch(config.jade.watch, function(){
-        gulp.start('jade', browserSync.reload);
+        gulp.start('jade', reload);
     });
 
     // watch images
     watch(config.images.src, function(){
-        gulp.start('images', browserSync.reload);
+        gulp.start('images', reload);
     });
 
     // watch svgs
     watch(config.svgSymbols.src, function(){
-        gulp.start('symbols', browserSync.reload);
+        gulp.start('symbols', reload);
     });
 
     // watch sprites
     watch(config.svg.src, function(){
-        gulp.start('sprite', browserSync.reload);
+        gulp.start('sprite', reload);
     });
 });
