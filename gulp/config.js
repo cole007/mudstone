@@ -95,8 +95,7 @@ const config = {
       outputStyle: 'expanded'
     }
   },
-
-
+  
   js: {
     src: `${assets}js/app.js`,
     libs: [`${assets}js/libs/*.js`, `${assets}js/plugins/*.js`],
@@ -120,7 +119,6 @@ const config = {
     src: `${assets}images/site/*`,
     dest: `${build}images`
   }, 
- 
   //svg symbols
   svgSymbols: {
     src: `${assets}images/svg-symbols/*.svg`,
@@ -133,7 +131,6 @@ const config = {
     fileName: 'source.html',
     jadeDest: `${assets}jade/source/_includes`
   },
-  
   //svg sprites/assets
   svg: {
     src: `${assets}images/svg-sprites/*.svg`,
