@@ -33,11 +33,11 @@ gulp.task('dev-html', () => {
 
 gulp.task('build-fonts', () => gulp.src($fonts.src).pipe(gulp.dest($fonts.dest)));
 
-gulp.task('build-fonts-css', () => gulp.src($webfontcss.src).pipe(gulp.dest($webfontcss.dest)));
+gulp.task('build-webfontcss', () => gulp.src($webfontcss.src).pipe(gulp.dest($webfontcss.dest)));
 
 gulp.task('build-favicons', () => gulp.src($favicons.src).pipe(gulp.dest($favicons.dest)));
 
-gulp.task('remove-dev-js', () => del($js.tmp));
+
 
 gulp.task('init', () => {
   runSequence(
@@ -46,7 +46,7 @@ gulp.task('init', () => {
       [
         'images', 
         'svg-assets', 
-        'build-fonts-css',
+        'build-webfontcss',
         'build-favicons',
         'build-fonts', 
         'init-scripts',
@@ -64,7 +64,7 @@ gulp.task('build-development', () => {
       'bundle-scripts', 
       'dev-html', 
       'move-scripts', 
-      'build-font-css'
+      'build-webfontcss'
     ]);
 });
 
@@ -75,7 +75,7 @@ gulp.task('build-stage', () => {
       'merge-scripts', 
       'dev-html', 
       'move-scripts', 
-      'build-font-css'
+      'build-webfontcss'
     ]);
 });
 
@@ -86,7 +86,7 @@ gulp.task('build-production', () => {
       'build-scripts', 
       'prod-html', 
       'move-scripts', 
-      'build-font-css'
+      'build-webfontcss'
     ], 
     'remove-dev-js');
 });

@@ -34,6 +34,7 @@ gulp.task('merge-scripts', () => runSequence('bundle-scripts', ['lib-scripts'], 
 
 gulp.task('build-scripts', () => runSequence('squish-scripts', ['squish-lib-scripts'], 'concat-scripts'));
 
+gulp.task('remove-dev-js', () => del($js.tmp));
 /*
  * gulp move-scripts
  * Move required lib files to desintation (things that need to go in the <head>)

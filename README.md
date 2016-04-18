@@ -65,17 +65,18 @@ function eg(container) {
 
 ## NPM packages included:
 
-- lodash (https://www.npmjs.com/package/lodash)
-- tweezer (https://github.com/jaxgeller/tweezer.js) 
-- local-links (https://www.npmjs.com/package/local-links)
-- lory-js (http://meandmax.github.io/lory/)
-- verge (https://www.npmjs.com/package/verge)
+- lodash (debounce, throttle, template) (https://www.npmjs.com/package/lodash)
 - webfontloader (https://www.npmjs.com/package/webfontloader)
-- layzr.js (https://github.com/callmecavs/layzr.js/tree/master)
+- local-links (https://www.npmjs.com/package/local-links)
+- verge (https://www.npmjs.com/package/verge)
+- lazysizes (https://github.com/aFarkas/lazysizes)
+- tweezer (https://github.com/jaxgeller/tweezer.js) 
 - wallop (https://github.com/peduarte/wallop)
+- lory-js (http://meandmax.github.io/lory/)
 - plyr (https://plyr.io)
 - hammerjs (http://hammerjs.github.io/)
 - imagesloaded (http://imagesloaded.desandro.com/)
+- google-maps (https://www.npmjs.com/package/google-maps)
 
 To use a NPM module use the es6 import syntax
 

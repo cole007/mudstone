@@ -1,4 +1,3 @@
-import $ from 'jquery';
 /** 
  * Method used to create an object based on input string
  * @method namespace

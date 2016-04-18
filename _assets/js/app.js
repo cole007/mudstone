@@ -12,8 +12,14 @@ import map from './behaviours/map';
 
 
 
+// https://github.com/typekit/webfontloader
 WebFont.load({
-	typekit: { id: 'vcl8lns' }
+	// google: { families: ['Droid Sans', 'Droid Serif'] },
+	typekit: { id: 'vcl8lns' },
+	// custom: {
+	// 	families: ['My Font', 'My Other Font:n4,i4,n7'],
+	// 	urls: ['/_assets/css/fonts.css']
+	// }
 });
 
 
