@@ -1,5 +1,6 @@
 import WebFont from 'webfontloader';
 import mud from './dependencies/load-behaviour';
+
 import canvasNavigation from './behaviours/canvasNavigation';
 import accordion from './behaviours/accordion';
 import validation from './behaviours/validation';
@@ -8,9 +9,10 @@ import { megaNav } from  './behaviours/megaNav';
 import prefix from './helpers/prefix';
 
 
-WebFont.load({
-	typekit: { id: 'vcl8lns' }
-});
+
+// WebFont.load({
+// 	typekit: { id: 'vcl8lns' }
+// });
 
 
 // assign the data-behaviour functions

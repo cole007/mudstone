@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import namespace from '../dependencies/namespace';
 
 

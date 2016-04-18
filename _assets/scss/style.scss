@@ -1,40 +1,3 @@
-//    File: _assets/scss/style.scss
-//
-//    Use spaces not tabs
-//
-//    # Selectors
-//
-//    One selector per line, One rule per line
-//    Don't use IDs as selectors
-//    Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container
-//    Use BEM syntax:
-//        Block
-//        Block__element
-//        Block--modifier
-//
-//    # Properties
-//
-//    List related properties together
-//    If the value of the width or height is 0, do not specify units
-//    Avoid magic numbers, eg numbers used as  quick fixes on a one-off basis
-//    Close final property with a semi-colon
-//    Err towards shorthand where avaliable, eg border, background, etc
-//
-//    # SASS/SCSS
-//
-//    All Vendor Prefixes Use @mixins
-//    Maximum Nesting: Three Levels Deep
-//    Maximum Nesting: 50 Lines
-//
-//    Locally compile Expanded
-//    For Deployment compile Compressed
-//
-//    Be Generous With Comments
-//
-//    Variablize All Common Numbers, and Numbers with Meaning
-//    Variablize All Colors
-//
-//    Shame Last
 $ie: false;
 // using  node-bourbon, see ./gulp/config.js
 @import "bourbon";
@@ -42,7 +5,6 @@ $ie: false;
 // stores variables used by svg/icon mixins
 @import '_system/gulp/png-sprites',
         '_system/gulp/svg-sprites',
-        '_system/gulp/icon-font',
         '_system/gulp/svg-symbols';
 // functions
 @import '_system/tools/tools-functions';
@@ -93,7 +55,6 @@ body:before {
   content: "mobile";
   display: none; /* Prevent from displaying. */
 }
-
 @include mq(480, min) {
   body:before {
     content: "480 up";
@@ -129,9 +90,3 @@ body:before {
 @import 'utils/utils';
 // final exceptions/shame
 @import 'views/exceptions';
-
-
-
-.lz {
-  img {display: block;}
-}

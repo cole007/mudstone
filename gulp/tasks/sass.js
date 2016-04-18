@@ -1,36 +1,63 @@
 /*
- * sass 
- * compile scss with libsass
+ * Main Task: gulp sass
+ * compile scss
  */
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
+import sass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
+import handleErrors from '../util/handleErrors';
+import autoprefixer from 'autoprefixer';
+import postcss from 'gulp-postcss';
+import cssnano from 'gulp-cssnano';
+import uncss from 'gulp-uncss';
+import config from '../config';
+import { includePaths } from 'node-bourbon';
 
-var gulp            = require('gulp'),
-    browserSync     = require('browser-sync'),
-    sass            = require('gulp-sass'),
-    sourcemaps      = require('gulp-sourcemaps'),
-    handleErrors    = require('../util/handleErrors'),
-    gulpif          = require('gulp-if'),
-    size            = require('gulp-size'),
-    handleErrors    = require('../util/handleErrors'),
-    autoprefixer    = require('autoprefixer'),
-    postcss         = require('gulp-postcss'),
-    config          = require('../config').sass,
-    env             = require('../config').env;
+const $sass = config.sass;
+const $uncss = config.uncss;
 
-gulp.task('sass', function () {
-  return gulp.src(config.watch)
-    .pipe(gulpif(env == 'dev', sourcemaps.init()))
+gulp.task('sass', () => {
+  return gulp.src($sass.watch)
+    .pipe(sourcemaps.init())
     .pipe(sass({
-        outputStyle: config.options.outputStyle,
-        includePaths: require('node-bourbon').includePaths
+        outputStyle: $sass.options.outputStyle,
+        includePaths
       }
     ))
     .on('error', handleErrors)
     .pipe(sourcemaps.write({includeContent: false}))
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(postcss([ autoprefixer({ browsers: config.prefix }) ]))
-    .pipe(gulpif(env == 'dev', sourcemaps.write('./')))
+    .pipe(postcss([ autoprefixer({ browsers: $sass.prefix }) ]))
+    .pipe(sourcemaps.write('./'))
     .on('error', handleErrors)
-    .pipe(size())
-    .pipe(gulp.dest(config.dest))
+    .pipe(gulp.dest($sass.dest))
     // .pipe(browserSync.reload({stream:true}));
+});
+
+
+gulp.task('build-css', () => {
+  return gulp.src($sass.watch)
+    .pipe(sass({
+        outputStyle: $sass.options.outputStyle,
+        includePaths
+      }
+    ))
+    .on('error', handleErrors)
+    .pipe(postcss([ autoprefixer({ browsers: $sass.prefix }) ]))
+    .pipe(cssnano())
+    .on('error', handleErrors)
+    .pipe(gulp.dest($sass.dest))
+});
+
+
+gulp.task('uncss', () => {
+  return gulp.src($uncss.src)
+    .pipe(uncss({
+        html: [$uncss.html],
+        ignore: [/\.no-\w+/g, /\.\w+\s?\.is-\w+/g]
+    }))
+    .pipe(cssnano())
+    .on('error', handleErrors)
+    .pipe(gulp.dest($uncss.dest))
 });

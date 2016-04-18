@@ -1,120 +1,92 @@
-/*
- * build
- * move all src files to dist directory
- */
- 
-var gulp                = require('gulp'),
-    runSequence         = require('run-sequence'),
-    uglify              = require('gulp-uglify'),
-    sass                = require('gulp-sass'),
-    autoprefixer        = require('autoprefixer'),
-    postcss             = require('gulp-postcss'),
-    concat              = require('gulp-concat'),
-    handleErrors        = require('../util/handleErrors'),
-    cssnano             = require('gulp-cssnano'),
-    del                 = require('del'),
-    util                = require('gulp-util'),
-    htmlreplace         = require('gulp-html-replace'),
-    setup               = require('../config'),
-    htmlv               = require('gulp-html-validator'),
-    config              = setup.build,
-    scripts             = setup.scripts;
- 
-gulp.task('build-favicons', function(callback) {
-    gulp.src(config.favicon_src)
-      .pipe(gulp.dest(config.favicon_dest));
-}); 
+import gulp from 'gulp';
+import runSequence from 'run-sequence';
+import htmlreplace from'gulp-html-replace';
+import config from '../config';
 
+const $tags = config.tags;
+const $fonts = config.fonts;
+const $favicons = config.favicons;
+const $js = config.js;
+const $webfontcss = config.webfontcss;
 
-// move the html files to dist
-gulp.task('build-html', function(callback) {
-    gulp.src(config.html_src)
-      .pipe(gulp.dest(config.html_dest));
-});
-
-gulp.task('prod-html', function() {
-  gulp.src(config.htmlScript)
+// replace two script tags with one
+gulp.task('prod-html', () => {
+  gulp.src($tags.src)
     .pipe(htmlreplace({
-        'js': '/_assets/js/dist/app.js'
+        'js': $js.prodTag
     },{
         keepBlockTags: true
     }))
-    .pipe(gulp.dest(config.htmlScriptDest));
+    .pipe(gulp.dest($tags.dest));
 });
 
-
-gulp.task('dev-html', function() {
-  gulp.src(config.htmlScript)
+// replace one script tag with two
+gulp.task('dev-html', () => {
+  gulp.src($tags.src)
     .pipe(htmlreplace({
-        'js': ['/_assets/js/tmp/libs.js', '/_assets/js/dist/app.js']
+        'js': $js.devTag
     },{
        keepBlockTags: true
     }))
-    .pipe(gulp.dest(config.htmlScriptDest));
+    .pipe(gulp.dest($tags.dest));
 });
 
- 
-// move the fonts to dist
-gulp.task('build-fonts', function(callback) {
-    gulp.src(config.fonts_src)
-      .pipe(gulp.dest(config.fonts_dest));
-});
- 
-// move images to dist
-gulp.task('build-images', function(callback) {
-    gulp.src(config.images_src)
-      .pipe(gulp.dest(config.images_dest));
-});
- 
- 
-// move any scripts which are not merged in to app.js
-// for example modernizer 
-gulp.task('move-scripts', function(callback) {
-    gulp.src(config.js_src)
-      .pipe(gulp.dest(config.js_dest));
-});
- 
-// optimise the css and move to the dist folder
-gulp.task('build-css', function() {
-  return gulp.src(setup.sass.watch)
-    .pipe(sass({
-        outputStyle: setup.sass.options.outputStyle,
-        includePaths: require('node-bourbon').includePaths
-      }
-    ))
-    .on('error', handleErrors)
-    .pipe(postcss([ autoprefixer({ browsers: setup.sass.prefix }) ]))
-    .pipe(cssnano())
-    .on('error', handleErrors)
-    .pipe(gulp.dest(setup.sass.dest))
-    // .pipe(browserSync.reload({stream:true}));
-}); 
+gulp.task('build-fonts', () => gulp.src($fonts.src).pipe(gulp.dest($fonts.dest)));
 
-gulp.task('html-validation', function () {
-  gulp.src('tmp/public/*.html')
-    .pipe(htmlv({format: 'html'}))
-    .pipe(gulp.dest('./reports'));
+gulp.task('build-fonts-css', () => gulp.src($webfontcss.src).pipe(gulp.dest($webfontcss.dest)));
+
+gulp.task('build-favicons', () => gulp.src($favicons.src).pipe(gulp.dest($favicons.dest)));
+
+gulp.task('remove-dev-js', () => del($js.tmp));
+
+gulp.task('init', () => {
+  runSequence(
+      'sprite', 
+      'symbols', 
+      [
+        'images', 
+        'svg-assets', 
+        'build-fonts-css',
+        'build-favicons',
+        'build-fonts', 
+        'init-scripts',
+        'dev-html'
+      ], 
+      'sass',
+      'jade');
 });
 
-
-
-gulp.task('clean-assets', function () {
-  return del(config.clean);
+gulp.task('build-development', () => {
+  runSequence(
+    'sass', 
+    [
+      'lib-scripts', 
+      'bundle-scripts', 
+      'dev-html', 
+      'move-scripts', 
+      'build-font-css'
+    ]);
 });
 
-
-gulp.task('init', function(callback) {
-  runSequence('sprite', ['jade', 'lib-scripts', 'svg-assets', 'build-fonts', 'iconfont', 'images', 'bundle-scripts', 'sass', 'dev-html', 'build-favicons'], callback);
+gulp.task('build-stage', () => {
+  runSequence(
+    'sass', 
+    [
+      'merge-scripts', 
+      'dev-html', 
+      'move-scripts', 
+      'build-font-css'
+    ]);
 });
 
-gulp.task('build-development', function(callback) {
-  runSequence('sass', ['lib-scripts', 'bundle-scripts', 'dev-html', 'move-scripts'], callback);
-});
-
-gulp.task('build-stage', function(callback) {
-  runSequence('sass', ['merge-scripts', 'prod-html', 'move-scripts'], 'clean-tmp-scripts', callback);
-});
-
-gulp.task('build-production', function(callback) {
-  runSequence('build-css', ['build-scripts', 'prod-html', 'move-scripts'], 'clean-tmp-scripts', callback);
+gulp.task('build-production', () => {
+  runSequence(
+    'build-css', 
+    [
+      'build-scripts', 
+      'prod-html', 
+      'move-scripts', 
+      'build-font-css'
+    ], 
+    'remove-dev-js');
 });
