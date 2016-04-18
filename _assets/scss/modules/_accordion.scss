@@ -2,8 +2,12 @@
 	padding: gutter(1);
 }
 
+// hide the content
 .accordion__content { 
 	display: none;
+
+	// show the content
+	// this class is added via js at the end of the accordion transition
 	&.is-active {
 		display: block;
 	}

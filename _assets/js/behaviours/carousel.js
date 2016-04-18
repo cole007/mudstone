@@ -11,11 +11,11 @@ function carousel(container) {
             slidesToScroll: 1,
             slideSpeed: 500,
             ease: 'cubic-bezier(0.455, 0.03, 0.515, 0.955)',
-            classNameFrame: 'js_frame',
-            classNameSlideContainer: 'js_slides',
+            classNameFrame: 'js-carousel-frame',
+            classNameSlideContainer: 'js-carousel-list',
             classNameActiveSlide: 'is-active',
-            classNamePrevCtrl:'js_prev',
-            classNameNextCtrl: 'js_next'
+            classNamePrevCtrl:'js-carousel-prev',
+            classNameNextCtrl: 'js-carousel-next'
         },
         slider = lory(carousel, options);
 

@@ -10,7 +10,7 @@ const controlsHtml = `
 
 var playingVideo;
 function video(container) {
-	container[0]._player = plyr.setup(container[0], {
+	container._player = plyr.setup(container, {
 		controls: [
 			'play',
 			'fullscreen'
@@ -18,9 +18,9 @@ function video(container) {
 		html: controlsHtml
 	});
 
-	container[0].addEventListener('play', function() {
+	container.addEventListener('play', function() {
 		// if any other videos are playing... stop them
-		if(playingVideo !== undefined && playingVideo !== container[0]) {
+		if(playingVideo !== undefined && playingVideo !== container) {
 			playingVideo._player[0].pause();
 		}
 		playingVideo = container[0];
