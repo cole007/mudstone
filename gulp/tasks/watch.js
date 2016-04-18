@@ -27,6 +27,11 @@ gulp.task('watch', ['scripts'], function() {
         gulp.start('jade', reload);
     });
 
+    // watch js libs
+    watch(config.js.libs, function(){
+        gulp.start('concat-libs', reload);
+    });
+
     // watch images
     watch(config.images.src, function(){
         gulp.start('images', reload);

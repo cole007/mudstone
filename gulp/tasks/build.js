@@ -60,7 +60,7 @@ gulp.task('build-development', () => {
   runSequence(
     'sass', 
     [
-      'lib-scripts', 
+      'concat-libs', 
       'bundle-scripts', 
       'dev-html', 
       'move-scripts', 
@@ -72,7 +72,7 @@ gulp.task('build-stage', () => {
   runSequence(
     'sass', 
     [
-      'merge-scripts', 
+      'build-scripts-dev', 
       'dev-html', 
       'move-scripts', 
       'build-webfontcss'
@@ -83,10 +83,9 @@ gulp.task('build-production', () => {
   runSequence(
     'build-css', 
     [
-      'build-scripts', 
+      'build-scripts-production', 
       'prod-html', 
       'move-scripts', 
       'build-webfontcss'
-    ], 
-    'remove-dev-js');
+    ]);
 });

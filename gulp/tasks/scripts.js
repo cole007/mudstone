@@ -22,17 +22,20 @@ import config from '../config';
 
 const $js = config.js;
 
+// watch the scripts
 gulp.task('scripts', () =>  buildScript($js.output, true, false));
 
+// compile the scripts
 gulp.task('bundle-scripts', () => buildScript($js.output, false, false));
 
-gulp.task('squish-scripts', () => buildScript($js.output, false, true));
+// compile and minify the scripts
+gulp.task('build-app', () => buildScript($js.output, false, true));
 
-gulp.task('init-scripts', () => runSequence('bundle-scripts', ['lib-scripts', 'move-scripts'], 'concat-scripts'));
+gulp.task('init-scripts', () => runSequence('bundle-scripts', ['concat-libs', 'move-scripts'], 'concat-scripts'));
 
-gulp.task('merge-scripts', () => runSequence('bundle-scripts', ['lib-scripts'], 'concat-scripts'));
+gulp.task('build-scripts-dev', () => runSequence('bundle-scripts', ['concat-libs'], 'concat-scripts'));
 
-gulp.task('build-scripts', () => runSequence('squish-scripts', ['squish-lib-scripts'], 'concat-scripts'));
+gulp.task('build-scripts-production', () => runSequence('build-app', ['build-lib-scripts'], 'concat-scripts', 'remove-dev-js'));
 
 gulp.task('remove-dev-js', () => del($js.tmp));
 /*
@@ -46,7 +49,7 @@ gulp.task('move-scripts', () => gulp.src($js.deps).pipe(gulp.dest($js.depsDest))
  * Concatenate lib files
  */
 
-gulp.task('lib-scripts', function() {
+gulp.task('concat-libs', function() {
   return gulp.src($js.libs)
     .pipe(concat($js.libsOutput))
     .pipe(gulp.dest($js.tmp))
@@ -56,7 +59,7 @@ gulp.task('lib-scripts', function() {
  * gulp squish-lib-scripts
  * Concatenate and minify lib files
  */
-gulp.task('squish-lib-scripts', function() {
+gulp.task('build-lib-scripts', function() {
   return gulp.src($js.libs)
     .pipe(uglify())
     .pipe(concat($js.libsOutput))
