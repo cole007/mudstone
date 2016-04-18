@@ -1,4 +1,6 @@
+// https://github.com/peduarte/wallop
 import Wallop from 'Wallop';
+// http://hammerjs.github.io/
 import Hammer from 'hammerjs';
 
 var timeout;

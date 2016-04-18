@@ -1,3 +1,4 @@
+// https://github.com/meandmax/lory
 import { lory } from 'lory.js';
 import Viewport from '../helpers/viewport';
 

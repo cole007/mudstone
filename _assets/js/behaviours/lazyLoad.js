@@ -1,7 +1,7 @@
+// https://github.com/aFarkas/lazysizes
 import lazySizes from 'lazysizes';
 
 function lazyLoad() {
-	// https://github.com/aFarkas/lazysizes
 	// add background-image support
 	document.addEventListener('lazybeforeunveil', function(e){
 	    var bg = e.target.getAttribute('data-bg');

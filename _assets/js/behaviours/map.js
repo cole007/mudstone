@@ -1,3 +1,5 @@
+// https://github.com/Carrooi/Js-GoogleMapsLoader
+// https://developers.google.com/maps/documentation/javascript/
 import GoogleMapsLoader from 'google-maps';
 
 const KEY = 'AIzaSyBIwGoEP0hq627k4tsloqVDpCdjpH9sQxU';
