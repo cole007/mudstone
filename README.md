@@ -56,6 +56,12 @@ For production every is built in the deploy directory
 -  /_assets/plugins/* any scripts that need to be bundled before browserfy (jquery plugins)
 -  /_assets/libs/* any libraries that need to be included in the head (such as moderniz),
 
+The data-behaviour method provides the vanilla js dom node.  If you need to use jquery methods you will need to wrap container in a jquery obect
+```
+function eg(container) {
+	$(container).addClass('is-active')
+} 
+```
 
 ## NPM packages included:
 
@@ -68,6 +74,8 @@ For production every is built in the deploy directory
 - layzr.js (https://github.com/callmecavs/layzr.js/tree/master)
 - wallop (https://github.com/peduarte/wallop)
 - plyr (https://plyr.io)
+- hammerjs (http://hammerjs.github.io/)
+- imagesloaded (http://imagesloaded.desandro.com/)
 
 To use a NPM module use the es6 import syntax
 
