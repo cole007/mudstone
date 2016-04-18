@@ -18,7 +18,7 @@ function pager(container, slide) {
 		})(i)
 	};
 
-	$(pagerItem).appendTo(container).wrapAll(pagerWrap);
+	$(pagerItem).appendTo($(container)).wrapAll(pagerWrap);
 
 	slide.on('change', function(e) {
 		if($activePagerLink !== undefined) $activePagerLink.removeClass(activeClass);
@@ -42,7 +42,7 @@ function pager(container, slide) {
 	}
 
 	
-	container.on('click', '.carousel__pager-link', pagerHandle);
+	$(container).on('click', '.carousel__pager-link', pagerHandle);
 }
 
 function cycle(slide) {
@@ -76,7 +76,7 @@ function gesture(container, slide) {
 
 function slide(container) {
 	var slide = {};
-	slide = new Wallop(container[0], {
+	slide = new Wallop(container, {
 		// buttonPreviousClass: 'js-slide-prev',
 		// buttonNextClass: 'js-slide-next',
 		itemClass: 'js-carousel-item',
@@ -90,7 +90,7 @@ function slide(container) {
 
 	pager(container, slide);
 	cycle(slide);
-	gesture(container[0], slide);
+	gesture(container, slide);
 };
 
 export default slide;

@@ -21,23 +21,18 @@ mud.LoadWindow = mud.LoadWindow || {};
 mud.loadBehaviour = function(context){
  
     if(context === undefined){
-        context = $(document);
+        context = document;
     }
-     
-    // iterate through each element with $('[data-behaviour]') in DOM
-    context.find("*[data-behaviour]").each(function(){
-        // assign to variable
-        var $el = $(this);
-        // grab contents of behaviours
-        var behaviours = $el.attr('data-behaviour');
-        // split out behaviours as multiple behaviours can be defined on each DOM element e.g. data-behaviour="showVid ShowHide ..etd"
-        $.each(behaviours.split(" "), function(index, behaviourName){
+    var nodes = context.querySelectorAll('*[data-behaviour]');
+    Array.prototype.forEach.call(nodes, function(element) {
+        //var k = element.getAttribute('data-behaviour');
+        element.getAttribute('data-behaviour').split(" ").forEach(function(behaviourName) {
             try{
                 // assign instance of method object based on behaviour name e.g. mud.Behaviours.showVid to variable
                 var BehaviourClass = mud.Behaviours[behaviourName];
                 // instantiate method object
                 if(typeof mud.Behaviours[behaviourName] !== 'undefined'){
-                    var initializedBehaviour = new BehaviourClass($el);
+                    var initializedBehaviour = new BehaviourClass(element);
                 }else{
                     // log error if behaviour not found
                     console.log(behaviourName+' Behaviour not found');
@@ -48,7 +43,7 @@ mud.loadBehaviour = function(context){
                 console.log(e);
             }
         });
-    });
+    })
 };
 
 mud.onWindowLoad = function(){

@@ -3,7 +3,7 @@ import Viewport from '../helpers/viewport';
 
 function carousel(container) {
     // expose the raw dom object
-    var carousel = container[0],
+    var carousel = container,
         viewport = new Viewport(), 
         options = {
             infinite: false,

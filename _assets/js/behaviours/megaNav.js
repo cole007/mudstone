@@ -4,7 +4,7 @@ var menu;
 
 function megaNav(container) {
 	menu = new MegaMenu({
-		container: container,
+		container: $(container),
 		btn: '.js-menu-btn',
 		target: ($btn) => $btn.next(),
 		backBtn: '.js-menu-back',

@@ -37,17 +37,17 @@ function canvasNavigation(container) {
 	}
 	// if onLoad the viewport is smaller than desktop
 	if(viewport.width < breakpoints.desktop) {
-		container.on('click', '.menu__btn', clickHandle);
+		$(container).on('click', '.menu__btn', clickHandle);
 	}
 	// watch for breakpoint changes
 	// the function only gets called when a breakpoint changes
 	// Used to unbind the click event
 	viewport.change(function(current, prev) {
 		if(current === 'desktop' || this.width >= breakpoints.desktop) {
-			container.off('click', '.menu__btn', clickHandle);
+			$(container).off('click', '.menu__btn', clickHandle);
 		}
 		if(current === 'tablet' || this.width < breakpoints.desktop) {
-			container.on('click', '.menu__btn', clickHandle);
+			$(container).on('click', '.menu__btn', clickHandle);
 		}
 	});
 };

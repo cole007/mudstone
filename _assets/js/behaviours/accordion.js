@@ -8,7 +8,7 @@ import Viewport from '../helpers/viewport';
 function accordion(container) {
 	var viewport = new Viewport();
 	var accordion = new Expand({
-		wrapper: container,
+		wrapper: $(container),
 		button: '.button',
 		closeOthers: true,
 		activeClass: 'is-active',
