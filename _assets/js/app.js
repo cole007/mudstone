@@ -32,7 +32,7 @@ mud.Behaviours.accordion = accordion;
 mud.Behaviours.carousel = carousel;
 mud.Behaviours.slide = slide;
 mud.Behaviours.video = video;
-mud.LoadWindow.map = map;
+mud.Behaviours.map = map;
 
 window.onload = function(){
     mud.onWindowLoad();

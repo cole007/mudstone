@@ -4,7 +4,7 @@ import GoogleMapsLoader from 'google-maps';
 
 const KEY = 'AIzaSyBIwGoEP0hq627k4tsloqVDpCdjpH9sQxU';
 
-function map() {
+function map(container) {
 
 	GoogleMapsLoader.load(function(google){
 		GoogleMapsLoader.KEY = KEY;

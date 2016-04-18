@@ -19,24 +19,19 @@
     font-size: 20px;
     color: $white;
     position: relative;
-    flex: 1 0 25%;
+    flex: 1 0 100%;
     height: 400px;
     border: 2px solid $black;
 }
 
-[data-320] {
-    .carousel__item {
-        flex: 1 0 100%;
-    }
-}
 
-[data-768] {
+@include mq(768, min) {
     .carousel__item {
         flex: 1 0 33.3333%;
     }
 }
 
-[data-1024] {
+@include mq(1024, min) {
     .carousel__item {
         flex: 1 0 20%;
     }
