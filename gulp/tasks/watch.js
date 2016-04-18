@@ -37,7 +37,7 @@ gulp.task('watch', ['scripts'], function() {
         gulp.start('images', reload);
     });
 
-    // watch svgs
+    // watch svg symbols
     watch(config.svgSymbols.src, function(){
         gulp.start('symbols', reload);
     });
@@ -45,5 +45,10 @@ gulp.task('watch', ['scripts'], function() {
     // watch sprites
     watch(config.svg.src, function(){
         gulp.start('sprite', reload);
+    });
+
+    // watch svg assets 
+    watch(config.svg.assets, function(){
+        gulp.start('svg-assets', reload);
     });
 });
