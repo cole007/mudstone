@@ -1,3 +1,4 @@
+// https://validatejs.org/
 import validate from 'validate.js';
 
 
@@ -10,12 +11,17 @@ function ValidateForm(opts) {
 		validClassName: 'is-valid',
 		messageClass: ['help-block', 'error'],
 		messageEl: 'span',
-		ajax: true
+		inputs: 'input[name], select[name], textarea[name]',
+		ajax: true,
+		emptyOnSuccess: true
 	};
+
 
 	this.options = {
 		form: opts.form,
+		url: opts.url || '',
 		constraints: opts.constraints,
+		inputs: opts.inputs || defaults.inputs,
 		group: opts.group || defaults.group,
 		messageClassName: opts.messageClassName || defaults.messageClassName,
 		errorClassName: opts.errorClassName || defaults.errorClassName,
@@ -24,7 +30,8 @@ function ValidateForm(opts) {
 		messageEl: opts.messageEl || defaults.messageEl,
 		ajax: opts.ajax || defaults.ajax,
 		successCallback: opts.successCallback || null,
-		errorCallback: opts.errorCallback || null
+		errorCallback: opts.errorCallback || null,
+		emptyOnSuccess: opts.emptyOnSuccess || defaults.emptyOnSuccess
 	};
 
 	const _this = this;
@@ -41,19 +48,21 @@ function ValidateForm(opts) {
 		handleFormSubmit.call(this, form);
 	});
 
+	validate.validators.email.message = 'mango';
+
 	// Hook up the inputs to validate on the fly
-	var inputs = document.querySelectorAll("input, textarea, select");
+	var inputs = document.querySelectorAll(_opts.inputs);
 	// add blur events to all of the inputs
 	for (let i = 0; i < inputs.length; ++i) {
 		inputs.item(i).addEventListener("change", function(e) {
-		  var errors = validate(form, constraints) || {};
+		  var errors = validate(form, constraints, {fullMessages: false}) || {};
 		  showErrorsForInput(this, errors[this.name])
 		});
 	}
 
 	function handleFormSubmit(form, input) {
 		// validate the form aainst the constraints
-		var errors = validate(form, constraints);
+		var errors = validate(form, constraints, {fullMessages: false});
 		// then we update the form to reflect the results
 		showErrors(form, errors || {});
 		if (!errors) {
@@ -64,7 +73,7 @@ function ValidateForm(opts) {
 	// Updates the inputs with the validation errors
 	function showErrors(form, errors) {
 		// We loop through all the inputs and show the errors for that input
-		var inputs = form.querySelectorAll("input[name], select[name], textarea[name]");
+		var inputs = form.querySelectorAll(_opts.inputs);
 		_array.call(inputs).forEach((input, index) =>  showErrorsForInput(input, errors && errors[input.name]));
 	}
 
@@ -120,24 +129,38 @@ function ValidateForm(opts) {
 			block.classList.add(_opts.messageClass[i]);
 		}
 		block.innerText = error;
+
+		console.log(block);
 		messages.appendChild(block);
 	}
+
+
+	function emptyInputs() {
+		var inputs = form.querySelectorAll(_opts.inputs);
+		_array.call(inputs).forEach((input, index) =>  {
+			input.value = '';
+		});
+	}
+
 
 	function showSuccess() {
 		if(_opts.ajax === true) {
 			var data = $(form).serialize();
 			$.ajax({
-				url : '',
+				url : _opts.url,
 				method: 'POST',
 				data: data,
-				success: function(response, textStatus, jqXHR){
+				success: (response, textStatus, jqXHR) => {
+					if(_opts.emptyOnSuccess === true) {
+						emptyInputs();
+					}
 					if(_opts.successCallback) {
-						_opts.successCallback.call(_this, response, textStatus, jqXHR)
+						_opts.successCallback.call(this, response, textStatus, jqXHR)
 					}
 				},
-				error: function(jqXHR, textStatus, errorThrown){
+				error: (jqXHR, textStatus, errorThrown) => {
 					if(_opts.errorCallback) {
-						_opts.errorCallback.call(_this, jqXHR, textStatus, errorThrown)
+						_opts.errorCallback.call(this, jqXHR, textStatus, errorThrown)
 					}
 				}
 			});

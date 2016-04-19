@@ -1,50 +1,59 @@
 import ValidateForm from '../helpers/validation';
+import Viewport from '../helpers/viewport';
+import prefix from '../helpers/prefix';
 
 function form(container) {
+	var viewport = new Viewport();
+	var successMessageHtml = `<div class="form-success" style="position: fixed; z-index: 10001; background-color: white; border: 1px solid black">
+								<h1>Well that is belting</h1>
+								<p>Your message has been successfully sent</p>
+							  </div>`;
+							  
 	var validate = new ValidateForm({
 		form: container,
+		ajax: true,
+		url: 'sproutForms/entries/saveEntry',
 		constraints: {
-			email: {
-				// Email is required
-				presence: true,
-				// and must be an email (duh)
-				email: true,
+			"fields[fullName]": {
+				presence: {
+					message: 'Full Name is required'
+				},
+
 			},
-			password: {
-				// Password is also required
-				presence: true,
-				// And must be at least 5 characters long
-				length: {
-					minimum: 5
-				}
+			'fields[email]': {
+				presence: {
+					message: 'Email is required'
+				},
+				email: {
+					message: 'That\'s no email address'
+				},
 			},
-			"confirm-password": {
-				// You need to confirm your password
-				presence: true,
-				// and it needs to be equal to the other password
-				equality: {
-					attribute: "password",
-					message: "^The passwords does not match"
-				}
-			},
-			options: {
-				presence: true,
-			},
-			tock: {
-				presence: true,
-			},
-			message: {
-				presence: true,
+			'fields[message]': {
+				presence: {
+					message: 'What do you want?'
+				},
 			}
 		},
-		ajax: true,
+		inputs: '.js-validate',
 		successCallback: function(response, textStatus, jqXHR) {
-			console.log('success');
+			var $el = $(successMessageHtml).appendTo($('body'));
+			var { clientWidth, clientHeight } = $el[0];
+			$el[0].style.top = `${viewport.height / 2 - clientHeight / 2}px`;
+			$el[0].style.left = `${viewport.width / 2 - clientWidth / 2}px`;
+			$el[0].style.opacty = 0;
+			$el[0].style[prefix.css3('transition')] = 'opacity 3s';
+			setTimeout(function() {
+				$el[0].style.opacty = 1;
+				setTimeout(function() {
+					$el[0].style.display = 'none';
+				}, 3000);
+			}, 10);
 		},
 		errorCallback: function(jqXHR, textStatus, errorThrown) {
 			console.log('error');
 		}
 	})
+
 
 };
 
