@@ -8,6 +8,7 @@ import accordion from './behaviours/accordion';
 import carousel from './behaviours/carousel';
 import slide from './behaviours/slide';
 import video from './behaviours/video';
+import form from './behaviours/form';
 import map from './behaviours/map';
 
 
@@ -32,6 +33,7 @@ mud.Behaviours.accordion = accordion;
 mud.Behaviours.carousel = carousel;
 mud.Behaviours.slide = slide;
 mud.Behaviours.video = video;
+mud.Behaviours.form = form;
 mud.Behaviours.map = map;
 
 window.onload = function(){

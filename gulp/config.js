@@ -36,7 +36,8 @@ var server = {
           baseDir: root,
           directory: false
       },
-      notify: false
+      notify: false,
+      index: "index.html"
     };
 
 var jadeDest = root;
