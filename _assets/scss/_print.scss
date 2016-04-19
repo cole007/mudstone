@@ -1,0 +1,74 @@
+@media print {
+	*,
+	*:before,
+	*:after {
+	    background: transparent !important;
+	    color: #000 !important; 
+	    box-shadow: none !important;
+	    text-shadow: none !important;
+	}
+
+	body {
+		font: 1em Georgia, "Times New Roman", Times, serif !important;
+	}
+
+
+	h1,h2,h3,h4,h5,h6 {
+		font-family: Helvetica, Arial, sans-serif;
+	}
+
+	h1 { font-size: 250%; }
+	h2 { font-size: 175%; }
+	h3 { font-size: 135%; }
+	h4 { font-size: 100%; }
+	h5 { font-size: 100%; }
+	h6 { font-size: 90%; }
+
+	a:link, a:visited {
+		color: #00c;
+		font-weight: bold;
+		text-decoration: underline; 
+		&:after {
+			content: " (" attr(href) ") ";
+		}
+	}
+
+	// Don't show links that are fragment identifiers
+	a[href^="#"]:after {
+	    content: "";
+	}
+
+	pre,
+	blockquote {
+	    border: 1px solid #999;
+	    page-break-inside: avoid;
+	}
+
+	// Printing Tables:
+	// http://css-discuss.incutio.com/wiki/Printing_Tables
+	thead {
+	    display: table-header-group;
+	}
+
+	tr,
+	img {
+	    page-break-inside: avoid;
+	}
+
+	img {
+	    max-width: 100% !important;
+	}
+
+	p,
+	h2,
+	h3 {
+	    orphans: 3;
+	    widows: 3;
+	}
+
+	h2,
+	h3 {
+	    page-break-after: avoid;
+	}
+
+}
