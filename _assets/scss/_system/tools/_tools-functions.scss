@@ -32,7 +32,18 @@
 }
 
 @function gutter($lines: 1, $gutter: $base-padding) {
-	@return floor(($gutter * $lines) * 1px);
+  @if length($lines) == 1 {
+    @return floor(($gutter * $lines) * 1px);
+  } @else if length($lines) < 5{
+    $string: '';
+    @for $i from 1 through length($lines) {
+      $string: $string + ' ' + floor(($gutter * nth($lines, $i)) * 1px);
+    }
+    @return unquote($string);
+  } @else {
+    @warn 'To many values used in gutter function';
+    @return null;
+  }
 }
 
 @function gridCalc($columns,$total-columns: $base-max-columns) {
