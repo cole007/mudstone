@@ -3,53 +3,53 @@ $ie: false;
 @import "bourbon";
 // gulp generated scss
 // stores variables used by svg/icon mixins
-@import '_system/gulp/png-sprites',
-        '_system/gulp/svg-sprites',
-        '_system/gulp/svg-symbols';
+@import '_system/gulp/png-sprites';
+@import '_system/gulp/svg-sprites';
+@import '_system/gulp/svg-symbols';
 // functions
 @import '_system/tools/tools-functions';
 // Libraries and dependencies
 // latest version of normalize - with img/fieldset
-@import '_system/libs/normalize',
-        '_config/variables';
+@import '_system/libs/normalize';
+@import '_config/variables';
 // tools - mixins and functions
 // these shouldn't need to be changed
-@import '_system/tools/tools-helpers',
-        '_system/tools/tools-grid',
-        '_system/tools/tools-images',
-        '_system/tools/tools-type';
+@import '_system/tools/tools-helpers';
+@import '_system/tools/tools-grid';
+@import '_system/tools/tools-images';
+@import '_system/tools/tools-type';
 // views and components
 // config/fonts
 // @import '_config/variables'; -- imported at root level (function/tool dependencies)
-@import '_config/fonts',
-        '_config/debug';
+@import '_config/fonts';
+@import '_config/debug';
  
 // base elements
 // First elements to be styled
 // No nesting or important... low specificity
-@import 'base/type',
-        'base/forms',
-        'base/tables',
-        'base/buttons',
-        'base/icons',
-        'base/list';
+@import 'base/type';
+@import 'base/forms';
+@import 'base/tables';
+@import 'base/buttons';
+@import 'base/icons';
+@import 'base/list';
 // layout and structure
 // Maximum 2 levels of specificity  
-@import 'layout/header',
-        'layout/footer',
-        'layout/navigation',
-        'layout/structure';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/navigation';
+@import 'layout/structure';
 // modules and components, should work independently from the layout
 // Maximum 3 levels of specificity  
-@import 'modules/panels',
-        'modules/accordion',
-        'modules/wysiwyg',
-        'modules/tabs',
-        'modules/carousel',
-        'modules/slide',
-        'modules/map',
-        'modules/video',
-        'modules/hero';
+@import 'modules/panels';
+@import 'modules/accordion';
+@import 'modules/wysiwyg';
+@import 'modules/tabs';
+@import 'modules/carousel';
+@import 'modules/slide';
+@import 'modules/map';
+@import 'modules/video';
+@import 'modules/hero';
  
 // views, mediaquery stuff 
 // Maximum 3 levels of specificity  
@@ -58,35 +58,36 @@ body:before {
   content: "mobile";
   display: none; /* Prevent from displaying. */
 }
-@include mq(480, min) {
-  body:before {
-    content: "480 up";
-  }
-  @import 'views/480-up';
+
+@media screen and (min-width:480px){
+	body:before {
+		content: "480 up";
+	}
+	@import 'views/480-up';
 }
-@include mq(660, min) {
-    body:before {
-      content: "660 up";
-    }
-    @import 'views/660-up';
+@media screen and (min-width:660px){
+	body:before {
+		content: "660 up";
+	}
+	@import 'views/660-up';
 }
-@include mq(768, min) {
-    body:before {
-      content: "tablet";
-    }
-    @import 'views/768-up';
+@media screen and (min-width:768px){
+	body:before {
+		content: "tablet";
+	}
+	@import 'views/768-up';
 }
-@include mq(960, min) {
-    body:before {
-      content: "960 up";
-    }
-    @import 'views/960-up';
+@media screen and (min-width:960px){
+	body:before {
+		content: "960 up";
+	}
+	@import 'views/960-up';
 }
-@include mq(1024, min) {
-    body:before {
-      content: "desktop";
-    }
-    @import 'views/1024-up';
+@media screen and (min-width:1200px){
+	body:before {
+		content: "desktop";
+	}
+	@import 'views/1024-up';
 }
 // utils - these should generally trump other selectors, 
 // important is fine here
