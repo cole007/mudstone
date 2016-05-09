@@ -37,7 +37,7 @@ var server = {
           directory: false
       },
       notify: false,
-      index: "index.html"
+      startPath: "index.html"
     };
 
 var jadeDest = root;
@@ -57,11 +57,12 @@ switch (state) {
     break;
   case "cms":
     jadeDest = '_assets/jade/dist/';
-    tagSrc = `${craftLayout}${craftLayout}`;
-    tagDest = `${craftLayout}`;
+ 	tagSrc = 'deploy/craft/templates/wrapper/_layout.twig',
+    tagDest = 'deploy/craft/templates/wrapper/';
     server = {
       proxy: url,
-      notify: false
+      notify: false,
+      startPath: "index.php"
     };
     break;
 }
@@ -183,6 +184,16 @@ const config = {
   favicons: {
     src: `${assets}favicons/*`,
     dest: `${build}favicons/`
+  },
+
+  json: {
+  	src: `${assets}js/content/content.json`,
+  	dest: root
+  },
+
+  template: {
+  	src: `${assets}js/template/listing.html`,
+  	dest: `${build}js/template/`
   }
  
 };

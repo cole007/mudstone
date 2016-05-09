@@ -37,7 +37,9 @@ gulp.task('build-webfontcss', () => gulp.src($webfontcss.src).pipe(gulp.dest($we
 
 gulp.task('build-favicons', () => gulp.src($favicons.src).pipe(gulp.dest($favicons.dest)));
 
+gulp.task('build-json', () => gulp.src($json.src).pipe(gulp.dest($json.dest)));
 
+gulp.task('build-template', () => gulp.src($template.src).pipe(gulp.dest($template.dest)));
 
 gulp.task('init', () => {
   runSequence(
