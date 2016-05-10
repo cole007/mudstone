@@ -6,8 +6,10 @@ import config from '../config';
 const $tags = config.tags;
 const $fonts = config.fonts;
 const $favicons = config.favicons;
+const $json = config.json;
 const $js = config.js;
 const $webfontcss = config.webfontcss;
+const $template = config.template;
 
 // replace two script tags with one
 gulp.task('prod-html', () => {
