@@ -28,13 +28,17 @@ gulp.task('scripts', () =>  buildScript($js.output, true, false));
 // compile the scripts
 gulp.task('bundle-scripts', () => buildScript($js.output, false, false));
 
-// compile and minify the scripts
+// compile and minify the es6 javascit
 gulp.task('build-app', () => buildScript($js.output, false, true));
 
-gulp.task('init-scripts', () => runSequence('bundle-scripts', ['concat-libs', 'move-scripts'], 'concat-scripts'));
+// kick off the scripts, bundle the es6 files, concat the libs, move and <head> scripts
+gulp.task('init-scripts', () => runSequence('bundle-scripts', ['concat-libs', 'move-scripts']));
 
-gulp.task('build-scripts-dev', () => runSequence('bundle-scripts', ['concat-libs'], 'concat-scripts'));
+// build the es6 scripts, concatenate the libs scripts 
+gulp.task('build-scripts-dev', () => runSequence('bundle-scripts', ['concat-libs']));
 
+// build the scripts for production
+// concat, and minify libs with es6 templates
 gulp.task('build-scripts-production', () => runSequence('build-app', ['build-lib-scripts'], 'concat-scripts', 'remove-dev-js'));
 
 gulp.task('remove-dev-js', () => del($js.tmp));
@@ -48,7 +52,6 @@ gulp.task('move-scripts', () => gulp.src($js.deps).pipe(gulp.dest($js.depsDest))
  * gulp lib-scripts
  * Concatenate lib files
  */
-
 gulp.task('concat-libs', function() {
   return gulp.src($js.libs)
     .pipe(concat($js.libsOutput))
@@ -65,7 +68,6 @@ gulp.task('build-lib-scripts', function() {
     .pipe(concat($js.libsOutput))
     .pipe(gulp.dest($js.tmp))
 });
-
 
 
 

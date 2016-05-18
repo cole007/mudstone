@@ -17,6 +17,7 @@ gulp.task('server', () => browserSync($browserSync));
 gulp.task('watch', ['scripts'], function() {
     browserSync($browserSync);
     
+    
     // watch scss
     watch(config.sass.watch, function(){
         gulp.start('sass', reload);
@@ -25,6 +26,16 @@ gulp.task('watch', ['scripts'], function() {
     // watch jade
     watch(config.jade.watch, function(){
         gulp.start('jade', reload);
+    });
+
+    // watch template
+    watch(config.template.src, function(){
+        gulp.start('build-template', reload);
+    });
+
+    // watch json
+    watch(config.json.src, function(){
+        gulp.start('build-json', reload);
     });
 
     // watch js libs

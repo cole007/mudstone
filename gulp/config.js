@@ -25,8 +25,6 @@ const build = (state === 'dev') ? `tmp/${public_html}/_assets/` : `deploy/${publ
 const root = (state === 'dev') ? `tmp/${public_html}/` : `deploy/${public_html}/`;
 // where should the jade templates be built, usually root, except when state === cms
 const url = 'local.ournameismud.co.uk';
-const craftLayout = '_layout.twig';
-const craftLayoutPath = 'deploy/craft/templates/wrapper/';
 
 /*
  * Default browsersync settings, 
@@ -41,8 +39,10 @@ var server = {
     };
 
 var jadeDest = root;
-var tagSrc = ` ${root}*.html`;
+var tagSrc = `./${root}*.html`;
 var tagDest = root;
+
+console.log(tagSrc);
 
 /*
  * Jade Build directory conditionals, based on state
@@ -57,8 +57,8 @@ switch (state) {
     break;
   case "cms":
     jadeDest = '_assets/jade/dist/';
-    tagSrc = `${craftLayout}${craftLayout}`;
-    tagDest = `${craftLayout}`;
+    tagSrc = 'deploy/craft/templates/wrapper/_layout.twig',
+    tagDest = 'deploy/craft/templates/wrapper/';
     server = {
       proxy: url,
       notify: false
@@ -88,10 +88,10 @@ const config = {
   browserSync: server,
  
   sass: {
-    src: [`${assets}scss/style.scss`, `${assets}scss/ie.scss`],
+    src: [`${assets}scss/*.scss`],
     dest: `${build}css`,
     prefix: AUTOPREFIXER_BROWSERS,
-    watch: assets + 'scss/**/**/*.scss',
+    watch: `${assets}scss/**/**/*.scss`,
     options: {
       outputStyle: 'expanded'
     }
@@ -99,7 +99,7 @@ const config = {
   
   js: {
     src: `${assets}js/app.js`,
-    libs: [`${assets}js/libs/*.js`, `${assets}js/plugins/*.js`],
+    libs: [`${assets}js/libs/jquery-2.2.1.min.js.js`, `${assets}js/plugins/*.js`],
     path: `${assets}js/`,
     libsOutput: 'libs.js',
     output: 'app.js',
@@ -154,7 +154,7 @@ const config = {
  
   uncss: {
     css: `${build}css/style.css`,
-    html: root + '**/*.html',
+    html: `${root}**/*.html`,
     dest: `${build}css`
   },
  
@@ -183,8 +183,18 @@ const config = {
   favicons: {
     src: `${assets}favicons/*`,
     dest: `${build}favicons/`
-  }
+  },
  
+  json: {
+    src: `${assets}js/content/content.json`,
+    dest: root
+  },
+
+  template: {
+    src: `${assets}js/template/*.html`,
+    dest: `${build}js/template/`
+  }
+
 };
 
 

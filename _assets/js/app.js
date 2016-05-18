@@ -1,5 +1,8 @@
 import WebFont from 'webfontloader';
 import mud from './dependencies/load-behaviour';
+import svg4everybody from 'svg4everybody';
+// object-fit polyfill https://github.com/bfred-it/object-fit-images
+// import objectFitImages from 'object-fit-images';
 
 import { megaNav } from  './behaviours/megaNav';
 import canvasNavigation from './behaviours/canvasNavigation';
@@ -42,4 +45,7 @@ window.onload = function(){
 
 $(function() {
 	mud.loadBehaviour();
+	svg4everybody();
+	// var someImages = document.querySelectorAll('img.u-fit');
+	// objectFitImages(someImages);
 });
