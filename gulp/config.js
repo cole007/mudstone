@@ -42,8 +42,6 @@ var jadeDest = root;
 var tagSrc = `./${root}*.html`;
 var tagDest = root;
 
-console.log(tagSrc);
-
 /*
  * Jade Build directory conditionals, based on state
  * CMS state Browsersync settings
@@ -57,11 +55,12 @@ switch (state) {
     break;
   case "cms":
     jadeDest = '_assets/jade/dist/';
-    tagSrc = 'deploy/craft/templates/wrapper/_layout.twig',
-    tagDest = 'deploy/craft/templates/wrapper/';
+    tagSrc = './deploy/craft/templates/wrapper/_layout.twig',
+    tagDest = './deploy/craft/templates/wrapper/';
     server = {
       proxy: url,
       notify: false
+      startPath: "index.html"
     };
     break;
 }

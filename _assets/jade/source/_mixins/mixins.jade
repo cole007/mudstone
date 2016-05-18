@@ -1,12 +1,12 @@
-mixin svg(name)
+mixin svg-inline(name)
 	.icon(class="sym--#{name}")
 		svg
 			use(xlink:href="##{name}")
 
-mixin svg-img(name)
-	.icon(class="sym--#{name}")
+mixin svg(name)
+	.icon(class="icon--#{name}")
 		svg
-			use(xlink:href="/_assets/images/svg-symbol.svg{name}")
+			use(xlink:href="/_assets/images/svg-symbols.svg##{name}")
 
 
 mixin social(icons, className)
@@ -14,4 +14,3 @@ mixin social(icons, className)
 		each val in icons
 			li
 				a(href="#" class="#{className}__item #{className}__item--#{val}")
-
