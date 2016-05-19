@@ -96,3 +96,17 @@ body:before {
 @import 'views/exceptions';
 
 @import 'print';
+
+
+.test {
+	   scale: 1 2;
+	&::range-track {
+	    background: #3071a9;
+	    width: 100%;
+	}
+
+	&::range-thumb {
+	    border-radius: 3px;
+	    cursor: pointer;
+	}
+}

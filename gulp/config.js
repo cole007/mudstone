@@ -59,7 +59,7 @@ switch (state) {
     tagDest = './deploy/craft/templates/wrapper/';
     server = {
       proxy: url,
-      notify: false
+      notify: false,
       startPath: "index.html"
     };
     break;

@@ -12,6 +12,9 @@ import postcss from 'gulp-postcss';
 import cssnano from 'gulp-cssnano';
 import uncss from 'gulp-uncss';
 import config from '../config';
+
+import range from 'postcss-input-range';
+
 import { includePaths } from 'node-bourbon';
 
 const $sass = config.sass;
@@ -28,7 +31,10 @@ gulp.task('sass', () => {
     .on('error', handleErrors)
     .pipe(sourcemaps.write({includeContent: false}))
     .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(postcss([ autoprefixer({ browsers: $sass.prefix }) ]))
+    .pipe(postcss([ 
+        autoprefixer({ browsers: $sass.prefix }),
+        range()
+    ]))
     .pipe(sourcemaps.write('./'))
     .on('error', handleErrors)
     .pipe(gulp.dest($sass.dest))
