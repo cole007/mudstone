@@ -41,15 +41,7 @@ $ie: false;
 @import 'layout/structure';
 // modules and components, should work independently from the layout
 // Maximum 3 levels of specificity  
-@import 'modules/panels';
-@import 'modules/accordion';
 @import 'modules/wysiwyg';
-@import 'modules/tabs';
-@import 'modules/carousel';
-@import 'modules/slide';
-@import 'modules/map';
-@import 'modules/video';
-@import 'modules/hero';
  
 // views, mediaquery stuff 
 // Maximum 3 levels of specificity  
