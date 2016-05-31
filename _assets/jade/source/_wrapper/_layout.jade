@@ -9,7 +9,12 @@ html.no-js<!--<![endif]-->
         meta(name='description', content='')
         meta(name='viewport', content='width=device-width, initial-scale=1')
         //- include ../_includes/favicons
-        link(rel='stylesheet', href='/_assets/css/style.css', media='screen AND (min-width:180px)')
+        <!--[if IE]>
+        link(rel='stylesheet', href='/_assets/css/ie.css')
+        <![endif]-->
+        <!--[if !IE]><!-->
+        link(rel='stylesheet', href='/_assets/css/style.css')
+        <!--<![endif]-->
         //- Remove script tag if modernizr is being used
         script var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");
         //- custom modernizr script, only tests for touch events
