@@ -1,0 +1,16 @@
+//- load accordion__content into the layout
+extends _wrapper/_layout
+//- define the block of accordion__content to be placed in the extend
+block content
+
+	.wrapper.gutter-row
+		h1 Slide Example
+		.slide(data-behaviour="slide")
+			.slide__list
+				-var n = 0
+				while n < 5
+					.slide__item.js-slide-item
+						img(src="/_assets/images/img#{n}.jpg")
+					-n++
+			button.slide__btn.slide__btn--prev.js-slide-prev Previous
+			button.slide__btn.slide__btn--next.js-slide-next Next

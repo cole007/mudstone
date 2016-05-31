@@ -1,0 +1,121 @@
+$grid-settings: (
+  type: 'flex',
+  columns: $base-max-columns,
+  max-width: $base-max-width,
+  gutter: $base-grid-gutter,
+  direction: 'ltr'
+);
+
+$grid-tablet-settings: (
+  type: 'flex',
+  columns: 6,
+  max-width: $base-max-width,
+  gutter: $base-grid-gutter,
+  direction: 'ltr'
+);
+
+$grid-mobile-settings: (
+  type: 'flex',
+  columns: 4,
+  max-width: $base-max-width,
+  gutter: $base-grid-gutter,
+  direction: 'ltr'
+);
+
+@mixin grid-classes($total-columns: 12, $gutter: gutter(1), $prefix: g-d, $output: class) {
+  @for $i from 1 through $total-columns {
+    @if $output == extend {
+      %#{$prefix}#{$i} {
+        width: colCalc($i,$total-columns,$gutter);
+      }
+    } @else {
+      .#{$prefix}#{$i}  {
+        width: colCalc($i,$total-columns,$gutter);
+      }
+    }
+  }
+} 
+
+/// @param {map} $map
+@mixin g-wrapper($map: $grid-settings) {
+  $max-width:  map-get($map, max-width);
+  width: 100%;
+  max-width: $max-width;
+  margin: auto;
+}
+
+
+/// @param {map} $map
+/// @param {boolean} $inc_gutter
+/// @param {boolean/integer} $space-below
+
+@mixin g-row($map: $grid-settings, $inc_gutter: true, $space-below: true, $type: false) {
+
+  $type: if($type == false, map-get($map, type), $type);
+  $direction: map-get($map, direction);
+  $gutter: map-get($map, gutter);
+  $max-width:  map-get($map, max-width);
+
+  @if $type == 'flex' {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @if $type == 'float' {
+    @include cf();
+  }
+  // https://css-tricks.com/fighting-the-space-between-inline-block-elements/
+  // 
+  // nope, this was never a good idea
+  // "Update: unless you care to support Android WebKit."
+  // @if $type == 'inline' {
+  //   font-size: 0;
+  // }
+  
+  // Nope
+  // @if $type == 'justify' {
+  //   font-size: 0;
+  //   text-align: justify;
+  //   &:after {
+  //     display: inline-block;
+  //     width: 100%;
+  //     content: " "
+  //   }
+  // }
+
+  @if $inc_gutter == true {
+    margin-left: -$gutter * 2;
+  }  
+
+  @if $space-below != false {
+    @if type-of($space-below) == number {
+      margin-bottom: $space-below;
+    } @else {
+      margin-bottom: $gutter * 2;
+    }
+  }
+}
+
+
+/// @param {integer/boolean} $columns
+/// @param {map} $map
+/// @param {boolean} $inc_gutter
+
+@mixin g-col($columns: 1, $map: $grid-settings, $inc_gutter: true) {
+  $gutter: map-get($map, gutter);
+  $total_columns: map-get($map, columns);
+
+  @if $inc_gutter == true {
+    padding-left: $gutter * 2;
+  }  
+
+  @if $columns != false {
+    @if type-of($columns) != list {
+      width: gridCalc($columns, $total_columns);
+    } @else {
+      $column: nth($columns,1);
+      $count: nth($columns,2);
+      width: gridCalc($column, $count);
+    }
+  }
+}

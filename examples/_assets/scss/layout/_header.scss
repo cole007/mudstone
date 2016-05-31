@@ -1,0 +1,39 @@
+// site logo
+.site-logo {
+	@include font-type(bold);
+	//@include font-family(display);
+	@include font-size(size(h6),false);
+	line-height: 1;
+	display: block;
+	position: relative;
+	z-index: 101;
+	transition: all .4s;
+	margin-left: 20px;
+}
+
+// vertical space for the fixed header
+.site {
+	@include mq(1024, max) {
+		padding-top: 41px;
+	}
+}
+
+.site-header {
+	padding: gutter(.5) 0;
+	// all of this needs to be replaced for desktop
+	// so lets wrap the fella in a little media query
+	@include mq(1024, max) {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		left: 0;
+		background-color: $white;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+		color: $black;
+	}
+}
+
+
+
+
+

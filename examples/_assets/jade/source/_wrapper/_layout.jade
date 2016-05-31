@@ -1,0 +1,31 @@
+include ../_mixins/mixins
+doctype
+<!--[if IE 8]><html class="ie-8"><![endif]-->
+<!--[if gt IE 8]><!-->
+html.no-js<!--<![endif]-->
+    head
+        meta(charset='utf-8')
+        title MudStone
+        meta(name='description', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        //- include ../_includes/favicons
+        <!--[if IE]>
+        link(rel='stylesheet', href='/_assets/css/ie.css')
+        <![endif]-->
+        <!--[if !IE]><!-->
+        link(rel='stylesheet', href='/_assets/css/style.css')
+        <!--<![endif]-->
+        //- Remove script tag if modernizr is being used
+        script var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");
+        //- custom modernizr script, only tests for touch events
+        //-  script(src='/_assets/js/libs/modernizr.min.js')
+    body
+        .site
+            include ../_includes/header
+            .site-page
+                block content
+            include ../_includes/footer
+        // build:js
+        script(src='/_assets/js/deps/libs.js')
+        script(src='/_assets/js/dist/app.js')
+        // endbuild

@@ -1,0 +1,16 @@
+//- load accordion__content into the layout
+extends _wrapper/_layout
+//- define the block of accordion__content to be placed in the extend
+block content
+
+	.wrapper.gutter-row
+		h1 Carousel Example
+		.carousel.js-carousel(data-behaviour="carousel")
+			.carousel__frame.js-carousel-frame
+				ul.carousel__list.js-carousel-list
+					-var n = 0
+					while n < 20
+						li.carousel__item.js-carousel-item #{n}
+						-n++
+			button.js-carousel-prev BACK
+			button.js-carousel-next FORWARD

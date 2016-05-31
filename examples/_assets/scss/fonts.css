@@ -1,0 +1,15 @@
+@font-face{
+	font-family: "FSEmericWeb-Book";
+	src: url("../fonts/FSEmericWeb-Book.eot");
+	src: url("../fonts/FSEmericWeb-Book.eot?#iefix") format("embedded-opentype"), 
+		 url("../fonts/FSEmericWeb-Book.woff") format("woff"), 
+		 url("../fonts/FSEmericWeb-Book.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "FSEmericWeb-Light";
+	src: url("../fonts/FSEmericWeb-Light.eot");
+	src: url("../fonts/FSEmericWeb-Light.eot?#iefix") format("embedded-opentype"), 
+	     url("../fonts/FSEmericWeb-Light.woff") format("woff"), 
+	     url("../fonts/FSEmericWeb-Light.ttf") format("truetype");
+}
