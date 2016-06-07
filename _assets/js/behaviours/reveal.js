@@ -10,6 +10,9 @@ export default function reveal(container) {
 
 	const reveal = new Inview({
 		element: container.querySelectorAll('.js-reveal'),
+		alreadyInView: function(e) {
+
+		},
 		pre: function(e) {
 			e.style.opacity = 0;
 			e.style[prefix.css3('transition')] = 'all .3s .2s';
