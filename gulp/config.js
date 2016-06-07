@@ -98,7 +98,7 @@ const config = {
   
   js: {
     src: `${assets}js/app.js`,
-    libs: [`${assets}js/libs/jquery-2.2.1.min.js.js`, `${assets}js/plugins/*.js`],
+    libs: [`${assets}js/libs/jquery-2.2.1.min.js`, `${assets}js/plugins/*.js`],
     path: `${assets}js/`,
     libsOutput: 'libs.js',
     output: 'app.js',

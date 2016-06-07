@@ -1,5 +1,11 @@
 import WebFont from 'webfontloader';
 import mud from './dependencies/load-behaviour';
+
+import reveal from './behaviours/reveal';
+
+mud.Behaviours.reveal = reveal;
+
+
 // import svg4everybody from 'svg4everybody';
 // object-fit polyfill https://github.com/bfred-it/object-fit-images
 // import objectFitImages from 'object-fit-images';
