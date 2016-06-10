@@ -39,7 +39,9 @@ export default class Inview {
     }
 
     initialize() {
+
         this.collection.filter((e) => verge.inViewport(e)).map((e) => this.alreadyInView.call(this, e))
+
         // loop over all of the elements
         this.collection
             // filter out items that are already in the viewport

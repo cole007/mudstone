@@ -4,23 +4,24 @@ import prefix from '../helpers/prefix';
 export default function reveal(container) {
 
 
-	function counter(e) {
-		e.innerHTML = 'Good evening miss';
+	function _reveal(e) {
+		e.style.backgroundColor = 'green';
 	}
+
 
 	const reveal = new Inview({
 		element: container.querySelectorAll('.js-reveal'),
-		alreadyInView: function(e) {
-
-		},
+		threshold: 0,
 		pre: function(e) {
 			e.style.opacity = 0;
 			e.style[prefix.css3('transition')] = 'all .3s .2s';
 		},
+		alreadyInView: function(e) {
+			_reveal(e);
+		},
 		post: function(e) {
 			e.style.opacity = 1;
-			e.style.backgroundColor = 'red';
-			counter(e);
+			_reveal(e);
 		}
 	})
 }
