@@ -18,6 +18,13 @@ WebFont.load({
 	// 	families: ['My Font', 'My Other Font:n4,i4,n7'],
 	// 	urls: ['/_assets/css/fonts.css']
 	// }
+	active() {
+		mud.onFontLoad();
+	},
+
+	inactive() {
+		mud.onFontLoad();
+	}
 });
 
 window.onload = function(){

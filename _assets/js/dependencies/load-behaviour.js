@@ -10,6 +10,7 @@ var mud = namespace('mud.mudlication.Site');
  
 mud.Behaviours = {};
 mud.LoadWindow = mud.LoadWindow || {};
+mud.LoadFont = mud.LoadFont || {};
 /** 
  * Method used to create an object based on input string
  * @method  mud.loadBehaviour
@@ -54,6 +55,17 @@ mud.onWindowLoad = function(){
           mud.LoadWindow[k]();
         } 
       }
+    }
+};
+
+mud.onLoadFont = function () {
+    // call loadWindow
+    if (mud.LoadFont) {
+        for (var k in mud.LoadFont) {
+            if (Object.keys(mud.LoadFont).length > 0) {
+                mud.LoadFont[k]();
+            }
+        }
     }
 };
 
