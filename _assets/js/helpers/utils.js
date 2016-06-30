@@ -4,7 +4,7 @@
 
 export function lock() {
 	const $window = $(window);
-			$body = $('body');
+	const $body = $('body');
 
 	var windowTop;
 	return {

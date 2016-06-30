@@ -1,5 +1,4 @@
 import assignIn from 'lodash.assignin';
-import assign from 'lodash.assign';
 import Concert from 'concert';
 
 function namespace(namespaceString) {
@@ -48,60 +47,58 @@ mud.loadBehaviour = function(context){
                 // assign instance of method object based on behaviour name e.g. mud.Behaviours.showVid to variable
                 var BehaviourClass = mud.Behaviours[behaviourName];
 
-                // Inheritable Observables
-                // https://github.com/moll/js-concert
-                assignIn(
-                    BehaviourClass.prototype,
-                    Concert
-                )
-
-                BehaviourClass.prototype.state = {};
-
-                BehaviourClass.prototype.add = function(name) {
-                    if(typeof mud.Collection[name] === 'undefined') {
-                        mud.Collection[name] = this;
-                    } else {
-                        console.error(name, 'already existing in the collection');
-                    }
-                }
-
-                BehaviourClass.prototype.get = function(name) {
-                    if(typeof mud.Collection[name] !== 'undefined') {
-                        return mud.Collection[name]
-                    } else {
-                        console.error(name, 'does not existing in the collection');
-                    }
-                }
-
-                BehaviourClass.prototype.setState = function(state) {
-                    Object.assign(this.state, state)
-
-                }
-
-                BehaviourClass.prototype.getState = function(state) {
-                    var output = {};
-                    for (var i in this.state) {
-                        if (this.state.hasOwnProperty(i)) {
-                            if(i === state) {
-                                output[i] = this.state[i]
-                            }
-                        }
-                    }
-                    return output;
-                }
-
-                BehaviourClass.prototype.el = element;
 
                 // instantiate method object
                 if(typeof mud.Behaviours[behaviourName] !== 'undefined'){
-                    var initializedBehaviour = new BehaviourClass(element);
+
+                    // Inheritable Observables
+                    // https://github.com/moll/js-concert
+                    assignIn(
+                        BehaviourClass.prototype,
+                        Concert
+                    )
+
+                    BehaviourClass.prototype.state = {};
+                    BehaviourClass.prototype.el = element;
+
+                    BehaviourClass.prototype.add = function(name) {
+                        if(typeof mud.Collection[name] === 'undefined') {
+                            mud.Collection[name] = this;
+                        } else {
+                            console.error(name, 'already existing in the collection');
+                        }
+                    }
+
+                    BehaviourClass.prototype.get = function(name) {
+                        if(typeof mud.Collection[name] !== 'undefined') {
+                            return mud.Collection[name]
+                        } else {
+                            console.error(name, 'does not existing in the collection');
+                        }
+                    }
+
+                    BehaviourClass.prototype.setState = function(state) {
+                        Object.assign(this.state, state)
+                    }
+
+                    BehaviourClass.prototype.getState = function(state) {
+                        var output = {};
+                        for (var i in this.state) {
+                            if (this.state.hasOwnProperty(i)) {
+                                if(i === state) {
+                                    output[i] = this.state[i]
+                                }
+                            }
+                        }
+                        return output;
+                    }
+
+                    const initializedBehaviour = new BehaviourClass(element);
                 }else{
-                    // log error if behaviour not found
                     console.warn(behaviourName+' Behaviour not found');
                 }
             }
             catch(e){
-                // log error if behaviour not found
                 console.error(e);
             }
         });

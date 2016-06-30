@@ -1,13 +1,15 @@
 import Transition from '../helpers/transition';
 import { lock } from '../helpers/utils';
 import Viewport from '../helpers/viewport';
-import config from '../dependencies/config';
 
 function canvasNavigation(container) {
 	const _lock = lock();
 	const $btn = $('.menu__btn');
 	const viewport = new Viewport();
-	const { breakpoints } = config;
+	const breakpoints = {
+		desktop: 1024,
+		tablet: 768
+	};
 	const transition = new Transition({
 		el: '.js-menu',	
 		activeClass: 'is-active',
@@ -26,7 +28,6 @@ function canvasNavigation(container) {
 		},
 		closeComplete: function(){
 			$(this.el).removeClass('is-animating-out is-active');
-			menu.resetMenu();
 		}
 	});
 	// the click handler
