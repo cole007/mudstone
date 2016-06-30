@@ -1,9 +1,11 @@
 import WebFont from 'webfontloader';
-import mud from './dependencies/load-behaviour';
+import mud from './loader/behaviour';
 
-import reveal from './behaviours/reveal';
+import { obj1, obj2, obj3 } from './behaviours/obj';
 
-mud.Behaviours.reveal = reveal;
+mud.Behaviours.obj1 = obj1;
+mud.Behaviours.obj2 = obj2;
+mud.Behaviours.obj3 = obj3;
 
 
 // import svg4everybody from 'svg4everybody';
@@ -19,11 +21,10 @@ WebFont.load({
 	// 	urls: ['/_assets/css/fonts.css']
 	// }
 	active() {
-		mud.onFontLoad();
+		mud.onLoadFont();
 	},
-
 	inactive() {
-		mud.onFontLoad();
+		mud.onLoadFont();
 	}
 });
 

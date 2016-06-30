@@ -1,21 +1,20 @@
 import Transition from '../helpers/transition';
-import utils from '../helpers/utils';
+import { lock } from '../helpers/utils';
 import Viewport from '../helpers/viewport';
 import config from '../dependencies/config';
-import { menu } from '../behaviours/megaNav';
 
 function canvasNavigation(container) {
-	let lock = utils.lock();
-	let $btn = $('.menu__btn');
-	let viewport = new Viewport();
-	let { breakpoints } = config;
-	let transition = new Transition({
+	const _lock = lock();
+	const $btn = $('.menu__btn');
+	const viewport = new Viewport();
+	const { breakpoints } = config;
+	const transition = new Transition({
 		el: '.js-menu',	
 		activeClass: 'is-active',
 		openStart: function() {
 			$(this.el).addClass('is-animating-in');
 			$btn.addClass('is-active');
-			lock.capture();
+			_lock.capture();
 		},
 		openComplete: function() {
 			$(this.el).addClass('is-active').removeClass('is-animating-in');
@@ -23,7 +22,7 @@ function canvasNavigation(container) {
 		closeStart: function(){
 			$(this.el).addClass('is-animating-out');
 			$btn.removeClass('is-active');
-			lock.release();
+			_lock.release();
 		},
 		closeComplete: function(){
 			$(this.el).removeClass('is-animating-out is-active');

@@ -1,23 +1,7 @@
-import debounce from 'lodash.debounce';
-/* 
-	var viewport = new Viewport({
-		debounceDelay: 300
-	});
-	viewport.resize(function() {
-		if(this.width > 768) {
-			do something
-		}
-	});
-	viewport.change(function(prev, current) {
-		if(prev === 'smartphone') {
-			// destroy some stuff
-		}
-		if(current === 'tablet') {
-			// add some stuff
-		}
-	});
-*/
-var Viewport = function(opts) {
+// import $ from 'jquery';
+import debounce from 'lodash.debounce'; 
+
+export default function Viewport(opts) {
 	var defaults = {
 		debounceDelay: 300
 	};
@@ -63,5 +47,3 @@ var Viewport = function(opts) {
 		$window.off('resize', query);
 	}
 };
-
-export default Viewport;
