@@ -1,6 +1,5 @@
 import WebFont from 'webfontloader';
 import mud from './loader/behaviour';
-import { ReqAnimation } from './helpers/utils';
 
 // import svg4everybody from 'svg4everybody';
 // object-fit polyfill https://github.com/bfred-it/object-fit-images
@@ -25,12 +24,6 @@ WebFont.load({
 window.onload = function(){
     mud.onWindowLoad();
 };
-
-var test1 = new ReqAnimation();
-test1.loop = function() {
-	console.log('called');
-}
-
 
 $(function() {
 	mud.loadBehaviour();
