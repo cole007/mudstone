@@ -1,11 +1,3 @@
-/** 
- * Method used to create an object based on input string
- * @method namespace
- * @param  {String} namespaceString dot notation of object representation
- * @return {Object} parent ret urns object relative indepth to notation
- * @example
- * var mud = namespace('mud.mudlication.Site');
- */
 function namespace(namespaceString) {
   "use strict";
   var parts = namespaceString.split('.'),
@@ -20,5 +12,9 @@ function namespace(namespaceString) {
   
   return parent;
 }
-
-export default namespace;
+/**
+ * Module to hold behaviours
+ * @module mrb
+ * @submodule Behaviours
+ */
+export const mud = namespace('mud.mudlication.Site');

@@ -18,6 +18,16 @@ docs
 tmp
 reports
 
+deploy/public/images
+deploy/public/resources
+deploy/public/downloads
+deploy/public/uploads
+
+deploy/public_html/images
+deploy/public_html/resources
+deploy/public_html/downloads
+deploy/public_html/uploads
+
 
 # Craft #
 ######################

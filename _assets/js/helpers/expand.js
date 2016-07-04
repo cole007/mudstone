@@ -1,5 +1,4 @@
 import Tweezer from 'tweezer.js';
-import config from '../dependencies/config';
 
 /* 
 Example Usage 
@@ -72,7 +71,13 @@ function Expand(opts) {
 		activeClass: 'is-active',
 		activeContentClass: 'is-active',
 		duration: 800,
-		autoInitialize: true
+		autoInitialize: true,
+		easing: (t, b, c, d) => {
+			if ((t/=d/2) < 1) { 
+				return c/2*t*t + b
+			}
+			return -c/2 * ((--t)*(t-2) - 1) + b
+		},
 	};
 
 	// the options
@@ -84,7 +89,7 @@ function Expand(opts) {
 		activeClass: opts.activeClass || defaults.activeClass, // string
 		activeContentClass: opts.activeContentClass || defaults.activeContentClass, // string
 		duration: opts.duration || defaults.duration, // number
-		easing: config.tween.easing, // easing function
+		easing: opts.easing || defaults.easing, // easing function
 		autoInitialize: opts.autoInitialize || defaults.autoInitialize, // boolean
 		// callbacks 
 		openStart: opts.openStart, // function

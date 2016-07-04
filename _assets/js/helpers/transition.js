@@ -1,6 +1,7 @@
-import prefix from '../helpers/prefix';
+// import $ from 'jquery';
+import { transitionEnd } from '../helpers/prefix';
 
-function Transition(opts) {
+export default function Transition(opts) {
 	this.el = opts.el;
 	this.activeClass = opts.activeClass;
 	// callbacks
@@ -11,8 +12,8 @@ function Transition(opts) {
 	var _this = this;
 
 	// transition end event
-	function transitionEnd(el, fn) {
-		el.one(prefix.transitionEnd, function(e) {
+	function _transitionEnd(el, fn) {
+		el.one(transitionEnd, function(e) {
 			if(typeof fn == 'function') {
 				fn();
 			}
@@ -20,7 +21,7 @@ function Transition(opts) {
 	};
 	// Complete callback wrapper
 	function action(fn) {
-		transitionEnd($(opts.el), () => {
+		_transitionEnd($(opts.el), () => {
 			if(typeof fn === 'function') {
 				fn();
 			}
@@ -32,16 +33,30 @@ function Transition(opts) {
 			if(typeof this.openStart === 'function') {
 				this.openStart();
 			}
-			action(this.openComplete.bind(this));	
+			if(typeof this.openComplete === 'function') {
+				action(this.openComplete.bind(this));	
+			}
 		}
 		else {
 			if(typeof this.closeStart === 'function') {
 				this.closeStart();
 			}
+			if(typeof this.closeComplete === 'function'){
+				action(this.closeComplete.bind(this));	
+				this.modalClosed.call(this);
+			}
+		}
+	}
+
+	this.modalClosed = function() {}
+
+	this.destroy = function() {
+		if(typeof this.closeStart === 'function') {
+			this.closeStart();
+		}
+		if(typeof this.closeComplete === 'function'){
 			action(this.closeComplete.bind(this));	
 		}
 	}
 };
-
-export default Transition;
 
