@@ -100,8 +100,14 @@ mud.onLoadFont = function(){
 
 mud.loadRequestAnimationFrame = function(){
     // call loadWindow
+    var lastPosition = -1, handle;
     if(mud.Animation.length > 0) {
         const loop = () => {
+            if (lastPosition == window.pageYOffset) {
+                handle = raf( loop );
+                return false;
+            } else lastPosition = window.pageYOffset;
+
             mud.Animation.map(e => {
                 if(typeof e.loop === 'function') {
                     e.loop();
@@ -111,7 +117,8 @@ mud.loadRequestAnimationFrame = function(){
                 raf.cancel(handle);
                 return;
             }
-            const handle = raf( loop );
+
+            handle = raf( loop );
         }
         loop();
     }

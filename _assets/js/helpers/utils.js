@@ -29,10 +29,8 @@ export function ajax(url) {
 	});
 }
 
-
-
 export class ReqAnimation {
-    constructor(opts) {
+    constructor() {
         this.index = mud.Animation.length;
         mud.Animation.push(this);
     }
