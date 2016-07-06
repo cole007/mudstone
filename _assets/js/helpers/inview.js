@@ -30,16 +30,19 @@ export default class Inview {
         this.post = opts.post;
         this.alreadyInView = opts.alreadyInView;
         this.collection = Array.prototype.slice.call(this.element);
+        this.collectionCopy = Array.prototype.slice.call(this.element);
         this.viewport = this.viewport.bind(this);
         this.initialize();
         this.start();
+
+        this.collectionCopy
     }
 
     start() {
         const scroll = new ReqAnimation();
         scroll.loop = () => {
             this.viewport.call(this);
-            if(this.collection.length === 0) {
+            if(this.collectionCopy.length === 0) {
                 scroll.destroy();
                 return;
             }
@@ -54,7 +57,7 @@ export default class Inview {
                 // call the post function
                 this.post.call(this, e, i);
                 // remove the item from the array
-                this.collection.splice(i, 1);
+                this.collectionCopy.splice(i, 1);
             }
         })
     }
