@@ -26,7 +26,7 @@ var accordion = new Expand({
 		console.log('this', this, 'el', el, 'target', target);
 	},
 	onTick: function(v, el, target) {
-		console.log('this', this, 'v', v, el', el, 'target', target);
+		console.log('this', this, 'v', v, 'el', el, 'target', target);
 	
 	}
 });
