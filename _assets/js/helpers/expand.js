@@ -1,10 +1,11 @@
+
 import Tweezer from 'tweezer.js';
 
 /* 
 Example Usage 
 Javascript:  
 var accordion = new Expand({
-	wrapper: '.js-accordion',
+	wrapper: '$('.js-accordion')',
 	button: '.button',
 	closeOthers: false,
 	activeClass: '.is-active',
