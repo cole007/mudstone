@@ -30,19 +30,18 @@ export default class Inview {
         this.post = opts.post;
         this.alreadyInView = opts.alreadyInView;
         this.collection = Array.prototype.slice.call(this.element);
-        this.collectionCopy = Array.prototype.slice.call(this.element);
         this.viewport = this.viewport.bind(this);
-        this.initialize();
-        this.start();
-
-        this.collectionCopy
+        this.initialize()
+        this.start.call(this);
+             //   console.log(this.collection.length);
+        this.count = this.collection.length;
     }
 
     start() {
         const scroll = new ReqAnimation();
         scroll.loop = () => {
             this.viewport.call(this);
-            if(this.collectionCopy.length === 0) {
+            if(this.count === 0) {
                 scroll.destroy();
                 return;
             }
@@ -51,13 +50,14 @@ export default class Inview {
 
     viewport() {
         // loop through all of the items
-        this.collection.map((e, i) => {
+        this.filtered.map((e, i) => {
             // if in view
-            if(verge.inViewport(e, this.threshold)) {
+            if(verge.inViewport(e, this.threshold) && e._inview === false) {
+                e._inview = true;
                 // call the post function
                 this.post.call(this, e, i);
                 // remove the item from the array
-                this.collectionCopy.splice(i, 1);
+                this.count -= 1;
             }
         })
     }
@@ -68,13 +68,17 @@ export default class Inview {
         }
         if(typeof this.pre === 'function') {
             // loop over all of the elements
-            this.collection
+            this.filtered = this.collection
                 // filter out items that are already in the viewport
                 .filter((e) => !verge.inViewport(e))
                 // map over each item, calling the pre function, passing this as this, and e as the first argument
                 .map((e, i) => {
+                    e._inview = false; 
                     this.pre.call(this, e, i);
+                    return e;
                 });
+
+            this.count = this.filtered.length;
         }
     }
 }
