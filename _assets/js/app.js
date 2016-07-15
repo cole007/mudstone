@@ -1,10 +1,6 @@
 import WebFont from 'webfontloader';
 import mud from './loader/behaviour';
 
-// import svg4everybody from 'svg4everybody';
-// object-fit polyfill https://github.com/bfred-it/object-fit-images
-// import objectFitImages from 'object-fit-images';
-
 // https://github.com/typekit/webfontloader
 WebFont.load({
 	// google: { families: ['Droid Sans', 'Droid Serif'] },

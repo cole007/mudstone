@@ -89,7 +89,7 @@
   },
   "name": "local.mudstone.com",
   "description": "Our Name is Mud gulp boilerplate",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "gulpfile.babel.js",
   "dependencies": {},
   "author": "ournameismud.com",

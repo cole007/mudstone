@@ -1,5 +1,4 @@
 import verge from 'verge';
-import raf from 'raf';
 import { ReqAnimation } from '../helpers/utils';
 
 // example usage 
