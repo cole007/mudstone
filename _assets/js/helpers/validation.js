@@ -48,7 +48,6 @@ function ValidateForm(opts) {
 		handleFormSubmit.call(this, form);
 	});
 
-	validate.validators.email.message = 'mango';
 
 	// Hook up the inputs to validate on the fly
 	var inputs = document.querySelectorAll(_opts.inputs);
