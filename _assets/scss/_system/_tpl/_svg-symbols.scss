@@ -23,3 +23,10 @@
   }
 }
 <% }); %>
+
+
+<% _.forEach( icons, function( icon ){ %>
+<%= '$' + icon.className.split('.')[1] + '-width' %>: <%=  parseInt(icon.width) + 'px' %>;
+<%= '$' + icon.className.split('.')[1] + '-height' %>: <%=  parseInt(icon.height) + 'px' %>;
+<%= '$' + icon.className.split('.')[1] + '-ratio' %>: <%=  parseInt(icon.height) / parseInt(icon.width) %>;
+<% }); %>

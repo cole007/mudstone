@@ -17,6 +17,7 @@ WebFont.load({
 	}
 });
 
+
 window.onload = function(){
     mud.onWindowLoad();
 };
