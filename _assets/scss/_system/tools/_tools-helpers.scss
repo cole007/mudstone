@@ -92,7 +92,7 @@
 // - @include mq('min', '40px') {stuff:here}
 // debug option - this can only be used when mixin is declared at the root
 // until libsass supports @at-root{}
-@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $inc-ie: false) {
+@mixin mq($bp: 320, $type: min, $orientation: null, $property: width, $inc-ie: true) {
   $min: null;
   $max: null;
   $break: null;
