@@ -2,23 +2,23 @@ import verge from 'verge';
 import { ReqAnimation } from '../helpers/utils';
 
 // example usage 
-// new Inview({
-//     element: container.querySelectorAll('.js-reveal'),
-//     threshold: 100,
-//     pre(e) {
-//         e.style.opacity = 0;
-//         e.style[css3('transition')] = `all .750s cubic-bezier(0, 0, 0.3, 1)`;
-//         e.style[css3('transform')] = `translate3d(0, 100px, 0)`;
-//     },
-//     post(e) {
-//         e.style.opacity = 1;
-//         e.style[css3('transform')] = `translate3d(0, 0, 0)`;
-//     },
-//     alreadyInView(e) {
-//         e.style.opacity = 1;
-//         e.style[css3('transform')] = `translate3d(0, 0, 0)`;
-//     }
-// })  
+    // const inview = new Inview({
+    //     element: document.querySelectorAll('.box'),
+    //     threshold: 100,
+    //     pre(e) {
+    //         e.style.opacity = 0;
+    //         e.style[css3('transition')] = `all .750s cubic-bezier(0, 0, 0.3, 1)`;
+    //         e.style[css3('transform')] = `translate3d(0, 100px, 0)`;
+    //     },
+    //     post(e) {
+    //         e.style.opacity = 1;
+    //         e.style[css3('transform')] = `translate3d(0, 0, 0)`;
+    //     },
+    //     alreadyInView(e) {
+    //         e.style.opacity = 1;
+    //         e.style[css3('transform')] = `translate3d(0, 0, 0)`;
+    //     }
+    // }).initialize().start();
 
 
 export default class Inview {
@@ -30,21 +30,25 @@ export default class Inview {
         this.alreadyInView = opts.alreadyInView;
         this.collection = Array.prototype.slice.call(this.element);
         this.viewport = this.viewport.bind(this);
-        this.initialize()
-        this.start.call(this);
+        //this.initialize()
+        //this.start.call(this);
              //   console.log(this.collection.length);
         this.count = this.collection.length;
     }
 
     start() {
-        const scroll = new ReqAnimation();
-        scroll.loop = () => {
+        this.scroll = new ReqAnimation();
+        this.scroll.loop = () => {
             this.viewport.call(this);
             if(this.count === 0) {
-                scroll.destroy();
+                this.scroll.destroy();
                 return;
             }
         }
+    }
+
+    destroy() {
+        this.scroll.destroy();
     }
 
     viewport() {
@@ -79,5 +83,7 @@ export default class Inview {
 
             this.count = this.filtered.length;
         }
+
+        return this
     }
 }
