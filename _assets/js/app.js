@@ -1,7 +1,7 @@
 import WebFont from 'webfontloader';
 import mud from './loader/behaviour';
-import Inview from './helpers/inview';
-import { css3 } from './helpers/prefix';
+import Viewport from './helpers/viewport';
+
 
 // https://github.com/typekit/webfontloader
 WebFont.load({

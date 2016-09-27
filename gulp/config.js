@@ -98,7 +98,7 @@ const config = {
   
   js: {
     src: `${assets}js/app.js`,
-    libs: [`${assets}js/libs/jquery-2.2.1.min.js`, `${assets}js/plugins/*.js`],
+    libs: [`${assets}js/libs/jquery-3.1.1.min.js`, `${assets}js/libs/polyfills.js`, `${assets}js/plugins/*.js`],
     path: `${assets}js/`,
     libsOutput: 'libs.js',
     output: 'app.js',
@@ -107,7 +107,7 @@ const config = {
     // build dest for final output
     dest: `${build}js/dist`,
     // scripts for the <head> section
-    deps: [`${assets}js/libs/modernizr.min.js`],
+    deps: [`${assets}js/libs/modernizr.min.js`, `${assets}js/libs/picturefill.min.js`],
     depsDest: `${build}js/libs/`,
     // html tags
     prodTag: '/_assets/js/dist/app.js',

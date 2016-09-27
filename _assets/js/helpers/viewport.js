@@ -1,5 +1,7 @@
 // import $ from 'jquery';
 import debounce from 'lodash.debounce'; 
+import events from './events';
+
 
 export default class Viewport {
 	constructor(opts = {}) {
@@ -16,6 +18,9 @@ export default class Viewport {
 		this.off = this.off.bind(this);
 		this.resize = this.resize.bind(this);
 		this.change = this.change.bind(this);
+
+
+		this.handle = {};
 	}
 
 	query() {
@@ -30,18 +35,17 @@ export default class Viewport {
 	}
 
 	on(e, fn) {
-		this.events[e] = fn;
-		if(typeof this[e] === 'function') {
-			this.window.addEventListener('resize', debounce(this[e].bind(this, this.events[e]), this.debounce), false);
-		} else {
-			console.warn('no valid function supplied');
-		}
+		this.handle[e] = debounce(this[e].bind(this, fn), this.debounce);
+		this.window.addEventListener('resize', this.handle[e], false)
+
+		return this;
 	}
 
-	off(e, fn) {
-		this.events[e] = fn;
-		this.window.removeEventListener('resize', this[e], false)
+	off(e) {
+		this.window.removeEventListener('resize', this.handle[e], false)
+		return this;
 	}
+
 
 	resize(fn) {
 		fn.call(this);
@@ -49,12 +53,11 @@ export default class Viewport {
 
 	change(fn) {
 		this.breakpoint = this.query();
-
 		if(this.current !== this.breakpoint) {
 			const prev = this.current;
 			const current = this.breakpoint;
 			this.current = this.breakpoint;
-			fn.call(this, prev, current);
+			fn.call(this);
 		}
 	}
 }
