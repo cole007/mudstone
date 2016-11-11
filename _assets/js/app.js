@@ -2,6 +2,8 @@ import WebFont from 'webfontloader';
 import mud from './loader/behaviour';
 import Viewport from './helpers/viewport';
 
+import debounce from 'lodash.debounce';
+
 
 // https://github.com/typekit/webfontloader
 WebFont.load({
