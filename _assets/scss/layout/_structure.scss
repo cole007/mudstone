@@ -1,0 +1,56 @@
+use {
+	pointer-events: none;
+}
+
+.wrapper {
+	max-width: 1100px;
+	width: 100%;
+	margin: auto;
+	// only apply padding to left and right, so slice* classes can do vertical padding
+	// like a boss 
+	padding-left: gutter(1);
+	padding-right: gutter(1);
+}
+
+.slice {
+	padding-top: gutter(2.5);
+	padding-bottom: gutter(2.5);
+}
+
+.slice--butter {
+	padding-bottom: gutter(2.5);
+}
+
+.slice--ketchup {
+	padding-top: gutter(2.5);
+}
+
+.slice--tabs {
+	padding-bottom: gutter(6);
+}
+
+@include mq(768, min) {
+	.slice--huge {
+		padding-top: gutter(5);
+		padding-bottom: gutter(5);
+	}
+}
+
+@include mq(1200, min) {
+	.slice--huge {
+		padding-top: gutter(7);
+		padding-bottom: gutter(7);
+	}
+}
+
+.lazyload,
+.lazyloading {
+    opacity: .25;
+    background-color: c(bg, dark);
+}
+
+.lazyloaded {
+    opacity: 1;
+    background-color: transparent;
+    transition: opacity 300ms, background-color 300ms;
+}

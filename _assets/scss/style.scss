@@ -41,6 +41,8 @@ $ie: false;
 @import 'layout/structure';
 // modules and components, should work independently from the layout
 // Maximum 3 levels of specificity  
+@import 'modules/map';
+@import 'modules/video';
 @import 'modules/wysiwyg';
  
 // views, mediaquery stuff 
@@ -50,6 +52,11 @@ body:before {
   content: "mobile";
   display: none; /* Prevent from displaying. */
 }
+
+// utils - these should generally trump other selectors, 
+// important is fine here
+@import 'utils/utils';
+
 
 @media screen and (min-width:540px){
 	// don't expose 540 breakpoint to Viewport helper utility
@@ -68,34 +75,22 @@ body:before {
 }
 
 
-@media screen and (min-width:1200px){
+@media screen and (min-width:1024px){
 	body:before {
 		content: "desktop";
 	}
+	@import 'views/desktop';
+}
+
+
+
+@media screen and (min-width:1200px){
+
 	@import 'views/1200-up';
 }
-// utils - these should generally trump other selectors, 
-// important is fine here
-@import 'utils/utils';
+
+
 // final exceptions/shame
 @import 'views/exceptions';
 
 @import 'print';
-
-.wrapper {
-	max-width: 1200px;
-	width: 100%;
-	margin: auto;
-}
-
-.container {
-	display: flex;
-	flex-wrap: nowrap;
-
-	margin-left: -20px;
-
-	.box {
-		flex: 1 0 50%;
-		padding-left: 20px;
-	}
-}

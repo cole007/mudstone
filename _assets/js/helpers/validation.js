@@ -1,172 +1,218 @@
-// https://validatejs.org/
-import validate from 'validate.js';
+import validate from 'validate.js'
 
+/**
+ * Creates a new form validator.
+ * @class
+ */
 
-export default function ValidateForm(opts) {
+export default class Validation {
+	constructor(el, opts = {}) {
+		// Dom node: the form elements
+		this.form = el
+		// Object: the validation constraints
+		this.constraints = opts.constraints
+		// String: tags to validate against
+		this.selector = opts.selector || 'input, textarea, select'
+		// String: classname for the div that surrounds the input
+		this.inputWrapper = opts.inputWrapper || 'js-input-wrap'
+		// String: classname used on error message block
+		this.messageClassName = opts.messageClassName || 'message'
+		// Function/String: the tag to be used to store the message
+		// If a function is supplied the first argument is the error message
+		this.messageEl = opts.messageEl || 'span'
+		// String: classname used for errors
+		this.errorClassName = opts.errorClassName || 'is-error'
+		// String: classname used for success
+		this.validClassName = opts.validClassName || 'is-valid'
+		// Boolean: submit form with ajax
+		this.ajax = opts.ajax || false
 
-	const defaults = {
-		group: 'form__group',
-		messageClassName: '.messages',
-		errorClassName: 'is-error',
-		validClassName: 'is-valid',
-		messageClass: ['help-block', 'error'],
-		messageEl: 'span',
-		inputs: 'input[name], select[name], textarea[name]',
-		emptyOnSuccess: true
-	};
+		// all of the valid inputs
+		this.inputs = Array.from(this.form.querySelectorAll(this.selector))
+		.filter(input => input.getAttribute('type') !== 'hidden')
+		.filter(input => input.getAttribute('type') !== 'submit')
+		// all of the required inputs
+		this.requiredInputs = this.inputs.filter(input => input.required)
 
-
-	this.options = {
-		form: opts.form,
-		url: opts.url || '',
-		constraints: opts.constraints,
-		inputs: opts.inputs || defaults.inputs,
-		group: opts.group || defaults.group,
-		messageClassName: opts.messageClassName || defaults.messageClassName,
-		errorClassName: opts.errorClassName || defaults.errorClassName,
-		validClassName: opts.validClassName || defaults.validClassName,
-		messageClass: opts.messageClass || defaults.messageClass,
-		messageEl: opts.messageEl || defaults.messageEl,
-		ajax: opts.ajax,
-		successCallback: opts.successCallback || null,
-		errorCallback: opts.errorCallback || null,
-		emptyOnSuccess: opts.emptyOnSuccess || defaults.emptyOnSuccess,
-		postSettings: opts.postSettings || {}
-	};
-
-	$(opts.form).attr('novalidate', true);
-
-	const _this = this;
-	const _opts = this.options;
-	const form = _opts.form;
-	const constraints = _opts.constraints;
-	const _array = Array.prototype.slice;
-
-	form.addEventListener("submit", (e) => {
-		// only preventDefault is ajax is true or there are errors on the page
-		if(_opts.ajax === true || validate(form, constraints)) {
-			e.preventDefault();
-		}
-		handleFormSubmit.call(this, form);
-	});
-
-
-	// Hook up the inputs to validate on the fly
-	var inputs = form.querySelectorAll(_opts.inputs);
-	// add blur events to all of the inputs
-	for (let i = 0; i < inputs.length; ++i) {
-		inputs.item(i).addEventListener("change", function(e) {
-		  const errors = validate(form, constraints, {fullMessages: false}) || {};
-		  showErrorsForInput(this, errors[this.name])
-		});
+		// bind methods
+		this.showErrors = this.showErrors.bind(this)
+		this.submitHandler = this.submitHandler.bind(this)
+		this.changeHandler = this.changeHandler.bind(this)
+		this.showErrorsForInput = this.showErrorsForInput.bind(this)
+		this.resetFormGroup = this.resetFormGroup.bind(this)
+		this.addError = this.addError.bind(this)
+		this.send = this.send.bind(this)
+		this.reset = this.reset.bind(this)
+		this.clearFields = this.clearFields.bind(this)
+		// add the event listeners
+		this.addEventListeners()
+		// set the form to novalidate, prevents html5 form validatiopn
+		this.form.setAttribute('novalidate', true)
+		// add error message divs to each required group
+		Validation.addMessageNodesToDom(this.requiredInputs, this.messageClassName, this.inputWrapper)
 	}
 
-	function handleFormSubmit(form, input) {
+
+	/**
+	 * Bind the events
+	 */
+
+	addEventListeners() {
+		this.form.addEventListener('submit', this.submitHandler)
+		this.requiredInputs.forEach((input) => input.addEventListener('change', this.changeHandler))
+	}
+
+	/**
+	 * Find the closest parent
+	 * @param {Node} dom node - the required dom node
+	 * @param {String} className - the class name to search for
+	 */
+
+	static closestParent(node, className, form) {
+		if (!node || node === form) {
+			return null
+		}
+		if (node.classList.contains(className)) {
+			return node
+		}
+		return Validation.closestParent(node.parentNode, className, form)
+	}
+
+	/**
+	 * Reset form, remove any classes add and empty the message element
+	 * @param {formGroup} node - The form group being reset
+	 */
+
+	resetFormGroup(formGroup) {
+		// Remove the success and error classes
+		formGroup.classList.remove(this.errorClassName)
+		formGroup.classList.remove(this.validClassName)
+		formGroup.querySelector(`.${this.messageClassName}`).innerHTML = ''
+	}
+
+	/**
+	 * Append div after every required input for messages
+	 * @param {Array} inputs - The required fields array
+	 * @param {String} inputWrapper - the input parent wrapper
+	 * @param {String} className - the class name used for each
+	 */
+
+	static addMessageNodesToDom(inputs, className, inputWrapper) {
+		inputs.forEach((input) => {
+			try {
+				const messageDiv = document.createElement('div')
+				const parent = Validation.closestParent(input, inputWrapper, this.form)
+				messageDiv.className = className
+				parent.appendChild(messageDiv)
+			} catch(e) {
+				log('Validation addMessageNodesToDom', e)
+			}
+		})
+	}
+
+	/**
+	 * Submit handler - handle the form submission, *this* is bound to the Instance, not the dom node
+	 * @param {e} event 
+	 */
+
+	submitHandler(e) {
 		// validate the form aainst the constraints
-		const errors = validate(form, constraints, {fullMessages: false});
-		// then we update the form to reflect the results
-		showErrors(form, errors || {});
-		if (!errors) {
-			showSuccess.call(this);
+		const errors = validate(this.form, this.constraints, {fullMessages: false})
+
+
+		if(this.ajax || errors) {
+			e.preventDefault()
 		}
+		// then we update the form to reflect the results
+		this.showErrors(errors || {})
+
+		!errors && this.send()
 	}
 
-	// Updates the inputs with the validation errors
-	function showErrors(form, errors) {
-		// We loop through all the inputs and show the errors for that input
-		const inputs = form.querySelectorAll(_opts.inputs);
-		_array.call(inputs).forEach((input, index) =>  showErrorsForInput(input, errors && errors[input.name]));
+	reset() {
+		this.requiredInputs.forEach((input) => {
+			const formGroup = Validation.closestParent(input.parentNode, this.inputWrapper, this.form)
+			this.resetFormGroup(formGroup)
+		})
+		this.clearFields()
+		return this
 	}
 
-	// Shows the errors for a specific input
-	function showErrorsForInput(input, errors) {
+	clearFields() {
+		this.inputs.forEach((input) => input.value = '')
+		return this
+	}
+
+	/**
+	 * Change handler, called every time an input is changed, *this* is bound to the Instance, not the dom node
+	 * @param {e} event
+	 */
+
+	changeHandler(e) {
+		const input = e.srcElement
+		const errors = validate(this.form, this.constraints, {fullMessages: false}) || {}
+		this.showErrorsForInput(input, errors[input.name])
+	} 
+
+	/**
+	 * show success and post form the server
+	 * @param {e} event
+	 */
+
+	send() {
+
+	}
+
+	/**
+	 * show errors - show all error messages, trigger by submission
+	 * @param {Array} errors - the errors array
+	 */
+
+	showErrors(errors) {
+		this.requiredInputs.forEach((input) => this.showErrorsForInput(input, errors && errors[input.name]))
+	}
+
+	/**
+	 * addError - creates dom node and adds error message
+	 * @param {Node} messages - the dom node
+	 * @param {String} error - error message 
+	 */
+
+	addError(messages, error) {
+		let block
+		if(typeof this.messageEl === 'function') {
+			const node = this.messageEl(error)
+			block = node instanceof jQuery ? node[0] : node
+		} else {
+			block = document.createElement(this.messageEl)
+			block.classList.add('help-block')
+			block.innerText = error
+		}
+		messages.appendChild(block)
+	}
+
+	/**
+	 * showErrorsForInput - creates dom node and adds error message
+	 * @param {Node} input - dom node
+	 * @param {Array} all of the errors
+	 */
+
+	showErrorsForInput(input, errors) {
 		// This is the root of the input
-		const formGroup = closestParent(input.parentNode, _opts.group);
+		const formGroup = Validation.closestParent(input.parentNode, this.inputWrapper, this.form)
 		// Find where the error messages will be insert into
-		const messages = formGroup.querySelector(_opts.messageClassName);
+		const messages = formGroup.querySelector(`.${this.messageClassName}`)
 		// First we remove any old messages and resets the classes
-		resetFormGroup(formGroup);
+		this.resetFormGroup(formGroup)
 		// If we have errors
 		if (errors) {
 			// we first mark the group has having errors
-			formGroup.classList.add(_opts.errorClassName);
+			formGroup.classList.add(this.errorClassName)
 			// then we append all the errors
-			errors.forEach((error) => addError(messages, error))
+			errors.forEach((error) => this.addError(messages, error))
 		} else {
-		 	// otherwise we simply mark it as success
-		 	formGroup.classList.add(_opts.validClassName);
+			// otherwise we simply mark it as success
+			formGroup.classList.add(this.validClassName)
 		}
 	}
-
-	// Recusively finds the closest parent that has the specified class
-	function closestParent(child, className) {
-		if (!child || child == form) {
-		  return null;
-		}
-		if (child.classList.contains(className)) {
-		  return child;
-		} else {
-		  return closestParent(child.parentNode, className);
-		}
-	}
-
-	function resetFormGroup(formGroup) {
-	// Remove the success and error classes
-		formGroup.classList.remove(_opts.errorClassName);
-		formGroup.classList.remove(_opts.validClassName);
-		const helpBlockErrors = formGroup.querySelectorAll(`.${_opts.messageClass.join('.')}`);
-
-		// and remove any old messages
-		_array.call(helpBlockErrors).forEach(function(el) {
-		  el.parentNode.removeChild(el);
-		});
-	}
-
-	// Adds the specified error with the following markup
-	// <p class="help-block error">[message]</p>
-	function addError(messages, error) {
-		var block = document.createElement(_opts.messageEl);
-		for(let i = 0; i < _opts.messageClass.length; i++) {
-			block.classList.add(_opts.messageClass[i]);
-		}
-		block.innerText = error;
-		messages.appendChild(block);
-	}
-
-
-	function emptyInputs() {
-		const inputs = form.querySelectorAll(_opts.inputs);
-		_array.call(inputs).forEach((input, index) =>  {
-			input.value = '';
-		});
-	}
-
-
-	function showSuccess() {
-		if(_opts.ajax === true) {
-			const data = $(form).serialize();
-
-			const ajaxSettings = {
-				url : _opts.url,
-				method: 'POST',
-				data: data,
-				success: (response, textStatus, jqXHR) => {
-					if(_opts.emptyOnSuccess === true) {
-						emptyInputs();
-					}
-					if(_opts.successCallback) {
-						_opts.successCallback.call(this, response, textStatus, jqXHR)
-					}
-				},
-				error: (jqXHR, textStatus, errorThrown) => {
-					if(_opts.errorCallback) {
-						_opts.errorCallback.call(this, jqXHR, textStatus, errorThrown)
-					}
-				}
-			}
-
-			const o = $.extend({}, ajaxSettings, _opts.postSettings);
-			$.ajax(o);
-		}
-	}
-};
+}

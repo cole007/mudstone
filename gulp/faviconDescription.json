@@ -1,6 +1,6 @@
 {
 	"masterPicture": "./_assets/images/favicons/favicon.png",
-	"iconsPath": "/_assets/favicons/",
+	"iconsPath": "/",
 	"design": {
 		"ios": {
 			"pictureAspect": "backgroundAndMargin",
@@ -10,7 +10,7 @@
 		"desktopBrowser": {},
 		"windows": {
 			"pictureAspect": "whiteSilhouette",
-			"backgroundColor": "#00aba9",
+			"backgroundColor": "#ffffff",
 			"onConflict": "override"
 		},
 		"androidChrome": {
@@ -19,7 +19,7 @@
 			"backgroundColor": "#ffffff",
 			"themeColor": "#ab6060",
 			"manifest": {
-				"name": "Garry",
+				"name": "Croxley Park",
 				"display": "browser",
 				"orientation": "notSet",
 				"onConflict": "override",
@@ -28,7 +28,7 @@
 		},
 		"safariPinnedTab": {
 			"pictureAspect": "silhouette",
-			"themeColor": "#5bbad5"
+			"themeColor": "#ffffff"
 		}
 	},
 	"settings": {

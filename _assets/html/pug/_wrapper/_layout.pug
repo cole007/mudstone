@@ -1,0 +1,31 @@
+include ../_mixins/mixins
+block vars
+doctype
+<!--[if IE]>
+<html lang="en" class="no-js ie">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+    head
+        meta(charset='utf-8')
+        title #{pageTitle}
+        meta(name='description', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+
+        //- Remove script tag if modernizr is being used
+        script var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");
+        link(rel='stylesheet', href='/_assets/css/style.css')
+        include ../_includes/favicons
+            
+        //- custom modernizr script, only tests for touch events
+        //- script(src='/_assets/js/libs/modernizr.min.js')
+    body(class=`${bodyClass !== undefined && bodyClass}`)
+        .site
+            include ../_includes/header
+            .site-page#barba-wrapper
+                .barba-container(data-namespace=`${slug}` data-behaviour="scrollReveal")
+                    block content
+            include ../_includes/footer
+            include ../_includes/source
+        script(src='/_assets/js/dist/app.js')

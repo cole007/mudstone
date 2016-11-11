@@ -1,36 +1,35 @@
-import WebFont from 'webfontloader';
-import mud from './loader/behaviour';
-import Viewport from './helpers/viewport';
+import './libs/polyfills'
+// attached jQuery to the window for global access
+import jQuery from 'jquery'
+window.$ = jQuery
 
-import debounce from 'lodash.debounce';
+import WebFont from 'webfontloader'
+import { events } from './helpers/events'
+import { views } from './views'
+import lazysizes from 'lazysizes'
+import debug from 'debug'
 
+// logs enabled during development
+window.log = debug('app:log')	
+if(ENV === 'development') {
+	debug.enable('app:log')
+} else {
+	debug.disable('app:log')
+}
 
-// https://github.com/typekit/webfontloader
+log('Logging is enabled!, ENV')
+
 WebFont.load({
-	// google: { families: ['Droid Sans', 'Droid Serif'] },
-	typekit: { id: 'vcl8lns' },
-	// custom: {
-	// 	families: ['My Font', 'My Other Font:n4,i4,n7'],
-	// 	urls: ['/_assets/css/fonts.css']
-	// }
+	typekit: { id: 'cdu5srl' },
 	active() {
-		mud.onLoadFont();
+		events.trigger('fonts:loaded')
 	},
 	inactive() {
-		mud.onLoadFont();
+		events.trigger('fonts:loaded')
 	}
-});
-
-
-window.onload = function(){
-    mud.onWindowLoad();
-};
+})
 
 $(function() {
-	mud.loadBehaviour();
-	mud.loadRequestAnimationFrame();
-	// svg4everybody();
-	// var someImages = document.querySelectorAll('img.u-fit');
-	// objectFitImages(someImages);
-});
-
+	views()
+	lazysizes.init()
+})

@@ -28,141 +28,141 @@ input[type=number]::-webkit-outer-spin-button {
 // }
 
 // remove border and margin from fieldsets
-fieldset {
-	margin: 0;
-	border: 0;
-}
+// fieldset {
+// 	margin: 0;
+// 	border: 0;
+// }
 
-.form__group {
-	margin-bottom: gutter(1);
-}
+// .form__group {
+// 	margin-bottom: gutter(1);
+// }
 
 
-.form__input {
-	@include font-size(ms(0));
-	display: block;
-	border: 2px solid lighten($base-grey,40%);
-	padding: gutter(.5) gutter(.5);
-}
+// .form__input {
+// 	@include font-size(ms(0));
+// 	display: block;
+// 	border: 2px solid lighten($base-grey,40%);
+// 	padding: gutter(.5) gutter(.5);
+// }
 
-.form__label {
-	@include font-type(bold);
-	@include font-size(ms(-1));
-	display: inline-block;
-	margin-bottom: gutter(.25);
-}
+// .form__label {
+// 	@include font-type(bold);
+// 	@include font-size(ms(-1));
+// 	display: inline-block;
+// 	margin-bottom: gutter(.25);
+// }
 
-.form__label--toggle {
-	@include font-type(base);
-	@include font-size(ms(0));
-	position: relative;
-	vertical-align: baseline;
-	padding-left: gutter(1.5);
-	margin-right: gutter(1.5);
-}
+// .form__label--toggle {
+// 	@include font-type(base);
+// 	@include font-size(ms(0));
+// 	position: relative;
+// 	vertical-align: baseline;
+// 	padding-left: gutter(1.5);
+// 	margin-right: gutter(1.5);
+// }
 
-.form__textarea {
+// .form__textarea {
 
-}
+// }
 
-.form__select {
-	@include font-size(ms(0));
-	position: relative;
-	display: block;
-	border: 2px solid lighten($base-grey,40%);
-	// use pseudo elements to cover native dropdown
-	// position in the corner
-	&:before,
-	&:after {
-		@include position(absolute, 0 0 0 null);
-		content: " ";
-		pointer-events: none;
-	}
-	// add a background colour 
-	&:before {
-		background-color: lighten($base-grey,40%);
-		width: 30px;
-	}
-	// place a triangle in the middle
-	&:after {
-		@include triangle(lighten($base-grey,20%), 8px, 12px, bottom);
-		margin: auto;
-		right: 8px;
-	}
-	// reset the select element
-	select {
-		border: 0;
-		padding: gutter(.5) gutter(.5);
-		width: 100%;
-		display: block;
-	}
-}
+// .form__select {
+// 	@include font-size(ms(0));
+// 	position: relative;
+// 	display: block;
+// 	border: 2px solid lighten($base-grey,40%);
+// 	// use pseudo elements to cover native dropdown
+// 	// position in the corner
+// 	&:before,
+// 	&:after {
+// 		@include position(absolute, 0 0 0 null);
+// 		content: " ";
+// 		pointer-events: none;
+// 	}
+// 	// add a background colour 
+// 	&:before {
+// 		background-color: lighten($base-grey,40%);
+// 		width: 30px;
+// 	}
+// 	// place a triangle in the middle
+// 	&:after {
+// 		@include triangle(lighten($base-grey,20%), 8px, 12px, bottom);
+// 		margin: auto;
+// 		right: 8px;
+// 	}
+// 	// reset the select element
+// 	select {
+// 		border: 0;
+// 		padding: gutter(.5) gutter(.5);
+// 		width: 100%;
+// 		display: block;
+// 	}
+// }
 
-.form__toggle {
-	// this doesn't work in jquery validation
-	// use absolute positioning instead of opacity/visibity/display/apperance
-	@include reset-input();
-	& + label {
-		&:before {
-			@include position(absolute, -3px null 0 0);
-			transition: all .3s;
-			content: " ";
-			pointer-events: none;
-			width: 20px;
-			height: 20px;
-			margin: auto;
-			display: block;
-			border: 2px solid lighten($base-grey,40%);
-		}
-	}
-	&:checked + label {
-		&:before {
-			box-shadow: 0 0 0 5px $white inset;
-			background-color: $black;
-		}
-	}
-}
+// .form__toggle {
+// 	// this doesn't work in jquery validation
+// 	// use absolute positioning instead of opacity/visibity/display/apperance
+// 	@include reset-input();
+// 	& + label {
+// 		&:before {
+// 			@include position(absolute, -3px null 0 0);
+// 			transition: all .3s;
+// 			content: " ";
+// 			pointer-events: none;
+// 			width: 20px;
+// 			height: 20px;
+// 			margin: auto;
+// 			display: block;
+// 			border: 2px solid lighten($base-grey,40%);
+// 		}
+// 	}
+// 	&:checked + label {
+// 		&:before {
+// 			box-shadow: 0 0 0 5px $white inset;
+// 			background-color: $black;
+// 		}
+// 	}
+// }
 
-// <div class="form__group">
-//   <input type="radio" name="radio" id="radio1" class="form__toggle form__toggle--radio">
-//   <label for="radio1" class="form__label form__label--toggle">Yup</label>
-//   <input type="radio" name="radio" id="radio2" class="form__toggle form__toggle--radio">
-//   <label for="radio2" class="form__label form__label--toggle">Nope</label>
-// </div>
-.form__toggle--radio {
-	& + label {
-		&:before {
-			border-radius: 100%;
-		}
-	}
-	// checked sate
-	// &:checked + label {
-	// 	&:before {
-	// 		box-shadow: 0 0 0 5px $white inset;
-	// 		background-color: $black;
-	// 	}
-	// }
-}
+// // <div class="form__group">
+// //   <input type="radio" name="radio" id="radio1" class="form__toggle form__toggle--radio">
+// //   <label for="radio1" class="form__label form__label--toggle">Yup</label>
+// //   <input type="radio" name="radio" id="radio2" class="form__toggle form__toggle--radio">
+// //   <label for="radio2" class="form__label form__label--toggle">Nope</label>
+// // </div>
+// .form__toggle--radio {
+// 	& + label {
+// 		&:before {
+// 			border-radius: 100%;
+// 		}
+// 	}
+// 	// checked sate
+// 	// &:checked + label {
+// 	// 	&:before {
+// 	// 		box-shadow: 0 0 0 5px $white inset;
+// 	// 		background-color: $black;
+// 	// 	}
+// 	// }
+// }
 
-// <div class="form__group">
-//   <input type="checkbox" name="check1" id="check1" class="form__toggle form__toggle--check">
-//   <label for="check1" class="form__label form__label--toggle">Yup</label>
-//   <input type="checkbox" name="check2" id="check2" class="form__toggle form__toggle--check">
-//   <label for="check2" class="form__label form__label--toggle">Yup</label>
-// </div>
-.form__toggle--check {
-	// & + label {
-	// 	&:before {
-	// 	}
-	// }
+// // <div class="form__group">
+// //   <input type="checkbox" name="check1" id="check1" class="form__toggle form__toggle--check">
+// //   <label for="check1" class="form__label form__label--toggle">Yup</label>
+// //   <input type="checkbox" name="check2" id="check2" class="form__toggle form__toggle--check">
+// //   <label for="check2" class="form__label form__label--toggle">Yup</label>
+// // </div>
+// .form__toggle--check {
+// 	// & + label {
+// 	// 	&:before {
+// 	// 	}
+// 	// }
 
-	// checked sate
-	// &:checked + label {
-	// 	&:before {
-	// 		box-shadow: 0 0 0 5px $white inset;
-	// 		background-color: $black;
-	// 	}
-	// }
-}
+// 	// checked sate
+// 	// &:checked + label {
+// 	// 	&:before {
+// 	// 		box-shadow: 0 0 0 5px $white inset;
+// 	// 		background-color: $black;
+// 	// 	}
+// 	// }
+// }
 
 

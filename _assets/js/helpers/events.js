@@ -1,28 +1,7 @@
-import assignIn from 'lodash.assignin';
-import Concert from 'concert';
-
-/* example usage 
-
-import events from '../helpers/events';
-events.on('add:onions', function() {
-	console.log('add:onions event called');
-})
-
-function beltingFunction() {
-	events.trigger('add:onions')
-}
-
-*/
+import Concert from 'concert'
 
 function Events() {}
 
-assignIn(
-    Events.prototype,
-    Concert
-)
+Object.assign(Events.prototype, Concert)
 
-const _events = new Events();
-
-export default _events;
-
-
+export const events = new Events()

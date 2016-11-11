@@ -5,60 +5,64 @@
 //  */
 
 //@include baseline();
-//@include type-reveal();
+@include type-reveal();
 
 html {
     @include font-baseline();
+
+    @include mq(768, min) {
+			@include font-size(18, 32);
+    }
 }
 
 html,body {
-	font-family: 'Raleway', sans-serif;
+	font-family: map-get($fonts, regular);
 }
 
 body {
-	@include font-type('base');
 	@include font-size($base-font-size);
 	font-style: normal;
 	font-weight: normal;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	color: c(type, base);
 }
 
 
 h1,.heading-1 {
-	@include font-type(bold);
-	@include font-size(size(h3));
+	@include font-size(size(h1));
+	font-family: map-get($fonts, brand);
 	margin: 0 0 gutter(1);
 }
 
 
 h2,.heading-2 {
-	@include font-type(bold);
-	@include font-size(size(h4));
+	@include font-size(size(h2));
+	font-family: map-get($fonts, brand);
 	margin: 0 0 gutter(1);
 }
 
 h3,.heading-3 {
-	@include font-type(bold);
-	@include font-size(size(h5));
+	@include font-size(size(h3));
+	font-family: map-get($fonts, brand);
 	margin: 0 0 gutter(1);
 }
 
 h4,.heading-4 {
-	@include font-type(bold);
-	@include font-size(size(h6));
+	@include font-size(size(h4));
+	font-family: map-get($fonts, brand);
 	margin: 0 0 gutter(1);
 }
 
 h5,.heading-5 {
-	@include font-type(bold);
-	@include font-size(size(h6));
+	@include font-size(size(h5));
+	font-family: map-get($fonts, brand);
 	margin: 0 0 gutter(1);
 }
 
 h6,.heading-6 {
-	@include font-type(bold);
 	@include font-size(size(h6));
+	font-family: map-get($fonts, brand);
 	margin: 0 0 gutter(1);
 }
 
@@ -80,7 +84,12 @@ em {
 a {
 	text-decoration: none;
 	color: inherit;
+	transition: opacity .3s ease;
 	&:hover {
-		color: c(link,hover);
+		opacity: .5;
 	}
+}
+
+address {
+	font-style: normal;
 }

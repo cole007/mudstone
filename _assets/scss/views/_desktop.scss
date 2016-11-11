@@ -1,0 +1,29 @@
+// structure
+.gd {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+.gd__col--1-2 {
+	width: 50%;
+}
+
+.gd__col--1-3 {
+	width: 33.333%
+}
+
+
+.gd--modal {
+	margin-left: gutter(-3);
+
+	& > .gt__col {
+		padding-left: gutter(3);
+	}
+}
+
+.gd--contact {
+	.g__col {
+		margin: 0;
+	}
+}

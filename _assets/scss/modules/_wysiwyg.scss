@@ -3,6 +3,10 @@
 // no classes can be used
 .s-content {
 
+	a {
+		text-decoration: underline;
+	}
+
 	ul,ol {
 		margin: 0 0 gutter(1);
 		list-style: none;

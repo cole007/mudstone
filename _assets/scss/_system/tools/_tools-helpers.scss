@@ -375,6 +375,7 @@
 
 // menu button
 
+
 @mixin menu-icon-rotate($width: 30px, $height: 6px, $color: $white, $curve: true, $active_class: '.is-active', $gap: 2) {
     $exit_lenght: $height * 2;
     $bar_gaps: ($height * $gap) + 1;
@@ -398,7 +399,7 @@
             right: 0;
             bottom: 0;
             margin: auto;
-            z-index: 100001;
+            z-index: 1;
             @if $curve == true {
                 border-radius: $height;
             }
@@ -425,13 +426,14 @@
     }
     &.is-active {
         & > span {
-            &:before {
-                transform: translateY(-$exit_lenght) rotate(45deg);
-    
-            }
-            &:after {
-                transform: translateY(-$exit_lenght) rotate(-45deg);
-            }
+          background-color: transparent;
+          &:before {
+              transform: translateY(0) rotate(45deg);
+  
+          }
+          &:after {
+              transform: translateY(0) rotate(-45deg);
+          }
         }
     }
 }

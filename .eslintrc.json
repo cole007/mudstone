@@ -1,0 +1,44 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "globals": {
+        "ENV": true,
+        "$": true,
+        "jQuery": true,
+        "log": true,
+        "google": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "eqeqeq": ["error", "allow-null"],
+        "no-extra-bind": "error",
+        "no-implicit-globals": "off",
+        "no-redeclare": "error",
+        "no-var": "error",
+        "camelcase": ["error", { 
+            "properties": "never" 
+        }],
+        "no-plusplus": "error"
+    }
+}

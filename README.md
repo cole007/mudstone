@@ -1,90 +1,44 @@
 #Mudstone
 ![Mud](http://ournameismud.co.uk/css/images/maps-icon.png)
 
-**Mudstone**, gulp based web framework
+Frontend starter kit
+
+######Requirements
+- node >= 6.9.1
+- npm >= 3.3.12
+- gulp >= 3.91
+
+######Installation
+
+`npm install`
+
+######Development mode
+
+`npm start`
+
+######Minify css and javascript
+`npm run build`
 
 ##Gulp 
 
 * Compile sass (using libsass)
-* Compile ES6 with babel/browserify
-* Uglify and concatenate javascript assets
-* Sourcemaps
-* Optimise Images
-* Sprite generator
-* SVG sprites, with png sprite fallback
-* SVG symbol
-* Compile jade templates
-* Optimise css with uncss and clean css
-* Html validator
-* Critcal path css generator
-* Build task for deployment directory
-* Watch with Browsersync for live reload and server
+* Transpile es6 to es5 with rollup-babel-plugin
+* Javascript linting with eslint
+* Lossless image compression
+* SVG symbol generater
+* Compile pug templates (formerly jade) 
+* Compile scss (with postcss autoprefixer)
+* SCSS linting with gulp-sass-lint
+* Livereload and server with BrowserSync
 
-##SCSS 
+###Workflow 
 
-Boilerplate setup to use Bourbon (via node)
-Autoprefixer used for... wait for it... prefixing
+To begin development run `npm start`, this will rebuild all of the assets, start browsersync and watch all of the assets for changes. The css and javascript is unminified during development. Before deploying code to a production environment run `npm run build` to compress scss/js and remove any source maps.
 
-##Setup
+###NPM modules
 
-Make sure you have Node.js and gulp installed 
+For any npm modules that will be used in production use `npm install bla --save`, all other scripts (like gulp tasks) should be saved as dev dependencies (npm install bla --save-dev)
 
-######From the terminal run
-```
- npm install
- gulp init - this will run all of the tasks (sass, jade, scripts, sprites, fonts, images)
- gulp - starts server, watches css,js,jade et al
- 
-```
-
-See gulp/configs.js for paths and files
-
-##Folder Structure
-
-All of the site files are stored in the _assets directory
-
-During development (see gulp/config.js) files are published to a tmp directory
-
-For production every is built in the deploy directory
-
-##Javascript
-
--  /_assets/js/app.js is the main entry point
--  /_assets/js/dependencies/* contains the namespace function the data-behaviour method
--  /_assets/js/helpers/* small utility functions
--  /_assets/js/behaviours/* page behaviours, modules etc
--  /_assets/plugins/* any scripts that need to be bundled before browserfy (jquery plugins)
--  /_assets/libs/* any libraries that need to be included in the head (such as moderniz),
-
-The data-behaviour method provides the vanilla js dom node.  If you need to use jquery methods you will need to wrap container in a jquery obect
-```
-function eg(container) {
-	$(container).addClass('is-active')
-} 
-```
-
-## NPM packages included:
-
-- lodash (debounce, throttle, template) (https://www.npmjs.com/package/lodash)
-- webfontloader (https://www.npmjs.com/package/webfontloader)
-- local-links (https://www.npmjs.com/package/local-links)
-- verge (https://www.npmjs.com/package/verge)
-- lazysizes (https://github.com/aFarkas/lazysizes)
-- tweezer (https://github.com/jaxgeller/tweezer.js) 
-- wallop (https://github.com/peduarte/wallop)
-- lory-js (http://meandmax.github.io/lory/)
-- plyr (https://plyr.io)
-- hammerjs (http://hammerjs.github.io/)
-- imagesloaded (http://imagesloaded.desandro.com/)
-- google-maps (https://www.npmjs.com/package/google-maps)
-
-To use a NPM module use the es6 import syntax
-
-`import _ from 'lodash';`
-
-## Non es6/common js plugins
-
-If you need to use any old school plugins, you now can.  Any files in 'js/plugins' will be merged together and concatenated to the start of the final output js file.
 
 ##Git methodology
 

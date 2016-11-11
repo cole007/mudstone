@@ -18,6 +18,7 @@ docs
 tmp
 reports
 
+deploy/public/imager
 deploy/public/images
 deploy/public/resources
 deploy/public/downloads

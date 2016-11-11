@@ -3,6 +3,10 @@
 	position: relative;
 }
 
+.u-b {
+	display: block;
+}
+
 .u-left {
 	float: left;
 }
@@ -11,35 +15,51 @@
 	float: right;
 }
 
-// grid 
+.u-bg-light {
+	color:c(bg,dark);
+	background-color:c(bg,light);
+}
 
-.g-cf {
-	@include cf();
-	& > .g-col {
-		float: left;
+.u-bg-dark {
+	background-color: c(bg, dark);
+}
+
+.u-bg-what {
+	background-color: c(themes, what)
+}
+
+.u-bg-why {
+	background-color: c(themes, why)
+}
+ 
+.u-bg-who {
+	background-color: c(themes, who)
+}
+
+.u-bg-where {
+	background-color: c(themes, where)
+}
+
+.u-bg-whats {
+	background-color: c(themes, whats)
+}
+
+.u-faux-link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.u-bg-vodafone {
+	background-color:#e60000;
+	a {
+		&:hover {
+			color:$black;
+		}
 	}
-}
-
-.g-fx {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.g-fx--column {
-	flex-direction: column;
-}
-
-.g-fx--row {
-	flex-direction: row;
-}
-
-.g-fx--wrap {
-	flex-wrap: wrap;
-}
-
-.g-center {
-	margin-left: auto;
-	margin-right: auto;
 }
 
 // panels
@@ -109,4 +129,12 @@
 
 .u-xlist {
 	list-style: none;
+}
+
+
+
+// responsive
+
+.u-tablet {
+	display:none;
 }

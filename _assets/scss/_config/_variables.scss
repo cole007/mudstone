@@ -7,7 +7,7 @@ $svg-sprite:                    '../images/svg-sprite.svg';
 
 // Typography
 $base-font-size:                16;
-$base-line-height:              12;
+$base-line-height:              27;
 $browser-default-font-size:     16;
 $magic-number:                  $base-line-height;
 $magic-ratio:                   $base-line-height / $base-font-size;
@@ -34,24 +34,28 @@ $major-twelfth:                 3;
 $double-octave:                 4;
 
 // units added later
-$modular-scale-ratio:           $major-third;
+$modular-scale-ratio:           $major-second;
 $modular-scale-base:            $base-font-size;
 
 $font-size: (
-    h1:                         ms(6),
-    h2:                         ms(5),
-    h3:                         ms(4),
-    h4:                         ms(3),
-    h5:                         ms(2),
-    h6:                         ms(1)
+    h1:                         ms(7),
+    h2:                         ms(6),
+    h3:                         ms(5),
+    h4:                         ms(4),
+    h5:                         ms(3),
+    h6:                         ms(2)
 );
 
+$fonts: (
+  brand: ("fatfrank",sans-serif),
+  regular: ("semplicitapro",sans-serif)
+);
 
 // Grid
 $base-max-width:                1280px;
 $base-max-columns:              12;
 $current-breakpoint:            base;
-$base-padding:                  20;
+$base-padding:                  $base-font-size;
 
 $base-grid-gutter:              $base-padding;
 
@@ -71,15 +75,16 @@ $base-grey:                     #706f6f;
 $palettes: (
     bg: (
       body:                     #e5e5e5,
-      dark:                     $base-grey,
-      light:                    #f2f2f2
+      dark:                     #00234b,
+      light:                    #f2f4f6,
+      dropdown:                 #ccd3db
     ),
     themes: (
-        contact:                #ff0031,
-        blog:                   #37cecd,
-        service:                #00afff,
-        about:                  #ffc627,
-        case:                   #6be361,
+        what:                   #2d6e87,
+        why:                    #ff9641,
+        who:                    #82a087,
+        where:                  #ffbe32,
+        whats:                  #96b9dc,
     ),
     std: (
         base:                   #4A90E2,
@@ -87,6 +92,13 @@ $palettes: (
     ),
     link: ( 
       hover:                    #ff0031
+    ),
+    type: (
+      base:                     #00234b,
+      light:                    #8091a5
+    ),
+    form: (
+      upload:                   #bfc8d2
     )
 );
 
@@ -108,3 +120,8 @@ $breakpoints: (
   desktop-large:                1600
 );
 
+
+
+$scale: 129 / 240;
+
+$header-height: 82px;

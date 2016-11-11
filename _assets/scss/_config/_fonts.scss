@@ -10,14 +10,3 @@
   }
 }
 
-
-@mixin std-border($position: all, $color: $base-grey, $weight: 1px, $style: solid) {
-  @if $position == all {
-    border: $weight $style $color;
-  } @else {
-    border-#{$position}: $weight $style $color;
-  }
-}
-
-
-

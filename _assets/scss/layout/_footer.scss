@@ -1,2 +1,6 @@
 // max nesting = 2
-.site-footer {}
+.site-footer {
+	@include font-size(16, 28)
+	text-align: center;
+}
+

@@ -1,1 +1,194 @@
 // structure
+.gt {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.gt--gutters {
+	margin-left: gutter(-1);
+	
+	& > .gt__col {
+		padding-left: gutter(1);
+	}
+}
+
+.gt__col--1-2 {
+	width: 50%;
+}
+
+.gt__col--auto {
+	width: auto;
+	margin: 0 gutter(1);
+}
+
+.gt__col--1-3 {
+	width: 33.3333%;
+}
+
+.gt__col--2-3 {
+	width: 66.6666%;
+}
+
+.gt--contact,
+.gt--footer,
+.gt--jobs,
+.gt--values {
+	justify-content: center;
+	align-items: center;
+}
+
+.gt--footer {
+	flex-direction: row;
+}
+
+.gt--contact {
+	.gt__col {
+		margin-bottom: gutter(2);
+	}
+}
+
+.gt--modal {
+	margin-left: gutter(-1.5);
+
+	& > .gt__col {
+		padding-left: gutter(1.5);
+	}
+}
+
+
+.gt--footer {
+	.gt__col {
+		margin-bottom: 0;
+	}
+}
+
+.gt--pager {
+	justify-content: center;
+}
+
+.gt__col--values {
+	width: 30%;
+	margin: 0 gutter(.5) gutter(1)
+}
+
+.gt__col--social {
+	margin-left: gutter(4);
+	margin-right: gutter(4);
+	order: 0;
+}
+
+.gt--end  {
+	justify-content: flex-end;
+}
+
+.gt--profile {
+	display: flex;
+	flex-direction: column;
+}
+
+.client-links {
+	transform: none;
+	top: auto;
+	bottom: 0;
+	height: auto;
+}
+
+.client-links__wrapper {
+	font-size: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+}
+
+
+.client-links__list {
+	max-height: none;
+	transition: transform;
+	height: auto;
+	margin: 0;
+	background: none;
+	overflow: auto;
+	width: 100%;
+}
+
+
+.client-links__item {
+	height: auto;
+	display: inline-block;
+	vertical-align: bottom;
+	padding: 0;
+	&.is-active {
+		background-color: c(bg, light);
+		display: inline-block;
+	}
+}
+
+.client-pagination {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+}
+
+.client-pagination__item {
+	display: inline-block;
+}
+
+.client-links__link {
+	@include font-size($base-font-size, false)
+  padding: gutter(1.5) gutter(2);
+}
+
+.client-links {
+	&.is-active {
+
+		.client-pagination {
+			display: block;
+		}
+
+		.client-links__wrapper {
+			overflow: hidden;
+		}
+	}
+}
+
+
+/// client thinger
+
+.dropdown,
+.dropdown__btn {
+	display: none;
+}
+
+
+// utils
+
+.client-links__mask {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 60px;
+	background-image: linear-gradient(to left, c(themes, what), rgba(c(themes, what), 0));
+}
+
+.u-tablet {
+	display:block;
+}
+
+.u-mob {
+	display:none;
+}
+
+.u-bg-vodafone {
+	.client-links__mask {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 60px;
+		background-image: linear-gradient(to left, #e60000, rgba(#e60000, 0));
+	}
+}

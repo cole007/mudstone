@@ -12,57 +12,57 @@
  * This is the same as static except the url variable is used 
  * as a proxy for browsersync
  */
-const state = 'dev'; 
+const state = 'dev' 
+
 /*
  * src directories
  */
-const assets = './_assets/';
+const assets = './_assets/'
 /*
  * Build directory conditionals, based on state
 */ 
-const public_html = 'public';
-const build = (state === 'dev') ? `tmp/${public_html}/_assets/` : `deploy/${public_html}/_assets/`;
-const root = (state === 'dev') ? `tmp/${public_html}/` : `deploy/${public_html}/`;
-// where should the jade templates be built, usually root, except when state === cms
-const url = 'local.ournameismud.co.uk';
+const public_html = 'public'
+const build = (state === 'dev') ? `tmp/${public_html}/_assets/` : `deploy/${public_html}/_assets/`
+const root = (state === 'dev') ? `tmp/${public_html}/` : `deploy/${public_html}/`
+// where should the pug templates be built, usually root, except when state === cms
+const url = 'www.bla.com'
+const craftSourcePath = `./deploy/craft/templates/includes/`
 
 /*
  * Default browsersync settings, 
 */ 
-var server = { 
+let browserSync = { 
       server: {
           baseDir: root,
-          directory: false
+          directory: false,
+          index: 'index.html'
       },
-      notify: false,
-      index: "index.html"
-    };
+      notify: false
+    }
 
-var jadeDest = root;
-var tagSrc = `./${root}*.html`;
-var tagDest = root;
+let pugDest = root
+let tagSrc = `./${root}*.html`
+let tagDest = root
 
 /*
- * Jade Build directory conditionals, based on state
+ * pug Build directory conditionals, based on state
  * CMS state Browsersync settings
 */ 
 switch (state) {
-  case "dev":
-    jadeDest = root;
-    break;
-  case "static":
-    jadeDest = `deploy/${public_html}/`;
-    break;
-  case "cms":
-    jadeDest = '_assets/jade/dist/';
+  case "static": {
+    pugDest = `deploy/${public_html}/`
+    break
+  }
+  case "cms": {
+    pugDest = '_assets/html/dist/'
     tagSrc = './deploy/craft/templates/wrapper/_layout.twig',
-    tagDest = './deploy/craft/templates/wrapper/';
-    server = {
+    tagDest = './deploy/craft/templates/wrapper/'
+    browserSync = {
       proxy: url,
-      notify: false,
-      startPath: "index.html"
-    };
-    break;
+      notify: false
+    }
+    break
+  }
 }
 /*
  * Autoprefix browser suppport
@@ -70,21 +70,25 @@ switch (state) {
 const AUTOPREFIXER_BROWSERS = [
       'ie >= 9',
       'ie_mob >= 10',
-      'ff >= 40',
-      'chrome >= 47',
+      'ff >= 45',
+      'chrome >= 50',
       'safari >= 7',
       'opera >= 33',
       'ios >= 7',
       'android >= 4.4',
       'bb >= 10'
-    ];
+    ]
 /*
  * module exports
  * variables used by gulp tasks, see the tasks folder
  */
 const config = {
  
-  browserSync: server,
+  browserSync,
+
+  state,
+
+  url,
  
   sass: {
     src: [`${assets}scss/*.scss`],
@@ -93,25 +97,31 @@ const config = {
     watch: `${assets}scss/**/**/*.scss`,
     options: {
       outputStyle: 'expanded'
+    },
+    lint: {
+      ignore: [`${assets}scss/_system/**/*.scss`],
+      include: [`${assets}scss/base/*.scss`]
     }
+  },
+
+  craft: {
+    watch: './deploy/craft/templates/**/**/**.*'
   },
   
   js: {
     src: `${assets}js/app.js`,
-    libs: [`${assets}js/libs/jquery-3.1.1.min.js`, `${assets}js/libs/polyfills.js`, `${assets}js/plugins/*.js`],
-    path: `${assets}js/`,
-    libsOutput: 'libs.js',
+    watch: `${assets}js/**/**/*.js`,
     output: 'app.js',
     // temp files for devleoping
-    tmp: `${build}js/deps`,
     // build dest for final output
     dest: `${build}js/dist`,
     // scripts for the <head> section
-    deps: [`${assets}js/libs/modernizr.min.js`, `${assets}js/libs/picturefill.min.js`],
-    depsDest: `${build}js/libs/`,
-    // html tags
-    prodTag: '/_assets/js/dist/app.js',
-    devTag: ['/_assets/js/deps/libs.js', '/_assets/js/dist/app.js']
+    libs: [`${assets}js/libs/modernizr.min.js`],
+    libsDest: `${build}js/libs/`,
+
+    lint: {
+      ignore: `${assets}js/libs/*.js`
+    }
   },
   
   // jpegs/pngs/etc
@@ -126,10 +136,10 @@ const config = {
     iconTemplate: `${assets}scss/_system/_tpl/_svg-symbols.scss`,
     cssPath: `${assets}scss/_system/gulp/`,
     cssOutput: '_svg-symbols.scss',
-    fileDest: `${assets}images/svg-symbols/output/`,
+    fileDest: state === 'dev' ? `${assets}html/pug/_includes/` : craftSourcePath,
     file: `${assets}images/svg-symbols/source.html`,
-    fileName: 'source.html',
-    jadeDest: `${assets}jade/source/_includes`
+    fileName: state === 'dev' ? 'source.pug' : '_source.twig',
+    pugDest: `${assets}html/pug/_includes`
   },
   //svg sprites/assets
   svg: {
@@ -141,32 +151,38 @@ const config = {
     pngs: `${assets}images/png-sprites`,
     assets: `${assets}images/svg-assets/*.svg`
   },
-  // png sprite assets 
-  sprites: {
-    data: `${assets}images/png-sprites/*.png`,
-    imgName: 'png-sprite.png',
-    cssName: '_png-sprites.scss',
-    imgPath: '../images/png-sprite.png',
-    spriteDataImg: `${build}images`,
-    spriteDataCss: `${assets}scss/_system/gulp/`
-  },
  
   uncss: {
-    css: `${build}css/style.css`,
+    src: `${build}css/style.css`,
     html: `${root}**/*.html`,
     dest: `${build}css`
   },
+  
+  critical: {
+    inline: true,
+    base: './',
+    src: 'index.html',
+    dest: 'dist/index-critical.html',
+    minify: true,
+    width: 1200,
+    height: 480
+  },
  
-  jade: {
-    src: `${assets}jade/source/*.jade`,
-    watch: `${assets}jade/source/**/*.jade`,
-    dest: jadeDest,
-    basedir: `${assets}jade/source`
+  pug: {
+    src: `${assets}html/pug/*.pug`,
+    watch: `${assets}html/pug/**/*.pug`,
+    dest: pugDest,
+    basedir: `${assets}html/pug`
   },
 
   fonts: {
     src: `${assets}fonts/*.*`,
     dest: `${build}fonts/`
+  },
+
+  video: {
+    src: `${assets}video/*.*`,
+    dest: `${build}video/`
   },
 
   webfontcss: {
@@ -181,7 +197,7 @@ const config = {
 
   favicons: {
     src: `${assets}favicons/*`,
-    dest: `${build}favicons/`
+    dest: root
   },
  
   json: {
@@ -192,9 +208,12 @@ const config = {
   template: {
     src: `${assets}js/template/*.html`,
     dest: `${build}js/template/`
+  },
+
+  clean: {
+   assets: build,
+   html: pugDest
   }
+}
 
-};
-
-
-export default config;
+export default config

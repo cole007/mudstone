@@ -98,7 +98,7 @@ AddType text/x-component .htc
     RewriteCond $1 !\.(gif|jpe?g|png)$ [NC]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ /index.php?/$1 [L]
+    RewriteRule ^(.*)$ /index.php?/$1 [L, QSA]
 
     # If 404s, "No Input File" or every URL returns the same thing
     # make it /index.php?/$1 above (add the question mark)

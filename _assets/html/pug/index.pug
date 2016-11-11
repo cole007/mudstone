@@ -1,0 +1,32 @@
+//- load accordion__content into the layout
+extends _wrapper/_layout
+//- define the block of accordion__content to be placed in the extend
+block vars
+	-var pageTitle = 'Home page'
+	-var slug = 'index'
+	-var bodyClass = ''
+
+block content
+	
+	.grid
+		.col HELLO
+		.col HELLO
+		.col HELLO
+		.col HELLO
+		.col HELLO
+		.col HELLO
+
+	.grid2
+		.col HELLO 2
+		.col HELLO 2
+		.col HELLO 2
+		.col HELLO 2
+		.col HELLO 2
+
+
+
+	.slice
+		.map#map_canvas(data-behaviour="map")
+	.slice
+		.video(data-behaviour="video")
+			div(data-type="vimeo" data-video-id="3910317")

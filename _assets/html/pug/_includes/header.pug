@@ -1,0 +1,20 @@
+header.site-header(data-behaviour="mobileMenu")
+	.wrapper.g.g--header
+		a(href="/") MudStone
+		nav.menu#menu
+			a.menu__btn.js-mobile-nav-btn(data-target="#menu" href="#")
+				span
+			.js-menu-wrapper.menu__wrapper
+				ul.nav.js-menu-container
+					li.menu__item
+						a.menu__link(href="#" class=`${slug === 'page-1' ? 'is-current' : ''}`) Page 1
+					li.menu__item
+						a.menu__link(href="#" class=`${slug === 'page-2' ? 'is-current' : ''}`) Page 2
+					li.menu__item
+						a.menu__link(href="#" class=`${slug === 'page-3' ? 'is-current' : ''}`) Page 3
+					li.menu__item
+						a.menu__link(href="#" class=`${slug === 'page-4' ? 'is-current' : ''}`) Page 4
+					li.menu__item
+						a.menu__link(href="#" class=`${slug === 'page-5' ? 'is-current' : ''}`) Page 5
+					li.menu__item
+						a.menu__link(href="#" class=`${slug === 'page-6' ? 'is-current' : ''}`) Page 6
