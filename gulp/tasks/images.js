@@ -3,7 +3,6 @@ import gulp from 'gulp'
 import svgmin from 'gulp-svgmin'
 import imagemin from 'gulp-imagemin'
 import handleErrors from '../util/handleErrors'
-import browserSync from 'browser-sync'
 import webp from 'gulp-webp'
 import config from '../config'
 
@@ -14,8 +13,8 @@ gulp.task('images', () => {
 	return gulp.src($images.src)
 		.pipe(changed($images.dest))
 		.pipe(imagemin())
+		.on('error', handleErrors)
 		.pipe(gulp.dest($images.dest))
-		.pipe(browserSync.reload({stream:true}))
 })
 
 

@@ -1,8 +1,6 @@
 $ie: false; // using  node-bourbon, see ./gulp/config.js
 @import "bourbon"; // gulp generated scss
 // stores variables used by svg/icon mixins
-@import '_system/gulp/png-sprites';
-@import '_system/gulp/svg-sprites';
 @import '_system/gulp/svg-symbols'; // functions
 @import '_system/tools/tools-functions'; // Libraries and dependencies
 // latest version of normalize - with img/fieldset
@@ -25,7 +23,6 @@ $ie: false; // using  node-bourbon, see ./gulp/config.js
 @import 'base/tables';
 @import 'base/buttons';
 @import 'base/icons';
-@import 'base/list'; // layout and structure
 // Maximum 2 levels of specificity
 @import 'layout/header';
 @import 'layout/footer';
@@ -35,43 +32,7 @@ $ie: false; // using  node-bourbon, see ./gulp/config.js
 @import 'modules/map';
 @import 'modules/video';
 @import 'modules/wysiwyg';
-// views, mediaquery stuff
-// Maximum 3 levels of specificity
-
-body:before {
-  content: "mobile";
-  display: none;
-  /* Prevent from displaying. */
-}
 // utils - these should generally trump other selectors,
 // important is fine here
 @import 'utils/utils';
-@media screen and (min-width:540px) {
-  // don't expose 540 breakpoint to Viewport helper utility
-  // unless you want to
-  // body:before {
-  // 	content: "540";
-  // }
-  @import 'views/540-up';
-}
-
-@media screen and (min-width:768px) {
-  body:before {
-    content: "tablet";
-  }
-  @import 'views/768-up';
-}
-
-@media screen and (min-width:1024px) {
-  body:before {
-    content: "desktop";
-  }
-  @import 'views/desktop';
-}
-
-@media screen and (min-width:1200px) {
-  @import'views/1200-up';
-}
-// final exceptions/shame
-@import 'views/exceptions';
 @import 'print';

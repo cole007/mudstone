@@ -16,8 +16,10 @@ files:
   include: '_assets/scss/**/*.s+(a|c)ss'
   ignore:
     - '_assets/scss/_system/**/*.*'
+    - '_assets/scss/_config/*.*'
 # Rule Configuration
 rules:
+  space-after-colon: 2
   extends-before-mixins: 2
   extends-before-declarations: 2
   placeholder-in-extend: 2
@@ -31,12 +33,12 @@ rules:
   no-warn: 1
   no-debug: 1
   no-ids: 2
-  no-important: 2
-  hex-notation:
-    - 2
-    -
-      style: uppercase
+  # no-important: 2
+  # hex-notation:
+  #   - 2
+  #   -
+  #     style: uppercase
   indentation:
     - 2
     -
-      size: 2
+      size: 'tab'

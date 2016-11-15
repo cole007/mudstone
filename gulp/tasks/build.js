@@ -15,17 +15,11 @@ const $tags = config.tags
 const $js = config.js
 const $sass = config.sass
 
-gulp.task('bust-cache', () => {
-	gulp.src($tags.src)
-		.pipe(htmlreplace({
-			'js': `${$js.build}/${$js.output}?v=${Date.now()}`,
-			'css': `${$sass.build}/${$sass.output}?v=${Date.now()}`
-		}, {
-			keepBlockTags: true
-		}))
-		.pipe(gulp.dest($tags.dest))
-})
-
+const date = Date.now()
+const cacheAssets = {
+	'js': `${$js.build}/${$js.output}?v=${date}`,
+	'css': `${$sass.build}/${$sass.output}?v=${date}`
+}
 
 
 gulp.task('build-video', () => gulp.src($video.src).pipe(gulp.dest($video.dest)))
@@ -35,22 +29,57 @@ gulp.task('build-favicons', () => gulp.src($favicons.src).pipe(gulp.dest($favico
 gulp.task('build-json', () => gulp.src($json.src).pipe(gulp.dest($json.dest)))
 gulp.task('build-template', () => gulp.src($template.src).pipe(gulp.dest($template.dest)))
 
-gulp.task('init', () => {
+gulp.task('build-images', () => {
 	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
 		runSequence(
-			'symbols', [
-				'images',
-				'svg-assets',
-				'build-webfontcss',
-				'build-favicons',
-				'build-video',
-				'build-fonts'
-			],
-			'move-scripts',
-			'scripts',
-			'sass',
-			'pug')
+			'symbols',
+			'images',
+			'svg-assets'
+		)
 	})
 })
 
-gulp.task('build-production', ['sass', 'scripts', 'bust-cache'])
+
+gulp.task('build-etc', () => {
+	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
+		runSequence(
+			'build-webfontcss',
+			'build-favicons',
+			'build-video',
+			'build-fonts'
+		)
+	})
+})
+
+
+gulp.task('build-scripts', () => {
+	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
+		runSequence(
+			'move-scripts',
+			'scripts'
+		)
+	})
+})
+
+gulp.task('build-fresh', () => {
+	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
+		runSequence(
+			'build-images',
+			[
+				'build-etc',
+				'build-scripts',
+				'sass',
+				'pug'
+			])
+	})
+})
+
+gulp.task('fresh-cache', () => {
+	gulp.src($tags.src)
+		.pipe(htmlreplace(cacheAssets, {
+			keepBlockTags: true
+		}))
+		.pipe(gulp.dest($tags.dest))
+})
+
+gulp.task('build-production', ['sass', 'scripts', 'fresh-cache'])

@@ -1,8 +1,7 @@
-/*
- * Main Task: gulp sass
- * compile scss
- */
+
+
 import gulp from 'gulp'
+import fs from 'fs'
 import sass from 'gulp-sass'
 import sourcemaps from 'gulp-sourcemaps'
 import handleErrors from '../util/handleErrors'
@@ -13,6 +12,7 @@ import uncss from 'gulp-uncss'
 import critical from 'critical'
 import config from '../config'
 import gulpif from 'gulp-if'
+import writeSVG from 'postcss-write-svg'
 import {
 	includePaths
 } from 'node-bourbon'
@@ -55,6 +55,9 @@ gulp.task('sass', () => {
 		})))
 		.pipe(postcss([
 			lost(),
+			writeSVG({
+				encoding: 'base64'
+			}),
 			autoprefixer({
 				browsers: $sass.prefix
 			})
@@ -70,7 +73,7 @@ gulp.task('sass', () => {
 gulp.task('uncss', () => {
 	return gulp.src($uncss.src)
 		.pipe(uncss({
-			html: JSON.parse(require('fs').readFileSync('./sitemap.json', 'utf-8')),
+			html: JSON.parse(fs.readFileSync('./sitemap.json', 'utf-8')),
 			ignore: [/\.no-\w+/g, /\.is-\w+/g, /\.plyr\w+/g, /\.lazy\w+/g]
 		}))
 		.pipe(cssnano())
@@ -88,7 +91,7 @@ const {
 	height
 } = $critical
 
-gulp.task('critical', (cb) => critical.generate({
+gulp.task('critical', () => critical.generate({
 	inline,
 	base,
 	src,

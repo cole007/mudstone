@@ -26,7 +26,7 @@ gulp.task('watch', () => {
 	watch(config.images.src, () =>  gulp.start('images', reload))
 	// watch svg symbols
 	watch(config.svgSymbols.src, () => gulp.start('symbols', reload))
-	// watch svg assets 
+	// watch svg assets
 	watch(config.svg.assets, () => gulp.start('svg-assets', reload))
 	// watch craft
 	watch(config.craft.watch, reload)
