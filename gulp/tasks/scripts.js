@@ -1,3 +1,5 @@
+/*eslint no-undef: "error"*/
+
 import gulp from 'gulp'
 import rollup from 'rollup-stream'
 import babel from 'rollup-plugin-babel'
@@ -9,7 +11,6 @@ import uglify from 'rollup-plugin-uglify'
 import config from '../config'
 import source from 'vinyl-source-stream'
 import handleErrors from '../util/handleErrors'
-import gulpif from 'gulp-if'
 
 const $js = config.js
 
@@ -22,7 +23,7 @@ const options = {
 		resolve({
 			jsnext: true,
 			main: true,
-			browser: true,
+			browser: true
 		}),
 		commonjs({
 			include: 'node_modules/**',
@@ -35,13 +36,13 @@ const options = {
 		}),
 		babel({
 			exclude: 'node_modules/**',
-			presets: ['es2015-rollup', 'stage-0'], 
+			presets: ['es2015-rollup', 'stage-0'],
 			plugins: [
-				"syntax-object-rest-spread",
-				"transform-es2015-parameters",
-				"transform-es2015-destructuring",
-				"transform-object-rest-spread"
-			], 
+				'syntax-object-rest-spread',
+				'transform-es2015-parameters',
+				'transform-es2015-destructuring',
+				'transform-object-rest-spread'
+			],
 			babelrc: false
 		}),
 		replace({

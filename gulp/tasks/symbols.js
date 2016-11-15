@@ -1,12 +1,9 @@
 import gulp from 'gulp'
 import svgmin from 'gulp-svgmin'
 import handleErrors from '../util/handleErrors'
-import browserSync from 'browser-sync'
 import inject from 'gulp-inject'
 import gulpif from 'gulp-if'
 import svgSymbols from 'gulp-svg-symbols'
-import runSequence from 'run-sequence'
-import del from 'del'
 import rename from 'gulp-rename'
 import config from '../config'
 
@@ -29,7 +26,7 @@ gulp.task('symbols',  () => {
 	function fileContents (filePath, file) {
 		return file.contents.toString()
 	}
-	
+
 	return gulp
 		.src($symbols.file)
 		.pipe(inject(svgs, { transform: fileContents }))

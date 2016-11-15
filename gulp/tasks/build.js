@@ -19,18 +19,16 @@ gulp.task('build-json', () => gulp.src($json.src).pipe(gulp.dest($json.dest)))
 gulp.task('build-template', () => gulp.src($template.src).pipe(gulp.dest($template.dest)))
 
 gulp.task('init', () => {
-	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then((paths) => {
-    console.log('Deleted files and folders:\n', paths.join('\n'))
+	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
 		runSequence(
-			'symbols', 
-				[
-					'images', 
-					'svg-assets', 
-					'build-webfontcss',
-					'build-favicons',
-					'build-video',
-					'build-fonts'
-				], 
+			'symbols', [
+				'images',
+				'svg-assets',
+				'build-webfontcss',
+				'build-favicons',
+				'build-video',
+				'build-fonts'
+			],
 			'move-scripts',
 			'scripts',
 			'sass',
