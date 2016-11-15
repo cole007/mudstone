@@ -51,8 +51,8 @@ let tagDest = root
 
 switch (state) {
   case 'static': {
-    pugDest = `deploy/${publicHtml}/`
-    break
+		pugDest = `deploy/${publicHtml}/`
+		break
   }
 	case 'cms':	{
 		pugDest = '_assets/html/dist/'
@@ -70,15 +70,15 @@ switch (state) {
  */
 
 const AUTOPREFIXER_BROWSERS = [
-  'ie >= 9',
-  'ie_mob >= 10',
-  'ff >= 45',
-  'chrome >= 50',
-  'safari >= 7',
-  'opera >= 33',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
+	'ie >= 9',
+	'ie_mob >= 10',
+	'ff >= 45',
+	'chrome >= 50',
+	'safari >= 7',
+	'opera >= 33',
+	'ios >= 7',
+	'android >= 4.4',
+	'bb >= 10'
 ]
 	/*
 	 * module exports
@@ -103,7 +103,9 @@ const config = {
 		lint: {
 			ignore: [`${assets}scss/_system/**/*.scss`],
 			include: [`${assets}scss/base/*.scss`]
-		}
+		},
+		output: ['style.css'],
+		build: `${assets}/css`
 	},
 
 	craft: {
@@ -123,7 +125,8 @@ const config = {
 
 		lint: {
 			ignore: `${assets}js/libs/*.js`
-		}
+		},
+		build: `${assets}/js/dist`
 	},
 
 	// jpegs/pngs/etc

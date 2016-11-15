@@ -8,7 +8,8 @@
         "$": true,
         "jQuery": true,
         "log": true,
-        "google": true
+        "google": true,
+        "process": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
@@ -36,8 +37,8 @@
         "no-implicit-globals": "off",
         "no-redeclare": "error",
         "no-var": "error",
-        "camelcase": ["error", { 
-            "properties": "never" 
+        "camelcase": ["error", {
+            "properties": "never"
         }],
         "no-plusplus": "error"
     }

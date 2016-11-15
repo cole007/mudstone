@@ -2,6 +2,7 @@ import gulp from 'gulp'
 import runSequence from 'run-sequence'
 import config from '../config'
 import del from 'del'
+import htmlreplace from'gulp-html-replace'
 
 const $fonts = config.fonts
 const $favicons = config.favicons
@@ -10,6 +11,22 @@ const $webfontcss = config.webfontcss
 const $template = config.template
 const $video = config.video
 const $clean = config.clean
+const $tags = config.tags
+const $js = config.js
+const $sass = config.sass
+
+gulp.task('bust-cache', () => {
+	gulp.src($tags.src)
+		.pipe(htmlreplace({
+			'js': `${$js.build}/${$js.output}?v=${Date.now()}`,
+			'css': `${$sass.build}/${$sass.output}?v=${Date.now()}`
+		}, {
+			keepBlockTags: true
+		}))
+		.pipe(gulp.dest($tags.dest))
+})
+
+
 
 gulp.task('build-video', () => gulp.src($video.src).pipe(gulp.dest($video.dest)))
 gulp.task('build-fonts', () => gulp.src($fonts.src).pipe(gulp.dest($fonts.dest)))
@@ -36,4 +53,4 @@ gulp.task('init', () => {
 	})
 })
 
-gulp.task('build-production', ['sass', 'scripts'])
+gulp.task('build-production', ['sass', 'scripts', 'bust-cache'])

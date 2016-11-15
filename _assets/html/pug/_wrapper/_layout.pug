@@ -15,9 +15,11 @@ doctype
 
         //- Remove script tag if modernizr is being used
         script var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");
+        // build:css
         link(rel='stylesheet', href='/_assets/css/style.css')
+        // endbuild
         include ../_includes/favicons
-            
+
         //- custom modernizr script, only tests for touch events
         //- script(src='/_assets/js/libs/modernizr.min.js')
     body(class=`${bodyClass !== undefined && bodyClass}`)
@@ -28,4 +30,6 @@ doctype
                     block content
             include ../_includes/footer
             include ../_includes/source
+        // build:js
         script(src='/_assets/js/dist/app.js')
+        // endbuild
