@@ -24,6 +24,7 @@ const $critical = config.critical
 
 gulp.task('sass', () => {
 	return gulp.src($sass.watch)
+		.on('error', handleErrors)
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sassLint({
 			options: {
 				formatter: 'stylish',
@@ -38,12 +39,18 @@ gulp.task('sass', () => {
 				ignore: '_assets/scss/_system/**/*.scss' // This will still be respected and read
 			}
 		})))
+		.on('error', handleErrors)
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sassLint.format()))
+		.on('error', handleErrors)
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sassLint.failOnError()))
+		.on('error', handleErrors)
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init()))
+		.on('error', handleErrors)
 		.pipe(sass({
 			outputStyle: $sass.options.outputStyle,
-			includePaths: ['/node_modules/modularscale-sass/stylesheets/_modular-scale.scss']
+			includePaths: [
+				'/node_modules/modularscale-sass/stylesheets/_modular-scale.scss'
+			]
 		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.write({
