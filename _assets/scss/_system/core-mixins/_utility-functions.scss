@@ -3,6 +3,10 @@
   @return $computed / $fs;
 }
 
+@function strip-units($value) {
+	@return $value / ($value * 0 + 1);
+}
+
 @function gutter($lines: 1, $gutter: $base-padding) {
   @if length($lines) == 1 {
     @return floor(($gutter * $lines) * 1px);

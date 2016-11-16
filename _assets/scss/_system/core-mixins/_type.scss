@@ -54,3 +54,11 @@
   font-size: $base-font-size / $browser-default-font-size + em;
   line-height: $base-line-height / $base-font-size; /* [2] */
 }
+
+
+@mixin baseline($baseline: $magic-number) {
+  html {
+    $size: strip-units($baseline);
+    background-image: url(http://basehold.it/i/#{$size});
+  }
+}
