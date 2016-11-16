@@ -68,6 +68,8 @@
     "lost": "^7.1.1",
     "modularscale-sass": "^2.1.1",
     "node-bourbon": "*",
+    "postcss-animation": "0.0.11",
+    "postcss-aspect-ratio": "^1.0.0",
     "postcss-transform-shortcut": "^1.0.0",
     "postcss-write-svg": "^2.1.0",
     "require-dir": "^0.3.0",
@@ -104,7 +106,7 @@
   },
   "name": "ournameismud.com",
   "description": "Mudstone 2.0",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "main": "gulpfile.babel.js",
   "author": "Dave Stockley",
   "license": "MIT"

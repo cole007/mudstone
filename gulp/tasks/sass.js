@@ -13,6 +13,8 @@ import critical from 'critical'
 import config from '../config'
 import gulpif from 'gulp-if'
 import writeSVG from 'postcss-write-svg'
+import aspectRatio from 'postcss-aspect-ratio'
+import animateCss from 'postcss-animation'
 import sassLint from 'gulp-sass-lint'
 import lost from 'lost'
 
@@ -51,6 +53,8 @@ gulp.task('sass', () => {
 			loadMaps: true
 		})))
 		.pipe(postcss([
+			animateCss(),
+			aspectRatio(),
 			lost(),
 			writeSVG({
 				encoding: 'base64'
