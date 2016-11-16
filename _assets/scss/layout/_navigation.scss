@@ -1,105 +1,13 @@
-// this is probably global styles
+/*
+  Mobile navigation/off canvas
+*/
+@include mq($until: breakpoint('desktop')) {
 
-.menu {
-	font-family: map-get($fonts, brand);
-	text-transform: uppercase;
 }
 
-.menu__link {
-	@include font-size(18, false);
+/*
+  Desktop navigation
+*/
+@include mq($from: breakpoint('desktop')) {
 
-	@include mq(480 768) {
-		@include font-size(modular-scale(2), false);
-	}
-
-	@include mq(768 960) {
-		@include font-size(modular-scale(4), false);
-	}
-
-	display: block;
-	transition: color .3s ease, background-color .3s ease;
-
-	&:hover {
-		opacity: 1;
-	}
-
-	&:focus,
-	&:hover,
-	&.is-current {
-		color: $white;
-	}
-}
-
-
-
-
-// this is probably desktop only
-// will add the media queries later bra
-
-.menu__btn {
-	@include menu-icon-rotate($width: 30px, $height: 3px, $color: $black, $curve: false, $active_class: '.is-active', $gap: 2.5);
-	display: block;
-	width: 40px;
-	height: 40px;
-	position: relative;
-}
-
-@include mq(960, max) {
-	.menu__wrapper {
-		position: fixed;
-		top: $header-height;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		display: flex;
-		// display: none;
-		flex-direction: column;
-		justify-content: center;
-		background-color: c(bg, light);
-		z-index: -1;
-		visibility: hidden;
-		opacity: 0;
-		transition: visibility 0s .3s, z-index 0s .3s, opacity .3s ease;
-		
-		
-		&.is-animating {
-			transition: visibility 0s .3s, z-index 0s .3s, opacity .3s ease;
-		}
-
-		&.is-visible {
-			opacity: 1;
-			visibility: visible;
-			z-index: 10;
-	
-			&.is-animating {
-				transition: visibility 0s, z-index 0s, opacity .3s ease;
-			}
-		}
-	}
-
-	.menu__item { 
-		margin: gutter(.5) 0;
-		text-align: center;
-	}
-
-	.menu__link {
-		padding: gutter(.5)
-	}
-}
-
-
-@include mq(961, min) {
-
-	.menu__btn {
-		display: none;
-	}
-
-
-	.menu__link {
-		padding: gutter(.5) gutter(.75);
-	}
-
-	.menu__item {
-		display: inline-block;
-	}	
 }

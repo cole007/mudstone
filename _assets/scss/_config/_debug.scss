@@ -1,7 +1,9 @@
 @if $debug == true {
   body {
     &:after {
-      @include position(fixed, null null 0 0);
+      position: fixed;
+      bottom: 0;
+      left: 0;
       font-size: 12px;
       background-color: $black;
       color: $white;
@@ -9,30 +11,6 @@
       display: block;
       padding: gutter(.25);
       z-index: 100001;
-      @each $name, $breakpoint in $breakpoints {
-        @include mq($breakpoint, min) {
-          content: '#{$name} => #{$breakpoint}';
-        }
-      }
     }
   }
-
-  @debug 'modular-scale(-4)' modular-scale(-4) + 'px';
-  @debug 'modular-scale(-3)' modular-scale(-3) + 'px';
-  @debug 'modular-scale(-2)' modular-scale(-2) + 'px';
-  @debug 'modular-scale(-1)' modular-scale(-1) + 'px';
-  @debug 'modular-scale(0)'  modular-scale(0) + 'px';
-  @debug 'modular-scale(1)'  modular-scale(1) + 'px';
-  @debug 'modular-scale(2)'  modular-scale(2) + 'px';
-  @debug 'modular-scale(3)'  modular-scale(3) + 'px';
-  @debug 'modular-scale(4)'  modular-scale(4) + 'px';
-  @debug 'modular-scale(5)'  modular-scale(5) + 'px';
-  @debug 'modular-scale(6)'  modular-scale(6) + 'px';
-  @debug 'modular-scale(7)'  modular-scale(7) + 'px';
-  @debug 'modular-scale(8)'  modular-scale(8) + 'px';
-  @debug 'modular-scale(9)'  modular-scale(9) + 'px';
-  @debug 'modular-scale(10)'  modular-scale(10) + 'px';
-  @debug 'modular-scale(11)'  modular-scale(11) + 'px';
-  @debug 'modular-scale(12)'  modular-scale(12) + 'px';
-  @debug 'modular-scale(13)'  modular-scale(13) + 'px';
 }

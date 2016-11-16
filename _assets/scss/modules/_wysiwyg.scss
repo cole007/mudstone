@@ -1,4 +1,4 @@
-// scoped styles 
+// scoped styles
 // Any content editabled region should be wrapper in this class
 // no classes can be used
 .s-content {
@@ -35,7 +35,7 @@
 			}
 		}
 	}
-	
+
 	p {}
 
 	a {
@@ -50,13 +50,11 @@
 	}
 
 	cite {
-		@include font-type(bold);
-		@include font-size(ms(-1));
 		font-style: normal;
 	}
 
 	img {}
-	
+
 	table {}
 
 	dl {}

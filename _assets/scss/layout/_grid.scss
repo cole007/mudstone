@@ -1,0 +1,60 @@
+/*
+  content property used by the viewport change event
+*/
+
+body:before {
+  content: "none";
+  display: none;
+}
+
+@each $break, $key in $breakpoints {
+  @include mq($from: breakpoint($break)) {
+    body:before {
+      content: '#{$break}';
+    }
+  }
+}
+
+/*
+  Core
+*/
+
+.g {
+
+}
+
+/*
+  Mobile, see config
+*/
+@include mq($from: breakpoint('mobile')) {
+  .gm {
+
+  }
+}
+
+/*
+  Tablet, see config
+*/
+@include mq($from: breakpoint('tablet')) {
+  .gt {
+
+  }
+}
+
+/*
+  Desktop, see config
+*/
+@include mq($from: breakpoint('desktop')) {
+  .gd {
+
+  }
+}
+
+/*
+  Wide, see config
+*/
+@include mq($from: breakpoint('wide')) {
+  .gw {
+
+  }
+}

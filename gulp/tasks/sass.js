@@ -13,9 +13,6 @@ import critical from 'critical'
 import config from '../config'
 import gulpif from 'gulp-if'
 import writeSVG from 'postcss-write-svg'
-import {
-	includePaths
-} from 'node-bourbon'
 import sassLint from 'gulp-sass-lint'
 import lost from 'lost'
 
@@ -44,7 +41,7 @@ gulp.task('sass', () => {
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init()))
 		.pipe(sass({
 			outputStyle: $sass.options.outputStyle,
-			includePaths
+			includePaths: ['/node_modules/modularscale-sass/stylesheets/_modular-scale.scss']
 		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.write({

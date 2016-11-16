@@ -15,35 +15,6 @@
 	float: right;
 }
 
-.u-bg-light {
-	color:c(bg,dark);
-	background-color:c(bg,light);
-}
-
-.u-bg-dark {
-	background-color: c(bg, dark);
-}
-
-.u-bg-what {
-	background-color: c(themes, what)
-}
-
-.u-bg-why {
-	background-color: c(themes, why)
-}
- 
-.u-bg-who {
-	background-color: c(themes, who)
-}
-
-.u-bg-where {
-	background-color: c(themes, where)
-}
-
-.u-bg-whats {
-	background-color: c(themes, whats)
-}
-
 .u-faux-link {
 	position: absolute;
 	top: 0;
@@ -52,17 +23,6 @@
 	height: 100%;
 	display: block;
 }
-
-.u-bg-vodafone {
-	background-color:#e60000;
-	a {
-		&:hover {
-			color:$black;
-		}
-	}
-}
-
-// panels
 
 // base class for all modules
 // ensures even spacing around the module
@@ -75,11 +35,7 @@
 	}
 }
 
-// effects
 
-.u-trans {
-	transition: all .3s;
-}
 
 // image replacement
 
@@ -117,24 +73,4 @@
 
 .u-text-left {
 	text-align: left;
-}
-
-// type branding!?
-.u-em {
-	
-}
-
-
-/// resets
-
-.u-xlist {
-	list-style: none;
-}
-
-
-
-// responsive
-
-.u-tablet {
-	display:none;
 }

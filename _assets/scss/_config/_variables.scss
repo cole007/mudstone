@@ -1,121 +1,65 @@
 // debugging
 $debug: false;
 
-// images
-$png-sprite: '../images/png-sprite.png';
-$svg-sprite: '../images/svg-sprite.svg';
 
-// Typography
+/*
+  typography
+*/
 $base-font-size: 16;
+$mq-base-font-size: $base-font-size * 1px;
 $base-line-height: 27;
 $browser-default-font-size: 16;
 $magic-number: $base-line-height;
 $magic-ratio: $base-line-height / $base-font-size;
 
-// Scaling Variables
-$golden: 1.618;
-$minor-second: 1.067;
-$major-second: 1.125;
-$minor-third: 1.2;
-$major-third: 1.25;
-$perfect-fourth: 1.333;
-$augmented-fourth: 1.414;
-$perfect-fifth: 1.5;
-$minor-sixth: 1.6;
-$major-sixth: 1.667;
-$minor-seventh: 1.778;
-$major-seventh: 1.875;
-$octave: 2;
-$major-tenth: 2.5;
-$major-eleventh: 2.667;
-$major-twelfth: 3;
-$double-octave: 4;
 
-// units added later
-$modular-scale-ratio: $major-second;
-$modular-scale-base: $base-font-size;
-
-$font-size: (
-  h1: ms(7),
-  h2: ms(6),
-  h3: ms(5),
-  h4: ms(4),
-  h5: ms(3),
-  h6: ms(2)
-);
-
+/*
+  Font stack
+*/
 $fonts: (
   brand: ("fatfrank",sans-serif),
   regular: ("semplicitapro",sans-serif)
 );
 
-// Grid
-$base-max-width: 1280px;
-$base-max-columns: 12;
-$current-breakpoint: base;
-$base-padding: $base-font-size;
 
-$base-grid-gutter: $base-padding;
-
-$grid-mobile-gutter: $base-padding / 2 * 1px;
-$grid-tablet-gutter: $base-padding * 1px;
-$grid-desktop-gutter: $base-padding * 1px;
+/*
+  Gutters
+*/
+$base-padding: 20;
 
 
-// Counter
-$counter: counter;
-
-// Colours
+/*
+  Colours
+*/
 $white: #fff;
 $black: #000;
-$base-grey: #706f6f;
-
 $palettes:(
   bg: (
     body: #e5e5e5,
     dark: #00234b,
-    light: #f2f4f6,
-    dropdown: #ccd3db
+    light: #f2f4f6
   ),
-  themes: (
-    what: #2d6e87,
-    why: #ff9641,
-    who: #82a087,
-    where: #ffbe32,
-    whats: #96b9dc,
-  ),
-  std: (
-    base: #4A90E2,
-    dark: #267de2
-  ),
-  link: (
-    hover: #ff0031
-  ),
+  themes: (),
   type: (
     base: #00234b,
     light: #8091a5
   ),
-  form: (
+  buttons: (
+    upload: #bfc8d2
+  ),
+  states: (
     upload: #bfc8d2
   )
 );
 
-// Breakpoints
-$break-tiny: 480;
-$break-small: 768;
-$break-nexus: 960;
-$break-large: 1024;
-$break-massive: 1200;
+
+/*
+  Breakpoints
+*/
 
 $breakpoints: (
-  mobile-portrait: 320,
-  mobile-landscape: 480,
-  tablet-portrait: 660,
-  tablet-landscape: 960,
-  desktop-small: 1024,
-  desktop-standard: 1200,
-  desktop-large: 1600
+  mobile:  320px,
+  tablet:  740px,
+  desktop: 980px,
+  wide:    1300px
 );
-
-
-$header-height: 80px;

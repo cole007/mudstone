@@ -139,7 +139,7 @@ const config = {
 		src: `${assets}images/svg-symbols/*.svg`,
 		dest: `${build}images/`,
 		iconTemplate: `${assets}scss/_system/_tpl/_svg-symbols.scss`,
-		cssPath: `${assets}scss/_system/gulp/`,
+		cssPath: `${assets}scss/_system/gulp-output/`,
 		cssOutput: '_svg-symbols.scss',
 		fileDest: state === 'dev' ? `${assets}html/pug/_includes/` : craftSourcePath,
 		file: `${assets}images/svg-symbols/source.html`,
