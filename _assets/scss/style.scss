@@ -27,6 +27,11 @@
 @import '_system/core-mixins/type';
 
 /*
+  Custom, site specific mixins
+*/
+@import '_system/site-mixins/mixins';
+
+/*
   svg-symbols generated via `gulp symbols`
 */
 @import '_system/gulp-output/svg-symbols';
