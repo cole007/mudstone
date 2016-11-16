@@ -41,26 +41,26 @@ For any npm modules that will be used in production use `npm install bla --save`
 
 ###NPM scripts
 
-`npm start` - fresh build and server
-`npm run compile` - does just that
-`npm run yup` - aka `gulp`
-`npm run server` - starts a server
-`npm run images` - runs all of the image tasks (svgs, images etc)
-`npm run etc` - build fonts, videos, misc tasks
-`npm run scripts` - compile the scripts
-`npm run build` - minifies css/js
+- `npm start` - fresh build and server
+- `npm run compile` - does just that
+- `npm run yup` - aka `gulp`
+- `npm run server` - starts a server
+- `npm run images` - runs all of the image tasks (svgs, images etc)
+- `npm run etc` - build fonts, videos, misc tasks
+- `npm run scripts` - compile the scripts
+- `npm run build` - minifies css/js
 
 ###CSS
 postcss plugins:
-https://github.com/arccoza/postcss-aspect-ratio
-https://github.com/peterramsing/lost
-https://github.com/jonathantneal/postcss-write-svg
-https://github.com/zhouwenbin/postcss-animation
-https://github.com/pascalduez/postcss-quantity-queriespostcs
-https://github.com/jedmao/postcss-triangle
+- https://github.com/arccoza/postcss-aspect-ratio
+- https://github.com/peterramsing/lost
+- https://github.com/jonathantneal/postcss-write-svg
+- https://github.com/zhouwenbin/postcss-animation
+- https://github.com/pascalduez/postcss-quantity-queriespostcs
+- https://github.com/jedmao/postcss-triangle
 
 node includes
-https://github.com/modularscale/modularscale-sass
+- https://github.com/modularscale/modularscale-sass
 
 ##Git methodology
 
