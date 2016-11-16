@@ -106,7 +106,7 @@
   },
   "name": "ournameismud.com",
   "description": "Mudstone 2.0",
-  "version": "6.1.1",
+  "version": "6.1.2",
   "main": "gulpfile.babel.js",
   "author": "Dave Stockley",
   "license": "MIT"
