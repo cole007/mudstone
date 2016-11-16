@@ -15,6 +15,8 @@ import gulpif from 'gulp-if'
 import writeSVG from 'postcss-write-svg'
 import aspectRatio from 'postcss-aspect-ratio'
 import animateCss from 'postcss-animation'
+import postcssTriangle from 'postcss-triangle'
+import quantityQueries from 'postcss-quantity-queries'
 import sassLint from 'gulp-sass-lint'
 import lost from 'lost'
 
@@ -55,6 +57,8 @@ gulp.task('sass', () => {
 		.pipe(postcss([
 			animateCss(),
 			aspectRatio(),
+			postcssTriangle(),
+			quantityQueries(),
 			lost(),
 			writeSVG({
 				encoding: 'base64'

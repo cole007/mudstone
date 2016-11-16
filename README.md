@@ -56,6 +56,8 @@ https://github.com/arccoza/postcss-aspect-ratio
 https://github.com/peterramsing/lost
 https://github.com/jonathantneal/postcss-write-svg
 https://github.com/zhouwenbin/postcss-animation
+https://github.com/pascalduez/postcss-quantity-queriespostcs
+https://github.com/jedmao/postcss-triangle
 
 node includes
 https://github.com/modularscale/modularscale-sass
