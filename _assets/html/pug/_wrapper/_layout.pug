@@ -15,6 +15,12 @@ doctype
 
         //- Remove script tag if modernizr is being used
         script var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");
+				script.
+					if(!window.HTMLPictureElement || !('sizes' in document.createElement('img'))){
+					!function(a){var b=function(b,c){"use strict";var d=a.document.getElementsByTagName("script")[0],e=a.document.createElement("script");return e.src=b,e.async=!0,d.parentNode.insertBefore(e,d),c&&"function"==typeof c&&(e.onload=c),e};"undefined"!=typeof module?module.exports=b:a.loadJS=b}("undefined"!=typeof global?global:this);
+					document.createElement('picture');
+					loadJS("/_assets/js/libs/picturefill.min.js");
+					}
         // build:css
         link(rel='stylesheet', href='/_assets/css/style.css')
         // endbuild

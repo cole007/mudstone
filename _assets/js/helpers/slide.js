@@ -43,7 +43,7 @@ export default class Slide {
 		this.mc = new Hammer.Manager(this.tag, {
 			touchAction: 'auto',
 			recognizers: [
-				[Hammer.Pan,{ direction: Hammer.DIRECTION_HORIZONTAL }],
+				[Hammer.Pan,{ direction: Hammer.DIRECTION_HORIZONTAL }]
 			]
 		})
 		const Pan = new Hammer.Pan()
