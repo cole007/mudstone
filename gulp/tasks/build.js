@@ -17,8 +17,8 @@ const $sass = config.sass
 
 const date = Date.now()
 const cacheAssets = {
-	'js': `${$js.build}/${$js.output}?v=${date}`,
-	'css': `${$sass.build}/${$sass.output}?v=${date}`
+	'js': `${$js.tagSrc}/${$js.output}?v=${date}`,
+	'css': `${$sass.tagSrc}/${$sass.output}?v=${date}`
 }
 
 

@@ -18,14 +18,15 @@ const state = 'dev'
  * src directories
  */
 const assets = './_assets/'
+const buildFolder = 'dist'
 	/*
 	 * Build directory conditionals, based on state
 	 */
 const publicHtml = 'public'
-const build = (state === 'dev') ? `tmp/${publicHtml}/_assets/` : `deploy/${publicHtml}/_assets/`
+const build = (state === 'dev') ? `tmp/${publicHtml}/${buildFolder}/` : `deploy/${publicHtml}/${buildFolder}/`
 const root = (state === 'dev') ? `tmp/${publicHtml}/` : `deploy/${publicHtml}/`
 	// where should the pug templates be built, usually root, except when state === cms
-const url = 'www.bla.com'
+const url = 'local.amandastockley.com'
 const craftSourcePath = './deploy/craft/templates/includes/'
 
 /*
@@ -35,7 +36,7 @@ let browserSync = {
 	server: {
 		baseDir: root,
 		directory: false,
-		index: 'index.html'
+		index: `index.${state === 'cms' ? 'php' : 'html'}`
 	},
 	notify: false
 }
@@ -49,22 +50,20 @@ let tagDest = root
  * CMS state Browsersync settings
  */
 
-switch (state) {
-  case 'static': {
-		pugDest = `deploy/${publicHtml}/`
-		break
-  }
-	case 'cms':	{
-		pugDest = '_assets/html/dist/'
-		tagSrc = './deploy/craft/templates/wrapper/_layout.twig',
-		tagDest = './deploy/craft/templates/wrapper/'
-		browserSync = {
-			proxy: url,
-			notify: false
-		}
-		break
+if(state === 'static') {
+	pugDest = `deploy/${publicHtml}/`
+}
+
+if(state === 'cms') {
+	pugDest = '_assets/html/dist/'
+	tagSrc = './deploy/craft/templates/wrapper/_layout.twig',
+	tagDest = './deploy/craft/templates/wrapper/'
+	browserSync = {
+		proxy: url,
+		notify: false
 	}
 }
+
 /*
  * Autoprefix browser suppport
  */
@@ -105,7 +104,7 @@ const config = {
 			include: [`${assets}scss/base/*.scss`]
 		},
 		output: ['style.css'],
-		build: `${assets}/css`
+		tagSrc: `${buildFolder}/css`
 	},
 
 	craft: {
@@ -118,15 +117,18 @@ const config = {
 		output: 'app.js',
 		// temp files for devleoping
 		// build dest for final output
-		dest: `${build}js/dist`,
+		dest: `${build}js`,
 		// scripts for the <head> section
-		libs: [`${assets}js/libs/modernizr.min.js`],
+		libs: [
+			'./node_modules/jquery/dist/jquery.min.js',
+			'./node_modules/picturefill/dist/picturefill.min.js'
+		],
 		libsDest: `${build}js/libs/`,
 
 		lint: {
 			ignore: `${assets}js/libs/*.js`
 		},
-		build: `${assets}/js/dist`
+		tagSrc: `${buildFolder}/js`
 	},
 
 	// jpegs/pngs/etc
@@ -143,7 +145,7 @@ const config = {
 		cssOutput: '_svg-symbols.scss',
 		fileDest: state === 'dev' ? `${assets}html/pug/_includes/` : craftSourcePath,
 		file: `${assets}images/svg-symbols/source.html`,
-		fileName: state === 'dev' ? 'source.pug' : '_source.twig',
+		fileName: state === 'dev' ? 'symbols.pug' : '_symbols.twig',
 		pugDest: `${assets}html/pug/_includes`
 	},
 	//svg sprites/assets

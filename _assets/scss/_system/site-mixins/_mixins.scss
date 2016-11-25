@@ -1,0 +1,15 @@
+@mixin font-type($font: 'base') {
+  @if $font == bold {
+    font-family: 'calibre-semibold', futura, sans-serif;
+    font-weight: 400;
+  } @else if $font == thin {
+    font-family: 'calibre-thin', futura, sans-serif;
+    font-weight: 400;
+  } @else if $font == light {
+    font-family: 'calibre-light', futura, sans-serif;
+    font-weight: 400;
+  } @else if $font == base {
+    font-family: 'calibre-regular', futura, sans-serif;
+    font-weight: 400;
+  }
+}

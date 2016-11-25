@@ -9,33 +9,37 @@ doctype
 <!--<![endif]-->
     head
         meta(charset='utf-8')
-        title #{pageTitle}
+        title Mudstone
         meta(name='description', content='')
         meta(name='viewport', content='width=device-width, initial-scale=1')
+        //-
+          include ../_includes/favicons
+        //- loads picturefill async (loadJS/loadCSS scripts)
+        include ../_includes/scripts
+        //-
+          include ../_includes/critical-css
+        link(rel='stylesheet', href='/dist/css/style.css')
 
-        //- Remove script tag if modernizr is being used
-        script var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");
-				script.
-					if(!window.HTMLPictureElement || !('sizes' in document.createElement('img'))){
-					!function(a){var b=function(b,c){"use strict";var d=a.document.getElementsByTagName("script")[0],e=a.document.createElement("script");return e.src=b,e.async=!0,d.parentNode.insertBefore(e,d),c&&"function"==typeof c&&(e.onload=c),e};"undefined"!=typeof module?module.exports=b:a.loadJS=b}("undefined"!=typeof global?global:this);
-					document.createElement('picture');
-					loadJS("/_assets/js/libs/picturefill.min.js");
-					}
-        // build:css
-        link(rel='stylesheet', href='/_assets/css/style.css')
-        // endbuild
-        include ../_includes/favicons
-
-        //- custom modernizr script, only tests for touch events
-        //- script(src='/_assets/js/libs/modernizr.min.js')
+        //- async css loader, critical path chuff
+          link(rel="preload" href="/dist/css/style.css" as="style" onload="this.rel='stylesheet'")
+          noscript
+            link(rel="stylesheet" href="/dist/css/style.css")
     body(class=`${bodyClass !== undefined && bodyClass}`)
         .site
             include ../_includes/header
             .site-page#barba-wrapper
-                .barba-container(data-namespace=`${slug}`)
+                .barba-container
                     block content
             include ../_includes/footer
-            include ../_includes/source
+
+            //- svg symbols
+            include ../_includes/symbols
+
+        //- Load jquery from CDN, with backup
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+        script.
+          window.jQuery || document.write('<script src="/dist/js/libs/jquery.min.js"><\\/script>')
+
         // build:js
-        script(src='/_assets/js/dist/app.js')
+        script(src='/dist/js/app.js')
         // endbuild
