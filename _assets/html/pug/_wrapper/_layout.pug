@@ -20,7 +20,7 @@ doctype
           include ../_includes/critical-css
         link(rel='stylesheet', href='/dist/css/style.css')
 
-        //-
+        //- async css loader, critical path chuff
           link(rel="preload" href="/dist/css/style.css" as="style" onload="this.rel='stylesheet'")
           noscript
             link(rel="stylesheet" href="/dist/css/style.css")
