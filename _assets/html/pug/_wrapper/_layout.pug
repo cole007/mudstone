@@ -1,4 +1,5 @@
 include ../_mixins/mixins
+doctype
 block vars
 doctype
 <!--[if IE]>
@@ -8,28 +9,35 @@ doctype
 <html lang="en" class="no-js">
 <!--<![endif]-->
     head
+        //- Remove script tag if modernizr is being used
         meta(charset='utf-8')
-        title #{pageTitle}
+        title Amanda Stockley
         meta(name='description', content='')
         meta(name='viewport', content='width=device-width, initial-scale=1')
+        //-
+          include ../_includes/favicons
+        include ../_includes/scripts
+        //-
+          include ../_includes/critical-css
+        link(rel='stylesheet', href='/dist/css/style.css')
 
-        //- Remove script tag if modernizr is being used
-        script var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");
-        // build:css
-        link(rel='stylesheet', href='/_assets/css/style.css')
-        // endbuild
-        include ../_includes/favicons
+        //-
+          Load css function, Load js function
+          link(rel="preload" href="/dist/css/style.css" as="style" onload="this.rel='stylesheet'")
+          noscript
+            link(rel="stylesheet" href="/dist/css/style.css")
 
-        //- custom modernizr script, only tests for touch events
-        //- script(src='/_assets/js/libs/modernizr.min.js')
     body(class=`${bodyClass !== undefined && bodyClass}`)
         .site
             include ../_includes/header
             .site-page#barba-wrapper
-                .barba-container(data-namespace=`${slug}`)
+                .barba-container
                     block content
             include ../_includes/footer
-            include ../_includes/source
+            include ../_includes/symbols
         // build:js
-        script(src='/_assets/js/dist/app.js')
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+        script.
+          window.jQuery || document.write('<script src="/dist/js/libs/jquery.min.js"><\\/script>')
+        script(src='/dist/js/app.js')
         // endbuild

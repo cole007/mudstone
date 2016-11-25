@@ -1,14 +1,8 @@
 import './libs/polyfills'
-// attached jQuery to the window for global access
-import jQuery from 'jquery'
-window.$ = jQuery
+
 import WebFont from 'webfontloader'
-import {
-	events
-} from './helpers/events'
-import {
-	views
-} from './views'
+import { events } from './helpers/events'
+import { views } from './views'
 import lazysizes from 'lazysizes'
 import debug from 'debug'
 
@@ -23,6 +17,13 @@ if (ENV === 'development') {
 log('Logging is enabled!, ENV')
 
 WebFont.load({
+	// custom: {
+  //   families: ['My Font', 'My Other Font:n4,i4,n7'],
+  //   urls: ['/dist/css/fonts.css']
+  // }
+	// google: {
+  //   families: ['Droid Sans', 'Droid Serif:bold']
+  // }
 	typekit: {
 		id: 'cdu5srl'
 	},
