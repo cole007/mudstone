@@ -1,5 +1,4 @@
 include ../_mixins/mixins
-doctype
 block vars
 doctype
 <!--[if IE]>
@@ -9,20 +8,19 @@ doctype
 <html lang="en" class="no-js">
 <!--<![endif]-->
     head
-        //- Remove script tag if modernizr is being used
         meta(charset='utf-8')
-        title Amanda Stockley
+        title Mudstone
         meta(name='description', content='')
         meta(name='viewport', content='width=device-width, initial-scale=1')
         //-
           include ../_includes/favicons
+        //- loads picturefill async (loadJS/loadCSS scripts)
         include ../_includes/scripts
         //-
           include ../_includes/critical-css
         link(rel='stylesheet', href='/dist/css/style.css')
 
         //-
-          Load css function, Load js function
           link(rel="preload" href="/dist/css/style.css" as="style" onload="this.rel='stylesheet'")
           noscript
             link(rel="stylesheet" href="/dist/css/style.css")
@@ -34,10 +32,15 @@ doctype
                 .barba-container
                     block content
             include ../_includes/footer
+
+            //- svg symbols
             include ../_includes/symbols
-        // build:js
+
+        //- Load jquery from CDN, with backup
         script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
         script.
           window.jQuery || document.write('<script src="/dist/js/libs/jquery.min.js"><\\/script>')
+
+        // build:js
         script(src='/dist/js/app.js')
         // endbuild
