@@ -70,6 +70,7 @@
     "node-bourbon": "*",
     "postcss-animation": "0.0.11",
     "postcss-aspect-ratio": "^1.0.0",
+    "postcss-object-fit-images": "^1.1.2",
     "postcss-quantity-queries": "^0.4.0",
     "postcss-transform-shortcut": "^1.0.0",
     "postcss-triangle": "^1.0.1",
@@ -107,8 +108,8 @@
     "favicon-markup": "real-favicon inject gulp/faviconData.json deploy/craft/template/wrapper deploy/craft/template/wrapper/*"
   },
   "name": "ournameismud.com",
-  "description": "Mudstone 2.0",
-  "version": "6.2.0",
+  "description": "Mudstone 6.0",
+  "version": "6.2.1",
   "main": "gulpfile.babel.js",
   "author": "Dave Stockley",
   "license": "MIT"

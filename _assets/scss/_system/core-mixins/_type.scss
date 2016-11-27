@@ -1,3 +1,8 @@
+@function font($family: 'default') {
+  @return map-get($fonts, $family);
+}
+
+
 @mixin type-reveal($selector: ".site") {
   #{unquote($selector)} {
     transition: opacity .4s;

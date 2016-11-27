@@ -15,6 +15,7 @@ import aspectRatio from 'postcss-aspect-ratio'
 import animateCss from 'postcss-animation'
 import postcssTriangle from 'postcss-triangle'
 import quantityQueries from 'postcss-quantity-queries'
+import objectFitImages from 'postcss-object-fit-images'
 import sassLint from 'gulp-sass-lint'
 import lost from 'lost'
 
@@ -60,6 +61,7 @@ gulp.task('sass', () => {
 			loadMaps: true
 		})))
 		.pipe(postcss([
+			objectFitImages(),
 			animateCss(),
 			aspectRatio(),
 			postcssTriangle(),

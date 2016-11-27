@@ -6,7 +6,7 @@
   https://github.com/zhouwenbin/postcss-animation
   https://github.com/pascalduez/postcss-quantity-queriespostcs
   https://github.com/jedmao/postcss-triangle
-  
+
   node includes
   https://github.com/modularscale/modularscale-sass
 */
@@ -105,3 +105,9 @@
   This file *should* be blank!
 */
 @import 'utils/shame';
+
+
+
+.test {
+  font-family: font('brand')
+}

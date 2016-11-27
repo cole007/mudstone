@@ -26,7 +26,7 @@ const publicHtml = 'public'
 const build = (state === 'dev') ? `tmp/${publicHtml}/${buildFolder}/` : `deploy/${publicHtml}/${buildFolder}/`
 const root = (state === 'dev') ? `tmp/${publicHtml}/` : `deploy/${publicHtml}/`
 	// where should the pug templates be built, usually root, except when state === cms
-const url = 'local.amandastockley.com'
+const url = 'local.ournameismud.com'
 const craftSourcePath = './deploy/craft/templates/includes/'
 
 /*
