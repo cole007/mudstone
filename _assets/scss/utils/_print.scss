@@ -1,72 +1,59 @@
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ *
+ * This file contains only the print styles from the HTML5 Boilerplate
+ * project. See <https://github.com/h5bp/html5-boilerplate> for more
+ * information on the main project.
+ */
+
+/* ==========================================================================
+   Print styles.
+   ========================================================================== */
 @media print {
 	*,
 	*:after,
 	*:before {
-		background: transparent !important;
-		color: #000 !important;
-		box-shadow: none !important;
+		background : transparent !important;
+		color      : #000 !important;
+		/* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+		box-shadow : none !important;
 		text-shadow: none !important;
 	}
 
-	body {
-		font: 1em Georgia, "Times New Roman", Times, serif !important;
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		font-family: Helvetica, Arial, sans-serif;
-	}
-
-	h1 {
-		font-size: 250%;
-	}
-
-	h2 {
-		font-size: 175%;
-	}
-
-	h3 {
-		font-size: 135%;
-	}
-
-	h4 {
-		font-size: 100%;
-	}
-
-	h5 {
-		font-size: 100%;
-	}
-
-	h6 {
-		font-size: 90%;
-	}
-
-	a:link,
+	a,
 	a:visited {
-		color: #00C;
-		font-weight: bold;
 		text-decoration: underline;
-
-		&:after {
-			content: " (" attr(href) ") ";
-		}
 	}
-	// Don't show links that are fragment identifiers
-	a[href^="#"]:after {
+
+	a[href]:after {
+		content: " (" attr(href) ")";
+	}
+
+	abbr[title]:after {
+		content: " (" attr(title) ")";
+	}
+
+	/*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+	a[href^="#"]:after,
+	a[href^="javascript:"]:after {
 		content: "";
 	}
 
 	blockquote,
 	pre {
-		border: 1px solid #999;
+		border           : 1px solid #999;
 		page-break-inside: avoid;
 	}
-	// Printing Tables:
-	// http://css-discuss.incutio.com/wiki/Printing_Tables
+	/*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
 	thead {
 		display: table-header-group;
 	}
@@ -84,7 +71,7 @@
 	h3,
 	p {
 		orphans: 3;
-		widows: 3;
+		widows : 3;
 	}
 
 	h2,

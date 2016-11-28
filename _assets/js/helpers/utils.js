@@ -1,3 +1,6 @@
+import local from 'local-links'
+
+
 /**
  * Return the prefix used by the current browser
  * @return {Object} prefix object
@@ -6,7 +9,7 @@ export const prefix = (function() {
 	const styles = window.getComputedStyle(document.documentElement, '')
 	const pre = (Array.prototype.slice
 		.call(styles)
-		.join('') 
+		.join('')
 		.match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
 		)[1]
 	const dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1]
@@ -87,7 +90,7 @@ export const lock = () => {
 	const $window = $(window)
 	const $body = $('body')
 	let windowTop
-	
+
 	return {
 		capture() {
 			windowTop = $window.scrollTop()
@@ -106,6 +109,15 @@ export function ajax(url) {
 		url: url,
 		type: 'get',
 		data: data
+	})
+}
+
+export function externalLinks() {
+	Array.from(document.querySelectorAll('a')).forEach((el) => {
+		if(local.pathname(el) === null || el.getAttribute('href').indexOf('.pdf') > -1) {
+			el.setAttribute('target', '_blank')
+			el.setAttribute('rel', 'noopener')
+		}
 	})
 }
 
