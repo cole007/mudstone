@@ -54,6 +54,7 @@ export default class Expander {
    */
 	constructor(el, opts = {}) {
 		this.el = el
+		this.$tag = $(this.el)
 		this.button = opts.button || '.js-expand-btn'
 		this.activeClass = opts.activeClass || 'is-active'
 		this.content = opts.content || '.js-expand-content'
@@ -65,7 +66,7 @@ export default class Expander {
 		this.elements = Array.from(this.el.querySelectorAll(this.button))
 		// create event delegation container
 		// this.delegate = new Delegate(this.el)
-		// bind methods 
+		// bind methods
 		this.handleButtonClicks = this.handleButtonClicks.bind(this)
 		this.addEvents = this.addEvents.bind(this)
 		this.removeEvents = this.removeEvents.bind(this)
@@ -86,7 +87,7 @@ export default class Expander {
    * @return {object} this
    */
 	addEvents() {
-		this.el.on('click', this.button, this.fn)
+		this.$tag.on('click', this.button, this.fn)
 		return this
 	}
 
@@ -95,7 +96,7 @@ export default class Expander {
    * @return {object} this
    */
 	removeEvents() {
-		this.el.off('click', this.button, this.fn)
+		this.$tag.off('click', this.button, this.fn)
 		return this
 	}
 
@@ -143,15 +144,15 @@ export default class Expander {
 		const button = e.srcElement
 
 		this.closeOthers && this.elements
-			.filter((element) => 
-				element.classList.contains(this.activeClass) 
+			.filter((element) =>
+				element.classList.contains(this.activeClass)
 				&& element.getAttribute('href') !== button.getAttribute('href'))
 			.forEach((element) => {
 				this.close(element)
 			})
 
-		button.classList.contains(this.activeClass) 
-			? this.close(button) 
+		button.classList.contains(this.activeClass)
+			? this.close(button)
 			: this.open(button)
 	}
 
@@ -164,7 +165,7 @@ export default class Expander {
 		const target = this.getTarget(button)
 		const _this = this
 		TweenLite.set(target, {
-			height: "auto",
+			height: 'auto',
 			onComplete() {
 				_this.trigger('before:open', button, target)
 				button.classList.add('is-active')
@@ -201,7 +202,7 @@ export default class Expander {
 	close(button) {
 		const target = this.getTarget(button)
 		const _this = this
-		
+
 		TweenLite.to(target, 0.2, {
 			height:0,
 			onStart() {
