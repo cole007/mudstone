@@ -123,3 +123,34 @@ export function externalLinks() {
 
 
 export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+// this is designed to work with lazysizes
+export function lazyLoadedImagesLoaded(el, each, complete) {
+	const $tag = $(el)
+	const config = {
+		attributes: true,
+		childList: false,
+		characterData: false,
+		subtree: true,
+		attributeFilter: ['class']
+	}
+	const images = el.querySelectorAll('img')
+	const total = images.length
+	let previous = ''
+	const observer = new MutationObserver((mutations) => {
+		mutations.filter((mutation) => mutation.target.tagName.toUpperCase() === 'IMG')
+						.forEach((mutation) => {
+							if(previous === mutation.target.currentSrc && typeof each === 'function') {
+								each(mutation.target)
+							}
+							previous = mutation.target.currentSrc
+							if($tag.find('.lazyloaded').length >= total) {
+								observer.disconnect()
+								if(typeof complete === 'function') {
+									complete()
+								}
+							}
+						})
+	})
+	observer.observe(el, config)
+}
