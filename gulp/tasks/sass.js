@@ -48,10 +48,7 @@ gulp.task('sass', () => {
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init()))
 		.on('error', handleErrors)
 		.pipe(sass({
-			outputStyle: $sass.options.outputStyle,
-			includePaths: [
-				'/node_modules/modularscale-sass/stylesheets/_modular-scale.scss'
-			]
+			outputStyle: $sass.options.outputStyle
 		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.write({

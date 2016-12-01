@@ -6,63 +6,64 @@
 //@include baseline();
 @include type-reveal();
 
+
 html {
-  @include font-baseline();
-  -ms-text-size-adjust    : 100%;
-  /* 2 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
+-ms-text-size-adjust    : 100%;
+/* 2 */
+-webkit-text-size-adjust: 100%;
+/* 2 */
+  @include t-html;
+}
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, cite, small, strong, dl, dt, dd, ol, ul, li {
+  @include t-reset;
 }
 
 body,
 html {
-  font-family: map-get($fonts, regular);
+  font-family: map-get($fonts, default);
 }
 
 body {
-  @include font-size($base-font-size);
-  font-style             : normal;
-  font-weight            : normal;
   -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing: grayscale;
   color                  : c(type, base);
 }
 
-.heading-1,
-h1 {
-  font-family: map-get($fonts, brand);
-  margin     : 0 0 gutter(1);
+h1, .heading-1,
+h2, .heading-2,
+h3, .heading-3,
+h4, .heading-4,
+h5, .heading-5,
+h6, .heading-6 {
+  @include t-heading;
 }
 
-.heading-2,
-h2 {
-  font-family: map-get($fonts, brand);
-  margin     : 0 0 gutter(1);
+h1, .heading-1 {
+  @include t-h1;
 }
 
-.heading-3,
-h3 {
-  font-family: map-get($fonts, brand);
-  margin     : 0 0 gutter(1);
+h2, .heading-2 {
+  @include t-h2;
 }
 
-.heading-4,
-h4 {
-  font-family: map-get($fonts, brand);
-  margin     : 0 0 gutter(1);
+h3, .heading-3 {
+  @include t-h3;
 }
 
-.heading-5,
-h5 {
-  font-family: map-get($fonts, brand);
-  margin     : 0 0 gutter(1);
+h4, .heading-4 {
+  @include t-h4;
 }
 
-.heading-6,
-h6 {
-  font-family: map-get($fonts, brand);
-  margin     : 0 0 gutter(1);
+h5, .heading-5 {
+  @include t-h5;
 }
+
+h6, .heading-6 {
+  @include t-h6;
+}
+
 
 p {
   margin: 0 0 gutter(1);

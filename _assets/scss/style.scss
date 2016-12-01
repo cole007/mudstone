@@ -11,6 +11,7 @@
   https://github.com/modularscale/modularscale-sass
 */
 
+@import '../../node_modules/modularscale-sass/stylesheets/_modular-scale.scss';
 
 /*
   Utility functions
@@ -26,7 +27,7 @@
   mq mixin from https://github.com/sass-mq/sass-mq
 */
 @import '_system/core-mixins/mq';
-@import '_system/core-mixins/type';
+@import '_system/core-mixins/typographic';
 
 /*
   Custom, site specific mixins
@@ -41,6 +42,7 @@
 /*
   Site variables, go nuts!
 */
+@import '_config/typography';
 @import '_config/variables';
 
 /*
@@ -87,6 +89,13 @@
   Max specificity of 2
   *Layout* media queries should go here
 */
+@import 'modules/pager'; // this needs to be video and slide
+@import 'modules/video';
+@import 'modules/slide';
+@import 'modules/gallery';
+@import 'modules/hero';
+@import 'modules/post';
+@import 'modules/text-block';
 @import 'modules/wysiwyg';
 
 /*
@@ -105,11 +114,3 @@
   This file *should* be blank!
 */
 @import 'utils/shame';
-
-
-
-.obj {
-	width: 200px;
-	height: 200px;
-	background-color: #4ae;
-}

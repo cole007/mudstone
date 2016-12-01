@@ -67,7 +67,6 @@
     "gulp-webp": "^2.3.0",
     "lost": "^7.1.1",
     "modularscale-sass": "^2.1.1",
-    "node-bourbon": "*",
     "postcss-animation": "0.0.11",
     "postcss-aspect-ratio": "^1.0.0",
     "postcss-object-fit-images": "^1.1.2",
@@ -109,7 +108,7 @@
   },
   "name": "ournameismud.com",
   "description": "Mudstone 6.0",
-  "version": "6.2.3",
+  "version": "6.2.4",
   "main": "gulpfile.babel.js",
   "author": "Dave Stockley",
   "license": "MIT"
