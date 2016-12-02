@@ -91,6 +91,11 @@ const config = {
 
 	url,
 
+	deploy: {
+		project: root,
+		domain: 'xxxxxxx-mudbank.surge.sh'
+	},
+
 	sass: {
 		src: [`${assets}scss/*.scss`],
 		dest: `${build}css`,
