@@ -3,7 +3,7 @@ import './libs/polyfills'
 import WebFont from 'webfontloader'
 import { events } from './helpers/events'
 import { views } from './views'
-import lazysizes from 'lazysizes'
+import 'lazysizes'
 import debug from 'debug'
 
 // logs enabled during development
@@ -37,5 +37,4 @@ WebFont.load({
 
 $(function() {
 	views()
-	lazysizes.init()
 })
