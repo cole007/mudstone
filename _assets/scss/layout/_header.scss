@@ -1,1 +1,32 @@
-.site-header {}
+.site-header {
+	padding: vr-block(1) gutter(1);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.site-logo {
+	flex: 1;
+}
+
+
+/*
+
+	has the page got a big ole hero section
+	might need to do some style changes to the header
+	this class should be on the <body> element
+*/
+.has-hero {
+	.site-header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 2;
+	}
+
+	.site-logo {
+		color: $white;
+	}
+
+}

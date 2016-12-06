@@ -68,6 +68,7 @@
 @import 'base/type';
 @import 'base/tables';
 @import 'base/buttons';
+@import 'base/forms';
 
 /*
   This grid
@@ -89,13 +90,12 @@
   Max specificity of 2
   *Layout* media queries should go here
 */
-@import 'modules/pager'; // this needs to be video and slide
-@import 'modules/video';
+@import 'modules/form-example';
 @import 'modules/slide';
-@import 'modules/gallery';
 @import 'modules/hero';
-@import 'modules/post';
-@import 'modules/text-block';
+@import 'modules/video';
+@import 'modules/map';
+@import 'modules/accordion';
 @import 'modules/wysiwyg';
 
 /*

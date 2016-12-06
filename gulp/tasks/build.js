@@ -3,6 +3,7 @@ import runSequence from 'run-sequence'
 import config from '../config'
 import del from 'del'
 import htmlreplace from'gulp-html-replace'
+import surge from 'gulp-surge'
 
 const $fonts = config.fonts
 const $favicons = config.favicons
@@ -14,12 +15,20 @@ const $clean = config.clean
 const $tags = config.tags
 const $js = config.js
 const $sass = config.sass
+const $deploy = config.deploy
 
 const date = Date.now()
 const cacheAssets = {
 	'js': `${$js.tagSrc}/${$js.output}?v=${date}`,
 	'css': `${$sass.tagSrc}/${$sass.output}?v=${date}`
 }
+
+
+
+gulp.task('deploy', [], () => surge({
+	project: $deploy.project, // Path to your static build directory
+	domain: $deploy.domain // Your domain or Surge subdomain
+}))
 
 
 gulp.task('build-video', () => gulp.src($video.src).pipe(gulp.dest($video.dest)))

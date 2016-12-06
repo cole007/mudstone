@@ -34,9 +34,9 @@ const mapLoaded = () => {
 	function drop() {
 		setTimeout(addMarker, 200)
 	}
-	
+
 	function addMarker() {
-		const icon = new google.maps.MarkerImage('/_assets/images/map_marker.png')
+		const icon = new google.maps.MarkerImage('/dist/images/map_marker.png')
 		/*const marker = */new google.maps.Marker({
 			position: location,
 			map: map,

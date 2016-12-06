@@ -49,6 +49,7 @@ For any npm modules that will be used in production use `npm install bla --save`
 - `npm run etc` - build fonts, videos, misc tasks
 - `npm run scripts` - compile the scripts
 - `npm run build` - minifies css/js
+- `npm run deploy` - fresh build, minifies css/js and deploys to surge.sh
 
 ###CSS
 postcss plugins:

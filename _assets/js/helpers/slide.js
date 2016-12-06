@@ -22,6 +22,9 @@ export default class Slide {
 		this.slide = new Wallop(el, Object.assign({}, this.options, options))
 		this.slides = Array.from(this.tag.querySelectorAll(`.${options.itemClass}`))
 
+		this.pagerWrapperHtml = options.pagerWrappeHtml || '<ul class="slide-pager"></ul>'
+		this.pagerElClassName = options.pagerElClassName || 'slide-pager__item'
+
 		options.pager && this.addPager()
 		options.gestures && this.addGestures()
 
@@ -58,23 +61,25 @@ export default class Slide {
 	}
 
 	addPager() {
-		this.pagerWrapper = this.$tag.append($('<ol class="carousel-indicators"></ol>'))
-		this.pagerEl = this.slides
-												.map((slide, index) => `<li data-target='${index}' class='js-pager-btn ${index === 0 ? 'active' : ''}'></li>`)
-												.reduce((acc, current) => acc + current, '')
-		$('.carousel-indicators').append(this.pagerEl)
+		const $pagerEl = $(this.pagerElClassName)
 
-		this.$tag.on('click', '.js-pager-btn', (e) => {
+		this.pagerWrapper = this.$tag.append($(this.pagerWrapperHtml))
+		this.pagerEl = this.slides
+												.map((slide, index) => `<li aria-role="button" data-target='${index}' class='${this.pagerElClassName} ${index === 0 ? 'is-active' : ''}'><button class="button"></button></li>`)
+												.reduce((acc, current) => acc + current, '')
+		$('.slide-pager').append(this.pagerEl)
+
+		this.$tag.on('click', `.${this.pagerElClassName}`, (e) => {
 			const $btn = $(e.currentTarget)
 			const index = $btn.data('target')
-			$btn.addClass('active').siblings('li').removeClass('active')
+			$btn.addClass('is-active').siblings('li').removeClass('is-active')
 			this.slide.goTo(index)
 		})
 
 		this.slide.on('change', (e) => {
 			const index = e.detail.currentItemIndex
-			$('.js-pager-btn').siblings('li').removeClass('active')
-			$('.js-pager-btn').eq(index).addClass('active')
+			$pagerEl.siblings('li').removeClass('active')
+			$pagerEl.eq(index).addClass('active')
 		})
 	}
 
