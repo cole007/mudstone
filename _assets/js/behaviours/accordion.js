@@ -22,5 +22,7 @@ export class accordion extends Base {
 		accordion.on('after:close', (...args) => {
 			log('after:close', ...args)
 		})
+
+		
 	}
 }

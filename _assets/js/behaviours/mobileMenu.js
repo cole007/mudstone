@@ -7,7 +7,7 @@ export class mobileMenu extends Base {
 		const viewport = this.viewport
 
 		const sidenav = new SideNav(el.querySelector('.js-mobile-nav-btn'), {
-			init: viewport.width > 960 ? false : true,
+			init: false,
 			lock: true
 		})
 
@@ -15,14 +15,14 @@ export class mobileMenu extends Base {
 			sidenav.open && sidenav.hideSideNav()
 		})
 
-		viewport.on('resize', (view) => {
-			const { width } = view
-			if(width > 960 && sidenav.state === true) {
+		viewport.at(
+			'(max-width: 46.25em)',
+			() => {
+				sidenav.addEvents()
+			},
+			() => {
 				sidenav.destroy()
 			}
-			if(width <= 960 && sidenav.state === false) {
-				sidenav.addEvents()
-			}
-		})
+		)
 	}
 }
