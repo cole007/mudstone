@@ -19,9 +19,53 @@ body:before {
   Core
 */
 
+
+.wrapper {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 gutter(1);
+}
+
 .g {
 
 }
+
+/*
+  Vertical spacing classes
+*/
+
+
+.vr {
+	padding-top: vr-block(1);
+	padding-bottom: vr-block(1);
+}
+
+.vr--t {
+	padding-top: vr-block(1);
+}
+
+.vr--b {
+	padding-bottom: vr-block(1);
+}
+
+
+.vr--2 {
+	padding-top: vr-block(2);
+	padding-bottom: vr-block(2);
+}
+
+.vr--t2 {
+	padding-top: vr-block(2);
+}
+
+.vr--b2 {
+	padding-bottom: vr-block(2);
+}
+
+
+
+
 
 /*
   Mobile, see config

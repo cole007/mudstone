@@ -22,9 +22,15 @@ export default class SideNav {
 		this.init = opts.init || false
 		this.state = this.init
 		this.lock = opts.lock || false
-		this.clickOutside = opts.clickOutside || false
+		/*
+			TODO
+			Fix this bug!
+			setting clickOutside to false as it is currently causing an issue
+			with link events not being triggered
+		*/
+		this.clickOutside = false
 		this.events = ['before:open', 'after:open', 'before:close', 'after:close']
-		// bind methods 
+		// bind methods
 		this.addEvents = this.addEvents.bind(this)
 		this.removeEvents = this.removeEvents.bind(this)
 		this.clickCloseHande = this.clickCloseHande.bind(this)

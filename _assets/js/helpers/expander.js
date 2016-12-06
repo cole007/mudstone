@@ -1,7 +1,6 @@
 import throttle from 'lodash.throttle'
 import Concert from 'concert'
-import { TweenLite } from 'gsap'
-
+import TweenLite from 'gsap'
 /*
 Example Markup
 <ul data-behaviour="accordion" class="nav expander">
@@ -82,28 +81,28 @@ export default class Expander {
 		this.addAccessibility()
 	}
 
-  /**
-   * Attached the click handle
-   * @return {object} this
-   */
+	/**
+	* Attached the click handle
+	* @return {object} this
+	*/
 	addEvents() {
 		this.$tag.on('click', this.button, this.fn)
 		return this
 	}
 
-  /**
-   * Remove the click handle
-   * @return {object} this
-   */
+	/**
+	* Remove the click handle
+	* @return {object} this
+	*/
 	removeEvents() {
 		this.$tag.off('click', this.button, this.fn)
 		return this
 	}
 
-  /**
-   * Returns DOM to it's pre initalized state, removes all events
-   * @return {object} this
-   */
+	/**
+	* Returns DOM to it's pre initalized state, removes all events
+	* @return {object} this
+	*/
 	destroy() {
 		this.elements.forEach((button) => {
 			const target = this.getTarget(button)
@@ -125,23 +124,22 @@ export default class Expander {
 		return this
 	}
 
-  /**
-   * Returns the buttons target element
-   * @param {button} button - The button dom node
-   * @return {Object} the dom node
-   */
+	/**
+	* Returns the buttons target element
+	* @param {button} button - The button dom node
+	* @return {Object} the dom node
+	*/
 	getTarget(button) {
 		return this.el.querySelector(`${button.getAttribute('href')}`)
 	}
 
-  /**
-   * The click handler
-   * @param {e} e - the event object
-   * @return {Object} this
-   */
+	/**
+	* The click handler
+	* @param {e} e - the event object
+	*/
 	handleButtonClicks(e) {
 		e.preventDefault()
-		const button = e.srcElement
+		const button = e.currentTarget
 
 		this.closeOthers && this.elements
 			.filter((element) =>
@@ -150,17 +148,17 @@ export default class Expander {
 			.forEach((element) => {
 				this.close(element)
 			})
-
+		log(button, this.activeClass)
 		button.classList.contains(this.activeClass)
 			? this.close(button)
 			: this.open(button)
 	}
 
-  /**
-   * The open expander method
-   * @param {button} button - The buttons dom node
-   * @return {Object} this
-   */
+	/**
+	* The open expander method
+	* @param {button} button - The buttons dom node
+	* @return {Object} this
+	*/
 	open(button) {
 		const target = this.getTarget(button)
 		const _this = this
@@ -168,7 +166,8 @@ export default class Expander {
 			height: 'auto',
 			onComplete() {
 				_this.trigger('before:open', button, target)
-				button.classList.add('is-active')
+				target.classList.add(_this.activeClass)
+				button.classList.add(_this.activeClass)
 				button.setAttribute('aria-expanded', true)
 				button.setAttribute('aria-selected', true)
 				target.setAttribute('aria-hidden', false)
@@ -180,6 +179,7 @@ export default class Expander {
 			height: 0,
 			onComplete() {
 				_this.trigger('after:open', button, target)
+				target.classList.remove(_this.activeClass)
 			}
 		})
 
@@ -200,6 +200,7 @@ export default class Expander {
    * @return {Object} this
    */
 	close(button) {
+		log('close')
 		const target = this.getTarget(button)
 		const _this = this
 
@@ -210,7 +211,7 @@ export default class Expander {
 			},
 			onComplete() {
 				_this.trigger('after:close', button, target)
-				button.classList.remove('is-active')
+				button.classList.remove(_this.activeClass)
 				button.setAttribute('aria-expanded', false)
 				button.setAttribute('aria-selected', false)
 				target.setAttribute('aria-hidden', true)

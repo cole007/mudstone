@@ -33,7 +33,7 @@ export default class Validation {
 		.filter(input => input.getAttribute('type') !== 'submit')
 		// all of the required inputs
 		this.requiredInputs = this.inputs.filter(input => input.required)
-
+		log(this.requiredInputs)
 		// bind methods
 		this.showErrors = this.showErrors.bind(this)
 		this.submitHandler = this.submitHandler.bind(this)
@@ -112,7 +112,7 @@ export default class Validation {
 
 	/**
 	 * Submit handler - handle the form submission, *this* is bound to the Instance, not the dom node
-	 * @param {e} event 
+	 * @param {e} event
 	 */
 
 	submitHandler(e) {
@@ -152,7 +152,7 @@ export default class Validation {
 		const input = e.srcElement
 		const errors = validate(this.form, this.constraints, {fullMessages: false}) || {}
 		this.showErrorsForInput(input, errors[input.name])
-	} 
+	}
 
 	/**
 	 * show success and post form the server
@@ -175,7 +175,7 @@ export default class Validation {
 	/**
 	 * addError - creates dom node and adds error message
 	 * @param {Node} messages - the dom node
-	 * @param {String} error - error message 
+	 * @param {String} error - error message
 	 */
 
 	addError(messages, error) {
