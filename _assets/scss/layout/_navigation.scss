@@ -1,11 +1,20 @@
+
 /*
-  Mobile navigation/off canvas
+  Navigation layout component
 */
 
+
+/*
+  Bring the menu to the top of the page
+*/
 .menu {
 	z-index: 10;
 }
 
+
+/*
+  Navigation layout component
+*/
 @include mq($until: breakpoint('tablet')) {
   .menu__btn {
   	@include menu-icon-rotate($width: 30px, $height: 2px, $color: $black, $curve: true, $active_class: '.is-active', $gap: 3);

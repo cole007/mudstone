@@ -1,0 +1,31 @@
+//- load accordion__content into the layout
+extends _wrapper/_layout
+//- define the block of accordion__content to be placed in the extend
+block vars
+  -var pageTitle = 'Home page'
+  -var slug = 'index'
+  -var bodyClass = ''
+
+block content
+  .wrapper
+    .gt
+      .g__col.gt__1-2
+        img.slide__img(src="https://source.unsplash.com/category/nature/600x600" width="800" height="800")
+      .g__col.gt__1-2
+        img.slide__img(src="https://source.unsplash.com/category/technology/600x600" width="800" height="800")
+    .gt
+      .g__col.gt__1-3
+        img.slide__img(src="https://source.unsplash.com/random/600x600" width="800" height="800")
+      .g__col.gt__1-3
+        img.slide__img(src="https://source.unsplash.com/category/buildings/600x600" width="800" height="800")
+      .g__col.gt__1-3
+        img.slide__img(src="https://source.unsplash.com/category/people/600x600" width="800" height="800")
+    .gm
+      .g__col.gm__1-2.gt__1-4
+        img.slide__img(src="https://source.unsplash.com/random/600x600" width="800" height="800")
+      .g__col.gm__1-2.gt__1-4
+        img.slide__img(src="https://source.unsplash.com/random/600x600" width="800" height="800")
+      .g__col.gm__1-2.gt__1-4
+        img.slide__img(src="https://source.unsplash.com/category/buildings/600x600" width="800" height="800")
+      .g__col.gm__1-2.gt__1-4
+        img.slide__img(src="https://source.unsplash.com/category/people/600x600" width="800" height="800")
