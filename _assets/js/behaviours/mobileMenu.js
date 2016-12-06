@@ -11,17 +11,43 @@ export class mobileMenu extends Base {
 			lock: true
 		})
 
-		this.events.on('page:ready', () => {
-			sidenav.open && sidenav.hideSideNav()
-		})
-
+		// at method takes two/three/four arguments
+		// the first is the media query to test
+		// the second argument is a function, that is called once
+		// and only once the first argument evaluates to true
+		// the third (optional) argument is another function
+		// that is called once and only once the first argument
+		// evaluates as false
+		// the forth arugment is a bollean that sets the method to
+		// automatically listen resize events, the default value is true
 		viewport.at(
 			'(max-width: 46.25em)',
 			() => {
 				sidenav.addEvents()
+				log('this function is called once per change')
 			},
 			() => {
 				sidenav.destroy()
+				log('this function is called once per change')
+			}
+		)
+
+		// now that this at method exists we can listen to events/
+
+		this.on('pass:(max-width: 46.25em)', () => log('hello'))
+		this.on('fail:(max-width: 46.25em)', () => log('hello'))
+
+		// when method is basically the same as the at method/
+		// except the pass method is called on every resize
+		// whereas the fail method is only called once, like the at method
+		// this method is only called on resize
+		viewport.when(
+			'(max-width: 46.25em)',
+			() => {
+				log('Wowsa, I sense the browser is being resized above 46.25em')
+			},
+			() => {
+				log('Aaand rest, thanks for stopping')
 			}
 		)
 	}
