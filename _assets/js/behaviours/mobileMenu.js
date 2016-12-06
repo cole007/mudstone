@@ -34,8 +34,8 @@ export class mobileMenu extends Base {
 
 		// now that this at method exists we can listen to events/
 
-		this.on('pass:(max-width: 46.25em)', () => log('hello'))
-		this.on('fail:(max-width: 46.25em)', () => log('hello'))
+		viewport.on('pass:(max-width: 46.25em)', () => log('hello'))
+		viewport.on('fail:(max-width: 46.25em)', () => log('hello'))
 
 		// when method is basically the same as the at method/
 		// except the pass method is called on every resize
