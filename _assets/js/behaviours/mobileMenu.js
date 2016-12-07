@@ -34,8 +34,8 @@ export class mobileMenu extends Base {
 
 		// now that this at method exists we can listen to events/
 
-		viewport.on('pass:(max-width: 46.25em)', () => log('hello'))
-		viewport.on('fail:(max-width: 46.25em)', () => log('hello'))
+		viewport.on('pass:at:(max-width: 46.25em)', log.bind(null, 'pass:at:(max-width: 46.25em)'))
+		viewport.on('fail:at:(max-width: 46.25em)', log.bind(null, 'fail:at:(max-width: 46.25em)'))
 
 		// when method is basically the same as the at method/
 		// except the pass method is called on every resize
@@ -50,5 +50,8 @@ export class mobileMenu extends Base {
 				log('Aaand rest, thanks for stopping')
 			}
 		)
+
+		viewport.on('pass:when:(max-width: 46.25em)', () => log('pass:when:(max-width: 46.25em)'))
+		viewport.on('fail:when:(max-width: 46.25em)', () => log('fail:when:(max-width: 46.25em)'))
 	}
 }

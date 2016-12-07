@@ -89,14 +89,14 @@ export default class Viewport {
 		const fn = () => {
 			if(window.matchMedia(query).matches) {
 				if(match !== 'pass') {
-					pass()
-					this.trigger(`pass:${query}`)
+					if(typeof pass === 'function') pass()
+					this.trigger(`pass:at:${query}`)
 				}
 				match = 'pass'
 			} else {
 				if(match !== 'fail') {
-					this.trigger(`fail:${query}`)
-					if(fail) fail()
+					this.trigger(`fail:at:${query}`)
+					if(typeof fail === 'function') fail()
 				}
 				match = 'fail'
 			}
@@ -112,11 +112,12 @@ export default class Viewport {
 		let failed = false
 		const fn = () => {
 			if(window.matchMedia(query).matches) {
-				pass()
+				if(typeof pass === 'function') pass()
+				this.trigger(`pass:when:${query}`)
 			} else {
 				if(!failed) {
-					this.trigger(`fail:${query}`)
-					if(fail) fail()
+					this.trigger(`fail:when:${query}`)
+					if(typeof fail === 'function') fail()
 				}
 				failed = true
 			}

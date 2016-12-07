@@ -7,7 +7,12 @@ export class accordion extends Base {
 		super(el)
 
 		const accordion = new Expander(el, {
-			init: true
+			init: true,
+			button: '.js-expand-btn',
+			activeClass: 'is-active',
+			closeOthers: false,
+			duration: 300,
+			name: 'expander'
 		})
 
 		accordion.on('before:open', (...args) => {
@@ -22,7 +27,5 @@ export class accordion extends Base {
 		accordion.on('after:close', (...args) => {
 			log('after:close', ...args)
 		})
-
-		
 	}
 }

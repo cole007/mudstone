@@ -56,7 +56,6 @@ export default class Expander {
 		this.$tag = $(this.el)
 		this.button = opts.button || '.js-expand-btn'
 		this.activeClass = opts.activeClass || 'is-active'
-		this.content = opts.content || '.js-expand-content'
 		this.closeOthers = opts.closeOthers || false
 		this.duration = opts.duration || 300
 		this.init = opts.init || false
@@ -164,7 +163,7 @@ export default class Expander {
 			duration: 1000,
 			easing: (t, b, c, d) => {
 				if ((t /= d / 2) < 1) return c / 2 * t * t + b
-				return -c / 2 * ((--t) * (t - 2) - 1) + b
+				return -c / 2 * ((t -= 1) * (t - 2) - 1) + b
 			}
 		})
 		.on('tick', value => target.style.height = `${value}px`)
@@ -210,14 +209,6 @@ export default class Expander {
 		return this
 	}
 
-	updateTabIndex() {
-		this.elements
-			.filter((element) => !element.classList.contains(this.activeClass))
-			.forEach((element) => element.setAttribute('tab-index', -1))
-
-		return this
-	}
-
 	/**
 	 * The close expander method
 	 * @param {button} button - The buttons dom node
@@ -243,6 +234,14 @@ export default class Expander {
 			button._ticking = false
 		})
 		button._ticking = true
+
+		return this
+	}
+
+	updateTabIndex() {
+		this.elements
+			.filter((element) => !element.classList.contains(this.activeClass))
+			.forEach((element) => element.setAttribute('tab-index', -1))
 
 		return this
 	}
