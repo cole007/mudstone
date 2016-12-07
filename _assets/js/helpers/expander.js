@@ -169,6 +169,8 @@ export default class Expander {
 		.on('tick', value => target.style.height = `${value}px`)
 		.on('done', complete)
 		.begin() // this fires the tweening
+		
+		return this
 	}
 
 	/**
@@ -177,11 +179,8 @@ export default class Expander {
 	 * @return {Object} this
 	 */
 	open(button) {
-		log(button._ticking)
 		if(button._ticking) return
-
 		const target = this.getTarget(button)
-		const _this = this
 
 		target.style.display = 'block'
 		target.style.height = 'auto'
@@ -189,23 +188,32 @@ export default class Expander {
 
 		target.style.height = 0
 		target.style.willChange = 'height'
-		_this.trigger('before:open', button, target)
+
 		target.style.height = 'auto'
-		button.classList.add(_this.activeClass)
+		button.classList.add(this.activeClass)
+
+
+		this.trigger('before:open', button, target)
+				.updateTabIndex()
+				._tween(target, 0, height, () => {
+
+					this.trigger('after:open', button, target)
+							._openComplete(button, target)
+
+					target.style.willChange = ''
+					target.classList.add(this.activeClass)
+					button._ticking = false
+				})
+
+		button._ticking = true
+		return this
+	}
+
+	_openComplete(button, target) {
 		button.setAttribute('aria-expanded', true)
 		button.setAttribute('aria-selected', true)
 		target.setAttribute('aria-hidden', false)
 		button.setAttribute('tab-index', '')
-		_this.updateTabIndex()
-
-		this._tween(target, 0, height, () => {
-			_this.trigger('after:open', button, target)
-			target.style.willChange = ''
-			target.classList.add(_this.activeClass)
-			button._ticking = false
-		})
-
-		button._ticking = true
 		return this
 	}
 
@@ -218,23 +226,30 @@ export default class Expander {
 		log(button._ticking)
 		if(button._ticking) return
 		const target = this.getTarget(button)
-		const _this = this
+		//const _this = this
 		const height = target.clientHeight
 		target.style.willChange = 'height'
 
-		_this.trigger('before:close', button, target)
-		this._tween(target, height, 0, () => {
-			_this.trigger('after:close', button, target)
-			button.classList.remove(_this.activeClass)
-			target.classList.remove(_this.activeClass)
-			button.setAttribute('aria-expanded', false)
-			button.setAttribute('aria-selected', false)
-			target.setAttribute('aria-hidden', true)
-			target.style.willChange = ''
-			button._ticking = false
-		})
+		this.trigger('before:close', button, target)
+				._tween(target, height, 0, () => {
+
+					this.trigger('after:close', button, target)
+							._closeComplete(button, target)
+
+					button.classList.remove(this.activeClass)
+					target.classList.remove(this.activeClass)
+					button._ticking = false
+				})
 		button._ticking = true
 
+		return this
+	}
+
+	_closeComplete(button, target) {
+		button.setAttribute('aria-expanded', false)
+		button.setAttribute('aria-selected', false)
+		target.setAttribute('aria-hidden', true)
+		target.style.willChange = ''
 		return this
 	}
 

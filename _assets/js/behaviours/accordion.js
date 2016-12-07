@@ -10,7 +10,7 @@ export class accordion extends Base {
 			init: true,
 			button: '.js-expand-btn',
 			activeClass: 'is-active',
-			closeOthers: false,
+			closeOthers: true,
 			duration: 300,
 			name: 'expander'
 		})
