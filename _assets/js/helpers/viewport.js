@@ -1,32 +1,60 @@
 import Concert from 'concert'
-import debounce from 'lodash.debounce'
+import raf from 'raf'
+
+// Nice...
+// https://developer.mozilla.org/en-US/docs/Web/Events/resize
+(function() {
+	const throttle = function(type, name, obj = window) {
+		let running = false
+		const func = function() {
+			if (running) {
+				return
+			}
+			running = true
+			raf(function() {
+				// this is very nice... custom events... fancy
+				obj.dispatchEvent(new CustomEvent(name))
+				running = false
+			})
+		}
+		obj.addEventListener(type, func)
+	}
+
+	/* init - you can init any event */
+	throttle('resize', 'smartresize')
+})()
 
 export default class Viewport {
 	constructor(opts = {}) {
 		this.window = window
 		this.current = this.query()
-		const { width, height } = this.getDimensions()
+		const {
+			width,
+			height
+		} = this.getDimensions()
 		this.width = width
 		this.height = height
 		this.currentWidth = width
 		this.delay = opts.delay || 300
-		// the raf handler
+			// the raf handler
 		this._resize = this._resize.bind(this)
 		this.getDimensions = this.getDimensions.bind(this)
-		this.handle = debounce(this._resize, this.delay)
-		// bind this into methods
+			// bind this into methods
 		this.watch = this.watch.bind(this)
 		this.checkForBreakpointChange = this.checkForBreakpointChange.bind(this)
 		this.destroy = this.destroy.bind(this)
-		// merge Concert methods with this
+			// merge Concert methods with this
 		Object.assign(this, Concert)
+
+		// for the at method
+		this.do = this.on
 	}
 
-		/*
-			@method query()
-			return String
-			body:before{ content }
-		*/
+	/*
+		@method query()
+		return String
+		body:before{ content }
+	*/
 
 	query() {
 		return window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '')
@@ -39,7 +67,7 @@ export default class Viewport {
 	*/
 	getDimensions() {
 		return {
-			width: window.innerWidth ||  document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
+			width: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
 			height: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
 		}
 	}
@@ -52,16 +80,66 @@ export default class Viewport {
 	*/
 
 	watch() {
-		window.addEventListener('resize', this.handle)
+		window.addEventListener('smartresize', this._resize)
+		return this
+	}
+
+	at(query, pass, fail, watch = true) {
+		let match = false
+		const fn = () => {
+			if(window.matchMedia(query).matches) {
+				if(match !== 'pass') {
+					if(typeof pass === 'function') pass()
+					this.trigger(`pass:at:${query}`)
+				}
+				match = 'pass'
+			} else {
+				if(match !== 'fail') {
+					this.trigger(`fail:at:${query}`)
+					if(typeof fail === 'function') fail()
+				}
+				match = 'fail'
+			}
+		}
+
+		fn()
+		watch && this.on('resize', fn)
+
+		return this
+	}
+
+	when(query, pass, fail) {
+		let failed = false
+		const fn = () => {
+			if(window.matchMedia(query).matches) {
+				if(typeof pass === 'function') pass()
+				this.trigger(`pass:when:${query}`)
+			} else {
+				if(!failed) {
+					this.trigger(`fail:when:${query}`)
+					if(typeof fail === 'function') fail()
+				}
+				failed = true
+			}
+		}
+		this.on('resize', fn)
+
 		return this
 	}
 
 	_resize() {
-		const { width, height } = this.getDimensions()
+		const {
+			width,
+			height
+		} = this.getDimensions()
 		this.width = width
 		this.height = height
 		this.breakpoint = this.query()
-		this.trigger('resize', {width, height, breakpoint: this.breakpoint})
+		this.trigger('resize', {
+			width,
+			height,
+			breakpoint: this.breakpoint
+		})
 		this.checkForBreakpointChange()
 	}
 
@@ -72,7 +150,7 @@ export default class Viewport {
 	*/
 
 	checkForBreakpointChange() {
-		if(this.current !== this.breakpoint) {
+		if (this.current !== this.breakpoint) {
 			const prev = this.current
 			const current = this.breakpoint
 			this.current = this.breakpoint
