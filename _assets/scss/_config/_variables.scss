@@ -11,6 +11,7 @@ $base-padding: 20;
 */
 $white: #fff;
 $black: #000;
+
 $palettes:(
   bg: (
     body: #e5e5e5,
@@ -37,6 +38,7 @@ $palettes:(
 
 $breakpoints: (
   mobile:  320px,
+  sm-tablet:600px;
   tablet:  740px,
   desktop: 980px,
   wide:    1300px
