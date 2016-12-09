@@ -2,6 +2,38 @@ import Wallop from 'Wallop'
 import Hammer from 'hammerjs'
 import raf from 'raf'
 
+/*
+
+Just a wrapper around Wallop
+Adds gestures and pager buttons
+
+<div class="slide slide--right" data-behaviour="carousel">
+	<div class="slice__list js-slide-wrapper">
+		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/buildings/1600x900" width="1600" height="900"></div>
+		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/nature/1600x900" width="1600" height="900"></div>
+		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/people/1600x900" width="1600" height="900"></div>
+		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/technology/1600x900" width="1600" height="900"></div>
+		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/objects/1600x900" width="1600" height="900"></div>
+	</div>
+</div>
+
+const carousel = new Slide(el, {
+	buttonPreviousClass: 'js-slide-prev',
+	buttonNextClass: 'js-slide-next',
+	itemClass: 'slide__item',
+	currentItemClass: 'slide__item--current',
+	showPreviousClass: 'slide__item--showPrevious',
+	showNextClass: 'slide__item--showNext',
+	hidePreviousClass: 'slide__item--hidePrevious',
+	hideNextClass: 'slide__item--hideNext',
+	carousel: true,
+	autoplay: true,
+	delay: 5000,
+	gestures: true,
+	pager: true
+})
+
+*/
 
 export default class Slide {
 	constructor(el, options) {
