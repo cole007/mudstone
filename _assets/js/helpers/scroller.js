@@ -2,6 +2,7 @@ import raf from 'raf'
 
 export default class Scroller {
 	constructor(el) {
+		alert('Ey up... this class is out of date, use the new ScrollView helper')
 		this.tag = el
 		this.lastPosition = -1
 		this._loop = this._loop.bind(this)

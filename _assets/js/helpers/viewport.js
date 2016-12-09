@@ -1,108 +1,70 @@
 import Concert from 'concert'
-import raf from 'raf'
 
-// Nice...
-// https://developer.mozilla.org/en-US/docs/Web/Events/resize
-(function() {
-	const throttle = function(type, name, obj = window) {
-		let running = false
-		const func = function() {
-			if (running) {
-				return
-			}
-			running = true
-			raf(function() {
-				// this is very nice... custom events... fancy
-				obj.dispatchEvent(new CustomEvent(name))
-				running = false
-			})
-		}
-		obj.addEventListener(type, func)
-	}
-
-	/* init - you can init any event */
-	throttle('resize', 'smartresize')
-})()
 
 export default class Viewport {
-	constructor(opts = {}) {
-		this.window = window
-		this.current = this.query()
-		const {
-			width,
-			height
-		} = this.getDimensions()
-		this.width = width
-		this.height = height
-		this.currentWidth = width
-		this.delay = opts.delay || 300
-			// the raf handler
-		this._resize = this._resize.bind(this)
-		this.getDimensions = this.getDimensions.bind(this)
+	constructor() {
+		this.dispatch = this.dispatch.bind(this)
 			// bind this into methods
 		this.watch = this.watch.bind(this)
-		this.checkForBreakpointChange = this.checkForBreakpointChange.bind(this)
+		// this.checkForBreakpointChange = this.checkForBreakpointChange.bind(this)
 		this.destroy = this.destroy.bind(this)
 			// merge Concert methods with this
 		Object.assign(this, Concert)
-
-		// for the at method
-		this.do = this.on
 	}
 
-	/*
-		@method query()
-		return String
-		body:before{ content }
-	*/
-
-	query() {
+	get query() {
 		return window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('content').replace(/\"/g, '')
 	}
 
-	/*
-		@method getDimensions()
-		return Object
-		{ width, height }
-	*/
-	getDimensions() {
-		return {
-			width: window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth,
-			height: window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
-		}
+	get width() {
+		return window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
 	}
 
-	/*
-		@method watch()
-		add resize event listener
-		triggers 'resize' and 'change' events
-		return null
-	*/
+	get height() {
+		return window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight
+	}
 
 	watch() {
-		window.addEventListener('smartresize', this._resize)
+		this.previous = this.query
+		window.addEventListener('smartresize', this.dispatch)
 		return this
+	}
+
+	dispatch(e) {
+		const { detail } = e
+		this.trigger('resize', detail)
+		if(this.current !== this.query) {
+			this.trigger('change', {
+				detail,
+				previous: this.previous,
+				current: this.query
+			})
+			this.previous = this.query
+		}
 	}
 
 	at(query, pass, fail, watch = true) {
 		let match = false
-		const fn = () => {
+		const fn = (detail = {}) => {
 			if(window.matchMedia(query).matches) {
 				if(match !== 'pass') {
-					if(typeof pass === 'function') pass()
-					this.trigger(`pass:at:${query}`)
+					if(typeof pass === 'function') pass(detail)
+					this.trigger(`pass:at:${query}`, detail)
 				}
 				match = 'pass'
 			} else {
 				if(match !== 'fail') {
-					this.trigger(`fail:at:${query}`)
-					if(typeof fail === 'function') fail()
+					this.trigger(`fail:at:${query}`, detail)
+					if(typeof fail === 'function') fail(detail)
 				}
 				match = 'fail'
 			}
 		}
 
-		fn()
+		fn({
+			width: this.width,
+			height: this.height
+		})
 		watch && this.on('resize', fn)
 
 		return this
@@ -110,14 +72,14 @@ export default class Viewport {
 
 	when(query, pass, fail) {
 		let failed = false
-		const fn = () => {
+		const fn = (detail) => {
 			if(window.matchMedia(query).matches) {
-				if(typeof pass === 'function') pass()
-				this.trigger(`pass:when:${query}`)
+				if(typeof pass === 'function') pass(detail)
+				this.trigger(`pass:when:${query}`, detail)
 			} else {
 				if(!failed) {
-					this.trigger(`fail:when:${query}`)
-					if(typeof fail === 'function') fail()
+					this.trigger(`fail:when:${query}`, detail)
+					if(typeof fail === 'function') fail(detail)
 				}
 				failed = true
 			}
@@ -127,48 +89,13 @@ export default class Viewport {
 		return this
 	}
 
-	_resize() {
-		const {
-			width,
-			height
-		} = this.getDimensions()
-		this.width = width
-		this.height = height
-		this.breakpoint = this.query()
-		this.trigger('resize', {
-			width,
-			height,
-			breakpoint: this.breakpoint
-		})
-		this.checkForBreakpointChange()
-	}
-
-	/*
-		@method checkForBreakpointChange()
-		Check for breakpoint changes
-		return null
-	*/
-
-	checkForBreakpointChange() {
-		if (this.current !== this.breakpoint) {
-			const prev = this.current
-			const current = this.breakpoint
-			this.current = this.breakpoint
-			this.trigger('change', this, current, prev)
-		}
-	}
-
-	/*
-		@method destroy()
-		Cancel requestAnimationFrame
-	*/
-
 	destroy() {
 		this.off('resize')
 		this.off('change')
 	}
 
 	kill() {
-		window.removeEventListener('resize', this.handle)
+		this.destroy()
+		window.removeEventListener('smartresize', this.handle)
 	}
 }
