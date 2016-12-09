@@ -3,6 +3,28 @@ import { transitionEnd, lock } from './utils'
 
 /**
  * Creates a new SideNav.
+
+	<a class="menu__btn js-mobile-nav-btn" data-target="#menu" href="#"><span></span></a>
+	<nav class="menu site-menu" id="menu">
+		<div class="js-menu-wrapper menu__wrapper">
+			<ul class="r-ul nav js-menu-container">
+				<li class="menu__item t-menu"><a href="#slides">Slides</a></li>
+				<li class="menu__item t-menu"><a href="#videos">Videos</a></li>
+				<li class="menu__item t-menu"><a href="#accordions">Accordions</a></li>
+				<li class="menu__item t-menu"><a href="#map">Map</a></li>
+				<li class="menu__item t-menu"><a href="#form">Form</a></li>
+				<li class="menu__item t-menu"><a href="#map">Map</a></li>
+				<li class="menu__item t-menu"><a href="/grid.html">Grid</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	const sidenav = new SideNav(el.querySelector('.js-mobile-nav-btn'), {
+		init: false,
+		lock: true
+	})
+
+ 
  * @class
  */
 export default class SideNav {

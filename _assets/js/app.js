@@ -1,9 +1,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array etc
 import './libs/polyfills'
-
 // https://github.com/aFarkas/lazysizes
 import 'lazysizes'
-
+import './helpers/customEvents'
 // https://github.com/bfred-it/object-fit-images
 import objectFitImages from 'object-fit-images'
 
@@ -36,6 +35,10 @@ WebFont.load({
 		id: 'cdu5srl'
 	}
 })
+
+
+
+
 
 $(function() {
 	views()

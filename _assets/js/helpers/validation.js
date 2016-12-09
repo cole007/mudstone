@@ -2,6 +2,36 @@ import validate from 'validate.js'
 
 /**
  * Creates a new form validator.
+
+	<div class="form__group js-input-wrap">
+		<label class="form__label" for="frm_name">Name</label>
+		<input class="form__input" type="text" name="frm_name" id="frm_name" required>
+	</div>
+
+	new Validation(el, {
+		constraints: {
+			'frm_email': {
+				presence: {
+					message: 'Email is required'
+				},
+				email: {
+					message: 'Please enter a valid email address'
+				}
+			},
+			'frm_name': {
+				presence: {
+					message: 'Please enter your name'
+				}
+			},
+			'frm_msg': {
+				presence: {
+					message: 'Please enter your message'
+				}
+			}
+		}
+	})
+
+
  * @class
  */
 

@@ -84,6 +84,7 @@
 @import 'layout/header';
 @import 'layout/footer';
 @import 'layout/navigation';
+@import 'layout/structure';
 
 /*
   Modules styles only
@@ -97,6 +98,7 @@
 @import 'modules/map';
 @import 'modules/accordion';
 @import 'modules/wysiwyg';
+@import 'modules/scroll-view';
 
 /*
   Utility classes, these should always win, go crazy with import
