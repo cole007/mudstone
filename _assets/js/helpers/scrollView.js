@@ -10,6 +10,11 @@ import Concert from 'concert'
 	})
 
 	// or do some fancy stuff with in/out of view elements
+
+	<div data-behaviour="inview">
+		<div class="js-sv"></div> * 10000
+	</div>
+
 	const view = new ScrollView(el, {
 		selector: '.js-sv'
 	})
