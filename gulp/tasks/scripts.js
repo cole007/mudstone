@@ -36,14 +36,19 @@ const options = {
 		}),
 		babel({
 			exclude: 'node_modules/**',
-			presets: ['es2015-rollup', 'stage-0'],
+			presets: [
+				'stage-0',
+				['es2015', { 'modules': false }]
+			],
 			plugins: [
+				'external-helpers',
 				'syntax-object-rest-spread',
 				'transform-es2015-parameters',
 				'transform-es2015-destructuring',
 				'transform-object-rest-spread'
 			],
-			babelrc: false
+			babelrc: false,
+			runtimeHelpers: true
 		}),
 		replace({
 			ENV: JSON.stringify(process.env.NODE_ENV || 'development')
