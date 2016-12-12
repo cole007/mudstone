@@ -7,10 +7,11 @@ Frontend starter kit
 - node >= 6.9.1
 - npm >= 3.3.12
 - gulp >= 3.91
+- yarn >= 0.17.10
 
 ######Installation
 
-`npm install`
+`yarn`
 
 ######Development mode
 
@@ -37,7 +38,7 @@ To begin development run `npm start`, this will rebuild all of the assets, start
 
 ###NPM modules
 
-For any npm modules that will be used in production use `npm install bla --save`, all other scripts (like gulp tasks) should be saved as dev dependencies (npm install bla --save-dev)
+For any npm modules that will be used in production use `yarn add bla`, all other scripts (like gulp tasks) should be saved as dev dependencies (yarn add bla --dev)
 
 ###NPM scripts
 
