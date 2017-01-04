@@ -4,23 +4,23 @@ mixin use(name)
 
 mixin svg-inline(name)
   .icon(class=`icon--${name}`)
-    +svg(name)
+    +use(name)
 
 mixin svg-link(name, href, className)
   a.icon(class=`icon--${name} ${className !== undefined && className}` href=`${href}`)
-    +svg(name)
+    +use(name)
 
 mixin svg-button(name, type, className)
   button.icon(class=`icon--${name} ${className !== undefined && className}` type=`${type}`)
-    +svg(name)
+    +use(name)
 
 mixin svg-label(name, htmlFor, className)
   label.icon(class=`icon--${name} ${className !== undefined && className}` for=`${htmlFor}`)
-    +svg(name)
+    +use(name)
 
 mixin svg(name)
   .icon(class=`icon--${name}`)
-    +svg(name)
+    +use(name)
 
 mixin social(icons, className)
   ul.nav(class=`${className}`)
