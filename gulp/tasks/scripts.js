@@ -14,11 +14,14 @@ import handleErrors from '../util/handleErrors'
 
 const $js = config.js
 
+let cache
+
 const options = {
 	entry: $js.src,
 	dest: `${$js.dest}/${$js.output}`,
 	format: 'iife',
 	sourceMap: (process.env.NODE_ENV !== 'production' && 'inline'),
+	cache: cache,
 	plugins: [
 		resolve({
 			jsnext: true,
@@ -38,7 +41,9 @@ const options = {
 			exclude: 'node_modules/**',
 			presets: [
 				'stage-0',
-				['es2015', { 'modules': false }]
+				['es2015', {
+					'modules': false
+				}]
 			],
 			plugins: [
 				'external-helpers',
@@ -59,9 +64,12 @@ const options = {
 
 gulp.task('scripts', () => {
 	return rollup(options)
-	.on('error', handleErrors)
-	.pipe(source($js.output))
-	.pipe(gulp.dest($js.dest))
+		.on('error', handleErrors)
+		.on('bundle', (bundle) => {
+			cache = bundle
+		})
+		.pipe(source($js.output))
+		.pipe(gulp.dest($js.dest))
 })
 
 gulp.task('move-scripts', () => gulp.src($js.libs).pipe(gulp.dest($js.libsDest)))

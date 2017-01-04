@@ -1,0 +1,25 @@
+//- load accordion__content into the layout
+extends _wrapper/_shell
+//- define the block of accordion__content to be placed in the extend
+block vars
+    -var pageTitle = 'Home page'
+    -var slug = 'index'
+    -var bodyClass = 'has-hero'
+
+block content
+    div(data-behaviour="multiFilter")
+        ul
+            li(data-store='4') Old Broad Street
+            li(data-store='67') Cannon Street
+            li(data-store='104') Paternoster Square
+            li(data-store='139') Fenchurch Street
+            li(data-store='185') Coffee Bar
+            li(data-store='5') Essex Street
+            li(data-store='147') New Street Square
+            li(data-store='131') Churchill Place
+            li(data-store='112') Canada Place Kiosk
+            li(data-store='20') Canada Place Mall
+            li(data-store='155') Salt Beef Bar
+            li(data-store='123') Cabot Place West
+            li(data-store='22') Cabot Place Salad Bar
+            li(data-store='175') Bank Street
