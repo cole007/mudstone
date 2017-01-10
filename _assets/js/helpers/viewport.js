@@ -23,7 +23,7 @@ import Concert from 'concert'
 	mediaquery: as above
 	success: a function that is called once the mediaquery is active (throttled)
 	fail: same as the at fail function
-	
+
 })
 
 
@@ -105,6 +105,7 @@ export default class Viewport {
 			if(window.matchMedia(query).matches) {
 				if(typeof pass === 'function') pass(detail)
 				this.trigger(`pass:when:${query}`, detail)
+				failed = false
 			} else {
 				if(!failed) {
 					this.trigger(`fail:when:${query}`, detail)
