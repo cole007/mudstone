@@ -1,4 +1,5 @@
 import validate from 'validate.js'
+import Concert from 'concert'
 
 /**
  * Creates a new form validator.
@@ -80,6 +81,8 @@ export default class Validation {
 		this.form.setAttribute('novalidate', true)
 		// add error message divs to each required group
 		Validation.addMessageNodesToDom(this.requiredInputs, this.messageClassName, this.inputWrapper)
+
+		Object.assign(this, Concert)
 	}
 
 
@@ -190,7 +193,24 @@ export default class Validation {
 	 */
 
 	send() {
+		const data = new FormData(this.form)
+		const _this = this
 
+		const ajaxSettings = {
+			url : this.url,
+			method: 'POST',
+			data: data,
+			success: (response, textStatus, jqXHR) => {
+				_this.trigger('submit:success', {response, textStatus, jqXHR, input: _this.getInputValues()})
+				_this.clearFields()
+			},
+			error: (jqXHR, textStatus, errorThrown) => {
+				_this.trigger('submit:error', {jqXHR, textStatus, errorThrown})
+			}
+		}
+
+		const o = Object.assign({}, ajaxSettings, this.postSettings)
+		$.ajax(o)
 	}
 
 	/**
