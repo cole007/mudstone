@@ -19,7 +19,7 @@ const $deploy = config.deploy
 
 const date = Date.now()
 const cacheAssets = {
-	'js': `${$js.tagSrc}/${$js.output}?v=${date}`,
+	'js': `/${$js.tagSrc}/${$js.output}?v=${date}`,
 	'css': `${$sass.tagSrc}/${$sass.output}?v=${date}`
 }
 
