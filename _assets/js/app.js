@@ -41,6 +41,7 @@ WebFont.load({
 
 
 $(function() {
+	log('LOAD')
 	views()
 	objectFitImages()
 })

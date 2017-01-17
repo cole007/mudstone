@@ -11,7 +11,10 @@ export default function loader(args, context = document) {
 		obj.behaviours.forEach((behaviourName) => {
 			try {
 				const behaviour = new args[behaviourName](obj.node)
-				typeof behaviour.render === 'function' && setTimeout(() => behaviour.render())
+				setTimeout(() => {
+
+					behaviour.init().render()
+				})
 			} catch(error) {
 				log(`${behaviourName} Behaviour not found, ${error}`)
 			}

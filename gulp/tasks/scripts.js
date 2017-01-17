@@ -29,10 +29,7 @@ const options = {
 			browser: true
 		}),
 		commonjs({
-			include: 'node_modules/**',
-			namedExports: {
-				// 'node_modules/jquery/dist/jquery.min.js': [ '' ],
-			}
+			include: 'node_modules/**'
 		}),
 		eslint({
 			exclude: $js.lint.ignore
@@ -41,6 +38,7 @@ const options = {
 			exclude: 'node_modules/**',
 			presets: [
 				'stage-0',
+				'stage-2',
 				['es2015', {
 					'modules': false
 				}]
@@ -50,7 +48,8 @@ const options = {
 				'syntax-object-rest-spread',
 				'transform-es2015-parameters',
 				'transform-es2015-destructuring',
-				'transform-object-rest-spread'
+				'transform-object-rest-spread',
+				'transform-class-properties'
 			],
 			babelrc: false,
 			runtimeHelpers: true
