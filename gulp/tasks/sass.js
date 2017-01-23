@@ -18,6 +18,7 @@ import quantityQueries from 'postcss-quantity-queries'
 import objectFitImages from 'postcss-object-fit-images'
 import sassLint from 'gulp-sass-lint'
 import lost from 'lost'
+import rename from 'gulp-rename'
 
 const $sass = config.sass
 const $uncss = config.uncss
@@ -74,6 +75,9 @@ gulp.task('sass', () => {
 		.pipe(gulpif(process.env.NODE_ENV === 'production', cssnano()))
 		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.write('./')))
 		.on('error', handleErrors)
+		.pipe(gulpif(process.env.NODE_ENV === 'production', rename({
+			suffix: `-${config.stamp}`
+		})))
 		.pipe(gulp.dest($sass.dest))
 })
 

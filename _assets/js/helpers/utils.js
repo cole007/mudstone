@@ -1,5 +1,5 @@
 import local from 'local-links'
-
+import Tweezer from 'tweezer.js'
 
 /**
  * Return the prefix used by the current browser
@@ -63,8 +63,6 @@ export function css3(prop) {
 	return false
 }
 
-
-
 /**
  * Return the prefix animationEnd event name
  * @return {String} the animation end string
@@ -84,7 +82,6 @@ export const animationEnd = (function(){
 	}
 	return false
 })()
-
 
 export const lock = () => {
 	const $window = $(window)
@@ -121,7 +118,6 @@ export function externalLinks() {
 	})
 }
 
-
 export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 // this is designed to work with lazysizes
@@ -153,4 +149,106 @@ export function lazyLoadedImagesLoaded(el, each, complete) {
 						})
 	})
 	observer.observe(el, config)
+}
+
+export const breakpoints = {
+
+	from : {
+		'mobile': '(min-width: 20em)',
+		'mobile-large': '(min-width: 30em)',
+		'tablet-small': '(min-width: 33.75em)',
+		'tablet': '(min-width: 47.5em)',
+		'desktop': '(min-width: 64em)',
+		'wide': '(min-width: 90em)'
+	},
+
+	until : {
+		'mobile': '(max-width: 20em)',
+		'mobile-large': '(max-width: 30em)',
+		'tablet-small': '(max-width: 33.75em)',
+		'tablet': '(max-width: 47.5em)',
+		'desktop': '(max-width: 64em)',
+		'wide': '(max-width: 90em)'
+	}
+}
+
+
+
+export function getSiblings(element) {
+	return Array.from(element.parentNode.children).filter(child => child !== element)
+}
+
+export function getParents(elem, selector) {
+	for ( ; elem && elem !== document; elem = elem.parentNode ) {
+		if ( elem.matches( selector ) ) return elem
+	}
+	return null
+}
+
+export const scrollTo = (obj = {}) => {
+
+	const defaults = {
+		start: window.pageYOffset,
+		end: 0,
+		callback: null
+	}
+
+	const { start, end, callback } = Object.assign({}, defaults, obj)
+
+	new Tweezer({
+		start,
+		end,
+		duration: 1000,
+		easing: (t, b, c, d) => {
+			if ((t/=d/2) < 1) return c/2*t*t + b
+			return -c/2 * ((t -= 1) * (t-2) - 1) + b
+		}
+	})
+	.on('tick', v => window.scrollTo(0, v))
+	.on('done', ()=> {
+		if(typeof callback === 'function') {
+			callback()
+		}
+	})
+	.begin() // this fires the tweening
+}
+
+
+export function upAndDown(start, min, max, loop = false) {
+
+	let count = start
+	return {
+		increment() {
+			count = (count + 1) % max
+			if(!loop && count === 0) {
+				count = max - 1
+			}
+			return count
+		},
+		decrement() {
+			if(loop && count === 0) {
+				count = max
+			}
+			count = count === 0 ? 0 : (count -= 1)
+			return count
+		},
+		setStart(value) {
+			count = value
+		},
+		max() {
+			return max - 1
+		},
+		min() {
+			return min
+		},
+		current() {
+			return count
+		}
+	}
+}
+
+
+
+export function delaySpread(container, fn) {
+	Array.from(container.children).forEach((element, index) => element.style[css3('transitionDelay')] = `${fn(index)}ms`)
 }

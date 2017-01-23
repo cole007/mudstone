@@ -17,7 +17,7 @@ Adds gestures and pager buttons
 	</div>
 </div>
 
-const carousel = new Slide(el, {
+new Slide(el, {
 	buttonPreviousClass: 'js-slide-prev',
 	buttonNextClass: 'js-slide-next',
 	itemClass: 'slide__item',
@@ -35,12 +35,9 @@ const carousel = new Slide(el, {
 
 */
 
-export default class Slide {
+export default class Slide extends Wallop {
 	constructor(el, options) {
-		this.tag = el
-		this.$tag = $(el)
-
-		this.options = {
+		const defaults = {
 			buttonPreviousClass: 'js-slide-prev',
 			buttonNextClass: 'js-slide-next',
 			itemClass: 'm-slide__item',
@@ -49,76 +46,105 @@ export default class Slide {
 			showNextClass: 'm-slide__item--showNext',
 			hidePreviousClass: 'm-slide__item--hidePrevious',
 			hideNextClass: 'm-slide__item--hideNext',
-			carousel: true
-		}
-		this.slide = new Wallop(el, Object.assign({}, this.options, options))
-		this.slides = Array.from(this.tag.querySelectorAll(`.${options.itemClass}`))
-
-		this.pagerWrapperHtml = options.pagerWrappeHtml || '<ul class="slide-pager"></ul>'
-		this.pagerElClassName = options.pagerElClassName || 'slide-pager__item'
-
-		options.pager && this.addPager()
-		options.gestures && this.addGestures()
-
-		if(options.autoplay) {
-			this.timeout = undefined
-			this.handle = undefined
-			this.autoPlaySlide = this.autoPlaySlide.bind(this)
-			this.autoPlaySlide(this.slide, options.delay)
-			this.slide.on('change', () => {
-				clearTimeout(this.timeout)
-				raf.cancel(this.handle)
-				this.autoPlaySlide(this.slide, options.delay)
-			})
+			carousel: true,
+			pagerElClassName: 'slide-pager__item',
+			delay: 5000,
+			autoplay: false,
+			pager: false,
+			getures: false
 		}
 
+		const opts = {...defaults, ...options}
+
+		super(el, opts)
+
+		this.opts = opts
+		this.tag = el
+		this.$tag = $(this.tag)
+		this.slides = Array.from(el.querySelectorAll(`.${opts.itemClass}`))
+
+		this.pagerElClassName = opts.pagerElClassName
+
+		if(opts.pager) {
+			this.onPagerClickHandle = this.onPagerClickHandle.bind(this)
+			this.addPagerHTML()
+					.addPagerEvents()
+		}
+
+		opts.gestures && this.addGestures()
+		opts.autoplay && this.autoPlaySlide()
+
+		this.on('change', this.onChange.bind(this))
 	}
 
 	addGestures() {
 		this.mc = new Hammer.Manager(this.tag, {
 			touchAction: 'auto',
 			recognizers: [
-				[Hammer.Pan,{ direction: Hammer.DIRECTION_HORIZONTAL }]
+				[Hammer.Pan, {
+					direction: Hammer.DIRECTION_HORIZONTAL
+				}]
 			]
 		})
 		const Pan = new Hammer.Pan()
 		this.mc.add(Pan)
 		this.mc.on('panend', (e) => {
 			if(e.additionalEvent === 'panleft') {
-				this.slide.previous()
+				this.previous()
 			} else if(e.additionalEvent === 'panright') {
-				this.slide.next()
+				this.next()
 			}
 		})
 	}
 
-	addPager() {
-		const $pagerEl = $(this.pagerElClassName)
 
-		this.pagerWrapper = this.$tag.append($(this.pagerWrapperHtml))
-		this.pagerEl = this.slides
-												.map((slide, index) => `<li aria-role="button" data-target='${index}' class='${this.pagerElClassName} ${index === 0 ? 'is-active' : ''}'><button class="button"></button></li>`)
-												.reduce((acc, current) => acc + current, '')
-		$('.slide-pager').append(this.pagerEl)
+	onChange(e) {
+		const { currentItemIndex } = e.detail
+		const { pager, autoplay } = this.opts
+		if(pager) {
+			this.activePager.classList.remove('is-active')
+			this.activePager = this.pagerElements[currentItemIndex]
+			this.activePager.classList.add('is-active')
+		}
 
-		this.$tag.on('click', `.${this.pagerElClassName}`, (e) => {
-			const $btn = $(e.currentTarget)
-			const index = $btn.data('target')
-			$btn.addClass('is-active').siblings('li').removeClass('is-active')
-			this.slide.goTo(index)
-		})
-
-		this.slide.on('change', (e) => {
-			const index = e.detail.currentItemIndex
-			$pagerEl.siblings('li').removeClass('active')
-			$pagerEl.eq(index).addClass('active')
-		})
+		if(autoplay) {
+			clearTimeout(this.timeout)
+			raf.cancel(this.handle)
+			this.autoPlaySlide()
+		}
 	}
 
-	autoPlaySlide(slide, delay) {
+	addPagerHTML() {
+		const pagerElements = this.slides.map((slide, index) => {
+			return `<li role="button" tabindex="0" aria-role="button" data-target='${index}' class='${this.opts.pagerElClassName} ${index === 0 ? 'is-active' : ''}'></li>`
+		}).reduce((acc, current) => acc + current, '')
+
+		const ul = document.createElement('ul')
+		ul.classList.add('r-ul', 'slide-pager')
+		ul.innerHTML = pagerElements
+		this.tag.append(ul)
+		this.pagerElements = this.tag.querySelectorAll(`.${this.opts.pagerElClassName}`)
+		this.activePager = this.tag.querySelector(`.${this.opts.pagerElClassName}.is-active`)
+		return this
+	}
+
+	addPagerEvents() {
+		this.$tag.on('click', `.${this.opts.pagerElClassName}`, this.onPagerClickHandle)
+	}
+
+	onPagerClickHandle(e) {
+		const el = e.currentTarget
+		const { target } = el.dataset
+		this.goTo(target)
+		this.activePager.classList.remove('is-active')
+		this.activePager = el
+		this.activePager.classList.add('is-active')
+	}
+
+	autoPlaySlide() {
 		this.timeout = setTimeout(() => {
-			this.handle = raf(this.autoPlaySlide.bind(null, slide, delay))
-			slide.next()
-		}, delay)
+			this.handle = raf(this.autoPlaySlide)
+			this.next()
+		}, this.opts.delay)
 	}
 }

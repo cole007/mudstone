@@ -2,6 +2,7 @@
 
 import gulp from 'gulp'
 import rollup from 'rollup-stream'
+import gulpif from 'gulp-if'
 import babel from 'rollup-plugin-babel'
 import eslint from 'rollup-plugin-eslint'
 import resolve from 'rollup-plugin-node-resolve'
@@ -11,6 +12,7 @@ import uglify from 'rollup-plugin-uglify'
 import config from '../config'
 import source from 'vinyl-source-stream'
 import handleErrors from '../util/handleErrors'
+import rename from 'gulp-rename'
 
 const $js = config.js
 
@@ -29,10 +31,7 @@ const options = {
 			browser: true
 		}),
 		commonjs({
-			include: 'node_modules/**',
-			namedExports: {
-				// 'node_modules/jquery/dist/jquery.min.js': [ '' ],
-			}
+			include: 'node_modules/**'
 		}),
 		eslint({
 			exclude: $js.lint.ignore
@@ -41,6 +40,7 @@ const options = {
 			exclude: 'node_modules/**',
 			presets: [
 				'stage-0',
+				'stage-2',
 				['es2015', {
 					'modules': false
 				}]
@@ -50,7 +50,8 @@ const options = {
 				'syntax-object-rest-spread',
 				'transform-es2015-parameters',
 				'transform-es2015-destructuring',
-				'transform-object-rest-spread'
+				'transform-object-rest-spread',
+				'transform-class-properties'
 			],
 			babelrc: false,
 			runtimeHelpers: true
@@ -69,6 +70,9 @@ gulp.task('scripts', () => {
 			cache = bundle
 		})
 		.pipe(source($js.output))
+		.pipe(gulpif(process.env.NODE_ENV === 'production', rename({
+			suffix: `-${config.stamp}`
+		})))
 		.pipe(gulp.dest($js.dest))
 })
 

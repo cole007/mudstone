@@ -17,19 +17,20 @@ const $js = config.js
 const $sass = config.sass
 const $deploy = config.deploy
 
-const date = Date.now()
 const cacheAssets = {
-	'js': `/${$js.tagSrc}/${$js.output}?v=${date}`,
-	'css': `${$sass.tagSrc}/${$sass.output}?v=${date}`
+	'js': `/${$js.tagSrc}/${$js.output.split('.')[0]}-${config.stamp}.js`,
+	'css': `/${$sass.tagSrc}/${$sass.output.split('.')[0]}-${config.stamp}.css`
 }
 
-
+const devAssets = {
+	'js': `/${$js.tagSrc}/${$js.output}`,
+	'css': `/${$sass.tagSrc}/${$sass.output}`
+}
 
 gulp.task('deploy', [], () => surge({
 	project: $deploy.project, // Path to your static build directory
 	domain: $deploy.domain // Your domain or Surge subdomain
 }))
-
 
 gulp.task('build-video', () => gulp.src($video.src).pipe(gulp.dest($video.dest)))
 gulp.task('build-fonts', () => gulp.src($fonts.src).pipe(gulp.dest($fonts.dest)))
@@ -39,7 +40,7 @@ gulp.task('build-json', () => gulp.src($json.src).pipe(gulp.dest($json.dest)))
 gulp.task('build-template', () => gulp.src($template.src).pipe(gulp.dest($template.dest)))
 
 gulp.task('build-images', () => {
-	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
+	del([`${$clean.assets}/images/**.*`]).then(() => {
 		runSequence(
 			'symbols',
 			'images',
@@ -50,19 +51,17 @@ gulp.task('build-images', () => {
 
 
 gulp.task('build-etc', () => {
-	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
-		runSequence(
-			'build-webfontcss',
-			'build-favicons',
-			'build-video',
-			'build-fonts'
-		)
-	})
+	runSequence(
+		'build-webfontcss',
+		'build-favicons',
+		'build-video',
+		'build-fonts'
+	)
 })
 
 
 gulp.task('build-scripts', () => {
-	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
+	del([`${$clean.assets}/js/**/*`]).then(() => {
 		runSequence(
 			'move-scripts',
 			'scripts'
@@ -84,11 +83,23 @@ gulp.task('build-fresh', () => {
 })
 
 gulp.task('fresh-cache', () => {
+	const files = process.env.NODE_ENV !== 'production' ? devAssets : cacheAssets
 	gulp.src($tags.src)
-		.pipe(htmlreplace(cacheAssets, {
+		.pipe(htmlreplace(files, {
 			keepBlockTags: true
 		}))
 		.pipe(gulp.dest($tags.dest))
 })
 
-gulp.task('build-production', ['sass', 'scripts', 'fresh-cache'])
+gulp.task('build-production', () => {
+	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
+		runSequence(
+			'build-images',
+			[
+				'build-etc',
+				'build-scripts',
+				'sass',
+				'pug'
+			],'fresh-cache')
+	})
+})
