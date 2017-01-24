@@ -11,39 +11,55 @@ export class test extends Base {
 	constructor(tag) {
 		super(tag)
 	}
-
 	events = [
 		'click button : clickHandle'
 	]
-
 	clickHandle(e) {
 		log(e.currentTarget)
 	}
-
 }
 */
 
+class Model {
+	constructor() {
+		this._model = []
+	}
 
-/**
- * Base class, all behaviours should extend from this class
- * @class
- */
-//
+	setState(obj) {
+		if(!obj.name || !obj.data) {
+			log('setState require an object with a name and data property')
+			return
+		}
+		const o = this._model[obj.name]
+		this._model[obj.name] = {...o, ...obj}
+	}
+
+	getState(name) {
+		return this._model[name].data
+	}
+}
+
+const model = new Model()
 
 
 export default class Base {
-	constructor(tag = document, bindEvents = true, barba = true) {
+	constructor(tag = document, opts = { bindEvents: true, barba: false }) {
 		this.tag = tag
 		this.$tag = $(tag)
-		this.bindEvents = bindEvents
-		this.barba = barba
+		this.bindEvents = opts.bindEvents
+		this.barba = opts.barba
 		this.listen = listener
 		this.viewport = viewport
-		this._events = []
+		this.__events = []
+		this._addEvents = this._addEvents.bind(this)
+		this._removeEvents = this._removeEvents.bind(this)
+
+		this.model = model
 	}
 
-	bindEventHandlers() {
-		this._events = this.events.map((action) => {
+
+	_bindEventHandlers() {
+		this.__events = this.events.map((action) => {
 			const input = action.split(':')
 			const fn = input[1].trim(' ')
 			const parts = input[0].split(' ')
@@ -55,28 +71,32 @@ export default class Base {
 	}
 
 	_addEvents() {
-		this._events.forEach((instance) => {
+		this.__events.forEach((instance) => {
 			this.$tag.on(instance.event, instance.selector, this[instance.fn].bind(this))
 		})
+		return this
+	}
+
+	_removeEvent(event, selector) {
+		this.$tag.off(event, selector)
+		return this
 	}
 
 	_removeEvents() {
-		this._events.forEach((instance) => {
+		this.__events.forEach((instance) => {
 			this.$tag.off(instance.event, instance.selector)
 		})
+		return this
 	}
 
-	init() {
+	_init() {
+
 		if(this.events) {
-			this.bindEventHandlers()
-			log('bind')
+			this._bindEventHandlers()
 		}
-
 		if(this.barba && this.events) {
-
 			this.listen.on('page:change', (...args) => {
 				this._removeEvents()
-
 				if(typeof this.pageTransiton === 'function') {
 					this.pageTransiton(...args)
 				}
@@ -86,8 +106,11 @@ export default class Base {
 	}
 
 	render() {
+
 		if(this.bindEvents && this.events) {
 			this._addEvents()
 		}
+
+		return this
 	}
 }

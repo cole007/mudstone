@@ -2,6 +2,7 @@
 
 import gulp from 'gulp'
 import rollup from 'rollup-stream'
+import gulpif from 'gulp-if'
 import babel from 'rollup-plugin-babel'
 import eslint from 'rollup-plugin-eslint'
 import resolve from 'rollup-plugin-node-resolve'
@@ -11,6 +12,7 @@ import uglify from 'rollup-plugin-uglify'
 import config from '../config'
 import source from 'vinyl-source-stream'
 import handleErrors from '../util/handleErrors'
+import rename from 'gulp-rename'
 
 const $js = config.js
 
@@ -68,6 +70,9 @@ gulp.task('scripts', () => {
 			cache = bundle
 		})
 		.pipe(source($js.output))
+		.pipe(gulpif(process.env.NODE_ENV === 'production', rename({
+			suffix: `-${config.stamp}`
+		})))
 		.pipe(gulp.dest($js.dest))
 })
 

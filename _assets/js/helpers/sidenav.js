@@ -4,17 +4,17 @@ import { transitionEnd, lock } from './utils'
 /**
  * Creates a new SideNav.
 
-	<a class="menu__btn js-mobile-nav-btn" data-target="#menu" href="#"><span></span></a>
-	<nav class="menu site-menu" id="menu">
-		<div class="js-menu-wrapper menu__wrapper">
-			<ul class="r-ul nav js-menu-container">
-				<li class="menu__item t-menu"><a href="#slides">Slides</a></li>
-				<li class="menu__item t-menu"><a href="#videos">Videos</a></li>
-				<li class="menu__item t-menu"><a href="#accordions">Accordions</a></li>
-				<li class="menu__item t-menu"><a href="#map">Map</a></li>
-				<li class="menu__item t-menu"><a href="#form">Form</a></li>
-				<li class="menu__item t-menu"><a href="#map">Map</a></li>
-				<li class="menu__item t-menu"><a href="/grid.html">Grid</a></li>
+	<a class="menu__btn js-mobile-nav-btn" href="#0"><span></span></a>
+	<nav class="menu site-menu">
+		<div class="js-menu-wrapper menu__wrapper"> <!-- this is the section that animates in -->
+			<ul class="r-ul nav js-menu-container"> <!-- this is the section that blocks clicks from propagating -->
+				<li class="menu__item"><a href="#slides">Slides</a></li>
+				<li class="menu__item"><a href="#videos">Videos</a></li>
+				<li class="menu__item"><a href="#accordions">Accordions</a></li>
+				<li class="menu__item"><a href="#map">Map</a></li>
+				<li class="menu__item"><a href="#form">Form</a></li>
+				<li class="menu__item"><a href="#map">Map</a></li>
+				<li class="menu__item"><a href="/grid.html">Grid</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -24,7 +24,7 @@ import { transitionEnd, lock } from './utils'
 		lock: true
 	})
 
- 
+
  * @class
  */
 export default class SideNav {
@@ -37,20 +37,17 @@ export default class SideNav {
 		this.button = button
 		this.body = document.querySelector('body')
 		this.html = document.querySelector('html')
-		this.target = opts.target || document.querySelector(this.button.getAttribute('data-target'))
-		this.wrapper = opts.wrapper || this.target.querySelector('.js-menu-wrapper')
-		this.container = opts.container || this.target.querySelector('.js-menu-container')
+		//this.target = opts.target || document.querySelector(this.button.getAttribute('data-target'))
+		this.wrapper = opts.wrapper || document.querySelector('.js-menu-wrapper')
+		this.container = opts.container || document.querySelector('.js-menu-container')
 		this.open = false
 		this.init = opts.init || false
 		this.state = this.init
 		this.lock = opts.lock || false
-		/*
-			TODO
-			Fix this bug!
-			setting clickOutside to false as it is currently causing an issue
-			with link events not being triggered
-		*/
-		this.clickOutside = false
+
+		this.closer = opts.closer || false
+
+		this.clickOutside = opts.clickOutside || false
 		this.events = ['before:open', 'after:open', 'before:close', 'after:close']
 		// bind methods
 		this.addEvents = this.addEvents.bind(this)
@@ -60,7 +57,7 @@ export default class SideNav {
 		this.onTransitionEnd = this.onTransitionEnd.bind(this)
 		this.hideSideNav = this.hideSideNav.bind(this)
 		this.showSideNav = this.showSideNav.bind(this)
-		this.blockClicks = this.clickOutside && this.blockClicks.bind(this)
+		this.blockClicks = this.blockClicks.bind(this)
 
 		// merge concert events into sideNav
 		Object.assign(this, Concert)
@@ -79,8 +76,15 @@ export default class SideNav {
 	addEvents() {
 		this.state = true
 		this.button.addEventListener('click', this.clickHandle)
-		this.wrapper.addEventListener('click', this.clickCloseHande)
-		this.clickOutside && this.container.addEventListener('click', this.blockClicks)
+
+		const wrapper = this.closer ? this.closer : this.wrapper
+
+		this.clickOutside && wrapper.addEventListener('click', this.hideSideNav)
+
+		if(!this.closer && this.clickOutside) {
+			this.container.addEventListener('click', this.blockClicks)
+		}
+
 		return this
 	}
 
@@ -90,7 +94,7 @@ export default class SideNav {
 	 */
 	removeEvents() {
 		this.button.removeEventListener('click', this.clickHandle)
-		this.wrapper.removeEventListener('click', this.clickCloseHande)
+		this.clickOutside && this.wrapper.removeEventListener('click', this.hideSideNav)
 		this.clickOutside && this.container.removeEventListener('click', this.blockClicks)
 		return this
 	}
@@ -123,6 +127,7 @@ export default class SideNav {
 	clickCloseHande(e) {
 		e.preventDefault()
 	}
+
 
 	/**
 	 * show the side nav
