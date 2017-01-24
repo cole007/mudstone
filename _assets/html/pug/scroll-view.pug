@@ -1,10 +1,9 @@
-//- load accordion__content into the layout
-extends _wrapper/_shell
-//- define the block of accordion__content to be placed in the extend
+extends _wrapper/_layout
+
 block vars
   -var pageTitle = 'Home page'
   -var slug = 'index'
-  -var bodyClass = 'has-hero'
+  -var bodyClass = ''
 
 block content
   div.inview-wrapper(data-behaviour="inview")
