@@ -76,6 +76,10 @@
   }
 }
 
+@function font($type: default) {
+    @return map-get($fonts, $type);
+}
+
 // font-size  -
 // see http://codepen.io/chriscoyier/pen/gsodI for usage example
 // - does not require a height, although a height can be used
