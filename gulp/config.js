@@ -14,6 +14,8 @@
  */
 const state = 'dev'
 
+const stamp = Date.now()
+
 /*
  * src directories
  */
@@ -87,6 +89,8 @@ const config = {
 
 	browserSync,
 
+	stamp,
+
 	state,
 
 	url,
@@ -108,7 +112,7 @@ const config = {
 			ignore: [`${assets}scss/_system/**/*.scss`],
 			include: [`${assets}scss/base/*.scss`]
 		},
-		output: ['style.css'],
+		output: 'style.css',
 		tagSrc: `${buildFolder}/css`
 	},
 

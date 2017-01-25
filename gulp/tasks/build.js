@@ -2,7 +2,7 @@ import gulp from 'gulp'
 import runSequence from 'run-sequence'
 import config from '../config'
 import del from 'del'
-import htmlreplace from'gulp-html-replace'
+import htmlreplace from 'gulp-html-replace'
 import surge from 'gulp-surge'
 
 const $fonts = config.fonts
@@ -72,8 +72,7 @@ gulp.task('build-scripts', () => {
 gulp.task('build-fresh', () => {
 	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
 		runSequence(
-			'build-images',
-			[
+			'build-images', [
 				'build-etc',
 				'build-scripts',
 				'sass',
@@ -85,21 +84,20 @@ gulp.task('build-fresh', () => {
 gulp.task('fresh-cache', () => {
 	const files = process.env.NODE_ENV !== 'production' ? devAssets : cacheAssets
 	gulp.src($tags.src)
-		.pipe(htmlreplace(files, {
-			keepBlockTags: true
-		}))
-		.pipe(gulp.dest($tags.dest))
+	.pipe(htmlreplace(files, {
+		keepBlockTags: true
+	}))
+	.pipe(gulp.dest($tags.dest))
 })
 
 gulp.task('build-production', () => {
 	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
 		runSequence(
-			'build-images',
-			[
+			'build-images', [
 				'build-etc',
 				'build-scripts',
 				'sass',
 				'pug'
-			],'fresh-cache')
+			], 'fresh-cache')
 	})
 })
