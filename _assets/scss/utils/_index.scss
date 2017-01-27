@@ -74,3 +74,25 @@
 .u-text-left {
 	text-align: left;
 }
+
+
+
+// colours
+
+.u-text-white {
+	color:$white;
+}
+.u-text-black {
+	color:$white;
+}
+
+
+// backgrounds
+
+.u-bg-white {
+	background:$white;
+}
+.u-bg-black {
+	background:$black;
+	color:$white;
+}
