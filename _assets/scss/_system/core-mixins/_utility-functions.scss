@@ -38,12 +38,6 @@
  	@return mix(black, $color, $percent);
 }
 
-// http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
-// use eg palette(accent,light)
-@function palette($palette, $tone: 'base') {
-    @return map-get(map-get($palettes, $palette), $tone);
-}
-
 @function c($palette, $tone: 'base') {
     @return map-get(map-get($palettes, $palette), $tone);
 }
@@ -52,121 +46,7 @@
 	@return map-get($breakpoints, $break);
 }
 
-
 @function rem($size, $base: $browser-default-font-size) {
   $remSize: $size / $base;
   @return #{$remSize}rem;
-}
-
-@mixin type-reveal($selector: ".site") {
-  #{unquote($selector)} {
-    transition: opacity .4s;
-    opacity: 0;
-    .wf-active &,
-    .wf-fail &,
-    .wf-inactive & {
-      opacity: 1;
-    }
-  }
-
-  .no-js {
-    #{unquote($selector)} {
-      opacity: 1;
-    }
-  }
-}
-
-@function font($type: default) {
-    @return map-get($fonts, $type);
-}
-
-// font-size  -
-// see http://codepen.io/chriscoyier/pen/gsodI for usage example
-// - does not require a height, although a height can be used
-
-@mixin font-size($font-size, $line-height: true) {
-  @if $debug == true {
-    font-size: $font-size * 1px;
-  } @else {
-    font-size: ($font-size / $base-font-size) * 1rem;
-  }
-
-  @if $line-height == true {
-    line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
-  }
-
-  @elseif $line-height != false {
-    @if type-of($line-height) == number {
-      @if unitless($line-height) {
-        line-height: leading($font-size, $line-height);
-      }
-    }
-  }
-}
-
-@mixin line-height($font-size, $line-height: true) {
-  @if $line-height == true {
-    line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
-  }
-  @if unitless($line-height) {
-    line-height: leading($font-size, $line-height);
-  }
-}
-
-@mixin font-baseline($font-size: $base-font-size, $line-height:  $base-line-height, $default:$browser-default-font-size) {
-  font-size: $base-font-size / $browser-default-font-size + em;
-  line-height: $base-line-height / $base-font-size; /* [2] */
-}
-
-
-@mixin baseline($baseline: $magic-number) {
-  html {
-    $size: strip-units($baseline);
-    background-image: url(http://basehold.it/i/#{$size});
-  }
-}
-
-@function font($type: default) {
-	@return map-get($fonts, $type);
-}
-
-@function type-group($name: 'mobile', $prop: 'body') {
-    @return map-get(map-get($font-sizes, $name), $prop);
-}
-
-
-@mixin resp-size($min: $min-font, $max: $max-font, $line-height-multiple: false) {
-  $local-line-height: strip-units($desktop-line-height);
-
-	font-size: rem($min);
-
-	@if(type-of($line-height-multiple) == number or $line-height-multiple == true) {
-		line-height: ($line-height-multiple * $local-line-height) / strip-units($max);
-	}
-
-	@if(type-of($line-height-multiple) == boolean and $line-height-multiple == false) {
-		line-height: $desktop-line-height / $min;
-	}
-
-	@if strip-units($max) != strip-units($min) {
-		@include mq($from: breakpoint('mobile')) {
-	  	font-size: calc( #{strip-units($min)}px + (#{strip-units($max)} - #{strip-units($min)}) * ((100vw - #{breakpoint('mobile')}) / (#{strip-units(breakpoint('desktop'))} - #{strip-units(breakpoint('mobile'))})) );
-		}
-
-		@include mq($from: breakpoint('desktop')) {
-			font-size: rem($max);
-		}
-	}
-}
-
-
-@mixin resp-map($value, $leading: false) {
-	$min: if(type-group('mobile', $value), type-group('mobile', $value), type-group('desktop', $value));
-	$max: if(type-group('desktop', $value), type-group('desktop', $value), type-group('mobile', $value));
-
-	@if $min == null or $max == null {
-		@warn 'No such font group was found, please check the $font-sizes map';
-	} @else {
-		@include size($min, $max, $leading)
-	}
 }

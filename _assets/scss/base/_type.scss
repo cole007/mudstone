@@ -6,88 +6,83 @@
 //@include baseline();
 @include type-reveal();
 
-
 html {
--ms-text-size-adjust    : 100%;
-/* 2 */
--webkit-text-size-adjust: 100%;
-/* 2 */
-  @include t-html;
+	font-family: map-get($fonts, default);
+	-ms-text-size-adjust: 100%;
+	/* 2 */
+	-webkit-text-size-adjust: 100%;
+	/* 2 */
 }
 
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, cite, small, strong, dl, dt, dd, ol, ul, li {
-  @include t-reset;
-}
-
-body,
-html {
-  font-family: map-get($fonts, default);
-}
 
 body {
-  -webkit-font-smoothing : antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color                  : c(type, base);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: c(type, base);
 }
 
-h1, .heading-1,
-h2, .heading-2,
-h3, .heading-3,
-h4, .heading-4,
-h5, .heading-5,
-h6, .heading-6 {
-  @include t-heading;
+.heading-1,
+.heading-2,
+.heading-3,
+.heading-4,
+.heading-5,
+.heading-6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
 }
 
-h1, .heading-1 {
-  @include t-h1;
+.heading-1,
+h1 {
 }
 
-h2, .heading-2 {
-  @include t-h2;
+.heading-2,
+h2 {
 }
 
-h3, .heading-3 {
-  @include t-h3;
+.heading-3,
+h3 {
 }
 
-h4, .heading-4 {
-  @include t-h4;
+.heading-4,
+h4 {
 }
 
-h5, .heading-5 {
-  @include t-h5;
+.heading-5,
+h5 {
 }
 
-h6, .heading-6 {
-  @include t-h6;
+.heading-6,
+h6 {
 }
-
 
 p {
-  margin: 0 0 gutter(1);
+	margin: 0 0 gutter(1);
 }
 
 b,
 strong {
-  font-weight: normal;
+	font-weight: normal;
 }
 
 em {
-  font-style: normal;
+	font-style: normal;
 }
 
 a {
-  text-decoration: none;
-  color          : inherit;
-  transition     : opacity 0.3s ease;
+	text-decoration: none;
+	color: inherit;
+	transition: opacity 0.3s ease;
 
-  &:hover {
-    opacity: 0.5;
-  }
+	&:hover {
+		opacity: 0.5;
+	}
 }
 
 address {
-  font-style: normal;
+	font-style: normal;
 }
