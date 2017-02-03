@@ -18,53 +18,51 @@ const $js = config.js
 
 let cache
 
-const options = {
-	entry: $js.src,
-	dest: `${$js.dest}/${$js.output}`,
-	format: 'iife',
-	sourceMap: (process.env.NODE_ENV !== 'production' && 'inline'),
-	cache: cache,
-	plugins: [
-		resolve({
-			jsnext: true,
-			main: true,
-			browser: true
-		}),
-		commonjs({
-			include: 'node_modules/**'
-		}),
-		eslint({
-			exclude: $js.lint.ignore
-		}),
-		babel({
-			exclude: 'node_modules/**',
-			presets: [
-				'stage-0',
-				'stage-2',
-				['es2015', {
-					'modules': false
-				}]
-			],
-			plugins: [
-				'external-helpers',
-				'syntax-object-rest-spread',
-				'transform-es2015-parameters',
-				'transform-es2015-destructuring',
-				'transform-object-rest-spread',
-				'transform-class-properties'
-			],
-			babelrc: false,
-			runtimeHelpers: true
-		}),
-		replace({
-			ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-		}),
-		(process.env.NODE_ENV === 'production' && uglify())
-	]
-}
-
 gulp.task('scripts', () => {
-	return rollup(options)
+	return rollup({
+		entry: $js.src,
+		dest: `${$js.dest}/${$js.output}`,
+		format: 'iife',
+		sourceMap: (process.env.NODE_ENV !== 'production' && 'inline'),
+		cache: cache,
+		plugins: [
+			resolve({
+				jsnext: true,
+				main: true,
+				browser: true
+			}),
+			commonjs({
+				include: 'node_modules/**'
+			}),
+			eslint({
+				exclude: $js.lint.ignore
+			}),
+			babel({
+				exclude: 'node_modules/**',
+				presets: [
+					'stage-0',
+					'stage-2',
+					['es2015', {
+						'modules': false
+					}]
+				],
+				plugins: [
+					'external-helpers',
+					'syntax-object-rest-spread',
+					'transform-es2015-parameters',
+					'transform-es2015-destructuring',
+					'transform-object-rest-spread',
+					'transform-class-properties'
+				],
+				babelrc: false,
+				runtimeHelpers: true
+			}),
+			replace({
+				ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+			}),
+			(process.env.NODE_ENV === 'production' && uglify())
+		]
+	})
 		.on('error', handleErrors)
 		.on('bundle', (bundle) => {
 			cache = bundle
