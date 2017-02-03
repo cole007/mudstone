@@ -10,7 +10,6 @@
     "lazysizes": "^3.0.0-rc3",
     "local-links": "^1.4.1",
     "lodash.debounce": "^4.0.8",
-    "lodash.template": "^4.4.0",
     "lodash.throttle": "^4.1.1",
     "object-fit-images": "^3.1.0",
     "picturefill": "^3.0.2",
