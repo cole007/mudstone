@@ -1,6 +1,5 @@
 import Viewport from './viewport'
 import { events as listener } from './events'
-// import $ from 'jquery'
 
 const viewport = new Viewport()
 viewport.watch()

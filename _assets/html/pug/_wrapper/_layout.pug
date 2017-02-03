@@ -7,39 +7,39 @@ doctype
 <!--[if gt IE 9]><!-->
 <html lang="en" class="no-js">
 <!--<![endif]-->
-    head
-        meta(charset='utf-8')
-        title Mudstone
-        meta(name='description', content='')
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        //-
-          include ../_includes/favicons
-        //- loads picturefill async (loadJS/loadCSS scripts)
-        include ../_includes/scripts
-        //-
-          include ../_includes/critical-css
-        link(rel='stylesheet', href='/dist/css/style.css')
+  head
+    meta(charset='utf-8')
+    title Mudstone
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    //-
+      include ../_includes/favicons
+    //- loads picturefill async (loadJS/loadCSS scripts)
+    include ../_includes/scripts
+    //-
+      include ../_includes/critical-css
+    link(rel='stylesheet', href='/dist/css/style.css')
 
-        //- async css loader, critical path chuff
-          link(rel="preload" href="/dist/css/style.css" as="style" onload="this.rel='stylesheet'")
-          noscript
-            link(rel="stylesheet" href="/dist/css/style.css")
-    body(class=`${bodyClass !== undefined && bodyClass}`)
-        .site
-            include ../_includes/header
-            .site-page#barba-wrapper
-                .barba-container
-                    block content
-            include ../_includes/footer
+    //- async css loader, critical path chuff
+      link(rel="preload" href="/dist/css/style.css" as="style" onload="this.rel='stylesheet'")
+      noscript
+        link(rel="stylesheet" href="/dist/css/style.css")
+  body(class=`${bodyClass !== undefined && bodyClass}`)
+    .site
+      include ../_includes/header
+      .site-page#barba-wrapper
+        .barba-container
+          block content
+      include ../_includes/footer
 
-            //- svg symbols
-            include ../_includes/symbols
+      //- svg symbols
+      include ../_includes/symbols
 
-        //- Load jquery from CDN, with backup
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
-        script.
-          window.jQuery || document.write('<script src="/dist/js/libs/jquery.min.js"><\\/script>')
+    //- Load jquery from CDN, with backup
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+    script.
+      window.jQuery || document.write('<script src="/dist/js/libs/jquery.min.js"><\\/script>')
 
-        // build:js
-        script(src='/dist/js/app.js')
-        // endbuild
+    // build:js
+    script(src='/dist/js/app.js')
+    // endbuild

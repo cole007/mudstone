@@ -11,6 +11,9 @@ gulp.task('default', ['watch'])
 gulp.task('server', () => browserSync($browserSync))
 
 gulp.task('watch', () => {
+
+	global.isWatching = true
+	
 	browserSync($browserSync)
 	// watch scss
 	watch(config.sass.watch, () => gulp.start('sass', reload))

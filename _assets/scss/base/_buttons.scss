@@ -2,7 +2,7 @@
 // <a href="#" class="btn btn--downloads"></a>
 .btn {
 	$btn-height: 44;
-	@include font-size(18,$btn-height);
+	@include font-size(18, $btn-height);
 	display:inline-block;
 	vertical-align:middle;
 	white-space:nowrap;
@@ -12,7 +12,7 @@
 	padding: 0 25px;
 	text-decoration: none;
 	height: $btn-height * 1px;
-	
+
 	&:hover {
 
 	}

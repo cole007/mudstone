@@ -1,5 +1,5 @@
 
-extends _wrapper/_shell
+extends _wrapper/_layout
 
 block vars
   -var pageTitle = 'Home page'
@@ -26,7 +26,7 @@ block content
         .vr--b
           h2 Map
           include _modules/map
-      #form
-        .vr--b
-          h2 Form Example
-          include _modules/form
+  #form
+    .vr--b
+      h2 Form Example
+      include _modules/form

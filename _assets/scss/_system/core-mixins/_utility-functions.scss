@@ -1,4 +1,4 @@
-@function computeLineHeight($font-size, $computed) {
+@function leading($font-size, $computed) {
   $fs: strip-units($font-size);
   @return $computed / $fs;
 }
@@ -9,13 +9,13 @@
 
 @function gutter($lines: 1, $gutter: $base-padding) {
   @if length($lines) == 1 {
-    @return floor(($gutter * $lines) * 1px);
-  } @else if length($lines) < 5{
+    @return rem(floor(($gutter * $lines) * 1px));
+  } @else if length($lines) < 5 {
     $string: '';
     @for $i from 1 through length($lines) {
       $string: $string + ' ' + floor(($gutter * nth($lines, $i)) * 1px);
     }
-    @return unquote($string);
+    @return rem(unquote($string));
   } @else {
     @warn 'To many values used in gutter function';
     @return null;
@@ -95,11 +95,10 @@
     line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
   }
 
-
   @elseif $line-height != false {
     @if type-of($line-height) == number {
       @if unitless($line-height) {
-        line-height: computeLineHeight($font-size, $line-height);
+        line-height: leading($font-size, $line-height);
       }
     }
   }
@@ -110,7 +109,7 @@
     line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
   }
   @if unitless($line-height) {
-    line-height: computeLineHeight($font-size, $line-height);
+    line-height: leading($font-size, $line-height);
   }
 }
 
@@ -125,4 +124,49 @@
     $size: strip-units($baseline);
     background-image: url(http://basehold.it/i/#{$size});
   }
+}
+
+@function font($type: default) {
+	@return map-get($fonts, $type);
+}
+
+@function type-group($name: 'mobile', $prop: 'body') {
+    @return map-get(map-get($font-sizes, $name), $prop);
+}
+
+
+@mixin resp-size($min: $min-font, $max: $max-font, $line-height-multiple: false) {
+  $local-line-height: strip-units($desktop-line-height);
+
+	font-size: rem($min);
+
+	@if(type-of($line-height-multiple) == number or $line-height-multiple == true) {
+		line-height: ($line-height-multiple * $local-line-height) / strip-units($max);
+	}
+
+	@if(type-of($line-height-multiple) == boolean and $line-height-multiple == false) {
+		line-height: $desktop-line-height / $min;
+	}
+
+	@if strip-units($max) != strip-units($min) {
+		@include mq($from: breakpoint('mobile')) {
+	  	font-size: calc( #{strip-units($min)}px + (#{strip-units($max)} - #{strip-units($min)}) * ((100vw - #{breakpoint('mobile')}) / (#{strip-units(breakpoint('desktop'))} - #{strip-units(breakpoint('mobile'))})) );
+		}
+
+		@include mq($from: breakpoint('desktop')) {
+			font-size: rem($max);
+		}
+	}
+}
+
+
+@mixin resp-map($value, $leading: false) {
+	$min: if(type-group('mobile', $value), type-group('mobile', $value), type-group('desktop', $value));
+	$max: if(type-group('desktop', $value), type-group('desktop', $value), type-group('mobile', $value));
+
+	@if $min == null or $max == null {
+		@warn 'No such font group was found, please check the $font-sizes map';
+	} @else {
+		@include size($min, $max, $leading)
+	}
 }

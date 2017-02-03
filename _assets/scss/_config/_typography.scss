@@ -89,6 +89,29 @@ $vertical-rhythm: true !default;
 /*
   Font stack
 */
+
+/*
+  Font stack
+*/
 $fonts: (
-  default: $heading-font
+	default: $body-font,
+	bold: $gill-sans,
+	light: $gill-sans
+);
+
+
+/*
+	map of font sizes,
+	if the font size is the same at mobile and desktop you only need to define the
+	font in one of the maps, otherwise the same font name needs to be used in both
+	mobile and desktop maps
+*/
+
+$font-sizes: (
+	mobile: (
+		body: 14px
+	),
+	desktop: (
+		body: 18px
+	)
 );
