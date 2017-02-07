@@ -8,6 +8,7 @@ Frontend starter kit
 - npm >= 3.3.12
 - gulp >= 3.91
 - yarn >= 0.17.10
+- webpack >= 2.2.0
 
 ######Installation
 
@@ -23,11 +24,12 @@ Frontend starter kit
 ##Gulp
 
 * Compile sass (using libsass)
-* Transpile es6 to es5 with rollup-babel-plugin
+* Transpile es6 to es5 with babel
+* Bundle js with webpack 2
 * Javascript linting with eslint
 * Lossless image compression
 * SVG symbol generater
-* Compile pug templates (formerly jade)
+* Compile nunjucks template
 * Compile scss (with postcss autoprefixer)
 * SCSS linting with gulp-sass-lint
 * Livereload and server with BrowserSync
@@ -43,14 +45,12 @@ For any npm modules that will be used in production use `yarn add bla`, all othe
 ###NPM scripts
 
 - `npm start` - fresh build and server
-- `npm run compile` - does just that
-- `npm run yup` - aka `gulp`
+- `npm run dev` - aka `gulp`
 - `npm run server` - starts a server
-- `npm run images` - runs all of the image tasks (svgs, images etc)
-- `npm run etc` - build fonts, videos, misc tasks
-- `npm run scripts` - compile the scripts
-- `npm run build` - minifies css/js
-- `npm run deploy` - fresh build, minifies css/js and deploys to surge.sh
+- `npm run build:assets` - build fonts, videos, misc tasks, images, svgs et al
+- `npm run build:scripts` - compile the scripts in production mode
+- `npm run build:css` - compile the sass in production mode
+- `npm run build` - build all the things in production mode
 
 ###CSS
 postcss plugins:

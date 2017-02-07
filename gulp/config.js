@@ -27,7 +27,7 @@ const buildFolder = 'dist'
 const publicHtml = 'public'
 const build = (state === 'dev') ? `tmp/${publicHtml}/${buildFolder}/` : `deploy/${publicHtml}/${buildFolder}/`
 const root = (state === 'dev') ? `tmp/${publicHtml}/` : `deploy/${publicHtml}/`
-	// where should the pug templates be built, usually root, except when state === cms
+	// where should the nunjucks templates be built, usually root, except when state === cms
 const url = 'local.ournameismud.com'
 const craftSourcePath = './deploy/craft/templates/includes/'
 
@@ -43,21 +43,20 @@ let browserSync = {
 	notify: false
 }
 
-let pugDest = root
+let nunjucksDest = root
 let tagSrc = `./${root}*.html`
 let tagDest = root
 
 /*
- * pug Build directory conditionals, based on state
+ * nunjucks Build directory conditionals, based on state
  * CMS state Browsersync settings
  */
 
 if(state === 'static') {
-	pugDest = `deploy/${publicHtml}/`
+	nunjucksDest = `deploy/${publicHtml}/`
 }
-
 if(state === 'cms') {
-	pugDest = '_assets/html/dist/'
+	nunjucksDest = '_assets/html/dist/'
 	tagSrc = './deploy/craft/templates/wrapper/_layout.twig',
 	tagDest = './deploy/craft/templates/wrapper/'
 	browserSync = {
@@ -146,17 +145,19 @@ const config = {
 		dest: `${build}images`
 	},
 	//svg symbols
+
 	svgSymbols: {
 		src: `${assets}images/svg-symbols/*.svg`,
 		dest: `${build}images/`,
 		iconTemplate: `${assets}scss/_system/_tpl/_svg-symbols.scss`,
 		cssPath: `${assets}scss/_system/gulp-output/`,
 		cssOutput: '_svg-symbols.scss',
-		fileDest: state === 'dev' ? `${assets}html/pug/_includes/` : craftSourcePath,
+		fileDest: state === 'dev' ? `${assets}html/nunjucks/includes/` : craftSourcePath,
 		file: `${assets}images/svg-symbols/source.html`,
-		fileName: state === 'dev' ? 'symbols.pug' : '_symbols.twig',
-		pugDest: `${assets}html/pug/_includes`
+		fileName: state === 'dev' ? 'symbols.njk' : '_symbols.twig',
+		nunjucksDest: `${assets}html/nunjucks/includes`
 	},
+
 	//svg sprites/assets
 	svg: {
 		src: `${assets}images/svg-sprites/*.svg`,
@@ -184,12 +185,14 @@ const config = {
 		height: 480
 	},
 
-	pug: {
-		src: `${assets}html/pug/*.pug`,
-		watch: `${assets}html/pug/**/*.pug`,
-		dest: pugDest,
-		basedir: `${assets}html/pug`
+
+	nunjucks: {
+		src: `${assets}html/nunjucks/*.njk`,
+		watch: `${assets}html/nunjucks/**/*.njk`,
+		dest: nunjucksDest,
+		basedir: `${assets}html/nunjucks`
 	},
+
 
 	fonts: {
 		src: `${assets}fonts/*.*`,
@@ -228,7 +231,7 @@ const config = {
 
 	clean: {
 		assets: build,
-		html: pugDest
+		html: nunjucksDest
 	}
 }
 

@@ -3,7 +3,7 @@ import runSequence from 'run-sequence'
 import config from '../config'
 import del from 'del'
 import htmlreplace from 'gulp-html-replace'
-import surge from 'gulp-surge'
+import util from 'gulp-util'
 
 const $fonts = config.fonts
 const $favicons = config.favicons
@@ -15,7 +15,6 @@ const $clean = config.clean
 const $tags = config.tags
 const $js = config.js
 const $sass = config.sass
-const $deploy = config.deploy
 
 const cacheAssets = {
 	'js': `/${$js.tagSrc}/${$js.output.split('.')[0]}-${config.stamp}.js`,
@@ -27,10 +26,6 @@ const devAssets = {
 	'css': `/${$sass.tagSrc}/${$sass.output}`
 }
 
-gulp.task('deploy', [], () => surge({
-	project: $deploy.project, // Path to your static build directory
-	domain: $deploy.domain // Your domain or Surge subdomain
-}))
 
 gulp.task('build-video', () => gulp.src($video.src).pipe(gulp.dest($video.dest)))
 gulp.task('build-fonts', () => gulp.src($fonts.src).pipe(gulp.dest($fonts.dest)))
@@ -76,28 +71,31 @@ gulp.task('build-fresh', () => {
 				'build-etc',
 				'build-scripts',
 				'sass',
-				'pug'
+				'nunjucks'
 			])
 	})
 })
 
 gulp.task('fresh-cache', () => {
-	const files = process.env.NODE_ENV !== 'production' ? devAssets : cacheAssets
-	gulp.src($tags.src)
-	.pipe(htmlreplace(files, {
-		keepBlockTags: true
-	}))
-	.pipe(gulp.dest($tags.dest))
+	const files = util.env.production ? cacheAssets : devAssets
+
+	return gulp.src($tags.src)
+		.pipe(htmlreplace(files, {
+			keepBlockTags: true
+		}))
+		.pipe(gulp.dest($tags.dest))
 })
 
 gulp.task('build-production', () => {
+	process.env.NODE_ENV = 'production'
+
 	del([`${$clean.assets}/*`, `${$clean.html}/*.html`]).then(() => {
 		runSequence(
 			'build-images', [
 				'build-etc',
 				'build-scripts',
 				'sass',
-				'pug'
+				'nunjucks'
 			], 'fresh-cache')
 	})
 })

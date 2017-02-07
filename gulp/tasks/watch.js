@@ -1,6 +1,7 @@
 import gulp from 'gulp'
 import browserSync from 'browser-sync'
 import watch from 'gulp-watch'
+import util from 'gulp-util'
 import config from '../config'
 
 const $browserSync = config.browserSync
@@ -12,15 +13,15 @@ gulp.task('server', () => browserSync($browserSync))
 
 gulp.task('watch', () => {
 
-	global.isWatching = true
-	
+	process.env.NODE_ENV = util.env.production ? 'production' : 'development'
+
 	browserSync($browserSync)
 	// watch scss
 	watch(config.sass.watch, () => gulp.start('sass', reload))
 	// watch js
 	watch(config.js.watch, () => gulp.start('scripts', reload))
 	// watch pug
-	watch(config.pug.watch, () => gulp.start('pug', reload))
+	watch(config.nunjucks.watch, () => gulp.start('nunjucks', reload))
 	// watch template
 	watch(config.template.src, () => gulp.start('build-template', reload))
 	// watch json

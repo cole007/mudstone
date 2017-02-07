@@ -1,4 +1,6 @@
 import gulp from 'gulp'
+import util from 'gulp-util'
+import rename from 'gulp-rename'
 import fs from 'fs'
 import sass from 'gulp-sass'
 import sourcemaps from 'gulp-sourcemaps'
@@ -18,16 +20,17 @@ import quantityQueries from 'postcss-quantity-queries'
 import objectFitImages from 'postcss-object-fit-images'
 import sassLint from 'gulp-sass-lint'
 import lost from 'lost'
-import rename from 'gulp-rename'
+import browserSync from 'browser-sync'
 
 const $sass = config.sass
 const $uncss = config.uncss
 const $critical = config.critical
 
 gulp.task('sass', () => {
+
 	return gulp.src($sass.watch)
 		.on('error', handleErrors)
-		.pipe(gulpif(process.env.NODE_ENV !== 'production', sassLint({
+		.pipe(gulpif(util.env.production !== true, sassLint({
 			options: {
 				formatter: 'stylish',
 				'merge-default-rules': false
@@ -42,20 +45,20 @@ gulp.task('sass', () => {
 			}
 		})))
 		.on('error', handleErrors)
-		.pipe(gulpif(process.env.NODE_ENV !== 'production', sassLint.format()))
+		.pipe(gulpif(util.env.production !== true, sassLint.format()))
 		.on('error', handleErrors)
-		.pipe(gulpif(process.env.NODE_ENV !== 'production', sassLint.failOnError()))
+		.pipe(gulpif(util.env.production !== true, sassLint.failOnError()))
 		.on('error', handleErrors)
-		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init()))
+		.pipe(gulpif(util.env.production !== true, sourcemaps.init()))
 		.on('error', handleErrors)
 		.pipe(sass({
 			outputStyle: $sass.options.outputStyle
 		}))
 		.on('error', handleErrors)
-		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.write({
+		.pipe(gulpif(util.env.production !== true, sourcemaps.write({
 			includeContent: false
 		})))
-		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.init({
+		.pipe(gulpif(util.env.production !== true, sourcemaps.init({
 			loadMaps: true
 		})))
 		.pipe(postcss([
@@ -72,13 +75,14 @@ gulp.task('sass', () => {
 				browsers: $sass.prefix
 			})
 		]))
-		.pipe(gulpif(process.env.NODE_ENV === 'production', cssnano()))
-		.pipe(gulpif(process.env.NODE_ENV !== 'production', sourcemaps.write('./')))
+		.pipe(gulpif(util.env.production === true, cssnano()))
+		.pipe(gulpif(util.env.production !== true, sourcemaps.write('./')))
 		.on('error', handleErrors)
-		.pipe(gulpif(process.env.NODE_ENV === 'production', rename({
+		.pipe(gulpif(util.env.production === true, rename({
 			suffix: `-${config.stamp}`
 		})))
 		.pipe(gulp.dest($sass.dest))
+		.pipe(browserSync.create().stream())
 })
 
 
