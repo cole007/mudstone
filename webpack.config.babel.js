@@ -14,6 +14,7 @@ const webpackConfig = env => {
 
 	const config = webpackValidator({
 		watch,
+		cache: true,
 		context: __dirname,
 		entry: `${__dirname}/_assets/js/app.js`,
 		output: {

@@ -19,7 +19,7 @@ gulp.task('watch', () => {
 	// watch js
 	watch(config.js.watch, () => gulp.start('scripts', reload))
 	// watch pug
-	watch(config.pug.watch, () => gulp.start('pug', reload))
+	watch(config.nunjucks.watch, () => gulp.start('nunjucks', reload))
 	// watch template
 	watch(config.template.src, () => gulp.start('build-template', reload))
 	// watch json
