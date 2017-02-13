@@ -82,7 +82,9 @@ gulp.task('sass', () => {
 			suffix: `-${config.stamp}`
 		})))
 		.pipe(gulp.dest($sass.dest))
-		.pipe(browserSync.create().stream())
+		.pipe(browserSync.create().reload({
+			stream: true
+		}))
 })
 
 

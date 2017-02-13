@@ -95,7 +95,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "gulp build-fresh && gulp",
+    "start": "gulp build-fresh --init && gulp watch",
     "dev": "gulp",
     "server": "gulp server",
     "build:assets": "gulp build-etc build-images",

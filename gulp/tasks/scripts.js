@@ -10,18 +10,24 @@ import config from '../config'
 import webpackConfig from '../../webpack.config.babel.js'
 const $js = config.js
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
 
-	const env = util.env.production ? 'production' : 'development'
+
+	let env = util.env.production ? 'production' : 'development'
+
+	if(util.env.init) {
+		env = 'init'
+	}
 
 	return gulp.src($js.src)
-    .pipe(stream(webpackConfig(env), webpack))
+		.pipe(stream(webpackConfig(env), webpack, () => {
+			browserSync.reload()
+		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(process.env.NODE_ENV === 'production', rename({
 			suffix: `-${config.stamp}`
 		})))
-    .pipe(gulp.dest($js.dest))
-		.pipe(browserSync.create().stream())
+		.pipe(gulp.dest($js.dest))
 })
 
 

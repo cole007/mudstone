@@ -5,6 +5,7 @@ import inject from 'gulp-inject'
 import gulpif from 'gulp-if'
 import svgSymbols from 'gulp-svg-symbols'
 import rename from 'gulp-rename'
+import browserSync from 'browser-sync'
 import config from '../config'
 
 const $symbols = config.svgSymbols
@@ -33,4 +34,7 @@ gulp.task('symbols',  () => {
 		.pipe(rename($symbols.fileName))
 		.on('error', handleErrors)
 		.pipe(gulp.dest($symbols.fileDest))
+		.pipe(browserSync.create().reload({
+			stream: true
+		}))
 })

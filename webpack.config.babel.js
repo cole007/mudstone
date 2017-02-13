@@ -9,8 +9,12 @@ import { getIfUtils, removeEmpty } from 'webpack-config-utils'
 const webpackConfig = env => {
 	const { ifProd } = getIfUtils(env)
 
+	const watch = (env === 'production' || env === 'init') ? false : true
+
+	console.log(watch)
 
 	const config = webpackValidator({
+		watch,
 		context: __dirname,
 		entry: `${__dirname}/_assets/js/app.js`,
 		output: {

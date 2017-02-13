@@ -4,6 +4,7 @@ import svgmin from 'gulp-svgmin'
 import imagemin from 'gulp-imagemin'
 import handleErrors from '../util/handleErrors'
 import webp from 'gulp-webp'
+import browserSync from 'browser-sync'
 import config from '../config'
 
 const $images = config.images
@@ -15,6 +16,9 @@ gulp.task('images', () => {
 		.pipe(imagemin())
 		.on('error', handleErrors)
 		.pipe(gulp.dest($images.dest))
+		.pipe(browserSync.create().reload({
+			stream: true
+		}))
 })
 
 
@@ -23,6 +27,9 @@ gulp.task('svg-assets', () => {
 		.pipe(svgmin())
 		.on('error', handleErrors)
 		.pipe(gulp.dest($svg.dest))
+		.pipe(browserSync.create().reload({
+			stream: true
+		}))
 })
 
 
@@ -31,4 +38,7 @@ gulp.task('webp', () => {
 		.pipe(webp())
 		.on('error', handleErrors)
 		.pipe(gulp.dest($svg.dest))
+		.pipe(browserSync.create().reload({
+			stream: true
+		}))
 })
