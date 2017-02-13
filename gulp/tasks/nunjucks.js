@@ -15,7 +15,7 @@ gulp.task('nunjucks', () => {
 		.on('error', handleErrors)
 		.pipe(rename((path) => path.extname = '.html'))
 		.pipe(gulp.dest($nunjucks.dest))
-		.pipe(browserSync.create().reload({
+		.pipe(browserSync.reload({
 			stream: true
 		}))
 })

@@ -14,14 +14,12 @@ gulp.task('server', () => browserSync($browserSync))
 gulp.task('watch', () => {
 
 	process.env.NODE_ENV = util.env.production ? 'production' : 'development'
-
-	browserSync($browserSync)
 	// watch scss
 	watch(config.sass.watch, () => gulp.start('sass', reload))
 	// watch js
 	watch(config.js.watch, () => gulp.start('scripts', reload))
 	// watch pug
-	watch(config.nunjucks.watch, () => gulp.start('nunjucks', reload))
+	watch(config.pug.watch, () => gulp.start('pug', reload))
 	// watch template
 	watch(config.template.src, () => gulp.start('build-template', reload))
 	// watch json
@@ -34,4 +32,6 @@ gulp.task('watch', () => {
 	watch(config.svg.assets, () => gulp.start('svg-assets', reload))
 	// watch craft
 	watch(config.craft.watch, reload)
+	
+	browserSync($browserSync)
 })

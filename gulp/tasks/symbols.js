@@ -34,7 +34,7 @@ gulp.task('symbols',  () => {
 		.pipe(rename($symbols.fileName))
 		.on('error', handleErrors)
 		.pipe(gulp.dest($symbols.fileDest))
-		.pipe(browserSync.create().reload({
+		.pipe(browserSync.reload({
 			stream: true
 		}))
 })

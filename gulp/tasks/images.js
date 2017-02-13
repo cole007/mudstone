@@ -16,7 +16,7 @@ gulp.task('images', () => {
 		.pipe(imagemin())
 		.on('error', handleErrors)
 		.pipe(gulp.dest($images.dest))
-		.pipe(browserSync.create().reload({
+		.pipe(browserSync.reload({
 			stream: true
 		}))
 })
@@ -27,7 +27,7 @@ gulp.task('svg-assets', () => {
 		.pipe(svgmin())
 		.on('error', handleErrors)
 		.pipe(gulp.dest($svg.dest))
-		.pipe(browserSync.create().reload({
+		.pipe(browserSync.reload({
 			stream: true
 		}))
 })
@@ -38,7 +38,7 @@ gulp.task('webp', () => {
 		.pipe(webp())
 		.on('error', handleErrors)
 		.pipe(gulp.dest($svg.dest))
-		.pipe(browserSync.create().reload({
+		.pipe(browserSync.reload({
 			stream: true
 		}))
 })
