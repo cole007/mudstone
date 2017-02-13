@@ -55,7 +55,6 @@
     "gulp-notify": "^3.0.0",
     "gulp-nunjucks": "^3.0.0",
     "gulp-postcss": "^6.3.0",
-    "gulp-pug": "^3.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-rollup": "^2.11.0",
     "gulp-sass": "^3.1.0",
