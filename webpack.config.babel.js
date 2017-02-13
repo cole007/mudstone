@@ -11,7 +11,6 @@ const webpackConfig = env => {
 
 	const watch = (env === 'production' || env === 'init') ? false : true
 
-	console.log(watch)
 
 	const config = webpackValidator({
 		watch,
