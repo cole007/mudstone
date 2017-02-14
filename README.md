@@ -32,7 +32,13 @@ Frontend starter kit
 * Compile nunjucks template
 * Compile scss (with postcss autoprefixer)
 * SCSS linting with gulp-sass-lint
-* Livereload and server with BrowserSync
+* Livereload/Hot Module Reloading and server with BrowserSync
+
+###Inspiration
+
+Special thanks to Viget's fantastic gulp-starter (blendid branch).  This is basically an es6 fork, with a few things added and a few things removed
+https://github.com/vigetlabs/gulp-starter/tree/blendid
+
 
 ###Workflow
 
@@ -46,11 +52,9 @@ For any npm modules that will be used in production use `yarn add bla`, all othe
 
 - `npm start` - fresh build and server
 - `npm run dev` - aka `gulp`
-- `npm run server` - starts a server
-- `npm run build:assets` - build fonts, videos, misc tasks, images, svgs et al
-- `npm run build:scripts` - compile the scripts in production mode
-- `npm run build:css` - compile the sass in production mode
+- `npm run cms` - gulp in cms mode
 - `npm run build` - build all the things in production mode
+- `npm run build:cms`- build all the things in production mode for a cms site
 
 ###CSS
 postcss plugins:

@@ -1,0 +1,12 @@
+{
+  "baseDir": "./deploy/public",
+  "dest": "./deploy/public",
+  "dist": "./deploy/public/dist",
+  
+	"browserSync": {
+		"server": {
+			"baseDir": "deploy/public",
+      "index": "index.html"
+		}
+	}
+}
