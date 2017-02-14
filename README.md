@@ -40,6 +40,10 @@ Special thanks to Viget's fantastic gulp-starter (blendid branch).  This is basi
 https://github.com/vigetlabs/gulp-starter/tree/blendid
 
 
+###Setup
+All of the file paths are defined in `gulp/path.*.*.json`  The CMS and Production version are merged into the dev one when in cms/production mode
+You can run any gulp task with --cms or --production (or both) to compile the various environment versions.
+
 ###Workflow
 
 To begin development run `npm start`, this will rebuild all of the assets, start browsersync and watch all of the assets for changes. The css and javascript is unminified during development. Before deploying code to a production environment run `npm run build` to compress scss/js and remove any source maps.
