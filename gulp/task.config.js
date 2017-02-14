@@ -45,6 +45,7 @@ export default {
 		extensions: ['json']
 	},
 
+
 	scss: {
 		task: 'code',
 		watch: true,
