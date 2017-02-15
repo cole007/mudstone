@@ -26,8 +26,7 @@
 		"sourceType": "module",
 		"ecmaFeatures": {
 			"jsx": true
-		},
-		"sourceType": "module"
+		}
 	},
 	"rules": {
 		"no-console": ["warn", {
@@ -48,6 +47,9 @@
 		"semi": [
 			"warn",
 			"never"
+		],
+		"no-unused-vars": [
+			"warn"
 		],
 		"eqeqeq": ["error", "allow-null"],
 		"no-extra-bind": "error",
