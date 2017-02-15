@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <symbol id="arrow" viewBox="0 0 16.04 10.97">
+      <title>arrow</title><path d="M1.37 4.83h14.68v1.3H1.37z"/><path d="M5.48 10.97L0 5.49 5.49 0l.92.92-4.57 4.57 4.56 4.56-.92.92z"/>
+    </symbol>
+    <symbol id="chevron" viewBox="0 0 28.33 17">
+      <title>chevron</title><path d="M14.17 17L0 2.83 2.83 0l11.34 11.34L25.51 0l2.83 2.83L14.17 17z"/>
+    </symbol>
+    <symbol id="close" viewBox="0 0 11.27 11.27">
+      <title>close</title><path d="M.003 10.198L10.214-.012l1.06 1.06-10.21 10.21z"/><path d="M.003 1.062L1.064.002l10.21 10.21-1.06 1.06z"/>
+    </symbol>
+    <symbol id="tick" viewBox="0 0 17.44 12.97">
+      <title>tick</title><path d="M5.53 12.96L0 7.44l1.06-1.06 4.47 4.46L16.38 0l1.05 1.06-11.9 11.9z"/>
+    </symbol></svg>
