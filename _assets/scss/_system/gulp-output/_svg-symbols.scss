@@ -16,6 +16,46 @@
   }
 }
 
+.icon--arrow {
+  width: 16.04px;
+  &:after {
+    padding-bottom: 62.5%;
+  }
+}
+.icon--chevron {
+  width: 28.33px;
+  &:after {
+    padding-bottom: 60.71428571428571%;
+  }
+}
+.icon--close {
+  width: 11.27px;
+  &:after {
+    padding-bottom: 100%;
+  }
+}
+.icon--tick {
+  width: 17.44px;
+  &:after {
+    padding-bottom: 70.58823529411765%;
+  }
+}
 
 
 
+
+$icon--arrow-width: 16px;
+$icon--arrow-height: 10px;
+$icon--arrow-ratio: 0.625;
+
+$icon--chevron-width: 28px;
+$icon--chevron-height: 17px;
+$icon--chevron-ratio: 0.6071428571428571;
+
+$icon--close-width: 11px;
+$icon--close-height: 11px;
+$icon--close-ratio: 1;
+
+$icon--tick-width: 17px;
+$icon--tick-height: 12px;
+$icon--tick-ratio: 0.7058823529411765;
