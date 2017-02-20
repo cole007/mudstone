@@ -1,13 +1,21 @@
 #Mudstone Documentation
 
-####Folder Structure
 
-######Code assets
+####TLDR;
+`npm start` and you're good to go! 
+
+**The only change you will need to make to the config is the browsersync proxy url.**
+`gulp/paths.config.cms`
+
+
+##Folder Structure
+
+####Code assets
 - _assets/scss/*.scss 
 - _assets/html/nunjucks/*.njk
 - _assets/js/*.js
  
-######Static assets
+####Static assets
 - _assets/images/site/*.[.jpg, .png]
 - _assets/images/svg-symbols/*.svg
 - _assets/images/svg-assets/*.svg
@@ -23,13 +31,13 @@
 - `package.json` Dependencies
 - `yarn.lock` The yarn lock file!
 
-####Tasks
+##Tasks
 
 In the following instructions we use the images task as an example. The same steps and requirements apply to all of the gulp tasks, except for bundling the javascript, which is handled by webpack.
 
 Each task is comprised of four components.
 
-#####Paths
+####Paths
 
 `gulp/paths.config.dev.json`
 
@@ -42,7 +50,7 @@ Each task is comprised of four components.
 
 A json object with a src and dest key/value pair. The source path is relative from the assets directory, and the dest path is relative from public
 
-#####Task config
+####Task config
 
 `gulp/task.config.js`
 
@@ -57,7 +65,7 @@ A json object with a src and dest key/value pair. The source path is relative fr
 - watch: *Boolean*, should gulp watch for changes 
 - extensions: *Array* of file extensions **required** 
 
-#####Gulp task
+####Gulp task
 `gulp/tasks/images.js`
 
 ```
@@ -90,7 +98,7 @@ export function imagesTask() {
 gulp.task('images', imagesTask)
 ```
 
-#####Export Gulp task
+####Export Gulp task
 `gulp/tasks/index.js`
 
 ```
@@ -114,10 +122,10 @@ const paths = {
 
 And that's it! 
 
-###Javascript
+##Javascript
 https://webpack.js.org/configuration/
 
-####Environments
+##Environments
 
 There are three possible environments, each configured with a paths.config.*env*.json file.  When they are merged together it is a shallow merge, so all of the settings for a given object will be required. 
 
@@ -183,7 +191,7 @@ There are three possible environments, each configured with a paths.config.*env*
 }
 ```
 
-####NPM Scripts
+##NPM Scripts
 
 All of the standard gulp tasks are available, i.e. `gulp images`. The following npm scripts are just pointers to gulp tasks (npm start === gulp), rather pointless when you think about it, but hey ho! 
 
