@@ -98,13 +98,6 @@ export function imagesTask() {
 gulp.task('images', imagesTask)
 ```
 
-####Export Gulp task
-`gulp/tasks/index.js`
-
-```
-export { images } from './images'
-```
-
 *Note:* Sometimes you only want to pass in a single level of files into the `gulp.src()` function.  For example the scss task:
 
 ```
@@ -119,6 +112,16 @@ const paths = {
 }
 
 ```
+
+
+####Export Gulp task
+`gulp/tasks/index.js`
+
+```
+export { images } from './images'
+```
+
+
 
 And that's it! 
 
