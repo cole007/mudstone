@@ -3,6 +3,8 @@
 
 Frontend starter kit
 
+See notes.md
+
 ######Requirements
 - node >= 6.9.1
 - npm >= 3.3.12
