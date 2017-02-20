@@ -97,7 +97,7 @@
   "private": true,
   "scripts": {
     "start": "gulp",
-    "dev": "gulp watchg",
+    "dev": "gulp watch",
     "cms": "gulp --cms",
     "build": "gulp build --production",
     "build:cms": "gulp build --cms --production"
