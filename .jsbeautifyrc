@@ -17,12 +17,17 @@
 	},
 	"css": {
 		"allowed_file_extensions": ["css", "scss", "sass", "less"],
-		"end_with_newline": false,
+		"end_with_newline": true,
+		"brace_style": "expanded",
 		"indent_char": " ",
 		"indent_size": 1,
 		"indent_with_tabs": true,
-		"newline_between_rules": true,
-		"selector_separator_newline": true
+		"newline_between_rules": false,
+		"selector_separator_newline": true,
+		"preserve_newlines": true,
+		"keep_array_indentation": true,
+    "keep_function_indentation": true,
+    "space_before_conditional": true
 	},
 	"js": {
 		"allowed_file_extensions": ["js", "jsx", "json", "eslintrc", "jsbeautifyrc"],

@@ -1,14 +1,18 @@
+
+
 // debugging
 $debug: false;
+
 /*
   Gutters
 */
-$base-padding: 20;
 
+$base-padding: 20;
 
 /*
   Colours
 */
+
 $white: #fff;
 $black: #000;
 
@@ -31,7 +35,6 @@ $palettes:(
   )
 );
 
-
 /*
   Breakpoints
 */
@@ -44,8 +47,7 @@ $breakpoints: (
   wide:    1300px
 );
 
-
 /* lost grid settings */
 
 @lost gutter 20px;
-@lost clearing left
+@lost clearing left;
