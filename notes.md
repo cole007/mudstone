@@ -41,6 +41,7 @@ Just note that running gulp will not build a js bundle you can access
 The following gulp tasks are available, it should be pretty obvious what they do.  Each task is preceded with `gulp`
 - fonts
 - scss 
+- bundle:script
 - favicons
 - json (moves any json files from `_assets/js/json/` to `BASEDIR/public`)
 - cssFonts

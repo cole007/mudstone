@@ -18,7 +18,7 @@ const webpackConfig = env => {
 	const dest = path.resolve(process.env.PWD, PATH_CONFIG.dest, PATH_CONFIG.js.dest)
 	const publicPath = pathToUrl(PATH_CONFIG.js.dest, '/')
 	const filename = TASK_CONFIG.js.filename
-
+	console.log(env)
 	const {
 		ifProd
 	} = getIfUtils(env)
