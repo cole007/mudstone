@@ -38,7 +38,43 @@ Just note that running gulp will not build a js bundle you can access
 
 ##Tasks
 
-In the following instructions we use the images task as an example. The same steps and requirements apply to all of the gulp tasks, except for bundling the javascript, which is handled by webpack.
+The following gulp tasks are available, it should be pretty obvious what they do.  Each task is preceded with `gulp`
+- fonts
+- scss 
+- favicons
+- json (moves any json files from `_assets/js/json/` to `BASEDIR/public`)
+- cssFonts
+- move-scripts
+- clean 
+- html
+- symbols
+- svgs
+- images
+- cacheBuster
+- watch
+- browserSync
+- build
+
+##NPM Scripts
+
+All of the standard gulp tasks are available, i.e. `gulp images`. The following npm scripts are just pointers to gulp tasks (npm start === gulp), rather pointless when you think about it, but hey ho! 
+
+- `npm start` Empty build folder, rebuild and watch everything
+- `npm run dev` Same as above, without rebuilding everything
+- `npm run cms` Same as start but with the environment set to cms
+- `npm run build` Build all the things in production mode
+- `npm run build:cms` As above but in production cms mode  
+
+Any task can be run independantly in any of the enviroments.
+
+`gulp images --cms`
+
+`gulp images --production`
+
+`gulp images --cms --production`
+
+
+##Task tutorial
 
 Each task is comprised of four components.
 
@@ -198,26 +234,6 @@ There are three possible environments, each configured with a paths.config.*env*
   }
 }
 ```
-
-##NPM Scripts
-
-All of the standard gulp tasks are available, i.e. `gulp images`. The following npm scripts are just pointers to gulp tasks (npm start === gulp), rather pointless when you think about it, but hey ho! 
-
-- `npm start` Empty build folder, rebuild and watch everything
-- `npm run dev` Same as above, without rebuilding everything
-- `npm run cms` Same as start but with the environment set to cms
-- `npm run build` Build all the things in production mode
-- `npm run build:cms` As above but in production cms mode  
-
-Any task can be run independantly in any of the enviroments.
-
-`gulp images --cms`
-
-`gulp images --production`
-
-`gulp images --cms --production`
-
-
 
 ##Debugging
 
