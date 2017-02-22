@@ -12,9 +12,12 @@ import animateCss from 'postcss-animation'
 import postcssTriangle from 'postcss-triangle'
 import quantityQueries from 'postcss-quantity-queries'
 import objectFitImages from 'postcss-object-fit-images'
+import styleLint from 'gulp-stylelint'
 import lost from 'lost'
 import browserSync from 'browser-sync'
-import { handleErrors } from '../libs/utils'
+import {
+	handleErrors
+} from '../libs/utils'
 import path from 'path'
 
 export function scssTask() {
@@ -30,6 +33,15 @@ export function scssTask() {
 	return gulp.src(paths.src)
 		.pipe(gulpif(!global.production, sourcemaps.init()))
 		.pipe(sass(TASK_CONFIG.scss.options))
+		.pipe(styleLint({
+			debug: true,
+			syntax: ['scss'],
+			ignoreFiles: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.src, TASK_CONFIG.scss.lintIgnorePaths),
+			reporters: [{
+				formatter: 'string',
+				console: true
+			}]
+		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init({
 			loadMaps: true

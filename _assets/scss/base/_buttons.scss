@@ -3,23 +3,17 @@
 .btn {
 	$btn-height: 44;
 	@include font-size(18, $btn-height);
-	display:inline-block;
-	vertical-align:middle;
-	white-space:nowrap;
-	cursor:pointer;
-	border:none;
-	margin:0;
+	display: inline-block;
+	vertical-align: middle;
+	white-space: nowrap;
+	cursor: pointer;
+	border: none;
+	margin: 0;
 	padding: 0 25px;
 	text-decoration: none;
 	height: $btn-height * 1px;
-
-	&:hover {
-
-	}
-
-	&:focus {
-
-	}
+	&:hover {}
+	&:focus {}
 }
 
 // reset for actual buttons
@@ -30,7 +24,7 @@
 	padding: 0;
 	cursor: pointer;
 }
-
 [disabled] {
 	cursor: default;
 }
+

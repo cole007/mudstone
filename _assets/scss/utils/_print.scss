@@ -8,18 +8,19 @@
  * information on the main project.
  */
 
+
 /* ==========================================================================
    Print styles.
    ========================================================================== */
+
 @media print {
+	
 	*,
-	*:after,
+	*:after, 
 	*:before {
-		background : transparent !important;
-		color      : #000 !important;
-		/* Black prints faster:
-                                   http://www.sanbeiji.com/archives/953 */
-		box-shadow : none !important;
+		background: transparent !important;
+		color: #000 !important;
+		box-shadow: none !important;
 		text-shadow: none !important;
 	}
 
@@ -35,30 +36,23 @@
 	abbr[title]:after {
 		content: " (" attr(title) ")";
 	}
-
-	/*
-     * Don't show links that are fragment identifiers,
-     * or use the `javascript:` pseudo protocol
-     */
-	a[href^="#"]:after,
-	a[href^="javascript:"]:after {
+	
+	a[href^="#"]:after, 
+	a[href^="javascript:"]:after {	
 		content: "";
 	}
 
-	blockquote,
+	blockquote, 
 	pre {
-		border           : 1px solid #999;
+		border: 1px solid #999;
 		page-break-inside: avoid;
 	}
-	/*
-     * Printing Tables:
-     * http://css-discuss.incutio.com/wiki/Printing_Tables
-     */
+
 	thead {
 		display: table-header-group;
 	}
 
-	img,
+	img, 
 	tr {
 		page-break-inside: avoid;
 	}
@@ -67,15 +61,17 @@
 		max-width: 100% !important;
 	}
 
-	h2,
-	h3,
+	h2, 
+	h3, 
 	p {
 		orphans: 3;
-		widows : 3;
+		widows: 3;
 	}
 
-	h2,
+	h2, 
 	h3 {
 		page-break-after: avoid;
 	}
+
 }
+
