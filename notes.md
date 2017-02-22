@@ -13,7 +13,6 @@
 When running `gulp` the javascript bundle is served from memory, meaning no file is written to disk.
 Just note that running gulp will not build a js bundle you can access
 
-
 ##Folder Structure
 
 ####Code assets
@@ -217,3 +216,49 @@ Any task can be run independantly in any of the enviroments.
 `gulp images --production`
 
 `gulp images --cms --production`
+
+
+
+##Debugging
+
+#### Tasks
+`yarn install` to make sure you have the latest dependencies
+
+If you can't see where the task is crashing try commenting each of the task objects `(gulp/task.config.js)`
+
+If the problem is coming from either scss or javascript try commenting out in `style.scss` and `app.js`.  
+
+Go nuclear, delete the `node_modules` folder and do anther `yarn`
+
+Google!
+
+#### Missing files
+
+Make sure the css and js html tags are wrapped in the following comment blocks
+
+```
+<!-- build:css-->
+	<link rel="stylesheet" href="/dist/css/style.css">
+<!-- endbuild-->
+
+
+<!-- build:js-->
+	<script src="/dist/js/bundle.js"></script>
+<!-- endbuild-->
+
+```
+
+Any markup between the comment blocks will be replaced.  Running the build tasks will appended a time stamp to the end of each file name.
+
+`<script src="/dist/css/style.59843957348.js"></script>`
+`<script src="/dist/js/bundle.59843957348.js"></script>`
+
+Check the destination path configs are correct.
+
+#### Nothing loads
+
+Sounds like a browsersync problem.  Check the settings in the path config files.
+
+#### Unexpected token in npm module
+
+Sounds like a babel transform issue, so may need to install a babel transform plugin and update the webpack.config file (`gulp/libs/webpack.babel.config`).  Check for github issues. 
