@@ -10,7 +10,7 @@
 - To deploy a **static build** run `npm run build`
 - To deploy to **craft** use `npm run build:cms`
 
-When running `gulp` the javascript bundle is served from memory, meaning no file is written to disk, which makes it much quicker. 
+When running `gulp` the javascript bundle is served from memory, meaning no file is written to disk.
 Just note that running gulp will not build a js bundle you can access
 
 
