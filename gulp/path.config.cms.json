@@ -23,5 +23,11 @@
     "dest": "./deploy/craft/templates/wrapper/",
     "css": "/dist/css/",
     "js": "/dist/js/"
+  },
+
+
+  "html": {
+    "src": "html/nunjucks",
+    "dest": "../_assets/html/dist"
   }
 }

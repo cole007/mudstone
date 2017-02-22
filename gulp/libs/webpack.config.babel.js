@@ -33,6 +33,11 @@ const webpackConfig = env => {
 			publicPath: publicPath
 		},
 		devtool: ifProd('eval', 'source-map'),
+		resolve: {
+			alias: {
+				'vue$': 'vue/dist/vue.common.js'
+			}
+		},
 		module: {
 			loaders: [
 				{

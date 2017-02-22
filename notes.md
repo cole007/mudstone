@@ -7,6 +7,9 @@
 **The only change you will need to make to the config is the browsersync proxy url.**
 `gulp/paths.config.cms`
 
+- To deploy a **static build** run `npm run build`.  This will compile the assets to deploy/public
+- To deploy to **craft** use `npm run build:cms`, this will do the same but the nunjucks assets will not be moved to deploy/public
+
 
 ##Folder Structure
 

@@ -1,0 +1,8 @@
+<div id="accordion">
+  {% for entry in accordion %}
+    <div class="expander">
+      <header class="expander__header">{{ entry.title }}</header>
+      <div class="expander__content">{{ entry.body }}</div>
+    </div>
+  {% endfor %}
+</div>
