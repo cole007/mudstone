@@ -7,8 +7,11 @@
 **The only change you will need to make to the config is the browsersync proxy url.**
 `gulp/paths.config.cms`
 
-- To deploy a **static build** run `npm run build`.  This will compile the assets to deploy/public
-- To deploy to **craft** use `npm run build:cms`, this will do the same but the nunjucks assets will not be moved to deploy/public
+- To deploy a **static build** run `npm run build`
+- To deploy to **craft** use `npm run build:cms`
+
+When running `gulp` the javascript bundle is served from memory, meaning no file is written to disk, which makes it much quicker. 
+Just note that running gulp will not build a js bundle you can access
 
 
 ##Folder Structure
