@@ -32,6 +32,7 @@ Just note that running gulp will not build a js bundle you can access
 - `.babelrc` Babel settings for gulp tasks only
 - `.eslintrc` Eslint settings
 - `.jsbeautifyrc` Beautify settings
+- `.stylelintrc` Stylelint config settings
 - `gulp.babel.js` The gulps tasks entry point
 - `package.json` Dependencies
 - `yarn.lock` The yarn lock file!
