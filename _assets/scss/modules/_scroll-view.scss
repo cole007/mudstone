@@ -7,8 +7,9 @@
 	width: 33.3333%;
 	background-color: #4ae;
 	border: 2px solid $white;
-	transition: all .5s .3s ease;
-	&:before {
+	transition: all 0.5s 0.3s ease;
+
+	&::before {
 		padding-top: 100%;
 		display: block;
 		content: " ";

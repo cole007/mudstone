@@ -16,6 +16,7 @@ $base-padding: 20;
 $white: #fff;
 $black: #000;
 
+/* stylelint-disable */
 $palettes:(
   bg: (
     body: #e5e5e5,
@@ -34,11 +35,13 @@ $palettes:(
     upload: #bfc8d2
   )
 );
+/* stylelint-enable */
 
 /*
   Breakpoints
 */
 
+/* stylelint-disable */
 $breakpoints: (
   mobile:  320px,
   sm-tablet:600px,
@@ -46,7 +49,7 @@ $breakpoints: (
   desktop: 980px,
   wide:    1300px
 );
-
+/* stylelint-enable */
 /* lost grid settings */
 
 @lost gutter 20px;

@@ -1,0 +1,53 @@
+
+
+// debugging
+$debug: false;
+
+/*
+  Gutters
+*/
+
+$base-padding: 20;
+
+/*
+  Colours
+*/
+
+$white: #fff;
+$black: #000;
+
+$palettes:(
+  bg: (
+    body: #e5e5e5,
+    dark: #00234b,
+    light: #f2f4f6
+  ),
+  themes: (),
+  type: (
+    base: #00234b,
+    light: #8091a5
+  ),
+  buttons: (
+    upload: #bfc8d2
+  ),
+  states: (
+    upload: #bfc8d2
+  )
+);
+
+/*
+  Breakpoints
+*/
+
+$breakpoints: (
+  mobile:  320px,
+  sm-tablet:600px,
+  tablet:  740px,
+  desktop: 980px,
+  wide:    1300px
+);
+
+/* lost grid settings */
+
+@lost gutter 20px;
+@lost clearing left;

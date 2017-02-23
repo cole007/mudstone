@@ -7,15 +7,14 @@
 /*
  Reset some form bits, to prevent weirdness in ios
 */
+
 input[type="submit"],
 input[type="search"],
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-    appearance: none;
-    border-radius: 0;
+	appearance: none;
+	border-radius: 0;
 }
-
-
 
 
 /*
@@ -27,6 +26,7 @@ fieldset {
 	border: 0;
 }
 
+
 /*
 
 Basic form markup:
@@ -37,9 +37,11 @@ Basic form markup:
 </div>
 */
 
+
 /*
 	field wrapping element
 */
+
 .form__group {
 	margin-bottom: vr-block(1);
 }
@@ -48,6 +50,7 @@ Basic form markup:
 /*
 	label element
 */
+
 .form__label {
 	font-size: ms(-1);
 	display: block;
@@ -57,12 +60,13 @@ Basic form markup:
 /*
 	input element, 100% wide to fill container
 */
+
 .form__input {
 	font-size: ms(0);
 	border: 1px solid lighten($black, 95%);
 	display: block;
 	width: 100%;
-	padding: vr-block(0.25) gutter(.5);
+	padding: vr-block(0.25) gutter(0.5);
 }
 
 
@@ -82,6 +86,7 @@ Basic form markup:
 		</div>
 	</div>
 */
+
 .form__input--select {
 	select {
 		height: 100%;
@@ -94,13 +99,13 @@ Basic form markup:
 	}
 }
 
-
 .form__input--area {
-	line-height: computeLineHeight(16, 20);
+	line-height: leading(16, 20);
 	resize: vertical;
-	padding: vr-block(0.5) gutter(.5);
-	min-height: vr-block(3);
+	padding: gutter(0.5);
+	min-height: gutter(3);
 }
+
 
 /*
 
@@ -131,14 +136,17 @@ Basic form markup:
 
 	Relative wrapper for the psuedo radio/checkboxes
 */
+
 .form-toggle {
 	position: relative;
 }
+
 
 /*
 
 	Hide the input and remove it from the document flow
 */
+
 .form-toggle__input {
 	float: left;
 	position: absolute;
@@ -148,14 +156,14 @@ Basic form markup:
 	opacity: 0;
 
 	&:checked + .form-toggle__label {
-		&:before {
+		&::before {
 			border: 1px solid lighten($black, 5%);
 			background-color: lighten($black, 65%);
 		}
 	}
 
 	&:checked + .form-toggle__label--checkbox {
-		&:before {
+		&::before {
 			box-shadow: 0 0 0 5px $white inset;
 		}
 	}
@@ -166,31 +174,30 @@ Basic form markup:
 
 	Let's use flexbox to nicely align the psuedo element and the labels innerhtml
 */
+
 .form-toggle__label {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 
-	&:before {
+	&::before {
 		content: " ";
 		border: 1px solid lighten($black, 95%);
 		width: 20px;
 		height: 20px;
 		display: block;
-		margin-right: gutter(.5);
+		margin-right: gutter(0.5);
 	}
 }
 
-
 .form-toggle__label--radio {
-	&:before {
+	&::before {
 		border-radius: 100%;
 	}
 }
 
-
 .form__button {
-	padding: vr-block(.25);
+	padding: gutter(0.25);
 	background-color: lighten($black, 75%);
 	border: 1px solid lighten($black, 95%);
 	display: block;
@@ -199,3 +206,4 @@ Basic form markup:
 	font-weight: 700;
 	text-transform: uppercase;
 }
+

@@ -1,0 +1,10 @@
+
+.expand__content {
+	overflow: hidden;
+}
+
+.accordion {
+	[aria-hidden="true"] {
+		height: 0;
+	}
+}

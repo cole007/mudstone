@@ -60,7 +60,7 @@ export default {
 			autoprefixer: false
 		},
 		extensions: ['scss'],
-		lintIgnorePaths: '_system',
+		lintIgnorePaths: '_system/**/*.scss',
 		filename: 'style' // no extension
 	},
 

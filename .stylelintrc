@@ -2,5 +2,18 @@
   "extends": "stylelint-config-standard",
   "plugins": [
     "stylelint-scss"
-  ]
+  ],
+  "rules": {
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "declaration-colon-space-after": "always",
+    "indentation": ["tab", {
+      "except": ["value"]
+    }],
+    "max-empty-lines": 2,
+    "unit-whitelist": ["em", "rem", "%", "s", "px", "vh", "vw", "vmin", "vmax"],
+    "at-rule-no-unknown": [null, {
+      ignoreAtRules: ["lost", "include"]
+    }]
+  }
 }

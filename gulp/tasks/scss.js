@@ -25,23 +25,25 @@ export function scssTask() {
 
 
 	const paths = {
-		src: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.src, '*.scss'),
+		src: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.src, '**/**/*.scss'),
 		dest: path.resolve(process.env.PWD, PATH_CONFIG.dest, PATH_CONFIG.scss.dest)
 	}
 
 
 	return gulp.src(paths.src)
-		.pipe(gulpif(!global.production, sourcemaps.init()))
-		.pipe(sass(TASK_CONFIG.scss.options))
 		.pipe(styleLint({
 			debug: true,
-			syntax: ['scss'],
+			failAfterError: false,
+			syntax: 'scss',
 			ignoreFiles: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.src, TASK_CONFIG.scss.lintIgnorePaths),
 			reporters: [{
 				formatter: 'string',
 				console: true
 			}]
 		}))
+		.on('error', handleErrors)
+		.pipe(gulpif(!global.production, sourcemaps.init()))
+		.pipe(sass(TASK_CONFIG.scss.options))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init({
 			loadMaps: true

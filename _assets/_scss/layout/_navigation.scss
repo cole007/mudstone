@@ -1,0 +1,186 @@
+
+/*
+  Navigation layout component
+*/
+
+
+/*
+  Bring the menu to the top of the page
+*/
+.menu {
+	z-index: 10;
+}
+
+
+/*
+  Navigation layout component
+*/
+@include mq($until: breakpoint('tablet')) {
+  .menu__btn {
+  	@include menu-icon-rotate($width: 30px, $height: 2px, $color: $black, $curve: true, $active_class: '.is-active', $gap: 3);
+  	display: block;
+  	position: relative;
+  	width: 40px;
+  	height: 40px;
+  	z-index: 12;
+  	&.is-active {
+  		span {
+  			background-color: transparent;
+  			&:before,
+  			&:after {
+  				background-color: $black;
+  			}
+  		}
+  	}
+  }
+
+
+
+  // all of this needs to be replaced for desktop
+  // so lets wrap the fella in a little media query
+
+
+  .menu__root {
+  	position: absolute;
+  	top: 70px;
+  	bottom: 0;
+  	left: 0;
+  	width: 100%;
+  	overflow-y: auto;
+  	overflow-x: hidden;
+  }
+
+  .menu__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+  	display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  	text-align: center;
+  	background-color: c(bg,light);
+  	transition: opacity .5s, transform .5s, visibility 0s;
+    justify-content: center;
+
+
+  	transform: scale(1.3);
+  	transform-origin: 50% 50%;
+		/*
+			prevents page paints on scroll
+		*/
+		will-change: transform;
+		z-index: -1;
+		visibility: hidden;
+		opacity: 0;
+		transition: visibility 0s .3s, z-index 0s .3s, opacity .3s ease, transform .3s ease;
+
+
+		&.is-animating {
+			transition: visibility 0s .3s, z-index 0s .3s, opacity .3s ease, transform .3s ease;
+		}
+
+		&.is-visible {
+			opacity: 1;
+			visibility: visible;
+			z-index: 11;
+
+			&.is-animating {
+				transition: visibility 0s, z-index 0s, opacity .3s ease;
+			}
+		}
+  }
+
+
+  .menu__item {
+		font-size: ms(1);
+  	transition: color .3s;
+  	position: relative;
+  	color: $black;
+  	& > a {
+  		padding: gutter(.5) 0;
+
+  		&:focus,
+  		&:hover {
+  			color: $black;
+  		}
+
+  	}
+  }
+
+  .menu__subwrap {
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	overflow-y: auto;
+  	overflow-x: hidden;
+  	transform: translate3d(100%,0,0);
+  	transition: transform .3s;
+  	background-color: c(themes,blog);
+  	&.is-active {
+  		transform: translate3d(0,0,0);
+  	}
+
+  	.nav {
+  		height: 100%;
+  		overflow-y: auto;
+  	}
+  }
+
+
+  .menu__item--contact {
+  	display: none;
+  }
+
+}
+
+/*
+  Desktop navigation
+*/
+@include mq($from: breakpoint('tablet')) {
+
+  .menu__btn {
+  	display: none;
+  }
+
+
+  .menu__wrapper {
+  	position: static;
+  	visibility: visible;
+  	opacity: 1;
+  	display: block;
+  	width: auto;
+  	transform: none;
+  	background: none;
+  }
+
+  .menu__item {
+  	font-weight: normal;
+  	display: inline-block;
+  	margin: 0 gutter(.5);
+  	position: relative;
+  	a {
+			position: relative;
+  		display: block;
+  		text-align: center;
+  		margin: 0 gutter(.5);
+  	}
+  }
+
+
+	/*
+
+		has the page got a big ole hero section
+		might need to do some style changes to the meni
+	*/
+	.has-hero {
+		.menu {
+			color: $white;
+		}
+	}
+}

@@ -3,8 +3,9 @@
 	overflow: hidden;
 	height: 100vh;
 	z-index: 0;
-	&:before {
-		background-image: linear-gradient(to bottom, rgba($black,0.6) 0%, rgba($black,0) 40%, rgba($black,0) 40%, rgba($black,0.8) 100%);
+
+	&::before {
+		background-image: linear-gradient(to bottom, rgba($black, 0.6) 0%, rgba($black, 0) 40%, rgba($black, 0) 40%, rgba($black, 0.8) 100%);
 		content: " ";
 		position: absolute;
 		top: 0;
