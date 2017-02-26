@@ -3,7 +3,7 @@
 
 Frontend starter kit
 
-See notes.md
+See user-guide.md
 
 ######Requirements
 - node >= 6.9.1
