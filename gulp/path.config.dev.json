@@ -1,0 +1,82 @@
+{
+  "baseDir": "./tmp/public",
+  "src": "./_assets",
+  "dest": "./tmp/public",
+  "dist": "./tmp/public/dist",
+
+	"browserSync": {
+		"server": {
+			"baseDir": "tmp/public",
+      "index": "index.html"
+		}
+	},
+
+  "html": {
+    "src": "html/nunjucks",
+    "dest": "./"
+  },
+
+
+  "static": {
+    "src": "static",
+    "dest": "./"
+  },
+
+  "js": {
+    "src": "js",
+    "dest": "dist/js",
+		"libs": [
+			"./node_modules/jquery/dist/jquery.min.js",
+			"./node_modules/picturefill/dist/picturefill.min.js"
+		]
+  },
+
+  "json": {
+    "src": "js/json",
+    "dest": "./"
+  },
+
+  "scss": {
+    "src": "scss",
+    "dest": "dist/css"
+  },
+
+  "cssFonts": {
+    "src": "scss",
+    "dest": "dist/css"
+  },
+
+  "images": {
+    "src": "images/site",
+    "dest": "dist/images"
+  },
+
+  "fonts": {
+    "src": "fonts",
+    "dest": "dist/fonts"
+  },
+
+  "symbols": {
+    "src": "images/svg-symbols",
+    "dest": "dist/images",
+    "fileName": "symbols.njk",
+    "fileDest": "html/nunjucks/includes"
+  },
+
+  "svgs": {
+    "src": "images/svg-assets",
+    "dest": "dist/images"
+  },
+
+  "favicons": {
+    "src": "favicons",
+    "dest": "./"
+  },
+
+  "tags": {
+    "src": "./tmp/public/*.html",
+    "dest": "./tmp/public/",
+    "css": "/dist/css/",
+    "js": "/dist/js/"
+  }
+}

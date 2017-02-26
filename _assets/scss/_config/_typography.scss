@@ -1,7 +1,6 @@
-// Typographic v2.9.2 - https://github.com/corysimmons/typographic
-
-
-// Sans-serif
+/*
+	Sans-serif
+*/
 
 $calibri       : 'Calibri', 'Candara', 'Segoe', 'Segoe UI', 'Optima', 'Arial', 'sans-serif';
 $candara       : 'Candara', 'Calibri', 'Segoe', 'Segoe UI', 'Optima', 'Arial', 'sans-serif';
@@ -18,8 +17,9 @@ $tahoma        : 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
 $trebuchet     : 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma', 'sans-serif';
 $verdana       : 'Verdana', 'Geneva', 'sans-serif';
 
-
-// Serif
+/*
+	Serif
+*/
 
 $antiqua       : 'Book Antiqua', 'Palatino', 'Palatino Linotype', 'Palatino LT STD', 'Georgia', 'serif';
 $baskerville   : 'Baskerville', 'Baskerville old face', 'Hoefler Text', 'Garamond', 'Times New Roman', 'serif';
@@ -34,16 +34,13 @@ $hoefler       : 'Hoefler Text', 'Baskerville old face', 'Garamond', 'Times New 
 $lucida-bright : 'Lucida Bright', 'Georgia', 'serif';
 $palatino      : 'Palatino', 'Palatino Linotype', 'Palatino LT STD', "Book Antiqua", 'Georgia', 'serif';
 
-
-
 /*
-  typography
+	Typography settings
 */
+
 $base-font-size: 16;
 $base-line-height: 27;
 $browser-default-font-size: 16px;
-
-
 
 $minor-second   : 1.067;
 $major-second   : 1.125;
@@ -67,10 +64,8 @@ $ms-base: 16px;
 $ms-ratio: $minor-third;
 
 // @debug ms-list(0, 10, $ms-base, $ms-ratio);
-//
 // @debug rem(ms(2));
 // @debug ms(2);
-
 
 $line-height-ratio: 1.75 !default;
 $heading-ratio: $golden !default;
@@ -92,15 +87,11 @@ $desktop-line-height: 30px;
   Font stack
 */
 
-/*
-  Font stack
-*/
-$fonts: (
-	default: $body-font,
-	bold: $gill-sans,
+$fonts: ( 
+	default: $body-font, 
+	bold: $gill-sans, 
 	light: $gill-sans
 );
-
 
 /*
 	map of font sizes,
@@ -109,11 +100,26 @@ $fonts: (
 	mobile and desktop maps
 */
 
-$font-sizes: (
-	mobile: (
-		body: 14px
-	),
-	desktop: (
-		body: 18px
+$font-sizes: ( 
+	mobile: ( 
+		body: 14px,
+
+		heading-1: 22px,
+		heading-2: 22px,
+		heading-3: 20px,
+		heading-4: 18px,
+		heading-5: 16px,
+		heading-6: 16px
+	), 
+	desktop: ( 
+		body: 18px,
+
+		heading-1: 40px,
+		heading-2: 36px,
+		heading-3: 30px,
+		heading-4: 26px,
+		heading-5: 22px,
+		heading-6: 18px
 	)
 );
+

@@ -11,23 +11,21 @@
 */
 
 
-
-
 /*
   content property used by the viewport change event
 */
 
-body:before {
-  content: "none";
-  display: none;
+body::before {
+	content: "none";
+	display: none;
 }
 
 @each $break, $key in $breakpoints {
-  @include mq($from: breakpoint($break)) {
-    body:before {
-      content: '#{$break}';
-    }
-  }
+	@include mq($from: breakpoint($break)) {
+		body::before {
+			content: '#{$break}';
+		}
+	}
 }
 
 
@@ -38,9 +36,6 @@ body:before {
 	It alls quite a lot of extra css that isn't really needed when
 	you have no gutters.
 */
-.g {
-
-}
 
 
 .g__col {
@@ -48,49 +43,57 @@ body:before {
 }
 
 
+
+
+
+
+
+
+
+
 /*
   Footer grid modification
 */
-.g--footer {
 
-}
+
+
+
+
+
+
+
 
 
 /*
   Mobile, see config
 */
+
 @include mq($from: breakpoint('mobile')) {
-
-
 	/*
 	  Mobile default grid root node
 	*/
-  .gm {
+	.gm {
 		lost-flex-container: row;
-  }
+	}
 
 	.gm__1-2 {
 		lost-column: 1/2 2 gutter(1) flex;
-		margin-bottom: gutter(1)
+		margin-bottom: gutter(1);
 	}
 }
+
 
 /*
   Tablet, see config
 */
-@include mq($from: breakpoint('tablet')) {
 
+@include mq($from: breakpoint('tablet')) {
 	/*
 		Tablet default grid root node
 	*/
-  .gt {
+	.gt {
 		lost-flex-container: row;
-  }
-
-	.gv {
-
 	}
-
 
 	/*
 		grid column blocks
@@ -109,28 +112,29 @@ body:before {
 	}
 }
 
+
 /*
   Desktop, see config
 */
-@include mq($from: breakpoint('desktop')) {
 
+@include mq($from: breakpoint('desktop')) {
 	/*
 		Desktop default grid root node
 	*/
-  .gd {
 
-  }
+	// .gd {}
 }
+
 
 /*
   Wide, see config
 */
-@include mq($from: breakpoint('wide')) {
 
+@include mq($from: breakpoint('wide')) {
 	/*
 		Wide default grid root node
 	*/
-  .gw {
 
-  }
+	//.gw {}
 }
+

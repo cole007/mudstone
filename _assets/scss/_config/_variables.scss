@@ -1,14 +1,21 @@
-// debugging
-$debug: false;
-/*
-  Gutters
-*/
-$base-padding: 20;
 
+/* stylelint-disable */
+/*
+	Debugging Flag
+*/
+
+$debug: false;
+
+/*
+  Base Gutters
+*/
+
+$base-padding: 20;
 
 /*
   Colours
 */
+
 $white: #fff;
 $black: #000;
 
@@ -18,23 +25,32 @@ $palettes:(
     dark: #00234b,
     light: #f2f4f6
   ),
+  
   themes: (),
+  
   type: (
-    base: #00234b,
-    light: #8091a5
+    light: #8091a5,
+    base: #444444,
+    dark: #1a1a1a
   ),
+
   buttons: (
-    upload: #bfc8d2
+    light: #8091a5,
+    base: #444444,
+    dark: #1a1a1a
   ),
+  
+  boxes: (
+    light: #8091a5,
+    base: #444444,
+    dark: #1a1a1a
+  ),
+  
   states: (
     upload: #bfc8d2
   )
 );
 
-
-/*
-  Breakpoints
-*/
 
 $breakpoints: (
   mobile:  320px,
@@ -44,8 +60,5 @@ $breakpoints: (
   wide:    1300px
 );
 
-
-/* lost grid settings */
-
 @lost gutter 20px;
-@lost clearing left
+@lost clearing left;

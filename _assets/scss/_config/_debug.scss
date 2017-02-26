@@ -1,16 +1,19 @@
-@if $debug == true {
-  body {
-    &:after {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      font-size: 12px;
-      background-color: $black;
-      color: $white;
-      content: 'root';
-      display: block;
-      padding: gutter(.25);
-      z-index: 100001;
-    }
-  }
+/* stylelint-disable */
+
+@if $debug==true {
+	body {
+		&:after {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			font-size: 12px;
+			background-color: $black;
+			color: $white;
+			content: 'root';
+			display: block;
+			padding: gutter(.25);
+			z-index: 100001;
+		}
+	}
 }
+

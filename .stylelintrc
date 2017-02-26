@@ -1,0 +1,24 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "color-hex-length": "long",
+    "declaration-colon-space-after": "always",
+    "indentation": ["tab", {
+      "except": ["value"]
+    }],
+    "number-leading-zero": "never",
+    "max-empty-lines": 10,
+    "selector-pseudo-element-colon-notation": "double",
+    "unit-whitelist": ["em", "rem", "%", "ms", "px", "vh", "vw", "vmin", "vmax"],
+    "property-no-unknown": [
+      true, {
+        ignoreProperties: ["/^lost-/"]
+      }
+    ]
+  }
+}

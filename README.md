@@ -3,11 +3,14 @@
 
 Frontend starter kit
 
+See notes.md
+
 ######Requirements
 - node >= 6.9.1
 - npm >= 3.3.12
 - gulp >= 3.91
 - yarn >= 0.17.10
+- webpack >= 2.2.0
 
 ######Installation
 
@@ -23,14 +26,25 @@ Frontend starter kit
 ##Gulp
 
 * Compile sass (using libsass)
-* Transpile es6 to es5 with rollup-babel-plugin
+* Transpile es6 to es5 with babel
+* Bundle js with webpack 2
 * Javascript linting with eslint
 * Lossless image compression
 * SVG symbol generater
-* Compile pug templates (formerly jade)
+* Compile nunjucks template
 * Compile scss (with postcss autoprefixer)
 * SCSS linting with gulp-sass-lint
-* Livereload and server with BrowserSync
+* Livereload/Hot Module Reloading and server with BrowserSync
+
+###Inspiration
+
+Special thanks to Viget's fantastic gulp-starter (blendid branch).  This is basically an es6 fork, with a few things added and a few things removed
+https://github.com/vigetlabs/gulp-starter/tree/blendid
+
+
+###Setup
+All of the file paths are defined in `gulp/path.*.*.json`  The CMS and Production version are merged into the dev one when in cms/production mode
+You can run any gulp task with --cms or --production (or both) to compile the various environment versions.
 
 ###Workflow
 
@@ -43,14 +57,10 @@ For any npm modules that will be used in production use `yarn add bla`, all othe
 ###NPM scripts
 
 - `npm start` - fresh build and server
-- `npm run compile` - does just that
-- `npm run yup` - aka `gulp`
-- `npm run server` - starts a server
-- `npm run images` - runs all of the image tasks (svgs, images etc)
-- `npm run etc` - build fonts, videos, misc tasks
-- `npm run scripts` - compile the scripts
-- `npm run build` - minifies css/js
-- `npm run deploy` - fresh build, minifies css/js and deploys to surge.sh
+- `npm run dev` - aka `gulp`
+- `npm run cms` - gulp in cms mode
+- `npm run build` - build all the things in production mode
+- `npm run build:cms`- build all the things in production mode for a cms site
 
 ###CSS
 postcss plugins:

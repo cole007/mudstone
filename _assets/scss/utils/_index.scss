@@ -31,14 +31,11 @@
 	> *:last-child,
 	> *:last-child > *:last-child,
 	> *:last-child > *:last-child > *:last-child {
-		margin-bottom: 0
+		margin-bottom: 0;
 	}
 }
 
-
-
 // image replacement
-
 .u-ir {
 	display: block;
 	text-indent: 150%;
@@ -46,23 +43,20 @@
 	white-space: nowrap;
 }
 
-
 // state
-
 .u-hidden {
 	display: none;
 }
 
 .u-removed {
-	width: 0px;
-	height: 0px;
+	width: 0;
+	height: 0;
 	margin: -1px;
 	visibility: hidden;
 	pointer-events: none;
 }
 
 // text
-
 .u-text-center {
 	text-align: center;
 }
@@ -75,24 +69,22 @@
 	text-align: left;
 }
 
-
-
 // colours
-
 .u-text-white {
-	color:$white;
-}
-.u-text-black {
-	color:$white;
+	color: $white;
 }
 
+.u-text-black {
+	color: $white;
+}
 
 // backgrounds
-
 .u-bg-white {
-	background:$white;
+	background: $white;
 }
+
 .u-bg-black {
-	background:$black;
-	color:$white;
+	background: $black;
+	color: $white;
 }
+

@@ -8,12 +8,14 @@ import objectFitImages from 'object-fit-images'
 
 //https://github.com/typekit/webfontloader
 import WebFont from 'webfontloader'
-import { views } from './views'
+import {
+	views
+} from './views'
 import debug from 'debug'
 
 // logs enabled during development
 window.log = debug('app:log')
-if (ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
 	debug.enable('app:log')
 } else {
 	debug.disable('app:log')
@@ -40,8 +42,7 @@ WebFont.load({
 
 
 
-$(function() {
-	log('LOAD')
+$(function () {
 	views()
 	objectFitImages()
 })

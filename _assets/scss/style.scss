@@ -16,55 +16,65 @@
 /*
   Utility functions
 */
+
 @import '_system/core-mixins/utility-functions';
 
 /*
   easing functions http://easings.net/
 */
+
 @import '_system/core-mixins/easing';
 
 /*
   mq mixin from https://github.com/sass-mq/sass-mq
 */
+
 @import '_system/core-mixins/mq';
 @import '_system/core-mixins/type-helpers';
 
 /*
   Custom, site specific mixins
 */
+
 @import '_system/site-mixins/mixins';
 
 /*
   svg-symbols generated via `gulp symbols`
 */
+
 @import '_system/gulp-output/svg-symbols';
 
 /*
   Site variables, go nuts!
 */
+
 @import '_config/typography';
 @import '_config/variables';
 
 /*
   debug, $debug = true ?
 */
+
 @import '_config/_debug';
 
 /*
   Adapted normalize (stuff we don't use/need removed)
 */
+
 @import 'base/mudmalize';
 
 /*
   Reset util classes, single class name, easy to overwrite later on
   Prefix classes with r-
 */
+
 @import 'base/reset';
 
 /*
   Low level styles, no nesting, single class names, no media queries
   Typography, Buttons, Tables, Form elements, Etc
 */
+
 @import 'base/type';
 @import 'base/tables';
 @import 'base/buttons';
@@ -74,6 +84,7 @@
   This grid
   Prefix classes with g-
 */
+
 @import 'layout/grid';
 
 /*
@@ -81,6 +92,7 @@
   Max specificity of 2
   *Layout* media queries should go here
 */
+
 @import 'layout/header';
 @import 'layout/footer';
 @import 'layout/navigation';
@@ -91,6 +103,7 @@
   Max specificity of 2
   *Layout* media queries should go here
 */
+
 @import 'modules/form-example';
 @import 'modules/slide';
 @import 'modules/hero';
@@ -104,21 +117,28 @@
   Utility classes, these should always win, go crazy with import
   Prefix classes with u-
 */
+
 @import 'utils/index';
 
 /*
   Print styles
 */
-@import 'utils/print';
 
+@import 'utils/print';
 
 /*
   No JS styles
 */
+
 @import 'utils/no-js';
 
 /*
   Shame, hacks, overwrites, sad panda
   This file *should* be blank!
 */
+
 @import 'utils/shame';
+
+body {
+	background: green;
+}

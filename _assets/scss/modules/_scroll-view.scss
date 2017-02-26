@@ -5,10 +5,11 @@
 
 .item {
 	width: 33.3333%;
-	background-color: #4ae;
+	background-color: #44aaee;
 	border: 2px solid $white;
-	transition: all .5s .3s ease;
-	&:before {
+	transition: all 500ms 300ms ease;
+
+	&::before {
 		padding-top: 100%;
 		display: block;
 		content: " ";
