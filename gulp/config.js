@@ -152,9 +152,9 @@ const config = {
 		iconTemplate: `${assets}scss/_system/_tpl/_svg-symbols.scss`,
 		cssPath: `${assets}scss/_system/gulp-output/`,
 		cssOutput: '_svg-symbols.scss',
-		fileDest: state === 'dev' ? `${assets}html/pug/_includes/` : craftSourcePath,
+		fileDest: state === 'cms' ? craftSourcePath : `${assets}html/pug/_includes/`,
 		file: `${assets}images/svg-symbols/source.html`,
-		fileName: state === 'dev' ? 'symbols.pug' : '_symbols.twig',
+		fileName: state === 'dev' ? '_symbols.twig' : 'symbols.pug',
 		pugDest: `${assets}html/pug/_includes`
 	},
 	//svg sprites/assets
