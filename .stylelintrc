@@ -6,11 +6,11 @@
   "rules": {
     "block-no-empty": null,
     "color-no-invalid-hex": true,
+    "color-hex-length": "long",
     "declaration-colon-space-after": "always",
     "indentation": ["tab", {
       "except": ["value"]
     }],
-    "color-hex-length": "long",
     "number-leading-zero": "never",
     "max-empty-lines": 10,
     "selector-pseudo-element-colon-notation": "double",
