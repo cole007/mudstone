@@ -60,7 +60,7 @@ export default {
 			autoprefixer: false
 		},
 		extensions: ['scss'],
-		lintIgnorePaths: '_system/**/*.scss',
+		lintIgnorePaths: ['_system/**/*.scss', '_config/*.scss'],
 		filename: 'style' // no extension
 	},
 
@@ -104,7 +104,7 @@ export default {
 	symbols: {
 		task: 'asset',
 		watch: true,
-		scssTemplate: 'scss/_system/_tpl/_svg-symbols.scss',
+		scssTemplate: '../gulp/libs/symbols.tmp.scss',
 		scssOutputPath: 'scss/_system/gulp-output/',
 		scssOutputFile: '_svg-symbols.scss',
 		sourceFile: 'images/svg-symbols/source.html',

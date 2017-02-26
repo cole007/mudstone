@@ -43,6 +43,7 @@ export function symbolsTask() {
 			templates: ['default-svg', paths.scssTemplate]
 		}))
 		.pipe(gulpif( /[.]svg$/, gulp.dest(paths.dest)))
+		.pipe(gulpif( /[.]scss$/, rename(paths.scssOutputFile)))
 		.pipe(gulpif( /[.]scss$/, gulp.dest(paths.scssOutputPath)))
 
 

@@ -10,10 +10,15 @@
     "indentation": ["tab", {
       "except": ["value"]
     }],
-    "max-empty-lines": 2,
-    "unit-whitelist": ["em", "rem", "%", "s", "px", "vh", "vw", "vmin", "vmax"],
-    "at-rule-no-unknown": [null, {
-      ignoreAtRules: ["lost", "include"]
-    }]
+    "color-hex-length": "long",
+    "number-leading-zero": "never",
+    "max-empty-lines": 10,
+    "selector-pseudo-element-colon-notation": "double",
+    "unit-whitelist": ["em", "rem", "%", "ms", "px", "vh", "vw", "vmin", "vmax"],
+    "property-no-unknown": [
+      true, {
+        ignoreProperties: ["/^lost-/"]
+      }
+    ]
   }
 }

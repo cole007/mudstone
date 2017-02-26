@@ -1,7 +1,7 @@
 import browserSync from 'browser-sync'
 import gulp from 'gulp'
 import webpack from 'webpack'
-import webpackConfig from '../libs/webpack.config.babel'
+import webpackConfig from './webpack.config.babel'
 import { pathToUrl } from '../libs/utils'
 import path from 'path'
 

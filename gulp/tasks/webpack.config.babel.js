@@ -9,7 +9,7 @@ import {
 } from 'webpack-config-utils'
 import {
 	pathToUrl
-} from './utils'
+} from '../libs/utils'
 
 
 const webpackConfig = env => {

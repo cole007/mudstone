@@ -15,13 +15,10 @@ import objectFitImages from 'postcss-object-fit-images'
 import styleLint from 'gulp-stylelint'
 import lost from 'lost'
 import browserSync from 'browser-sync'
-import {
-	handleErrors
-} from '../libs/utils'
+import { handleErrors } from '../libs/utils'
 import path from 'path'
 
 export function scssTask() {
-
 
 
 	const paths = {
@@ -35,7 +32,6 @@ export function scssTask() {
 			debug: true,
 			failAfterError: false,
 			syntax: 'scss',
-			ignoreFiles: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.src, TASK_CONFIG.scss.lintIgnorePaths),
 			reporters: [{
 				formatter: 'string',
 				console: true
@@ -68,7 +64,6 @@ export function scssTask() {
 		})))
 		.pipe(gulp.dest(paths.dest))
 		.pipe(browserSync.stream())
-
 }
 
 

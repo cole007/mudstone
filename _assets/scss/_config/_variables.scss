@@ -1,10 +1,13 @@
 
+/* stylelint-disable */
+/*
+	Debugging Flag
+*/
 
-// debugging
 $debug: false;
 
 /*
-  Gutters
+  Base Gutters
 */
 
 $base-padding: 20;
@@ -16,32 +19,39 @@ $base-padding: 20;
 $white: #fff;
 $black: #000;
 
-/* stylelint-disable */
 $palettes:(
   bg: (
     body: #e5e5e5,
     dark: #00234b,
     light: #f2f4f6
   ),
+  
   themes: (),
+  
   type: (
-    base: #00234b,
-    light: #8091a5
+    light: #8091a5,
+    base: #444444,
+    dark: #1a1a1a
   ),
+
   buttons: (
-    upload: #bfc8d2
+    light: #8091a5,
+    base: #444444,
+    dark: #1a1a1a
   ),
+  
+  boxes: (
+    light: #8091a5,
+    base: #444444,
+    dark: #1a1a1a
+  ),
+  
   states: (
     upload: #bfc8d2
   )
 );
-/* stylelint-enable */
 
-/*
-  Breakpoints
-*/
 
-/* stylelint-disable */
 $breakpoints: (
   mobile:  320px,
   sm-tablet:600px,
@@ -49,8 +59,6 @@ $breakpoints: (
   desktop: 980px,
   wide:    1300px
 );
-/* stylelint-enable */
-/* lost grid settings */
 
 @lost gutter 20px;
 @lost clearing left;

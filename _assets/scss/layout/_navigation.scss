@@ -67,29 +67,31 @@
 		z-index: -1;
 		visibility: hidden;
 		opacity: 0;
-		transition: visibility 0s 0.3s, z-index 0s 0.3s, opacity 0.3s ease, transform 0.3s ease;
+		transition: visibility 0ms 300ms, z-index 0ms 300ms, opacity 300ms ease, transform 300ms ease;
 
 		&.is-animating {
-			transition: visibility 0s 0.3s, z-index 0s 0.3s, opacity 0.3s ease, transform 0.3s ease;
+			transition: visibility 0ms 300ms, z-index 0ms 300ms, opacity 300ms ease, transform 300ms ease;
 		}
+
 		&.is-visible {
 			opacity: 1;
 			visibility: visible;
 			z-index: 11;
+
 			&.is-animating {
-				transition: visibility 0s, z-index 0s, opacity .3s ease;
+				transition: visibility 0ms, z-index 0ms, opacity 300ms ease;
 			}
 		}
 	}
 
 	.menu__item {
 		font-size: ms(1);
-		transition: color .3s;
+		transition: color 300ms;
 		position: relative;
 		color: $black;
 
 		& > a {
-			padding: gutter(0.5) 0;
+			padding: gutter(.5) 0;
 
 			&:focus,
 			&:hover {
@@ -107,20 +109,31 @@
 		overflow-y: auto;
 		overflow-x: hidden;
 		transform: translate3d(100%, 0, 0);
-		transition: transform 0.3s;
+		transition: transform 300ms;
 		background-color: c(themes, blog);
+
 		&.is-active {
 			transform: translate3d(0, 0, 0);
 		}
+
 		.nav {
 			height: 100%;
 			overflow-y: auto;
 		}
 	}
+
 	.menu__item--contact {
 		display: none;
 	}
 }
+
+
+
+
+
+
+
+
 
 
 /*
@@ -162,4 +175,3 @@
 		}
 	}
 }
-

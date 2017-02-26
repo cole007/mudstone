@@ -3,7 +3,7 @@ import webpack from 'webpack'
 import {
 	logger
 } from '../libs/utils'
-import webpackConfig from '../libs/webpack.config.babel'
+import webpackConfig from './webpack.config.babel'
 
 export function webpackProductionTask(callback) {
 	const env = global.production ? 'production' : 'development'

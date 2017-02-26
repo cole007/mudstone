@@ -137,7 +137,7 @@
 		@warn 'No such font group was found, please check the $font-sizes map';
 	}
 	@else {
-		@include size($min, $max, $leading)
+		@include resp-size($min, $max, $leading)
 	}
 }
 

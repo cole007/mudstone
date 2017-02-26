@@ -1,5 +1,21 @@
+/*
+	Reset element styles
+*/
+
 .r-ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+}
+
+/*
+	r-dl
+*/
+
+.r-dl {
+	margin: 0;
+}
+
+.r-dd {
+	margin-left: 0;
 }

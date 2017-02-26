@@ -47,7 +47,7 @@
 .slide__item--hidePrevious,
 .slide__item--hideNext {
 	visibility: visible;
-	animation: fadeOut 450ms cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+	animation: fadeOut 450ms cubic-bezier(.455, .03, .515, .955) both;
 }
 
 
@@ -72,9 +72,6 @@
 	pointer-events: none;
 }
 
-
-/*==========  FADE ANIMATIONS  ==========*/
-
 @keyframes fadeOut {
 	100% {
 		opacity: 0;
@@ -84,7 +81,7 @@
 
 .slide-pager {
 	position: absolute;
-	bottom: vr-block(0.25);
+	bottom: gutter(.25);
 	left: 50%;
 	transform: translate3d(-50%, 0, 0);
 	list-style: none;
@@ -95,7 +92,7 @@
 
 .slide-pager__item {
 	display: inline-block;
-	margin: 0 gutter(0.5);
+	margin: 0 gutter(.5);
 
 	.button {
 		width: 10px;

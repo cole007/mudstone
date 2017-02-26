@@ -1,10 +1,21 @@
-// /*
-//  ==============================================================
-//  Typography
-//  ==============================================================
-//  */
-//@include baseline();
+/*
+ Typography
+*/
+
 @include type-reveal();
+
+
+
+
+
+
+
+
+
+
+/*
+	Root
+*/
 
 html {
 	font-family: map-get($fonts, default);
@@ -18,36 +29,63 @@ body {
 	color: c(type, base);
 }
 
-.heading-1,
-.heading-2,
-.heading-3,
-.heading-4,
-.heading-5,
-.heading-6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {}
+
+
+
+
+
+
+
+
+
+/*
+	Headings
+*/
 
 .heading-1,
-h1 {}
+h1 {
+	@include resp-map('heading-1');
+}
 
 .heading-2,
-h2 {}
+h2 {
+	@include resp-map('heading-2');
+}
 
 .heading-3,
-h3 {}
+h3 {
+	@include resp-map('heading-3');
+}
 
 .heading-4,
-h4 {}
+h4 {
+	@include resp-map('heading-4');
+}
 
 .heading-5,
-h5 {}
+h5 {
+	@include resp-map('heading-5');
+}
 
 .heading-6,
-h6 {}
+h6 {
+	@include resp-map('heading-6');
+}
+
+
+
+
+
+
+
+
+
+
+/*
+	Base element styles
+	avoid adding font sizes to elements directly
+	utilise the cascade and utility classes
+*/
 
 p {
 	margin: 0 0 gutter(1);
@@ -65,10 +103,10 @@ em {
 a {
 	text-decoration: none;
 	color: inherit;
-	transition: opacity 0.3s ease;
+	transition: opacity 300ms ease;
 
 	&:hover {
-		opacity: 0.5;
+		opacity: .5;
 	}
 }
 

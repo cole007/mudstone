@@ -17,7 +17,7 @@
 		// push container in
 		padding-left: gutter(1);
 		// push text in
-		&:before {
+		&::before {
 			// pull marker back (equal to padding-left)
 			margin: 0 gutter(.5) 0 gutter(-1);
 			color: #ee4433;
@@ -37,8 +37,6 @@
 		}
 	}
 
-	p {}
-
 	a {
 		text-decoration: underline;
 		color: c(themes, blog);
@@ -53,11 +51,4 @@
 	cite {
 		font-style: normal;
 	}
-
-	img {}
-
-	table {}
-
-	dl {}
 }
-

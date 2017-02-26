@@ -33,6 +33,7 @@ Just note that running gulp will not build a js bundle you can access
 - `.eslintrc` Eslint settings
 - `.jsbeautifyrc` Beautify settings
 - `.stylelintrc` Stylelint config settings
+- `.stylelintignore` Paths stylelint should ignore
 - `gulp.babel.js` The gulps tasks entry point
 - `package.json` Dependencies
 - `yarn.lock` The yarn lock file!
@@ -279,4 +280,4 @@ Sounds like a browsersync problem.  Check the settings in the path config files.
 
 #### Unexpected token in npm module
 
-Sounds like a babel transform issue, so may need to install a babel transform plugin and update the webpack.config file (`gulp/libs/webpack.babel.config`).  Check for github issues. 
+Sounds like a babel transform issue, so may need to install a babel transform plugin and update the webpack.config file (`gulp/tasks/webpack.babel.config`).  Check for github issues. 
