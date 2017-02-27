@@ -76,6 +76,11 @@ Any task can be run independantly in any of the enviroments.
 
 `gulp images --cms --production`
 
+##Linting
+
+scss: https://github.com/stylelint/stylelint-config-standard
+javascript: http://eslint.org/docs/rules/
+
 
 ##Task tutorial
 
