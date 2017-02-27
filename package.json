@@ -62,7 +62,6 @@
     "gulp-postcss": "^6.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
-    "gulp-sass-lint": "^1.2.0",
     "gulp-sequence": "^0.4.6",
     "gulp-size": "^2.0.0",
     "gulp-sizereport": "^1.2.0",
