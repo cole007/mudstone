@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+### 7.0.4
+
+####Added
+
+- editorconfig added
+
 ### 7.0.3
 
 ####Changed
