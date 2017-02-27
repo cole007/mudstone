@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - nunjucks wrapper extends shell
 
+####Fixed
+
+- resp-size mixin fix when true passed to line-height argument
+
 ### 7.0.0
 
 ####Added

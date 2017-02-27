@@ -109,7 +109,7 @@
 	$local-line-height: strip-units($desktop-line-height);
 	font-size: rem($min);
 	@if(type-of($line-height-multiple)==number or $line-height-multiple==true) {
-		line-height: ($line-height-multiple * $local-line-height) / strip-units($max);
+		line-height: ($local-line-height) / strip-units($max);
 	}
 	@if(type-of($line-height-multiple)==boolean and $line-height-multiple==false) {
 		line-height: $desktop-line-height / $min;
