@@ -49,7 +49,8 @@ export default function loader(args, context = document) {
 				}
 
 			} catch(error) {
-				log(`${behaviourName} Behaviour not found, ${error}`)
+				log(`Error thrown in ${behaviourName} behaviour, Behaviour might be missing or broken, see error below for more details`)
+				throw new Error(error)
 			}
 		})
 	})
