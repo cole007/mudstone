@@ -50,7 +50,7 @@ export default {
 		task: 'code',
 		watch: true,
 		autoprefixer: {
-			browsers: ['last 3 version']
+			browsers: ['last 8 version']
 		},
 		options: {
 			indentedSyntax: false,
