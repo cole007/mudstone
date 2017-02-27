@@ -1,53 +1,21 @@
-{% import "../macros/helpers.njk" as h %}
 {% set path = '../includes/' %}
+{% extends "../layout/shell.njk" %}
 
-<!DOCTYPE html><!--[if IE]>
-<html lang="en" class="no-js ie">
-<![endif]-->
-<!--[if gt IE 9]><!-->
-<html lang="en" class="no-js">
-<!--<![endif]-->
-	<head>
-	  <meta charset="utf-8">
-	  <title>{% block title %}{% endblock %}</title>
-	  <meta name="description" content="">
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-	  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-	  <link rel="manifest" href="/manifest.json">
-	  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2b2e45">
-	  <meta name="theme-color" content="#2b2e45">
-	  <script>var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");</script>
-	  <script>!function(a){var b=function(b,c){"use strict";var d=a.document.getElementsByTagName("script")[0],e=a.document.createElement("script");return e.src=b,e.async=!0,d.parentNode.insertBefore(e,d),c&&"function"==typeof c&&(e.onload=c),e};"undefined"!=typeof module?module.exports=b:a.loadJS=b}("undefined"!=typeof global?global:this);</script>
-	  <script>
-	    if(!window.HTMLPictureElement || !('sizes' in document.createElement('img'))){
-	      document.createElement('picture');
-	      loadJS("/dist/js/picturefill.min.js");
-	    }
-	  </script>
-	  <!-- build:css-->
-	  <link rel="stylesheet" href="/dist/css/style.css">
-	  <!-- endbuild-->
-	</head>
-	<body>
-		{% block header %}
-			{% include path + "header.njk" %}
-		{% endblock %}
-		<div id="barba-wrapper" class="site-page">
-			<div class="barba-container">
-				{% block content %}
-				{% endblock %}
-			</div>
+
+{% block base %}
+
+	{% block header %}
+		{% include "../includes/header.njk" %}
+	{% endblock %}
+
+	<div id="barba-wrapper" class="site-page">
+		<div class="barba-container">
+			{% block content %}
+			{% endblock %}
 		</div>
-		{% include path + "footer.njk" %}
-		{% block extra %}{% endblock %}
-		{% include path + "symbols.njk" %}
+	</div>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="/dist/js/jquery.min.js"><\\/script>')</script>
-		<!-- build:js-->
-		<script src="/dist/js/bundle.js"></script>
-		<!-- endbuild-->
-	</body>
-</html>
+	{% include "../includes/footer.njk" %}
+	{% block extra %}{% endblock %}
+
+{% endblock %}
