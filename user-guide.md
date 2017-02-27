@@ -68,7 +68,7 @@ All of the standard gulp tasks are available, i.e. `gulp images`. The following 
 - `npm run build` Build all the things in production mode
 - `npm run build:cms` As above but in production cms mode  
 
-Any task can be run independantly in any of the enviroments.
+Any task can be run independently in any of the environments.
 
 `gulp images --cms`
 
@@ -79,6 +79,7 @@ Any task can be run independantly in any of the enviroments.
 ##Linting
 
 scss: https://github.com/stylelint/stylelint-config-standard
+
 javascript: http://eslint.org/docs/rules/
 
 
@@ -147,7 +148,7 @@ export function imagesTask() {
 gulp.task('images', imagesTask)
 ```
 
-*Note:* Sometimes you only want to pass in a single level of files into the `gulp.src()` function.  For example the scss task:
+*Note:* Sometimes you only want provide a single file to the gulp task, in which case you can use the following snippet
 
 ```
 /// other scss dependencies
