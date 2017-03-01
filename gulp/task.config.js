@@ -84,6 +84,29 @@ export default {
 		extensions: ['svg']
 	},
 
+	sprites: {
+		task: false,
+		watch: false,
+		mode: {
+			css: {
+				spacing: {
+					padding: 0
+				},
+				dest: './',
+				layout: 'diagonal',
+				sprite: 'svg-sprite.svg',
+				bust: false,
+				render: {
+					scss: {
+						dest: '_system/gulp-output/_svg-sprites.scss',
+						template: 'gulp/libs/sprites.tmp.scss'
+					}
+				}
+			}
+		},
+		extensions: ['svg']
+	},
+
 	cssFonts: {
 		task: 'asset',
 		watch: true,

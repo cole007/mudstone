@@ -63,6 +63,11 @@
     "fileDest": "html/nunjucks/includes"
   },
 
+	"sprites": {
+    "src": "images/svg-sprites",
+    "dest": "dist/images"
+	},
+
   "svgs": {
     "src": "images/svg-assets",
     "dest": "dist/images"

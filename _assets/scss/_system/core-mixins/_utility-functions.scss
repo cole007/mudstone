@@ -54,3 +54,10 @@
 	@return #{$remSize}rem;
 }
 
+
+@mixin svg($sprite) {
+	$map: map-get($sprites, $sprite);
+	background: url('../images/svg-sprite.svg') map-get($map, backgroundX) map-get($map, backgroundY) no-repeat;
+	width: map-get($map, width);
+	height: map-get($map, height);
+}
