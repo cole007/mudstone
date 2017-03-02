@@ -12,7 +12,7 @@
 	// 	extensions: ['js'],
 	// 	task: 'code',
 	// 	watch: true,
-	// 	output: 'app.js',
+	// 	output: 'bundle.js',
 	// 	folder: 'js'
 	// }
 
