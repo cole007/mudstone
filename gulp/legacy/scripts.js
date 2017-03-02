@@ -65,6 +65,9 @@
 	// 		.pipe(gulpif(global.production, uglify()))
 	// 		.pipe(concat(TASK_CONFIG.scripts.output))
 	// 		.pipe(gulpif(!global.production, sourcemaps.write('./')))
+	// 		.pipe(gulpif(global.production, rename({
+	//     	suffix: `.${TASK_CONFIG.stamp}`
+	// 		})))
 	// 		.on('error', handleErrors)
 	// 		.pipe(gulp.dest(paths.dest))
 	// 		.pipe(browserSync.stream())
