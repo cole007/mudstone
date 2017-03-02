@@ -85,9 +85,9 @@
 	Replace the task config conditional in tasks/watch.js
 */
 
-
 	// if(taskConfig) {
-	// 	const srcPath = typeof taskConfig.folder !== 'undefined' ? taskConfig.folder : path.resolve(process.env.PWD, PATH_CONFIG.src, taskPath.src) 
+	// 	const srcPath = typeof taskConfig.folder !== 'undefined' ? path.resolve(process.env.PWD, PATH_CONFIG.src, taskConfig.folder) :
+	// 		path.resolve(process.env.PWD, PATH_CONFIG.src, taskPath.src)
 	// 	const globPattern = '**/*' + (taskConfig.extensions ? '.{' + taskConfig.extensions.join(',') + '}' : '')
 	// 	watch(path.join(srcPath, globPattern), watchConfig, function () {
 	// 		tasks[`${taskName}Task`]()
