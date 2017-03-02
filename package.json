@@ -74,6 +74,7 @@
     "gulp-uncss": "^1.0.4",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.5",
+    "gulp.spritesmith": "^6.3.0",
     "lost": "^8.0.0",
     "modularscale-sass": "^2.1.1",
     "postcss-animation": "0.0.11",
