@@ -1,11 +1,14 @@
 import gulp from 'gulp'
 import svgmin from 'gulp-svgmin'
 import browserSync from 'browser-sync'
-import { getPaths } from '../libs/utils'
+import path from 'path'
 
-export function svgTask() {
+export function svgsTask() {
 
-	const paths = getPaths('svgs')
+	const paths = {
+		src: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.svgs.src, '*.svg'),
+		dest: path.resolve(process.env.PWD, PATH_CONFIG.dest, PATH_CONFIG.svgs.dest)
+	}
 
 	return gulp.src(paths.src)
 		.pipe(svgmin())
@@ -14,4 +17,4 @@ export function svgTask() {
 }
 
 
-gulp.task('svgs', svgTask)
+gulp.task('svgs', svgsTask)
