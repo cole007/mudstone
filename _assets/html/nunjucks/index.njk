@@ -5,7 +5,9 @@
 
 {% block content %}
 
-	<h1>Mudstone {{ title }} This is turbo keen</h1>
+	{% for entry in accordion|not('type', 'null') %}
+		{{ entry.title }} - {{ loop.index }}
+	{% endfor %} 
 	
 {% endblock %}
 

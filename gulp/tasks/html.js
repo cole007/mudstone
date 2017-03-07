@@ -23,7 +23,22 @@ export function htmlTask() {
 		const dataPath = path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.html.src, TASK_CONFIG.html.dataFile)
 		return JSON.parse(fs.readFileSync(dataPath, 'utf8'))
 	}
-	const manageEnv = TASK_CONFIG.html.manageEnv
+	
+	const manageEnv = function(environment) {
+	
+		environment.addFilter('has', (input, prop, value) => {
+			return input.filter((entry) => entry[prop] === value)
+		})
+	
+		environment.addFilter('not', (input, prop, value) => {
+			return input.filter((entry) => entry[prop] !== value)
+		})
+	
+		environment.addFilter('limit', (input, count) => input.slice(0, count))
+
+	}
+
+
 	return gulp.src(src)
 		.pipe(data(getData))
 		.on('error', handleErrors)

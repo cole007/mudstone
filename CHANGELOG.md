@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+### 7.0.10
+
+####Added
+
+- has/not/limit custom nunjucks filters added
+
+
 ### 7.0.9
 
 ####Change
