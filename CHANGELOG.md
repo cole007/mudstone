@@ -4,6 +4,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+### 7.0.12
+
+####Added
+
+- Dave MW's `@include size(mob,desktop,line-height)` font size function based on Typographic scaling sizes.
 
 ### 7.0.11
 
@@ -82,7 +87,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ####Added
 
-- Changelog file! 
+- Changelog file!
 - User guide
 - Stylelint
 - Configuration files
@@ -117,5 +122,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Babel
 - Browserify
-
-
