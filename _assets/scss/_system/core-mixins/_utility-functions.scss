@@ -63,28 +63,4 @@
 	height: map-get($map, height);
 }
 
-@mixin size($min: $min-font, $max: $max-font, $line-height: false) {
-    $desktop-line-height: $max-font * $line-height-ratio;
-    $mobile-line-height: ($min / $min-font) * $line-height-ratio;
-    font-size: (($min * 1px) / $min-font) + rem;
 
-    @if(type-of($line-height) == number or $line-height == true) {
-        line-height: $line-height/$max;
-    } @else {
-        line-height: #{strip-units($mobile-line-height)}rem;
-    }
-
-    @if strip-units($max) != strip-units($min) {
-        @include mq($from: $min-width) {
-          font-size: calc( #{strip-units($min)}px + (#{strip-units($max)} - #{strip-units($min)}) * ((100vw - #{breakpoint('mobile')}) / (#{strip-units(breakpoint('desktop'))} - #{strip-units(breakpoint('mobile'))})) );
-        }
-
-        @include mq($from: breakpoint('desktop')) {
-            font-size: (($max * 1px) / $max-font) + rem;
-            @if(type-of($line-height) != number or $line-height != true) {
-                $line-height-calc: ceil($max / $base-line-height) * $line-height-ratio;
-                line-height: $line-height-calc + rem;
-               }
-        }
-    }
-}
