@@ -25,7 +25,6 @@ See user-guide.md
 
 ##Gulp
 
-* Compile sass (using libsass)
 * Transpile es6 to es5 with babel
 * Bundle js with webpack 2
 * Javascript linting with eslint
@@ -33,12 +32,12 @@ See user-guide.md
 * SVG symbol generater
 * Compile nunjucks template
 * Compile scss (with postcss autoprefixer)
-* SCSS linting with gulp-sass-lint
-* Livereload/Hot Module Reloading and server with BrowserSync
+* SCSS linting with stylelint
+* Livereload and server with BrowserSync
 
 ###Inspiration
 
-Special thanks to Viget's fantastic gulp-starter (blendid branch).  This is basically an es6 fork, with a few things added and a few things removed
+Heavily inspired by Viget's belting gulp-starter (blendid branch).  This is basically an es6 fork, with a few things added and a few things removed
 https://github.com/vigetlabs/gulp-starter/tree/blendid
 
 
