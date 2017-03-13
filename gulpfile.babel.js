@@ -12,16 +12,16 @@ process.env.PWD = process.env.PWD || path.resolve(process.cwd(), '../../')
 
 let CONFIG = PATH_CONFIG
 
-if(util.env.production) {
-	CONFIG = Object.assign({}, PATH_CONFIG, PATH_CONFIG_PRODUCTION)
-} 
-if(util.env.cms) {
-	CONFIG = Object.assign({}, PATH_CONFIG, PATH_CONFIG_CMS)
-}
+// if(util.env.production) {
+// 	CONFIG = Object.assign({}, PATH_CONFIG, PATH_CONFIG_PRODUCTION)
+// } 
+// if(util.env.cms) {
+// 	CONFIG = Object.assign({}, PATH_CONFIG, PATH_CONFIG_CMS)
+// }
 
-if(util.env.cms && util.env.production) {
-	CONFIG = Object.assign({}, PATH_CONFIG, PATH_CONFIG_PRODUCTION, PATH_CONFIG_CMS)
-}
+// if(util.env.cms && util.env.production) {
+// 	CONFIG = Object.assign({}, PATH_CONFIG, PATH_CONFIG_PRODUCTION, PATH_CONFIG_CMS)
+// }
 
 global.production = util.env.production
 

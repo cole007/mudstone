@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+### 7.0.13
+
+####Fixed
+
+- https://github.com/cole007/mudstone/issues/7
+
 ### 7.0.12
 
 ####Added

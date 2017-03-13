@@ -19,9 +19,9 @@ if (process.env.NODE_ENV === 'development') {
 	debug.enable('app:log')
 } else {
 	debug.disable('app:log')
-}
+} 
 
-log('Logging is enabled!, ENV')
+log(`Logging is enabled!, NODE_ENV: ${process.env.NODE_ENV}`)
 
 WebFont.load({
 	/*

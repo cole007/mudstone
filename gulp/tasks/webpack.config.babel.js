@@ -71,12 +71,7 @@ const webpackConfig = env => {
 			]
 		},
 		plugins: removeEmpty([
-			new ProgressBarPlugin(),
-			new webpack.DefinePlugin({
-				'process.env': {
-					NODE_ENV: ifProd('"production"', '"development"')
-				}
-			})
+			new ProgressBarPlugin()
 		])
 	})
 
@@ -113,7 +108,14 @@ const webpackConfig = env => {
 			}
 
 
-			config.plugins.push(new webpack.HotModuleReplacementPlugin())
+			config.plugins.push(
+				new webpack.DefinePlugin({
+					'process.env': {
+						NODE_ENV: '"development"'
+					}
+				}),
+				new webpack.HotModuleReplacementPlugin()	
+			)
 		}
 		// Addtional loaders for dev
 		config.module.loaders = config.module.loaders.concat(TASK_CONFIG.js.developmentLoaders || [])
@@ -122,6 +124,11 @@ const webpackConfig = env => {
 
 	if(env === 'production') {
 		config.plugins.push(
+			new webpack.DefinePlugin({
+				'process.env': {
+					NODE_ENV: '"production"'
+				}
+			}),
 			new webpack.optimize.UglifyJsPlugin(),
 			new webpack.NoEmitOnErrorsPlugin()
 		)
