@@ -7,7 +7,8 @@ import path from 'path'
 
 export default function browserSyncTask () {
 
-	const config = webpackConfig('production')
+	const env = global.production ? 'production' : 'development'
+	const config = webpackConfig(env)
 	const compiler = webpack(config)
 	const proxyConfig = SERVER.proxy || null
 
