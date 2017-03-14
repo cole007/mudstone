@@ -34,7 +34,7 @@ export function htmlTask() {
 			return input.filter((entry) => entry[prop] !== value)
 		})
 	
-		environment.addFilter('random', (input) => {
+		environment.addFilter('rand', (input) => {
 			let i = input.length
 			while (i) {
 				let j = Math.floor(Math.random() * i)
