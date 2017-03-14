@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.14
+
+####Added
+
+- nunjucks random filter
 
 ### 7.0.13
 
