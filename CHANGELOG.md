@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.15
+
+####Change
+
+- Fill attributes no longer stripped from svg symbols
+
+```
+.pipe(cheerio({
+	run($) {
+		$('[fill]').removeAttr('fill');
+	},
+	parserOptions: { 
+		xmlMode: true 
+	}
+}))
+```
+
 ### 7.0.14
 
 ####Added
