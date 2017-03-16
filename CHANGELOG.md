@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.16
+
+#### Fixed
+
+- Stylelint rules for some post css plugins (aspect-ratio and quantity queries)
+
 ### 7.0.15
 
 #### Change
