@@ -1,25 +1,17 @@
 {
-  "title" : "7.0",
-  "accordion": [
-    {
-      "type": "feature",
-      "title": "Lorem bollur",
-      "body": "Ipsam exercitation sapiente euismod, tellus mollitia minus orci torquent dolorem in minus, aliquet fringilla, maxime aliquip porro at necessitatibus platea nascetur minus, tempore natus ridiculus."
-    },
-    {
-      "type": "feature",
-      "title": "Lorem gorrum",
-      "body": "Ipsam exercitation sapiente euismod, tellus mollitia minus orci torquent dolorem in minus, aliquet fringilla, maxime aliquip porro at necessitatibus platea nascetur minus, tempore natus ridiculus."
-    },
-    {
-      "type": "feature",
-      "title": "Lorem bolbottom",
-      "body": "Ipsam exercitation sapiente euismod, tellus mollitia minus orci torquent dolorem in minus, aliquet fringilla, maxime aliquip porro at necessitatibus platea nascetur minus, tempore natus ridiculus."
-    },
-    {
-      "type": null,
-      "title": "Lorem chumphole",
-      "body": "Ipsam exercitation sapiente euismod, tellus mollitia minus orci torquent dolorem in minus, aliquet fringilla, maxime aliquip porro at necessitatibus platea nascetur minus, tempore natus ridiculus."
-    }
-  ]
+  "title" : "Mudstone 7",
+	"menu": [
+		{
+			"title": "MudStone",
+			"url": "https://github.com/cole007/mudstone/"
+		},
+		{
+			"title": "User Guide",
+			"url": "https://github.com/cole007/mudstone/blob/master/user-guide.md"
+		},
+		{
+			"title": "Changelog",
+			"url": "https://github.com/cole007/mudstone/blob/master/CHANGELOG.md"
+		}
+	]
 }

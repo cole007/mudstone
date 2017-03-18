@@ -9,23 +9,22 @@
 	@return $value / ($value * 0 + 1);
 }
 
-@function gutter($lines: 1, $gutter: $base-line-height) {
+@function gutter($lines: 1, $gutter: $base-padding) {
 	@if length($lines)==1 {
-		@return rem(($gutter * $lines) * 1px);
+		@return rem(floor(($gutter * $lines) * 1px));
 	}
 	@else if length($lines) < 5 {
 		$string: '';
 		@for $i from 1 through length($lines) {
-			$string: $string + ' ' + rem(($gutter * nth($lines, $i)) * 1px);
+			$string: $string + ' ' + floor(($gutter * nth($lines, $i)) * 1px);
 		}
-		@return unquote($string);
+		@return rem(unquote($string));
 	}
 	@else {
 		@warn 'To many values used in gutter function';
 		@return null;
 	}
 }
-
 
 @function gridCalc($columns, $total-columns: $base-max-columns) {
 	@return percentage($columns / $total-columns);
@@ -63,4 +62,6 @@
 	height: map-get($map, height);
 }
 
-
+@function ratio($x: 16, $y: 9) {
+	@return percentage($y / $x);
+}

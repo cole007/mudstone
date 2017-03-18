@@ -9,12 +9,10 @@
 	$bar_gaps: ($height * $gap) + 1;
 	//position: relative;
 	& > span {
-		transition: all 0.5s;
-		transform: translateY(0px);
+		transition: transform 300ms;
+		transform: translateY(0);
 		margin: auto;
-		pointer-events: none;
-		vertical-align: middle;
-		display: inline-block;
+
 		&,
 		&:before,
 		&:after {
@@ -27,22 +25,14 @@
 			right: 0;
 			bottom: 0;
 			margin: auto;
-			z-index: 100001;
+			z-index: 21;
 			@if $curve==true {
 				border-radius: $height;
 			}
 		}
 		&:before,
 		&:after {
-			position: absolute;
-			left: 0;
-			transition: all 0.5s;
-			content: " ";
-			display: block;
-			width: $width;
-			height: $height;
-			background-color: $color;
-			display: block;
+			transition: transform 300ms;
 		}
 		&:before {
 			transform: translateY(-$bar_gaps);
@@ -52,12 +42,12 @@
 		}
 	}
 	&.is-active {
-		&>span {
+		& > span {
 			&:before {
-				transform: translateY(-$exit_lenght) rotate(45deg);
+				transform: translateY(0) rotate(45deg);
 			}
 			&:after {
-				transform: translateY(-$exit_lenght) rotate(-45deg);
+				transform: translateY(0) rotate(-45deg);
 			}
 		}
 	}

@@ -39,13 +39,13 @@
 
 	a {
 		text-decoration: underline;
-		color: c(themes, blog);
+		color: c(type, dark);
 	}
 
 	blockquote {
 		margin: 0 0 gutter(1);
 		padding: 0 0 0 gutter(1);
-		border-left: 3px solid c(themes, blog);
+		border-left: 3px solid c(type, dark);
 	}
 
 	cite {

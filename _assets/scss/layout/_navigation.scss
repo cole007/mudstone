@@ -1,177 +1,71 @@
-/*
-  Navigation layout component
-*/
-
-
-/*
-  Bring the menu to the top of the page
-*/
-
 .menu {
-	z-index: 10;
+	position: fixed;
+	transform: translate3d(-100%, 0, 0);
+	visibility: hidden;
+	background-color: c(bg, brand);
+	transition: transform 300ms 0ms, visibility 0ms 300ms, z-index 0ms 300ms;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	z-index: -1;
+	display: flex;
+	align-items: center;
+	padding: gutter(1);
 }
 
-
-/*
-  Navigation layout component
-*/
-
-@include mq($until: breakpoint('tablet')) {
-	.menu__btn {
-		@include menu-icon-rotate($width: 30px, $height: 2px, $color: $black, $curve: true, $active_class: '.is-active', $gap: 3);
-
-		display: block;
-		position: relative;
-		width: 40px;
-		height: 40px;
-		z-index: 12;
-
-		&.is-active {
-			span {
-				background-color: transparent;
-
-				&::before,
-				&::after {
-					background-color: $black;
-				}
-			}
-		}
-	}
-	// all of this needs to be replaced for desktop
-	// so lets wrap the fella in a little media query
-	.menu__root {
-		position: absolute;
-		top: 70px;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		overflow-y: auto;
-		overflow-x: hidden;
-	}
-
-	.menu__wrapper {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		text-align: center;
-		background-color: c(bg, light);
-		justify-content: center;
-		transform: scale(1.3);
-		transform-origin: 50% 50%;
-		will-change: transform;
-		z-index: -1;
-		visibility: hidden;
-		opacity: 0;
-		transition: visibility 0ms 300ms, z-index 0ms 300ms, opacity 300ms ease, transform 300ms ease;
-
-		&.is-animating {
-			transition: visibility 0ms 300ms, z-index 0ms 300ms, opacity 300ms ease, transform 300ms ease;
-		}
-
-		&.is-visible {
-			opacity: 1;
-			visibility: visible;
-			z-index: 11;
-
-			&.is-animating {
-				transition: visibility 0ms, z-index 0ms, opacity 300ms ease;
-			}
-		}
-	}
-
-	.menu__item {
-		font-size: ms(1);
-		transition: color 300ms;
-		position: relative;
-		color: $black;
-
-		& > a {
-			padding: gutter(.5) 0;
-
-			&:focus,
-			&:hover {
-				color: $black;
-			}
-		}
-	}
-
-	.menu__subwrap {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		overflow-y: auto;
-		overflow-x: hidden;
-		transform: translate3d(100%, 0, 0);
-		transition: transform 300ms;
-		background-color: c(themes, blog);
-
-		&.is-active {
-			transform: translate3d(0, 0, 0);
-		}
-
-		.nav {
-			height: 100%;
-			overflow-y: auto;
-		}
-	}
-
-	.menu__item--contact {
-		display: none;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-/*
-  Desktop navigation
-*/
-
-@include mq($from: breakpoint('tablet')) {
-	.menu__btn {
-		display: none;
-	}
-
-	.menu__wrapper {
-		position: static;
+.menu-btn--trigger:target {
+	& + .menu {
+		transform: translate3d(0, 0, 0);
 		visibility: visible;
-		opacity: 1;
-		display: block;
-		width: auto;
-		transform: none;
-		background: none;
-	}
+		transition-delay: 0ms;
+		z-index: 1;
 
-	.menu__item {
-		font-weight: normal;
-		display: inline-block;
-		margin: 0 gutter(.5);
-		position: relative;
-
-		a {
-			position: relative;
-			display: block;
-			text-align: center;
-			margin: 0 gutter(.5);
+		.menu-btn--close {
+			opacity: 1;
+			transition-delay: 600ms;
 		}
 	}
+}
 
-	.has-hero {
-		.menu {
-			color: $white;
-		}
+.menu-btn {
+	position: absolute;
+	top: gutter(1);
+	right: gutter(1);
+	display: block;
+
+	& > .icon {
+		width: 30px;
+	}
+}
+
+.menu-btn--open {
+	color: c(core, green);
+	font-family: font('bold');
+	font-size: rem(12px);
+
+	.icon {
+		margin-bottom: gutter(.25);
+	}
+}
+
+.menu-btn--close {
+	opacity: 0;
+	transition: opacity 600ms 0ms;
+	transform: translateZ(0);
+}
+
+.menu-btn--trigger {
+	position: fixed;
+	top: 0;
+}
+
+.menu__item {
+	font-size: rem(32px);
+	color: c(type, dark);
+
+	&:not(:last-child) {
+		margin-bottom: gutter(1);
 	}
 }

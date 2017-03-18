@@ -4,7 +4,7 @@
 	Debugging Flag
 */
 
-$debug: false;
+$debug: true;
 
 /*
   Base Gutters
@@ -16,39 +16,51 @@ $base-padding: 20;
   Colours
 */
 
+
+// 031931 // 050a21
+
 $white: #fff;
 $black: #000;
 
 $palettes:(
   bg: (
-    body: #e5e5e5,
-    dark: #00234b,
-    light: #f2f4f6
+    body: #ffffff,
+    dark: #050A21,
+    light: #EEEEEE,
+		brand: #8600B7
   ),
-  
-  themes: (),
-  
+
+	core: (
+		brand: #21ffc4,
+		alt: #031B33,
+		grey: #eeeeee
+	),
+
+	secondary: (
+		brand: #1abf91,
+		alt: #050a21,
+		grey: #e94554
+	),
+
+	chart: (
+		green: #0e6b61,
+		purple: #461c4f,
+		red: #f78793,
+		grey1: #b6bfc5,
+		grey2: #61696e
+	),
+
   type: (
     light: #8091a5,
     base: #444444,
-    dark: #1a1a1a
+    dark: #031B33
   ),
 
-  buttons: (
-    light: #8091a5,
-    base: #444444,
-    dark: #1a1a1a
-  ),
-  
-  boxes: (
-    light: #8091a5,
-    base: #444444,
-    dark: #1a1a1a
-  ),
-  
-  states: (
-    upload: #bfc8d2
-  )
+	border: (
+		base: #535565,
+		light: #818D99,
+    dark: #031B33
+	)
 );
 
 
@@ -62,3 +74,4 @@ $breakpoints: (
 
 @lost gutter 20px;
 @lost clearing left;
+@lost flexbox flex;

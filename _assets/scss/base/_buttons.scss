@@ -1,19 +1,45 @@
 // for link buttons
 // <a href="#" class="btn btn--downloads"></a>
-$btn-height: 44;
+
 
 .btn {
-	@include font-size(18, $btn-height);
+	@include resp-map('button');
 
-	display: inline-block;
-	vertical-align: middle;
-	white-space: nowrap;
+	font-family: font('default');
 	cursor: pointer;
 	border: none;
 	margin: 0;
-	padding: 0 25px;
 	text-decoration: none;
-	height: $btn-height * 1px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: gutter(.5) gutter(1);
+	color: c(type, dark);
+}
+
+.btn--box {
+	border: rem(1px) solid currentColor;
+}
+
+.btn--brand {
+	color: c(core, green);
+}
+
+.btn--white {
+	color: $white;
+}
+
+.btn--dark {
+	color: c(type, dark);
+}
+
+.btn--sort {
+	font-size: rem(15px);
+	padding: gutter(.5);
+}
+
+.btn--full {
+	width: 100%;
 }
 
 // reset for actual buttons

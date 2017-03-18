@@ -15,5 +15,12 @@
 			z-index: 100001;
 		}
 	}
+	@each $break, $key in $breakpoints {
+		@include mq($from: breakpoint($break)){
+			body:after {
+				content: '#{$break}';
+			}
+		}
+	}
 }
 

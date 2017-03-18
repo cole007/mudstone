@@ -32,10 +32,13 @@ WebFont.load({
 		google: {
 	    families: ['Droid Sans', 'Droid Serif:bold']
 	  },
+		typekit: {
+			id: 'cdu5srl'
+		}
 	*/
-	typekit: {
-		id: 'cdu5srl'
-	}
+	google: {
+		families: ['Lato:300,400,700']
+	},
 })
 
 

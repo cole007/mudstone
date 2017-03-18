@@ -24,6 +24,12 @@
     padding-bottom: 62.5%;
   }
 }
+.icon--burger {
+  width: 37.72px;
+  &:after {
+    padding-bottom: 81.08108108108108%;
+  }
+}
 .icon--chevron {
   width: 28.33px;
   &:after {
@@ -49,6 +55,10 @@
 $icon--arrow-width: 16px;
 $icon--arrow-height: 10px;
 $icon--arrow-ratio: 0.625;
+
+$icon--burger-width: 37px;
+$icon--burger-height: 30px;
+$icon--burger-ratio: 0.8108108108108109;
 
 $icon--chevron-width: 28px;
 $icon--chevron-height: 17px;
