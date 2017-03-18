@@ -4,10 +4,3 @@
 # User-agent: *
 # Disallow: /
 
-# Disallow Perch (live)
-# User-agent: *
-# Disallow: /Perch
-
-# Disallow Perch (EE)
-# User-agent: *
-# Disallow: /admin

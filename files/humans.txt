@@ -15,8 +15,7 @@
                         
 /* SITE */
 
-    Last update: YYYY/MM/DD 
-    Standards: HTML5, CSS3,..
-    Components: Modernizr, jQuery, etc.
-    Software: Software used for the development 
-    Debounce method from http://davidwalsh.name/javascript-debounce-function
+    Last update: 2017/03/18 
+    Standards: HTML5, CSS3, ES2015..
+    Components: Modernizr, jQuery, Picturefill, WebFontLoader, lodash etc.
+    Software: Node
