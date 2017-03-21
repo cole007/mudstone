@@ -1,7 +1,7 @@
-#Mudstone Documentation
+# Mudstone Documentation
 
 
-####TLDR;
+#### TLDR;
 `npm start` and you're good to go! 
 
 **The only change you will need to make to the config is the browsersync proxy url.**
@@ -13,14 +13,14 @@
 When running `gulp` the javascript bundle is served from memory, meaning no file is written to disk.
 Just note that running gulp will not build a js bundle you can access
 
-##Folder Structure
+## Folder Structure
 
-####Code assets
+#### Code assets
 - _assets/scss/*.scss 
 - _assets/html/nunjucks/*.njk
 - _assets/js/*.js
  
-####Static assets
+#### Static assets
 - _assets/images/site/*.[.jpg, .png]
 - _assets/images/svg-symbols/*.svg
 - _assets/images/svg-assets/*.svg
@@ -28,7 +28,7 @@ Just note that running gulp will not build a js bundle you can access
 - _assets/fonts/
 
 
-####Files
+#### Files
 - `.babelrc` Babel settings for gulp tasks only
 - `.eslintrc` Eslint settings
 - `.jsbeautifyrc` Beautify settings
@@ -38,7 +38,7 @@ Just note that running gulp will not build a js bundle you can access
 - `package.json` Dependencies
 - `yarn.lock` The yarn lock file!
 
-##Tasks
+## Tasks
 
 The following gulp tasks are available, it should be pretty obvious what they do.  Each task is preceded with `gulp`
 - fonts
@@ -58,7 +58,7 @@ The following gulp tasks are available, it should be pretty obvious what they do
 - browserSync
 - build
 
-##NPM Scripts
+## NPM Scripts
 
 All of the standard gulp tasks are available, i.e. `gulp images`. The following npm scripts are just pointers to gulp tasks (npm start === gulp), rather pointless when you think about it, but hey ho! 
 
@@ -76,18 +76,18 @@ Any task can be run independently in any of the environments.
 
 `gulp images --cms --production`
 
-##Linting
+## Linting
 
 scss: https://github.com/stylelint/stylelint-config-standard
 
 javascript: http://eslint.org/docs/rules/
 
 
-##Task tutorial
+## Task tutorial
 
 Each task is comprised of four components.
 
-####Paths
+#### Paths
 
 `gulp/paths.config.dev.json`
 
@@ -100,7 +100,7 @@ Each task is comprised of four components.
 
 A json object with a src and dest key/value pair. The source path is relative from the assets directory, and the dest path is relative from public
 
-####Task config
+#### Task config
 
 `gulp/task.config.js`
 
@@ -115,7 +115,7 @@ A json object with a src and dest key/value pair. The source path is relative fr
 - watch: *Boolean*, should gulp watch for changes 
 - extensions: *Array* of file extensions **required** 
 
-####Gulp task
+#### Gulp task
 `gulp/tasks/images.js`
 
 ```
@@ -164,7 +164,7 @@ const paths = {
 ```
 
 
-####Export Gulp task
+#### Export Gulp task
 `gulp/tasks/index.js`
 
 ```
@@ -175,10 +175,10 @@ export { images } from './images'
 
 And that's it! 
 
-##Javascript
+## Javascript
 https://webpack.js.org/configuration/
 
-##Environments
+## Environments
 
 There are three possible environments, each configured with a paths.config.*env*.json file.  When they are merged together it is a shallow merge, so all of the settings for a given object will be required. 
 
@@ -244,7 +244,7 @@ There are three possible environments, each configured with a paths.config.*env*
 }
 ```
 
-##Debugging
+## Debugging
 
 #### Tasks
 `yarn install` to make sure you have the latest dependencies
