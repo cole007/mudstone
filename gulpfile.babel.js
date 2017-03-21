@@ -23,6 +23,7 @@ if(util.env.cms && util.env.production) {
 	CONFIG = Object.assign({}, PATH_CONFIG, PATH_CONFIG_PRODUCTION, PATH_CONFIG_CMS)
 }
 
+
 global.production = util.env.production
 
 

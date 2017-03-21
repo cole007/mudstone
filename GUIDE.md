@@ -65,6 +65,7 @@ All of the standard gulp tasks are available, i.e. `gulp images`. The following 
 - `npm start` Empty build folder, rebuild and watch everything
 - `npm run dev` Same as above, without rebuilding everything
 - `npm run cms` Same as start but with the environment set to cms
+- `npm run compile` Build all the things in development mode
 - `npm run build` Build all the things in production mode
 - `npm run build:cms` As above but in production cms mode  
 
