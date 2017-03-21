@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.17
+
+#### Added
+
+- Better media query debugging
+
 ### 7.0.16
 
 #### Fixed
