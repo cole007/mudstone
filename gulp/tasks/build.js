@@ -12,9 +12,6 @@ gulp.task('size-report', function () {
 })
 
 export function buildTask(cb) {
-
-	global.production = true
-
 	const { assetTasks, codeTasks } = getTasks()
 	assetTasks.push('move-scripts')
 	codeTasks.push('bundle-script')

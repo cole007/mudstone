@@ -1,5 +1,6 @@
 {
   "title" : "Mudstone 7",
+
 	"menu": [
 		{
 			"title": "MudStone",
@@ -12,6 +13,21 @@
 		{
 			"title": "Changelog",
 			"url": "https://github.com/cole007/mudstone/blob/master/CHANGELOG.md"
+		}
+	],
+
+	"contacts": [
+		{
+			"title": "Mud",
+			"tel": "01234567890",
+			"email": "qwertyuio@wert.com"
+		}
+	],
+
+	"posts": [
+		{
+			"title": "A post item",
+			"body": "Lorem bla bla"
 		}
 	]
 }

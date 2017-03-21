@@ -104,13 +104,14 @@
     "start": "gulp",
     "dev": "gulp watch",
     "cms": "gulp --cms",
+    "compile": "gulp build",
     "build": "gulp build --production",
     "build:cms": "gulp build --cms --production"
   },
   "name": "ournameismud.com",
   "description": "Mudstone 7.0",
-  "version": "7.0.17",
+  "version": "7.0.18",
   "main": "gulpfile.babel.js",
-  "author": "Dave Stockley",
+  "author": "Dave Stockley @ournameismud",
   "license": "MIT"
 }

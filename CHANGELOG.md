@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.18
+
+#### Added
+
+- nunjucks string filters, nbr2tag and nbr2br (see gulp/tasks/htmls.js for examples)
+- `npm run compile` like build, except it doesn't minify or append a timestamp to the files
+
 ### 7.0.17
 
 #### Added
