@@ -14,29 +14,6 @@ import {
 } from '../libs/utils'
 import r from 'nunjucks/src/runtime'
 
-function SafeString(val) {
-	if(typeof val !== 'string') {
-		return val
-	}
-
-	this.val = val
-	this.length = val.length
-}
-
-SafeString.prototype = Object.create(String.prototype, {
-	length: {
-		writable: true,
-		configurable: true,
-		value: 0
-	}
-})
-SafeString.prototype.valueOf = function () {
-	return this.val
-}
-SafeString.prototype.toString = function () {
-	return this.val
-}
-
 
 export function htmlTask() {
 
