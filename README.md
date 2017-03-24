@@ -5,6 +5,8 @@ Frontend starter kit
 
 # This is a pre ES6 branch, includes legacy tasks like png sprites, icon fonts, concat js files etc
 
+## Caveat, there is to svg2png task, so you will need to manually save png files for spriting
+
 See user-guide.md
 
 ###### Requirements
