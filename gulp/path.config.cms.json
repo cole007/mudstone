@@ -4,7 +4,7 @@
   "dist": "./deploy/public/_assets",
   
 	"browserSync": {
-    "proxy": "http://local.search-star.co.uk"
+    "proxy": "http://local.mudstone.co.uk"
 	},
 
   "symbols": {
