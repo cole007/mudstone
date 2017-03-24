@@ -65,9 +65,6 @@ $pngSprite: (
 
 	);
 
-	$spritesheet-sprites: ($logo-desktop, $logo-mobile-star, $logo-star, $logo, $play-btn, );
-	$spritesheet: (220px, 147px, '../images/png-sprite.png', $spritesheet-sprites, );
-
 	@mixin png-sprite($name) {
 		$sprite: map-get($pngSprite, $name);
 		width: map-get($sprite, width);

@@ -1,0 +1,144 @@
+// debugging
+$debug: true;
+
+// images
+$image-path:                    '../images/';
+$png-sprite:                    '../images/png-sprite.png';
+$svg-sprite:                    '../images/svg-sprite.svg';
+
+// Typography
+$base-font-size:                16;
+$base-line-height:              24;
+$browser-default-font-size:     16;
+$magic-number:                  $base-line-height;
+$magic-ratio:                   $base-line-height / $base-font-size;
+
+// Scaling Variables
+$golden:                        1.618;
+$minor-second:                  1.067;
+$major-second:                  1.125;
+$minor-third:                   1.2;
+$major-third:                   1.25;
+$perfect-fourth:                1.333;
+$augmented-fourth:              1.414;
+$perfect-fifth:                 1.5;
+$minor-sixth:                   1.6;
+$major-sixth:                   1.667;
+$minor-seventh:                 1.778;
+$major-seventh:                 1.875;
+$octave:                        2;
+$major-tenth:                   2.5;
+$major-eleventh:                2.667;
+$major-twelfth:                 3;
+$double-octave:                 4;
+
+// units added later
+$modular-scale-ratio:           $major-third;
+$modular-scale-base:            $base-font-size;
+
+$font-size: (
+    h1:                         51,
+    h2:                         42,
+    h3:                         30,
+    h4:                         26,
+    h5:                         22,
+    h6:                         20
+);
+
+// Grid
+$base-max-width:                1204px;
+$base-max-columns:              12;
+$current_breakpoint:            base;
+$base-padding:                  modular-scale(1);
+$base-grid-gutter:              20px;
+
+// Counter
+$counter:                       counter;
+
+// Colours
+$white:                         #fff;
+$black:                         #000;
+$base-grey:                     #3D3D40;
+
+$palettes: (
+    bg: (
+      body:                     #e6e6e6,
+      dark:                     $base-grey,
+      light:                    #e6e6e6,
+      footer:                   #3D3D3F
+    ),
+    themes: (
+      magenta:                  #e5007e,
+      grey:                     $base-grey
+    ),
+    std: (
+        base:                   #4A90E2,
+        dark:                   #267DE2
+    ),
+    animation: (
+        pagination:             #b3b3b3
+    ),
+    timeline: (
+        month:                  #b3b3b3
+    ),
+    border: (
+        header:                 #CCCCCC
+    ),
+    stats: (
+        arrow:                  #ebebeb
+    ),
+    tabs: (
+        off:                    #CCCCCC
+    ),
+    form: (
+        placeholder:            #cccccc
+    ),
+    slide: (
+        pagination:             #cccccc
+    ),
+    theme: (
+        c1:                     #9300ff, // PURPLE
+        contact:                #ff0031, // RED
+        blog:                   #37cecd, // CYAN
+        service:                #00afff, // BLUE
+        c5:                     #0050ff, // DARK BLUE
+        c6:                     #ff7d3a, // ORANGE
+        about:                  #ffc627, // YELLOW
+        case:                   #6be361, // GREEN
+        home:                   $white
+    )
+);
+
+
+$themes: (
+        contact:                #ff0031,
+        blog:                   #37cecd,
+        service:                #00afff,
+        about:                  #ffc627,
+        case:                   #6be361
+);
+$pages: (
+        contact:                #ff0031,
+        blog:                   #37cecd,
+        services:               #00afff,
+        about:                  #ffc627,
+        case:                   #6be361
+);
+
+
+// Breakpoints
+$break-tiny:                    480;
+$break-600:                     600;
+$break-tablet:                  768;
+$break-900:                     900;
+$break-desktop:                 1024;
+
+$break-small:                   768;
+$break-nexus:                   962;
+
+$break-large:                   1204;
+$break-massive:                 1600;
+
+
+$header-height: 82px;
+$person_overlay: rgba(#ffc627,.85);

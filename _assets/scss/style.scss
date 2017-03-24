@@ -1,145 +1,93 @@
+//    File: _assets/css/scss/style.scss
+//
+//    Use spaces not tabs
+//
+//    # Selectors
+//
+//    One selector per line, One rule per line
+//    Don't use IDs as selectors
+//    Use hyphens to concatenate class names, eg body-container not bodyContainer or body_container
+//    Use BEM syntax:
+//        Block
+//        Block__element
+//        Block--modifier
+//
+//    # Properties
+//
+//    List related properties together
+//    If the value of the width or height is 0, do not specify units
+//    Avoid magic numbers, eg numbers used as  quick fixes on a one-off basis
+//    Close final property with a semi-colon
+//    Err towards shorthand where avaliable, eg border, background, etc
+//
+//    # SASS/SCSS
+//
+//    All Vendor Prefixes Use @mixins
+//    Maximum Nesting: Three Levels Deep
+//    Maximum Nesting: 50 Lines
+//
+//    Locally compile Expanded
+//    For Deployment compile Compressed
+//
+//    Be Generous With Comments
+//
+//    Variablize All Common Numbers, and Numbers with Meaning
+//    Variablize All Colors
+//
+//    Nest and Name Your Media Queries
+//
+//    Shame Last
 $ie: false;
 
-@import 'bourbon';
+// using  node-bourbon, see ./gulp/config.js
+@import "bourbon";
 
-/*
-  postcss plugins:
-  https://github.com/arccoza/postcss-aspect-ratio
-  https://github.com/peterramsing/lost
-  https://github.com/jonathantneal/postcss-write-svg
-  https://github.com/zhouwenbin/postcss-animation
-  https://github.com/pascalduez/postcss-quantity-queriespostcs
-  https://github.com/jedmao/postcss-triangle
+// gulp generated scss
+@import '_system/gulp/png-sprites',
+		'_system/gulp/svg-sprites',
+		'_system/gulp/icon-font';
 
-  node includes
-  https://github.com/modularscale/modularscale-sass
-*/
 
-@import '../../node_modules/modularscale-sass/stylesheets/_modular-scale.scss';
+// Libraries and dependencies
+@import '_system/libs/libs-reset',
+		'_config/libs-vars';
 
-/*
-  Utility functions
-*/
+// tools - mixins and functions
+// these shouldn't need to be changed
+@import '_system/tools/tools-functions',
+		'_system/tools/tools-easing',
+		'_system/tools/tools-helpers',
+		'_system/tools/tools-images',
+		'_system/tools/tools-grid',
+		'_system/tools/tools-layout',
+		'_system/tools/tools-type';
 
-@import '_system/core-mixins/utility-functions';
+// project specific mixins
+@import '_config/libs-mixins';
 
-/*
-  easing functions http://easings.net/
-*/
+// views and components
+// utils
+// @import 'utils/utils';
 
-@import '_system/core-mixins/easing';
+// base
+// @import 'base/type',
+// 		'base/forms',
+// 		'base/tables',
+// 		'base/buttons',
+// 		'base/icons',
+// 		'base/nav';
 
-/*
-  mq mixin from https://github.com/sass-mq/sass-mq
-*/
+// layout
 
-@import '_system/core-mixins/mq';
-@import '_system/core-mixins/type-helpers';
+// @import 'layout/header',
+// 				'layout/footer',
+// 				'layout/grid',
+// 				'layout/structure';
 
-/*
-  Custom, site specific mixins
-*/
+// modules
 
-@import '_system/site-mixins/mixins';
+// @import 'modules/panels';
 
-/*
-  svg-symbols generated via `gulp symbols`
-*/
 
-@import '_system/gulp-output/svg-symbols';
-// @import '_system/gulp-output/svg-sprites';
+// @import 'theme/theme';
 
-/*
-  Site variables, go nuts!
-*/
-
-@import '_config/typography';
-@import '_config/variables';
-
-/*
-  debug, $debug = true ?
-*/
-
-@import '_config/_debug';
-
-/*
-  Adapted normalize (stuff we don't use/need removed)
-*/
-
-@import 'base/mudmalize';
-
-/*
-  Reset util classes, single class name, easy to overwrite later on
-  Prefix classes with r-
-*/
-
-@import 'base/reset';
-
-/*
-  Low level styles, no nesting, single class names, no media queries
-  Typography, Buttons, Tables, Form elements, Etc
-*/
-
-@import 'base/type';
-@import 'base/tables';
-@import 'base/buttons';
-@import 'base/forms';
-
-/*
-  This grid
-  Prefix classes with g-
-*/
-
-@import 'layout/grid';
-
-/*
-  Layout global components etc
-  Max specificity of 2
-  *Layout* media queries should go here
-*/
-
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/navigation';
-@import 'layout/structure';
-
-/*
-  Modules styles only
-  Max specificity of 2
-  *Layout* media queries should go here
-*/
-
-@import 'modules/form-example';
-@import 'modules/slide';
-@import 'modules/hero';
-@import 'modules/video';
-@import 'modules/map';
-@import 'modules/accordion';
-@import 'modules/wysiwyg';
-@import 'modules/scroll-view';
-
-/*
-  Utility classes, these should always win, go crazy with import
-  Prefix classes with u-
-*/
-
-@import 'utils/index';
-
-/*
-  Print styles
-*/
-
-@import 'utils/print';
-
-/*
-  No JS styles
-*/
-
-@import 'utils/no-js';
-
-/*
-  Shame, hacks, overwrites, sad panda
-  This file *should* be blank!
-*/
-
-@import 'utils/shame';

@@ -1,7 +1,7 @@
 {
   "baseDir": "./deploy/public",
   "dest": "./deploy/public",
-  "dist": "./deploy/public/dist",
+  "dist": "./deploy/public/_assets",
 
   
 	"browserSync": {
@@ -14,7 +14,7 @@
   "tags": {
     "src": "./deploy/public/*.html",
     "dest": "./deploy/public/",
-    "css": "/dist/css/",
-    "js": "/dist/js/"
+    "css": "/_assets/css/",
+    "js": "/_assets/js/"
   }
 }

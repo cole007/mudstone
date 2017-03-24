@@ -1,35 +1,42 @@
 $sprites: (
   sprite: (
-		width: 76px, 
-		height: 53px, 
+		width: 474px, 
+		height: 242px, 
 		svgPath: '../images/svg-sprite.svg'
 	),
-	arrow: (
-		width: 16.04px, 
-		height: 10.97px, 
+	logo: (
+		width: 93.081px, 
+		height: 50px, 
 		backgroundX: 0px, 
 		backgroundY: 0px, 
 		path: '../images/svg-sprite.svg'
 	),
-	chevron: (
-		width: 28.33px, 
-		height: 17px, 
-		backgroundX: -17px, 
-		backgroundY: -11px, 
+	logo-desktop: (
+		width: 220px, 
+		height: 32px, 
+		backgroundX: -94px, 
+		backgroundY: -50px, 
 		path: '../images/svg-sprite.svg'
 	),
-	close: (
-		width: 11.27px, 
-		height: 11.27px, 
-		backgroundX: -46px, 
-		backgroundY: -28px, 
+	logo-mobile-star: (
+		width: 50px, 
+		height: 50px, 
+		backgroundX: -314px, 
+		backgroundY: -82px, 
 		path: '../images/svg-sprite.svg'
 	),
-	tick: (
-		width: 17.44px, 
-		height: 12.97px, 
-		backgroundX: -58px, 
-		backgroundY: -40px, 
+	logo-star: (
+		width: 44px, 
+		height: 44px, 
+		backgroundX: -364px, 
+		backgroundY: -132px, 
+		path: '../images/svg-sprite.svg'
+	),
+	play-btn: (
+		width: 65.4px, 
+		height: 65.3px, 
+		backgroundX: -408px, 
+		backgroundY: -176px, 
 		path: '../images/svg-sprite.svg'
 	),
 );

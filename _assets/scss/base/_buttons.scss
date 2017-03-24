@@ -1,57 +1,207 @@
-// for link buttons
-// <a href="#" class="btn btn--downloads"></a>
-
 
 .btn {
-	@include resp-map('button');
-
-	font-family: font('default');
-	cursor: pointer;
-	border: none;
-	margin: 0;
-	text-decoration: none;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: gutter(.5) gutter(1);
-	color: c(type, dark);
+    $btn-height: 44;
+    @include font-size(18,$btn-height);
+    display:inline-block;
+    vertical-align:middle;
+    white-space:nowrap;
+    cursor:pointer;
+    border:none;
+    margin:0;
+    padding: 0 25px;
+    text-decoration: none;
+    height: $btn-height * 1px;
 }
 
-.btn--box {
-	border: rem(1px) solid currentColor;
-}
-
-.btn--brand {
-	color: c(core, green);
-}
-
-.btn--white {
-	color: $white;
-}
-
-.btn--dark {
-	color: c(type, dark);
-}
-
-.btn--sort {
-	font-size: rem(15px);
-	padding: gutter(.5);
-}
-
-.btn--full {
-	width: 100%;
-}
-
-// reset for actual buttons
-// <button type="submit" class="button btn--downloads"></a>
 .button {
-	background: none;
-	border: 0;
-	padding: 0;
+    &:before {
+        @include icon-font();
+    }
+    background: none;
+    border: 0;
+    padding: 0;
 	cursor: pointer;
 }
 
-[disabled] {
-	cursor: default;
+.button--down,
+.button--up {
+    &:before {
+        @include font-size(30,false);
+        content: icon-char(down_arrow);
+    }
 }
 
+.button--up {
+    &:before {
+        content: icon-char(up_arrow);
+    }
+}
+
+.button--close,
+.button--search {
+    color: c(theme,blog);
+    &:before {
+        @include font-size(25,false);
+        content: icon-char(search);
+    }
+}
+
+.button--close {
+    &:before {
+        content: icon-char(close-icon);
+    }
+}
+
+.button--top {
+    display: block;
+    text-align: center;
+    &:after,
+    &:before {
+        @include icon-font();
+        @include font-size(30,false);
+        @include position(absolute, null 0 gutter(2) 0);
+        content: icon-char(up_arrow);
+        transition: all .3s;
+    }
+    &:hover {
+        &:before {
+            transform: translateY(gutter(-.75));
+        }
+        &:after {
+            transform: translateY(gutter(.75));
+        }
+    }
+
+
+    @media only screen and (max-height: 380px) and (orientation: portrait) {
+        &:before,
+        &:after {
+            @include font-size(20,false);
+        }
+    }
+    @media only screen and (min-width: 1024px) and (min-height: 800px) and(orientation: landscape) {
+        &:before,
+        &:after {
+            @include font-size(54,false);
+        }
+        &:hover {
+            &:before {
+                transform: translateY(gutter(-1.25));
+            }
+            &:after {
+                transform: translateY(gutter(1.25));
+            }
+        }
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+.button--download {
+    @include font-type(display);
+    position: relative;
+    border-bottom: 3px solid;
+    margin-left: gutter(1);
+    &:hover {
+        color: $base-grey;
+        &:before {
+            border: 0;
+            top: 10px;
+        }
+    }
+    &:before {
+        @include position(absolute, -5px null null gutter(-1));
+        @include font-size(14,false);
+        content: icon-char(download);
+        transition: all .3s;
+        border-bottom: 3px solid;        
+    }
+    // .l-box & {
+    //     margin-left: gutter(1);
+    // }
+
+    @include mq($break-large, min) {
+        @include font-size(22,false);
+        margin-left: gutter(1.25);
+        &:before {
+            @include font-size(20,false);
+            top: -7px;
+            left: gutter(-1.25);
+        }
+    }
+}
+
+.button--landing {
+    background:c(theme,service);
+    border-radius:5px;
+    display:inline-flex;
+    color:white;
+    text-align:center;
+    padding:15px;
+    //width:100%;
+    @include font-size(25,25);
+    transition:background 0.3s ease;
+
+    &:hover {
+        background:darken(c(theme,service), 5%);
+    }
+}
+
+p > a,
+.link {
+    @include underline($color: c(theme,blog), $line-height: 100%, $bg: transparent, $weight: 5px);
+    @include font-type(display);
+    transition: all .3s;
+    display: inline;
+    line-height: inherit;
+}
+
+.page {
+    p > a,
+    a.link {
+        &:hover {
+            color: $base-grey;
+        }
+    }
+}
+
+.link--author.link--author {
+    white-space: nowrap;
+    &:hover {
+        color: c(theme,blog);
+    }
+}
+
+.s-post p > a,
+.s-post li > a {
+    @include font-type(bold);
+    background-image: linear-gradient(to bottom, transparent 50%, c(theme,blog) 50%);
+    line-height: inherit;
+    background-size: 3px 3px;
+    background-repeat: repeat-x;
+    background-position-y: 100%;
+
+
+}
+.s-generic {
+    p > a ,
+    li > a {
+        background-image: linear-gradient(to bottom, transparent 50%, c(theme,about) 50%);
+        background-repeat: repeat-x;
+      background-position-y: 100%;
+    }
+    .social-list dt, 
+    .social-list dd {
+        color: c(theme,about);
+    }
+}
+
+
+// .btn-link {
+//     border-bottom: 3px solid c(theme,c7);
+//     @include mq($break-tablet, min) {
+//         @include font-size(22,28);
+//     }
+// }

@@ -1,140 +1,45 @@
-/*
-  NOTE
-
-	This file should only contain css related to the grid
-	just widths, margins and vertical spacing,
-	Any other styling, such as background colours, should be moved to a different
-	selector. Nount wrong with 4/5 classes on a single element.
-	<div class="g__col gm__1-2 gt__1-3 gd__1-4 cta-box"></div>
-	Ideally, if you can, move the cta styling to a child element, leaving the class
-	with only grid properties. Oh so reusable, oh so portable
-*/
-
-
-/*
-  content property used by the viewport change event
-*/
-
-body::before {
-	content: "none";
-	display: none;
-}
-
-@each $break, $key in $breakpoints {
-	@include mq($from: breakpoint($break)) {
-		body::before {
-			content: '#{$break}';
-		}
-	}
+.grid {
+    font-size:0;
+    vertical-align: top;
+    margin-left:-20px;
 }
 
 
-/*
-  Base default grid root node
-	If you need to create a grid with gutters use lost
-	If you need to create a grid without gutters, don't bother with lost
-	It alls quite a lot of extra css that isn't really needed when
-	you have no gutters.
-*/
-
-
-.g__col {
-	margin-bottom: gutter(1);
+.grid__col {
+    display:inline-block;
+    padding-left:20px;
+    width:100%;
+    vertical-align:top;
+    @include font-size($base-font-size);
 }
 
-
-
-
-
-
-
-
-
-
-/*
-  Footer grid modification
-*/
-
-
-
-
-
-
-
-
-
-
-/*
-  Mobile, see config
-*/
-
-@include mq($from: breakpoint('mobile')) {
-	/*
-	  Mobile default grid root node
-	*/
-	.gm {
-		lost-flex-container: row;
-	}
-
-	.gm__1-2 {
-		lost-column: 1/2 2 gutter(1) flex;
-		margin-bottom: gutter(1);
-	}
+.grid--testimonials {
+    margin-top:40px;
+}
+.grid--team {
+    margin-top:40px;
 }
 
+@media only screen and (min-width: 480px) {
 
-/*
-  Tablet, see config
-*/
+    .grid--2 {
+        .grid__col {
+            width:50%;
+            flex:0 0 50%;
+            max-width:50%;
+        }
+    }
 
-@include mq($from: breakpoint('tablet')) {
-	/*
-		Tablet default grid root node
-	*/
-	.gt {
-		lost-flex-container: row;
-	}
-
-	/*
-		grid column blocks
-		Create a two column grid with 20px gutters... in flex
-	*/
-	.gt__1-2 {
-		lost-column: 1/2 gutter(1) flex;
-	}
-
-	.gt__1-3 {
-		lost-column: 1/3 gutter(1) flex;
-	}
-
-	.gt__1-4 {
-		lost-column: 1/4 gutter(1) flex;
-	}
 }
 
+@media only screen and (min-width: 768px) {
 
-/*
-  Desktop, see config
-*/
+    .grid--3 {
+        .grid__col {
+            width:33.33333%;
+            flex:0 0 33.33333%;
+            max-width:33.33333%;
+        }
+    }
 
-@include mq($from: breakpoint('desktop')) {
-	/*
-		Desktop default grid root node
-	*/
-
-	// .gd {}
 }
-
-
-/*
-  Wide, see config
-*/
-
-@include mq($from: breakpoint('wide')) {
-	/*
-		Wide default grid root node
-	*/
-
-	//.gw {}
-}
-

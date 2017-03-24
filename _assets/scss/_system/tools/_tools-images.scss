@@ -1,0 +1,60 @@
+
+
+// image wrapper or aspect ratio
+@mixin image-wrapper($aspect-ratio: 16 9, $max-height: false, $imageSettings: true) {
+
+	@if $max-height != false {
+		max-height: $max-height;
+	}
+
+	@if $imageSettings == true {
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	$x: nth($aspect-ratio,1);
+	$y: nth($aspect-ratio,2);
+
+
+	&:before {
+		padding-bottom: gridCalc($y,$x);
+		content: " ";
+		display: inline-block;
+	}
+}
+
+
+// // Sprite 
+// @function sprite-spacing($sprite, $property: width, $excess: 0) {
+// 	$ext: if($property == width, 5, 6);
+// 	// 5 == width
+// 	// 6 == height
+// 	$spacing:  nth($sprite, 5);
+// 	@return $spacing + $excess;
+// }
+
+
+// @mixin sprite-file() {
+//     background: url($png-sprite) no-repeat;
+// } 
+
+// @mixin sprite-modifier($sprite) {
+//   @include sprite-position($sprite);
+//   @include sprite-width($sprite);
+//   @include sprite-height($sprite);
+// }
+
+
+// svg sprite functions
+
+// Gets an attribute from the sass mapp
+
+
+
+@mixin svg($sprite) {
+	@if $ie == true {
+		@include png-sprite($sprite);
+	} @else {
+		@include svg-sprite($sprite);
+	}
+}

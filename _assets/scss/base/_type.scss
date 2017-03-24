@@ -1,116 +1,409 @@
-/*
- Typography
-*/
+// /*
+//  ==============================================================
+//  Typography
+//  ==============================================================
+//  */
 
-@include type-reveal();
+//@include baseline();
+
+@font-face {
+    font-family: 'aktiv_groteskregular';
+    src: url('../fonts/aktivgrotesk_std_rg-webfont.eot');
+    src: url('../fonts/aktivgrotesk_std_rg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aktivgrotesk_std_rg-webfont.woff2') format('woff2'),
+         url('../fonts/aktivgrotesk_std_rg-webfont.woff') format('woff'),
+         url('../fonts/aktivgrotesk_std_rg-webfont.ttf') format('truetype'),
+         url('../fonts/aktivgrotesk_std_rg-webfont.svg#aktiv_groteskregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'aktiv_groteskbold';
+    src: url('../fonts/aktivgrotesk_std_bd-webfont.eot');
+    src: url('../fonts/aktivgrotesk_std_bd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aktivgrotesk_std_bd-webfont.woff2') format('woff2'),
+         url('../fonts/aktivgrotesk_std_bd-webfont.woff') format('woff'),
+         url('../fonts/aktivgrotesk_std_bd-webfont.ttf') format('truetype'),
+         url('../fonts/aktivgrotesk_std_bd-webfont.svg#aktiv_groteskbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Boing Bold';
+    src: url('../fonts/Boing_Bold.eot');
+    src: url('../fonts/Boing_Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Boing_Bold.woff2') format('woff2'),
+         url('../fonts/Boing_Bold.woff') format('woff'),
+         url('../fonts/Boing_Bold.ttf') format('truetype'),
+         url('../fonts/Boing_Bold.svg#Boing_Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 
 
 
+// .site {
+// 	transition: opacity .4s;
+// 	opacity: 0;
+// 	.wf-active &,
+// 	.wf-fail & {
+// 		opacity: 1;
+// 	}
+// }
 
-
-
-
-
-/*
-	Root
-*/
+// .no-js {
+// 	.site {
+// 		opacity: 1;
+// 	}
+// }
 
 html {
-	font-family: map-get($fonts, default);
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
+    @include font-baseline();
 }
 
 body {
-	-webkit-font-smoothing: antialiased;
+	@include font-type('base');
+	@include font-size($base-font-size);
+	font-style: normal;
+	font-weight: normal;
+	-webkit-font-smoothing: subpixel-antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: c(type, base);
+	color: $base-grey;
 }
 
 
+h1,.heading-1 {
+	@include font-type(display);
+	@include font-size(size(h1),size(h1));
+	margin: 0 0 gutter(1);
+	@include mq(600, min) {
+		@include font-size(70,false);
+	}
+	@include mq(900, min) {
+		@include font-size(85,false);
+	}
+	@include mq($break-large, min) {
+		@include font-size(105,99);
+		margin-bottom: gutter(2);
+	}
 
-
-
-
-
-
-
-
-/*
-	Headings
-*/
-
-.heading-1,
-h1 {
-	@include resp-map('heading-1');
-}
-
-.heading-2,
-h2 {
-	@include resp-map('heading-2');
-}
-
-.heading-3,
-h3 {
-	@include resp-map('heading-3');
-}
-
-.heading-4,
-h4 {
-	@include resp-map('heading-4');
-}
-
-.heading-5,
-h5 {
-	@include resp-map('heading-5');
-}
-
-.heading-6,
-h6 {
-	@include resp-map('heading-6');
+	strong {
+		font-family: inherit;
+	}
 }
 
 
+h2,.heading-2 {
+	@include font-type(display);
+	@include font-size(size(h2),47);
+	margin: 0 0 gutter(1);
 
+	@include mq(600, min) {
+		@include font-size(size(h2),47);
+	}
+}
 
-
-
-
-
-
-
-/*
-	Base element styles
-	avoid adding font sizes to elements directly
-	utilise the cascade and utility classes
-*/
-
-p {
+h3,.heading-3 {
+	@include font-type(display);
+	@include font-size(size(h3),size(h3));
 	margin: 0 0 gutter(1);
 }
 
-b,
-strong {
-	font-weight: normal;
+h4,.heading-4 {
+	@include font-type(display);
+	@include font-size(size(h4),size(h4));
+	margin: 0 0 gutter(1);
+}
+
+.heading-4 {
+	@include mq($break-large, min) {
+		@include font-size(38,41);
+		margin-bottom: gutter(2);
+	}
+}
+
+h5,.heading-5,%heading-5 {
+	@include font-type(display);
+	@include font-size(size(h5));
+	margin: 0 0 gutter(1);
+}
+
+%heading-5 {
+	@include mq($break-600, min) {
+		@include font-size(27,false);
+	}
+}
+
+
+h6,.heading-6 {
+	@include font-type(display);
+	@include font-size(size(h6));
+	margin: 0 0 gutter(1);
+}
+
+
+.h-hero {
+	line-height: 0.95; 
+	opacity: .9;
+		
+
+	@include mq(320, max) {
+		@include font-size(40,false);
+	}
+
+
+	// @media only screen and (min-height: 481px) and (orientation: portrait) {
+	// 	@include font-size(45,false);
+	// }
+
+
+	// @media only screen and (min-height: 600px) and (orientation: portrait) {
+	// 	@include font-size(50,false);
+	// 	margin-bottom: gutter(2);
+	// }
+
+
+	// @media only screen and (min-height: 700px) and (orientation: portrait) {
+	// 	@include font-size(60,false);
+	// }
+
+	// @media only screen and (min-height: 960px) and (orientation: portrait) {
+	// 	@include font-size(75,false);
+	// }
+
+
+
+	// @media only screen and (max-width: 1024px) and (max-height: 800px) and (orientation: landscape) {
+	// 	font-size: 6vw;
+	// 	margin-bottom: gutter(3);
+	// }
+
+
+	// @media only screen and (min-width: 760px) and (orientation: landscape) {
+	// 	@include font-size(60,false);
+	// 	margin-bottom: gutter(2);
+	// }
+
+	
+	// @media only screen and (min-width: 1024px) and (min-height: 800px) and (orientation: landscape) {
+	// 	font-size: 7vw;
+	// 	margin-bottom: gutter(3);
+	// }
+
+
+	// @media only screen and (min-width: 1280px) and (orientation: landscape) {
+	// 	@include font-size(85,false);
+	// 	margin-bottom: gutter(2);
+		
+	// }
+
+	// @media only screen and (min-width: 1500px) and (min-height: 800px) and (orientation: landscape) {
+	// 	@include font-size(105,false);
+	// }
+
+}
+
+.h-contact {
+	@include mq($bp: 470, $type: min, $orientation: landscape, $property: width) {
+		max-width: 60%;
+	}
+	@include mq($break-tablet, min) {
+		max-width: none;
+	}
+
+}
+
+p {
+	@include font-size(17,27);
+	margin: 0 0 gutter(1);
+}
+
+strong,b {
+	@include font-type(bold);
 }
 
 em {
 	font-style: normal;
+	@include font-type(italic);
 }
+
 
 a {
 	text-decoration: none;
 	color: inherit;
-	transition: opacity 300ms ease;
+}
 
-	&:hover {
-		opacity: .5;
+hr {
+	margin: gutter(2) 0 gutter(1);
+	display: block;
+	border-width: 1px 0 0;
+	border-color: c(border,header);
+}
+
+.s-intro {
+	p {
+		@include font-type(display);
+	}
+
+
+	p > a,
+	.link {
+		background-position-y: 90%;
+	}
+
+	.inline-link {
+		display: block;
+	}
+
+	@include mq($break-900, min) {
+		p {
+			@include font-size(29,34);
+		}
 	}
 }
 
-address {
-	font-style: normal;
+.details {
+	dt,dd {
+		margin: 0;
+
+	}
 }
 
+.list {
+	li {
+		margin-bottom: gutter(.25);
+	}
+}
+
+.h-brand {
+	position: relative;
+	display: inline-block;
+	&:after {
+		@include icon-font();
+		position: absolute;
+		bottom: 0;
+		font-size: 35%;
+		content: icon-char(cursor);
+		display: inline-block;
+		margin-left: gutter(.5);
+		transform: translateY(-20%);
+	}
+}
+
+.section-heading {
+	margin-bottom: gutter(2);
+}
+
+
+em {
+	font-style: italic;
+}
+
+.post-content {
+
+	a,u,ins {
+		text-decoration: none !important; // overwrite any inline wp styles 
+	}
+
+	h1,
+	h2 {
+		@include font-size(22,false);
+	}
+	h3 {
+		@include font-size(20,false);
+	}
+	h4 {
+		@include font-size(18,false);
+	}
+
+	@include mq($break-desktop, min) {
+		h1,
+		h2 {
+			@include font-size(30,false);
+		}
+		h3 {
+			@include font-size(25,false);
+		}
+		h4 {
+			@include font-size(22,false);
+		}
+
+	}
+}
+
+.s-post {
+
+
+	p > a:hover {
+		color: c(theme,blog);
+	}
+
+	table {
+		width: 100%;
+		text-align: left;
+		margin-bottom: gutter(1);
+	}
+	td,th {
+		padding: gutter(.25);
+	}
+
+	tbody {
+		tr:nth-child(odd) {
+			background-color: c(bg,light);
+		}
+	}
+
+	thead {
+		border-bottom: 1px solid c(border,header);
+	}
+	tfoot {
+		border-top: 1px solid c(border,header);
+	}
+
+
+	.inline-image {
+		&,
+		img {
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+
+}
+
+
+	.inline-image {
+		&,
+		img {
+			display: inline-block !important;
+			vertical-align: middle;
+		}
+	}
+
+.no-link {
+	background: none!important;
+}
+
+.s-generic {
+	@include font-type(base);
+}
+
+
+
+.s-post-old {
+	h1,h2,h3,h4,h5,h6 {
+		margin: gutter(1) 0;
+	}
+}
+
+// .post-content,
+// .s-generic {
+// 	a {
+// 		@include font-type(base);
+// 		font-weight: bold;
+// 	}
+// }

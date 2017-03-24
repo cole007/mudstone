@@ -1,18 +1,281 @@
-/*
-  Base wrapper
-	Add a little side padding for some sweet mobile side spacing
-	This class should not be used on the same element as vr class
-*/
-
 .wrapper {
-	width: 100%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 gutter(1);
+	@include g-wrapper();
+	padding-left: gutter(1);
+	padding-right: gutter(1);
+	@include mq($break-600) {
+		padding-left: gutter(2);
+		padding-right: gutter(2);
+
+	}
 }
+
+.page {
+	@include font-type(display);
+}
+
+// .l-wrap--rev {
+// 	flex-direction: row-reverse;
+// }
+
+@include mq($break-tablet, min) {
+
+	.l-wrap {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.l-wrap--center {
+		align-items: center;
+	}
+
+	.l-box {
+		width: 48%;
+	}
+
+	.l-box--lead {
+		flex: 2;
+		padding-right: gutter(2);
+	}
+
+	.l-box--sub {
+		flex: 1;
+	}
+
+	.l-box--contact {
+		width: 40%;
+	}
+}
+
+@include mq($break-600, min) {
+	.l-box--lead {
+		max-width: 445px;
+	}
+}
+
+
+@include mq($break-900, min) {
+	.l-box--lead {
+		max-width: 70%;
+	}
+}
+
+@include mq($break-large, min) {
+	.l-box--lead {
+		max-width: gridCalc(2,3);
+	}
+	.l-box--sub {
+		flex: none;
+	}
+
+	.l-box--social {
+		width: 250px;
+	}
+
+	.l-box--contact {
+		.slice--contact & {
+			padding-left: gutter(2);
+		}
+		.s-contact & {
+			padding-left: gutter(2);
+		}
+	}
+}
+
+.l-box--contact {
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+.slice {
+	padding-top: gutter(2);
+	padding-bottom: gutter(2);
+	transition: all .3s;
+	@include mq($break-desktop, min) {
+		padding-top: gutter(4);
+		padding-bottom: gutter(4);
+	}
+}
+
+.slice--post {
+	@include mq($break-desktop, min) {
+		padding-top: gutter(6);
+		padding-bottom: gutter(6);
+	}
+}
+
+.slice--end {
+	padding-top: gutter(2);
+	padding-bottom: gutter(2);
+	position: relative;
+	height: gutter(7);
+}
+
+
+
+.strip-list {
+	& > li:nth-child(even) {
+		&,
+		& + .slice--end {
+			background-color: c(bg,light);
+		}
+	}
+}
+
+.paginate-parent + .slice--end {
+	background-color: c(bg,light);
+}
+
+
+.site .page {
+  animation-duration: 1s;
+  transition-timing-function: ease-in;
+  animation-fill-mode: both;
+  transform-origin: 50% 0;
+}
+
+.site .slice--cx + .page {
+	animation-delay: 1s;
+}
+
 
 .site {
-	overflow-x: hidden;
+	&:before {
+		position: fixed;
+		top: 0;
+		left: -300%;
+		right: 0;
+		height: 6px;
+		content: " ";
+		z-index: 100001;
+		display: block;
+		opacity: 0;
+		transition: opacity 100ms, transform 300ms;
+		transform: translateY(-4px); 
+		background-image: linear-gradient(to right,( c(theme,about) 75%, $white 75%) );
+	}
+
+
+	&.t-case {
+		&:before {
+			background-image: linear-gradient(to right,( c(theme,case) 75%, $white 75%) );
+		}
+	}
 }
 
 
+.is-exiting {
+	.site {
+		&:before {
+			opacity: 1;
+			transform: translateY(0);
+			animation: loadingBar 1000ms infinite;
+		}
+	}
+}
+
+@each $l1, $color in $pages {
+		.site.t-#{$l1}-trans {
+			&:before {
+				background-image: linear-gradient(to right,( $color 75%, $white 75%) );
+			}
+		}
+}
+
+.site .page {
+  animation-name: fadeIn;
+}
+
+.site.s-case .page {
+  animation-name: fadeInslideUp;
+}
+
+.is-exiting .page {
+  animation-direction: alternate-reverse;
+}
+
+.is-exiting .logo:after {
+  animation-name: loading;
+}
+
+/*
+ * Keyframes
+ */
+@keyframes fadeInslideUp {
+  0% { 
+  	opacity: 0; 
+  	transform: translateY(200px);
+  }
+  100% { 
+  	opacity: 1; 
+  	transform: translateY(0);
+  }
+}
+
+@keyframes loadingBar {
+  100% { 
+  	transform: translateX(75%);
+  }
+}
+/*
+ * Keyframes
+ */
+@keyframes fadeIn {
+  0% { 
+  	opacity: 0; 
+  }
+  100% { 
+  	opacity: 1; 
+  }
+}
+
+.no-js {
+	.loader {
+		display: none;
+	}
+}
+
+@keyframes loading {
+	100% {
+		transform: rotateZ(360deg);
+	}
+}
+
+.loader {
+	@include position(fixed, 0);
+	height: 100%;
+	background-color: c(bg, light);
+	z-index: 10000001;
+	&:before {
+		@include position(absolute, 0);
+		margin: auto;
+		background: url(#{$image-path}logo.svg) 50% no-repeat;
+		background-size: 60px 60px;
+		display: block;
+		content: " ";
+		animation: loading 1.5s infinite linear
+	}
+}
+
+.js-actor {
+	opacity: 0;
+	transition: all .3s;
+	&.is-loaded {
+		opacity: 1;
+	}
+}
+
+.s-generic {
+	max-width: 780px;
+}
+
+.slice--404 {
+	text-align: center;
+	margin: auto;
+}
+
+.container-404 {
+	max-width: 700px;
+	margin: auto;
+}

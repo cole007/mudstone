@@ -55,8 +55,8 @@ export default {
 
 	pug: {
 		extensions: ['pug'],
-		task: 'code',
-		watch: true,
+		// task: 'code',
+		// watch: true,
 		excludeFolders: ['_mixins', '_includes', '_sidebars', '_modules', 'wrapper', '_wrapper']
 	},
 
@@ -104,7 +104,7 @@ export default {
 		task: 'asset',
 		watch: true,
 		template: 'gulp/libs/png-sprites.tmp.scss.handlebars',
-		scssPath: '_assets/scss/_system/gulp-output/',
+		scssPath: '_assets/scss/_system/gulp/',
 		scssFile: '_png-sprites.scss',
 		output: 'png-sprite.png',
 		imagePath: '../images/png-sprite.png',
@@ -112,7 +112,7 @@ export default {
 	},
 
 	sprites: {
-		task: true,
+		task: 'asset',
 		watch: true,
 		mode: {
 			css: {
@@ -125,7 +125,7 @@ export default {
 				bust: false,
 				render: {
 					scss: {
-						dest: '_system/gulp-output/_svg-sprites.scss',
+						dest: '_system/gulp/_svg-sprites.scss',
 						template: 'gulp/libs/sprites.tmp.scss'
 					}
 				}
@@ -156,7 +156,7 @@ export default {
 		task: 'asset',
 		watch: true,
 		scssTemplate: '../gulp/libs/symbols.tmp.scss',
-		scssOutputPath: 'scss/_system/gulp-output/',
+		scssOutputPath: 'scss/_system/gulp/',
 		scssOutputFile: '_svg-symbols.scss',
 		sourceFile: 'images/svg-symbols/source.html',
 		fileName: 'symbols.njk',
@@ -168,7 +168,7 @@ export default {
 		watch: true,
 		name: 'icon-font',
 		template: 'gulp/libs/iconfont.tmp.scss',
-		scss: '../../../../_assets/scss/_system/gulp-output/_icon-font.scss',
+		scss: '../../../../_assets/scss/_system/gulp/_icon-font.scss',
 		fontPath: '../fonts/',
 		extensions: ['svg']
 	},

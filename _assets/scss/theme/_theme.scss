@@ -1,0 +1,125 @@
+.t-home {
+	.hero {
+		.button--down {
+			&:before {
+				color: c(theme,about);
+			}
+		}
+	}
+
+	.h-brand {
+		&:after {
+			color: c(theme,about);
+		}
+	}
+
+
+
+	.t-text,
+	.menu--tel {
+		color: c(theme,about);
+	}
+
+	.site-footer {
+		.link {
+			background-image: linear-gradient(to bottom,(transparent 50%, c(theme,about) 50%));
+		}
+	}
+
+	.menu__btn {
+		span {
+			&,
+			&:before,
+			&:after {
+				background-color: c(theme,about);
+			}
+		}
+	}
+	
+	.button--top,
+	.icon--tel {
+		color: c(theme,about);
+	}
+}
+
+// loop through each of the themes,
+// set background-color .t-theme-bg
+// set text color .t-theme-text
+@each $theme, $color in $themes {
+	.t-#{$theme}-bg {
+		background-color: $color;
+		color: $white;
+	}
+	.t-#{$theme}-text {
+		color: $color;
+	}
+
+	.t-#{$theme} {
+
+			
+		.s-post p > a,
+		.s-post li > a 	{
+			&:hover {
+				color: $color;
+			}
+		}
+
+
+		.t-text {
+			color: $color;
+		}
+		
+
+		&-text.link {
+			&:hover {
+				color: $base-grey;
+			}
+		}
+
+		.site-footer__col--wide .link,
+		.site-footer__nav .nav li:hover,
+		.site-footer__col p > a:hover,
+		.h-brand:after,
+		.button--top,
+		.site-footer .social__item:before,
+		.site-footer .btn-link,
+		.button--top,
+		.icon--tel,
+		.menu--tel,
+		.social-list dd,
+		.social-list dt {
+			color: $color;
+		}
+
+		
+	
+
+		.menu__btn {
+			span {
+				&,
+				&:before,
+				&:after {
+					background-color: $color;
+				}
+			}
+		}
+
+		p > a,
+		.link {
+			background-image: linear-gradient(to bottom,(transparent 50%, $color 50%));
+		}
+		
+		.page {
+			a.link {
+				&:hover {
+					color: $color;
+				}
+			}
+		}
+		
+	
+		.btn-link {
+			border-color: $color;
+		}
+	}
+}

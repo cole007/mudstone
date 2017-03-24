@@ -2,7 +2,7 @@
   "baseDir": "./tmp/public",
   "src": "./_assets",
   "dest": "./tmp/public",
-  "dist": "./tmp/public/dist",
+  "dist": "./tmp/public/_assets",
 
 	"browserSync": {
 		"server": {
@@ -24,10 +24,9 @@
 
   "js": {
     "src": "js",
-    "dest": "dist/js",
+    "dest": "_assets/js/libs",
 		"libs": [
-			"./node_modules/jquery/dist/jquery.min.js",
-			"./node_modules/picturefill/dist/picturefill.min.js"
+			"./_assets/js/libs/modernizr.min.js"
 		]
   },
 
@@ -45,7 +44,7 @@
 			"./_assets/js/tools.js",
 			"./_assets/js/behaviours/*.js"
 		],
-		"dest": "dist/js"
+		"dest": "_assets/js"
 	},
 
   "json": {
@@ -55,51 +54,51 @@
 
   "scss": {
     "src": "scss",
-    "dest": "dist/css"
+    "dest": "_assets/css"
   },
 
   "cssFonts": {
     "src": "scss",
-    "dest": "dist/css"
+    "dest": "_assets/css"
   },
 
   "images": {
     "src": "images/site",
-    "dest": "dist/images"
+    "dest": "_assets/images"
   },
 
   "fonts": {
     "src": "fonts",
-    "dest": "dist/fonts"
+    "dest": "_assets/fonts"
   },
 
   "symbols": {
     "src": "images/svg-symbols",
-    "dest": "dist/images",
+    "dest": "_assets/images",
     "fileName": "symbols.pug",
     "fileDest": "html/pug/_includes"
   },
 
   "iconFont": {
     "src": "images/icons",
-    "dest": "dist/fonts"
+    "dest": "_assets/fonts"
   },
 
 
 
 	"sprites": {
     "src": "images/svg-sprites",
-    "dest": "dist/images"
+    "dest": "_assets/images"
 	},
 
   "pngs": {
     "src": "images/png-sprites",
-    "dest": "dist/images"
+    "dest": "_assets/images"
   },
 
   "svgs": {
     "src": "images/svg-assets",
-    "dest": "dist/images"
+    "dest": "_assets/images"
   },
 
   "favicons": {
@@ -110,7 +109,7 @@
   "tags": {
     "src": "./tmp/public/*.html",
     "dest": "./tmp/public/",
-    "css": "/dist/css/",
-    "js": "/dist/js/"
+    "css": "/_assets/css/",
+    "js": "/_assets/js/"
   }
 }

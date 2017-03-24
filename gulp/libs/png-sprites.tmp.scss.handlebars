@@ -21,9 +21,6 @@ $pngSprite: (
 {{/content}}
 
 {{#content "spritesheet"}}
-	${{spritesheet_info.strings.name_sprites}}: ({{#each sprites}}${{strings.name}}, {{/each}});
-	${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.height}}, '{{{spritesheet.escaped_image}}}', ${{spritesheet_info.strings.name_sprites}}, );
-
 	@mixin png-sprite($name) {
 		$sprite: map-get($pngSprite, $name);
 		width: map-get($sprite, width);

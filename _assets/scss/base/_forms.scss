@@ -1,209 +1,417 @@
-/*
- 	This file should be used for resetting and normalizing form elements
-	Please create a module file for a specific form
-*/
 
-
-/*
- Reset some form bits, to prevent weirdness in ios
-*/
-
+// boilerplate form styles
+// core block styles
+// input reset
 input[type="submit"],
 input[type="search"],
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-	appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+
+textarea {
+    // -moz-appearance: none;
+    // -webkit-appearance: none;
+    // appearance: none;
+    border-radius: 0;
+}
+
+input,select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 	border-radius: 0;
 }
 
 
-/*
-	reset fieldset elements
-*/
+// select:focus,
+// input:focus {
+// 	outline: 0;
+// }
 
+// remove border and margin from fieldsets
 fieldset {
 	margin: 0;
 	border: 0;
 }
 
 
-/*
-
-Basic form markup:
-
-<div class="form__group">
-	<label class="form__label" for="frm_name">Name</label>
-	<input class="form__input" type="text" name="frm_name" id="frm_name">
-</div>
-*/
-
-
-/*
-	field wrapping element
-*/
-
-.form__group {
-	margin-bottom: vr-block(1);
-}
-
-
-/*
-	label element
-*/
-
-.form__label {
-	font-size: ms(-1);
-	display: block;
-}
-
-
-/*
-	input element, 100% wide to fill container
-*/
 
 .form__input {
-	font-size: ms(0);
-	border: 1px solid lighten($black, 95%);
-	display: block;
-	width: 100%;
-	padding: vr-block(.25) gutter(.5);
-}
+	border: 0;
+	//border-bottom: 3px solid c(theme,about);
+	background-color: transparent;
+	text-align: center;
+	color: $white;
 
+	&:focus {
+		outline: 0;
+	}
 
-/*
-	<div class="form__group">
-		<label class="form__label" for="frm_email">Options</label>
-		<div class="form__input form__input--select">
-			<select type="email" name="frm_email" id="frm_email">
-				<option selected="" disabled="">Option 1</option>
-				<option>Option 2</option>
-				<option>Option 3</option>
-				<option>Option 4</option>
-				<option>Option 5</option>
-				<option>Option 6</option>
-				<option>Option 7</option>
-			</select>
-		</div>
-	</div>
-*/
-
-.form__input--select {
-	select {
-		height: 100%;
-		text-indent: 0;
-		margin: 0;
-		padding: 0;
-		border: 0;
-		background: none;
-		width: 100%;
+	@media screen and (min-width:0\0) {
+		height: 46px;
 	}
 }
 
-.form__input--area {
-	line-height: leading(16, 20);
-	resize: vertical;
-	padding: gutter(.5);
-	min-height: gutter(3);
+.form__textarea {
+	resize: none;
+	height: 36px;
+	@include mq($break-tablet, min) {
+		padding-bottom: gutter(.5);
+	}
+}
+
+// .form__select {
+// 	position: relative;
+
+// 	// use pseudo elements to cover native dropdown
+// 	&:before,
+// 	&:after {
+// 		content: " ";
+// 	}
+// }
+
+// .form__toggle {
+// 	@include reset-input();
+// 	& + label {
+// 		&:before {
+// 			content: " ";
+// 		}
+// 	}
+// }
+
+// .form__toggle--radio {
+// 	& + label {
+// 		&:before {
+// 			width: 30px;
+// 			height: 30px;
+// 			border-radius: 100%;
+// 			border: 1px solid $base-grey;
+// 			display: inline-block;
+// 		}
+// 	}
+// 	// checked sate
+// 	&:checked + label {
+// 		&:before {
+
+// 		}
+// 	}
+// }
+
+// .form__toggle--check {
+// 	& + label {
+// 		&:before {
+// 			width: 30px;
+// 			height: 30px;
+// 			border: 1px solid $base-grey;
+// 			display: inline-block;
+// 		}
+// 	}
+
+// 	// checked sate
+// 	&:checked + label {
+// 		&:before {
+
+// 		}
+// 	}
+// }
+
+a:focus {
+	outline: 0;
+}
+
+.button {
+	&:focus {
+		outline: 0;
+	}
+}
+
+.form {
+	transition: all .3s;
+}
+
+@include placeholder {
+	@include font-type(display);
+}
+
+@keyframes submitting {
+	0 {
+		box-shadow:4px 0 0 0 c(theme,about), 12px 0 0 0 $base-grey,20px 0 0 0 $base-grey;
+	}
+	50% {
+		box-shadow:4px 0 0 0 c(theme,about),12px 0 0 0 c(theme,about),20px 0 0 0 $base-grey;
+	}
+	100% {
+		box-shadow:4px 0 0 0 c(theme,about),12px 0 0 0 c(theme,about),20px 0 0 0 c(theme,about);
+	}
+}
+
+@keyframes submitting-contact {
+	0 {
+		box-shadow:4px 0 0 0 c(theme,contact), 12px 0 0 0 c(bg,light),20px 0 0 0 c(bg,light);
+	}
+	50% {
+		box-shadow:4px 0 0 0 c(theme,contact),12px 0 0 0 c(theme,contact),20px 0 0 0 c(bg,light);
+	}
+	100% {
+		box-shadow:4px 0 0 0 c(theme,contact),12px 0 0 0 c(theme,contact),20px 0 0 0 c(theme,contact);
+	}
+}
+
+.is-submitting {
+	background: none !important;
+	color: c(theme,about);
+	&:after {
+		content: '';
+		display: inline-block;
+		width: 4px;
+		height: 4px;
+		border-radius: 100%;
+		box-shadow:4px 0 0 0 c(theme,about), 12px 0 0 0 $base-grey,20px 0 0 0 $base-grey;
+		animation: submitting 2s infinite both;
+	}
+}
+
+.t-contact {
+	.is-submitting {
+		color: c(theme,contact);
+		&:after {
+			animation-name: submitting-contact;
+			box-shadow:4px 0 0 0 c(theme,contact), 12px 0 0 0 c(bg,light),20px 0 0 0 c(bg,light);
+		}
+	}
 }
 
 
-/*
+@keyframes errorFade {
+	100% {
+		opacity: 1;
+	}
+}
 
-<div class="form__group">
-  <div class="form-toggle">
-    <input class="form-toggle__input" type="radio" name="ra" id="ra1">
-    <label class="form-toggle__label form-toggle__label--radio" for="ra1">Item 1</label>
-  </div>
-  <div class="form-toggle">
-    <input class="form-toggle__input" type="radio" name="ra" id="ra2">
-    <label class="form-toggle__label form-toggle__label--radio" for="ra2">Item 2</label>
-  </div>
-</div>
-<div class="form__group">
-  <div class="form-toggle">
-    <input class="form-toggle__input" type="checkbox" name="ch" id="ch1">
-    <label class="form-toggle__label form-toggle__label--checkbox" for="ch1">Item 1</label>
-  </div>
-  <div class="form-toggle">
-    <input class="form-toggle__input" type="checkbox" name="ch" id="ch2">
-    <label class="form-toggle__label form-toggle__label--checkbox" for="ch2">Item 2</label>
-  </div>
-</div>
-*/
-
-
-/*
-
-	Relative wrapper for the psuedo radio/checkboxes
-*/
-
-.form-toggle {
+.input {
 	position: relative;
 }
 
-
-/*
-
-	Hide the input and remove it from the document flow
-*/
-
-.form-toggle__input {
-	float: left;
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	opacity: 0;
-
-	&:checked + .form-toggle__label {
-		&::before {
-			border: 1px solid lighten($black, 5%);
-			background-color: lighten($black, 65%);
-		}
-	}
-
-	&:checked + .form-toggle__label--checkbox {
-		&::before {
-			box-shadow: 0 0 0 5px $white inset;
-		}
-	}
-}
-
-
-/*
-
-	Let's use flexbox to nicely align the psuedo element and the labels innerhtml
-*/
-
-.form-toggle__label {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-
-	&::before {
-		content: " ";
-		border: 1px solid lighten($black, 95%);
-		width: 20px;
-		height: 20px;
-		display: block;
-		margin-right: gutter(.5);
-	}
-}
-
-.form-toggle__label--radio {
-	&::before {
-		border-radius: 100%;
-	}
-}
-
-.form__button {
+label.error {
+	@include font-size(14);
+	@include position(absolute, -9px 0 null null);
+	display: inline-block;
 	padding: gutter(.25);
-	background-color: lighten($black, 75%);
-	border: 1px solid lighten($black, 95%);
-	display: block;
-	width: 100%;
-	text-align: center;
-	font-weight: 700;
-	text-transform: uppercase;
+	background-color: c(theme,contact);
+	animation: errorFade 1s forwards;
+	opacity: 0;
+	color: $white;
+	z-index: 1;
+	@include mq($break-900, min) {
+		top: 0;
+	}
+
+	@include fallback(animations) {
+		opacity: 1;
+	}
 }
 
+
+.form--signup {
+	
+	.input {
+		margin-bottom: gutter(1);
+	}
+
+	.form__label {
+		display: none;
+	}
+
+	label.error {
+		top: -9px;
+	}
+
+	@include placeholder {
+		color: $white;
+	}
+
+	.form__input {
+		color: $white;
+		padding: 0;
+		width: 100%;
+	}
+
+	.btn-link {
+		color: c(theme,about);
+	}
+
+	@include mq($break-large, min) {
+		label.error {
+			top: -2px;
+		}
+	}
+}
+
+
+
+.form--lines {
+	@include font-type(display);
+	.form__input {
+		border: 0;
+		//border-bottom: 3px solid c(theme,about);
+		background-color: transparent;
+		background-position-y: 85%;
+		text-align: center;
+		line-height: 2;
+		@include mq($break-600, min) {
+			text-align: left;
+		}
+
+		&:focus {
+			outline: 0;
+		}
+	}
+}
+
+
+.button--submit {
+	@include mq($break-900, min) {
+		@include font-size(22);
+	}
+}
+
+
+.form--search {
+	@include position(absolute, 13px 0 null null);
+	padding: 0 gutter(1) 0 gutter(2);
+	width: gutter(7);
+	transition: all .3s;
+	z-index: 1;
+	height: 36px; // same as the input
+	margin: auto;
+
+	@include mq($break-600, min) {
+		width: gutter(8.125);
+		padding-right: gutter(2);
+	}
+
+	@include placeholder() {
+		color: $base-grey;
+	}
+	
+
+
+	.button--search {
+		@include position(absolute, 3px null null -1px);
+		&:before {
+			@include font-size(30,false);
+		}
+	}
+	.button--close {
+		@include position(absolute, 2px gutter(1) null null);
+		opacity: 0;
+		transition: all .3s;
+		z-index: -1;
+		color: darken(c(bg,light),10%);
+	}
+	.form__input {
+		@include font-type(display);
+		padding-left: 0;
+		display: block;
+		text-align: left;
+		margin: auto;
+		color: $base-grey;
+		width: 100%;
+		height: 36px; // same as the input
+
+		@include mq(600, min) {
+			@include font-size(22,28);
+		}
+	}
+
+	&.is-active {
+		width: 100%;
+		padding: 0 gutter(3);
+		@include placeholder() {
+			color: c(bg,light);
+		}
+		
+		.button--search {
+			left: gutter(1);
+		}
+
+		.button--close {
+			opacity: 1;
+		}
+
+		// .form__input {
+		// 	border-bottom-color: c(bg,light);
+		// }
+	}
+}
+
+.form--contact {
+	width: 100%;
+	margin-bottom: gutter(2);
+	background-color: c(bg,light);
+
+	.button--close {
+		color: c(theme,contact);
+		position: absolute;
+    top: -40px;
+    right: 0;
+	}
+	
+	@include mq($break-tablet, min) {
+		margin-bottom: 0;
+	}
+	
+	.input {
+		margin-bottom: gutter(1);
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	
+	.form__input {
+		//border-bottom-color: c(theme,contact);
+		text-align: left;
+		width: 100%;
+		transition: all .3s;
+		padding-left: 0;
+		@include mq($break-900, min) {
+			@include font-size(22,false);
+		}
+		&:focus {
+			padding-left: gutter(.5);
+			padding-right: gutter(.5);
+			color: c(form,placeholder);
+		}
+		&,
+		&.is-keydown {
+			color: $base-grey;	
+		}
+	}
+
+	.form__textarea {
+		height: 36px;
+		background-color: c(bg,light);
+		//line-height: 1;
+		@include mq($break-900, min) {
+			height: 50px;
+		}
+		&.is-message {
+			height: 200px;
+			line-height: 1;
+			background-position-y: 100%;
+		}
+	}
+
+	// .btn-link {
+	// 	color: $base-grey;	
+	// 	border-bottom-color: c(theme,contact);
+	// }
+
+	@include placeholder() {
+		color: inherit;
+	}
+}

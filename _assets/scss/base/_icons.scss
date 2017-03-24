@@ -1,0 +1,95 @@
+.icon {
+	font-style: normal;
+	display: inline-block;
+	&:before {
+		@include icon-font();
+		color: inherit;
+	}
+}
+
+.icon--tel {
+	@include font-size(28,28);
+	vertical-align: middle;
+	margin: 3px gutter(1) 0 0;
+	//display: none;
+	&:before {
+		content: icon-char(icon_tel);
+	}
+}
+
+.social .social__item:hover:before {
+	color: $white !important;
+}
+
+.social__item {
+	@include font-size(25);
+	text-align: center;
+	@include mq($break-large, min) {
+		@include font-size(30);
+	}
+	&:before {
+		@include icon-font();
+	}
+	&--facebook {
+		&:before {
+			content: icon-char(facebook)
+		}
+	}
+	&--twitter {
+		&:before {
+			content: icon-char(twitter)
+		}
+	}
+	&--linkedin {
+		&:before {
+			content: icon-char(linkedin)
+		}
+	}
+	&--googleplus {
+		&:before {
+			content: icon-char(googleplus)
+		}
+	}
+	&--email {
+		&:before {
+			content: icon-char(email)
+		}
+	}
+}
+
+.social-list {
+	margin: gutter(1) 0 0;
+	max-width: 200px;
+	dt,dd {
+		flex: 1;
+		margin: 0;
+		color: c(theme,blog);
+	}
+	display: flex;
+	min-width: 30px;
+	text-align: center;
+	justify-content: space-between;
+	align-items: center;
+	dt {
+		@include font-type(display);
+		flex: 2;
+		text-align: left;
+	}
+
+	dd {
+		&:hover {
+			a { 
+				color: $base-grey;
+			}
+		}
+	}
+
+	.social__item  {
+		@include font-size(18);
+	}
+
+	@include mq($break-large, min) {
+		@include font-size(22,33);
+		max-width: 250px;
+	}
+}

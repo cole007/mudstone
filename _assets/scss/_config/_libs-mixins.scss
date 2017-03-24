@@ -1,0 +1,30 @@
+/*
+    File: _assets/css/scss/_libs-mixins.scss
+        Preference for third-party mixin libraries is to use Bourbon
+        See https://github.com/thoughtbot/bourbon
+*/
+
+@mixin font-type($font: 'base') {
+  @if $font == display {
+    font-family: "Boing Bold", "Century Gothic", "Gill Sans", Verdana, sans-serif; 
+    font-weight: normal; 
+  } @else if $font == bold {
+    font-family: "aktiv_groteskbold",sans-serif;
+    font-weight: 700;
+  }  @else if $font == base {
+    font-family: "aktiv_groteskregular",sans-serif;
+    font-weight: 400;
+  }
+}
+
+
+@mixin std-border($position: all, $color: $base-grey, $weight: 1px, $style: solid) {
+  @if $position == all {
+    border: $weight $style $color;
+  } @else {
+    border-#{$position}: $weight $style $color;
+  }
+}
+
+
+

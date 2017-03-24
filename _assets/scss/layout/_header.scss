@@ -1,35 +1,529 @@
-
-/*
-  Header layout component
-*/
 .site-header {
-	padding: gutter(1);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
+	//padding: gutter(1) 0 ;
+	position: relative;
+	//background-color: $white;
+	//height: $header-height;
+	z-index: 101;
+	width: 100%;
 
-.site-logo {
-	flex: 1;
-}
-
-
-/*
-
-	has the page got a big ole hero section
-	might need to do some style changes to the header
-	this class should be on the <body> element
-*/
-.has-hero {
-	.site-header {
-		position: absolute;
-		top: 0;
-		left: 0;
+	&:before {
+		@include position(absolute, 0 null null 0);
+		display: block;
+		background-color: $white;
+		content: " ";
 		width: 100%;
-		z-index: 2;
+		height: $header-height;
+    	z-index: -1;
 	}
 
-	.site-logo {
-		color: $white;
+	.wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		max-width: none;
+		border-bottom: 1px solid c(border,header);
+		height: $header-height;
+		padding: 0 gutter(1);
 	}
+
+	@include mq($break-large, min) {
+		padding: 0;
+		//height: $header-height;
+
+		.wrapper {
+			align-items: center;
+			position: relative;
+			//height: $header-height;
+		}
+
+		.icon--tel {
+			display: none;
+		}
+	}
+}
+
+.logo {
+	@include svg(logo);
+	display: block;
+	position: relative;
+	&:after {
+		@include svg(logo-star);
+		@include position(absolute, 0 -53px null null);
+		display: block;
+		content: " ";
+		margin-right: 3px;
+		animation: .5s infinite linear;
+	  	transform-origin: 50% 50%;
+	}
+	@include mq($break-small, min) {
+		@include svg(logo-desktop);
+		&:after {
+			top: -14px;
+			right: -53px;
+		}
+	}
+}
+
+// menu
+
+.menu {
+	@include position(absolute, $header-height 0 null 0);
+	text-align: center;
+	transition: height .1s ease-in-quad();
+	padding-top: 0;
+	height: 0;
+	overflow: hidden;
+	z-index: 1;
+	//background-color: $white;
+	//z-index: -1;
+	.panel {
+		display: none;
+		@include mq($break-large, min) {
+			@include font-type();
+			@include font-size(16,23);
+			display: block;
+			width: 335px;
+			padding-bottom: gutter(2);
+		}
+	}
+	@include mq($break-large, max) {
+		.is-menu-active & {
+			height: calc(100vh - #{$header-height});
+			overflow: auto;
+			//transform: translateY(100%);
+			//transition-delay: 0s;
+		}
+	}
+
+	& > .nav--stacked {
+		//border-top: 1px solid c(border,header);
+		@include mq($break-large, min) {
+			border: 0;
+		}
+	}
+
+	@include mq($break-large, min) {
+		padding-top: 0;
+		position: relative;
+		background: none;
+		z-index: auto;
+		height: auto !important;
+		top: auto;
+		overflow: visible;
+		& > .nav {
+			border-left: 1px solid c(border,header);
+			font-size: 0;
+		}
+	}
+
+	.menu--tel {
+		display: none;
+		@include mq($break-large, min) {
+			display: inline-block;
+
+		}
+	}
+}
+
+.is-menu-active {
+	@include mq($break-large, max) {
+		overflow: hidden;
+		// position: fixed;
+
+		.site-header {
+			// position: fixed;
+			// top: 0;
+			// overflow: auto;
+			// height: 100%;
+			// & + * {
+			// 	margin-top: $header-height;
+			// }
+		}
+	}
+}
+
+.is-menu-active {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.menu__item {
+	@include font-size(22,false);
+	@include font-type(display);
+	position: relative;
+	transition: all .1s 0s;
+	border-bottom: 1px solid c(border,header);
+	background-color: $white;
+	& > a {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 gutter(1);
+		min-height: 50px;
+		line-height: 1;
+	}
+	
+	@media only screen and (min-height: 900px) and (max-width: #{$break-large} + 'px') {
+		@include font-size(28,false);
+	}
+
+
+
+	@include mq($break-large, min) {
+		transition-delay: 0s;
+		height: $header-height - 1;
+		& > a {
+			height: $header-height - 1; // height less border
+			display: block;
+			padding: gutter(1.5) gutter(1);
+		}
+	}
+
+	// accordion stuff
+	&.is-active {
+		transition-delay: 0s;
+		color: $white;
+		&.t-about {
+			&,
+			.menu__dropdown {
+				background-color: c(theme,about);
+			}
+		}
+		&.t-service {
+			&,
+			.menu__dropdown {
+				background-color: c(theme,service);
+			}
+		}	
+
+		.menu__expand-btn {
+			&:before {
+				color: $white !important;
+				content: icon-char(up_arrow);
+			}
+		}
+	}
+
+	@include mq($break-large, min) {
+		@include font-size(19,false);
+		position: static;
+		display: inline-block!important;
+		border: 0;
+		border-right: 1px solid c(border,header);
+	}
+}
+
+.menu__item {
+	@include mq($break-large) {
+		vertical-align: middle;
+	}
+	@include mq($break-large) {
+		& > a {
+			position: relative;
+			&:before {
+				@include position(absolute, 0 0 null 0);
+				display: block;
+				content: " ";
+				height: 6px;
+				transform: translateY(-6px);
+				transition: transform .3s;
+			}
+		}
+
+		&.is-current {
+			&.t-about {
+				color: c(theme,about);
+			}
+			&.t-service {
+				color: c(theme,service);
+			}
+			&.t-blog {
+				color: c(theme,blog);
+			}
+			&.t-case {
+				color: c(theme,case);
+			}
+			&.t-contact {
+				color: c(theme,contact);
+			}
+		}
+
+		&.is-current,
+		&:hover {
+			& > a {
+				&:before {
+					transform: translateY(0);
+				}
+			}
+		}
+
+		&.t-about {
+			& > a:before {
+				background-color: c(theme,about);
+			}
+
+			&:hover {
+				color: $white ;
+			}
+
+		}
+		&.t-service {
+			& > a:before {
+				background-color: c(theme,service);
+			}
+			
+			&:hover {
+				color: $white ;
+			}
+		}
+		&.t-blog {
+			& > a:before {
+				background-color: c(theme,blog);
+			}
+		}
+		&.t-case {
+			& > a:before {
+				background-color: c(theme,case);
+			}
+		}
+		&.t-contact {
+			& > a:before {
+				background-color: c(theme,contact);
+			}
+		}
+	}
+}
+
+
+
+.menu__item--parent {
+	@include mq($break-large, min) {
+		& > a {
+			padding-right: gutter(2);
+			position: relative;
+			&:after {
+				@include font-size(10,false);
+				@include icon-font();
+				@include position(absolute, -6px gutter(.75) 0 null);
+				content: icon-char(down_arrow);
+				margin: auto;
+				height: 8px;
+			}
+		}
+		&.t-about {
+			a:after {
+				color: c(theme,about);
+			}
+		}
+		&.t-service {
+			a:after {
+				color: c(theme,service);
+			}
+		}
+
+		&:hover {
+			&,
+			a:after {
+				color: $white;
+			}
+			&.t-about {
+				&,
+				.menu__dropdown {
+					background-color: c(theme,about);
+				}
+			}
+			&.t-service {
+				&,
+				.menu__dropdown {
+					background-color: c(theme,service);
+				}
+			}
+			.menu__dropdown {
+				visibility: visible;
+				opacity: 1;
+				.link {
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+
+.menu__item-child {
+	margin-bottom: gutter(.5);
+	& > a {
+		display: block;
+		span {
+			padding: gutter(.25);
+		}
+	}
+	&:hover {
+		a {
+			span {
+				background-color: $white;
+			}
+		}
+		li.t-about & {
+			color: c(theme,about) !important;
+		}
+		li.t-service & {
+			color: c(theme,service) !important;
+		}
+	}
+}
+
+
+.menu__expand-btn {
+	@include position(absolute, gutter(1.5) gutter(1) null null);
+	z-index: 2;
+	width: 40px;
+	height: 40px;
+	margin: auto;
+	&:before {
+		@include icon-font();
+		@include font-size(11,false);
+		content: icon-char(down_arrow);
+
+		@media only screen and (min-height: 900px) and (max-width: #{$break-large} + 'px') {
+			@include font-size(20,false);
+		}
+	}
+
+	.menu__item.t-about & {
+		&:before {
+			color: c(theme,about);
+		}
+	}
+
+	.menu__item.t-service & {
+		&:before {
+			color: c(theme,service);
+		}
+	}
+
+
+	@include mq($break-large, min) {
+		display: none;	
+	}
+}
+
+.menu__dropdown {
+	padding-bottom: gutter(1);
+	display: none;
+
+
+
+	@include mq($break-large, min) {
+		@include position(absolute, null 179px null 0);
+		transition: all .3s;
+		visibility: hidden;
+		opacity: 0;
+		display: flex !important; // overwrite inline css
+		justify-content: flex-start;
+		text-align: left;
+		padding: gutter(1);
+		color: $white;
+		&:hover {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		p {
+			@include font-size(15,22);
+		}
+		
+		&:before {
+			@include position(absolute, 0 0 -50px -50px);
+			display: block;
+			content: " ";
+			z-index: -1;
+		}
+
+			
+		.link {
+			text-shadow: none;
+			margin-top: gutter(2);
+		}
+	}
+
+	.panel {
+		padding-left: gutter(2);
+		flex: 1;
+	}
+}
+
+.menu__dropdown-wrap {
+	.link {
+		display: none;
+		background-image: linear-gradient(to bottom, transparent 50%, $white 50%) !important;
+	}
+
+	@include mq($break-large, min) {
+		display: block;
+		.link {
+			@include font-size(22,false);
+			display: inline-block;
+			margin-left: gutter(.25);
+			// margin-top: gutter(1);
+			// padding: 0 gutter(.25);
+			opacity: 0;
+			transition: opacity .3s .5s, background-size .3s;
+			// &:hover {
+			// 	background-size: 10px 65px;
+			// 	background-position-y: 100%;
+			// }
+		}
+		.nav {
+			flex: 1;
+		}
+	}
+}
+
+.menu__btn {
+	@include menu-icon-rotate($width: 33px, $height: 5px, $color: $black, $curve: false, $active_class: '.is-active', $gap: 2);
+	display: inline-block;
+	&:focus {
+		outline: 0;
+	}
+
+	@include mq($break-large, min) {
+		display: none;
+	}
+}
+
+.menu__wrapper {
+	@include mq($break-large, min) {
+		position: relative;
+	}
+}
+
+.no-js {
+
+	:target {
+		display: block;
+		.menu__dropdown {
+			display: block;
+		}
+		&.menu {
+			transform: translateY(100%);
+		}
+
+		&.menu__item {
+			color: $white;
+		}
+
+		&.t-about {
+			background-color: c(theme,about);
+		}
+		&.t-service {
+			background-color: c(theme,service);
+		}
+	}
+	
 }

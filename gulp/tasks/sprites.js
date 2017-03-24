@@ -23,7 +23,7 @@ export function spritesTask() {
 
 	TASK_CONFIG.sprites.mode.css.render.scss.dest = `/_assets/${PATH_CONFIG.scss.src}/${dest}`
 	TASK_CONFIG.sprites.mode.css.render.scss.template = path.resolve(process.env.PWD, template)
-
+	
 	return gulp.src(paths.src)
 		.pipe(svgmin())
 		.pipe(svgSprite(TASK_CONFIG.sprites))
