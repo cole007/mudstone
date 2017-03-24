@@ -8,27 +8,35 @@ $sprites: (
 		width: 16.04px, 
 		height: 10.97px, 
 		backgroundX: 0px, 
-		backgroundY: 0px
+		backgroundY: 0px, 
+		path: '../images/svg-sprite.svg'
 	),
 	chevron: (
 		width: 28.33px, 
 		height: 17px, 
 		backgroundX: -17px, 
-		backgroundY: -11px
+		backgroundY: -11px, 
+		path: '../images/svg-sprite.svg'
 	),
 	close: (
 		width: 11.27px, 
 		height: 11.27px, 
 		backgroundX: -46px, 
-		backgroundY: -28px
+		backgroundY: -28px, 
+		path: '../images/svg-sprite.svg'
 	),
 	tick: (
 		width: 17.44px, 
 		height: 12.97px, 
 		backgroundX: -58px, 
-		backgroundY: -40px
+		backgroundY: -40px, 
+		path: '../images/svg-sprite.svg'
 	),
 );
 
-
-
+@mixin svg-sprite($name) {
+	$sprite: map-get($sprites, $name);
+	width: map-get($sprite, width);
+	height: map-get($sprite, height);
+	background: url(map-get($sprite, path)) no-repeat map-get($sprite, backgroundX) map-get($sprite, backgroundY);
+}

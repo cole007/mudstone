@@ -39,10 +39,25 @@ export default {
 		filename: 'bundle' // no extension
 	},
 
+	es5: {
+		extensions: ['js'],
+		task: 'code',
+		watch: true,
+		output: 'bundle.js',
+		folder: 'js'
+	},
+
 	json: {
 		watch: true,
 		task: 'asset',
 		extensions: ['json']
+	},
+
+	pug: {
+		extensions: ['pug'],
+		task: 'code',
+		watch: true,
+		excludeFolders: ['_mixins', '_includes', '_sidebars', '_modules', 'wrapper', '_wrapper']
 	},
 
 
@@ -61,7 +76,8 @@ export default {
 		},
 		extensions: ['scss'],
 		lintIgnorePaths: ['_system/**/*.scss', '_config/*.scss'],
-		filename: 'style' // no extension
+		filename: 'style', // no extension
+		ie: 'ie'
 	},
 
 	html: {
@@ -84,9 +100,20 @@ export default {
 		extensions: ['svg']
 	},
 
+	pngs: {
+		task: 'asset',
+		watch: true,
+		template: 'gulp/libs/png-sprites.tmp.scss.handlebars',
+		scssPath: '_assets/scss/_system/gulp-output/',
+		scssFile: '_png-sprites.scss',
+		output: 'png-sprite.png',
+		imagePath: '../images/png-sprite.png',
+		extensions: ['png']
+	},
+
 	sprites: {
-		task: false,
-		watch: false,
+		task: true,
+		watch: true,
 		mode: {
 			css: {
 				spacing: {
@@ -103,11 +130,6 @@ export default {
 					}
 				}
 			}
-		},
-		pngs: {
-			template: 'gulp/libs/png-sprites.tmp.scss.handlebars',
-			scss: '_system/gulp-output/_png-sprites.scss',
-			output: 'png-sprite.png'
 		},
 
 		extensions: ['svg']
@@ -138,6 +160,16 @@ export default {
 		scssOutputFile: '_svg-symbols.scss',
 		sourceFile: 'images/svg-symbols/source.html',
 		fileName: 'symbols.njk',
+		extensions: ['svg']
+	},
+
+	iconFont: {
+		task: 'asset',
+		watch: true,
+		name: 'icon-font',
+		template: 'gulp/libs/iconfont.tmp.scss',
+		scss: '../../../../_assets/scss/_system/gulp-output/_icon-font.scss',
+		fontPath: '../fonts/',
 		extensions: ['svg']
 	},
 

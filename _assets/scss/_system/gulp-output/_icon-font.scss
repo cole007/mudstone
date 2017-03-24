@@ -1,0 +1,103 @@
+/* stylelint-disable */
+
+
+@font-face {
+	font-family: "icon-font";
+	src: url('../fonts/icon-font.eot');
+	src: url('../fonts/icon-font.eot?#iefix') format('eot'),
+		url('../fonts/icon-font.woff') format('woff'),
+		url('../fonts/icon-font.ttf') format('truetype'),
+}
+
+
+$icon_map: (check: "\E001",close-icon: "\E002",contact-email: "\E003",contact-phone: "\E004",contact-pin: "\E005",cursor-outline: "\E006",cursor: "\E007",down_arrow: "\E008",download: "\E009",email: "\E00A",facebook: "\E00B",googleplus: "\E00C",icon_tel: "\E00D",left_arrow: "\E00E",linkedin: "\E00F",right_arrow: "\E010",search: "\E011",star: "\E012",twitter: "\E013",up_arrow: "\E014",);
+
+
+@function icon-char($filename) {
+	$char: "";
+	
+	@if $filename == check {
+		$char: "\E001";
+	}
+	@if $filename == close-icon {
+		$char: "\E002";
+	}
+	@if $filename == contact-email {
+		$char: "\E003";
+	}
+	@if $filename == contact-phone {
+		$char: "\E004";
+	}
+	@if $filename == contact-pin {
+		$char: "\E005";
+	}
+	@if $filename == cursor-outline {
+		$char: "\E006";
+	}
+	@if $filename == cursor {
+		$char: "\E007";
+	}
+	@if $filename == down_arrow {
+		$char: "\E008";
+	}
+	@if $filename == download {
+		$char: "\E009";
+	}
+	@if $filename == email {
+		$char: "\E00A";
+	}
+	@if $filename == facebook {
+		$char: "\E00B";
+	}
+	@if $filename == googleplus {
+		$char: "\E00C";
+	}
+	@if $filename == icon_tel {
+		$char: "\E00D";
+	}
+	@if $filename == left_arrow {
+		$char: "\E00E";
+	}
+	@if $filename == linkedin {
+		$char: "\E00F";
+	}
+	@if $filename == right_arrow {
+		$char: "\E010";
+	}
+	@if $filename == search {
+		$char: "\E011";
+	}
+	@if $filename == star {
+		$char: "\E012";
+	}
+	@if $filename == twitter {
+		$char: "\E013";
+	}
+	@if $filename == up_arrow {
+		$char: "\E014";
+	}
+
+	@return $char;
+}
+
+@mixin icon-font() {
+	font-family: "icon-font";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@mixin icon($filename, $insert: before, $extend: true) {
+	&:#{$insert} {
+		@if $extend == true {
+			@extend %icon;
+		} @else {
+			@include icon-font();
+		}
+		content: icon-char($filename);
+		@content;
+	}
+}
+
+@mixin icon-char($filename) {
+	content: icon-char($filename);
+}

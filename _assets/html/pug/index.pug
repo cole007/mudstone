@@ -1,0 +1,32 @@
+
+extends _wrapper/_layout
+
+block vars
+  -var pageTitle = 'Home page'
+  -var slug = 'index'
+  -var bodyClass = 'has-hero'
+
+block content
+  include _modules/hero
+  #main
+    .wrapper
+      #slides
+        .vr
+          h2 Slide Example
+          include _modules/slide
+      #videos
+        .vr--b
+          h2 Video Example
+          include _modules/video
+      #accordions
+        .vr--b
+          h2 Accordion Example
+          include _modules/accordion
+      #map
+        .vr--b
+          h2 Map
+          include _modules/map
+  #form
+    .vr--b
+      h2 Form Example
+      include _modules/form

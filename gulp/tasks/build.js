@@ -14,7 +14,7 @@ gulp.task('size-report', function () {
 export function buildTask(cb) {
 	const { assetTasks, codeTasks } = getTasks()
 	assetTasks.push('move-scripts')
-	codeTasks.push('bundle-script')
+	// codeTasks.push('bundle-script')
 
 	gulpSequence('clean', assetTasks, codeTasks, 'cacheBuster', 'size-report', cb)
 }

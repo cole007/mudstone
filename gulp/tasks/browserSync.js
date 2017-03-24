@@ -1,15 +1,9 @@
 import browserSync from 'browser-sync'
 import gulp from 'gulp'
-import webpack from 'webpack'
-import webpackConfig from './webpack.config.babel'
-import { pathToUrl } from '../libs/utils'
 import path from 'path'
 
 export default function browserSyncTask () {
 
-	const env = global.production ? 'production' : 'development'
-	const config = webpackConfig(env)
-	const compiler = webpack(config)
 	const proxyConfig = SERVER.proxy || null
 
 	if(typeof proxyConfig === 'string') {
@@ -30,15 +24,15 @@ export default function browserSyncTask () {
 		})
 	}
 
-	const server = SERVER.proxy || SERVER.server
-
-	server.middleware = [
-		require('webpack-dev-middleware')(compiler, {
-			stats: 'errors-only',
-			publicPath: pathToUrl('/', config.output.publicPath)
-		}),
-		require('webpack-hot-middleware')(compiler)
-	]
+	/*
+		server.middleware = [
+			require('webpack-dev-middleware')(compiler, {
+				stats: 'errors-only',
+				publicPath: pathToUrl('/', config.output.publicPath)
+			}),
+			require('webpack-hot-middleware')(compiler)
+		]
+	*/
 
 
 	browserSync.init(SERVER)

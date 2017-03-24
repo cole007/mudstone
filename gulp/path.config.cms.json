@@ -27,7 +27,7 @@
 
 
   "html": {
-    "src": "html/nunjucks",
+    "src": "html/pug",
     "dest": "../_assets/html/dist"
   }
 }

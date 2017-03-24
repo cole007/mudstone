@@ -5,12 +5,14 @@ export function cacheBusterTask() {
 
 	const production = {
 		'js': `${PATH_CONFIG.tags.js}${TASK_CONFIG.js.filename}.${TASK_CONFIG.stamp}.js`,
-		'css': `${PATH_CONFIG.tags.css}${TASK_CONFIG.scss.filename}.${TASK_CONFIG.stamp}.css`
+		'css': `${PATH_CONFIG.tags.css}${TASK_CONFIG.scss.filename}.${TASK_CONFIG.stamp}.css`,
+		'ie': `${PATH_CONFIG.tags.css}${TASK_CONFIG.scss.ie}.${TASK_CONFIG.stamp}.css`
 	}
 
 	const development = {
 		'js': `${PATH_CONFIG.tags.js}${TASK_CONFIG.js.filename}.js`,
-		'css': `${PATH_CONFIG.tags.css}${TASK_CONFIG.scss.filename}.css`
+		'css': `${PATH_CONFIG.tags.css}${TASK_CONFIG.scss.filename}.css`,
+		'is': `${PATH_CONFIG.tags.css}${TASK_CONFIG.scss.is}.css`
 	}
 
 	const files = global.production ? production : development

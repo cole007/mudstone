@@ -12,11 +12,11 @@ import animateCss from 'postcss-animation'
 import postcssTriangle from 'postcss-triangle'
 import quantityQueries from 'postcss-quantity-queries'
 import objectFitImages from 'postcss-object-fit-images'
-import styleLint from 'gulp-stylelint'
 import lost from 'lost'
 import browserSync from 'browser-sync'
 import { handleErrors } from '../libs/utils'
 import path from 'path'
+import bourbon from 'node-bourbon'
 
 export function scssTask() {
 
@@ -28,18 +28,9 @@ export function scssTask() {
 
 
 	return gulp.src(paths.src)
-		.pipe(styleLint({
-			debug: true,
-			failAfterError: false,
-			syntax: 'scss',
-			reporters: [{
-				formatter: 'string',
-				console: true
-			}]
-		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init()))
-		.pipe(sass(TASK_CONFIG.scss.options))
+		.pipe(sass({...TASK_CONFIG.scss.options, ...{includePaths: bourbon.includePaths}}))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init({
 			loadMaps: true

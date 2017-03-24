@@ -1,0 +1,46 @@
+/* stylelint-disable */
+
+
+@font-face {
+	font-family: "<%= fontName %>";
+	src: url('<%= fontPath %><%= fontName %>.eot');
+	src: url('<%= fontPath %><%= fontName %>.eot?#iefix') format('eot'),
+		url('<%= fontPath %><%= fontName %>.woff') format('woff'),
+		url('<%= fontPath %><%= fontName %>.ttf') format('truetype'),
+}
+
+
+$icon_map: (<% _.each(glyphs, function(glyph) { %><%= glyph.fileName %>: "\<%= glyph.codePoint %>",<% }) %>);
+
+
+@function icon-char($filename) {
+	$char: "";
+	<% _.each(glyphs, function(glyph) { %>
+	@if $filename == <%= glyph.fileName %> {
+		$char: "\<%= glyph.codePoint %>";
+	}<% }); %>
+
+	@return $char;
+}
+
+@mixin icon-font() {
+	font-family: "<%= fontName %>";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@mixin icon($filename, $insert: before, $extend: true) {
+	&:#{$insert} {
+		@if $extend == true {
+			@extend %icon;
+		} @else {
+			@include icon-font();
+		}
+		content: icon-char($filename);
+		@content;
+	}
+}
+
+@mixin icon-char($filename) {
+	content: icon-char($filename);
+}

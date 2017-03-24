@@ -9,7 +9,15 @@ $sprites: (
 		width: {{width.inner}}px, 
 		height: {{height.inner}}px, 
 		backgroundX: {{position.absolute.x}}px, 
-		backgroundY: {{position.absolute.y}}px
+		backgroundY: {{position.absolute.y}}px, 
+		path: '../images/svg-sprite.svg'
 	),
 {{/shapes}}
 );
+
+@mixin svg-sprite($name) {
+	$sprite: map-get($sprites, $name);
+	width: map-get($sprite, width);
+	height: map-get($sprite, height);
+	background: url(map-get($sprite, path)) no-repeat map-get($sprite, backgroundX) map-get($sprite, backgroundY);
+}

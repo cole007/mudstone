@@ -3,6 +3,8 @@
 
 Frontend starter kit
 
+# This is a pre ES6 branch, includes legacy tasks like png sprites, icon fonts, concat js files etc
+
 See user-guide.md
 
 ###### Requirements

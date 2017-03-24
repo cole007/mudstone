@@ -1,0 +1,57 @@
+include ../_mixins/mixins
+block vars
+doctype
+<!--[if IE]>
+<html lang="en" class="no-js ie">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+	head
+		meta(charset='utf-8')
+		title Mudstone
+		meta(name='description', content='')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		//-
+			include ../_includes/favicons
+		//- loads picturefill async (loadJS/loadCSS scripts)
+
+
+		//-
+			include ../_includes/critical-css
+
+		// build:css
+		link(rel='stylesheet', href='/dist/css/style.css')
+		// endbuild
+
+		<!--[if IE]>
+		// build:ie
+		link(rel='stylesheet', href='/dist/css/ie.css')
+		// endbuild
+		<![endif]-->
+
+
+
+		//- async css loader, critical path chuff
+			link(rel="preload" href="/dist/css/style.css" as="style" onload="this.rel='stylesheet'")
+			noscript
+				link(rel="stylesheet" href="/dist/css/style.css")
+	body
+		.site
+			include ../_includes/header
+			.site-page#barba-wrapper
+				.barba-container
+					block content
+			include ../_includes/footer
+
+			//- svg symbols
+			include ../_includes/symbols
+
+		//- Load jquery from CDN, with backup
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+		script.
+			window.jQuery || document.write('<script src="/dist/js/libs/jquery.min.js"><\\/script>')
+
+		// build:js
+		script(src='/dist/js/app.js')
+		// endbuild

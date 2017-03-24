@@ -1,22 +1,34 @@
 {{#extend "scss"}}
-	{{#content "sprites"}}
-		{{#each sprites}}
-			${{strings.name}}: (
-				x: {{px.x}}, 
-				y: {{px.y}}, 
-				offset_x: {{px.offset_x}}, 
-				offset_y: {{px.offset_y}}, 
-				width: {{px.width}}, 
-				height: {{px.height}}, 
-				total_width: {{px.total_width}}, 
-				total_height: {{px.total_height}}, 
-				escaped_image: '{{{escaped_image}}}', 
-				name: '{{name}}',
-			);
-		{{/each}}
-	{{/content}}
-	{{#content "spritesheet"}}
-		${{spritesheet_info.strings.name_sprites}}: ({{#each sprites}}${{strings.name}}, {{/each}});
-		${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.height}}, '{{{spritesheet.escaped_image}}}', ${{spritesheet_info.strings.name_sprites}}, );
-	{{/content}}
+{{#content "sprites"}}
+
+$pngSprite: (
+
+	{{#each sprites}}
+		{{strings.name}}: (
+			x: {{px.x}}, 
+			y: {{px.y}}, 
+			backgroundX: {{px.offset_x}}, 
+			backgroundY: {{px.offset_y}}, 
+			width: {{px.width}}, 
+			height: {{px.height}}, 
+			path: '{{{escaped_image}}}', 
+			name: '{{name}}',
+		),
+	{{/each}}
+
+	);
+
+{{/content}}
+
+{{#content "spritesheet"}}
+	${{spritesheet_info.strings.name_sprites}}: ({{#each sprites}}${{strings.name}}, {{/each}});
+	${{spritesheet_info.strings.name}}: ({{spritesheet.px.width}}, {{spritesheet.px.height}}, '{{{spritesheet.escaped_image}}}', ${{spritesheet_info.strings.name_sprites}}, );
+
+	@mixin png-sprite($name) {
+		$sprite: map-get($pngSprite, $name);
+		width: map-get($sprite, width);
+		height: map-get($sprite, height);
+		background: url(map-get($sprite, path)) no-repeat map-get($sprite, backgroundX) map-get($sprite, backgroundY);
+	}
+{{/content}}
 {{/extend}}

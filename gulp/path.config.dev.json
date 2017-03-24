@@ -31,6 +31,23 @@
 		]
   },
 
+	"pug": {
+		"src": "html/pug",
+		"dest": "./"
+	},
+
+	"es5": {
+		"src": [
+			"./_assets/js/libs/jquery-1.11.3.min.js",
+			"./_assets/js/libs/underscore-min.js",
+			"./_assets/js/plugins/*.js",
+			"./_assets/js/application.js",
+			"./_assets/js/tools.js",
+			"./_assets/js/behaviours/*.js"
+		],
+		"dest": "dist/js"
+	},
+
   "json": {
     "src": "js/json",
     "dest": "./"
@@ -59,14 +76,26 @@
   "symbols": {
     "src": "images/svg-symbols",
     "dest": "dist/images",
-    "fileName": "symbols.njk",
-    "fileDest": "html/nunjucks/includes"
+    "fileName": "symbols.pug",
+    "fileDest": "html/pug/_includes"
   },
+
+  "iconFont": {
+    "src": "images/icons",
+    "dest": "dist/fonts"
+  },
+
+
 
 	"sprites": {
     "src": "images/svg-sprites",
     "dest": "dist/images"
 	},
+
+  "pngs": {
+    "src": "images/png-sprites",
+    "dest": "dist/images"
+  },
 
   "svgs": {
     "src": "images/svg-assets",
