@@ -85,7 +85,7 @@ export default {
 	},
 
 	staticAssets: {
-		task: 'asset',
+		task: null,
 		watch: false,
 		extensions: ['*']
 	},
@@ -109,11 +109,6 @@ export default {
 					}
 				}
 			}
-		},
-		pngs: {
-			template: 'gulp/libs/png-sprites.tmp.scss.handlebars',
-			scss: '_system/gulp-output/_png-sprites.scss',
-			output: 'png-sprite.png'
 		},
 
 		extensions: ['svg']
