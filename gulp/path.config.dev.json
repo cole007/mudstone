@@ -17,9 +17,9 @@
   },
 
 
-  "static": {
+  "staticAssets": {
     "src": "static",
-    "dest": "./"
+    "dest": "dist/static"
   },
 
   "js": {

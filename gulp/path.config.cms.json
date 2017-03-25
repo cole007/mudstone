@@ -4,10 +4,6 @@
   "dist": "./deploy/public/dist",
   
 	"browserSync": {
-		"server": {
-			"baseDir": "deploy/public",
-      "index": "index.php"
-		},
     "proxy": "http://local.ournameismud.co.uk"
 	},
 

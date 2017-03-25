@@ -58,8 +58,18 @@ export function cssFontsTask () {
 		.pipe(browserSync.stream())
 }
 
+export function staticAssetsTask () {
+	const paths = getPaths('static')
+
+	return gulp.src(paths.src)
+		.pipe(changed(paths.dest)) // Ignore unchanged files
+		.pipe(gulp.dest(paths.dest))
+		.pipe(browserSync.stream())
+}
+
 gulp.task('fonts', fontsTask)
 gulp.task('cssFonts', cssFontsTask)
 gulp.task('favicons', faviconsTask)
 gulp.task('move-scripts', moveScriptsTask)
 gulp.task('json', jsonTask)
+gulp.task('staticAssets', staticAssetsTask)

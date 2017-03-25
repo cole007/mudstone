@@ -84,6 +84,12 @@ export default {
 		extensions: ['svg']
 	},
 
+	staticAssets: {
+		task: 'asset',
+		watch: false,
+		extensions: ['*']
+	},
+
 	sprites: {
 		task: false,
 		watch: false,

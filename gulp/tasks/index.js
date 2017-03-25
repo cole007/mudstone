@@ -7,5 +7,6 @@ export {
 	fontsTask,
 	faviconsTask,
 	jsonTask,
-	cssFontsTask
+	cssFontsTask,
+	staticTask
 } from './assets'
