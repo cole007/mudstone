@@ -66,35 +66,4 @@
 	@return percentage($y / $x);
 }
 
-@mixin t-html() {
-	font-size: $min-font;
 
-	@include mq($min-width) {
-		font-size: calc( #{$min-font} + (#{strip-units($max-font)} - #{strip-units($min-font)}) * ((100vw - #{$min-width}) / (#{strip-units($max-width)} - #{strip-units($min-width)})) );
-	}
-
-	@include mq($max-width) {
-		font-size: $max-font;
-	}
-}
-
-
-@mixin size($min: $min-font, $max: $max-font, $line-height: false) {
-	font-size: (($min * 1px) / $min-font) + rem;
-
-	@if(type-of($line-height) == number or $line-height == true) {
-		line-height:  ($line-height / $max);
-	} @else {
-		line-height:  $line-height-ratio;
-	}
-
-	@if strip-units($max) != strip-units($min) {
-		@include mq($from: $min-width) {
-			font-size: calc( #{strip-units($min)}px + (#{strip-units($max)} - #{strip-units($min)}) * ((100vw - #{$min-width}) / (#{strip-units($max-width)} - #{strip-units($min-width)})) );
-		}
-	}
-
-	@include mq($max-width) {
-		font-size: (($max * 1px) / $max-font) + rem;
-	}
-}

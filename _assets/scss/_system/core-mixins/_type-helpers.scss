@@ -104,22 +104,36 @@
 	@include resp-size(14px, 18px);
 */
 
-@mixin resp-size($min: $min-font, $max: $max-font, $line-height-multiple: false) {
-	$local-line-height: strip-units($desktop-line-height);
-	font-size: rem($min);
-	@if(type-of($line-height-multiple)==number or $line-height-multiple==true) {
-		line-height: ($local-line-height) / strip-units($max);
+@mixin t-html() {
+	font-size: $min-font;
+
+	@include mq($min-width) {
+		font-size: calc( #{$min-font} + (#{strip-units($max-font)} - #{strip-units($min-font)}) * ((100vw - #{$min-width}) / (#{strip-units($max-width)} - #{strip-units($min-width)})) );
 	}
-	@if(type-of($line-height-multiple)==boolean and $line-height-multiple==false) {
-		line-height: $desktop-line-height / $min;
+
+	@include mq($max-width) {
+		font-size: $max-font;
 	}
-	@if strip-units($max) !=strip-units($min) {
-		@include mq($from: breakpoint('mobile')) {
-			font-size: calc( #{strip-units($min)}px + (#{strip-units($max)} - #{strip-units($min)}) * ((100vw - #{breakpoint('mobile')}) / (#{strip-units(breakpoint('desktop'))} - #{strip-units(breakpoint('mobile'))})));
+}
+
+
+@mixin size($min: $min-font, $max: $max-font, $line-height: false) {
+	font-size: (($min * 1px) / $min-font) + rem;
+
+	@if(type-of($line-height) == number or $line-height == true) {
+		line-height:  ($line-height / $max);
+	} @else {
+		line-height:  $line-height-ratio;
+	}
+
+	@if strip-units($max) != strip-units($min) {
+		@include mq($from: $min-width) {
+			font-size: calc( #{strip-units($min)}px + (#{strip-units($max)} - #{strip-units($min)}) * ((100vw - #{$min-width}) / (#{strip-units($max-width)} - #{strip-units($min-width)})) );
 		}
-		@include mq($from: breakpoint('desktop')) {
-			font-size: rem($max);
-		}
+	}
+
+	@include mq($from: $max-width) {
+		font-size: (($max * 1px) / $max-font) + rem;
 	}
 }
 
@@ -136,7 +150,7 @@
 		@warn 'No such font group was found, please check the $font-sizes map';
 	}
 	@else {
-		@include resp-size($min, $max, $leading)
+		@include size($min, $max, $leading)
 	}
 }
 
