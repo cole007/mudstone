@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.19
+
+#### Added
+
+- A few more commonly-used grid sizings.
+- Latest versions of `size` and `t-html` CSS Typographic mixins.
+
 ### 7.0.18
 
 #### Added
@@ -33,8 +40,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 	run($) {
 		$('[fill]').removeAttr('fill');
 	},
-	parserOptions: { 
-		xmlMode: true 
+	parserOptions: {
+		xmlMode: true
 	}
 }))
 ```

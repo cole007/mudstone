@@ -69,9 +69,6 @@ body::before {
 */
 
 @include mq($from: breakpoint('mobile')) {
-	/*
-	  Mobile default grid root node
-	*/
 	.gm {
 		lost-flex-container: row;
 	}
@@ -84,31 +81,46 @@ body::before {
 
 
 /*
+  Small tablet, see config
+*/
+
+@include mq($from: breakpoint('sm-tablet')) {
+	.gsmt {
+		lost-flex-container: row;
+	}
+
+	.gsmt__1-2 {
+		lost-column: 1/2 2 gutter(1) flex;
+	}
+
+	.gsmt__1-3 {
+		lost-column: 1/3 3 gutter(1) flex;
+	}
+
+	.gsmt__1-4 {
+		lost-column: 1/4 4 gutter(1) flex;
+	}
+}
+
+/*
   Tablet, see config
 */
 
 @include mq($from: breakpoint('tablet')) {
-	/*
-		Tablet default grid root node
-	*/
 	.gt {
 		lost-flex-container: row;
 	}
 
-	/*
-		grid column blocks
-		Create a two column grid with 20px gutters... in flex
-	*/
 	.gt__1-2 {
-		lost-column: 1/2 gutter(1) flex;
+		lost-column: 1/2 2 gutter(1) flex;
 	}
 
 	.gt__1-3 {
-		lost-column: 1/3 gutter(1) flex;
+		lost-column: 1/3 3 gutter(1) flex;
 	}
 
 	.gt__1-4 {
-		lost-column: 1/4 gutter(1) flex;
+		lost-column: 1/4 4 gutter(1) flex;
 	}
 }
 
@@ -118,11 +130,21 @@ body::before {
 */
 
 @include mq($from: breakpoint('desktop')) {
-	/*
-		Desktop default grid root node
-	*/
+	.gd {
+		lost-flex-container: row;
+	}
 
-	// .gd {}
+	.gd__1-2 {
+		lost-column: 1/2 2 gutter(1) flex;
+	}
+
+	.gd__1-3 {
+		lost-column: 1/3 3 gutter(1) flex;
+	}
+
+	.gd__1-4 {
+		lost-column: 1/4 4 gutter(1) flex;
+	}
 }
 
 
@@ -131,10 +153,19 @@ body::before {
 */
 
 @include mq($from: breakpoint('wide')) {
-	/*
-		Wide default grid root node
-	*/
+	.gw {
+		lost-flex-container: row;
+	}
 
-	//.gw {}
+	.gw__1-2 {
+		lost-column: 1/2 2 gutter(1) flex;
+	}
+
+	.gw__1-3 {
+		lost-column: 1/3 3 gutter(1) flex;
+	}
+
+	.gw__1-4 {
+		lost-column: 1/4 4 gutter(1) flex;
+	}
 }
-
