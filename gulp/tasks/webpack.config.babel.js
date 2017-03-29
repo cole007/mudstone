@@ -22,7 +22,7 @@ const webpackConfig = env => {
 		ifProd
 	} = getIfUtils(env)
 
-	const config = webpackValidator({
+	const config = {
 		entry: TASK_CONFIG.js.entries,
 		cache: true,
 		context: context,
@@ -73,7 +73,7 @@ const webpackConfig = env => {
 		plugins: removeEmpty([
 			new ProgressBarPlugin()
 		])
-	})
+	}
 
 
 	if(env === 'development') {
