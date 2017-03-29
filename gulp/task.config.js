@@ -72,6 +72,12 @@ export default {
 		excludeFolders: ['layout', 'macros', 'data', 'partials', 'modules', 'wrapper', 'includes']
 	},
 
+	twig: {
+		task: 'asset',
+		watch: true,
+		extensions: ['twig', 'html']
+	},
+
 	images: {
 		task: 'asset',
 		watch: true,

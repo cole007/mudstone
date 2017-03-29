@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.20
+
+#### Added
+
+- Watch twig files for changes
+
 ### 7.0.19
 
 #### Added

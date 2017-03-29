@@ -16,6 +16,10 @@
     "dest": "./"
   },
 
+	"twig": {
+		"src": "../deploy/craft/templates",
+		"dest": "../deploy/craft/templates"
+	},
 
   "staticAssets": {
     "src": "static",
