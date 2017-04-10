@@ -24,6 +24,6 @@
 
   "html": {
     "src": "html/nunjucks",
-    "dest": "../_assets/html/dist"
+    "dest": "../../_assets/html/dist"
   }
 }

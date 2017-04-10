@@ -30,15 +30,17 @@ import Concert from 'concert'
 */
 
 
-export default class Viewport {
-	constructor() {
+export default class Viewport extends Concert {
+	constructor(watch = false) {
+		super()
 		this.dispatch = this.dispatch.bind(this)
 			// bind this into methods
 		this.watch = this.watch.bind(this)
 		// this.checkForBreakpointChange = this.checkForBreakpointChange.bind(this)
 		this.destroy = this.destroy.bind(this)
 			// merge Concert methods with this
-		Object.assign(this, Concert)
+
+		watch && this.watch()
 	}
 
 	get query() {

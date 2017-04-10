@@ -31,14 +31,14 @@ import Concert from 'concert'
 */
 
 
-export default class ScrollView {
+export default class ScrollView extends Concert {
 	constructor(el, obj = {}) {
+		super()
 		this.container = el || document
 		this.selector = obj.selector || '.js-sv'
 		this.elements = Array.from(this.container.querySelectorAll(this.selector))
 		this.reverse = [...this.elements.reverse()]
 		this.dispatch = this.dispatch.bind(this)
-		Object.assign(this, Concert)
 		this.initialize()
 	}
 

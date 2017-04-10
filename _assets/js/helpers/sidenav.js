@@ -27,13 +27,14 @@ import { transitionEnd, lock } from './utils'
 
  * @class
  */
-export default class SideNav {
+export default class SideNav extends Concert {
 	/**
 	 * Create a sidenav.
 	 * @param {el} el - The button node, querySelector('.myelm')
 	 * @param {opts} opts - The expander options
 	 */
 	constructor(button, opts = {}) {
+		super()
 		this.button = button
 		this.body = document.querySelector('body')
 		this.html = document.querySelector('html')
@@ -59,8 +60,6 @@ export default class SideNav {
 		this.showSideNav = this.showSideNav.bind(this)
 		this.blockClicks = this.blockClicks.bind(this)
 
-		// merge concert events into sideNav
-		Object.assign(this, Concert)
 		// kick off the things
 		this.init && this.initialize()
 

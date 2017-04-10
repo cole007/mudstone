@@ -45,13 +45,14 @@ accordion.close(el.querySelector('.js-button'))
  * Creates a new Expander.
  * @class
  */
-export default class Expander {
+export default class Expander extends Concert {
 	/**
 	 * Create an expander.
 	 * @param {el} el - The dom node, querySelector('.myelm')
 	 * @param {opts} opts - The expander options
 	 */
 	constructor(el, opts = {}) {
+		super()
 		this.el = el
 		this.$tag = $(this.el)
 		this.button = opts.button || '.js-expand-btn'
@@ -76,7 +77,6 @@ export default class Expander {
 		this.updateTabIndex = this.updateTabIndex.bind(this)
 		this.events = ['before:open', 'after:open', 'before:close', 'after:close']
 			// merge concert events into Expander
-		Object.assign(this, Concert)
 		this.fn = throttle(this.handleButtonClicks, 300)
 		this.init && this.addEvents()
 		this.addAccessibility()

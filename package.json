@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "barba.js": "^1.0.0",
     "concert": "^2.1.0",
     "debug": "^2.6.3",
@@ -109,7 +110,7 @@
   },
   "name": "ournameismud.com",
   "description": "Mudstone 7.0",
-  "version": "7.0.21",
+  "version": "7.0.22",
   "main": "gulpfile.babel.js",
   "author": "Dave Stockley @ournameismud",
   "license": "MIT"

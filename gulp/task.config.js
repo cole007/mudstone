@@ -32,7 +32,7 @@ export default {
 
 	js: {
 		entries: {
-			app: ['./app.js']
+			app: ['babel-polyfill','./app.js']
 		},
 		extensions: ['js', 'json'],
 		extractSharedJs: false,

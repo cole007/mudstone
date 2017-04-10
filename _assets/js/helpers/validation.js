@@ -36,8 +36,9 @@ import Concert from 'concert'
  * @class
  */
 
-export default class Validation {
+export default class Validation extends Concert {
 	constructor(el, opts = {}) {
+		super()
 		// Dom node: the form elements
 		this.form = el
 		// Object: the validation constraints
@@ -82,7 +83,6 @@ export default class Validation {
 		// add error message divs to each required group
 		Validation.addMessageNodesToDom(this.requiredInputs, this.messageClassName, this.inputWrapper)
 
-		Object.assign(this, Concert)
 	}
 
 

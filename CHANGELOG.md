@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.22
+
+#### Added
+
+- Babel-polyfill added to bundle
+
+#### Update
+
+- Helpers ui functions extend Concert
+
+#### Change
+
+- html output path in cms mode
+
 ### 7.0.21
 
 #### Update
