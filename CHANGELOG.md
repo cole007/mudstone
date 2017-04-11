@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.23
+
+#### Change
+
+- timestamp passed into nunjucks data, or as a craft set object
+- remove `Task` as a suffix from all gulp functions, updated docs
+
+
 ### 7.0.22
 
 #### Added

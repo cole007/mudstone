@@ -21,7 +21,7 @@ export function watchTasks() {
 			const srcPath = path.resolve(process.env.PWD, PATH_CONFIG.src, taskPath.src)
 			const globPattern = '**/*' + (taskConfig.extensions ? '.{' + taskConfig.extensions.join(',') + '}' : '')
 			watch(path.join(srcPath, globPattern), watchConfig, function () {
-				tasks[`${taskName}Task`]()
+				tasks[`${taskName}`]()
 			})
 		}
 	})

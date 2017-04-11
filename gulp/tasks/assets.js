@@ -4,7 +4,7 @@ import gulp from 'gulp'
 import { getPaths } from '../libs/utils'
 import path from 'path'
 
-export function fontsTask () {
+export function fonts () {
 	const paths = getPaths('fonts')
 
 	return gulp.src(paths.src)
@@ -13,7 +13,7 @@ export function fontsTask () {
 		.pipe(browserSync.stream())
 }
 
-export function faviconsTask () {
+export function favicons () {
 	const paths = getPaths('favicons')
 	
 	return gulp.src(paths.src)
@@ -22,7 +22,7 @@ export function faviconsTask () {
 		.pipe(browserSync.stream())
 }
 
-export function moveScriptsTask () {
+export function moveScripts () {
 
 	const src = PATH_CONFIG.js.libs.map((lib) => {
 		return path.resolve(process.env.PWD, lib)
@@ -35,7 +35,7 @@ export function moveScriptsTask () {
 		.pipe(browserSync.stream())
 }
 
-export function jsonTask () {
+export function json () {
 
 	const paths = getPaths('json')
 
@@ -46,7 +46,7 @@ export function jsonTask () {
 
 
 
-export function cssFontsTask () {
+export function cssFonts () {
 
 	const paths = {
 		src: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.cssFonts.src, '*.css'),
@@ -58,7 +58,7 @@ export function cssFontsTask () {
 		.pipe(browserSync.stream())
 }
 
-export function staticAssetsTask () {
+export function staticAssets() {
 	const paths = getPaths('static')
 
 	return gulp.src(paths.src)
@@ -67,9 +67,9 @@ export function staticAssetsTask () {
 		.pipe(browserSync.stream())
 }
 
-gulp.task('fonts', fontsTask)
-gulp.task('cssFonts', cssFontsTask)
-gulp.task('favicons', faviconsTask)
-gulp.task('move-scripts', moveScriptsTask)
-gulp.task('json', jsonTask)
-gulp.task('staticAssets', staticAssetsTask)
+gulp.task('fonts', fonts)
+gulp.task('cssFonts', cssFonts)
+gulp.task('favicons', favicons)
+gulp.task('move-scripts', moveScripts)
+gulp.task('json', json)
+gulp.task('staticAssets', staticAssets)

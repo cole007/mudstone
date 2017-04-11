@@ -5,7 +5,7 @@ import browserSync from 'browser-sync'
 import { getPaths } from '../libs/utils'
 
 
-export function imagesTask() {
+export function images() {
 
 	const paths = getPaths('images')
 	
@@ -18,4 +18,4 @@ export function imagesTask() {
 
 
 
-gulp.task('images', imagesTask)
+gulp.task('images', images)

@@ -15,7 +15,9 @@ import {
 import r from 'nunjucks/src/runtime'
 
 
-export function htmlTask() {
+export function html() {
+
+	const stamp = global.production ? `.${TASK_CONFIG.stamp}` : ''
 
 	const exclude = '!' + path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.html.src, '**/{' + TASK_CONFIG.html.excludeFolders
 		.join(',') + '}/**')
@@ -25,7 +27,7 @@ export function htmlTask() {
 
 	const getData = TASK_CONFIG.html.getData || function (file) {
 		const dataPath = path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.html.src, TASK_CONFIG.html.dataFile)
-		return JSON.parse(fs.readFileSync(dataPath, 'utf8'))
+		return {...JSON.parse(fs.readFileSync(dataPath, 'utf8')), stamp}
 	}
 
 	const manageEnv = function (environment) {
@@ -120,4 +122,4 @@ export function htmlTask() {
 
 
 
-gulp.task('html', htmlTask)
+gulp.task('html', html)

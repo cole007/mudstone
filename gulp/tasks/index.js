@@ -1,12 +1,11 @@
-export { scssTask } from './scss'
-export { htmlTask } from './html'
-export { imagesTask } from './images'
-export { svgsTask } from './svgs'
-export { symbolsTask } from './symbols'
+export { scss } from './scss'
+export { html } from './html'
+export { images } from './images'
+export { svgs } from './svgs'
+export { symbols } from './symbols'
 export {
 	fontsTask,
 	faviconsTask,
-	jsonTask,
-	cssFontsTask,
-	staticTask
+	json,
+	cssFonts
 } from './assets'

@@ -5,7 +5,7 @@ import {
 } from '../libs/utils'
 import webpackConfig from './webpack.config.babel'
 
-export function webpackProductionTask(callback) {
+export function webpackProduction(callback) {
 	const env = global.production ? 'production' : 'development'
 	const config = webpackConfig(env)
 	webpack(config, function (err, stats) {
@@ -15,4 +15,4 @@ export function webpackProductionTask(callback) {
 }
 
 
-gulp.task('bundle-script', webpackProductionTask)
+gulp.task('bundle-script', webpackProduction)
