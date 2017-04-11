@@ -18,7 +18,7 @@ import browserSync from 'browser-sync'
 import { handleErrors } from '../libs/utils'
 import path from 'path'
 
-export function scssTask() {
+export function scss() {
 
 
 	const paths = {
@@ -67,4 +67,4 @@ export function scssTask() {
 }
 
 
-gulp.task('scss', scssTask)
+gulp.task('scss', scss)

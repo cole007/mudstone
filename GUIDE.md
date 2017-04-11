@@ -103,6 +103,8 @@ A json object with a src and dest key/value pair. The source path is relative fr
 
 #### Task config
 
+The name (key) of the object must match the name of the task function
+
 `gulp/task.config.js`
 
 ```
@@ -132,7 +134,7 @@ import { getPaths } from '../libs/utils'
 /*
 	export named function
 */
-export function imagesTask() {
+export function images() {
 	/* see comment below about paths */
 	const paths = getPaths('images')
 	
@@ -146,7 +148,7 @@ export function imagesTask() {
 /*
 	expose gulp task
 */
-gulp.task('images', imagesTask)
+gulp.task('images', images)
 ```
 
 *Note:* Sometimes you only want provide a single file to the gulp task, in which case you can use the following snippet
@@ -248,6 +250,9 @@ There are three possible environments, each configured with a paths.config.*env*
 ## Debugging
 
 #### Tasks
+
+Does each task have a corresponding function, with the same name (see above)
+
 `yarn install` to make sure you have the latest dependencies
 
 If you can't see where the task is crashing try commenting each of the task objects `(gulp/task.config.js)`

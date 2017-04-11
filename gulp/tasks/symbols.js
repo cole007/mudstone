@@ -10,7 +10,7 @@ import htmlmin from 'gulp-htmlmin'
 import browserSync from 'browser-sync'
 import path from 'path'
 
-export function symbolsTask() {
+export function symbols() {
 
 	const paths = {
 		src: [path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.symbols.src, '*.svg')],
@@ -67,4 +67,4 @@ export function symbolsTask() {
 
 }	
 
-gulp.task('symbols', symbolsTask)
+gulp.task('symbols', symbols)

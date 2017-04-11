@@ -3,14 +3,20 @@ import htmlreplace from 'gulp-html-replace'
 
 export function cacheBusterTask() {
 
+	const cms = '{% set stamp = "%s" %}'
+
 	const production = {
-		'js': `${PATH_CONFIG.tags.js}${TASK_CONFIG.js.filename}.${TASK_CONFIG.stamp}.js`,
-		'css': `${PATH_CONFIG.tags.css}${TASK_CONFIG.scss.filename}.${TASK_CONFIG.stamp}.css`
+		'cms': {
+			src: `.${TASK_CONFIG.stamp}`,
+			tpl: cms
+		}
 	}
 
 	const development = {
-		'js': `${PATH_CONFIG.tags.js}${TASK_CONFIG.js.filename}.js`,
-		'css': `${PATH_CONFIG.tags.css}${TASK_CONFIG.scss.filename}.css`
+		'cms': {
+			src: '',
+			tpl: cms
+		}
 	}
 
 	const files = global.production ? production : development

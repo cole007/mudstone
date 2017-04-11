@@ -5,11 +5,11 @@ import {
 } from '../libs/utils'
 
 
-export function twigTask() {
+export function twig() {
 	const paths = getPaths('twig')
 
 	return gulp.src(paths.src)
 		.pipe(browserSync.stream())
 }
 
-gulp.task('twig', twigTask)
+gulp.task('twig', twig)
