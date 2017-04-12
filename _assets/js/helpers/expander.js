@@ -1,6 +1,7 @@
 import throttle from 'lodash.throttle'
 import Concert from 'concert'
 import Tweezer from 'tweezer.js'
+import Delegate from 'dom-delegate'
 /*
 Example Markup
 <ul data-behaviour="accordion" class="nav expander">
@@ -54,7 +55,7 @@ export default class Expander extends Concert {
 	constructor(el, opts = {}) {
 		super()
 		this.el = el
-		this.$tag = $(this.el)
+		this._del = new Delegate(el)
 		this.button = opts.button || '.js-expand-btn'
 		this.activeClass = opts.activeClass || 'is-active'
 		this.closeOthers = opts.closeOthers || false
@@ -78,8 +79,9 @@ export default class Expander extends Concert {
 		this.events = ['before:open', 'after:open', 'before:close', 'after:close']
 			// merge concert events into Expander
 		this.fn = throttle(this.handleButtonClicks, 300)
-		this.init && this.addEvents()
-		this.addAccessibility()
+		if(this.init) {
+			this.render()
+		}
 	}
 
 	/**
@@ -87,7 +89,7 @@ export default class Expander extends Concert {
 	 * @return {object} this
 	 */
 	addEvents() {
-		this.$tag.on('click', this.button, this.fn)
+		this._del.on('click', this.button, this.fn)
 		return this
 	}
 
@@ -96,32 +98,7 @@ export default class Expander extends Concert {
 	 * @return {object} this
 	 */
 	removeEvents() {
-		this.$tag.off('click', this.button, this.fn)
-		return this
-	}
-
-	/**
-	 * Returns DOM to it's pre initalized state, removes all events
-	 * @return {object} this
-	 */
-	destroy() {
-		this.elements.forEach((button) => {
-			const target = this.getTarget(button)
-			button.classList.remove(this.activeClass)
-			button.removeAttribute('aria-expanded')
-			button.removeAttribute('aria-selected')
-			button.removeAttribute('aria-controls')
-			button.removeAttribute('role', 'tab')
-			target.removeAttribute('aria-hidden')
-			target.removeAttribute('aria-labelledby')
-			target.removeAttribute('role', 'tabpanel')
-			target.classList.remove(this.activeClass)
-			target.removeAttribute('style')
-		})
-		this.el.removeAttribute('role')
-		this.el.removeAttribute('aria-multiselectable')
-		this.events.forEach(event => this.off(event))
-		this.removeEvents()
+		this._del.off('click', this.button, this.fn)
 		return this
 	}
 
@@ -138,9 +115,9 @@ export default class Expander extends Concert {
 	 * The click handler
 	 * @param {e} e - the event object
 	 */
-	handleButtonClicks(e) {
-		e.preventDefault()
-		const button = e.currentTarget
+	handleButtonClicks(evt, elm) {
+		evt.preventDefault()
+		const button = elm
 
 		this.closeOthers && this.elements
 			.filter((element) =>
@@ -169,7 +146,7 @@ export default class Expander extends Concert {
 		.on('tick', value => target.style.height = `${value}px`)
 		.on('done', complete)
 		.begin() // this fires the tweening
-		
+
 		return this
 	}
 
@@ -223,7 +200,6 @@ export default class Expander extends Concert {
 	 * @return {Object} this
 	 */
 	close(button) {
-		log(button._ticking)
 		if(button._ticking) return
 		const target = this.getTarget(button)
 		//const _this = this
@@ -280,6 +256,47 @@ export default class Expander extends Concert {
 		this.el.setAttribute('role', 'tablist')
 		this.el.setAttribute('aria-multiselectable', this.closeOthers)
 		return this
+	}
+
+	/*
+		Remove accessibility attributes
+	*/
+	removeAccessibility() {
+		this.elements.forEach((button) => {
+			const target = this.getTarget(button)
+			button.classList.remove(this.activeClass)
+			button.removeAttribute('aria-expanded')
+			button.removeAttribute('aria-selected')
+			button.removeAttribute('aria-controls')
+			button.removeAttribute('role', 'tab')
+			target.removeAttribute('aria-hidden')
+			target.removeAttribute('aria-labelledby')
+			target.removeAttribute('role', 'tabpanel')
+			target.classList.remove(this.activeClass)
+			target.removeAttribute('style')
+		})
+		this.el.removeAttribute('role')
+		this.el.removeAttribute('aria-multiselectable')
+
+		return this
+	}
+
+	/**
+	 * destroy, removes events and accessibility attributes
+	 */
+	destroy() {
+		this.events.forEach(event => this.off(event))
+		this.removeEvents()
+				.removeAccessibility()
+		return this
+	}
+
+	/*
+		bind events and add accessibility attributes
+	*/
+	render() {
+		this.addAccessibility()
+				.addEvents()
 	}
 
 }

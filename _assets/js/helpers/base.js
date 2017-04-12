@@ -1,21 +1,26 @@
 import Viewport from './viewport'
 import { events as listener } from './events'
+import Delegate from 'dom-delegate'
 
-const viewport = new Viewport()
-viewport.watch()
+const viewport = new Viewport(true)
 
 /*
 // Example
 export class test extends Base {
+
 	constructor(tag) {
 		super(tag)
 	}
+
 	events = [
 		'click button : clickHandle'
 	]
-	clickHandle(e) {
-		log(e.currentTarget)
+
+	clickHandle(evt, elm) {
+		// evt == events
+		// elm = the element clicked
 	}
+
 }
 */
 
@@ -34,7 +39,15 @@ class Model {
 	}
 
 	getState(name) {
-		return this._model[name].data
+		return this._model[name] && this._model[name].data
+	}
+
+	filter(cond) {
+		return Object.keys(this._model)
+						.map((model) => {
+							return {name: model, ...this._model[model].data}
+						})
+						.filter(cond)
 	}
 }
 
@@ -44,7 +57,7 @@ const model = new Model()
 export default class Base {
 	constructor(tag = document, opts = { bindEvents: true, barba: false }) {
 		this.tag = tag
-		this.$tag = $(tag)
+		this.$tag = new Delegate(tag)
 		this.bindEvents = opts.bindEvents
 		this.barba = opts.barba
 		this.listen = listener
@@ -54,24 +67,27 @@ export default class Base {
 		this._removeEvents = this._removeEvents.bind(this)
 
 		this.model = model
+
 	}
 
 
 	_bindEventHandlers() {
 		this.__events = this.events.map((action) => {
 			const input = action.split(':')
-			const fn = input[1].trim(' ')
+			const _fn = input[1].trim(' ').split(' ')
+			const fn = _fn[0]
 			const parts = input[0].split(' ')
 			const event = parts.shift()
 			const selector = parts.join(' ').trim(' ')
-			return { event, selector, fn  }
+			const capture = _fn[1] === 'true' ? true : false
+			return { event, selector, fn, capture  }
 		})
 		return this
 	}
 
 	_addEvents() {
 		this.__events.forEach((instance) => {
-			this.$tag.on(instance.event, instance.selector, this[instance.fn].bind(this))
+			this.$tag.on(instance.event, instance.selector, this[instance.fn].bind(this), instance.capture)
 		})
 		return this
 	}

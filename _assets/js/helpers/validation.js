@@ -3,12 +3,10 @@ import Concert from 'concert'
 
 /**
  * Creates a new form validator.
-
 	<div class="form__group js-input-wrap">
 		<label class="form__label" for="frm_name">Name</label>
 		<input class="form__input" type="text" name="frm_name" id="frm_name" required>
 	</div>
-
 	new Validation(el, {
 		constraints: {
 			'frm_email': {
@@ -31,8 +29,6 @@ import Concert from 'concert'
 			}
 		}
 	})
-
-
  * @class
  */
 

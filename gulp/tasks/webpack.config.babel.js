@@ -2,7 +2,6 @@
 import webpack from 'webpack'
 import path from 'path'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
-import webpackValidator from 'webpack-validator'
 import {
 	getIfUtils,
 	removeEmpty

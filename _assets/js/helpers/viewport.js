@@ -1,32 +1,23 @@
 import Concert from 'concert'
 
 /*
-
 	const viewport = new Viewport()
-
 	// these two properties will always return the correct dimensions
 	viewport.width / viewport.height
-
 	// all the resize events have custom detail property with the current width/height
-
 	Normal resize event
 	viewport.on('resize', (e) => log(e.detail.width))
-
 	viewport.at(mediaquery, success, fail, watch = true)
 	mediaquery: '(max-width: 46.25em)'
 	success: a function that is called once the mediaquery is active,
 					this function is only called once per change
 	fail: as above, but for the opposite
 	watch: where to watch for window resize events
-
 	viewport.when(mediaquery, success, fail)
 	mediaquery: as above
 	success: a function that is called once the mediaquery is active (throttled)
 	fail: same as the at fail function
-
 })
-
-
 */
 
 

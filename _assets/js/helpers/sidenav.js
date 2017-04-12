@@ -4,17 +4,17 @@ import { transitionEnd, lock } from './utils'
 /**
  * Creates a new SideNav.
 
-	<a class="menu__btn js-mobile-nav-btn" href="#0"><span></span></a>
-	<nav class="menu site-menu">
-		<div class="js-menu-wrapper menu__wrapper"> <!-- this is the section that animates in -->
-			<ul class="r-ul nav js-menu-container"> <!-- this is the section that blocks clicks from propagating -->
-				<li class="menu__item"><a href="#slides">Slides</a></li>
-				<li class="menu__item"><a href="#videos">Videos</a></li>
-				<li class="menu__item"><a href="#accordions">Accordions</a></li>
-				<li class="menu__item"><a href="#map">Map</a></li>
-				<li class="menu__item"><a href="#form">Form</a></li>
-				<li class="menu__item"><a href="#map">Map</a></li>
-				<li class="menu__item"><a href="/grid.html">Grid</a></li>
+	<a class="menu__btn js-mobile-nav-btn" data-target="#menu" href="#"><span></span></a>
+	<nav class="menu site-menu" id="menu">
+		<div class="js-menu-wrapper menu__wrapper">
+			<ul class="r-ul nav js-menu-container">
+				<li class="menu__item t-menu"><a href="#slides">Slides</a></li>
+				<li class="menu__item t-menu"><a href="#videos">Videos</a></li>
+				<li class="menu__item t-menu"><a href="#accordions">Accordions</a></li>
+				<li class="menu__item t-menu"><a href="#map">Map</a></li>
+				<li class="menu__item t-menu"><a href="#form">Form</a></li>
+				<li class="menu__item t-menu"><a href="#map">Map</a></li>
+				<li class="menu__item t-menu"><a href="/grid.html">Grid</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -79,6 +79,7 @@ export default class SideNav extends Concert {
 		const wrapper = this.closer ? this.closer : this.wrapper
 
 		this.clickOutside && wrapper.addEventListener('click', this.hideSideNav)
+
 
 		if(!this.closer && this.clickOutside) {
 			this.container.addEventListener('click', this.blockClicks)

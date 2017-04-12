@@ -36,7 +36,7 @@ export default class ScrollView extends Concert {
 		super()
 		this.container = el || document
 		this.selector = obj.selector || '.js-sv'
-		this.elements = Array.from(this.container.querySelectorAll(this.selector))
+		this.elements = [...this.container.querySelectorAll(this.selector)]
 		this.reverse = [...this.elements.reverse()]
 		this.dispatch = this.dispatch.bind(this)
 		this.initialize()

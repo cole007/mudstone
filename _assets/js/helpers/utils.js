@@ -1,5 +1,6 @@
 import local from 'local-links'
 import Tweezer from 'tweezer.js'
+import axios from 'axios'
 
 /**
  * Return the prefix used by the current browser
@@ -84,29 +85,31 @@ export const animationEnd = (function(){
 })()
 
 export const lock = () => {
-	const $window = $(window)
-	const $body = $('body')
+	const { style } = document.body
 	let windowTop
 
 	return {
 		capture() {
-			windowTop = $window.scrollTop()
-			$body.css({position: 'fixed', height: '100%', top: windowTop * -1 + 'px', overflow: 'hidden', width: '100%'})
+			windowTop = window.pageYOffset
+			style.position = 'fixed'
+			style.height = '100%'
+			style.width = '100%'
+			style.overflow = 'hidden'
+			style.top = `${windowTop * -1}px`
 		},
 		release() {
-			$body.css({position: '', height: '', width: '', overflow: '', top: ''})
-			$window.scrollTop(windowTop)
+			style.position = ''
+			style.height = ''
+			style.width = ''
+			style.overflow = ''
+			style.top = ''
+			window.scrollTo(0, windowTop)
 		}
 	}
 }
 
 export function ajax(url) {
-	const data = {}
-	return $.ajax({
-		url: url,
-		type: 'get',
-		data: data
-	})
+	return axios.get(url)
 }
 
 export function externalLinks() {
@@ -122,7 +125,6 @@ export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobil
 
 // this is designed to work with lazysizes
 export function lazyLoadedImagesLoaded(el, each, complete) {
-	const $tag = $(el)
 	const config = {
 		attributes: true,
 		childList: false,
@@ -140,7 +142,7 @@ export function lazyLoadedImagesLoaded(el, each, complete) {
 								each(mutation.target)
 							}
 							previous = mutation.target.currentSrc
-							if($tag.find('.lazyloaded').length >= total) {
+							if(el.querySelectorAll('.lazyloaded').length >= total) {
 								observer.disconnect()
 								if(typeof complete === 'function') {
 									complete()
@@ -249,6 +251,7 @@ export function upAndDown(start, min, max, loop = false) {
 
 
 
-export function delaySpread(container, fn) {
-	Array.from(container.children).forEach((element, index) => element.style[css3('transitionDelay')] = `${fn(index)}ms`)
+export function delaySpread(container, fn, selector) {
+	const elements = selector ? container.querySelectorAll(selector) : container.children
+	Array.from(elements).forEach((element, index) => element.style[css3('transitionDelay')] = `${fn(index)}ms`)
 }

@@ -40,12 +40,12 @@ export default class Slide extends Wallop {
 		const defaults = {
 			buttonPreviousClass: 'js-slide-prev',
 			buttonNextClass: 'js-slide-next',
-			itemClass: 'm-slide__item',
-			currentItemClass: 'm-slide__item--current',
-			showPreviousClass: 'm-slide__item--showPrevious',
-			showNextClass: 'm-slide__item--showNext',
-			hidePreviousClass: 'm-slide__item--hidePrevious',
-			hideNextClass: 'm-slide__item--hideNext',
+			itemClass: 'slide__item',
+			currentItemClass: 'slide__item--current',
+			showPreviousClass: 'slide__item--showPrevious',
+			showNextClass: 'slide__item--showNext',
+			hidePreviousClass: 'slide__item--hidePrevious',
+			hideNextClass: 'slide__item--hideNext',
 			carousel: true,
 			pagerElClassName: 'slide-pager__item',
 			delay: 5000,
@@ -60,8 +60,11 @@ export default class Slide extends Wallop {
 
 		this.opts = opts
 		this.tag = el
-		this.$tag = $(this.tag)
+		//this.$tag = $(this.tag)
 		this.slides = Array.from(el.querySelectorAll(`.${opts.itemClass}`))
+
+		this.stop = this.stop.bind(this)
+		this.play = this.play.bind(this)
 
 		this.pagerElClassName = opts.pagerElClassName
 
@@ -95,6 +98,22 @@ export default class Slide extends Wallop {
 				this.next()
 			}
 		})
+	}
+
+	get items() {
+		return this.slides
+	}
+
+
+	play() {
+		this.running = false
+		this.autoPlaySlide()
+	}
+
+	stop() {
+		clearTimeout(this.timeout)
+		raf.cancel(this.handle)
+		this.running = true
 	}
 
 
@@ -142,9 +161,11 @@ export default class Slide extends Wallop {
 	}
 
 	autoPlaySlide() {
-		this.timeout = setTimeout(() => {
-			this.handle = raf(this.autoPlaySlide)
-			this.next()
-		}, this.opts.delay)
+		if(!this.running) {
+			this.timeout = setTimeout(() => {
+				this.handle = raf(this.autoPlaySlide)
+				this.next()
+			}, this.opts.delay)
+		}
 	}
 }
