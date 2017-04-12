@@ -1,3 +1,4 @@
+/*
 import Barba from 'barba.js'
 import { transitionEnd } from '../helpers/utils'
 import local from 'local-links'
@@ -40,3 +41,4 @@ export const Transition = Barba.BaseTransition.extend({
 		})
 	}
 })
+*/

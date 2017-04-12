@@ -1,5 +1,3 @@
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array etc
-import './libs/polyfills'
 // https://github.com/aFarkas/lazysizes
 import 'lazysizes'
 import './helpers/customEvents'
@@ -44,8 +42,7 @@ WebFont.load({
 
 
 
-
-$(function () {
+document.addEventListener('DOMContentLoaded', function() {
 	views()
 	objectFitImages()
 })

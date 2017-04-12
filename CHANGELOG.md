@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.1.0
+
+#### Breaking Change
+
+- query dependency removed, event delegation with `npm dom-delegate`
+
 ### 7.0.23
 
 #### Change
