@@ -1,30 +1,7 @@
 {
   "dependencies": {
-    "axios": "^0.16.1",
     "babel-polyfill": "^6.23.0",
-    "barba.js": "^1.0.0",
-    "concert": "^2.1.0",
-    "debug": "^2.6.3",
-    "dom-delegate": "^2.0.3",
-    "google-maps": "^3.2.1",
-    "hammerjs": "^2.0.8",
-    "imagesloaded": "^4.1.1",
-    "jquery": "^3.2.1",
-    "lazysizes": "^3.0.0",
-    "local-links": "^1.4.1",
-    "lodash.debounce": "^4.0.8",
-    "lodash.throttle": "^4.1.1",
-    "object-fit-images": "^3.1.3",
-    "picturefill": "^3.0.2",
-    "plyr": "^2.0.12",
-    "raf": "^3.3.0",
-    "tweezer.js": "^1.4.0",
-    "validate.js": "^0.11.1",
-    "vanilla-modal": "^1.6.4",
-    "verge": "^1.9.1",
-    "vue": "^2.2.6",
-    "wallop": "^2.4.1",
-    "webfontloader": "^1.6.26"
+    "debug": "^2.6.3"
   },
   "devDependencies": {
     "apache-server-configs": "^2.14.0",
