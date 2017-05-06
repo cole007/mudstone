@@ -1,48 +1,69 @@
-// https://github.com/aFarkas/lazysizes
-import 'lazysizes'
-import './helpers/customEvents'
-// https://github.com/bfred-it/object-fit-images
-import objectFitImages from 'object-fit-images'
-
-//https://github.com/typekit/webfontloader
-import WebFont from 'webfontloader'
-import {
-	views
-} from './views'
 import debug from 'debug'
 
 // logs enabled during development
 window.log = debug('app:log')
-if (process.env.NODE_ENV === 'development') {
+if(process.env.NODE_ENV === 'development') {
 	debug.enable('app:log')
 } else {
 	debug.disable('app:log')
-} 
+}
 
 log(`Logging is enabled!, NODE_ENV: ${process.env.NODE_ENV}`)
 
-WebFont.load({
-	/*
-		custom: {
-	    families: ['My Font', 'My Other Font:n4,i4,n7'],
-	    urls: ['/dist/css/fonts.css']
-	  },
-		google: {
-	    families: ['Droid Sans', 'Droid Serif:bold']
-	  },
-		typekit: {
-			id: 'cdu5srl'
+
+import Base from './helpers/base'
+
+class Root extends Base {
+	constructor(document) {
+		super(document, 'root')
+	}
+
+	events = {
+		'click .site-logo': 'pubes'
+	}
+	
+	pubes(e) {
+		e.preventDefault()
+		log('logo', this)
+	}
+}
+
+class Spleen extends Base {
+	constructor(document) {
+		super(document, 'spleen')
+	}
+
+	events = {
+		'click .menu-btn':  function(e) {
+			e.preventDefault()
+			log('menu', this)
 		}
-	*/
-	google: {
-		families: ['Lato:300,400,700']
-	},
-})
+	}
+}
 
 
+document.addEventListener('DOMContentLoaded', function () {
+	const r = new Root().initialize()
+	const x = new Spleen().initialize()
 
+	r.listener.on('thing', () => {
+		log('thing happened')
+	})
 
-document.addEventListener('DOMContentLoaded', function() {
-	views()
-	objectFitImages()
+	setTimeout(() => {
+
+		r.on('state:changed', ({prev, next}) => {
+			log(prev, next)
+		})
+
+		x.setState({a: 'a'})
+		r.setState({a: 'b'})
+		x.setState({a: 'a'}, 'root')
+
+		x.listener.trigger('thing')
+		x.trigger('thing')
+		
+		r.destroy()
+		x.destroy()
+	}, 1000)
 })

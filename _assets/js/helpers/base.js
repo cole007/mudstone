@@ -1,131 +1,150 @@
-import Viewport from './viewport'
-import { events as listener } from './events'
 import Delegate from 'dom-delegate'
+import Concert from 'concert'
+import uniqueId from 'lodash.uniqueid'
+import isObject from 'lodash.isobject'
 
-const viewport = new Viewport(true)
+let _storeInstance = null
+let _listenerInstance = null
 
-/*
-// Example
-export class test extends Base {
+const _behaviours = []
 
-	constructor(tag) {
-		super(tag)
-	}
-
-	events = [
-		'click button : clickHandle'
-	]
-
-	clickHandle(evt, elm) {
-		// evt == events
-		// elm = the element clicked
-	}
-
-}
-*/
-
-class Model {
+class Listener extends Concert {
 	constructor() {
-		this._model = []
-	}
-
-	setState(obj) {
-		if(!obj.name || !obj.data) {
-			log('setState require an object with a name and data property')
-			return
+		super()
+		if(!_listenerInstance){
+			_listenerInstance = this
 		}
-		const o = this._model[obj.name]
-		this._model[obj.name] = {...o, ...obj}
-	}
-
-	getState(name) {
-		return this._model[name] && this._model[name].data
-	}
-
-	filter(cond) {
-		return Object.keys(this._model)
-						.map((model) => {
-							return {name: model, ...this._model[model].data}
-						})
-						.filter(cond)
+		return _listenerInstance
 	}
 }
 
-const model = new Model()
-
-
-export default class Base {
-	constructor(tag = document, opts = { bindEvents: true, barba: false }) {
-		this.tag = tag
-		this.$tag = new Delegate(tag)
-		this.bindEvents = opts.bindEvents
-		this.barba = opts.barba
-		this.listen = listener
-		this.viewport = viewport
-		this.__events = []
-		this._addEvents = this._addEvents.bind(this)
-		this._removeEvents = this._removeEvents.bind(this)
-
-		this.model = model
-
-	}
-
-
-	_bindEventHandlers() {
-		this.__events = this.events.map((action) => {
-			const input = action.split(':')
-			const _fn = input[1].trim(' ').split(' ')
-			const fn = _fn[0]
-			const parts = input[0].split(' ')
-			const event = parts.shift()
-			const selector = parts.join(' ').trim(' ')
-			const capture = _fn[1] === 'true' ? true : false
-			return { event, selector, fn, capture  }
-		})
-		return this
-	}
-
-	_addEvents() {
-		this.__events.forEach((instance) => {
-			this.$tag.on(instance.event, instance.selector, this[instance.fn].bind(this), instance.capture)
-		})
-		return this
-	}
-
-	_removeEvent(event, selector) {
-		this.$tag.off(event, selector)
-		return this
-	}
-
-	_removeEvents() {
-		this.__events.forEach((instance) => {
-			this.$tag.off(instance.event, instance.selector)
-		})
-		return this
-	}
-
-	_init() {
-
-		if(this.events) {
-			this._bindEventHandlers()
+class Store {
+	constructor() {
+		if(!_storeInstance){
+			_storeInstance = this
 		}
-		if(this.barba && this.events) {
-			this.listen.on('page:change', (...args) => {
-				this._removeEvents()
-				if(typeof this.pageTransiton === 'function') {
-					this.pageTransiton(...args)
-				}
-			})
+		this._cid = uniqueId('root::')
+		return _storeInstance
+	}
+
+	_state = {}
+
+	set state(newState) {
+		const oldState = this._state
+		const nextState = this._state = {...oldState, ...newState}
+		this._state = nextState
+	}
+
+	get state() {
+		return this._state
+	}
+
+	reset(name) {
+		this._state[name] = {}
+	}
+
+	destroy() {
+		_listenerInstance = null
+		this._state = {}
+	}
+}
+
+
+export default class Base extends Concert {
+
+	constructor(el = document, name, state = {}) {
+		super()
+		this.store = new Store()
+		this.listener = new Listener()
+		this.$el = el
+		this.$delegate = new Delegate(this.$el)
+		this.delegate = this.delegate.bind(this)
+		this.undelegate = this.undelegate.bind(this)
+		this.initialize = this.initialize.bind(this)
+		this.delegateEvents = this.delegateEvents.bind(this)
+		this.unDelegateEvents = this.unDelegateEvents.bind(this)
+		this.cid = name || uniqueId(`${this.constructor.name}:`)
+		this.setState(state, this.cid, false)
+
+		_behaviours.push({[this.cid]: this})
+
+		return this
+	}
+
+	setState(obj, name = this.cid, trigger = true) {
+		if(!isObject(obj)) {
+			throw new Error('setState expects an object')
+		}
+		const { state } = this.store
+		const prev = state[name]
+		const next = {...state[name], ...obj}
+		trigger && this.trigger('state:update', ({ prev }))
+		this.store.state = {[name]: next}
+		trigger && this.trigger('state:changed', ({ prev, next }))
+
+		return this
+	}
+	
+	getState(name = this.cid) {
+		return this.store.state[name]
+	}
+
+	get state() {
+		return this.store.state[this.cid]
+	}
+	
+	
+	delegateEvents() {
+		const events = this.events
+		if(!events) return this
+		for(let key in events) {
+			const eventKey = events[key]
+			const method = typeof eventKey === 'function' ? eventKey : this[eventKey]
+			const parts = key.split(' ')
+			this.delegate(parts[0], parts[1], method.bind(this))
 		}
 		return this
 	}
 
-	render() {
-
-		if(this.bindEvents && this.events) {
-			this._addEvents()
+	unDelegateEvents() {
+		const events = this.events
+		if(!events) return this
+		for(let key in events) {
+			const eventKey = events[key]
+			const method = typeof eventKey === 'function' ? eventKey : this[eventKey]
+			const parts = key.split(' ')
+			this.undelegate(parts[0], parts[1], method.bind(this))
 		}
-
 		return this
 	}
+	
+	delegate(eventName, selector, listener) {
+		this.$delegate.on(eventName, selector, listener)
+		return this
+	}
+
+	undelegate(eventName, selector, listener) {
+		this.$delegate.off(eventName, selector, this[listener])
+		return this
+	}
+	
+	initialize() {
+		this.delegateEvents()
+		return this
+	}
+
+	destroy() {
+		this.unDelegateEvents()
+		return this
+	}
+
+	refresh() {
+		this.unDelegateEvents()
+		this.delegateEvents()
+		return this
+	}
+
+	mounted() {}
+
+	render() {}
 }
