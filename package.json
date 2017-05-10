@@ -79,6 +79,7 @@
     "modularscale-sass": "^2.1.1",
     "postcss-animation": "^0.0.12",
     "postcss-aspect-ratio": "^1.0.0",
+    "postcss-inline-svg": "^2.3.1",
     "postcss-object-fit-images": "^1.1.2",
     "postcss-quantity-queries": "^0.4.0",
     "postcss-transform-shortcut": "^2.0.1",
@@ -110,7 +111,7 @@
   },
   "name": "ournameismud.com",
   "description": "Mudstone 7.0",
-  "version": "7.0.23",
+  "version": "7.0.24",
   "main": "gulpfile.babel.js",
   "author": "Dave Stockley @ournameismud",
   "license": "MIT"

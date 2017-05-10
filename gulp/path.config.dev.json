@@ -42,7 +42,8 @@
 
   "scss": {
     "src": "scss",
-    "dest": "dist/css"
+    "dest": "dist/css",
+		"inlineSVG": "images/svg-assets"
   },
 
   "cssFonts": {

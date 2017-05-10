@@ -8,6 +8,7 @@ import cssnano from 'gulp-cssnano'
 import gulpif from 'gulp-if'
 import writeSVG from 'postcss-write-svg'
 import aspectRatio from 'postcss-aspect-ratio'
+import inlineSVG from 'postcss-inline-svg'
 import animateCss from 'postcss-animation'
 import postcssTriangle from 'postcss-triangle'
 import quantityQueries from 'postcss-quantity-queries'
@@ -23,7 +24,8 @@ export function scss() {
 
 	const paths = {
 		src: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.src, '**/**/*.scss'),
-		dest: path.resolve(process.env.PWD, PATH_CONFIG.dest, PATH_CONFIG.scss.dest)
+		dest: path.resolve(process.env.PWD, PATH_CONFIG.dest, PATH_CONFIG.scss.dest),
+		svg: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.inlineSVG)
 	}
 
 
@@ -51,6 +53,9 @@ export function scss() {
 			postcssTriangle(),
 			quantityQueries(),
 			lost(),
+			inlineSVG({
+				path: paths.svg
+			}),
 			writeSVG({
 				encoding: 'base64'
 			}),
