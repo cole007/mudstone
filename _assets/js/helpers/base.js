@@ -3,12 +3,13 @@ import Concert from 'concert'
 import uniqueId from 'lodash.uniqueid'
 import isObject from 'lodash.isobject'
 
-let _storeInstance = null
+
+/*
+	Global Event Bus
+	Returns a single instance
+*/
 let _listenerInstance = null
-
-const _behaviours = []
-
-class Listener extends Concert {
+export class Listener extends Concert {
 	constructor() {
 		super()
 		if(!_listenerInstance){
@@ -18,7 +19,12 @@ class Listener extends Concert {
 	}
 }
 
-class Store {
+/*
+	A global state object thinger
+	Returns a single instance
+*/
+let _storeInstance = null
+export class Store {
 	constructor() {
 		if(!_storeInstance){
 			_storeInstance = this
@@ -49,15 +55,17 @@ class Store {
 	}
 }
 
-
+/*
+	Base Class, 
+*/
 export default class Base extends Concert {
 
 	constructor(el = document, name, state = {}) {
 		super()
 		this.store = new Store()
 		this.listener = new Listener()
+		this.$delegate = new Delegate(el)
 		this.$el = el
-		this.$delegate = new Delegate(this.$el)
 		this.delegate = this.delegate.bind(this)
 		this.undelegate = this.undelegate.bind(this)
 		this.initialize = this.initialize.bind(this)
@@ -65,9 +73,6 @@ export default class Base extends Concert {
 		this.unDelegateEvents = this.unDelegateEvents.bind(this)
 		this.cid = name || uniqueId(`${this.constructor.name}:`)
 		this.setState(state, this.cid, false)
-
-		_behaviours.push({[this.cid]: this})
-
 		return this
 	}
 
@@ -81,7 +86,7 @@ export default class Base extends Concert {
 		trigger && this.trigger('state:update', ({ prev }))
 		this.store.state = {[name]: next}
 		trigger && this.trigger('state:changed', ({ prev, next }))
-
+		
 		return this
 	}
 	
@@ -92,7 +97,6 @@ export default class Base extends Concert {
 	get state() {
 		return this.store.state[this.cid]
 	}
-	
 	
 	delegateEvents() {
 		const events = this.events
@@ -129,6 +133,7 @@ export default class Base extends Concert {
 	}
 	
 	initialize() {
+		log('hello')
 		this.delegateEvents()
 		return this
 	}
@@ -147,4 +152,84 @@ export default class Base extends Concert {
 	mounted() {}
 
 	render() {}
+}
+
+export class Loader extends Listener {
+	constructor(context, behaviours) {
+		super()
+		this.context = context
+		this.behaviours = behaviours
+		this.nodes = []
+		this.scoped = []
+		this.history()
+	}
+
+	history() {
+		this.on('page:exit', this.destroyBehaviour)
+		this.on('page:change', this.start)
+	}
+
+	getNodes(context = document) {
+		this.nodes = [...context.querySelectorAll('*[data-behaviour]')]
+		return this
+	}
+
+	initializeBehaviour() {
+		const { nodes, behaviours } = this
+		this.scoped = nodes.map((node) => {
+			const behaviours = node.getAttribute('data-behaviour').split(' ')
+			return {
+				node,
+				behaviours
+			}
+		})
+		.map((obj) => {
+			return obj.behaviours.map((behaviourName) => {
+				return new behaviours[behaviourName](obj.node)
+			})
+		})
+		return this
+	}
+
+	destroyBehaviour() {
+		this.behaviours.forEach(behaviour => {
+			if(typeof behaviour.destory === 'function') {
+				behaviour.destory()
+			}
+		})
+	}
+
+	start(context = this.context) {
+		this.getNodes(context)
+		this.initializeBehaviour()
+		this.scoped.forEach(node => {
+			node.forEach(behaviour => {
+				behaviour.initialize()
+			})
+		})
+		
+		setTimeout(() => {
+			this.mounted()
+		})
+	}
+
+	beforeLeave() {
+		const promises = []
+		this.scoped.forEach(node => {
+			node.forEach(behaviour => {
+				if(typeof behaviour.onLeave === 'function') {
+					promises.push(behaviour)
+				}
+			})
+		})
+		return new Promise.all(promises)
+	}
+ 
+	mounted() {
+		this.scoped.forEach(node => {
+			node.forEach(behaviour => {
+				behaviour.mounted()
+			})
+		})
+	}
 }

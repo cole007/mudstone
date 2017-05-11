@@ -1,5 +1,5 @@
 import debug from 'debug'
-
+import * as behaviours from './behaviours'
 // logs enabled during development
 window.log = debug('app:log')
 if(process.env.NODE_ENV === 'development') {
@@ -11,59 +11,8 @@ if(process.env.NODE_ENV === 'development') {
 log(`Logging is enabled!, NODE_ENV: ${process.env.NODE_ENV}`)
 
 
-import Base from './helpers/base'
-
-class Root extends Base {
-	constructor(document) {
-		super(document, 'root')
-	}
-
-	events = {
-		'click .site-logo': 'pubes'
-	}
-	
-	pubes(e) {
-		e.preventDefault()
-		log('logo', this)
-	}
-}
-
-class Spleen extends Base {
-	constructor(document) {
-		super(document, 'spleen')
-	}
-
-	events = {
-		'click .menu-btn':  function(e) {
-			e.preventDefault()
-			log('menu', this)
-		}
-	}
-}
-
+import { Loader } from './helpers/base'
 
 document.addEventListener('DOMContentLoaded', function () {
-	const r = new Root().initialize()
-	const x = new Spleen().initialize()
-
-	r.listener.on('thing', () => {
-		log('thing happened')
-	})
-
-	setTimeout(() => {
-
-		r.on('state:changed', ({prev, next}) => {
-			log(prev, next)
-		})
-
-		x.setState({a: 'a'})
-		r.setState({a: 'b'})
-		x.setState({a: 'a'}, 'root')
-
-		x.listener.trigger('thing')
-		x.trigger('thing')
-		
-		r.destroy()
-		x.destroy()
-	}, 1000)
+	new Loader(document, behaviours).start()
 })

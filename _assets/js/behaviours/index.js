@@ -4,4 +4,6 @@
 // export { accordion } from './accordion'
 // export { formValidation } from './formValidation'
 // export { inview } from './inview'
-// export { mobileMenu } from './mobileMenu'
+export { Root } from './Root'
+export { Spleen } from './Spleen'
+export { Test } from './Test'
