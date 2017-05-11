@@ -1,6 +1,6 @@
-import Base from '../src/js/core'
+import Base from '../../src/js/core'
 
-test('Base: when called it creates an instance of Listener ', () => {
+test('Base: when called it creates an instance of Base ', () => {
 	expect(new Base()).toBeInstanceOf(Base)
 })
 

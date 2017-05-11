@@ -1,6 +1,6 @@
-import Loader from '../src/js/core/loader'
+import Loader from '../../src/js/core/loader'
 
-test('Loader: when called it creates an instance of Listener ', () => {
+test('Loader: when called it creates an instance of Loader ', () => {
 	expect(new Loader()).toBeInstanceOf(Loader)
 })
 
