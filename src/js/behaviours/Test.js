@@ -1,4 +1,4 @@
-import Base from '../helpers/base'
+import Base from '../core'
 
 export class Test extends Base {
 	constructor(document) {
@@ -6,11 +6,11 @@ export class Test extends Base {
 	}
 
 	events = {
-		'click .site-logo': 'pubes'
+		'click .site-logo': 'onClick'
 	}
 	
-	pubes(e) {
+	onClick(e, elm) {
 		e.preventDefault()
-		log('logo', this)
+		log('Test', this, elm)
 	}
 }

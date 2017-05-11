@@ -2,59 +2,8 @@ import Delegate from 'dom-delegate'
 import Concert from 'concert'
 import uniqueId from 'lodash.uniqueid'
 import isObject from 'lodash.isobject'
-
-
-/*
-	Global Event Bus
-	Returns a single instance
-*/
-let _listenerInstance = null
-export class Listener extends Concert {
-	constructor() {
-		super()
-		if(!_listenerInstance){
-			_listenerInstance = this
-		}
-		return _listenerInstance
-	}
-}
-
-/*
-	A global state object thinger
-	Returns a single instance
-*/
-let _storeInstance = null
-export class Store {
-	constructor() {
-		if(!_storeInstance){
-			_storeInstance = this
-		}
-		this._cid = uniqueId('root::')
-		return _storeInstance
-	}
-
-	_state = {}
-
-	set state(newState) {
-		const oldState = this._state
-		const nextState = this._state = {...oldState, ...newState}
-		this._state = nextState
-	}
-
-	get state() {
-		return this._state
-	}
-
-	reset(name) {
-		this._state[name] = {}
-	}
-
-	destroy() {
-		_listenerInstance = null
-		this._state = {}
-	}
-}
-
+import Listener from './listener'
+import Store from './store'
 /*
 	Base Class, 
 */
@@ -149,87 +98,13 @@ export default class Base extends Concert {
 		return this
 	}
 
+	_onLeave() {
+		if(typeof this.onLeave === 'function') {
+			return new Promise(this.onLeave)
+		}
+	}
+
 	mounted() {}
 
 	render() {}
-}
-
-export class Loader extends Listener {
-	constructor(context, behaviours) {
-		super()
-		this.context = context
-		this.behaviours = behaviours
-		this.nodes = []
-		this.scoped = []
-		this.history()
-	}
-
-	history() {
-		this.on('page:exit', this.destroyBehaviour)
-		this.on('page:change', this.start)
-	}
-
-	getNodes(context = document) {
-		this.nodes = [...context.querySelectorAll('*[data-behaviour]')]
-		return this
-	}
-
-	initializeBehaviour() {
-		const { nodes, behaviours } = this
-		this.scoped = nodes.map((node) => {
-			const behaviours = node.getAttribute('data-behaviour').split(' ')
-			return {
-				node,
-				behaviours
-			}
-		})
-		.map((obj) => {
-			return obj.behaviours.map((behaviourName) => {
-				return new behaviours[behaviourName](obj.node)
-			})
-		})
-		return this
-	}
-
-	destroyBehaviour() {
-		this.behaviours.forEach(behaviour => {
-			if(typeof behaviour.destory === 'function') {
-				behaviour.destory()
-			}
-		})
-	}
-
-	start(context = this.context) {
-		this.getNodes(context)
-		this.initializeBehaviour()
-		this.scoped.forEach(node => {
-			node.forEach(behaviour => {
-				behaviour.initialize()
-			})
-		})
-		
-		setTimeout(() => {
-			this.mounted()
-		})
-	}
-
-	beforeLeave() {
-		const promises = []
-		this.scoped.forEach(node => {
-			node.forEach(behaviour => {
-				if(typeof behaviour.onLeave === 'function') {
-					promises.push(behaviour)
-				}
-			})
-		})
-		return new Promise.all(promises)
-	}
- 
-	mounted() {
-		this.scoped.forEach(node => {
-			node.forEach(behaviour => {
-				behaviour.mounted()
-			})
-		})
-	}
 }

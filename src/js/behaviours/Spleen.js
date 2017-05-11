@@ -1,4 +1,4 @@
-import Base from '../helpers/base'
+import Base from '../core'
 
 export class Spleen extends Base {
 	constructor(document) {
@@ -6,9 +6,9 @@ export class Spleen extends Base {
 	}
 
 	events = {
-		'click .menu-btn':  function(e) {
+		'click .menu-btn':  (e, elm) => {
 			e.preventDefault()
-			log('menu', this)
+			log('menu', this, elm)
 		}
 	}
 }

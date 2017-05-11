@@ -1,4 +1,4 @@
-import Base from '../helpers/base'
+import Base from '../core'
 
 export class Root extends Base {
 	constructor(document) {
@@ -7,18 +7,16 @@ export class Root extends Base {
 	}
 
 	events = {
-		'click button': 'pubes'
+		'click button': 'onClick'
 	}
 	
-	pubes(e) {
+	onClick(e) {
 		e.preventDefault()
 
 		this.listener.trigger('page:change')
 	}
 
-	onLeave() {
-		return Promise((resolve) => {
-			resolve()
-		})
+	onLeave(resolve) {
+		resolve()
 	}
 }

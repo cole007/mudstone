@@ -50,6 +50,7 @@
     "del": "^2.2.0",
     "eslint": "^3.19.0",
     "eslint-loader": "^1.7.1",
+    "eslint-plugin-jest": "^20.0.1",
     "eslint-plugin-react": "^6.10.3",
     "gulp": "^3.9.1",
     "gulp-changed": "^2.0.0",
@@ -79,6 +80,7 @@
     "gulp-uncss": "^1.0.4",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.5",
+    "jest": "^20.0.1",
     "lost": "^8.0.0",
     "modularscale-sass": "^3.0.2",
     "postcss-animation": "^0.0.12",
@@ -110,7 +112,8 @@
     "cms": "gulp --cms",
     "compile": "gulp build",
     "build": "gulp build --production",
-    "build:cms": "gulp build --cms --production"
+    "build:cms": "gulp build --cms --production",
+    "test": "jest"
   },
   "name": "ournameismud.com",
   "description": "Mudstone 7.0",
