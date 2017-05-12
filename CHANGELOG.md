@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 7.0.25
+
+#### Change
+
+- Build size report only shows dist assets
 
 ### 7.0.24
 
