@@ -1,0 +1,19 @@
+{% set path = '../includes/' %}
+{% extends "../layout/shell.njk" %}
+
+
+{% block base %}
+
+	{% block header %}
+		{% include "../includes/header.njk" %}
+	{% endblock %}
+
+	{% block content %}
+
+
+	{% endblock %}
+
+	{% include "../includes/footer.njk" %}
+	{% block extra %}{% endblock %}
+
+{% endblock %}

@@ -1,6 +1,6 @@
 {
   "baseDir": "./tmp/public",
-  "src": "./_assets",
+  "src": "./src",
   "dest": "./tmp/public",
   "dist": "./tmp/public/dist",
 

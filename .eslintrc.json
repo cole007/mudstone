@@ -1,7 +1,8 @@
 {
 	"env": {
 		"browser": true,
-		"es6": true
+		"es6": true,
+		"jest": true
 	},
 	"globals": {
 		"ENV": true,
@@ -17,7 +18,8 @@
 		"SERVER": true
 	},
 	"plugins": [
-		"react"
+		"react",
+		"jest"
 	],
 	"extends": "eslint:recommended",
 	"parser": "babel-eslint",

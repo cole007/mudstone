@@ -6,4 +6,4 @@ _assets/scss/_config
 
 # thirdparty code might live here
 # so lets not lint
-_assets/scss/_system
+src/scss/_system
