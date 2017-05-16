@@ -11,7 +11,16 @@ if(process.env.NODE_ENV === 'development') {
 log(`Logging is enabled!, NODE_ENV: ${process.env.NODE_ENV}`)
 
 import Loader from './core/loader'
+import TransitionsManager from './views/TransitionsManager'
+import DispatchManager from './views/DispatchManager'
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
-	new Loader(document, behaviours).start()
+	new Loader(document, behaviours)
+		.start()
+		.watch([
+			new TransitionsManager(),
+			new DispatchManager()
+		])
 })

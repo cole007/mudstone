@@ -11,4 +11,12 @@ export class Spleen extends Base {
 			log('menu', this, elm)
 		}
 	}
+
+	onLeave(resolve) {
+		log('onLeave')
+		setTimeout(() => {
+			log('spleen')
+			resolve()
+		}, 5000)
+	}
 }

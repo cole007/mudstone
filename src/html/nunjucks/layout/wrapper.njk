@@ -8,12 +8,10 @@
 		{% include "../includes/header.njk" %}
 	{% endblock %}
 
-	<div id="barba-wrapper" class="site-page">
-		<div class="barba-container">
-			{% block content %}
-			{% endblock %}
-		</div>
-	</div>
+	{% block content %}
+
+
+	{% endblock %}
 
 	{% include "../includes/footer.njk" %}
 	{% block extra %}{% endblock %}

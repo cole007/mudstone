@@ -7,3 +7,5 @@
 export { Root } from './Root'
 export { Spleen } from './Spleen'
 export { Test } from './Test'
+export { Header } from './Header'
+export { Footer } from './Footer'

@@ -3,7 +3,6 @@ import Base from '../core'
 export class Root extends Base {
 	constructor(document) {
 		super(document, 'root')
-		log('hi')
 	}
 
 	events = {
@@ -16,7 +15,12 @@ export class Root extends Base {
 		this.listener.trigger('page:change')
 	}
 
+
 	onLeave(resolve) {
-		resolve()
+		log('onLeave')
+		setTimeout(() => {
+			log('r')
+			resolve()
+		}, 5000)
 	}
 }

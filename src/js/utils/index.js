@@ -176,9 +176,7 @@ export const breakpoints = {
 
 
 
-export function getSiblings(element) {
-	return Array.from(element.parentNode.children).filter(child => child !== element)
-}
+
 
 export function getParents(elem, selector) {
 	for ( ; elem && elem !== document; elem = elem.parentNode ) {

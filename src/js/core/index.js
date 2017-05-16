@@ -82,7 +82,6 @@ export default class Base extends Concert {
 	}
 	
 	initialize() {
-		log('hello')
 		this.delegateEvents()
 		return this
 	}
@@ -96,12 +95,6 @@ export default class Base extends Concert {
 		this.unDelegateEvents()
 		this.delegateEvents()
 		return this
-	}
-
-	_onLeave() {
-		if(typeof this.onLeave === 'function') {
-			return new Promise(this.onLeave)
-		}
 	}
 
 	mounted() {}
