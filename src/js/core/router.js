@@ -1,5 +1,26 @@
 import Listener from '../core/listener'
 import { Dispatcher, Pjax, HistoryManager } from 'barba.js'
+import { BaseTransition } from 'barba.js'
+
+const transition = BaseTransition.extend({
+	start: function () {
+		const { from, to, loader } = this
+		loader.beforeLeave(from, to).then(() => this.next())
+	},
+
+	next() {
+		this.newContainerLoading.then(() => this.done())
+	},
+
+	done: function () {
+		const { from, to, loader } = this
+		this.oldContainer.parentNode.removeChild(this.oldContainer)
+		loader.afterLeave(from, to).then(() => {
+			this.newContainer.style.visibility = 'visible'
+			this.deferred.resolve()
+		})
+	},
+})
 
 export default class RouteManager {
 	constructor(routes) {
@@ -21,8 +42,16 @@ export default class RouteManager {
 		return route ? route : {path: '*', namespace: null}
 	}
 
-
 	mount(loader) {
+		Pjax.getTransition = function () {
+			const { from, to } = this.History.routes
+			return transition.extend({
+				from,
+				to,
+				loader
+			})
+		}
+
 		Dispatcher.on('linkClicked', (HTMLElement) => {
 			this.clicked = true
 			const { pathname } = HTMLElement

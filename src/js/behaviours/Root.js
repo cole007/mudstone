@@ -13,12 +13,11 @@ export class Root extends Base {
 		e.preventDefault()
 	}
 
-
-	onBeforeEnter() {
+	onBeforeEnter(from, to) {
 		log('onBeforeEnter: root')
 	}
 
-	onAfterEnter() {
+	onAfterEnter(from, to) {
 		log('onAfterEnter: root')
 	}
 

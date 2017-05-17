@@ -1,11 +1,9 @@
-import Listener from './listener'
 import { Pjax } from 'barba.js'
 import { closest } from '../utils/dom'
 import * as views from '../views'
 
-export default class extends Listener {
+export default class Loader {
 	constructor(context, behaviours) {
-		super()
 		this.barba = false
 		this.context = context
 		this.behaviours = behaviours
