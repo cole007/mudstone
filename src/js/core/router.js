@@ -1,6 +1,5 @@
 import Listener from '../core/listener'
-import { Dispatcher, Pjax, HistoryManager } from 'barba.js'
-import { BaseTransition } from 'barba.js'
+import { Dispatcher, Pjax, HistoryManager, BaseTransition } from 'barba.js'
 
 const transition = BaseTransition.extend({
 	start: function () {
