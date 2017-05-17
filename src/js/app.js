@@ -15,14 +15,15 @@ function test() {
 
 import Loader from './core/loader'
 import TransitionsManager from './core/transitions'
-import DispatchManager from './core/dispatch'
+import RouteManager from './core/router'
+import routes from './views/routes'
 
 document.addEventListener('DOMContentLoaded', function () {
 	new Loader(document, behaviours)
 		.start()
 		.watch([
 			new TransitionsManager(),
-			new DispatchManager()
+			new RouteManager(routes)
 		])
 		.setup([
 			test

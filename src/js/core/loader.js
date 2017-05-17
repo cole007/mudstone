@@ -1,6 +1,7 @@
 import Listener from './listener'
 import { Pjax } from 'barba.js'
 import { closest } from '../utils/dom'
+import * as views from '../views'
 
 export default class extends Listener {
 	constructor(context, behaviours) {
@@ -16,9 +17,14 @@ export default class extends Listener {
 		return [...context.querySelectorAll('*[data-behaviour]')]
 	}
 
-	initializeBehaviour(nodes) {
+	get container() {
+		return document.querySelector(`.${Pjax.Dom.containerClass}`)
+	}
+
+	gatherBehaviours(nodes) {
 		const { behaviours } = this
-		this.scoped = nodes.map((node) => {
+
+		return [].concat.apply([], nodes.map((node) => {
 			const behaviours = node.getAttribute('data-behaviour').split(' ')
 			return {
 				node,
@@ -29,19 +35,24 @@ export default class extends Listener {
 			return obj.behaviours.map((behaviourName) => {
 				return new behaviours[behaviourName](obj.node)
 			})
-		})
+		}))
+	}
 
-		this.scoped = [].concat.apply([], this.scoped)
-		this.local = this.scoped.filter(({$el}) => closest($el, this.containerClass))
+	start(context = this.context) {
+		this.all = this.gatherBehaviours(this.getNodes(context))
+		this.all.forEach(behaviour => behaviour.initialize())		
+		this.local = this.all.filter(({$el}) => closest($el, this.containerClass))
+		setTimeout(() => {
+			this.created()
+		})
 		return this
 	}
 
-	start(context = this.context, onLoad = true) {
-		this.initializeBehaviour(this.getNodes(context))
-		const array = onLoad ? this.scoped : this.local
-		array.forEach(behaviour => behaviour.initialize())		
+	update(context) {
+		this.local = this.gatherBehaviours(this.getNodes(context))
+		this.local.forEach(behaviour => behaviour.initialize())
 		setTimeout(() => {
-			this.mounted()
+			this.updated()
 		})
 		return this
 	}
@@ -49,6 +60,9 @@ export default class extends Listener {
 	watch(funcs) {
 		this.barba = true
 		funcs.forEach((func) => func.mount(this))
+		for(let key in views) {
+			views[key].init()
+		}
 		Pjax.start()
 		return this
 	}
@@ -64,33 +78,50 @@ export default class extends Listener {
 	}
 
 	beforeEnter(to, from) {
-		return this.local.filter(behaviour => typeof behaviour.onEnter === 'function')
-											.map((behaviour) => behaviour.onEnter.bind(behaviour, to, from))
+		this.gatherBehaviours(this.getNodes(this.container))
+			.filter(behaviour => typeof behaviour.onBeforeEnter === 'function')
+			.map((behaviour) => behaviour.onBeforeEnter(to, from))
+		return this
 	}
 
-	beforeLeave() {
-		const promises = this.local.filter(behaviour => typeof behaviour.onLeave === 'function')
+	afterEnter(to, from) {
+		this.gatherBehaviours(this.getNodes(this.container))
+			.filter(behaviour => typeof behaviour.onAfterEnter === 'function')
+			.map((behaviour) => behaviour.onAfterEnter(to, from))
+		return this
+	}
+
+	beforeLeave(from, to) {
+		const promises = this.local.filter(behaviour => typeof behaviour.onBeforeLeave === 'function')
 																.map((behaviour) => {
-																	return new Promise(behaviour.onLeave)
+																	return new Promise(behaviour.onBeforeLeave.bind(behaviour, from, to))
 																})
+		return Promise.all(promises)
+	}
+
+	afterLeave(to, from) {
+		const promises = this.local.filter(behaviour => typeof behaviour.onAfterLeave === 'function')
+																.map((behaviour) => {
+																	return new Promise(behaviour.onAfterLeave.bind(behaviour, from, to))
+																})
+
 		return Promise.all(promises)
 	}
 
 	unmount() {
 		this.local = this.local.reduce((acc, curr) => {
-			log('unmount', curr)
-			if(typeof curr.destroy === 'function') {
-				curr.destroy()
-			}
+			curr.destroy === 'function' && curr.destroy()
 			return acc
 		}, [])
-
 		return this
 	}
- 
-	mounted() {
-		this.scoped.forEach(behaviour => behaviour.mounted())
 
+	created() {
+		this.all.forEach(behaviour => behaviour.mounted())
+	}
+ 
+	updated() {
+		this.local.forEach(behaviour => behaviour.mounted())
 		return this
 	}
 }

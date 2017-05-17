@@ -12,11 +12,25 @@ export class Spleen extends Base {
 		}
 	}
 
-	onLeave(resolve) {
-		log('onLeave spleen')
+	onBeforeEnter() {
+		log('onBeforeEnter: spleen')
+	}
+
+	onAfterEnter() {
+		log('onAfterEnter: spleen')
+	}
+
+	onBeforeLeave(from, to, resolve) {
 		setTimeout(() => {
-			log('Resolved spleen')
+			log('onBeforeLeave: spleen')
 			resolve()
-		}, 5000)
+		}, 1000)
+	}
+
+	onAfterLeave(from, to, resolve) {
+		setTimeout(() => {
+			log('onAfterLeave: spleen')
+			resolve()
+		}, 1000)
 	}
 }
