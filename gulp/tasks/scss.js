@@ -1,7 +1,6 @@
 import gulp from 'gulp'
 import rename from 'gulp-rename'
 import sass from 'gulp-sass'
-import sassGlob from 'gulp-sass-glob'
 import sourcemaps from 'gulp-sourcemaps'
 import autoprefixer from 'autoprefixer'
 import postcss from 'gulp-postcss'
@@ -9,7 +8,6 @@ import cssnano from 'gulp-cssnano'
 import gulpif from 'gulp-if'
 import writeSVG from 'postcss-write-svg'
 import aspectRatio from 'postcss-aspect-ratio'
-import inlineSVG from 'postcss-inline-svg'
 import animateCss from 'postcss-animation'
 import postcssTriangle from 'postcss-triangle'
 import quantityQueries from 'postcss-quantity-queries'
@@ -25,9 +23,7 @@ export function scss() {
 
 	const paths = {
 		src: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.src, '**/**/*.scss'),
-		components: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.components),
-		dest: path.resolve(process.env.PWD, PATH_CONFIG.dest, PATH_CONFIG.scss.dest),
-		svg: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.inlineSVG)
+		dest: path.resolve(process.env.PWD, PATH_CONFIG.dest, PATH_CONFIG.scss.dest)
 	}
 
 
@@ -43,7 +39,6 @@ export function scss() {
 		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init()))
-		.pipe(sassGlob())
 		.pipe(sass(TASK_CONFIG.scss.options))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init({
@@ -56,9 +51,6 @@ export function scss() {
 			postcssTriangle(),
 			quantityQueries(),
 			lost(),
-			inlineSVG({
-				path: paths.svg
-			}),
 			writeSVG({
 				encoding: 'base64'
 			}),

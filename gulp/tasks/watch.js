@@ -20,13 +20,7 @@ export function watchTasks() {
 		if(taskConfig) {
 			const srcPath = path.resolve(process.env.PWD, PATH_CONFIG.src, taskPath.src)
 			const globPattern = '**/*' + (taskConfig.extensions ? '.{' + taskConfig.extensions.join(',') + '}' : '')
-
-			const files = taskName === 'scss' 
-				? [path.resolve(process.env.PWD, PATH_CONFIG.src, taskPath.src), path.resolve(process.env.PWD, PATH_CONFIG.src, taskPath.components)]
-				: path.join(srcPath, globPattern)
-
-
-			watch(files, watchConfig, function () {
+			watch(path.join(srcPath, globPattern), watchConfig, function () {
 				tasks[`${taskName}`]()
 			})
 		}

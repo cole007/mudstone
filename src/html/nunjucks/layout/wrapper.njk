@@ -1,0 +1,21 @@
+{% set path = '../includes/' %}
+{% extends "../layout/shell.njk" %}
+
+
+{% block base %}
+
+	{% block header %}
+		{% include "../includes/header.njk" %}
+	{% endblock %}
+
+	<div id="barba-wrapper" class="site-page">
+		<div class="barba-container">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>
+
+	{% include "../includes/footer.njk" %}
+	{% block extra %}{% endblock %}
+
+{% endblock %}

@@ -3,7 +3,6 @@
   "src": "./src",
   "dest": "./tmp/public",
   "dist": "./tmp/public/dist",
-	"build": "./deploy/public",
 
 	"browserSync": {
 		"server": {
@@ -28,7 +27,7 @@
   },
 
   "js": {
-    "src": "assets/js",
+    "src": "js",
     "dest": "dist/js",
 		"libs": [
 			"./node_modules/jquery/dist/jquery.min.js",
@@ -42,10 +41,45 @@
   },
 
   "scss": {
-    "src": "assets/scss",
-    "dest": "dist/css",
-		"inlineSVG": "images/svg-assets",
-		"components": "components/**/**/**/*.scss"
+    "src": "scss",
+    "dest": "dist/css"
+  },
+
+  "cssFonts": {
+    "src": "scss",
+    "dest": "dist/css"
+  },
+
+  "images": {
+    "src": "images/site",
+    "dest": "dist/images"
+  },
+
+  "fonts": {
+    "src": "fonts",
+    "dest": "dist/fonts"
+  },
+
+  "symbols": {
+    "src": "images/svg-symbols",
+    "dest": "dist/images",
+    "fileName": "symbols.njk",
+    "fileDest": "html/nunjucks/includes"
+  },
+
+	"sprites": {
+    "src": "images/svg-sprites",
+    "dest": "dist/images"
+	},
+
+  "svgs": {
+    "src": "images/svg-assets",
+    "dest": "dist/images"
+  },
+
+  "favicons": {
+    "src": "favicons",
+    "dest": "./"
   },
 
 	"tokens": {
@@ -57,43 +91,6 @@
 		],
 		"dest": "assets/scss/_config"
 	},
-
-  "cssFonts": {
-    "src": "assets/scss",
-    "dest": "dist/css"
-  },
-
-  "images": {
-    "src": "assets/images/site",
-    "dest": "dist/images"
-  },
-
-  "fonts": {
-    "src": "assets/fonts",
-    "dest": "dist/fonts"
-  },
-
-  "symbols": {
-    "src": "assets/images/svg-symbols",
-    "dest": "dist/images",
-    "fileName": "symbols.njk",
-    "fileDest": "html/nunjucks/includes"
-  },
-
-	"sprites": {
-    "src": "assets/images/svg-sprites",
-    "dest": "dist/images"
-	},
-
-  "svgs": {
-    "src": "assets/images/svg-assets",
-    "dest": "dist/images"
-  },
-
-  "favicons": {
-    "src": "assets/favicons",
-    "dest": "./"
-  },
 
   "tags": {
     "src": "./tmp/public/*.html",

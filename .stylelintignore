@@ -2,8 +2,8 @@
 # ignoring the config folder
 # contains some custom syntax (lost) that doesn't play nice
 
-src/assets/scss/_config
+src/scss/_config
 
 # thirdparty code might live here
 # so lets not lint
-src/assets/scss/_system
+src/scss/_system

@@ -1,42 +1,48 @@
-
-import fractal from '../fractal'
+import browserSync from 'browser-sync'
 import gulp from 'gulp'
 import webpack from 'webpack'
 import webpackConfig from './webpack.config.babel'
-import {
-	pathToUrl
-} from '../libs/utils'
+import { pathToUrl } from '../libs/utils'
 import path from 'path'
 
-export default function browserSyncTask() {
-
+export default function browserSyncTask () {
 
 	const env = global.production ? 'production' : 'development'
 	const config = webpackConfig(env)
 	const compiler = webpack(config)
-	const logger = fractal.cli.console
+	const proxyConfig = SERVER.proxy || null
 
-	fractal.web.set('server.sync', true)
+	if(typeof proxyConfig === 'string') {
+		SERVER.proxy = {
+			target: proxyConfig
+		}
+	}
 
-	fractal.web.set('server.syncOptions', {
-		baseDir: path.resolve(process.env.PWD, SERVER.server.baseDir),
-		middleware: [
-			require('webpack-dev-middleware')(compiler, {
-				stats: 'errors-only',
-				publicPath: pathToUrl('/', config.output.publicPath)
-			}),
-			require('webpack-hot-middleware')(compiler)
-		],
-		port: 3000
-	})
+	// Resolve path from PWD
+	if(SERVER.server && SERVER.server.baseDir) {
+		SERVER.server.baseDir = path.resolve(process.env.PWD, SERVER.server.baseDir)
+	}
 
-	const server = fractal.web.server()
+	// Resolve files from PWD
+	if(SERVER.files) {
+		SERVER.files = SERVER.files.map(function (glob) {
+			return path.resolve(process.env.PWD, glob)
+		})
+	}
 
-	server.on('error', err => logger.error(err.message))
+	const server = SERVER.proxy || SERVER.server
 
-	return server.start().then(() => {
-		logger.success(`Fractal server is now running at ${server.url}`)
-	})
+	server.middleware = [
+		require('webpack-dev-middleware')(compiler, {
+			stats: 'errors-only',
+			publicPath: pathToUrl('/', config.output.publicPath)
+		}),
+		require('webpack-hot-middleware')(compiler)
+	]
+
+
+	browserSync.init(SERVER)
 }
 
 gulp.task('browserSync', browserSyncTask)
+

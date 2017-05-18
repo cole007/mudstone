@@ -1,0 +1,17 @@
+{% extends "layout/wrapper.njk" %}
+
+{% block title %}{{ title }} | Home page{% endblock %}
+{% block bodyClass %}has-hero{% endblock %}
+
+{% block content %}
+
+	<div class="hero">
+		<img class="hero__img" src="https://source.unsplash.com/category/nature/1600x900" width="1600" height="900" alt="" />
+		<h1 class="hero__heading">{{ title }}</h1>
+	</div>
+	
+{% endblock %}
+
+
+{% block extra %}
+{% endblock %}
