@@ -12,10 +12,7 @@ const mandelbrot = require('@frctl/mandelbrot')({
 	styles: ['default', '/dist/css/theme.css'],
 	static: {
 		mount: 'fractal',
-	},
-	scripts: [
-		'/dist/js/bundle.js'
-	]
+	}
 })
 
 const mdAbbr = require('markdown-it-abbr')

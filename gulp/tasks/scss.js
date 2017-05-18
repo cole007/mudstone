@@ -1,6 +1,7 @@
 import gulp from 'gulp'
 import rename from 'gulp-rename'
 import sass from 'gulp-sass'
+import sassGlob from 'gulp-sass-glob'
 import sourcemaps from 'gulp-sourcemaps'
 import autoprefixer from 'autoprefixer'
 import postcss from 'gulp-postcss'
@@ -24,6 +25,7 @@ export function scss() {
 
 	const paths = {
 		src: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.src, '**/**/*.scss'),
+		components: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.components),
 		dest: path.resolve(process.env.PWD, PATH_CONFIG.dest, PATH_CONFIG.scss.dest),
 		svg: path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.scss.inlineSVG)
 	}
@@ -41,6 +43,7 @@ export function scss() {
 		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init()))
+		.pipe(sassGlob())
 		.pipe(sass(TASK_CONFIG.scss.options))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init({

@@ -44,14 +44,16 @@
   "scss": {
     "src": "assets/scss",
     "dest": "dist/css",
-		"inlineSVG": "images/svg-assets"
+		"inlineSVG": "images/svg-assets",
+		"components": "components/**/**/**/*.scss"
   },
 
 	"tokens": {
 		"src": "tokens",
 		"files": [
 			"colors.json",
-			"dimensions.json"
+			"fonts.json",
+			"breakpoints.json"
 		],
 		"dest": "assets/scss/_config"
 	},
