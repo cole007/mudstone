@@ -26,13 +26,20 @@
 	Note. 
 	The js task is mainly used by webpack, only the filename is ever used by gulp
 */
+
+
+
 export default {
 
 	stamp: Date.now(),
 
 	js: {
 		entries: {
-			app: ['babel-polyfill','./app.js']
+			app: [
+				'babel-polyfill',
+				'./src/assets/js/app.js'
+			],
+			globs: './src/components/**/*.js'
 		},
 		extensions: ['js', 'json'],
 		extractSharedJs: false,
@@ -64,13 +71,20 @@ export default {
 		filename: 'style' // no extension
 	},
 
-	html: {
-		task: 'code',
+	tokens: {
+		task: 'asset',
 		watch: true,
-		dataFile: 'data/global.json',
-		extensions: ['njk', 'html', 'json'],
-		excludeFolders: ['layout', 'macros', 'data', 'partials', 'modules', 'wrapper', 'includes']
+		prefix: '$tokens: ',
+		extensions: ['json']
 	},
+
+	// html: {
+	// 	task: 'code',
+	// 	watch: true,
+	// 	dataFile: 'data/global.json',
+	// 	extensions: ['njk', 'html', 'json'],
+	// 	excludeFolders: ['layout', 'macros', 'data', 'partials', 'modules', 'wrapper', 'includes']
+	// },
 
 	twig: {
 		task: 'asset',
@@ -141,7 +155,7 @@ export default {
 		task: 'asset',
 		watch: true,
 		scssTemplate: '../gulp/libs/symbols.tmp.scss',
-		scssOutputPath: 'scss/_system/gulp-output/',
+		scssOutputPath: 'assets/scss/_system/gulp-output/',
 		scssOutputFile: '_svg-symbols.scss',
 		sourceFile: 'images/svg-symbols/source.html',
 		fileName: 'symbols.njk',

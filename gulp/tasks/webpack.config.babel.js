@@ -9,7 +9,7 @@ import {
 import {
 	pathToUrl
 } from '../libs/utils'
-
+import glob from 'glob'
 
 const webpackConfig = env => {
 
@@ -21,10 +21,12 @@ const webpackConfig = env => {
 		ifProd
 	} = getIfUtils(env)
 
+
+
 	const config = {
-		entry: TASK_CONFIG.js.entries,
+		entry: [...TASK_CONFIG.js.entries.app].concat(glob.sync(TASK_CONFIG.js.entries.globs)),
 		cache: true,
-		context: context,
+		//context: context,
 		output: {
 			path: path.normalize(dest),
 			filename: `${filename}.js`,

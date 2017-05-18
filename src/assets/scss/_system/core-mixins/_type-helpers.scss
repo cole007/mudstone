@@ -77,9 +77,9 @@
 	}
 }
 
-@mixin font-baseline($font-size: $base-font-size, $line-height: $base-line-height, $default: $browser-default-font-size) {
-  font-size: $font-size / $default + em;
-  line-height: strip-units($line-height) / strip-units($font-size); /* [2] */
+@mixin font-baseline($font-size: $base-font-size, $line-height:  $base-line-height, $default:$browser-default-font-size) {
+  font-size: $base-font-size / strip-units($browser-default-font-size) + em;
+  line-height: $base-line-height / $base-font-size; /* [2] */
 }
 
 @mixin baseline($baseline: $magic-number) {
@@ -117,23 +117,27 @@
 }
 
 
-@mixin size($min: $min-font, $max: $max-font, $line-height: false) {
-	font-size: (($min * 1px) / $min-font) + rem;
+@mixin size($min: $min-font, $max: $max-font, $line-height-multiple: false) {
+  $local-line-height: strip-units($desktop-line-height);
 
-	@if(type-of($line-height) == number or $line-height == true) {
-		line-height:  ($line-height / $max);
-	} @else {
-		line-height:  $line-height-ratio;
+	font-size: rem($min);
+
+	@if(type-of($line-height-multiple) == number or $line-height-multiple == true) {
+		line-height: ($local-line-height) / strip-units($max);
+	}
+
+	@if(type-of($line-height-multiple) == boolean and $line-height-multiple == false) {
+		line-height: $desktop-line-height / $min;
 	}
 
 	@if strip-units($max) != strip-units($min) {
-		@include mq($from: $min-width) {
-			font-size: calc( #{strip-units($min)}px + (#{strip-units($max)} - #{strip-units($min)}) * ((100vw - #{$min-width}) / (#{strip-units($max-width)} - #{strip-units($min-width)})) );
+		@include mq($from: breakpoint('mobile')) {
+	  	font-size: calc( #{strip-units($min)}px + (#{strip-units($max)} - #{strip-units($min)}) * ((100vw - #{breakpoint('mobile')}) / (#{strip-units(breakpoint('desktop'))} - #{strip-units(breakpoint('mobile'))})) );
 		}
-	}
 
-	@include mq($from: $max-width) {
-		font-size: (($max * 1px) / $max-font) + rem;
+		@include mq($from: breakpoint('desktop')) {
+			font-size: rem($max);
+		}
 	}
 }
 

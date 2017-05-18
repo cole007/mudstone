@@ -3,11 +3,29 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+<<<<<<< HEAD
 ### 7.1.0
 
 #### Breaking Change
 
 - query dependency removed, event delegation with `npm dom-delegate`
+=======
+### 7.0.25
+
+#### Change
+
+- Build size report only shows dist assets
+
+### 7.0.24
+
+#### Added
+
+- Inline svg postcss plugin added
+
+```
+background: svg-load('arrow.svg', fill=#000000, stroke=#ffffff) no-repeat;
+```
+>>>>>>> 0c4ab4e336a87beeff4866701259777b2ad62541
 
 ### 7.0.23
 
