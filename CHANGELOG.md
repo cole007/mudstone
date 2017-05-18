@@ -3,13 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-<<<<<<< HEAD
 ### 7.1.0
+
+#### Added
+
+- JSON to scss
+- Fractal
+- Tests (wip)
+- Barba integration
 
 #### Breaking Change
 
 - query dependency removed, event delegation with `npm dom-delegate`
-=======
+- javascript folder structure changed
+- Base events object syntax
+
+
 ### 7.0.25
 
 #### Change
@@ -25,7 +34,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ```
 background: svg-load('arrow.svg', fill=#000000, stroke=#ffffff) no-repeat;
 ```
->>>>>>> 0c4ab4e336a87beeff4866701259777b2ad62541
 
 ### 7.0.23
 
