@@ -11,16 +11,27 @@ export class Root extends Base {
 	
 	onClick(e) {
 		e.preventDefault()
-
-		this.listener.trigger('page:change')
 	}
 
+	onBeforeEnter(from, to) {
+		log('onBeforeEnter: root')
+	}
 
-	onLeave(resolve) {
-		log('onLeave root')
+	onAfterEnter(from, to) {
+		log('onAfterEnter: root')
+	}
+
+	onBeforeLeave(from, to, resolve) {
 		setTimeout(() => {
-			log('Resolved root')
+			log('onBeforeLeave: root')
 			resolve()
-		}, 5000)
+		}, 1000)
+	}
+
+	onAfterLeave(from, to, resolve) {
+		setTimeout(() => {
+			log('onAfterLeave: root')
+			resolve()
+		}, 1000)
 	}
 }

@@ -3,7 +3,6 @@ import Concert from 'concert'
 import uniqueId from 'lodash.uniqueid'
 import isObject from 'lodash.isobject'
 import Listener from './listener'
-import Store from './store'
 /*
 	Base Class, 
 */
@@ -11,7 +10,6 @@ export default class Base extends Concert {
 
 	constructor(el = document, name, state = {}) {
 		super()
-		this.store = new Store()
 		this.listener = new Listener()
 		this.$delegate = new Delegate(el)
 		this.$el = el
