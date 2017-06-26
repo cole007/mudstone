@@ -44,24 +44,21 @@ const webpackConfig = env => {
 					exclude: /node_modules/,
 					query: {
 						'presets': [
-							['es2015', {
-								modules: false
-							}],
-							'stage-0',
-							'react'
+							['env', {
+								'targets': {
+									'browsers': ['last 2 versions', 'safari >= 7']
+								}
+							}]
 						],
 						'plugins': [
-							'transform-runtime',
 							'transform-object-rest-spread',
-							'transform-es2015-parameters',
-							'transform-es2015-destructuring',
-							'transform-class-properties',
-							'syntax-object-rest-spread'
+							'transform-class-properties'
 						],
 						babelrc: false,
 						cacheDirectory: false
 					}
 				},
+
 				{
 					test: /\.js$/,
 					loader: 'eslint-loader',

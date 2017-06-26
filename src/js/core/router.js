@@ -66,6 +66,10 @@ export default class RouteManager {
 			const { pathname } = HTMLElement
 			const path = pathname.split('.').shift()
 			this.match(pathname)
+
+			const { from, to } = HistoryManager.routes
+			loader.unmount()
+					.beforeEnter(from, to)
 		})
 
 		Dispatcher.on('initStateChange', (/*currentStatus*/) => {})
@@ -75,9 +79,8 @@ export default class RouteManager {
 		Dispatcher.on('transitionCompleted', (/*currentStatus, prevStatus*/) => {
 			if(this.clicked) {
 				const { from, to } = HistoryManager.routes
-				loader.unmount()
-					.beforeEnter(from, to)
-					.update(this.container, false)
+				
+				loader.update(this.container, false)
 					.globals()
 					.afterEnter(from, to)
 			}

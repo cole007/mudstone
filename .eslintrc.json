@@ -15,7 +15,8 @@
 		"global": true,
 		"TASK_CONFIG": true,
 		"PATH_CONFIG": true,
-		"SERVER": true
+		"SERVER": true,
+		"module": true
 	},
 	"plugins": [
 		"react",

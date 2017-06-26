@@ -13,6 +13,11 @@ function test() {
 	log('run on every page load')
 }
 
+if(module.hot) {
+	module.hot.accept()
+}
+
+
 import Loader from './core/loader'
 import RouteManager from './core/router'
 import routes from './views/routes'
