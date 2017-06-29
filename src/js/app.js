@@ -20,14 +20,13 @@ if(module.hot) {
 
 import Loader from './core/loader'
 
-import routes from './views/routes'
 import pathToRegexp from 'path-to-regexp'
 
 window.pathToRegexp = pathToRegexp
 
 new Loader(document, behaviours)
 	.start()
-	.watch(routes)
+	.watch()
 	// .setup([
 	// 	test
 	// ])

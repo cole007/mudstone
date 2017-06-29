@@ -2,15 +2,9 @@ import Base from '../core'
 
 export class B extends Base {
 	constructor(el) {
-		super(el)
-		log('init B')
+		super(el, 'B')
+		log('init A')
 	}
 
-	destroy() {
-		log('destroy B')
-	}
-
-	mounted() {
-		log('mount B')
-	}
+	mounted() {}
 }
