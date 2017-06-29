@@ -3,6 +3,7 @@
 	Returns a single instance
 */
 let _storeInstance = null
+
 export default class Store {
 	constructor() {
 		if(!_storeInstance){
@@ -21,14 +22,5 @@ export default class Store {
 
 	get state() {
 		return this._state
-	}
-
-	reset(name) {
-		this._state[name] = {}
-	}
-
-	destroy() {
-		_storeInstance = null
-		this._state = {}
 	}
 }
