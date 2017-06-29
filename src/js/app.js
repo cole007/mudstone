@@ -25,14 +25,12 @@ import pathToRegexp from 'path-to-regexp'
 
 window.pathToRegexp = pathToRegexp
 
-document.addEventListener('DOMContentLoaded', function () {
-	new Loader(document, behaviours)
-		.start()
-		.watch([
-			new RouteManager(routes)
-		])
-		.setup([
-			test
-		])
-		.globals()
-})
+new Loader(document, behaviours)
+	.start()
+	.watch([
+		new RouteManager(routes)
+	])
+	.setup([
+		test
+	])
+	.globals()

@@ -1,16 +1,16 @@
 import Base from '../core'
 
-export class Header extends Base {
+export class A extends Base {
 	constructor(el) {
 		super(el)
-		log('Header')
+		log('init A')
 	}
 
 	destroy() {
-		log('destroy Header')
+		log('destroy A')
 	}
 
 	mounted() {
-		log('mount Header')
+		log('mount A')
 	}
 }

@@ -38,8 +38,13 @@ export default class Loader {
 
 	start(context = this.context) {
 		this.all = this.gatherBehaviours(this.getNodes(context))
-		this.all.forEach(behaviour => behaviour.initialize())		
+		this.root = this.all.filter(({$el}) => !DomClosest($el, this.containerClass))
+						.map(behaviour => {
+							behaviour.initialize()
+							return behaviour
+						})		
 		this.local = this.all.filter(({$el}) => DomClosest($el, this.containerClass))
+
 		setTimeout(() => {
 			this.created()
 		})
@@ -105,6 +110,7 @@ export default class Loader {
 
 		return Promise.all(promises)
 	}
+
 
 	unmount() {
 		this.local = this.local.reduce((acc, curr) => {

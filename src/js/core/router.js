@@ -1,6 +1,6 @@
 import Listener from '../core/listener'
 import { Dispatcher, Pjax, HistoryManager, BaseTransition } from 'barba.js'
-import pathToRegexp from 'path-to-regexp'
+// import pathToRegexp from 'path-to-regexp'
 
 const transition = BaseTransition.extend({
 	start: function () {
@@ -27,7 +27,12 @@ export default class RouteManager {
 		this.routes = routes
 		this.listener = new Listener()
 		this.clicked = false
-		this.container = document.querySelector(`.${Pjax.Dom.containerClass}`)
+	}
+
+
+
+	get container() {
+		return document.querySelector(`.${Pjax.Dom.containerClass}`)
 	}
 
 	currentRoute() {
@@ -43,7 +48,7 @@ export default class RouteManager {
 	}
 
 	match(pathname) {
-		const tokens = pathToRegexp(pathname)
+		// const tokens = pathToRegexp(pathname)
 
 		HistoryManager.routes = {
 			from: this.currentRoute(),
@@ -64,12 +69,13 @@ export default class RouteManager {
 		Dispatcher.on('linkClicked', (HTMLElement) => {
 			this.clicked = true
 			const { pathname } = HTMLElement
-			const path = pathname.split('.').shift()
+			//const path = pathname.split('.').shift()
 			this.match(pathname)
 
-			const { from, to } = HistoryManager.routes
+			log('linkClicked')
+			//const { from, to } = HistoryManager.routes
 			loader.unmount()
-					.beforeEnter(from, to)
+					//.beforeEnter(from, to)
 		})
 
 		Dispatcher.on('initStateChange', (/*currentStatus*/) => {})
@@ -78,11 +84,11 @@ export default class RouteManager {
 
 		Dispatcher.on('transitionCompleted', (/*currentStatus, prevStatus*/) => {
 			if(this.clicked) {
-				const { from, to } = HistoryManager.routes
-				
+				//const { from, to } = HistoryManager.routes
+				log('transitionCompleted')
 				loader.update(this.container, false)
-					.globals()
-					.afterEnter(from, to)
+					// .globals()
+					// .afterEnter(from, to)
 			}
 		})
 	}

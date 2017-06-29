@@ -4,15 +4,15 @@
 	"menu": [
 		{
 			"title": "MudStone",
-			"url": "https://github.com/cole007/mudstone/"
+			"url": "/a.html"
 		},
 		{
 			"title": "User Guide",
-			"url": "https://github.com/cole007/mudstone/blob/master/user-guide.md"
+			"url": "/b.html"
 		},
 		{
 			"title": "Changelog",
-			"url": "https://github.com/cole007/mudstone/blob/master/CHANGELOG.md"
+			"url": "/c.html"
 		}
 	],
 
