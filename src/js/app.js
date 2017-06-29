@@ -19,7 +19,7 @@ if(module.hot) {
 
 
 import Loader from './core/loader'
-import RouteManager from './core/router'
+
 import routes from './views/routes'
 import pathToRegexp from 'path-to-regexp'
 
@@ -27,10 +27,8 @@ window.pathToRegexp = pathToRegexp
 
 new Loader(document, behaviours)
 	.start()
-	.watch([
-		new RouteManager(routes)
-	])
-	.setup([
-		test
-	])
-	.globals()
+	.watch(routes)
+	// .setup([
+	// 	test
+	// ])
+	// .globals()

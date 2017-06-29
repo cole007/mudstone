@@ -22,14 +22,14 @@ const transition = BaseTransition.extend({
 	},
 })
 
+
+
 export default class RouteManager {
 	constructor(routes) {
 		this.routes = routes
 		this.listener = new Listener()
 		this.clicked = false
 	}
-
-
 
 	get container() {
 		return document.querySelector(`.${Pjax.Dom.containerClass}`)
@@ -51,8 +51,8 @@ export default class RouteManager {
 		// const tokens = pathToRegexp(pathname)
 
 		HistoryManager.routes = {
-			from: this.currentRoute(),
-			to: this.getRoute(pathname)
+			from: 'this.currentRoute()',
+			to: 'this.getRoute(pathname)'
 		}
 	}
 

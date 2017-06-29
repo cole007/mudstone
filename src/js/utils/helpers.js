@@ -1,12 +1,9 @@
-
-
-export function parseUrl(url) {
-	const pathToRegexp = require('path-to-regexp')
-	return pathToRegexp.parse(url)
-}
-
-
-
+/**
+ * Helper function to lock the screen in the current position and prevent scrolling
+ *
+ * @function lock
+ * @return {Object}, capture/release methods
+ */
 export const lock = () => {
 	const { style } = document.body
 	let windowTop
@@ -29,4 +26,16 @@ export const lock = () => {
 			window.scrollTo(0, windowTop)
 		}
 	}
+}
+
+
+/**
+ * Converts a hypenated string into camel case: margin-top => marginTop
+ *
+ * @memberOf utils/helpers
+ * @param  {String} str
+ * @return {String} str
+ */
+export function camelCase(str) {
+	return str.replace(/-([a-z])/g, function($0, $1) { return $1.toUpperCase() }).replace('-','')
 }
