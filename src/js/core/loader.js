@@ -27,16 +27,11 @@ function getNodes(context = document) {
 function gatherBehaviours(nodes) {
 	return nodes.map((node) => {
 		const behaviours = node.getAttribute('data-behaviour').split(' ')
-		return {
-			node,
-			behaviours
-		}
-	})
-	.map((obj) => {
-		return obj.behaviours.map((behaviourName) => {
-			return { behaviourName, node: obj.node}
+		return behaviours.map((behaviourName) => {
+			return { behaviourName, node: node}
 		})
-	}).reduce((acc, curr) => [ ...acc, ...curr ], [])
+	})
+	.reduce((acc, curr) => [ ...acc, ...curr ], [])
 }
 
 /**
