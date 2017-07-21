@@ -1,4 +1,4 @@
-import { Pjax } from 'barba.js'
+import { Pjax, Prefetch } from 'barba.js'
 import { DomClosest } from '../utils/dom'
 // import * as views from '../views'
 import RouteManager from './router'
@@ -103,17 +103,17 @@ export default class Loader {
 			// initialize it (adds, events and the such)
 			behaviour.initialize()
 			// return the behaviour
-			return behaviour
+			return { node, behaviour }
 		})
 
 		// get the scoped behaviours, we'll need this later for destroying
 		// inital will be false on pagination so we can use the current set as scopeed
-		this.scroped = inital === true ? this.current.filter(({node}) => DomClosest(node, this.containerClass))
-																		: this.scoped = this.current
+		this.scoped = inital === true ? this.current.filter(({node}) => DomClosest(node, this.containerClass))
+			: this.scoped = this.current
 
 		// from the event loop, call each behaviours mounted method
 		setTimeout(() => {
-			this.current.forEach(behaviour => behaviour.mounted())
+			this.current.forEach(({behaviour}) => behaviour.mounted())
 		})
 
 		return this
@@ -129,6 +129,7 @@ export default class Loader {
 	update(context) {
 		// where are we, barba me thinks, oh, update the context, might come in handy.. dunno
 		this.context = context
+
 		// do the load thinger with the current batch of nodes
 		this.load(gatherBehaviours(getNodes(context)), false)
 		return this
@@ -143,8 +144,7 @@ export default class Loader {
 	watch(routes = []) {
 		// kick off the router... wip
 		new RouteManager(routes).mount(this)
-		// pjax yeah
-		Pjax.start()
+
 		return this
 	}
 
@@ -157,45 +157,42 @@ export default class Loader {
 	unmount() {
 		// loop over each behaviour and destroy, and empty the array
 		this.scoped = this.scoped.reduce((acc, curr) => {
-			// an emptry method you can use in your behaviour
-			curr.unmount()
-			// base destroy, removes event handlers
-			curr.destroy()
+			// base destroy, removes event handlers, unmount() called in base
+			curr.behaviour.destroy()
 			return acc
 		}, [])
+
 		return this
 	}
 
+	// beforeEnter(to, from) {
+	// 	this.current
+	// 		.filter(behaviour => typeof behaviour.onBeforeEnter === 'function')
+	// 		.map((behaviour) => behaviour.onBeforeEnter(to, from))
+	// 	return this
+	// }
 
+	// afterEnter(to, from) {
+	// 	this.current
+	// 		.filter(behaviour => typeof behaviour.onAfterEnter === 'function')
+	// 		.map((behaviour) => behaviour.onAfterEnter(to, from))
+	// 	return this
+	// }
 
-	beforeEnter(to, from) {
-		this.current
-			.filter(behaviour => typeof behaviour.onBeforeEnter === 'function')
-			.map((behaviour) => behaviour.onBeforeEnter(to, from))
-		return this
-	}
+	// beforeLeave(from, to) {
+	// 	const promises = this.current.filter(behaviour => typeof behaviour.onBeforeLeave === 'function')
+	// 															.map((behaviour) => {
+	// 																return new Promise(behaviour.onBeforeLeave.bind(behaviour, from, to))
+	// 															})
+	// 	return Promise.all(promises)
+	// }
 
-	afterEnter(to, from) {
-		this.current
-			.filter(behaviour => typeof behaviour.onAfterEnter === 'function')
-			.map((behaviour) => behaviour.onAfterEnter(to, from))
-		return this
-	}
+	// afterLeave(to, from) {
+	// 	const promises = this.current.filter(behaviour => typeof behaviour.onAfterLeave === 'function')
+	// 															.map((behaviour) => {
+	// 																return new Promise(behaviour.onAfterLeave.bind(behaviour, from, to))
+	// 															})
 
-	beforeLeave(from, to) {
-		const promises = this.current.filter(behaviour => typeof behaviour.onBeforeLeave === 'function')
-																.map((behaviour) => {
-																	return new Promise(behaviour.onBeforeLeave.bind(behaviour, from, to))
-																})
-		return Promise.all(promises)
-	}
-
-	afterLeave(to, from) {
-		const promises = this.current.filter(behaviour => typeof behaviour.onAfterLeave === 'function')
-																.map((behaviour) => {
-																	return new Promise(behaviour.onAfterLeave.bind(behaviour, from, to))
-																})
-
-		return Promise.all(promises)
-	}
+	// 	return Promise.all(promises)
+	// }
 }

@@ -136,6 +136,7 @@ export default class Base extends Concert {
 		@return this
 	*/
 	destroy() {
+		log('destroyed in base')
 		this.unmount()
 		this.unDelegateEvents()
 		for(let key in this){
@@ -150,5 +151,7 @@ export default class Base extends Concert {
 	*/
 	mounted() {}
 
-	unmount() {}
+	// unmount() {
+	// 	log('unmounted in base')
+	// }
 }

@@ -1,28 +1,20 @@
 import Listener from '../core/listener'
-import { Dispatcher, Pjax, HistoryManager, BaseTransition } from 'barba.js'
+import { Dispatcher, Prefetch, Pjax, HistoryManager, BaseTransition } from 'barba.js'
 import pathToRegexp from 'path-to-regexp'
 
 const transition = BaseTransition.extend({
 	start: function () {
-		const { from, to, loader } = this
-		loader.beforeLeave(from, to).then(() => this.next())
-	},
-
-	next() {
+		log('start trans')
 		this.newContainerLoading.then(() => this.done())
 	},
 
 	done: function () {
-		const { from, to, loader } = this
+		log('end trans')
 		this.oldContainer.parentNode.removeChild(this.oldContainer)
-		loader.afterLeave(from, to).then(() => {
-			this.newContainer.style.visibility = 'visible'
-			this.deferred.resolve()
-		})
-	},
+		this.newContainer.style.visibility = 'visible'
+		this.deferred.resolve()
+	}
 })
-
-
 
 export default class RouteManager {
 	constructor(routes) {
@@ -63,10 +55,7 @@ export default class RouteManager {
 
 	mount(loader) {
 		Pjax.getTransition = function () {
-			const { from, to } = this.History.routes
 			return transition.extend({
-				from,
-				to,
 				loader
 			})
 		}
@@ -75,24 +64,26 @@ export default class RouteManager {
 			this.clicked = true
 			const { pathname } = HTMLElement
 			this.match(pathname)
-			const { from, to } = HistoryManager.routes
-
-			loader.unmount()
-					.beforeEnter(from, to)
 		})
 
 		Dispatcher.on('initStateChange', (/*currentStatus*/) => {})
 
-		Dispatcher.on('newPageReady', (/*currentStatus, oldStatus, container, newContainer*/) => {})
+		Dispatcher.on('newPageReady', (x, y, HTMLElementContainer) => {
+			if(this.clicked) {
+				loader.unmount().update(HTMLElementContainer, false)
+			}
+		})
 
 		Dispatcher.on('transitionCompleted', (/*currentStatus, prevStatus*/) => {
 			if(this.clicked) {
-				//const { from, to } = HistoryManager.routes
 				log('transitionCompleted')
-				loader.update(this.container, false)
-					// .globals()
-					// .afterEnter(from, to)
 			}
 		})
+
+		Pjax.Dom.containerClass = 'barba-container'
+		Pjax.Dom.wrapperId = 'barba-wrapper'
+
+		Prefetch.init()
+		Pjax.start()
 	}
 }
