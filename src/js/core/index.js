@@ -136,8 +136,7 @@ export default class Base extends Concert {
 		@return this
 	*/
 	destroy() {
-		log('destroyed in base')
-		this.unmount()
+		if(typeof this.unmount === 'function') this.unmount()
 		this.unDelegateEvents()
 		for(let key in this){
 			delete this[key]

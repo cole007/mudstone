@@ -10,7 +10,7 @@ export class B extends Base {
 
 	mounted() {}
 
-	unmount() {
-		log('Unmount happened to B')
-	}
+	// unmount() {
+	// 	log('Unmount happened to B')
+	// }
 }
