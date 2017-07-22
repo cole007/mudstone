@@ -1,4 +1,4 @@
-import { Pjax, Prefetch } from 'barba.js'
+import { Pjax } from 'barba.js'
 import { DomClosest } from '../utils/dom'
 // import * as views from '../views'
 import RouteManager from './router'

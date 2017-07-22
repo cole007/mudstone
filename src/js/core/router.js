@@ -1,10 +1,11 @@
 import Listener from '../core/listener'
 import { Dispatcher, Prefetch, Pjax, HistoryManager, BaseTransition } from 'barba.js'
 import pathToRegexp from 'path-to-regexp'
+import { transitions } from '../views'
 
 const transition = BaseTransition.extend({
 	start: function () {
-		log('start trans')
+		log('start trans', this)
 		this.newContainerLoading.then(() => this.done())
 	},
 
@@ -55,7 +56,23 @@ export default class RouteManager {
 
 	mount(loader) {
 		Pjax.getTransition = function () {
+			const { from } = HistoryManager.routes
+			const path = from.path['input']
+
+			let props = {}
+
+			if(from.namespace) {
+				props = transitions.find((entry) => entry.namespace === from.namespace).transition
+			} else {
+				if(transitions.find((entry) => entry.path === path)) {
+					props = transitions.find((entry) => entry.path === path).transition
+				}
+
+			}
+			
 			return transition.extend({
+				...props,
+				...HistoryManager.routes,
 				loader
 			})
 		}

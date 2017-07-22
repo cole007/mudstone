@@ -1,11 +1,11 @@
-export const Homepage = {
+export const Base = {
 	start: function () {
-		log('start Homepage', this)
+		log('start Base', this)
 		this.newContainerLoading.then(() => this.done())
 	},
 
 	done: function () {
-		log('end Homepage')
+		log('end Base')
 		this.oldContainer.parentNode.removeChild(this.oldContainer)
 		this.newContainer.style.visibility = 'visible'
 		this.deferred.resolve()

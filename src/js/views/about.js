@@ -1,21 +1,13 @@
-import { BaseView } from 'barba.js'
+export const About = {
+	start: function () {
+		log('start About', this)
+		this.newContainerLoading.then(() => this.done())
+	},
 
-export const About = BaseView.extend({
-	namespace: 'about',
-	// onEnter: function() {
-	// 	// The new Container is ready and attached to the DOM.
-	// 	log('onEnter homepage')
-	// },
-	// onEnterCompleted: function() {
-	// 	// The Transition has just finished.
-	// 	log('onEnterCompleted homepage')
-	// },
-	// onLeave: function() {
-	// 	// A new Transition toward a new page has just started.
-	// 	log('onLeave homepage')
-	// },
-	// onLeaveCompleted: function() {
-	// 	// The Container has just been removed from the DOM.
-	// 	log('onLeaveCompleted homepage')
-	// }
-})
+	done: function () {
+		log('end About')
+		this.oldContainer.parentNode.removeChild(this.oldContainer)
+		this.newContainer.style.visibility = 'visible'
+		this.deferred.resolve()
+	}
+}
