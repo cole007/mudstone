@@ -1,12 +1,11 @@
 const testElement = document.createElement('div')
-
-const prefix = (function() {
+const prefix = (function () {
 	const styles = window.getComputedStyle(document.documentElement, '')
 	const pre = (Array.prototype.slice
 		.call(styles)
 		.join('')
 		.match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-		)[1]
+	)[1]
 	const dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1]
 	return {
 		dom: dom,

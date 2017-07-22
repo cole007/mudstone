@@ -1,4 +1,4 @@
-import raf from 'raf'
+
 
 /**
  * Smarter Resize Event
@@ -13,7 +13,7 @@ import raf from 'raf'
 				return
 			}
 			running = true
-			raf(function() {
+			requestAnimationFrame(function() {
 				const width = window.innerWidth || document.documentElement.clientWidth
 				const height = window.innerHeight || document.documentElement.clientHeight
 				obj.dispatchEvent(new CustomEvent(name, {

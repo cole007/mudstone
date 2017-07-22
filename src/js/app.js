@@ -10,9 +10,6 @@ if(process.env.NODE_ENV === 'development') {
 }
 log(`Logging is enabled!, NODE_ENV: ${process.env.NODE_ENV}`)
 
-function test() {
-	log('run on every page load')
-}
 
 if(module.hot) {
 	module.hot.accept()
