@@ -4,13 +4,6 @@
 	@return $computed / $fs;
 }
 
-@function font($font: default) {
-	@return map-get(map-get($fonts, $font), 'font-family');
-}
-
-@function weight($font: default) {
-	@return map-get(map-get($fonts, $font), 'weight');
-}
 
 @function calcfluid($min-type-size, $max-type-size, $start-fluid-width: $start-fluid-width, $stop-fluid-width: $stop-fluid-width) {
 	@return calc( #{$min-type-size} + (#{strip-units($max-type-size)} - #{strip-units($min-type-size)}) * ((100vw - #{$start-fluid-width}) / (#{strip-units($stop-fluid-width)} - #{strip-units($start-fluid-width)})) );
@@ -86,4 +79,27 @@
 
 @function ratio($x: 16, $y: 9) {
 	@return percentage($y / $x);
+}
+
+
+@function font($font: body) {
+	@return map-get(map-get($fonts, $font), 'font-family');
+}
+
+@function weight($font: body) {
+	@return map-get(map-get($fonts, $font), 'weight');
+}
+
+@function line-height($font: body) {
+	@return map-get(map-get($fonts, $font), 'line-height');
+}
+
+@mixin font($font: body) {
+	font-family: map-get(map-get($fonts, $font), 'font-family');
+	font-weight: map-get(map-get($fonts, $font), 'weight');
+}
+
+@mixin font-baseline($font-size: $base-font-size, $line-height:  $base-type-leading, $browser-default-font-size: $current-rootsize) {
+  font-size: strip-units($base-font-size) / strip-units($browser-default-font-size) + em;
+  line-height: $base-line-height / $base-font-size;
 }

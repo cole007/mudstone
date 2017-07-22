@@ -1,6 +1,7 @@
 import './utils/polyfills'
 import debug from 'debug'
 import * as behaviours from './behaviours'
+import WebFont from 'webfontloader'
 // logs enabled during development
 window.log = debug('app:log')
 if(process.env.NODE_ENV === 'development') {
@@ -14,6 +15,12 @@ log(`Logging is enabled!, NODE_ENV: ${process.env.NODE_ENV}`)
 if(module.hot) {
 	module.hot.accept()
 }
+
+WebFont.load({
+	google: {
+		families: ['Lato:300,400,700', 'Alfa Slab One']
+	},
+})
 
 
 import Loader from './core/loader'

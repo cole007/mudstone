@@ -3,6 +3,8 @@
 */
 
 html {
+	@include font-baseline();
+
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 }
@@ -10,12 +12,11 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-family: font('body');
+	font-weight: weight('body');
+	padding: 0;
+	margin: 0;
 }
-
-
-
-
-
 
 
 /*
@@ -23,28 +24,55 @@ body {
 */
 
 .heading-1,
-h1 {}
+h1 {
+	font-size: responsive ms(6) ms(9);
+	font-family: font('heading');
+	font-weight: weight('heading');
+	line-height: line-height('heading');
+	margin: 0 0 ms(1);
+}
 
 .heading-2,
-h2 {}
+h2 {
+	font-size: responsive ms(5) ms(8);
+	font-family: font('heading');
+	font-weight: weight('heading');
+	line-height: line-height('heading');
+	margin: 0 0 ms(1);
+}
 
 .heading-3,
-h3 {}
+h3 {
+	font-size: responsive ms(4) ms(7);
+	font-family: font('heading');
+	font-weight: weight('heading');
+	line-height: line-height('heading');
+	margin: 0 0 ms(1);
+}
 
 .heading-4,
-h4 {}
+h4 {
+	font-size: responsive ms(3) ms(4);
+	font-family: font('body');
+	font-weight: weight('heavy');
+	margin: 0 0 ms(0);
+}
 
 .heading-5,
-h5 {}
+h5 {
+	font-size: responsive ms(2) ms(3);
+	font-family: font('body');
+	font-weight: weight('heavy');
+	margin: 0 0 ms(0);
+}
 
 .heading-6,
-h6 {}
-
-
-
-
-
-
+h6 {
+	font-size: responsive ms(1) ms(2);
+	font-family: font('body');
+	font-weight: weight('heavy');
+	margin: 0 0 ms(0);
+}
 
 /*
 	Base element styles

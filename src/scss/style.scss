@@ -1,9 +1,9 @@
 @import '../../node_modules/modularscale-sass/stylesheets/_modularscale.scss';
 @import '../../node_modules/sass-mq/mq.scss';
-@import "normalize";
 @import 'susy';
+@import "normalize";
 
-@include normalize();
+// @include normalize();
 
 
 /*
@@ -50,6 +50,7 @@
   Prefix classes with r-
 */
 @import 'base/reset';
+
 /*
   Low level styles, no nesting, single class names, no media queries
   Typography, Buttons, Tables, Form elements, Etc
@@ -97,3 +98,4 @@
   This file *should* be blank!
 */
 @import 'utils/shame';
+
