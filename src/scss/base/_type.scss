@@ -1,24 +1,8 @@
 /*
- Typography
-*/
-
-@include type-reveal();
-
-
-
-
-
-
-
-
-
-
-/*
 	Root
 */
 
 html {
-	font-family: map-get($fonts, default);
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 }
@@ -26,11 +10,7 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: c(type, base);
 }
-
-
-
 
 
 
@@ -43,37 +23,22 @@ body {
 */
 
 .heading-1,
-h1 {
-	@include resp-map('heading-1');
-}
+h1 {}
 
 .heading-2,
-h2 {
-	@include resp-map('heading-2');
-}
+h2 {}
 
 .heading-3,
-h3 {
-	@include resp-map('heading-3');
-}
+h3 {}
 
 .heading-4,
-h4 {
-	@include resp-map('heading-4');
-}
+h4 {}
 
 .heading-5,
-h5 {
-	@include resp-map('heading-5');
-}
+h5 {}
 
 .heading-6,
-h6 {
-	@include resp-map('heading-6');
-}
-
-
-
+h6 {}
 
 
 

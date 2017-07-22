@@ -3,9 +3,6 @@
 
 
 .btn {
-	@include resp-map('button');
-
-	font-family: font('default');
 	cursor: pointer;
 	border: none;
 	margin: 0;
@@ -14,44 +11,4 @@
 	align-items: center;
 	justify-content: center;
 	padding: gutter(.5) gutter(1);
-	color: c(type, dark);
 }
-
-.btn--box {
-	border: rem(1px) solid currentColor;
-}
-
-.btn--brand {
-	color: c(core, green);
-}
-
-.btn--white {
-	color: $white;
-}
-
-.btn--dark {
-	color: c(type, dark);
-}
-
-.btn--sort {
-	font-size: rem(15px);
-	padding: gutter(.5);
-}
-
-.btn--full {
-	width: 100%;
-}
-
-// reset for actual buttons
-// <button type="submit" class="button btn--downloads"></a>
-.button {
-	background: none;
-	border: 0;
-	padding: 0;
-	cursor: pointer;
-}
-
-[disabled] {
-	cursor: default;
-}
-

@@ -1,35 +1,35 @@
+@import '../../node_modules/modularscale-sass/stylesheets/_modularscale.scss';
+@import '../../node_modules/sass-mq/mq.scss';
+@import "normalize";
+@import 'susy';
+
+@include normalize();
+
+
 /*
-  postcss plugins:
-  https://github.com/arccoza/postcss-aspect-ratio
-  https://github.com/peterramsing/lost
-  https://github.com/jonathantneal/postcss-write-svg
-  https://github.com/zhouwenbin/postcss-animation
-  https://github.com/pascalduez/postcss-quantity-queriespostcs
-  https://github.com/jedmao/postcss-triangle
-  node includes
-  https://github.com/modularscale/modularscale-sass
+  Settings
 */
 
-@import '../../node_modules/modularscale-sass/stylesheets/_modularscale.scss';
+@import '_config/settings';
+@import '_config/colors';
+@import '_config/dimensions';
+@import '_config/type-config';
+
+
 
 /*
   Utility functions
 */
 
-@import '_system/core-mixins/utility-functions';
+@import '_system/core/utilities';
+
 
 /*
-  easing functions http://easings.net/
+  Media query debugger
 */
 
-@import '_system/core-mixins/easing';
+@import '_config/debug';
 
-/*
-  mq mixin from https://github.com/sass-mq/sass-mq
-*/
-
-@import '_system/core-mixins/mq';
-@import '_system/core-mixins/type-helpers';
 
 /*
   Custom, site specific mixins
@@ -37,46 +37,24 @@
 
 @import '_system/site-mixins/mixins';
 
+
 /*
   svg-symbols generated via `gulp symbols`
 */
 
 @import '_system/gulp-output/svg-symbols';
-// @import '_system/gulp-output/svg-sprites';
-
-/*
-  Site variables, go nuts!
-*/
-
-@import '_config/typography';
-@import '_config/variables';
-
-/*
-  debug, $debug = true ?
-*/
-
-@import '_config/_debug';
-
-/*
-  Adapted normalize (stuff we don't use/need removed)
-*/
-
-@import 'base/mudmalize';
+@import '_system/gulp-output/svg-sprites';
 
 /*
   Reset util classes, single class name, easy to overwrite later on
   Prefix classes with r-
 */
-
 @import 'base/reset';
-
 /*
   Low level styles, no nesting, single class names, no media queries
   Typography, Buttons, Tables, Form elements, Etc
 */
-
 @import 'base/type';
-@import 'base/tables';
 @import 'base/buttons';
 @import 'base/forms';
 
@@ -84,7 +62,6 @@
   This grid
   Prefix classes with g-
 */
-
 @import 'layout/grid';
 
 /*
@@ -92,49 +69,31 @@
   Max specificity of 2
   *Layout* media queries should go here
 */
-
-// @import 'layout/header';
-// @import 'layout/footer';
-// @import 'layout/navigation';
-// @import 'layout/structure';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/navigation';
+@import 'layout/structure';
 
 /*
   Modules styles only
   Max specificity of 2
   *Layout* media queries should go here
 */
-
-// @import 'modules/form-example';
-// @import 'modules/slide';
-// @import 'modules/hero';
-// @import 'modules/video';
-// @import 'modules/map';
-// @import 'modules/accordion';
-// @import 'modules/wysiwyg';
-// @import 'modules/scroll-view';
+@import 'modules/wysiwyg';
 
 /*
   Utility classes, these should always win, go crazy with import
   Prefix classes with u-
 */
-
 @import 'utils/index';
 
 /*
   Print styles
 */
-
-@import 'utils/print';
-
-/*
-  No JS styles
-*/
-
-@import 'utils/no-js';
+@import 'print';
 
 /*
   Shame, hacks, overwrites, sad panda
   This file *should* be blank!
 */
-
 @import 'utils/shame';

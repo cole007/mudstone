@@ -1,6 +1,6 @@
 /* stylelint-disable */
 
-@if $debug==true {
+@if $debug == true {
 	body {
 		&:after {
 			position: fixed;

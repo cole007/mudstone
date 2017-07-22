@@ -1,86 +1,96 @@
-import verge from 'verge'
-import Concert from 'concert'
+import { DomClosest, DomCss } from '../utils/dom'
 
-/*
-	// just a plain old scroll, a wrapper around the 'smartscroll' event
-	const scroll = new ScrollView()
-	// custom event object, detail property has pageYOffset and direction values
-	scroll.on('dom:scroll', (evt) => {
-		log(evt)
-	})
+export default class ScrollView {
+	/**
+	 *
+	 * @memberOf ui/ScrollView
+	 * @function constructor
+	 * @param  {HTMLElement} el
+	 * @param {Object} options
+											selector {String}, Selector for elements to animate
+											group {String}, Optional selector for grouping elements
+											delay {Number}: Delay between transitions
+											duration {Number}: Duration of transition
+											exit {Object}: CSS properties for elements outside of the viewport
+											entrance {Object}: CSS properties for elements inside of the viewport
+											threshold {Number}: A threshold of 1.0 means that when 100% of the target is visible within the element specified by the root option, the callback is invoked
+											repeat {Boolean}: Repeat animations?
+	 */
+	constructor(el, options = {}) {
+		this.exit = options.exit || { opacity: 0 }
+		this.entrance = options.entrance || { opacity: 1 }
+		this.repeat = options.repeat || false
 
-	// or do some fancy stuff with in/out of view elements
+		const delay = options.delay || 500
+		const duration = options.duration || 2000
+		const easing = options.easing || 'ease'
+		const threshold = options.threshold || 0.01
+		const group = options.group || '[data-reveal-group]'
+		const selector  = options.selector || '[data-reveal-item]'
 
-	<div data-behaviour="inview">
-		<div class="js-sv"></div> * 10000
-	</div>
-
-	const view = new ScrollView(el, {
-		selector: '.js-sv'
-	})
-	// the evt object has two properties, element and the custom event
-	view.on('element:entrance', (evt) => {
-		evt.element.style.opacity = 1
-		evt.element.style.backgroundColor = '#e4a'
-	})
-
-	view.on('element:exit', (evt) => {
-		evt.element.style.opacity = 0
-	})
-
-*/
-
-
-export default class ScrollView extends Concert {
-	constructor(el, obj = {}) {
-		super()
-		this.container = el || document
-		this.selector = obj.selector || '.js-sv'
-		this.elements = [...this.container.querySelectorAll(this.selector)]
-		this.reverse = [...this.elements.reverse()]
-		this.dispatch = this.dispatch.bind(this)
-		this.initialize()
-	}
-
-	dispatch(evt) {
-		const {
-			direction
-		} = evt.detail
-		if(this.elements.length > 0) {
-			this.inView(direction)
-			this.outView(direction)
+		// https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+		const thresholdSets = []
+		for(let i = 0; i <= 1.0; i += threshold) {
+			thresholdSets.push(i)
 		}
-		this.trigger('dom:scroll', evt)
-	}
 
-	inView(direction = 'down') {
-		this.elements.filter((element) => verge.inY(element))
-			.forEach((element) => {
-				this.trigger('element:entrance', {
-					element,
-					direction
+		this.observer = new IntersectionObserver(this.inview.bind(this), {
+			root: null,
+			rootMargin: '0px',
+			threshold: thresholdSets
+		})
+
+		// build a one dimensional array of nodes
+		this.nodes = [...el.querySelectorAll(selector)].reduce((collection, node) => {
+			const parent = DomClosest(node, group)
+			if(parent) {
+				[...parent.querySelectorAll(selector)].forEach((child, index) => {
+					DomCss(child, {
+						'transition': `all ${duration}ms ${index * delay}ms ${easing}`
+					})
+					if(!collection.includes(child)) {
+						collection.push(child)
+					}
 				})
-			})
-	}
-
-	outView(direction = 'up') {
-		const array = direction === 'up' ? 'reverse' : 'elements'
-		this[array]
-			.filter((element) => !verge.inY(element))
-			.filter((element) => verge.inY(element, 1200))
-			.forEach((element) => {
-				this.trigger('element:exit', {
-					element,
-					direction
+			} else {
+				DomCss(node, {
+					'transition': `all ${duration}ms ${delay}ms ${easing}`
 				})
-			})
+				collection.push(node)
+			}
+			this.observer.observe(node)
+			return collection
+		}, [])
+
 	}
 
-	initialize() {
-		window.addEventListener('smartscoll', this.dispatch)
-	}
+	/**
+	 * 
+	 * @function inview
+	 * @param  {IntersectionObserverEntry } entries
+	 * @return void
+	 */
+	inview(entries) {
+		entries.forEach((entry) => {
+			/*
+				The current dom node
+			*/
+			const { target } = entry
+			/*
+				Get the style object
+			*/
+			const css = entry.isIntersecting ? this.entrance : this.exit
 
-	destroy() {
-		window.removeEventListener('smartscoll', this.dispatch)
+			/*
+				if we do not want to repeat the animations remove the element from the IntersectionObserver
+			*/
+			if(entry.isIntersecting && !this.repeat) {
+				this.observer.unobserve(target)
+			}
+			/*
+				Apply the css to the current target
+			*/
+			DomCss(target, css)	
+		})
 	}
 }

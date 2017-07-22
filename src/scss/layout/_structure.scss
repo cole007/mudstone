@@ -6,7 +6,7 @@
 
 .wrapper {
 	width: 100%;
-	max-width: 1200px;
+	max-width: rem($wrapper-width);
 	margin: 0 auto;
 	padding: 0 gutter(1);
 }

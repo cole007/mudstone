@@ -28,14 +28,8 @@ export const lock = () => {
 	}
 }
 
-
 /**
- * Converts a hypenated string into camel case: margin-top => marginTop
- *
- * @memberOf utils/helpers
- * @param  {String} str
- * @return {String} str
+ * Test against userAgent string, pretty cheap and can't really be trusted
+ * @return {Boolean} 
  */
-export function camelCase(str) {
-	return str.replace(/-([a-z])/g, function($0, $1) { return $1.toUpperCase() }).replace('-','')
-}
+export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)

@@ -1,3 +1,4 @@
+import './utils/polyfills'
 import debug from 'debug'
 import * as behaviours from './behaviours'
 // logs enabled during development

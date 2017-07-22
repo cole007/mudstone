@@ -1,3 +1,4 @@
+/* stylelint-disable */
 $sprites: (
   sprite: (
 		width: {{spriteWidth}}px, 
@@ -13,3 +14,4 @@ $sprites: (
 	),
 {{/shapes}}
 );
+/* stylelint-enable */

@@ -10,10 +10,9 @@ import writeSVG from 'postcss-write-svg'
 import aspectRatio from 'postcss-aspect-ratio'
 import animateCss from 'postcss-animation'
 import postcssTriangle from 'postcss-triangle'
-import quantityQueries from 'postcss-quantity-queries'
 import objectFitImages from 'postcss-object-fit-images'
 import styleLint from 'gulp-stylelint'
-import lost from 'lost'
+import rucksack from 'rucksack-css'
 import browserSync from 'browser-sync'
 import { handleErrors } from '../libs/utils'
 import path from 'path'
@@ -39,18 +38,24 @@ export function scss() {
 		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init()))
-		.pipe(sass(TASK_CONFIG.scss.options))
+		.pipe(sass({
+			...TASK_CONFIG.scss.options,
+			includePaths: [
+				path.resolve(process.env.PWD, 'node_modules/normalize-scss/sass'),
+				path.resolve(process.env.PWD, 'node_modules/normalize-scss/sass'),
+				path.resolve(process.env.PWD, 'node_modules/susy/sass')
+			]
+		}))
 		.on('error', handleErrors)
 		.pipe(gulpif(!global.production, sourcemaps.init({
 			loadMaps: true
 		})))
 		.pipe(postcss([
+			rucksack(),
 			objectFitImages(),
 			animateCss(),
 			aspectRatio(),
 			postcssTriangle(),
-			quantityQueries(),
-			lost(),
 			writeSVG({
 				encoding: 'base64'
 			}),
