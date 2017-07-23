@@ -47,19 +47,18 @@ export default class RouteManager {
 		}
 	}
 
-	match(pathname) {
-		HistoryManager.routes = {
-			from: this.currentRoute(),
-			to: this.getRoute(pathname)
-		}
-	}
 
 	mount(loader) {
+		const _this = this
+
 		Pjax.getTransition = function () {
 			const { from } = HistoryManager.routes
-			const path = from.path['input']
-
 			let props = {}
+			let path = '/'
+
+			if(from.path) {
+				path = from.path['input']
+			}
 
 			if(from.namespace) {
 				props = transitions.find((entry) => entry.namespace === from.namespace).transition
@@ -67,7 +66,6 @@ export default class RouteManager {
 				if(transitions.find((entry) => entry.path === path)) {
 					props = transitions.find((entry) => entry.path === path).transition
 				}
-
 			}
 			
 			return transition.extend({
@@ -80,7 +78,15 @@ export default class RouteManager {
 		Dispatcher.on('linkClicked', (HTMLElement) => {
 			this.clicked = true
 			const { pathname } = HTMLElement
-			this.match(pathname)
+
+			HistoryManager.routes = {
+				from: {
+					path: _this.getRouterObject(window.location.pathname),
+					namespace: Pjax.Dom.getNamespace(this.container)
+				},
+				to: _this.getRoute(pathname)
+			}
+
 		})
 
 		Dispatcher.on('initStateChange', (/*currentStatus*/) => {})

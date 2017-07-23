@@ -10,9 +10,5 @@ export const transitions = [
 	{
 		path: '/b',
 		transition: About
-	},
-	{
-		namespace: 'C',
-		transition: Base
 	}
 ]
