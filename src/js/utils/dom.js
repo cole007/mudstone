@@ -1,4 +1,5 @@
 const testElement = document.createElement('div')
+
 const prefix = (function () {
 	const styles = window.getComputedStyle(document.documentElement, '')
 	const pre = (Array.prototype.slice
@@ -13,6 +14,21 @@ const prefix = (function () {
 		css: '-' + pre + '-',
 		js: pre[0].toUpperCase() + pre.substr(1)
 	}
+})()
+
+export const transitionEnd = (function(){
+	const transEndEventNames = {
+		WebkitTransition : 'webkitTransitionEnd',
+		MozTransition    : 'transitionend',
+		OTransition      : 'oTransitionEnd otransitionend',
+		transition       : 'transitionend'
+	}
+	for (let name in transEndEventNames) {
+		if (testElement.style[name] !== undefined) {
+			return transEndEventNames[name]
+		}
+	}
+	return false
 })()
 
 /**

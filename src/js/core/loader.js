@@ -39,7 +39,7 @@ function gatherBehaviours(nodes) {
  *
  * @class  Loader
  */
-export default class Loader {
+export default class App {
 	/**
 	 * Manages data-behaviours, integrated with Barba.js
 	 *
@@ -165,34 +165,4 @@ export default class Loader {
 		return this
 	}
 
-	// beforeEnter(to, from) {
-	// 	this.current
-	// 		.filter(behaviour => typeof behaviour.onBeforeEnter === 'function')
-	// 		.map((behaviour) => behaviour.onBeforeEnter(to, from))
-	// 	return this
-	// }
-
-	// afterEnter(to, from) {
-	// 	this.current
-	// 		.filter(behaviour => typeof behaviour.onAfterEnter === 'function')
-	// 		.map((behaviour) => behaviour.onAfterEnter(to, from))
-	// 	return this
-	// }
-
-	// beforeLeave(from, to) {
-	// 	const promises = this.current.filter(behaviour => typeof behaviour.onBeforeLeave === 'function')
-	// 															.map((behaviour) => {
-	// 																return new Promise(behaviour.onBeforeLeave.bind(behaviour, from, to))
-	// 															})
-	// 	return Promise.all(promises)
-	// }
-
-	// afterLeave(to, from) {
-	// 	const promises = this.current.filter(behaviour => typeof behaviour.onAfterLeave === 'function')
-	// 															.map((behaviour) => {
-	// 																return new Promise(behaviour.onAfterLeave.bind(behaviour, from, to))
-	// 															})
-
-	// 	return Promise.all(promises)
-	// }
 }

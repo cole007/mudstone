@@ -1,302 +1,330 @@
-import throttle from 'lodash.throttle'
-import Concert from 'concert'
-import Tweezer from 'tweezer.js'
-import Delegate from 'dom-delegate'
-/*
-Example Markup
-<ul data-behaviour="accordion" class="nav expander">
-	<li class="expander__wrap">
-		<a href="#e1" class="expand__btn js-expand-btn">Button Bitch</a>
-	  <div id="e1" class="expand__content js-expand-content">
-	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aspernatur explicabo, at qui id sed quibusdam cupiditate impedit suscipit voluptate voluptas veniam similique ea, eveniet quam. Veritatis iste maiores error?</p>
-	  </div>
-	</li>
-	<li class="expander__wrap">
-		<a href="#e2" class="expand__btn js-expand-btn">Button Bitch</a>
-	  <div id="e2" class="expand__content js-expand-content">
-	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi aspernatur explicabo, at qui id sed quibusdam cupiditate impedit suscipit voluptate voluptas veniam similique ea, eveniet quam. Veritatis iste maiores error?</p>
-	  </div>
-	</li>
-</ul>
-
-Basic Usage:
-const el = document.querySelector('.expand-wrapper')
-const accordion = new Expander(el, {
-	closeOthers: true,
-	button: '.js-expand-btn',
-	content: '.js-expand-content',
-	init: true
-})
-
-// events
-accordion.on('before:open', function(button, target) {})
-accordion.on('after:open', function(button, target) {})
-accordion.on('before:close', function(button, target) {})
-accordion.on('after:close', function(button, target) {})
-
-// methods
-accordion.removeEvents() // removes click handlers
-accordion.addEvents() // bind click handlers
-accordion.open(el.querySelector('.js-button'))
-accordion.close(el.querySelector('.js-button'))
-*/
-
 
 /**
- * Creates a new Expander.
- * @class
+ * Accordion UI Component
+ *
  */
-export default class Expander extends Concert {
-	/**
-	 * Create an expander.
-	 * @param {el} el - The dom node, querySelector('.myelm')
-	 * @param {opts} opts - The expander options
-	 */
-	constructor(el, opts = {}) {
-		super()
-		this.el = el
-		this._del = new Delegate(el)
-		this.button = opts.button || '.js-expand-btn'
-		this.activeClass = opts.activeClass || 'is-active'
-		this.closeOthers = opts.closeOthers || false
-		this.duration = opts.duration || 300
-		this.init = opts.init || false
-		this.name = opts.name || 'expander'
-			// get the elements
-		this.elements = Array.from(this.el.querySelectorAll(this.button))
-			// create event delegation container
-			// this.delegate = new Delegate(this.el)
-			// bind methods
-		this.elements.forEach((button) => button._ticking = false)
 
-		this.handleButtonClicks = this.handleButtonClicks.bind(this)
-		this.addEvents = this.addEvents.bind(this)
-		this.removeEvents = this.removeEvents.bind(this)
-		this.open = this.open.bind(this)
-		this.close = this.close.bind(this)
-		this.destroy = this.destroy.bind(this)
-		this.updateTabIndex = this.updateTabIndex.bind(this)
-		this.events = ['before:open', 'after:open', 'before:close', 'after:close']
-			// merge concert events into Expander
-		this.fn = throttle(this.handleButtonClicks, 300)
-		if(this.init) {
-			this.render()
+export default function accordion(el, opts = {}) {
+
+	// default settings
+	const defaults = {
+		activeIndex: null,
+		closeOthers: false,
+		open: false,
+		selector: '[data-accordion-btn]',
+		name: 'accordion',
+		init: true,
+		buttonActiveClass: 'is-active',
+		contentActiveClass: 'is-expanded',
+		duration: 300,
+		breakpoint: null,
+		easing: function defaultEasing(t, b, c, d) {
+			if((t /= d / 2) < 1) return c / 2 * t * t + b
+			return -c / 2 * ((--t) * (t - 2) - 1) + b // eslint-disable-line
 		}
 	}
 
+	let current
+	let activated = false
+	const settings = (() => {
+		// create options object, merge opts from params
+		let options = {
+			...defaults,
+			...opts
+		}
+		// try and merge any json options from the dom
+		try {
+			const { accordionOptions } = el.dataset
+			const json = typeof accordionOptions === 'string' ? JSON.parse(accordionOptions) : {}
+			options = {
+				...options,
+				...json
+			}
+		} catch(err) {
+			console.error(err)
+		}
+		return options
+	})()
+
+	let {
+		breakpoint,
+		buttonActiveClass,
+		contentActiveClass,
+		duration,
+		easing,
+		init,
+		selector,
+		closeOthers,
+		activeIndex,
+		open,
+		name
+	} = settings
+	
+	if(breakpoint) {
+		init = false
+	}
+
+	let panes = []
+
 	/**
-	 * Attached the click handle
-	 * @return {object} this
+	 * Animate $target from start to end
+	 * @param {HTMLElement} $target
+	 * @param {Object} options
+	 * @return {Promise}
 	 */
-	addEvents() {
-		this._del.on('click', this.button, this.fn)
-		return this
+	function animate($target, options = {}) {
+		const { easing, duration, start, end } = options
+		const condition = (lastTick, next, end) => {
+			return (start < end) ? (next < end && lastTick <= next) : (next > end && lastTick >= next)
+		}
+
+
+
+		let next = null
+		let timeElapsed = null
+		let timeStart = null
+		let frame = null
+		return new Promise((resolve) => { 
+			const loop = (currentTime) => {
+				let lastTick = next || start
+				if(!timeStart) timeStart = currentTime
+				timeElapsed = currentTime - timeStart
+
+				next = Math.round(easing(timeElapsed, start, end - start, duration))
+				if(condition(lastTick, next, end)) {
+					frame = window.requestAnimationFrame(loop)
+					$target.style.height = `${next}px`
+				} else {
+					resolve()
+					window.cancelAnimationFrame(frame)
+					timeElapsed = null
+					timeStart = null
+					frame = null
+					lastTick = null
+				}
+			}
+			frame = window.requestAnimationFrame(loop)
+		})
 	}
 
 	/**
-	 * Remove the click handle
-	 * @return {object} this
+	 * Setup panels, add accessibility attributes
+	 *
+	 * @return {void}
 	 */
-	removeEvents() {
-		this._del.off('click', this.button, this.fn)
-		return this
-	}
-
-	/**
-	 * Returns the buttons target element
-	 * @param {button} button - The button dom node
-	 * @return {Object} the dom node
-	 */
-	getTarget(button) {
-		return this.el.querySelector(`${button.getAttribute('href')}`)
-	}
-
-	/**
-	 * The click handler
-	 * @param {e} e - the event object
-	 */
-	handleButtonClicks(evt, elm) {
-		evt.preventDefault()
-		const button = elm
-
-		this.closeOthers && this.elements
-			.filter((element) =>
-				element.classList.contains(this.activeClass) &&
-				element.getAttribute('href') !== button.getAttribute('href'))
-			.forEach((element) => {
-				this.close(element)
-			})
-
-		button.classList.contains(this.activeClass) ?
-			this.close(button) :
-			this.open(button)
-	}
-
-
-	_tween(target, start, end, complete) {
-		new Tweezer({
-			start,
-			end,
-			duration: 1000,
-			easing: (t, b, c, d) => {
-				if ((t /= d / 2) < 1) return c / 2 * t * t + b
-				return -c / 2 * ((t -= 1) * (t - 2) - 1) + b
+	function createPanels() {
+		panes = [...el.querySelectorAll(selector)].map(($button, index) => {
+			$button.setAttribute('data-accordion-index', index)
+			const { target } = $button.dataset
+			const $target = el.querySelector(target)
+			const state = open 
+												? true
+												: (!open && index === activeIndex ? true : false) 
+													? true
+													: false
+			$button.setAttribute('aria-expanded', state)
+			$button.setAttribute('aria-selected', state)
+			$button.setAttribute('aria-controls', `${name}-${index}`)
+			if(state) {
+				$button.classList.add(buttonActiveClass)
+				$target.classList.add(contentActiveClass)
+			}
+			$target.setAttribute('aria-labelledby', `${name}-${index}`)
+			$target.setAttribute('aria-hidden', !state)
+			$target.setAttribute('role', 'tabpanel')	
+			return {
+				$button,
+				$target,
+				index,
+				open: state,
+				isRunning: false
 			}
 		})
-		.on('tick', value => target.style.height = `${value}px`)
-		.on('done', complete)
-		.begin() // this fires the tweening
 
-		return this
 	}
 
 	/**
-	 * The open expander method
-	 * @param {button} button - The buttons dom node
-	 * @return {Object} this
+	 * function called after the transition has completed
+	 *
+	 * @return {Accordion}
 	 */
-	open(button) {
-		if(button._ticking) return
-		const target = this.getTarget(button)
-
-		target.style.display = 'block'
-		target.style.height = 'auto'
-		const height = target.clientHeight
-
-		target.style.height = 0
-		target.style.willChange = 'height'
-
-		target.style.height = 'auto'
-		button.classList.add(this.activeClass)
-
-
-		this.trigger('before:open', button, target)
-				.updateTabIndex()
-				._tween(target, 0, height, () => {
-
-					this.trigger('after:open', button, target)
-							._openComplete(button, target)
-
-					target.style.willChange = ''
-					target.classList.add(this.activeClass)
-					button._ticking = false
-				})
-
-		button._ticking = true
-		return this
+	function onEnd(pane) {
+		const { $target, $button, open } = pane
+		$target.style.willChange = null
+		$target.style.height = null
+		$target.style.display = null
+		pane.isRunning = false
+		$button.setAttribute('aria-expanded', open)
+		$button.setAttribute('aria-selected', open)
+		$target.setAttribute('aria-hidden', !open)
 	}
 
-	_openComplete(button, target) {
-		button.setAttribute('aria-expanded', true)
-		button.setAttribute('aria-selected', true)
-		target.setAttribute('aria-hidden', false)
-		button.setAttribute('tab-index', '')
-		return this
+	function delegated(e) {
+		const event = e
+		let { target } = e
+		function match(target) {
+			if(typeof target.matches === 'function') {
+				if(target && target.matches(selector)) {
+					clickHandle(event, target)
+					return
+				} 
+				match(target.parentNode)
+			}
+		}
+
+		match(target)
 	}
 
 	/**
-	 * The close expander method
-	 * @param {button} button - The buttons dom node
-	 * @return {Object} this
+	 * Attach the eventlisteners
+	 *
+	 * @private
+	 * @return {void}
 	 */
-	close(button) {
-		if(button._ticking) return
-		const target = this.getTarget(button)
-		//const _this = this
-		const height = target.clientHeight
-		target.style.willChange = 'height'
-
-		this.trigger('before:close', button, target)
-				._tween(target, height, 0, () => {
-
-					this.trigger('after:close', button, target)
-							._closeComplete(button, target)
-
-					button.classList.remove(this.activeClass)
-					target.classList.remove(this.activeClass)
-					button._ticking = false
-				})
-		button._ticking = true
-
-		return this
-	}
-
-	_closeComplete(button, target) {
-		button.setAttribute('aria-expanded', false)
-		button.setAttribute('aria-selected', false)
-		target.setAttribute('aria-hidden', true)
-		target.style.willChange = ''
-		return this
-	}
-
-	updateTabIndex() {
-		this.elements
-			.filter((element) => !element.classList.contains(this.activeClass))
-			.forEach((element) => element.setAttribute('tab-index', -1))
-
-		return this
+	function bindEvents() {
+		el.addEventListener('click', delegated)
 	}
 
 	/**
-	 * Add accessibility attritubes to dom nodes
-	 * @return {Object} this
+	 * Remove the eventlisteners
+	 *
+	 * @private
+	 * @return {void}
 	 */
-	addAccessibility() {
-		this.elements.forEach((button, index) => {
-			const target = this.getTarget(button)
-			const state = button.classList.contains(this.activeClass)
-			button.setAttribute('aria-expanded', state)
-			button.setAttribute('aria-selected', state)
-			button.setAttribute('aria-controls', `${this.name}-${index}`)
-			button.setAttribute('role', 'tab')
-			target.setAttribute('aria-hidden', !state)
-			target.setAttribute('aria-labelledby', `${this.name}-${index}`)
-			target.setAttribute('role', 'tabpanel')
+	function unBindEvents() {
+		el.removeEventListener('click', delegated)
+	}
+
+
+
+	/**
+	 * The delegated click event, open/close accordion pane
+	 *
+	 * @param {Object} event
+	 * @param {HTMLElement} element
+	 * @return {void}
+	 */
+	function clickHandle(event, element) {
+		event.preventDefault()
+		const { accordionIndex } = element.dataset
+		const open = element.getAttribute('aria-expanded') === 'true' ? true : false
+		if(closeOthers && current) {
+			const { index } = current
+			if(index !== parseInt(accordionIndex)) collapse(index)
+		}
+		open === true ? collapse(accordionIndex) : expand(accordionIndex)
+		current = panes[accordionIndex]
+	}
+
+	/**
+	 * Open animation
+	 *
+	 * @param {Number} index
+	 * @return {void}
+	 */
+	function expand(index) {
+		const pane = panes[index]
+		if(!pane.isRunning) {
+			const { $target, $button } = pane
+			$target.style.display = 'block'
+			const { height } = $target.getBoundingClientRect()
+			$target.style.height = 0
+			$target.style.willChange = 'height'
+			pane.isRunning = true
+			pane.open = true
+
+			animate($target, {
+				start: 0,
+				end: Math.round(height),
+				duration: duration,
+				easing: easing
+			}).then(() => {
+				onEnd(pane)
+				$button.classList.add(buttonActiveClass)
+				$target.classList.add(contentActiveClass)
+			})
+		}
+	}
+	
+
+	/**
+	 * Close animation
+	 *
+	 * @param {Number} index
+	 * @return {void}
+	 */
+	function collapse(index) {
+
+
+		const pane = panes[index]
+		if(!pane.isRunning) {
+			pane.open = false
+			const { $target, $button } = pane
+			const { height } = $target.getBoundingClientRect()
+			$target.style.height = `${height}px`
+			$target.style.willChange = 'height'
+			
+			pane.isRunning = true
+			animate($target, {
+				start: Math.round(height),
+				end: 0,
+				duration: duration,
+				easing: easing
+			}).then(() => {
+				onEnd(pane)
+				$button.classList.remove(buttonActiveClass)
+				$target.classList.remove(contentActiveClass)
+			})
+		}
+	}
+
+
+	/**
+	 * Initalize accordion, add aria attributes, bind events, open/close etc etc
+	 *
+	 * @return {Accordion}
+	 */
+	function initalize() {
+		if(activated) return
+		activated = true
+		bindEvents()
+		el.setAttribute('role', 'tablist')
+		el.setAttribute('aria-multiselectable', closeOthers)
+		createPanels()
+	}
+
+	/**
+	 * Destroy component, remove event listeners 
+	 *
+	 * @return {Accordion}
+	 */
+	function destroy() {
+		if(!activated) return
+		activated = false
+		unBindEvents()
+		el.removeAttribute('role')
+		el.removeAttribute('aria-multiselectable')
+		panes.forEach(({$button, $target}) => {
+			$button.classList.remove(buttonActiveClass)
+			$button.removeAttribute('aria-expanded')
+			$button.removeAttribute('aria-selected')
+			$button.removeAttribute('aria-controls')
+			$button.removeAttribute('role', 'tab')
+			$target.removeAttribute('aria-hidden')
+			$target.removeAttribute('aria-labelledby')
+			$target.removeAttribute('role', 'tabpanel')
+			$target.classList.remove(contentActiveClass)
+			$target.removeAttribute('style')
 		})
-		this.el.setAttribute('role', 'tablist')
-		this.el.setAttribute('aria-multiselectable', this.closeOthers)
-		return this
 	}
 
-	/*
-		Remove accessibility attributes
-	*/
-	removeAccessibility() {
-		this.elements.forEach((button) => {
-			const target = this.getTarget(button)
-			button.classList.remove(this.activeClass)
-			button.removeAttribute('aria-expanded')
-			button.removeAttribute('aria-selected')
-			button.removeAttribute('aria-controls')
-			button.removeAttribute('role', 'tab')
-			target.removeAttribute('aria-hidden')
-			target.removeAttribute('aria-labelledby')
-			target.removeAttribute('role', 'tabpanel')
-			target.classList.remove(this.activeClass)
-			target.removeAttribute('style')
-		})
-		this.el.removeAttribute('role')
-		this.el.removeAttribute('aria-multiselectable')
+	init && initalize()
 
-		return this
+	return {
+		initalize,
+		expand,
+		collapse,
+		destroy,
+		settings
 	}
-
-	/**
-	 * destroy, removes events and accessibility attributes
-	 */
-	destroy() {
-		this.events.forEach(event => this.off(event))
-		this.removeEvents()
-				.removeAccessibility()
-		return this
-	}
-
-	/*
-		bind events and add accessibility attributes
-	*/
-	render() {
-		this.addAccessibility()
-				.addEvents()
-	}
-
-}
+} 

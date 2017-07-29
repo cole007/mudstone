@@ -1,8 +1,8 @@
-import Base from '../core'
+import Behaviour from '../core'
 
 // use the unmount() method to remove any events, 
 // kill plugins etc
-export class C extends Base {
+export class C extends Behaviour {
 	constructor(el) {
 		super(el, 'C')
 		log('init C')

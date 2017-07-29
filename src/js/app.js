@@ -23,16 +23,9 @@ WebFont.load({
 })
 
 
-import Loader from './core/loader'
+import App from './core/loader'
 
-import pathToRegexp from 'path-to-regexp'
 
-window.pathToRegexp = pathToRegexp
-
-new Loader(document, behaviours)
+new App(document, behaviours)
 	.start()
 	.watch()
-	// .setup([
-	// 	test
-	// ])
-	// .globals()

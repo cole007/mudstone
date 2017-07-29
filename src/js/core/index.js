@@ -6,7 +6,7 @@ import Listener from './listener'
 /*
 	Base Class, 
 */
-export default class Base extends Concert {
+export default class Behaviour extends Concert {
 
 	constructor(el = document, name) {
 		super()

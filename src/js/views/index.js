@@ -1,5 +1,4 @@
 import { Homepage } from './homepage'
-import { Base } from './base'
 import { About } from './about'
 
 export const transitions = [

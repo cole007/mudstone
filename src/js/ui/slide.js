@@ -1,171 +1,177 @@
-import Wallop from 'Wallop'
+import Wallop from 'wallop'
 import Hammer from 'hammerjs'
-import raf from 'raf'
+import domify from 'domify'
+import { mergeOptopns } from '@/utils/helpers'
+import { DomClass } from '@/utils/dom'
 
-/*
 
-Just a wrapper around Wallop
-Adds gestures and pager buttons
-
-<div class="slide slide--right" data-behaviour="carousel">
-	<div class="slice__list js-slide-wrapper">
-		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/buildings/1600x900" width="1600" height="900"></div>
-		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/nature/1600x900" width="1600" height="900"></div>
-		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/people/1600x900" width="1600" height="900"></div>
-		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/technology/1600x900" width="1600" height="900"></div>
-		<div class="slide__item js-slide-item"><img class="slide__img" src="https://source.unsplash.com/category/objects/1600x900" width="1600" height="900"></div>
-	</div>
-</div>
-
-new Slide(el, {
-	buttonPreviousClass: 'js-slide-prev',
-	buttonNextClass: 'js-slide-next',
-	itemClass: 'slide__item',
-	currentItemClass: 'slide__item--current',
-	showPreviousClass: 'slide__item--showPrevious',
-	showNextClass: 'slide__item--showNext',
-	hidePreviousClass: 'slide__item--hidePrevious',
-	hideNextClass: 'slide__item--hideNext',
-	carousel: true,
-	autoplay: true,
-	delay: 5000,
-	gestures: true,
-	pager: true
-})
-
-*/
 
 export default class Slide extends Wallop {
-	constructor(el, options) {
+
+	constructor(element, options) {
 		const defaults = {
-			buttonPreviousClass: 'js-slide-prev',
-			buttonNextClass: 'js-slide-next',
-			itemClass: 'slide__item',
-			currentItemClass: 'slide__item--current',
-			showPreviousClass: 'slide__item--showPrevious',
-			showNextClass: 'slide__item--showNext',
-			hidePreviousClass: 'slide__item--hidePrevious',
-			hideNextClass: 'slide__item--hideNext',
+			buttonPreviousClass: 'c-slide__prev',
+			buttonNextClass: 'c-slide__next',
+			itemClass: 'c-slide__item',
+			currentItemClass: 'c-slide__item--current',
+			showPreviousClass: 'c-slide__item--showPrevious',
+			showNextClass: 'c-slide__item--showNext',
+			hidePreviousClass: 'c-slide__item--hidePrevious',
+			hideNextClass: 'c-slide__item--hideNext',
 			carousel: true,
-			pagerElClassName: 'slide-pager__item',
-			delay: 5000,
-			autoplay: false,
-			pager: false,
-			getures: false
+			pagerWrapper: '<ul class="c-slide__pager"></ul>',
+			pagerItem: '<li class="c-slide__pager-item"></li>',
+			pagerActiveClass: 'is-current',
+			delay: 3000,
+			swipe: true,
+			init: true,
+			startIndex: 0
 		}
+		
+		const opts = mergeOptopns(defaults, options, element, 'slideOptions')
 
-		const opts = {...defaults, ...options}
+		super(element, opts)
+		this.options = opts
+		this.$tag = element
+		this.slides = [...element.querySelectorAll(`.${opts.itemClass}`)]
+		this.previousIndex = this.currentItemIndex
 
-		super(el, opts)
-
-		this.opts = opts
-		this.tag = el
-		//this.$tag = $(this.tag)
-		this.slides = Array.from(el.querySelectorAll(`.${opts.itemClass}`))
-
-		this.stop = this.stop.bind(this)
-		this.play = this.play.bind(this)
-
-		this.pagerElClassName = opts.pagerElClassName
-
-		if(opts.pager) {
-			this.onPagerClickHandle = this.onPagerClickHandle.bind(this)
-			this.addPagerHTML()
-					.addPagerEvents()
-		}
-
-		opts.gestures && this.addGestures()
-		opts.autoplay && this.autoPlaySlide()
-
-		this.on('change', this.onChange.bind(this))
+		opts.init && this.initialize()
 	}
 
-	addGestures() {
-		this.mc = new Hammer.Manager(this.tag, {
-			touchAction: 'auto',
+	initialize = () => {
+		this.goTo(this.previousIndex)
+
+		if(this.options.pager) {
+			this.renderPager()
+		}
+		
+		if(this.options.loop) {
+			this.loop()
+		}
+		
+		if(this.options.swipe) {
+			this.addGestures()
+		}
+
+		this.listen()
+	}
+
+	renderPager = () => {
+		const { pagerWrapper, pagerItem, pagerActiveClass } = this.options
+		this.$pagerWrapper = this.$tag.appendChild(domify(pagerWrapper))
+		this.$pagerWrapper.appendChild(domify(this.slides.map(() => pagerItem).join('')))
+		this.$buttons = [...this.$pagerWrapper.children].map(($button, index) => {
+			$button.setAttribute('data-index', index)
+			if(index === this.currentItemIndex) {
+				DomClass($button).add('is-current')
+			}
+			return $button
+		})
+
+		DomClass(this.$buttons[this.currentItemIndex]).add(pagerActiveClass)
+
+		this.addPagerEvents()
+
+		return this
+	}
+
+	addPagerEvents = () => {
+		this.$buttons.forEach(button => button.addEventListener('click', this.onPagerClick))
+	}
+
+	removePagerEvents = () => {
+		this.$buttons.forEach(button => button.removeEventListener('click', this.onPagerClick))
+	}
+
+	onPagerClick = (evt) => {
+		evt.preventDefault()
+		const { target } = evt
+		const { index } = target.dataset
+
+		
+		this.goTo(index)
+	}
+
+	updatePagerLinks = (prev, next) => {
+		const { pagerActiveClass } = this.options
+		DomClass(this.$buttons[prev]).remove(pagerActiveClass)
+		DomClass(this.$buttons[next]).add(pagerActiveClass)
+	}
+
+	listen() {
+		this.on('change', this.onChange)
+	}
+
+	onChange = ({detail}) => {
+		const { currentItemIndex } = detail
+		if(this.options.pager) {
+			this.updatePagerLinks(this.previousIndex, currentItemIndex)
+		}
+
+		if(this.options.loop) {
+			this.cancelLoop()
+			this.loop()
+		}
+
+		this.previousIndex = currentItemIndex
+	}
+
+	destroy() {
+		this.removeAllHelperSettings()
+		this.off('change', this.onChange)
+		
+		if(this.buttonPrevious) {
+			this.buttonPrevious.setAttribute('disabled', true)
+		}
+
+		if(this.buttonNext) {
+			this.buttonNext.setAttribute('disabled', true)
+		}
+
+		if(this.options.pager) {
+			this.removePagerEvents()
+			this.$pagerWrapper.parentNode.removeChild(this.$pagerWrapper)
+		}
+		
+		if(this.options.loop) {
+			this.cancelLoop()
+		}
+		
+		if(this.options.swipe) {
+			this.mc.destroy()
+		}
+	}
+	
+	loop = () => {
+		this.timeout = setTimeout(() => {
+			this.handle = requestAnimationFrame(this.loop)
+			this.next()
+		}, this.options.delay)
+	}
+
+	cancelLoop = () => {
+		cancelAnimationFrame(this.handle)
+		clearTimeout(this.timeout)
+	}
+
+	addGestures = () => {
+		this.mc = new Hammer.Manager(this.$tag, {
 			recognizers: [
 				[Hammer.Pan, {
 					direction: Hammer.DIRECTION_HORIZONTAL
 				}]
 			]
 		})
-		const Pan = new Hammer.Pan()
-		this.mc.add(Pan)
-		this.mc.on('panend', (e) => {
-			if(e.additionalEvent === 'panleft') {
-				this.previous()
-			} else if(e.additionalEvent === 'panright') {
-				this.next()
-			}
-		})
+		this.mc.add(new Hammer.Pan())
+		this.mc.on('panend', this.onPanEnd)
 	}
 
-	get items() {
-		return this.slides
-	}
-
-
-	play() {
-		this.running = false
-		this.autoPlaySlide()
-	}
-
-	stop() {
-		clearTimeout(this.timeout)
-		raf.cancel(this.handle)
-		this.running = true
-	}
-
-
-	onChange(e) {
-		const { currentItemIndex } = e.detail
-		const { pager, autoplay } = this.opts
-		if(pager) {
-			this.activePager.classList.remove('is-active')
-			this.activePager = this.pagerElements[currentItemIndex]
-			this.activePager.classList.add('is-active')
+	onPanEnd = ({additionalEvent}) => {
+		if(additionalEvent === 'panleft') {
+			this.previous()
+		} else if(additionalEvent === 'panright') {
+			this.next()
 		}
-
-		if(autoplay) {
-			clearTimeout(this.timeout)
-			raf.cancel(this.handle)
-			this.autoPlaySlide()
-		}
-	}
-
-	addPagerHTML() {
-		const pagerElements = this.slides.map((slide, index) => {
-			return `<li role="button" tabindex="0" aria-role="button" data-target='${index}' class='${this.opts.pagerElClassName} ${index === 0 ? 'is-active' : ''}'></li>`
-		}).reduce((acc, current) => acc + current, '')
-
-		const ul = document.createElement('ul')
-		ul.classList.add('r-ul', 'slide-pager')
-		ul.innerHTML = pagerElements
-		this.tag.append(ul)
-		this.pagerElements = this.tag.querySelectorAll(`.${this.opts.pagerElClassName}`)
-		this.activePager = this.tag.querySelector(`.${this.opts.pagerElClassName}.is-active`)
-		return this
-	}
-
-	addPagerEvents() {
-		this.$tag.on('click', `.${this.opts.pagerElClassName}`, this.onPagerClickHandle)
-	}
-
-	onPagerClickHandle(e) {
-		const el = e.currentTarget
-		const { target } = el.dataset
-		this.goTo(target)
-		this.activePager.classList.remove('is-active')
-		this.activePager = el
-		this.activePager.classList.add('is-active')
-	}
-
-	autoPlaySlide() {
-		if(!this.running) {
-			this.timeout = setTimeout(() => {
-				this.handle = raf(this.autoPlaySlide)
-				this.next()
-			}, this.opts.delay)
-		}
-	}
+	} 
 }

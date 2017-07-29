@@ -33,3 +33,23 @@ export const lock = () => {
  * @return {Boolean} 
  */
 export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+export const mergeOptopns = (defaults, opts, el, name) => {
+	// create options object, merge opts from params
+	let options = {
+		...defaults,
+		...opts
+	}
+	// try and merge any json options from the dom
+	try {
+		const o = el.dataset[name]
+		const json = typeof o === 'string' ? JSON.parse(o) : {}
+		options = {
+			...options,
+			...json
+		}
+	} catch(err) {
+		console.error(err)
+	}
+	return options
+}

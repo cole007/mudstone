@@ -33,7 +33,8 @@ const webpackConfig = env => {
 		devtool: ifProd('eval', 'source-map'),
 		resolve: {
 			alias: {
-				'vue$': 'vue/dist/vue.common.js'
+				'vue$': 'vue/dist/vue.common.js',
+				'@': path.resolve(process.env.PWD, PATH_CONFIG.src, PATH_CONFIG.js.src)
 			}
 		},
 		module: {

@@ -4,3 +4,7 @@ export function groupBy(input, key) {
 		return rv
 	}, {})
 }
+
+export function isFunc(fn) {
+	return typeof fn === 'function'
+}
