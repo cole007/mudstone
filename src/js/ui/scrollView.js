@@ -1,4 +1,4 @@
-import { DomClosest, DomCss } from '../utils/dom'
+import { DomClosest, DomCss } from '@/utils/dom'
 
 export default class ScrollView {
 	/**

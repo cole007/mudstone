@@ -1,5 +1,6 @@
 import Concert from 'concert'
-import { transitionEnd, lock } from './utils'
+import { transitionEnd } from '@/utils/dom'
+import { lock } from '@/utils/helpers'
 
 /**
  * Creates a new SideNav.

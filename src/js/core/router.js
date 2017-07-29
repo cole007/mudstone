@@ -1,7 +1,7 @@
 import Listener from '../core/listener'
 import { Dispatcher, Prefetch, Pjax, HistoryManager, BaseTransition } from 'barba.js'
 import pathToRegexp from 'path-to-regexp'
-import { transitions } from '../views'
+import { transitions } from '@/views'
 
 const transition = BaseTransition.extend({
 	start: function () {

@@ -1,4 +1,4 @@
-import Behaviour from '../core'
+import Behaviour from '@/core'
 
 // use the unmount() method to remove any events, 
 // kill plugins etc

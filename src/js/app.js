@@ -25,7 +25,6 @@ WebFont.load({
 
 import App from './core/loader'
 
-
 new App(document, behaviours)
 	.start()
 	.watch()
