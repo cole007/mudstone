@@ -14,7 +14,6 @@ export default class Validation extends Concert {
 		selector: '.js-validate',
 		group: '.form-group',
 		messageWrapper: '<span class="error"></span>',
-		delegate: false,
 		ajax: true,
 		constraints: {
 			email: {
@@ -85,13 +84,8 @@ export default class Validation extends Concert {
 
 	constructor(el, options = {}) {
 		super()
-
 		this.$form = el
 		this.options = mergeOptopns(this.defaults, options, el, 'validationOptions')
-
-		/*
-			Event delegation via dom-delegate
-		*/
 		this.options.init && this.initalize()
 	}
 
@@ -114,12 +108,11 @@ export default class Validation extends Concert {
 	showError = (element) => {
 		const name = element.getAttribute('name')
 		const instance = this.collection.find(item => item.name === name)
-		const errors = validate(
-			{
-				[name]: element.value
-			}, {
-				[name]: instance.constraints
-			}, {fullMessages: false}
+		const input = {}
+		const constraints = {}
+		constraints[name] = instance.constraints
+		input[name] = element.value
+		const errors = validate(input, constraints, {fullMessages: false}
 		) || {}
 
 		if(errors[name]) {
@@ -191,5 +184,10 @@ export default class Validation extends Concert {
 		this.setDelegate()
 		this.setupDom()
 		this.addEvents()
+	}
+
+	destroy = () => {
+		this.collection = []
+		this.removeEvents()
 	}
 }
