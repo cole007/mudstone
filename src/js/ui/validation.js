@@ -1,264 +1,195 @@
-import validate from 'validate.js'
 import Concert from 'concert'
+import validate from 'validate.js'
+import domify from 'domify'
+import Delegate from 'dom-delegate'
+import { mergeOptopns } from '@/utils/helpers'
+import { DomClass, DomClosest } from '@/utils/dom'
 
-/**
- * Creates a new form validator.
-	<div class="form__group js-input-wrap">
-		<label class="form__label" for="frm_name">Name</label>
-		<input class="form__input" type="text" name="frm_name" id="frm_name" required>
-	</div>
-	new Validation(el, {
-		constraints: {
-			'frm_email': {
-				presence: {
-					message: 'Email is required'
-				},
-				email: {
-					message: 'Please enter a valid email address'
-				}
-			},
-			'frm_name': {
-				presence: {
-					message: 'Please enter your name'
-				}
-			},
-			'frm_msg': {
-				presence: {
-					message: 'Please enter your message'
-				}
-			}
-		}
-	})
- * @class
- */
+window.v = validate
 
 export default class Validation extends Concert {
-	constructor(el, opts = {}) {
-		super()
-		// Dom node: the form elements
-		this.form = el
-		// Object: the validation constraints
-		this.constraints = opts.constraints
-		// String: tags to validate against
-		this.selector = opts.selector || 'input, textarea, select'
-		// String: classname for the div that surrounds the input
-		this.inputWrapper = opts.inputWrapper || 'js-input-wrap'
-		// String: classname used on error message block
-		this.messageClassName = opts.messageClassName || 'message'
-		// Function/String: the tag to be used to store the message
-		// If a function is supplied the first argument is the error message
-		this.messageEl = opts.messageEl || 'span'
-		// String: classname used for errors
-		this.errorClassName = opts.errorClassName || 'is-error'
-		// String: classname used for success
-		this.validClassName = opts.validClassName || 'is-valid'
-		// Boolean: submit form with ajax
-		this.ajax = opts.ajax || false
 
-		// all of the valid inputs
-		this.inputs = Array.from(this.form.querySelectorAll(this.selector))
-		.filter(input => input.getAttribute('type') !== 'hidden')
-		.filter(input => input.getAttribute('type') !== 'submit')
-		// all of the required inputs
-		this.requiredInputs = this.inputs.filter(input => input.required)
-		log(this.requiredInputs)
-		// bind methods
-		this.showErrors = this.showErrors.bind(this)
-		this.submitHandler = this.submitHandler.bind(this)
-		this.changeHandler = this.changeHandler.bind(this)
-		this.showErrorsForInput = this.showErrorsForInput.bind(this)
-		this.resetFormGroup = this.resetFormGroup.bind(this)
-		this.addError = this.addError.bind(this)
-		this.send = this.send.bind(this)
-		this.reset = this.reset.bind(this)
-		this.clearFields = this.clearFields.bind(this)
-		// add the event listeners
-		this.addEventListeners()
-		// set the form to novalidate, prevents html5 form validatiopn
-		this.form.setAttribute('novalidate', true)
-		// add error message divs to each required group
-		Validation.addMessageNodesToDom(this.requiredInputs, this.messageClassName, this.inputWrapper)
-
-	}
-
-
-	/**
-	 * Bind the events
-	 */
-
-	addEventListeners() {
-		this.form.addEventListener('submit', this.submitHandler)
-		this.requiredInputs.forEach((input) => input.addEventListener('change', this.changeHandler))
-	}
-
-	/**
-	 * Find the closest parent
-	 * @param {Node} dom node - the required dom node
-	 * @param {String} className - the class name to search for
-	 */
-
-	static closestParent(node, className, form) {
-		if (!node || node === form) {
-			return null
-		}
-		if (node.classList.contains(className)) {
-			return node
-		}
-		return Validation.closestParent(node.parentNode, className, form)
-	}
-
-	/**
-	 * Reset form, remove any classes add and empty the message element
-	 * @param {formGroup} node - The form group being reset
-	 */
-
-	resetFormGroup(formGroup) {
-		// Remove the success and error classes
-		formGroup.classList.remove(this.errorClassName)
-		formGroup.classList.remove(this.validClassName)
-		formGroup.querySelector(`.${this.messageClassName}`).innerHTML = ''
-	}
-
-	/**
-	 * Append div after every required input for messages
-	 * @param {Array} inputs - The required fields array
-	 * @param {String} inputWrapper - the input parent wrapper
-	 * @param {String} className - the class name used for each
-	 */
-
-	static addMessageNodesToDom(inputs, className, inputWrapper) {
-		inputs.forEach((input) => {
-			try {
-				const messageDiv = document.createElement('div')
-				const parent = Validation.closestParent(input, inputWrapper, this.form)
-				messageDiv.className = className
-				parent.appendChild(messageDiv)
-			} catch(e) {
-				log('Validation addMessageNodesToDom', e)
-			}
-		})
-	}
-
-	/**
-	 * Submit handler - handle the form submission, *this* is bound to the Instance, not the dom node
-	 * @param {e} event
-	 */
-
-	submitHandler(e) {
-		// validate the form aainst the constraints
-		const errors = validate(this.form, this.constraints, {fullMessages: false})
-
-
-		if(this.ajax || errors) {
-			e.preventDefault()
-		}
-		// then we update the form to reflect the results
-		this.showErrors(errors || {})
-
-		!errors && this.send()
-	}
-
-	reset() {
-		this.requiredInputs.forEach((input) => {
-			const formGroup = Validation.closestParent(input.parentNode, this.inputWrapper, this.form)
-			this.resetFormGroup(formGroup)
-		})
-		this.clearFields()
-		return this
-	}
-
-	clearFields() {
-		this.inputs.forEach((input) => input.value = '')
-		return this
-	}
-
-	/**
-	 * Change handler, called every time an input is changed, *this* is bound to the Instance, not the dom node
-	 * @param {e} event
-	 */
-
-	changeHandler(e) {
-		const input = e.srcElement
-		const errors = validate(this.form, this.constraints, {fullMessages: false}) || {}
-		this.showErrorsForInput(input, errors[input.name])
-	}
-
-	/**
-	 * show success and post form the server
-	 * @param {e} event
-	 */
-
-	send() {
-		const data = new FormData(this.form)
-		const _this = this
-
-		const ajaxSettings = {
-			url : this.url,
-			method: 'POST',
-			data: data,
-			success: (response, textStatus, jqXHR) => {
-				_this.trigger('submit:success', {response, textStatus, jqXHR, input: _this.getInputValues()})
-				_this.clearFields()
+	defaults = {
+		init: true,
+		selector: '.js-validate',
+		group: '.form-group',
+		messageWrapper: '<span class="error"></span>',
+		delegate: false,
+		ajax: true,
+		constraints: {
+			email: {
+				// Email is required
+				presence: true,
+				// and must be an email (duh)
+				email: true
 			},
-			error: (jqXHR, textStatus, errorThrown) => {
-				_this.trigger('submit:error', {jqXHR, textStatus, errorThrown})
+			password: {
+				// Password is also required
+				presence: true,
+				// And must be at least 5 characters long
+				length: {
+					minimum: 5
+				}
+			},
+			'confirm-password': {
+				// You need to confirm your password
+				presence: true,
+				// and it needs to be equal to the other password
+				equality: {
+					attribute: 'password',
+					message: '^The passwords does not match'
+				}
+			},
+			username: {
+				// You need to pick a username too
+				presence: true,
+				// And it must be between 3 and 20 characters long
+				length: {
+					minimum: 3,
+					maximum: 20
+				},
+				format: {
+					// We don't allow anything that a-z and 0-9
+					pattern: '[a-z0-9]+',
+					// but we don't care if the username is uppercase or lowercase
+					flags: 'i',
+					message: 'can only contain a-z and 0-9'
+				}
+			},
+			country: {
+				// You also need to input where you live
+				presence: true,
+				// And we restrict the countries supported to Sweden
+				inclusion: {
+					within: ['SE'],
+					// The ^ prevents the field name from being prepended to the error
+					message: '^Sorry, this service is for Sweden only'
+				}
+			},
+			zip: {
+				// Zip is optional but if specified it must be a 5 digit long number
+				format: {
+					pattern: '\\d{5}'
+				}
+			},
+			'number-of-children': {
+				presence: true,
+				// Number of children has to be an integer >= 0
+				numericality: {
+					onlyInteger: true,
+					greaterThanOrEqualTo: 0
+				}
 			}
 		}
-
-		const o = Object.assign({}, ajaxSettings, this.postSettings)
-		$.ajax(o)
 	}
 
-	/**
-	 * show errors - show all error messages, trigger by submission
-	 * @param {Array} errors - the errors array
-	 */
+	constructor(el, options = {}) {
+		super()
 
-	showErrors(errors) {
-		this.requiredInputs.forEach((input) => this.showErrorsForInput(input, errors && errors[input.name]))
+		this.$form = el
+		this.options = mergeOptopns(this.defaults, options, el, 'validationOptions')
+
+		/*
+			Event delegation via dom-delegate
+		*/
+		this.options.init && this.initalize()
 	}
 
-	/**
-	 * addError - creates dom node and adds error message
-	 * @param {Node} messages - the dom node
-	 * @param {String} error - error message
-	 */
+	setForm = (el) => this.$form = el
 
-	addError(messages, error) {
-		let block
-		if(typeof this.messageEl === 'function') {
-			const node = this.messageEl(error)
-			block = node instanceof jQuery ? node[0] : node
+	addEvents = () => {
+		this.delegate.on('change', '[data-validate]', this.onChange)
+		this.$form.addEventListener('submit', this.onSubmit)
+	}
+
+	removeEvents = () => {
+		this.delegate.off('change', '[data-validate]', this.onChange)
+		this.$form.removeEventListener('submit', this.onSubmit)
+	}
+
+	onChange = (event, element) => {
+		this.showError(element)
+	}
+
+	showError = (element) => {
+		const name = element.getAttribute('name')
+		const instance = this.collection.find(item => item.name === name)
+		const errors = validate(
+			{
+				[name]: element.value
+			}, {
+				[name]: instance.constraints
+			}, {fullMessages: false}
+		) || {}
+
+		if(errors[name]) {
+			this.renderMessage(instance, errors[name])
+
 		} else {
-			block = document.createElement(this.messageEl)
-			block.classList.add('help-block')
-			block.innerText = error
+			this.removeError(instance)
 		}
-		messages.appendChild(block)
 	}
 
-	/**
-	 * showErrorsForInput - creates dom node and adds error message
-	 * @param {Node} input - dom node
-	 * @param {Array} all of the errors
-	 */
+	onSubmit = (event) => {
+		const { constraints, ajax } = this.options
+		const errors = validate(this.$form, constraints, {fullMessages: false})
 
-	showErrorsForInput(input, errors) {
-		// This is the root of the input
-		const formGroup = Validation.closestParent(input.parentNode, this.inputWrapper, this.form)
-		// Find where the error messages will be insert into
-		const messages = formGroup.querySelector(`.${this.messageClassName}`)
-		// First we remove any old messages and resets the classes
-		this.resetFormGroup(formGroup)
-		// If we have errors
-		if (errors) {
-			// we first mark the group has having errors
-			formGroup.classList.add(this.errorClassName)
-			// then we append all the errors
-			errors.forEach((error) => this.addError(messages, error))
-		} else {
-			// otherwise we simply mark it as success
-			formGroup.classList.add(this.validClassName)
+		if(ajax || errors) {
+			event.preventDefault()
 		}
+
+		if(errors) {
+			this.collection.forEach(({$node}) => this.showError($node, 'submit'))
+		}
+		
+		!errors && this.postForm()
+	}
+
+	postForm = () => {
+
+	}
+
+	renderMessage = ({$message, $parent, $node}, message) => {
+		if(message[0] === $message.textContent) return
+		$message.textContent = ''
+		$message.textContent = message[0]
+		DomClass($parent).add('is-error')
+		DomClass($node).add('is-error')
+	}
+
+	removeError = ({$message, $parent, $node}) => {
+		$message.textContent = ''
+		DomClass($parent).remove('is-error')
+		DomClass($node).remove('is-error')
+	}
+
+	setDelegate = (el = this.$form) => {
+		this.delegate = new Delegate(el)
+	}
+
+	setupDom = () => {
+		const { constraints, group, messageWrapper } = this.options
+		for(let key in constraints) {
+			const nodes = [...this.$form.querySelectorAll(`[name='${key}']`)].map(($node) => {
+				const $parent = DomClosest($node, group)
+				const $message = $parent.appendChild(domify(messageWrapper))
+				$node.setAttribute('data-validate', true)
+				return {
+					$node,
+					$parent,
+					$message,
+					name: key,
+					constraints: constraints[key]
+				}
+			})
+			this.collection = [...this.collection, ...nodes]
+		}
+	}
+
+	initalize = () => {
+		this.collection = []
+		this.setDelegate()
+		this.setupDom()
+		this.addEvents()
 	}
 }
