@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-polyfill": "^6.23.0",
     "barba.js": "^1.0.0",
+    "bricks.js": "^1.8.0",
     "concert": "^2.1.0",
     "debug": "^2.6.8",
     "dom-delegate": "^2.0.3",

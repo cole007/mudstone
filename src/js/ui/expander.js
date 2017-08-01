@@ -1,4 +1,6 @@
 
+
+import { mergeOptions } from '@/utils/helpers'
 /**
  * Accordion UI Component
  *
@@ -26,25 +28,10 @@ export default function accordion(el, opts = {}) {
 
 	let current
 	let activated = false
-	const settings = (() => {
-		// create options object, merge opts from params
-		let options = {
-			...defaults,
-			...opts
-		}
-		// try and merge any json options from the dom
-		try {
-			const { accordionOptions } = el.dataset
-			const json = typeof accordionOptions === 'string' ? JSON.parse(accordionOptions) : {}
-			options = {
-				...options,
-				...json
-			}
-		} catch(err) {
-			console.error(err)
-		}
-		return options
-	})()
+
+	
+
+	const settings = mergeOptions(defaults, opts, el, 'accordionOptions')
 
 	let {
 		breakpoint,
