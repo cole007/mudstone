@@ -5,9 +5,30 @@ import { mergeOptions } from '@/utils/helpers'
 import { DomClass } from '@/utils/dom'
 
 
-
+/**
+ * 
+ * @class Slide
+ * @extends  Wallop
+ * @param  {HTMLElement} el : the form to validate
+ * @param  {Object} options : Slide options, Standard Wallop options plus some extra
+ * 									pagerWrapper: String // html string used to contain the pager elements
+ * 									pagerItem: String // html string used to for each pager button
+ * 									pagerActiveClass: String // class applied to the current pager
+ * 									name: String // name used for accessibility props
+ * 									delay: Number // when using loop this is the time between transitions
+ * 									swipe: Boolean // add gestures
+ * 									init: Boolean // initalize the slide
+ * 									pager: Boolean // adds pager html
+ */
 export default class Slide extends Wallop {
 
+	/**
+	 * 
+	 * @function constructor
+	 * @param  {HTMLElement} el : the form to validate
+	 * @param  {Object} options : Slide options
+	 * @return Slide
+	 */
 	constructor(element, options) {
 		const defaults = {
 			buttonPreviousClass: 'c-slide__prev',
@@ -25,7 +46,7 @@ export default class Slide extends Wallop {
 			delay: 3000,
 			swipe: true,
 			init: true,
-			startIndex: 0
+			pager: true
 		}
 		
 		const opts = mergeOptions(defaults, options, element, 'slideOptions')
@@ -39,6 +60,11 @@ export default class Slide extends Wallop {
 		opts.init && this.initialize()
 	}
 
+	/**
+	 * 
+	 * @function initialize
+	 * @return Slide
+	 */
 	initialize = () => {
 		this.goTo(this.previousIndex)
 
@@ -55,8 +81,15 @@ export default class Slide extends Wallop {
 		}
 
 		this.listen()
+
+		return this
 	}
 
+	/**
+	 * 
+	 * @function renderPager
+	 * @return Slide
+	 */
 	renderPager = () => {
 		const { pagerWrapper, pagerItem, pagerActiveClass } = this.options
 		this.$pagerWrapper = this.$tag.appendChild(domify(pagerWrapper))
@@ -76,33 +109,66 @@ export default class Slide extends Wallop {
 		return this
 	}
 
+	/**
+	 * Bind pager events
+	 * @function addPagerEvents
+	 * @return Slide
+	 */
 	addPagerEvents = () => {
 		this.$buttons.forEach(button => button.addEventListener('click', this.onPagerClick))
 	}
 
+	/**
+	 * Remove pager events
+	 * @function removePagerEvents
+	 * @return Slide
+	 */
 	removePagerEvents = () => {
 		this.$buttons.forEach(button => button.removeEventListener('click', this.onPagerClick))
 	}
 
+	/**
+	 * Pager click event
+	 * @function onPagerClick
+	 * @param {Object} evt 
+	 * @return void
+	 */
 	onPagerClick = (evt) => {
 		evt.preventDefault()
 		const { target } = evt
 		const { index } = target.dataset
 
-		
 		this.goTo(index)
 	}
 
+	/**
+	 * Update the pager elements
+	 * @function updatePagerLinks
+	 * @param {Number} prev 
+	 * @param {Number} next 
+	 * @return void
+	 */
 	updatePagerLinks = (prev, next) => {
 		const { pagerActiveClass } = this.options
 		DomClass(this.$buttons[prev]).remove(pagerActiveClass)
 		DomClass(this.$buttons[next]).add(pagerActiveClass)
 	}
 
+	/**
+	 * Listen to slide changes
+	 * @function listen
+	 * @return void
+	 */
 	listen() {
 		this.on('change', this.onChange)
 	}
 
+	/**
+	 * Listen to slide changes
+	 * @function onChange
+	 * @param {Object} details - deconstructed param
+	 * @return void
+	 */
 	onChange = ({detail}) => {
 		const { currentItemIndex } = detail
 		if(this.options.pager) {
@@ -117,6 +183,11 @@ export default class Slide extends Wallop {
 		this.previousIndex = currentItemIndex
 	}
 
+	/**
+	 * Destroy the things
+	 * @function destroy
+	 * @return Slide
+	 */
 	destroy() {
 		this.removeAllHelperSettings()
 		this.off('change', this.onChange)
@@ -141,8 +212,15 @@ export default class Slide extends Wallop {
 		if(this.options.swipe) {
 			this.mc.destroy()
 		}
+
+		return this
 	}
 	
+	/**
+	 * loop through the slides
+	 * @function loop
+	 * @return void
+	 */
 	loop = () => {
 		this.timeout = setTimeout(() => {
 			this.handle = requestAnimationFrame(this.loop)
@@ -150,11 +228,21 @@ export default class Slide extends Wallop {
 		}, this.options.delay)
 	}
 
+	/**
+	 * cancel looping
+	 * @function cancelLoop
+	 * @return void
+	 */
 	cancelLoop = () => {
 		cancelAnimationFrame(this.handle)
 		clearTimeout(this.timeout)
 	}
 
+	/**
+	 * add gestures 
+	 * @function addGestures
+	 * @return void
+	 */
 	addGestures = () => {
 		this.mc = new Hammer.Manager(this.$tag, {
 			recognizers: [
@@ -167,6 +255,12 @@ export default class Slide extends Wallop {
 		this.mc.on('panend', this.onPanEnd)
 	}
 
+	/**
+	 * the gesture event
+	 * @function onPanEnd
+	 * @param {String} deconstructed event object
+	 * @return void
+	 */
 	onPanEnd = ({additionalEvent}) => {
 		if(additionalEvent === 'panleft') {
 			this.previous()

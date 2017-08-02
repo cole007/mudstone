@@ -2,13 +2,24 @@ import Concert from 'concert'
 import Delegate from 'dom-delegate'
 import { mergeOptions, fromTo } from '@base/utils/helpers'
 
+
 /**
- * Accordion UI Component
- *
+ * 
+ * @class Accordion
+ * @extends  Concert
+ * @param  {HTMLElement} el : the form to validate
+ * @param  {Object} options : accordion options
+ * 									activeIndex: Number // Set the inital active pane
+ * 									closeOthers: Boolean // set to true to ensure only one pane is ever open
+ * 									selector: String // css selector for each accordion button
+ * 									name: String // name used for accessibility props
+ * 									buttonActiveClass: String // active button class
+ * 									contentActiveClass: String // active content class
+ * 									duration: Number // Animation duration
+ * 									easing: Function // easing function to apply
  */
-
-
 export default class Accordion extends Concert {
+
 	defaults = {
 		activeIndex: null,
 		closeOthers: false,
@@ -25,17 +36,22 @@ export default class Accordion extends Concert {
 		}
 	}
 
+	/**
+	 * 
+	 * @function constructor
+	 * @param  {HTMLElement} el : the form to validate
+	 * @param  {Object} options : Accordion options
+	 * @return Accordion
+	 */
 	constructor(el, options = {}) {
 		super()
 		this.options = mergeOptions(this.defaults, options, el, 'accordionOptions')
 		this.$el = el
 		this.panes = []
 		this.current
-		this.activated = false
 		this.delegate = new Delegate(el)
 		this.options.init && this.initalize()
 	}
-
 
 	/**
 	 * Setup panels, add accessibility attributes
@@ -124,7 +140,6 @@ export default class Accordion extends Concert {
 		return this
 	}
 
-
 	/**
 	 * The 'change' event handler
 	 * 
@@ -146,6 +161,12 @@ export default class Accordion extends Concert {
 		this.current = this.panes[accordionIndex]
 	}
 
+	/**
+	 * 
+	 * @function expand
+	 * @param  {Number} index : the form to validate
+	 * @return {Accordion}
+	 */
 	expand = (index) => {
 		const pane = this.panes[index]
 		const { duration, easing, buttonActiveClass, contentActiveClass } = this.options
@@ -157,8 +178,6 @@ export default class Accordion extends Concert {
 			$target.style.willChange = 'height'
 			pane.isRunning = true
 			pane.open = true
-
-
 
 			this.trigger('accordion:open')
 
@@ -174,9 +193,16 @@ export default class Accordion extends Concert {
 				this.trigger('accordion:opened')
 			})
 		}
+
+		return this
 	}
 
-
+	/**
+	 * 
+	 * @function expand
+	 * @param  {Number} index : the form to validate
+	 * @return {Accordion}
+	 */
 	collapse = (index) => {
 
 		const { duration, easing, buttonActiveClass, contentActiveClass } = this.options
@@ -203,6 +229,8 @@ export default class Accordion extends Concert {
 				this.trigger('accordion:collapsed')
 			})
 		}
+
+		return this
 	}
 
 	/**
@@ -211,8 +239,6 @@ export default class Accordion extends Concert {
 	 * @return {Accordion}
 	 */
 	initalize = () => {
-		if(this.activated) return
-		this.activated = true
 		this.addEvents()
 		this.$el.setAttribute('role', 'tablist')
 		this.$el.setAttribute('aria-multiselectable', this.options.closeOthers)
@@ -223,16 +249,13 @@ export default class Accordion extends Concert {
 		return this
 	}
 
-
 	/**
 	 * Initalize accordion, add aria attributes, bind events, open/close etc etc
 	 *
 	 * @return {Accordion}
 	 */
 	destroy = () => {
-		if(!this.activated) return
 		const { buttonActiveClass, contentActiveClass } = this.options
-		this.activated = false
 		this.removeEvents()
 		this.$el.removeAttribute('role')
 		this.$el.removeAttribute('aria-multiselectable')

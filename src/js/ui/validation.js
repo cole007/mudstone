@@ -6,22 +6,19 @@ import axios from 'axios'
 import { mergeOptions } from '@base/utils/helpers'
 import { DomClass, DomClosest } from '@base/utils/dom'
 
-
-	/**
-	 * 
-	 * @class Validation
-	 * @extends  Concert
-	 * @param  {HTMLElement} el : the form to validate
-	 * @param  {Object} options : validation options
-	 * 									init: Boolean // enable the validation
-	 * 									group: Boolean/String // field grouping element, if boolean input.parentNode is used
-	 * 									ajax: Boolean // to post via ajax
-	 * 									url: String // the url to post to
-	 * 									emptyFieldsOnComplete: Boolean // reset fields on submit
-	 * 									constraints: Object // the validation rules, see validatejs.org for more information
-	 */
-
-
+/**
+ * 
+ * @class Validation
+ * @extends  Concert
+ * @param  {HTMLElement} el : the form to validate
+ * @param  {Object} options : validation options
+ * 									init: Boolean // enable the validation
+ * 									group: Boolean/String // field grouping element, if boolean input.parentNode is used
+ * 									ajax: Boolean // to post via ajax
+ * 									url: String // the url to post to
+ * 									emptyFieldsOnComplete: Boolean // reset fields on submit
+ * 									constraints: Object // the validation rules, see validatejs.org for more information
+ */
 
 
 export default class Validation extends Concert {
@@ -312,8 +309,8 @@ export default class Validation extends Concert {
 	initalize = () => {
 		this.collection = []
 		this.setDelegate()
-				.setupDom()
-				.addEvents()
+			.setupDom()
+			.addEvents()
 	}
 
 	/**
