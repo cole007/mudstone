@@ -1,4 +1,5 @@
-
+import Concert from 'concert'
+import Delegate from 'dom-delegate'
 import { mergeOptions, fromTo } from '@base/utils/helpers'
 
 /**
@@ -6,10 +7,9 @@ import { mergeOptions, fromTo } from '@base/utils/helpers'
  *
  */
 
-export default function accordion(el, opts = {}) {
 
-	// default settings
-	const defaults = {
+export default class Accordion extends Concert {
+	defaults = {
 		activeIndex: null,
 		closeOthers: false,
 		open: false,
@@ -19,39 +19,22 @@ export default function accordion(el, opts = {}) {
 		buttonActiveClass: 'is-active',
 		contentActiveClass: 'is-expanded',
 		duration: 300,
-		breakpoint: null,
 		easing: function defaultEasing(t, b, c, d) {
 			if((t /= d / 2) < 1) return c / 2 * t * t + b
 			return -c / 2 * ((--t) * (t - 2) - 1) + b // eslint-disable-line
 		}
 	}
 
-	let current
-	let activated = false
-
-
-	const settings = mergeOptions(defaults, opts, el, 'accordionOptions')
-
-	let {
-		breakpoint,
-		buttonActiveClass,
-		contentActiveClass,
-		duration,
-		easing,
-		init,
-		selector,
-		closeOthers,
-		activeIndex,
-		open,
-		name
-	} = settings
-	
-	if(breakpoint) {
-		init = false
+	constructor(el, options = {}) {
+		super()
+		this.options = mergeOptions(this.defaults, options, el, 'accordionOptions')
+		this.$el = el
+		this.panes = []
+		this.current
+		this.activated = false
+		this.delegate = new Delegate(el)
+		this.options.init && this.initalize()
 	}
-
-	let panes = []
-
 
 
 	/**
@@ -59,11 +42,19 @@ export default function accordion(el, opts = {}) {
 	 *
 	 * @return {void}
 	 */
-	function createPanels() {
-		panes = [...el.querySelectorAll(selector)].map(($button, index) => {
+	createPanels = () => {
+		const {
+			buttonActiveClass,
+			contentActiveClass,
+			activeIndex,
+			open,
+			name
+		} = this.options
+
+		this.panes = [...this.$el.querySelectorAll(this.options.selector)].map(($button, index) => {
 			$button.setAttribute('data-accordion-index', index)
 			const { target } = $button.dataset
-			const $target = el.querySelector(target)
+			const $target = this.$el.querySelector(target)
 			const state = open 
 				? true
 				: (!open && index === activeIndex ? true : false) 
@@ -87,90 +78,77 @@ export default function accordion(el, opts = {}) {
 				isRunning: false
 			}
 		})
-
 	}
-
+	
 	/**
 	 * function called after the transition has completed
 	 *
 	 * @return {Accordion}
 	 */
-	function onEnd(pane) {
+	onEnd = (pane) => {
 		const { $target, $button, open } = pane
-		$target.style.willChange = null
-		$target.style.height = null
-		$target.style.display = null
+		$target.style.willChange = ''
+		$target.style.height = ''
+		$target.style.display = ''
 		pane.isRunning = false
 		$button.setAttribute('aria-expanded', open)
 		$button.setAttribute('aria-selected', open)
 		$target.setAttribute('aria-hidden', !open)
-	}
 
-	function delegated(e) {
-		const event = e
-		let { target } = e
-		function match(target) {
-			if(typeof target.matches === 'function') {
-				if(target && target.matches(selector)) {
-					clickHandle(event, target)
-					return
-				} 
-				match(target.parentNode)
-			}
-		}
-
-		match(target)
+		return this
 	}
 
 	/**
-	 * Attach the eventlisteners
+	 * Bind event listeners
 	 *
-	 * @private
-	 * @return {void}
+	 * @function addEvents
+	 * @return {Accordion}
 	 */
-	function bindEvents() {
-		el.addEventListener('click', delegated)
+	addEvents = () => {
+		const { selector } = this.options
+		this.delegate.on('click', selector, this.clickHandle)
+
+		return this
 	}
 
 	/**
-	 * Remove the eventlisteners
+	 * Unbind event listeners
 	 *
-	 * @private
-	 * @return {void}
+	 * @function removeEvents
+	 * @return {Accordion}
 	 */
-	function unBindEvents() {
-		el.removeEventListener('click', delegated)
+	removeEvents = () => {
+		const { selector } = this.options
+		this.delegate.off('click', selector, this.clickHandle)
+
+		return this
 	}
 
 
-
 	/**
-	 * The delegated click event, open/close accordion pane
-	 *
-	 * @param {Object} event
-	 * @param {HTMLElement} element
-	 * @return {void}
+	 * The 'change' event handler
+	 * 
+	 * @function clickHandle
+	 * @param  {Object} event : event object
+	 * @param  {HTMLElement} element : the input that's changed
+	 * @return Void
 	 */
-	function clickHandle(event, element) {
+	clickHandle = (event, element) => {
 		event.preventDefault()
+		const { closeOthers } = this.options
 		const { accordionIndex } = element.dataset
 		const open = element.getAttribute('aria-expanded') === 'true' ? true : false
-		if(closeOthers && current) {
-			const { index } = current
-			if(index !== parseInt(accordionIndex)) collapse(index)
+		if(closeOthers && this.current) {
+			const { index } = this.current
+			if(index !== parseInt(accordionIndex)) this.collapse(index)
 		}
-		open === true ? collapse(accordionIndex) : expand(accordionIndex)
-		current = panes[accordionIndex]
+		open === true ? this.collapse(accordionIndex) : this.expand(accordionIndex)
+		this.current = this.panes[accordionIndex]
 	}
 
-	/**
-	 * Open animation
-	 *
-	 * @param {Number} index
-	 * @return {void}
-	 */
-	function expand(index) {
-		const pane = panes[index]
+	expand = (index) => {
+		const pane = this.panes[index]
+		const { duration, easing, buttonActiveClass, contentActiveClass } = this.options
 		if(!pane.isRunning) {
 			const { $target, $button } = pane
 			$target.style.display = 'block'
@@ -180,36 +158,37 @@ export default function accordion(el, opts = {}) {
 			pane.isRunning = true
 			pane.open = true
 
+
+
+			this.trigger('accordion:open')
+
 			fromTo({
 				start: 0,
 				end: Math.round(height),
 				duration: duration,
 				easing: easing
 			}, (v) =>  $target.style.height = `${v}px`).then(() => {
-				onEnd(pane)
+				this.onEnd(pane)
 				$button.classList.add(buttonActiveClass)
 				$target.classList.add(contentActiveClass)
+				this.trigger('accordion:opened')
 			})
 		}
 	}
-	
-
-	/**
-	 * Close animation
-	 *
-	 * @param {Number} index
-	 * @return {void}
-	 */
-	function collapse(index) {
 
 
-		const pane = panes[index]
+	collapse = (index) => {
+
+		const { duration, easing, buttonActiveClass, contentActiveClass } = this.options
+		const pane = this.panes[index]
 		if(!pane.isRunning) {
 			pane.open = false
 			const { $target, $button } = pane
 			const { height } = $target.getBoundingClientRect()
 			$target.style.height = `${height}px`
 			$target.style.willChange = 'height'
+
+			this.trigger('accordion:collapse')
 			
 			pane.isRunning = true
 			fromTo({
@@ -218,11 +197,30 @@ export default function accordion(el, opts = {}) {
 				duration: duration,
 				easing: easing
 			}, (v) =>  $target.style.height = `${v}px`).then(() => {
-				onEnd(pane)
+				this.onEnd(pane)
 				$button.classList.remove(buttonActiveClass)
 				$target.classList.remove(contentActiveClass)
+				this.trigger('accordion:collapsed')
 			})
 		}
+	}
+
+	/**
+	 * Initalize accordion, add aria attributes, bind events, open/close etc etc
+	 *
+	 * @return {Accordion}
+	 */
+	initalize = () => {
+		if(this.activated) return
+		this.activated = true
+		this.addEvents()
+		this.$el.setAttribute('role', 'tablist')
+		this.$el.setAttribute('aria-multiselectable', this.options.closeOthers)
+		this.createPanels()
+
+		this.trigger('accordion:initalize')
+
+		return this
 	}
 
 
@@ -231,27 +229,14 @@ export default function accordion(el, opts = {}) {
 	 *
 	 * @return {Accordion}
 	 */
-	function initalize() {
-		if(activated) return
-		activated = true
-		bindEvents()
-		el.setAttribute('role', 'tablist')
-		el.setAttribute('aria-multiselectable', closeOthers)
-		createPanels()
-	}
-
-	/**
-	 * Destroy component, remove event listeners 
-	 *
-	 * @return {Accordion}
-	 */
-	function destroy() {
-		if(!activated) return
-		activated = false
-		unBindEvents()
-		el.removeAttribute('role')
-		el.removeAttribute('aria-multiselectable')
-		panes.forEach(({$button, $target}) => {
+	destroy = () => {
+		if(!this.activated) return
+		const { buttonActiveClass, contentActiveClass } = this.options
+		this.activated = false
+		this.removeEvents()
+		this.$el.removeAttribute('role')
+		this.$el.removeAttribute('aria-multiselectable')
+		this.panes.forEach(({$button, $target}) => {
 			$button.classList.remove(buttonActiveClass)
 			$button.removeAttribute('aria-expanded')
 			$button.removeAttribute('aria-selected')
@@ -263,15 +248,10 @@ export default function accordion(el, opts = {}) {
 			$target.classList.remove(contentActiveClass)
 			$target.removeAttribute('style')
 		})
-	}
 
-	init && initalize()
+		this.trigger('accordion:destroy')
 
-	return {
-		initalize,
-		expand,
-		collapse,
-		destroy,
-		settings
+		return this
 	}
-} 
+}
+

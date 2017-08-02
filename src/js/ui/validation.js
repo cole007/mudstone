@@ -22,10 +22,6 @@ import { DomClass, DomClosest } from '@base/utils/dom'
 	 */
 
 
-// https://github.com/ansman/validate.js/issues/65
-validate.validators.checked = function (value, options) {
-	if(value !== true) return options.message || 'must be checked'
-}
 
 
 export default class Validation extends Concert {
@@ -35,6 +31,8 @@ export default class Validation extends Concert {
 		group: false,
 		messageWrapper: '<span class="error"></span>',
 		ajax: true,
+		errorClass: 'is-error',
+		validClass: 'is-valid',
 		url: '',
 		emptyFieldsOnComplete: true,
 		constraints: {
@@ -81,6 +79,11 @@ export default class Validation extends Concert {
 			}
 		}
 
+		// https://github.com/ansman/validate.js/issues/65
+		validate.validators.checked = function (value, options) {
+			if(value !== true) return options.message || 'must be checked'
+		}
+
 		this.options.init && this.initalize()
 	}
 
@@ -93,8 +96,14 @@ export default class Validation extends Concert {
 	 */
 	setForm = (el) => {
 		this.$form = el
+		this.$submit = this.$form.querySelector('[type="submit"]')
 
 		return this
+	}
+
+
+	get $$form() {
+		return this.$form
 	}
 
 	/**
@@ -145,19 +154,16 @@ export default class Validation extends Concert {
 	showError = (element) => {
 		const name = element.getAttribute('name')
 		const instance = this.collection.find(item => item.name === name)
-		const input = {}
-		const constraints = {}
-		constraints[name] = instance.constraints
-		input[name] = element.value
-		const errors = validate(this.$form, this.options.constraints, {fullMessages: false})
-
-
-		if(errors[name]) {
+		const errors = validate(this.$form, this.options.constraints, {fullMessages: false}) || {}
+		
+		if(errors[name] && instance) {
 			this.renderMessage(instance, errors[name])
-
-		} else {
-			this.removeError(instance)
+			return
 		}
+
+		if(instance) {
+			this.removeError(instance)
+		}	
 	}
 
 	/**
@@ -176,7 +182,6 @@ export default class Validation extends Concert {
 
 		if(errors) {
 			this.collection.forEach(({$node}) => this.showError($node, 'submit'))
-
 			this.trigger('form:errors-on-submit', errors)
 		}
 		
@@ -191,21 +196,33 @@ export default class Validation extends Concert {
 	 */
 	postForm = () => {
 		const data = new FormData(this.$form)
-		const { emptyFieldsOnComplete } = this.options
+		const { emptyFieldsOnComplete, url } = this.options
+
+		this.trigger('form:submit', this.$form)
+
 
 		axios({
 			method: 'post',
-			url: '',
+			url,
 			data
 		})
 			.then(function (response) {
 				emptyFieldsOnComplete && this.$form.reset()
+				this.resetInputNodes()
 				this.trigger('form:success', response)
 			})
 			.catch(function (error) {
-				this.trigger('form:success', error)
+				this.trigger('form:error', error)
 			})
+	}
 
+	resetInputNodes = () => {
+		const { validClass } = this.options
+
+		this.collection.forEach(({$node, $parent}) => {
+			DomClass($parent).remove(validClass)
+			DomClass($node).remove(validClass)
+		})
 	}
 
 	/**
@@ -218,10 +235,14 @@ export default class Validation extends Concert {
 	 */
 	renderMessage = ({$message, $parent, $node}, message) => {
 		if(message[0] === $message.textContent) return
+		const { errorClass, validClass } = this.options
+		
 		$message.textContent = ''
 		$message.textContent = message[0]
-		DomClass($parent).add('is-error')
-		DomClass($node).add('is-error')
+		DomClass($parent).add(errorClass)
+		DomClass($node).add(errorClass)
+		DomClass($parent).remove(validClass)
+		DomClass($node).remove(validClass)
 	}
 
 	/**
@@ -232,9 +253,12 @@ export default class Validation extends Concert {
 	 * @return Void
 	 */
 	removeError = ({$message, $parent, $node}) => {
-		$message.textContent = ''
-		DomClass($parent).remove('is-error')
-		DomClass($node).remove('is-error')
+		if($message) $message.textContent = ''
+		const { errorClass, validClass } = this.options
+		DomClass($parent).remove(errorClass)
+		DomClass($node).remove(errorClass)
+		DomClass($parent).add(validClass)
+		DomClass($node).add(validClass)
 	}
 
 	/**

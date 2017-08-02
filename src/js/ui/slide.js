@@ -1,7 +1,7 @@
 import Wallop from 'wallop'
 import Hammer from 'hammerjs'
 import domify from 'domify'
-import { mergeOptopns } from '@/utils/helpers'
+import { mergeOptions } from '@/utils/helpers'
 import { DomClass } from '@/utils/dom'
 
 
@@ -28,7 +28,7 @@ export default class Slide extends Wallop {
 			startIndex: 0
 		}
 		
-		const opts = mergeOptopns(defaults, options, element, 'slideOptions')
+		const opts = mergeOptions(defaults, options, element, 'slideOptions')
 
 		super(element, opts)
 		this.options = opts
