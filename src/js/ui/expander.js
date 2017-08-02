@@ -1,6 +1,6 @@
 
+import { mergeOptions, fromTo } from '@base/utils/helpers'
 
-import { mergeOptions } from '@/utils/helpers'
 /**
  * Accordion UI Component
  *
@@ -29,7 +29,6 @@ export default function accordion(el, opts = {}) {
 	let current
 	let activated = false
 
-	
 
 	const settings = mergeOptions(defaults, opts, el, 'accordionOptions')
 
@@ -53,46 +52,7 @@ export default function accordion(el, opts = {}) {
 
 	let panes = []
 
-	/**
-	 * Animate $target from start to end
-	 * @param {HTMLElement} $target
-	 * @param {Object} options
-	 * @return {Promise}
-	 */
-	function animate($target, options = {}) {
-		const { easing, duration, start, end } = options
-		const condition = (lastTick, next, end) => {
-			return (start < end) ? (next < end && lastTick <= next) : (next > end && lastTick >= next)
-		}
 
-
-
-		let next = null
-		let timeElapsed = null
-		let timeStart = null
-		let frame = null
-		return new Promise((resolve) => { 
-			const loop = (currentTime) => {
-				let lastTick = next || start
-				if(!timeStart) timeStart = currentTime
-				timeElapsed = currentTime - timeStart
-
-				next = Math.round(easing(timeElapsed, start, end - start, duration))
-				if(condition(lastTick, next, end)) {
-					frame = window.requestAnimationFrame(loop)
-					$target.style.height = `${next}px`
-				} else {
-					resolve()
-					window.cancelAnimationFrame(frame)
-					timeElapsed = null
-					timeStart = null
-					frame = null
-					lastTick = null
-				}
-			}
-			frame = window.requestAnimationFrame(loop)
-		})
-	}
 
 	/**
 	 * Setup panels, add accessibility attributes
@@ -105,10 +65,10 @@ export default function accordion(el, opts = {}) {
 			const { target } = $button.dataset
 			const $target = el.querySelector(target)
 			const state = open 
-												? true
-												: (!open && index === activeIndex ? true : false) 
-													? true
-													: false
+				? true
+				: (!open && index === activeIndex ? true : false) 
+					? true
+					: false
 			$button.setAttribute('aria-expanded', state)
 			$button.setAttribute('aria-selected', state)
 			$button.setAttribute('aria-controls', `${name}-${index}`)
@@ -220,12 +180,12 @@ export default function accordion(el, opts = {}) {
 			pane.isRunning = true
 			pane.open = true
 
-			animate($target, {
+			fromTo({
 				start: 0,
 				end: Math.round(height),
 				duration: duration,
 				easing: easing
-			}).then(() => {
+			}, (v) =>  $target.style.height = `${v}px`).then(() => {
 				onEnd(pane)
 				$button.classList.add(buttonActiveClass)
 				$target.classList.add(contentActiveClass)
@@ -252,12 +212,12 @@ export default function accordion(el, opts = {}) {
 			$target.style.willChange = 'height'
 			
 			pane.isRunning = true
-			animate($target, {
+			fromTo({
 				start: Math.round(height),
 				end: 0,
 				duration: duration,
 				easing: easing
-			}).then(() => {
+			}, (v) =>  $target.style.height = `${v}px`).then(() => {
 				onEnd(pane)
 				$button.classList.remove(buttonActiveClass)
 				$target.classList.remove(contentActiveClass)
