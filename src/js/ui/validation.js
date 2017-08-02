@@ -3,22 +3,30 @@ import validate from 'validate.js'
 import domify from 'domify'
 import Delegate from 'dom-delegate'
 import axios from 'axios'
-import { mergeOptions } from '@/utils/helpers'
-import { DomClass, DomClosest } from '@/utils/dom'
+import { mergeOptions } from '@base/utils/helpers'
+import { DomClass, DomClosest } from '@base/utils/dom'
 
 
-/**
- * 
- * @class Validation
- * @extends  Concert
- * @param  {HTMLElement} el : the form to validate
- * @param  {Object} options : validation options
- * 									init: Boolean // enable the validation
- * 									group: Boolean/String // field grouping element, if boolean input.parentNode is used
- * 									ajax: Boolean // to post via ajax
- * 									emptyFieldsOnComplete: Boolean // reset fields on submit
- * 									constraints: Object // the validation rules, see validatejs.org for more information
- */
+	/**
+	 * 
+	 * @class Validation
+	 * @extends  Concert
+	 * @param  {HTMLElement} el : the form to validate
+	 * @param  {Object} options : validation options
+	 * 									init: Boolean // enable the validation
+	 * 									group: Boolean/String // field grouping element, if boolean input.parentNode is used
+	 * 									ajax: Boolean // to post via ajax
+	 * 									url: String // the url to post to
+	 * 									emptyFieldsOnComplete: Boolean // reset fields on submit
+	 * 									constraints: Object // the validation rules, see validatejs.org for more information
+	 */
+
+
+// https://github.com/ansman/validate.js/issues/65
+validate.validators.checked = function (value, options) {
+	if(value !== true) return options.message || 'must be checked'
+}
+
 
 export default class Validation extends Concert {
 
@@ -27,6 +35,7 @@ export default class Validation extends Concert {
 		group: false,
 		messageWrapper: '<span class="error"></span>',
 		ajax: true,
+		url: '',
 		emptyFieldsOnComplete: true,
 		constraints: {
 			'questions[test_email]': {
@@ -140,8 +149,8 @@ export default class Validation extends Concert {
 		const constraints = {}
 		constraints[name] = instance.constraints
 		input[name] = element.value
-		const errors = validate(input, constraints, {fullMessages: false}
-		) || {}
+		const errors = validate(this.$form, this.options.constraints, {fullMessages: false})
+
 
 		if(errors[name]) {
 			this.renderMessage(instance, errors[name])
@@ -159,15 +168,16 @@ export default class Validation extends Concert {
 	 * @return Void
 	 */
 	onSubmit = (event) => {
-		const { constraints, ajax } = this.options
+		event.preventDefault()
+
+		const { constraints } = this.options
 		const errors = validate(this.$form, constraints, {fullMessages: false})
 
-		if(ajax || errors) {
-			event.preventDefault()
-		}
 
 		if(errors) {
 			this.collection.forEach(({$node}) => this.showError($node, 'submit'))
+
+			this.trigger('form:errors-on-submit', errors)
 		}
 		
 		!errors && this.postForm()
