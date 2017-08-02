@@ -1,0 +1,12 @@
+.c-accordion__wrapper {
+	overflow: hidden;
+	position: relative;
+
+	&[aria-hidden="false"] {
+		display: block;
+	}
+
+	&[aria-hidden="true"] {
+		display: none;
+	}
+}

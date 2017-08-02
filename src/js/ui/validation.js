@@ -3,8 +3,8 @@ import validate from 'validate.js'
 import domify from 'domify'
 import Delegate from 'dom-delegate'
 import axios from 'axios'
-import { mergeOptions } from '@base/utils/helpers'
-import { DomClass, DomClosest } from '@base/utils/dom'
+import { mergeOptions } from '@/utils/helpers'
+import { DomClass, DomClosest } from '@/utils/dom'
 
 /**
  * 

@@ -81,6 +81,8 @@
   *Layout* media queries should go here
 */
 @import 'modules/wysiwyg';
+@import 'modules/slide';
+@import 'modules/accordion';
 
 /*
   Utility classes, these should always win, go crazy with import

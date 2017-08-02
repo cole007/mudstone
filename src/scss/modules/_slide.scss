@@ -1,0 +1,149 @@
+.c-slide {
+	position: relative;
+	overflow: hidden;
+	margin-bottom: gutter(2);
+}
+
+.c-slide__wrapper {
+	position: relative;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+
+.c-slide__item {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	cursor: grab;
+
+	& > img {
+		pointer-events: none;
+	}
+}
+
+.c-slide__item--current {
+	position: relative;
+	visibility: visible;
+}
+
+
+.c-slide__item--hidePrevious,
+.c-slide__item--hideNext {
+	visibility: visible;
+	animation: fadeOut 450ms cubic-bezier(.455, .03, .515, .955) both;
+}
+
+
+
+/*
+  In order to fade out properly we need to make sure
+  that the item that is going to be the previous one
+  has a higer z-index that the next one
+ */
+
+.c-slide__item--hidePrevious,
+.c-slide__item--hideNext {
+	z-index: 2;
+}
+
+.c-slide__item--showPrevious,
+.c-slide__item--showNext {
+	z-index: 1;
+}
+
+
+.c-slide__title {
+	position: absolute;
+	top: gutter(.5);
+	left: gutter(.5);
+	max-width: 70%;
+	z-index: 1;
+	color: $white;
+	line-height: vr(4);
+	opacity: 0;
+	transition: opacity 300ms 750ms ease-in-out, transform 1000ms 550ms ease-in-out;
+	transform: translate3d(0, gutter(.25), 0);
+	font-size: responsive ms(2) ms(7);
+
+	@include mq($from: breakpoint('tablet')) {
+		top: gutter(1);
+		left: gutter(2);
+	}
+
+	span {
+		background-color: c(base, dark);
+		padding: 0 gutter(.5);
+		box-decoration-break: clone;
+	}
+
+	.c-slide__item--current & {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+.c-slide__img {
+	min-height: rem(300px);
+	object-fit: cover;
+}
+
+.c-slide__pager {
+	position: absolute;
+	bottom: gutter(1);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	z-index: 2;
+}
+
+.c-slide__pager-item {
+	background-color: c(secondary, dark);
+	border: 0;
+	appearance: none;
+	border-radius: 100%;
+	padding: 0;
+	width: gutter(.5);
+	height: gutter(.5);
+	margin: 0 gutter(.5);
+	transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+	transform-origin: 50%;
+	position: relative;
+	opacity: .7;
+	cursor: pointer;
+
+	&::before {
+		position: absolute;
+		top: gutter(-.125);
+		left: gutter(-.125);
+		right: gutter(-.125);
+		bottom: gutter(-.125);
+		content: " ";
+		border-radius: 100%;
+		display: block;
+		border: rem(1px) solid $white;
+		opacity: 0;
+		transform: scale(0);
+		transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+	}
+
+	&.is-current {
+		transform: scale(1.5);
+		opacity: 1;
+
+		&::before {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	&:focus {
+		transform: scale(1.2);
+		outline: 0;
+		opacity: .8;
+	}
+}

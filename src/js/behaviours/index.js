@@ -1,5 +1,3 @@
-export { A } from './a'
-export { B } from './b'
-export { C } from './c'
-export { Header } from './header'
+export { SlideShow } from './SlideShow'
 export { Validate } from './Validate'
+export { Accordion } from './Accordion'

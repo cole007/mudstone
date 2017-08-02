@@ -1,11 +1,11 @@
 import Concert from 'concert'
 import Delegate from 'dom-delegate'
-import { mergeOptions, fromTo } from '@base/utils/helpers'
+import { mergeOptions, fromTo } from '@/utils/helpers'
 
 
 /**
  * 
- * @class Accordion
+ * @class Expander
  * @extends  Concert
  * @param  {HTMLElement} el : the form to validate
  * @param  {Object} options : accordion options
@@ -18,7 +18,7 @@ import { mergeOptions, fromTo } from '@base/utils/helpers'
  * 									duration: Number // Animation duration
  * 									easing: Function // easing function to apply
  */
-export default class Accordion extends Concert {
+export default class Expander extends Concert {
 
 	defaults = {
 		activeIndex: null,
@@ -40,8 +40,8 @@ export default class Accordion extends Concert {
 	 * 
 	 * @function constructor
 	 * @param  {HTMLElement} el : the form to validate
-	 * @param  {Object} options : Accordion options
-	 * @return Accordion
+	 * @param  {Object} options : Expander options
+	 * @return Expander
 	 */
 	constructor(el, options = {}) {
 		super()
@@ -99,7 +99,7 @@ export default class Accordion extends Concert {
 	/**
 	 * function called after the transition has completed
 	 *
-	 * @return {Accordion}
+	 * @return {Expander}
 	 */
 	onEnd = (pane) => {
 		const { $target, $button, open } = pane
@@ -118,7 +118,7 @@ export default class Accordion extends Concert {
 	 * Bind event listeners
 	 *
 	 * @function addEvents
-	 * @return {Accordion}
+	 * @return {Expander}
 	 */
 	addEvents = () => {
 		const { selector } = this.options
@@ -131,7 +131,7 @@ export default class Accordion extends Concert {
 	 * Unbind event listeners
 	 *
 	 * @function removeEvents
-	 * @return {Accordion}
+	 * @return {Expander}
 	 */
 	removeEvents = () => {
 		const { selector } = this.options
@@ -165,7 +165,7 @@ export default class Accordion extends Concert {
 	 * 
 	 * @function expand
 	 * @param  {Number} index : the form to validate
-	 * @return {Accordion}
+	 * @return {Expander}
 	 */
 	expand = (index) => {
 		const pane = this.panes[index]
@@ -201,7 +201,7 @@ export default class Accordion extends Concert {
 	 * 
 	 * @function expand
 	 * @param  {Number} index : the form to validate
-	 * @return {Accordion}
+	 * @return {Expander}
 	 */
 	collapse = (index) => {
 
@@ -236,7 +236,7 @@ export default class Accordion extends Concert {
 	/**
 	 * Initalize accordion, add aria attributes, bind events, open/close etc etc
 	 *
-	 * @return {Accordion}
+	 * @return {Expander}
 	 */
 	initalize = () => {
 		this.addEvents()
@@ -252,7 +252,7 @@ export default class Accordion extends Concert {
 	/**
 	 * Initalize accordion, add aria attributes, bind events, open/close etc etc
 	 *
-	 * @return {Accordion}
+	 * @return {Expander}
 	 */
 	destroy = () => {
 		const { buttonActiveClass, contentActiveClass } = this.options
