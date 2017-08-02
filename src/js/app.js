@@ -1,7 +1,8 @@
 import './utils/polyfills'
 import debug from 'debug'
-import * as behaviours from './behaviours'
 import WebFont from 'webfontloader'
+
+import * as behaviours from './behaviours'
 // logs enabled during development
 window.log = debug('app:log')
 if(process.env.NODE_ENV === 'development') {
