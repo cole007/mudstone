@@ -1,12 +1,7 @@
 {% import "../macros/helpers.njk" as h %}
 {% set path = '../includes/' %}
-
-<!DOCTYPE html><!--[if IE]>
-<html lang="en" class="no-js ie">
-<![endif]-->
-<!--[if gt IE 9]><!-->
+<!DOCTYPE html>
 <html lang="en" class="no-js">
-<!--<![endif]-->
 	<head>
 	  <meta charset="utf-8">
 	  <title>{% block title %}{% endblock %}</title>
@@ -19,7 +14,10 @@
 		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#050a21">
 		<meta name="theme-color" content="#050a21">
 	  <script>var html=document.getElementsByTagName("html")[0];html.classList?html.classList.remove("no-js"):html.className=el.className.replace(new RegExp("(^|\\b)"+className.split(" ").join("|")+"(\\b|$)","gi")," ");</script>
-	  <script>!function(a){var b=function(b,c){"use strict";var d=a.document.getElementsByTagName("script")[0],e=a.document.createElement("script");return e.src=b,e.async=!0,d.parentNode.insertBefore(e,d),c&&"function"==typeof c&&(e.onload=c),e};"undefined"!=typeof module?module.exports=b:a.loadJS=b}("undefined"!=typeof global?global:this);</script>
+	  {# loadCSS #}
+		<script>!function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);</script>
+		{# loadJS #}
+		<script>!function(a){var b=function(b,c){"use strict";var d=a.document.getElementsByTagName("script")[0],e=a.document.createElement("script");return e.src=b,e.async=!0,d.parentNode.insertBefore(e,d),c&&"function"==typeof c&&(e.onload=c),e};"undefined"!=typeof module?module.exports=b:a.loadJS=b}("undefined"!=typeof global?global:this);</script>
 	  <script>
 	    if(!window.HTMLPictureElement || !('sizes' in document.createElement('img'))){
 	      document.createElement('picture');
@@ -32,7 +30,7 @@
 		{% block base %}
 		{% endblock %}
 		{% include path + "symbols.njk" %}
-
+		<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 		<script src="/dist/js/bundle{{ stamp }}.js"></script>
 	</body>
 </html>

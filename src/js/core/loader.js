@@ -1,5 +1,5 @@
 import { Pjax } from 'barba.js'
-import { DomClosest } from '../utils/dom'
+import { DomClosest } from '@/utils/dom'
 // import * as views from '../views'
 import RouteManager from './router'
 
@@ -30,8 +30,7 @@ function gatherBehaviours(nodes) {
 		return behaviours.map((behaviourName) => {
 			return { behaviourName, node: node}
 		})
-	})
-	.reduce((acc, curr) => [ ...acc, ...curr ], [])
+	}).reduce((acc, curr) => [ ...acc, ...curr ], [])
 }
 
 /**

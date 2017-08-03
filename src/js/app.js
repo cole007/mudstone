@@ -1,4 +1,3 @@
-import './utils/polyfills'
 import debug from 'debug'
 import WebFont from 'webfontloader'
 

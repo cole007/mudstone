@@ -1,24 +1,22 @@
-import Expander from '@/ui/Expander'
+import SideNav from '@/ui/SideNav'
 import Behaviour from '@/core'
 
 /**
  *
  * @extends Behaviour
- * @class Accordion
+ * @class MobileMenu
  */
-export class Accordion extends Behaviour {
-
+export class MobileMenu extends Behaviour {
+	
 	/**
 	 * @function constructor
 	 * @param  {HTMLElement} el | the html element the behaviour is mounted on
-	 * @return Accordion
+	 * @return MobileMenu
 	 */
 	constructor(el) {
 		super(el)
-		this.expander = new Expander(el)
+		new SideNav(el)
 	}
 
-	unmount() {
-		this.expander.destroy()
-	}
+	
 }

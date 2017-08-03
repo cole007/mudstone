@@ -1,4 +1,4 @@
-import Listener from '../core/listener'
+import Listener from './listener'
 import { Dispatcher, Prefetch, Pjax, HistoryManager, BaseTransition } from 'barba.js'
 import pathToRegexp from 'path-to-regexp'
 import { transitions } from '@/views'

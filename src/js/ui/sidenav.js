@@ -1,199 +1,200 @@
 import Concert from 'concert'
 import { transitionEnd } from '@/utils/dom'
 import { lock } from '@/utils/helpers'
+import { mergeOptions } from '@/utils/helpers'
 
 /**
- * Creates a new SideNav.
-
-	<a class="menu__btn js-mobile-nav-btn" data-target="#menu" href="#"><span></span></a>
-	<nav class="menu site-menu" id="menu">
-		<div class="js-menu-wrapper menu__wrapper">
-			<ul class="r-ul nav js-menu-container">
-				<li class="menu__item t-menu"><a href="#slides">Slides</a></li>
-				<li class="menu__item t-menu"><a href="#videos">Videos</a></li>
-				<li class="menu__item t-menu"><a href="#accordions">Accordions</a></li>
-				<li class="menu__item t-menu"><a href="#map">Map</a></li>
-				<li class="menu__item t-menu"><a href="#form">Form</a></li>
-				<li class="menu__item t-menu"><a href="#map">Map</a></li>
-				<li class="menu__item t-menu"><a href="/grid.html">Grid</a></li>
-			</ul>
-		</div>
-	</nav>
-
-	const sidenav = new SideNav(el.querySelector('.js-mobile-nav-btn'), {
-		init: false,
-		lock: true
-	})
-
-
- * @class
+ * @class SideNav
+ * @extends  Concert
+ * @param  {HTMLElement} el : menu button
+ * @param  {Object} options : menu options
  */
 export default class SideNav extends Concert {
+
+	defaults = {
+		inner: document.getElementById('menu-inner'),
+		canvas: document.getElementById('menu-canvas'),
+		closer: document.getElementById('closeBtn'),
+		init: false,
+		lock: true,
+		clickOutside: true,
+		buttonActiveClass: 'is-active',
+		canvasActiveClass: 'is-visible',
+		canvasAnimatingClass: 'is-animating'
+	}
+
 	/**
-	 * Create a sidenav.
-	 * @param {el} el - The button node, querySelector('.myelm')
-	 * @param {opts} opts - The expander options
+	 * The constructor
+	 * 
+	 * @function constructor
+	 * @param {HTMLElement} button
+	 * @param {Object} options
+	 * @return SideNav
 	 */
-	constructor(button, opts = {}) {
+	constructor(button, options = {}) {
 		super()
-		this.button = button
-		this.body = document.querySelector('body')
-		this.html = document.querySelector('html')
-		//this.target = opts.target || document.querySelector(this.button.getAttribute('data-target'))
-		this.wrapper = opts.wrapper || document.querySelector('.js-menu-wrapper')
-		this.container = opts.container || document.querySelector('.js-menu-container')
-		this.open = false
-		this.init = opts.init || false
-		this.state = this.init
-		this.lock = opts.lock || false
-
-		this.closer = opts.closer || false
-
-		this.clickOutside = opts.clickOutside || false
+		this.$body = document.querySelector('body')
+		this.$html = document.querySelector('html')
+		this.options = mergeOptions(this.defaults, options, button, 'sidenavOptions')
+		this.options.init && this.initialize()
+		this.isVisible = false
+		this.$inner =  this.options.inner
+		this.$canvas =  this.options.canvas
+		this.$closer =  this.options.closer
+		this.$button =  this.options.button
 		this.events = ['before:open', 'after:open', 'before:close', 'after:close']
-		// bind methods
-		this.addEvents = this.addEvents.bind(this)
-		this.removeEvents = this.removeEvents.bind(this)
-		this.clickCloseHande = this.clickCloseHande.bind(this)
-		this.clickHandle = this.clickHandle.bind(this)
-		this.onTransitionEnd = this.onTransitionEnd.bind(this)
-		this.hideSideNav = this.hideSideNav.bind(this)
-		this.showSideNav = this.showSideNav.bind(this)
-		this.blockClicks = this.blockClicks.bind(this)
-
-		// kick off the things
-		this.init && this.initialize()
-
-		if(this.lock) {
-			this._lock = lock()
-		}
+		if(this.options.lock) this.lock = lock()
 	}
 
 	/**
-	 * Attached the click handle
-	 * @return {object} this
+	 * Bind Events
+	 * 
+	 * @function addEvents
+	 * @return SideNav
 	 */
-	addEvents() {
-		this.state = true
-		this.button.addEventListener('click', this.clickHandle)
-
-		const wrapper = this.closer ? this.closer : this.wrapper
-
-		this.clickOutside && wrapper.addEventListener('click', this.hideSideNav)
-
-
-		if(!this.closer && this.clickOutside) {
-			this.container.addEventListener('click', this.blockClicks)
+	addEvents = () => {
+		const { clickOutside } = this.options
+		if(clickOutside && this.$inner) {
+			this.$canvas.addEventListener('click', this.hideSideNav)
+			this.$inner.addEventListener('click', this.blockClicks)
 		}
-
+		if(this.$closer) this.$closer.addEventListener('click', this.hideSideNav)
+		this.$button.addEventListener('click', this.onButtonClick)
 		return this
 	}
 
 	/**
-	 * Remove the click handle
-	 * @return {object} this
+	 * Remove Events
+	 * 
+	 * @function addEvents
+	 * @return SideNav
 	 */
-	removeEvents() {
-		this.button.removeEventListener('click', this.clickHandle)
-		this.clickOutside && this.wrapper.removeEventListener('click', this.hideSideNav)
-		this.clickOutside && this.container.removeEventListener('click', this.blockClicks)
+	removeEvents = () => {
+		const { clickOutside } = this.options
+		if(clickOutside && this.$inner) {
+			this.$canvas.removeEventListener('click', this.hideSideNav)
+			this.$inner.removeEventListener('click', this.blockClicks)
+		}
+		if(this.$closer) this.$closer.removeEventListener('click', this.hideSideNav)
+		this.$button.removeEventListener('click', this.onButtonClick)
 		return this
 	}
 
-
 	/**
-	 * The menu button click handle
-	 * @param {e} e - event object
+	 * Button click handle
+	 * 
+	 * @function onButtonClick
+	 * @param {Object} e - click event object
+	 * @return void
 	 */
-
-	clickHandle(e) {
+	onButtonClick = (e) => {
 		e.preventDefault()
-		this.open ? this.hideSideNav() : this.showSideNav()
+		this.isVisible ? this.hideSideNav() : this.showSideNav()
 	}
 
 	/**
-	 * Block clicks from bubbling
-	 * @param {e} e - event object
+	 * Prevent clicks from propogating 
+	 * 
+	 * @function {Object} e - click event object
+	 * @return void
 	 */
-
-	blockClicks(e) {
+	blockClicks = (e) => {
 		e.stopPropagation()
 	}
 
 	/**
-	 * close the menu handle
-	 * @param {e} e - event object
+	 * Animate in the canvas
+	 * 
+	 * @function showSideNav
+	 * @return void
 	 */
+	showSideNav = () => {
+		const {
+			buttonActiveClass,
+			canvasActiveClass,
+			canvasAnimatingClass,
+			lock
+		} = this.options
 
-	clickCloseHande(e) {
-		e.preventDefault()
-	}
+		if(lock) this.lock.capture()
 
-
-	/**
-	 * show the side nav
-	 * @return {object} this
-	 */
-
-	showSideNav() {
-		if(this.lock) {
-			this._lock.capture()
-		}
-		this.trigger('before:open', [this.wrapper, this.button])
-		this.button.classList.add('is-active')
-		this.wrapper.classList.add('is-animating')
-		this.wrapper.classList.add('is-visible')
-		this.wrapper.addEventListener(transitionEnd, this.onTransitionEnd)
-		return this
+		this.trigger('before:open')
+		this.$button.classList.add(buttonActiveClass)
+		this.$canvas.classList.add(canvasAnimatingClass)
+		this.$canvas.classList.add(canvasActiveClass)
+		this.$canvas.addEventListener(transitionEnd, this.onTransitionEnd)
 	}
 
 	/**
-	 * hide the side nav
-	 * @return {e} e - event object
+	 * Animate out the canvas
+	 * 
+	 * @function showSideNav
+	 * @return void
 	 */
-
-	hideSideNav() {
-		if(this.lock) {
-			this._lock.release()
-		}
-		this.trigger('before:close', [this.wrapper, this.button])
-		this.button.classList.remove('is-active')
-		this.wrapper.classList.add('is-animating')
-		this.wrapper.classList.remove('is-visible')
-		this.wrapper.addEventListener(transitionEnd, this.onTransitionEnd)
-		return this
-	}
-
-
-	/**
-	 * onTransitionEnd event
-	 * @return {Oject} this
-	 */
-
-	onTransitionEnd () {
-		this.open = !this.open
-		this.wrapper.classList.remove('is-animating')
-		this.trigger(this.open ? 'after:open' : 'after:close', [this.wrapper, this.button])
-		this.wrapper.removeEventListener(transitionEnd, this.onTransitionEnd)
-		return this
+	hideSideNav = () => {
+		const {
+			buttonActiveClass,
+			canvasActiveClass,
+			canvasAnimatingClass,
+			lock
+		} = this.options
+		if(lock) this.lock.release()
+		this.trigger('before:close')
+		this.$button.classList.remove(buttonActiveClass)
+		this.$canvas.classList.add(canvasAnimatingClass)
+		this.$canvas.classList.remove(canvasActiveClass)
+		this.$canvas.addEventListener(transitionEnd, this.onTransitionEnd)
 	}
 
 	/**
-	 * destroy remove all eventslisteners and events
-	 * @return {Oject} this
+	 * Transition end event
+	 * 
+	 * @function showSideNav
+	 * @return void
 	 */
+	onTransitionEnd = () => {
+		const {	canvasAnimatingClass } = this.options
+		this.isVisible = !this.isVisible
+		this.trigger(this.isVisible ? 'after:open' : 'after:close')
+		this.$canvas.classList.remove(canvasAnimatingClass)
+		this.$canvas.removeEventListener(transitionEnd, this.onTransitionEnd)
+	}
 
-	destroy() {
-		this.state = false
-		this.button.classList.remove('is-active')
-		this.wrapper.classList.remove('is-animating')
-		this.wrapper.classList.remove('is-visible')
+	/**
+	 * Unbind events, remove classes, disable
+	 * 
+	 * @function destroy
+	 * @return SideNav
+	 */
+	destroy = () => {
+		if(!this.enabled) return this
+		this.isVisible = false
+
+		const {
+			buttonActiveClass,
+			canvasActiveClass,
+			canvasAnimatingClass
+		} = this.options
+		this.enabled = false
+		this.$button.classList.remove(buttonActiveClass)
+		this.$wrapper.classList.remove(canvasAnimatingClass)
+		this.$wrapper.classList.remove(canvasActiveClass)
 		this.events.forEach(event => this.off(event))
 		this.removeEvents()
 		return this
 	}
 
-	initialize() {
+	/**
+	 * Bind events, enable
+	 * 
+	 * @function destroy
+	 * @return SideNav
+	 */
+	initialize = () => {
+		if(this.enabled) return this
+
+		this.enabled = true
 		this.addEvents()
+		return this
 	}
 }

@@ -3,8 +3,6 @@ import Hammer from 'hammerjs'
 import domify from 'domify'
 import { mergeOptions } from '@/utils/helpers'
 import { DomClass } from '@/utils/dom'
-
-
 /**
  * 
  * @class Slide

@@ -1,12 +1,13 @@
 import Behaviour from '@/core'
-import Slide from '@/ui/Slide'
+import Validation from '@/ui/Validation'
+
 
 /**
  *
  * @extends Behaviour
- * @class SlideShow
+ * @class FormValidation
  */
-export class SlideShow extends Behaviour {
+export class FormValidation extends Behaviour {
 	
 	/**
 	 * @function constructor
@@ -14,11 +15,11 @@ export class SlideShow extends Behaviour {
 	 * @return Accordion
 	 */
 	constructor(el) {
-		super(el, 'SlideShow')
-		this.slide = new Slide(el)
+		super(el)
+		this.validate = new Validation(el)
 	}
 
 	unmount() {
-		this.slide.destroy()
+		this.validate.destroy()
 	}
 }
