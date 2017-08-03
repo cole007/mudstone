@@ -5,7 +5,10 @@ import path from 'path'
 import { getTasks } from '../libs/utils'
 
 gulp.task('size-report', function () {
-	return gulp.src([path.resolve(process.env.PWD, PATH_CONFIG.dest, '**/*'), '*!rev-manifest.json'])
+	return gulp.src([
+		path.resolve(process.env.PWD, PATH_CONFIG.dist, '**/*.css'), 
+		path.resolve(process.env.PWD, PATH_CONFIG.dist, '**/*.js')
+	])
 		.pipe(sizereport({
 			gzip: true
 		}))

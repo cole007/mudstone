@@ -40,7 +40,7 @@ export default function browserSyncTask () {
 		require('webpack-hot-middleware')(compiler)
 	]
 
-	server.open = false
+	SERVER.open = false
 
 
 	browserSync.init(SERVER)

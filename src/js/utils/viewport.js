@@ -1,7 +1,6 @@
 import Concert from 'concert'
-import { isFunc } from './undermud'
 
-
+const isFunc = (fn) => typeof fn === 'function'
 
 export default class Viewport extends Concert {
 	constructor(watch = false) {
