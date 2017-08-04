@@ -3,7 +3,9 @@
 }
 
 .vanilla-modal .modal {
-	display: block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -20,21 +22,7 @@
 	-webkit-overflow-scrolling: touch;
 }
 
-.vanilla-modal .modal > * {
-	display: inline-block;
-	white-space: normal;
-	vertical-align: middle;
-	text-align: left;
-}
 
-.vanilla-modal .modal::before {
-	display: inline-block;
-	overflow: hidden;
-	width: 0;
-	height: 100%;
-	vertical-align: middle;
-	content: "";
-}
 
 .vanilla-modal.modal-visible .modal {
 	z-index: 99;
