@@ -1,6 +1,7 @@
 import browserSync from 'browser-sync'
 import changed from 'gulp-changed'
 import gulp from 'gulp'
+import cssnano from 'gulp-cssnano'
 import { getPaths } from '../libs/utils'
 import path from 'path'
 
@@ -45,7 +46,6 @@ export function json () {
 }
 
 
-
 export function cssFonts () {
 
 	const paths = {
@@ -54,6 +54,9 @@ export function cssFonts () {
 	}
 
 	return gulp.src(paths.src)
+		.pipe(cssnano({
+			discardUnused: false
+		}))
 		.pipe(gulp.dest(paths.dest))
 		.pipe(browserSync.stream())
 }
