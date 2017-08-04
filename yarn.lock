@@ -19,6 +19,10 @@
     normalize-path "^2.0.1"
     through2 "^2.0.3"
 
+FLIP@GoogleChrome/flipjs:
+  version "0.1.9"
+  resolved "https://codeload.github.com/GoogleChrome/flipjs/tar.gz/a084777ec725ef842dcf91eb2af78635d4d5e783"
+
 a-sync-waterfall@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/a-sync-waterfall/-/a-sync-waterfall-1.0.0.tgz#38e8319d79379e24628845b53b96722b29e0e47c"
@@ -2224,16 +2228,7 @@ css-what@2.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-2.1.0.tgz#9467d032c38cfaefb9f2d79501253062f87fa1bd"
 
-css@2.2.1, css@2.X, css@^2.1.0, css@^2.2.0, css@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/css/-/css-2.2.1.tgz#73a4c81de85db664d4ee674f7d47085e3b2d55dc"
-  dependencies:
-    inherits "^2.0.1"
-    source-map "^0.1.38"
-    source-map-resolve "^0.3.0"
-    urix "^0.1.0"
-
-"css@https://github.com/pocketjoso/css.git":
+css@2.2.1, css@2.X, css@^2.1.0, css@^2.2.0, css@^2.2.1, "css@https://github.com/pocketjoso/css.git":
   version "2.2.1"
   resolved "https://github.com/pocketjoso/css.git#8ddea7e3cbc0a183ecf694a7a5fbc84326893893"
   dependencies:

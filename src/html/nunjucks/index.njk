@@ -4,30 +4,21 @@
 {% block bodyClass %}has-hero{% endblock %}
 
 {% block content %}
-	<div class="c-slide" data-behaviour="SlideShow">
-		<div class="c-posts__list">
-			<ul class="c-slide__wrapper">
-				{% for image in slides %}
-					<li class="c-slide__item">
-						<img src="{{ image }}" class="c-slide__img">
-					</li>
-				{% endfor %}
-			</ul>
-		</div>
+	<div data-behaviour="ModalSteps">
+		<a data-modal-screen="#modal-1">Modal 1</a>
+		<div id="modal-1" class="modal-hider">Modal 1 content</div>
+		<div id="modal-2" class="modal-hider"><img src="/dist/images/demo_img_1.jpg" /></div>
+		<div id="modal-3" class="modal-hider">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione veniam, consequuntur facere amet! Ab itaque debitis minus odio nisi accusantium cum, temporibus porro nulla ad.</div>
+		<div id="modal-4" class="modal-hider"><img src="/dist/images/demo_img_1.jpg" /></div>
+		<div id="modal-5" class="modal-hider">Modal 5 content</div>
 	</div>
 
-
-
-	<div data-behaviour="Accordion">
-		<div>
-			{% for content in accordions %}
-				<div>
-					<button data-accordion-btn data-target="#_{{ loop.index }}">{{ content.title }}</button>
-					<div id="_{{ loop.index }}" class="c-accordion__wrapper">
-						{{ content.body }}
-					</div>
-				</div>
-			{% endfor %}
+	<div class="modal">
+		<div class="modal-inner">
+			<a data-modal-close>Close</a>
+			<div class="modal-content"></div>
+			<a data-modal-prev>Prev</a>
+			<a data-modal-next>Next</a>
 		</div>
 	</div>
 {% endblock %}

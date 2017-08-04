@@ -149,7 +149,7 @@ export function DomUnwrap(element) {//
  */
 export function DomWrap(element, wrapper) {// 
 	element.parentNode.insertBefore(wrapper, element)
-	wrapper.appendChild(element)
+	return wrapper.appendChild(element)
 }
 
 
@@ -165,7 +165,7 @@ export function DomWrap(element, wrapper) {//
  */
 export function DomInsertAfter(element, target) {
 	const method = typeof element === 'string' ? 'insertAdjacentHTML' : 'insertBefore'
-	target.parentNode[method](element, target.nextSibling)
+	return target.parentNode[method](element, target.nextSibling)
 }
 
 /**
@@ -178,7 +178,7 @@ export function DomInsertAfter(element, target) {
  */
 export function DomInsertBefore(element, target) {
 	const method = typeof element === 'string' ? 'insertAdjacentHTML' : 'insertBefore'
-	target.parentNode[method](element, target)
+	return target.parentNode[method](element, target)
 }
 
 /**
