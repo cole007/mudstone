@@ -4,6 +4,7 @@ import Delegate from 'dom-delegate'
 import { mergeOptions } from '@/utils/helpers'
 import { DomInsertAfter, DomClass } from '@/utils/dom'
 
+
 export default class ModalScreens extends Concert {
 
 	defaults = {

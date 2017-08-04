@@ -4,13 +4,11 @@
 {% block bodyClass %}has-hero{% endblock %}
 
 {% block content %}
-	<div data-behaviour="ModalSteps">
-		<a data-modal-screen="#modal-1">Modal 1</a>
-		<div id="modal-1" class="modal-hider">Modal 1 content</div>
-		<div id="modal-2" class="modal-hider"><img src="/dist/images/demo_img_1.jpg" /></div>
-		<div id="modal-3" class="modal-hider">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione veniam, consequuntur facere amet! Ab itaque debitis minus odio nisi accusantium cum, temporibus porro nulla ad.</div>
-		<div id="modal-4" class="modal-hider"><img src="/dist/images/demo_img_1.jpg" /></div>
-		<div id="modal-5" class="modal-hider">Modal 5 content</div>
+	<div>
+		<a data-modal-screen data-behaviour="ModalSteps" data-modal-screen-options='{"screens": ["#modal-1", "#modal-2"]}'>Modal 1</a>
+	</div>
+	<div>
+		<a data-modal-screen data-behaviour="ModalSteps" data-modal-screen-options='{"screens": ["#modal-2", "#modal-3"]}'>Modal 2</a>
 	</div>
 
 	<div class="modal">
@@ -21,6 +19,12 @@
 			<a data-modal-next>Next</a>
 		</div>
 	</div>
+
+	<div id="modal-1" class="modal-hider">Modal 1 content</div>
+	<div id="modal-2" class="modal-hider"><img src="/dist/images/demo_img_1.jpg" /></div>
+	<div id="modal-3" class="modal-hider">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione veniam, consequuntur facere amet! Ab itaque debitis minus odio nisi accusantium cum, temporibus porro nulla ad.</div>
+	<div id="modal-4" class="modal-hider"><img src="/dist/images/demo_img_1.jpg" /></div>
+	<div id="modal-5" class="modal-hider">Modal 5 content</div>
 {% endblock %}
 
 
