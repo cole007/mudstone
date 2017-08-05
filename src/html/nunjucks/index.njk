@@ -4,12 +4,26 @@
 {% block bodyClass %}has-hero{% endblock %}
 
 {% block content %}
+<div data-behaviour="ModalSteps">
 	<div>
-		<a data-modal-screen data-behaviour="ModalSteps" data-modal-screen-options='{"screens": ["#modal-1", "#modal-2"]}'>Modal 1</a>
+		<a data-modal-screen data-modal-screens='["#modal-1", "#modal-2"]'>Modal 1</a>
 	</div>
 	<div>
-		<a data-modal-screen data-behaviour="ModalSteps" data-modal-screen-options='{"screens": ["#modal-2", "#modal-3"]}'>Modal 2</a>
+		<a data-modal-screen data-modal-screens='["#modal-3"]'>Modal 2</a>
 	</div>
+	<div>
+		<a data-modal-screen data-modal-screens='["#modal-1", "#modal-2", "#modal-3", "#modal-4"]'>Modal 3</a>
+	</div>
+	<div>
+		<a data-modal-screen data-modal-screens='["#modal-3"]'>Modal 4</a>
+	</div>
+	<div>
+		<a data-modal-screen data-modal-screens='["#modal-1", "#modal-2"]'>Modal 5</a>
+	</div>
+	<div>
+		<a data-modal-screen data-modal-screens='["#modal-3"]'>Modal 6</a>
+	</div>
+</div>
 
 	<div class="modal">
 		<div class="modal-inner">

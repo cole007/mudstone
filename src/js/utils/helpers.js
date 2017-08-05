@@ -28,12 +28,31 @@ export const lock = () => {
 	}
 }
 
+export const getJson = (el, name) => {
+	// try and merge any json options from the dom
+	let output = []
+
+	try {
+		const json = el.dataset[name]
+		output = typeof json === 'string' ? JSON.parse(json) : false
+	} catch(err) {
+		console.error(err)
+	}
+
+	return output
+}
+
 /**
  * Test against userAgent string, pretty cheap and can't really be trusted
  * @return {Boolean} 
  */
 export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
+
+/**
+ * Helper to merge default options with provided options, and options from a dom node
+ * @return {Object/Array} 
+ */
 export const mergeOptions = (defaults, opts, el, name) => {
 	// create options object, merge opts from params
 	let options = {
@@ -54,10 +73,11 @@ export const mergeOptions = (defaults, opts, el, name) => {
 	return options
 }
 
+
 /**
 	 * Animate $target from start to end
-	 * @param {HTMLElement} $target
 	 * @param {Object} options
+	 * @param {Function} onTick - function to be called at each tick
 	 * @return {Promise}
 	 */
 export function fromTo(options = {}, onTick) {

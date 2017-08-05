@@ -1,9 +1,13 @@
 import VanillaModal from 'vanilla-modal'
 import Concert from 'concert'
 import Delegate from 'dom-delegate'
-import { mergeOptions } from '@/utils/helpers'
+import { mergeOptions, getJson } from '@/utils/helpers'
 import { DomInsertAfter, DomClass } from '@/utils/dom'
 
+/**
+ * @class ModalScreens
+ * @extends  Concert
+ */
 
 export default class ModalScreens extends Concert {
 
@@ -18,7 +22,8 @@ export default class ModalScreens extends Concert {
 		openSelector: '[data-modal-screen]',
 		nextSelector: '[data-modal-next]',
 		prevSelector: '[data-modal-prev]',
-		resetOnClose: true
+		resetOnClose: true,
+		init: true
 	}
 
 	modalOptions = {
@@ -35,9 +40,27 @@ export default class ModalScreens extends Concert {
 		transitions: true
 	}
 
+
+
+	screenNodes = []
+	currentKey = 0
+	id = 0
+	delegate = new Delegate(document)
+	currentIndex = this.currentIndex || 0
+	isOpen = false
+
+	/**
+	 * @param {HTMLELement} el, html element used to hold any inline options
+	 * @param {Object} options
+	 * @param  Concert
+	 */
 	constructor(el, options = {}) {
 		super()
 		this.options = mergeOptions(this.defaults, options, el, 'modalScreensOptions')
+		this.options.init && this.initalize()
+	}
+
+	initalize = () => {
 		this.modal = new VanillaModal({
 			...this.modalOptions,
 			...this.options.modalOptions,
@@ -46,23 +69,8 @@ export default class ModalScreens extends Concert {
 			onOpen: this.onOpen,
 			onClose: this.onClose
 		})
-		this.isOpen = false
-		this.delegate = new Delegate(document)
-		this.currentIndex = this.currentIndex || 0
-		this.total = this.options.screens.length
 		this.addEvents()
-		this.clone
-		this.screenNodes = this.options.screens.slice(1).map((screen, index) => {
-			const $screen = document.getElementById(screen.split('#')[1])
-			const $clone = $screen.cloneNode(true)
-			const id = $screen.getAttribute('id')
-			$clone.removeAttribute('id')
-			$clone.setAttribute('data-id', id)
-			$clone.setAttribute('data-index', index + 1)
-			DomClass($clone).remove('modal-hider')
-			DomClass($clone).add('modal-content')
-			return $clone
-		})
+		this.screens = this.options
 	}
 
 	addEvents = () => {
@@ -90,18 +98,34 @@ export default class ModalScreens extends Concert {
 	onOpen = () => {
 		this.currentIndex = 0
 		const { dom } = this.modal
+		const { screens } = this.screenNodes[this.currentKey]
 		this.trigger('modal:onOpen', this.modal)
 		dom.modalContent.setAttribute('data-id', this.modal.current.getAttribute('id'))
 		dom.modalContent.setAttribute('data-index', 0)
 		this.insertedScreens = []
-		this.screenNodes.reduce((prev, screen) => {
-			DomClass(screen).add('u-hidden')
-			const input = DomInsertAfter(screen, prev)
-			this.insertedScreens.push(input)
-			return input
-		}, dom.modalContent)
+		if(screens) {
+			screens.reduce((prev, screen) => {
+				DomClass(screen).add('u-hidden')
+				const input = DomInsertAfter(screen, prev)
+				this.insertedScreens.push(input)
+				return input
+			}, dom.modalContent)
+		}
 		this.isOpen = true
 		this.allScreens = [dom.modalContent, ...this.insertedScreens]
+	}
+
+	buildScreen = (screens) => {
+		return screens.slice(1).map((screen, index) => {
+			const $screen = document.getElementById(screen.split('#')[1])
+			const $clone = $screen.cloneNode(true)
+			$clone.removeAttribute('id')
+			$clone.setAttribute('data-id', $screen.getAttribute('id'))
+			$clone.setAttribute('data-index', index + 1)
+			DomClass($clone).remove('modal-hider')
+			DomClass($clone).add('modal-content')
+			return $clone
+		})
 	}
 
 	onClose = () => {
@@ -117,26 +141,46 @@ export default class ModalScreens extends Concert {
 		})
 		this.insertedScreens = []
 	}
-
-	onClick = (event) => {
+	
+	createScreenInstance = (element) => {
+		const tmp = getJson(element, 'modalScreens') || this.screens
+		const selectors  = tmp ? tmp : this.selectors	
+		const total = selectors.length
+		const screens = total > 1 ? this.buildScreen(selectors) : false
+		this.screenNodes.push({
+			selectors,
+			screens,
+			total
+		})
+		const modalKey = this.id
+		element.setAttribute('data-key', this.id)
+		this.id += 1
+		return modalKey
+	}
+	
+	onClick = (event, element) => {
 		event.preventDefault()
-		const { screens } = this.options
-		const screenToOpen = screens[0]
+		const { modalKey } = element.dataset
+		const key = modalKey ? modalKey : this.createScreenInstance(element)
+		const screenToOpen = this.screenNodes[key].selectors[0]
+		this.currentKey = key
 		this.modal.open(screenToOpen)
 	}
 
 	onClickNextScreen = (event) => {
 		event.preventDefault()
-		if(this.currentIndex === this.total - 1) return
+		const { total } = this.screenNodes[this.currentKey]
+		if(this.currentIndex === total - 1) return
 		const currentIndex = this.currentIndex
 		const k = currentIndex + 1
-		const index = k < this.total ? k : false
+		const index = k < total ? k : false
 		if(index) {
 			this.goTo(index)
 		}
 	}
 
 	onClickPrevScreen = (event) => {
+		log(this.allScreens)
 		event.preventDefault()
 		if(this.currentIndex === 0) return
 		const currentIndex = this.currentIndex
@@ -148,6 +192,7 @@ export default class ModalScreens extends Concert {
 	}
 
 	goTo = (index) => {
+		log('goto')
 		const $prev = this.allScreens[this.currentIndex]
 		const $next = this.allScreens[index]
 		DomClass($prev).add('u-hidden')
