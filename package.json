@@ -15,6 +15,7 @@
     "local-links": "^1.4.1",
     "lodash.debounce": "^4.0.8",
     "lodash.isobject": "^3.0.2",
+    "lodash.once": "^4.1.1",
     "lodash.throttle": "^4.1.1",
     "lodash.uniqueid": "^4.0.1",
     "normalize-scss": "^7.0.0",

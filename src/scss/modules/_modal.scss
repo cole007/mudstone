@@ -22,6 +22,11 @@
 	-webkit-overflow-scrolling: touch;
 }
 
+.modal-content {
+	transition: opacity 200ms;
+	opacity: 0;
+}
+
 
 
 .vanilla-modal.modal-visible .modal {
@@ -30,14 +35,19 @@
 	transition: opacity 200ms;
 }
 
-.modal-inner {
+.modal-box {
+	background: #ffffff;
+	transition: all 300ms;
 	position: relative;
-	overflow: hidden;
-	max-width: 90%;
-	max-height: 90%;
 	overflow-x: hidden;
 	overflow-y: auto;
-	background: #ffffff;
+	overflow: hidden;
+}
+
+.modal-inner {
+	position: relative;
+	max-width: 90%;
+	max-height: 90%;
 	z-index: -1;
 	opacity: 0;
 	transform: scale(0);
@@ -68,4 +78,24 @@
 
 .modal-hider {
 	display: none;
+}
+
+
+// [data-modal-prev] {
+// 	display: block;
+// 	position: absolute;
+// 	top: 0%;
+// 	right: 105%;
+// }
+
+// [data-modal-next] {
+// 	display: block;
+// 	position: absolute;
+// 	top: 0%;
+// 	left: 105%;
+// }
+
+
+img {
+	display: block;
 }

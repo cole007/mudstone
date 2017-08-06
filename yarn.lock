@@ -19,10 +19,6 @@
     normalize-path "^2.0.1"
     through2 "^2.0.3"
 
-FLIP@GoogleChrome/flipjs:
-  version "0.1.9"
-  resolved "https://codeload.github.com/GoogleChrome/flipjs/tar.gz/a084777ec725ef842dcf91eb2af78635d4d5e783"
-
 a-sync-waterfall@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/a-sync-waterfall/-/a-sync-waterfall-1.0.0.tgz#38e8319d79379e24628845b53b96722b29e0e47c"
@@ -5965,6 +5961,10 @@ lodash.merge@^4.4.0:
 lodash.mergewith@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
+
+lodash.once@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
 
 lodash.pad@^4.1.0:
   version "4.5.1"

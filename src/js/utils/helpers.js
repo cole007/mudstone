@@ -1,3 +1,21 @@
+import { transitionEnd, DomCss } from './dom'
+import once from 'lodash.once'
+
+export const transitionSteps = (element, css) => {
+
+	function onEnd(element, resolve) {
+		resolve()
+	}
+
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			element.addEventListener(transitionEnd, once(onEnd.bind(null, element, resolve)))
+			DomCss(element, css)
+		})
+	})
+}
+
+
 /**
  * Helper function to lock the screen in the current position and prevent scrolling
  *
@@ -121,3 +139,5 @@ export function fromTo(options = {}, onTick) {
 		frame = window.requestAnimationFrame(loop)
 	})
 }
+
+

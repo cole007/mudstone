@@ -4,41 +4,69 @@
 {% block bodyClass %}has-hero{% endblock %}
 
 {% block content %}
+
+
 <div data-behaviour="ModalSteps">
 	<div>
-		<a data-modal-screen data-modal-screens='["#modal-1", "#modal-2"]'>Modal 1</a>
+		<a data-modal-screen data-modal-screens='["#modal-1", "#modal-2", "#modal-3", "#modal-4", "#modal-5"]'>Modal 3</a>
 	</div>
 	<div>
 		<a data-modal-screen data-modal-screens='["#modal-3"]'>Modal 2</a>
-	</div>
-	<div>
-		<a data-modal-screen data-modal-screens='["#modal-1", "#modal-2", "#modal-3", "#modal-4"]'>Modal 3</a>
-	</div>
-	<div>
-		<a data-modal-screen data-modal-screens='["#modal-3"]'>Modal 4</a>
-	</div>
-	<div>
-		<a data-modal-screen data-modal-screens='["#modal-1", "#modal-2"]'>Modal 5</a>
-	</div>
-	<div>
-		<a data-modal-screen data-modal-screens='["#modal-3"]'>Modal 6</a>
-	</div>
+	</div>=
 </div>
 
 	<div class="modal">
 		<div class="modal-inner">
 			<a data-modal-close>Close</a>
 			<div class="modal-content"></div>
-			<a data-modal-prev>Prev</a>
-			<a data-modal-next>Next</a>
 		</div>
 	</div>
 
-	<div id="modal-1" class="modal-hider">Modal 1 content</div>
-	<div id="modal-2" class="modal-hider"><img src="/dist/images/demo_img_1.jpg" /></div>
-	<div id="modal-3" class="modal-hider">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione veniam, consequuntur facere amet! Ab itaque debitis minus odio nisi accusantium cum, temporibus porro nulla ad.</div>
-	<div id="modal-4" class="modal-hider"><img src="/dist/images/demo_img_1.jpg" /></div>
-	<div id="modal-5" class="modal-hider">Modal 5 content</div>
+	<div id="modal-1" style="background-color: #4ae; width: 500px; height: 400px" class="modal-hider">
+			<h1>Modal 1 content</h1>
+			<div>
+				<a data-modal-prev>Prev</a>
+			</div>
+			<div>
+				<a data-modal-next>Next</a>
+			</div>
+	</div>
+	<div id="modal-2" style="background-color: #c3a; width: 600px; height: 200px" class="modal-hider">
+			<h1>Modal 2 content</h1>
+			<div>
+				<a data-modal-prev>Prev</a>
+			</div>
+			<div>
+				<a data-modal-next>Next</a>
+			</div>
+	</div>
+	<div id="modal-3" style="background-color: #d3a; width: 100px; height: 500px" class="modal-hider">
+			<h1>Modal 3 content</h1>
+			<div>
+				<a data-modal-prev>Prev</a>
+			</div>
+			<div>
+				<a data-modal-next>Next</a>
+			</div>
+	</div>
+	<div id="modal-4" style="background-color: #ae2; width: 500px; height: 500px" class="modal-hider">
+			<h1>Modal 4 content</h1>
+			<div>
+				<a data-modal-prev>Prev</a>
+			</div>
+			<div>
+				<a data-modal-next>Next</a>
+			</div>
+	</div>
+	<div id="modal-5" style="background-color: #ea3; width: 500px; height: 600px" class="modal-hider">
+			<h1>Modal 5 content</h1>
+			<div>
+				<a data-modal-prev>Prev</a>
+			</div>
+			<div>
+				<a data-modal-next>Next</a>
+			</div>
+	</div>
 {% endblock %}
 
 
