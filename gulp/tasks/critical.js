@@ -9,12 +9,9 @@ export function critialCss() {
 
 	paths.map(({url, template}) => {
 		critical.generate({
-			inline: false,
 			base:  path.resolve(process.env.PWD, PATH_CONFIG.dest),
 			src: url,
-			width: 1300,
-			minify: true,
-			height: 900
+			...TASK_CONFIG.critical
 		}).then((output) => {
 			gulp.src(path.resolve(process.env.PWD, templates, template))
 				.pipe(htmlreplace({

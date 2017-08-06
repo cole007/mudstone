@@ -29,3 +29,8 @@ new App(document, behaviours)
 	.start()
 	.watch()
 
+navigator.serviceWorker.register('service-worker.js', {})
+
+navigator.serviceWorker.ready.then(() => {
+	log('it is ready now dave')
+})

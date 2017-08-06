@@ -35,6 +35,11 @@
 		]
   },
 
+  "serviceWorker": {
+    "src": "js/service-worker.js",
+    "dest": "./"
+  },
+
 	"inline": {
 		"src": [
 			"./node_modules/fg-loadjs/loadJS.js",

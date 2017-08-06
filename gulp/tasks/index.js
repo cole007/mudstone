@@ -11,3 +11,4 @@ export {
 	cssFonts
 } from './assets'
 export { tokens } from './tokens'
+export { serviceWorker } from './scripts'

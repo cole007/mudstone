@@ -39,6 +39,12 @@ export default {
 		filename: 'bundle' // no extension
 	},
 
+	serviceWorker: {
+		watch: true,
+		task: 'code',
+		extensions: ['js']
+	},
+
 	json: {
 		watch: true,
 		task: 'asset',
@@ -159,5 +165,12 @@ export default {
 		gulpWatch: {
 			usePolling: false
 		}
+	},
+
+	critical: {
+		inline: false,
+		width: 1300,
+		minify: true,
+		height: 900
 	}
 }
