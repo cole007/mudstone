@@ -19,7 +19,7 @@ export function buildTask(cb) {
 	assetTasks.push('move-scripts')
 	codeTasks.push('bundle-script')
 
-	gulpSequence('clean', assetTasks, codeTasks, 'cacheBuster', 'size-report', cb)
+	gulpSequence('clean', assetTasks, codeTasks, 'critical', 'cacheBuster', 'size-report', cb)
 }
 
 gulp.task('build', buildTask)

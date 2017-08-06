@@ -1,15 +1,5 @@
 <header class="site-header">
-	<a href="/" class="site-logo">
-		<img src="/dist/images/logo.png" width="100" height="83" alt="{{ title }}" />
-	</a>
-	<a href="#open:menu" class="menu-btn menu-btn--open">
-		{{ h.symbol('burger') }}
-	</a>
-	<span class="menu-btn menu-btn--trigger" id="open:menu"></span>
 	<nav class="menu">
-		<a href="#0" class="menu-btn menu-btn--close">
-			{{ h.symbol('close') }}
-		</a>
 		<ul class="r-ul menu__list">
 			{% for entry in menu %}
 				<li class="menu__item">

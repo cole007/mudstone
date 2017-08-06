@@ -2216,6 +2216,12 @@ css-system-font-keywords@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/css-system-font-keywords/-/css-system-font-keywords-1.0.0.tgz#85c6f086aba4eb32c571a3086affc434b84823ed"
 
+css-tree@1.0.0-alpha19:
+  version "1.0.0-alpha19"
+  resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-1.0.0-alpha19.tgz#949aa846c2c15b3979792e8fce05f6b6e3ebcad4"
+  dependencies:
+    source-map "^0.5.3"
+
 css-what@1.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-1.0.0.tgz#d7cc2df45180666f99d2b14462639469e00f736c"
@@ -2273,6 +2279,12 @@ cssnano@^3.0.0:
     postcss-unique-selectors "^2.0.2"
     postcss-value-parser "^3.2.3"
     postcss-zindex "^2.0.1"
+
+csso@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/csso/-/csso-3.1.1.tgz#ab427584486c2e02e180327511b0b02a9179c272"
+  dependencies:
+    css-tree "1.0.0-alpha19"
 
 csso@~2.3.1:
   version "2.3.2"
@@ -3260,9 +3272,13 @@ fd-slicer@~1.0.1:
   dependencies:
     pend "~1.2.0"
 
-fg-loadcss@1.3.1:
+fg-loadcss@1.3.1, fg-loadcss@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/fg-loadcss/-/fg-loadcss-1.3.1.tgz#8930e820959faafbb242850eeec4f2d0259430cb"
+
+fg-loadjs@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fg-loadjs/-/fg-loadjs-1.0.0.tgz#c096af1675b9ed0d3b588f69ef186c6d81dbfb01"
 
 figures@^1.3.5:
   version "1.7.0"
@@ -4064,6 +4080,14 @@ gulp-inject@^4.2.0:
     stream-to-array "^2.3.0"
     through2 "^2.0.1"
 
+gulp-inline-source@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/gulp-inline-source/-/gulp-inline-source-3.1.0.tgz#fe7b94a3105d3523356ab4e639112fcb2cbfea52"
+  dependencies:
+    gulp-util "~3.0.6"
+    inline-source "~5.2.1"
+    through2 "~2.0.0"
+
 gulp-match@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/gulp-match/-/gulp-match-1.0.3.tgz#91c7c0d7f29becd6606d57d80a7f8776a87aba8e"
@@ -4501,7 +4525,7 @@ html-tags@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
 
-htmlparser2@^3.9.0, htmlparser2@^3.9.1:
+htmlparser2@3.9.2, htmlparser2@^3.9.0, htmlparser2@^3.9.1:
   version "3.9.2"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.9.2.tgz#1bdf87acca0f3f9e53fa4fcceb0f4b4cbb00b338"
   dependencies:
@@ -4709,6 +4733,17 @@ inline-critical@^2.4.2:
     resolve "1.3.3"
     slash "1.0.0"
     uglify-js "^3.0.23"
+
+inline-source@~5.2.1:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/inline-source/-/inline-source-5.2.3.tgz#c95da30fe7e39144e9fdff5128d821c302001433"
+  dependencies:
+    csso "3.1.1"
+    htmlparser2 "3.9.2"
+    is-plain-obj "1.1.0"
+    object-assign "4.1.1"
+    svgo "0.7.2"
+    uglify-js "3.0.15"
 
 inquirer@^3.0.6:
   version "3.2.1"
@@ -4931,7 +4966,7 @@ is-path-inside@^1.0.0:
   dependencies:
     path-is-inside "^1.0.1"
 
-is-plain-obj@^1.0.0:
+is-plain-obj@1.1.0, is-plain-obj@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
 
@@ -6744,6 +6779,10 @@ object-assign@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.0.tgz#7a3b3d0e98063d43f4c03f2e8ae6cd51a86883a0"
 
+object-assign@4.1.1, object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+
 object-assign@^2.0.0, object-assign@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-2.0.0.tgz#f8309b09083b01261ece3ef7373f2b57b8dd7042"
@@ -6751,10 +6790,6 @@ object-assign@^2.0.0, object-assign@~2.0.0:
 object-assign@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
-
-object-assign@^4.0.0, object-assign@^4.0.1, object-assign@^4.1.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
 object-component@0.0.3:
   version "0.0.3"
@@ -9471,6 +9506,13 @@ ua-parser-js@0.7.12:
 uc.micro@^1.0.1, uc.micro@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.3.tgz#7ed50d5e0f9a9fb0a573379259f2a77458d50192"
+
+uglify-js@3.0.15:
+  version "3.0.15"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.15.tgz#aacb323a846b234602270dead8a32441a8806f42"
+  dependencies:
+    commander "~2.9.0"
+    source-map "~0.5.1"
 
 uglify-js@3.0.x, uglify-js@^3.0.23, uglify-js@^3.0.5:
   version "3.0.27"

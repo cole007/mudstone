@@ -105,9 +105,7 @@ export default class ModalScreens extends Concert {
 		this.trigger('modal:onOpen', this.modal)
 		this.trigger('modal:prev', {screens: this.screenNodes[this.currentKey]})
 		dom.modalContent.setAttribute('data-id', this.modal.current.getAttribute('id'))
-
 		DomCss(dom.modalContent, {opacity: 1})
-
 		const $wrap = DomWrap(dom.modalContent, domify('<div class="modal-box"></div>'))
 		dom.modalContent.setAttribute('data-index', 0)
 		this.insertedScreens = []
