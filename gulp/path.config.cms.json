@@ -22,6 +22,16 @@
   },
 
 
+	"inline": {
+		"src": [
+			"./node_modules/fg-loadjs/loadJS.js",
+			"./node_modules/fg-loadcss/src/loadCSS.js",
+			"./node_modules/fg-loadcss/src/cssrelpreload.js"
+		],
+		"output": "_layout.twig",
+		"path": "./deploy/craft/templates/wrapper/"
+	},
+
   "html": {
     "src": "html/nunjucks",
     "dest": "../../src/html/dist"

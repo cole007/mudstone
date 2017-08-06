@@ -7,7 +7,7 @@ import path from 'path'
 export function critialCss() {
 	const { paths, templates } = PATH_CONFIG.critical
 
-	paths.map(({url, template, dir}) => {
+	paths.map(({url, template}) => {
 		critical.generate({
 			inline: false,
 			base:  path.resolve(process.env.PWD, PATH_CONFIG.dest),
@@ -16,7 +16,7 @@ export function critialCss() {
 			minify: true,
 			height: 900
 		}).then((output) => {
-			gulp.src(path.resolve(process.env.PWD, PATH_CONFIG.dest, template))
+			gulp.src(path.resolve(process.env.PWD, templates, template))
 				.pipe(htmlreplace({
 					critical: {
 						src: null,

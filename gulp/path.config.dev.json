@@ -32,13 +32,18 @@
 		"libs": [
 			"./node_modules/jquery/dist/jquery.min.js",
 			"./node_modules/picturefill/dist/picturefill.min.js"
-		],
-		"inline": [
+		]
+  },
+
+	"inline": {
+		"src": [
 			"./node_modules/fg-loadjs/loadJS.js",
 			"./node_modules/fg-loadcss/src/loadCSS.js",
 			"./node_modules/fg-loadcss/src/cssrelpreload.js"
-		]
-  },
+		],
+		"output": "shell.njk",
+		"path": "./src/html/nunjucks/layout/"
+	},
 
   "json": {
     "src": "js/json",
@@ -105,12 +110,12 @@
 	},
 	
 	"critical": {
-		"templates": "./tmp/public",
+		"templates": "./src/public",
 		"paths": [
-			{ "url": "index.html", "dir": "/", "template": "index.html"},
-			{ "url": "a.html", "dir": "/", "template": "a.html"},
-			{ "url": "b.html", "dir": "/", "template": "b.html"},
-			{ "url": "c.html", "dir": "/", "template": "c.html"}
+			{ "url": "index.html", "template": "index.html"},
+			{ "url": "a.html", "template": "a.html"},
+			{ "url": "b.html", "template": "b.html"},
+			{ "url": "c.html", "template": "c.html"}
 		]
 	}
 }
