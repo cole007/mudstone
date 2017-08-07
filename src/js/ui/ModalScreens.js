@@ -102,9 +102,12 @@ export default class ModalScreens extends Concert {
 		this.currentIndex = 0
 		const { dom } = this.modal
 		const { screens } = this.screenNodes[this.currentKey]
+		const id = this.modal.current.getAttribute('id')
+		this.currentId = id
+		DomClass(document.body).add(`is-modal-${id}-open`)
 		this.trigger('modal:onOpen', this.modal)
 		this.trigger('modal:prev', {screens: this.screenNodes[this.currentKey]})
-		dom.modalContent.setAttribute('data-id', this.modal.current.getAttribute('id'))
+		dom.modalContent.setAttribute('data-id', id)
 		DomCss(dom.modalContent, {opacity: 1})
 		const $wrap = DomWrap(dom.modalContent, domify('<div class="modal-box"></div>'))
 		dom.modalContent.setAttribute('data-index', 0)
@@ -138,6 +141,7 @@ export default class ModalScreens extends Concert {
 
 	onClose = () => {
 		if(!this.isOpen) return
+		DomClass(document.body).add(`is-modal-${this.currentId}-open`)
 		this.isOpen = false
 		const { dom } = this.modal
 		dom.modalContent.removeAttribute('style')
