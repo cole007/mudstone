@@ -1,8 +1,7 @@
 # Mudstone
 ![Mud](http://ournameismud.co.uk/css/images/maps-icon.png)
 
-Frontend starter kit integrated with fract
-http://fractal.build/
+
 
 See user-guide.md
 
