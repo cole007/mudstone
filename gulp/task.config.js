@@ -40,8 +40,8 @@ export default {
 	},
 
 	serviceWorker: {
-		watch: true,
-		task: 'code',
+		watch: null,
+		task: false,
 		extensions: ['js']
 	},
 
@@ -74,11 +74,11 @@ export default {
 		task: 'code',
 		watch: true,
 		dataFile: 'data/global.json',
-		extensions: ['njk', 'html', 'json'],
+		extensions: ['twig', 'html', 'json'],
 		excludeFolders: ['layout', 'macros', 'data', 'partials', 'modules', 'wrapper', 'includes']
 	},
 
-	twig: {
+	craftTemplates: {
 		task: 'asset',
 		watch: true,
 		extensions: ['twig', 'html']
@@ -150,7 +150,7 @@ export default {
 		scssOutputPath: 'scss/_system/gulp-output/',
 		scssOutputFile: '_svg-symbols.scss',
 		sourceFile: 'images/svg-symbols/source.html',
-		fileName: 'symbols.njk',
+		fileName: 'symbols.twig',
 		extensions: ['svg']
 	},
 

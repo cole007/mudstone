@@ -29,7 +29,7 @@ export function inlineScripts() {
 
 export function serviceWorker() {
 	return gulp.src(path.resolve(PATH_CONFIG.src, PATH_CONFIG.serviceWorker.src))
-		.pipe(uglify())
+		// .pipe(uglify())
 		.pipe(gulp.dest(path.resolve(PATH_CONFIG.dest, PATH_CONFIG.serviceWorker.dest)))
 		.pipe(browserSync.stream())
 }

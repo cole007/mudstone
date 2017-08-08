@@ -1,11 +1,11 @@
-{% set path = '../includes/' %}
-{% extends "../layout/shell.njk" %}
+{% extends "./shell.twig" %}
 
+{% set path = '../includes/' %}
 
 {% block base %}
 
 	{% block header %}
-		{% include "../includes/header.njk" %}
+		{% include path ~ "header.twig" %}
 	{% endblock %}
 
 	<div id="barba-wrapper" class="site-page">
@@ -15,7 +15,7 @@
 		</div>
 	</div>
 
-	{% include "../includes/footer.njk" %}
+	{% include path ~ "footer.twig" %}
 	{% block extra %}{% endblock %}
 
 {% endblock %}

@@ -12,11 +12,11 @@
 	},
 
   "html": {
-    "src": "html/nunjucks",
+    "src": "html/twig",
     "dest": "./"
   },
 
-	"twig": {
+	"craftTemplates": {
 		"src": "../deploy/craft/templates",
 		"dest": "../deploy/craft/templates"
 	},
@@ -46,8 +46,8 @@
 			"./node_modules/fg-loadcss/src/loadCSS.js",
 			"./node_modules/fg-loadcss/src/cssrelpreload.js"
 		],
-		"output": "shell.njk",
-		"path": "./src/html/nunjucks/layout/"
+		"output": "shell.twig",
+		"path": "./src/html/twig/layout/"
 	},
 
   "json": {
@@ -78,8 +78,8 @@
   "symbols": {
     "src": "images/svg-symbols",
     "dest": "dist/images",
-    "fileName": "symbols.njk",
-    "fileDest": "html/nunjucks/includes"
+    "fileName": "symbols.twig",
+    "fileDest": "html/twig/includes"
   },
 
 	"sprites": {
