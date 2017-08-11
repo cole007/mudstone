@@ -36,13 +36,13 @@ export default class SideNav extends Concert {
 		this.$body = document.querySelector('body')
 		this.$html = document.querySelector('html')
 		this.options = mergeOptions(this.defaults, options, button, 'sidenavOptions')
-		this.options.init && this.initialize()
 		this.isVisible = false
 		this.$inner =  this.options.inner
 		this.$canvas =  this.options.canvas
 		this.$closer =  this.options.closer
-		this.$button =  this.options.button
+		this.$button =  button
 		this.events = ['before:open', 'after:open', 'before:close', 'after:close']
+		this.options.init && this.initialize()
 		if(this.options.lock) this.lock = lock()
 	}
 
