@@ -100,7 +100,7 @@ export default class App {
 			// instantiate the new behaviours
 			const behaviour = new behaviours[behaviourName](node)
 			// initialize it (adds, events and the such)
-			behaviour.initialize()
+			behaviour._options.bindEvents && behaviour.initialize()
 			// return the behaviour
 			return { node, behaviour }
 		})

@@ -8,8 +8,17 @@ import Listener from './listener'
 */
 export default class Behaviour extends Concert {
 
-	constructor(el = document, name) {
+	defaults = {
+		bindEvents: true
+	}
+
+	constructor(el = document, opts = {
+		name: '',
+		bindEvents: true
+	}) {
 		super()
+
+		this._options = {...this.defaults, ...opts}
 		/*
 			A globally available event bus
 		*/
@@ -46,7 +55,8 @@ export default class Behaviour extends Concert {
 		/*
 			Create a unique id
 		*/
-		this.cid = name
+		this.bindEvents = this._options.bindEvents
+		this.cid = this._options.name
 		return this
 	}
 
