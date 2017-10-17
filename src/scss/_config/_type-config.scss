@@ -1,96 +1,75 @@
-
-
 $fonts: (
-  heading: (
-    font-family: ('Alfa Slab One', cursive),
-		weight: 400,
-		line-height: 1.2
-  ),
-  heavy: (
-    font-family: ('Lato', sans-serif),
-    weight: 700,
-		line-height: 1.5
-	),
-  body: (
-    font-family: ('Lato', sans-serif),
-    weight: 400,
-		line-height: 1.5
-	),
-	light: (
-    font-family: ('Lato', sans-serif),
-    weight: 300,
-		line-height: 1.5
-	)
+	body:
+		(
+			font-family: ('franklin-gothic-urw', Franklin Gothic Medium, Tahoma),
+			weight: 400,
+			line-height: 1.5
+		),
+	heading-bold:
+		(
+			font-family:
+				(
+					'FoundersGroteskCondensedWeb-Bold',
+					Arial Narrow,
+					Helvetica,
+					Arial
+				),
+			weight: 400,
+			line-height: 0.84375
+		),
+	heading-medium:
+		(
+			font-family:
+				(
+					'FoundersGroteskCondensedWeb-SemiBold',
+					Arial Narrow,
+					Helvetica,
+					Arial
+				),
+			weight: 400,
+			line-height: 0.84375
+		),
+	heading-light:
+		(
+			font-family:
+				(
+					'FoundersGroteskCondensedWeb-Light',
+					Arial Narrow,
+					Helvetica,
+					Arial
+				),
+			weight: 400,
+			line-height: 0.84375
+		),
+	mono:
+		(
+			font-family: ('apercu-mono', Courier New),
+			weight: 300,
+			line-height: 1.5
+		)
 );
 
-// Use to convert px to rem
-$current-rootsize: 16px !default;
+$base-font-size: 18px;
+$base-type-leading: 24px;
 
-// Root font size, set on the html element, required by the fluid type mixins
-$min-type-size: 15px !default;
+$double-octave: 4;
+$pi: 3.14159265359;
+$major-twelfth: 3;
+$major-eleventh: 2.666666667;
+$major-tenth: 2.5;
+$octave: 2;
+$major-seventh: 1.875;
+$minor-seventh: 1.777777778;
+$major-sixth: 1.666666667;
+$phi: 1.618034;
+$golden: $phi;
+$minor-sixth: 1.6;
+$fifth: 1.5;
+$augmented-fourth: 1.41421;
+$fourth: 1.333333333;
+$major-third: 1.25;
+$minor-third: 1.2;
+$major-second: 1.125;
+$minor-second: 1.066666667;
 
-// Max font, set on the html element, required by the fluid type mixins
-$max-type-size: 18px !default;
-
-// Base line-height
-$base-type-leading: 1.7777777778 !default;
-$line-height-ratio: 1.7777777778 !default;
-
-// Breakpoint to initalize the fluid type
-$start-fluid-width: 280px;
-
-// The breakpoint to stop the fluid type inceading
-$stop-fluid-width: map-get($breakpoints, xlarge);
-
-// link offset from baseline
-$link-color: palette(blue) !default;
-
-// link offset from baseline
-$link-offset: 6px !default;
-
-// link thickness
-$link-width: 6px !default;
-
-// link underline opacity
-$link-underline-opacity: 1 !default;
-
-// link underline hover opacity
-$link-underline-hover-opacity: 1 !default;
-
-$base-font-size: 16px !default;
-
-// Ratios
-$double-octave    : 4                 ;
-$pi               : 3.14159265359     ;
-$major-twelfth    : 3                 ;
-$major-eleventh   : 2.666666667       ;
-$major-tenth      : 2.5               ;
-$octave           : 2                 ;
-$major-seventh    : 1.875             ;
-$minor-seventh    : 1.777777778       ;
-$major-sixth      : 1.666666667       ;
-$phi              : 1.618034          ;
-$golden           : $phi              ;
-$minor-sixth      : 1.6               ;
-$fifth            : 1.5               ;
-$augmented-fourth : 1.41421           ;
-$fourth           : 1.333333333       ;
-$major-third      : 1.25              ;
-$minor-third      : 1.2               ;
-$major-second     : 1.125             ;
-$minor-second     : 1.066666667       ;
-
-// Base config
-
-$modularscale: (
-  base: 1rem,
-  ratio: $minor-third,
-  heading: (
-  	base: 1.3rem,
-    ratio: $major-third
-	),
-	small: (
-		base: .9rem,
-		ratio: $minor-second
-	)
-);
+$modularscale: (base: rem($base-font-size), ratio: $major-second);

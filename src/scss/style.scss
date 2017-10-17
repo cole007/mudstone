@@ -1,42 +1,45 @@
+/*
+  Third party dependencies
+*/
+
 @import '../../node_modules/modularscale-sass/stylesheets/_modularscale.scss';
 @import '../../node_modules/sass-mq/mq.scss';
 @import 'susy';
-@import "normalize";
+@import 'plugins/svg-grid';
+@import 'normalize';
 
-// @include normalize();
+@include normalize();
 
+/*
+  Utilities and functions
+*/
+
+@import '_system/core/units';
+@import '_system/core/colors';
+@import '_system/core/type';
+@import '_system/core/spaces';
+@import '_system/core/mq';
+@import '_system/core/misc';
 
 /*
   Settings
 */
 
-@import '_config/settings';
 @import '_config/colors';
 @import '_config/dimensions';
 @import '_config/type-config';
-
-
-
-/*
-  Utility functions
-*/
-
-@import '_system/core/utilities';
-
 
 /*
   Media query debugger
 */
 
-@import '_config/debug';
-
+@import '_system/debug';
 
 /*
   Custom, site specific mixins
 */
 
 @import '_system/site-mixins/mixins';
-
 
 /*
   svg-symbols generated via `gulp symbols`
@@ -46,86 +49,56 @@
 @import '_system/gulp-output/svg-sprites';
 
 /*
-  Reset util classes, single class name, easy to overwrite later on
-  Prefix classes with r-
+  Resets, and globals
 */
-@import 'base/reset';
+
+@import 'framework/base';
 
 /*
-  Low level styles, no nesting, single class names, no media queries
+  Base styles
   Typography, Buttons, Tables, Form elements, Etc
 */
-@import 'base/type';
-@import 'base/buttons';
-@import 'base/forms';
+
+@import '01-base/*';
 
 /*
-  This grid
-  Prefix classes with g-
+  Object patterns
 */
-@import 'layout/grid';
+
+@import '02-objects/*';
 
 /*
-  Layout global components etc
-  Max specificity of 2
-  *Layout* media queries should go here
+  Global elements patterns
 */
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/navigation';
-@import 'layout/structure';
+
+@import '03-global/*';
 
 /*
-  Modules styles only
-  Max specificity of 2
-  *Layout* media queries should go here
+  Components patterns
 */
-@import 'modules/wysiwyg';
-@import 'modules/slide';
-@import 'modules/accordion';
-@import 'modules/modal';
+
+@import '04-components/*';
 
 /*
-  Utility classes, these should always win, go crazy with import
-  Prefix classes with u-
+  Grids and macro layouts
 */
-@import 'utils/index';
+
+@import '05-layouts/*';
+
+/*
+  Pages
+*/
+
+@import '06-pages/*';
+
+/*
+  Utility classes
+*/
+
+@import 'framework/utils';
 
 /*
   Print styles
 */
+
 @import 'print';
-
-/*
-  Shame, hacks, overwrites, sad panda
-  This file *should* be blank!
-*/
-@import 'utils/shame';
-
-
-[id="box"] {
-	width: 200px;
-	height: 200px;
-	background-color: green;
-	display: block;
-	transition: all 300ms;
-}
-
-
-.a {
-	[id="box"] {
-		background-color: blue;
-	}
-}
-
-.b {
-	[id="box"] {
-		background-color: green;
-	}
-}
-
-.c {
-	[id="box"] {
-		background-color: yellow;
-	}
-}

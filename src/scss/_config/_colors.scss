@@ -1,25 +1,15 @@
 $white: #ffffff;
 $black: #000000;
 
-
 $colors: (
-  primary: (
-    light: #ff0044,
-    base: #cc0022,
-    dark: #660011
-  ),
-  secondary: (
-    light: #3be,
-    base: #269,
-    dark: #257
-  ),
-  neutral: (
-    lightest: #efeff0,
-    lighter: #b9b9c0,
-    light: #8c8c9c,
-    base: #778,
-    dark: #636373,
-    darker: #3f3f46,
-    darkest: #1f1f20
-  )
+	base:
+		(
+			neutral: #9b8863,
+			latin: #b2c15d,
+			caribbean: #ee7827,
+			asia: #634da2,
+			body: #282827,
+			brand: #cb1d18
+		),
+	secondary: (brand: #a70e0a, neutral: #e7e6e0, amazon: #fcb12a)
 );

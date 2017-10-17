@@ -1,22 +1,49 @@
 $breakpoints: (
-  mobile:  320px,
-  sm-tablet:500px,
-  tablet:  740px,
-  desktop: 980px,
-  wide:    1300px
+	mobile: 320px,
+	sm-tablet:500px,
+	tablet: 740px,
+	desktop: 980px,
+	wide: 1300px
 );
 
-$wrapper-width: 1280px;
+$wrapper-width: 1380px;
 
 $base-padding: 20px;
+
+$grid-gutters: (mobile: 15px, tablet: 30px, desktop: 60px);
 
 // 4 symmetrical, fluid columns
 // gutters are 1/4 the size of a column
 // elements span 1 less gutter than columns
 // containers span 1 less gutter as well
 $susy: (
-  'columns': susy-repeat(4),
-  'gutters': 0.25,
-  'spread': 'narrow',
-  'container-spread': 'narrow',
+	'columns': susy-repeat(16),
+	'gutters': 20px,
+	'spread': 'narrow',
+	'container-spread': 'narrow'
 );
+
+$susy-small: (
+	'columns': susy-repeat(8),
+	'gutters': 10px,
+	'spread': 'narrow',
+	'container-spread': 'narrow'
+);
+
+$susy-medium: (
+	'columns': susy-repeat(12),
+	'gutters': 20px,
+	'spread': 'narrow',
+	'container-spread': 'narrow'
+);
+
+$susy-large: (
+	'columns': susy-repeat(12),
+	'gutters': 20px,
+	'spread': 'narrow',
+	'container-spread': 'narrow'
+);
+
+$header-offest: 15px;
+
+$header-btn-height: 50px;
