@@ -25,9 +25,16 @@
   Settings
 */
 
-@import '_config/colors';
+@import '_config/base';
 @import '_config/dimensions';
 @import '_config/type-config';
+
+/*
+  JSON Output
+*/
+@import '_tokens/fonts';
+@import '_tokens/colors';
+@import '_tokens/breakpoints';
 
 /*
   Media query debugger
@@ -46,7 +53,7 @@
 */
 
 @import '_system/gulp-output/svg-symbols';
-@import '_system/gulp-output/svg-sprites';
+// @import '_system/gulp-output/svg-sprites';
 
 /*
   Resets, and globals
@@ -55,41 +62,15 @@
 @import 'framework/base';
 
 /*
-  Base styles
-  Typography, Buttons, Tables, Form elements, Etc
+  [01] Base Styles
+  [02] Object patterns
+  [03] Global elements patterns
+  [04] Components patterns
+  [05] Grids and macro layouts
+  [06] Pages
 */
 
-@import '01-base/*';
-
-/*
-  Object patterns
-*/
-
-@import '02-objects/*';
-
-/*
-  Global elements patterns
-*/
-
-@import '03-global/*';
-
-/*
-  Components patterns
-*/
-
-@import '04-components/*';
-
-/*
-  Grids and macro layouts
-*/
-
-@import '05-layouts/*';
-
-/*
-  Pages
-*/
-
-@import '06-pages/*';
+@import '../templates/**/**/**/*';
 
 /*
   Utility classes

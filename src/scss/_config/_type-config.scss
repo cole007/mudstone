@@ -1,53 +1,6 @@
-$fonts: (
-	body:
-		(
-			font-family: ('franklin-gothic-urw', Franklin Gothic Medium, Tahoma),
-			weight: 400,
-			line-height: 1.5
-		),
-	heading-bold:
-		(
-			font-family:
-				(
-					'FoundersGroteskCondensedWeb-Bold',
-					Arial Narrow,
-					Helvetica,
-					Arial
-				),
-			weight: 400,
-			line-height: 0.84375
-		),
-	heading-medium:
-		(
-			font-family:
-				(
-					'FoundersGroteskCondensedWeb-SemiBold',
-					Arial Narrow,
-					Helvetica,
-					Arial
-				),
-			weight: 400,
-			line-height: 0.84375
-		),
-	heading-light:
-		(
-			font-family:
-				(
-					'FoundersGroteskCondensedWeb-Light',
-					Arial Narrow,
-					Helvetica,
-					Arial
-				),
-			weight: 400,
-			line-height: 0.84375
-		),
-	mono:
-		(
-			font-family: ('apercu-mono', Courier New),
-			weight: 300,
-			line-height: 1.5
-		)
-);
+/*
+	Type config
+*/
 
 $base-font-size: 18px;
 $base-type-leading: 24px;
@@ -73,3 +26,13 @@ $major-second: 1.125;
 $minor-second: 1.066666667;
 
 $modularscale: (base: rem($base-font-size), ratio: $major-second);
+
+// @for $i from -2 through 16 {
+// 	$modularscale: (
+// 		base: 18px,
+// 		ratio: $major-second
+// 	);
+// 	$size: ms($i);
+// 	$px: rem-to-px($size);
+// 	@debug $i ms($i);
+// }

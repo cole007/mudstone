@@ -1,0 +1,13 @@
+{
+	"html": {
+		"src": "templates/pages",
+		"data": "templates/__data/global.json",
+		"dest": "./"
+	},
+
+	"tokens": {
+		"src": "tokens",
+		"files": ["colors.json"],
+		"dest": "scss/_tokens"
+	}
+}
